@@ -87,3 +87,8 @@ sympy-plots-for-*.tex/
 
 # xindy
 *.xdy
+
+# video
+*.mov
+*.avi
+*.ogv
