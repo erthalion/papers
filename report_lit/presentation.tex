@@ -1,0 +1,110 @@
+%\documentclass[14pt, notes]{beamer}
+\documentclass[14pt]{beamer}
+
+%\usepackage{pgfpages}
+%\setbeameroption{show notes}
+%\setbeameroption{show notes on second screen=right}
+
+%encoding
+\usepackage[utf8]{inputenc}
+
+%language
+\usepackage[russian]{babel}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\graphicspath{{images/}}%путь к рисункам
+
+\setbeamerfont{author in head/foot}{size=\small}
+\setbeamerfont{title in head/foot}{size=\footnotesize}
+
+\title[Отчет: обзор литературы]{Обзор работ, посвященных численному и экспериментальному моделированию задач о течении в крупных кровеносных сосудах}
+\date{\today}
+\author[Долгов Д.А.]{Долгов Д.А.\\{\small Научный руководитель: Захаров Ю.Н.}}
+\institute{Кемеровский Государственный Университет \\
+    \vspace{0.7cm}
+    \vspace{0.7cm}
+} 
+\usetheme[numbers, totalnumbers, minimal, nologo]{Statmod}
+% Привычный шрифт для математических формул
+\usefonttheme[onlymath]{serif}
+
+\definecolor{statmodblue}{RGB}{100,10,30}
+\definecolor{statmodsand}{RGB}{244,215,103}
+
+\begin{document}
+\maketitle
+
+\begin{frame}
+\frametitle{Содержание}
+\begin{itemize}
+    \item Монографии по биологической гидродинамике сосудов
+    \item Работы, посвященные численному моделированию методом конечных элементов
+    \item Работы, посвященные численному моделированию методом погруженной границы
+\end{itemize}
+\end{frame}
+\note{Работы из первого раздела были написаны достаточно давно и являются "общеобразовательными"}
+
+\begin{frame}
+\frametitle{Биологическая гидродинамика}
+\begin{itemize}
+    \item Кардо К., Педли Т., Шротер Р., Сид У. Механика кровообращения. М.: Мир, 1981
+    \item Педли Т. Гидродинамика крупных кровеносных сосудов. М.: Мир, 1983
+\end{itemize}
+\end{frame}
+\note{Содержат общее биологическое описание + примеры, которые можно использовать в качестве тестовых}
+
+\begin{frame}
+\frametitle{Метод конечных элементов}
+\begin{itemize}
+    \item Zhang Y., Bajaj C., Finite element meshing for cardiac analysis // ICES Technical Reoprt 04-26, 2004
+    \item Taylor C.A. Finite element modeling of blood flow: Relevance to atherosclerosis // Intra and Extracorporeal Cardiovascular Fluid Dynamics - Vol. 2, 249-289, 2000
+\end{itemize}
+\end{frame}
+\note{Обе работы (и многие другие) посвящены построению и перестроению подходящих для расчета сеток}
+
+\begin{frame}
+\frametitle{Метод погруженной границы}
+\begin{itemize}
+    \item Классификация методов этого вида и их обзор
+    \item Теоретическое обоснование и практическое применение оригинального метода
+    \item Развитие оригинального метода
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Классификации и обзоры}
+\begin{itemize}
+    \item Mittal R., Iaccarino G., Immersed boundary methods // Annu. Rev. Fluid Mech. 2005. 37:239–61
+    \item Bandriga H., Immersed boundary methods, Master Thesis in Applied Mathematics, 2010
+    \item Мортиков Е.В., Применение метода погруженной границы для решения системы уравнений Навье-Стокса в областях сложной конфигурации // Вычислительные методы и программирование, 2010, Т. 11
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Теоретическое обоснование и практическое применение}
+\begin{itemize}
+    \item Peskin, C. S. The immersed boundary method // Acta Numerica 11, 479–517, 2002.
+    \item Boyce E.G. Immersed boundary model of aortic heart valve dynamics with physiological driving and loading conditions // International Journal for Numerical Methods in Biomedical Engineering. 1–29, 2011
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Развитие оригинального метода}
+\begin{itemize}
+    \item Pilhwa L., Boyce E.G., Peskin C.S., The immersed boundary method for advection-electrodiffusion with implicit timestepping and local mesh refinement // Comput Phys. 2010 July 1; 229(13)
+    \item Lai M., Tseng Y., Huang H., An immersed boundary method for interfacial flows with insoluble surfactant // Journal of Computational Physics. 01/2008; 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Развитие оригинального метода}
+\begin{itemize}
+    \item Fai T.G., Boyce E.G., Mori Y., Peskin C.S. Immersed boundary method for variable viscosity and variable density problems using fast constant-coefficient linear solvers I: Numerical method and results. // SIAM Journal on Scientific Computing, 35(5):B1132–B1161, 2013
+\end{itemize}
+\end{frame}
+
+\end{document}

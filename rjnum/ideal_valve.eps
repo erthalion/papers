@@ -1,0 +1,228 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%Creator: (ImageMagick)
+%%Title: (ideal_valve.eps)
+%%CreationDate: (2016-02-21T23:25:21+06:00)
+%%BoundingBox: -0 -0 829 505
+%%HiResBoundingBox: 0 0 829 505
+%%LanguageLevel: 2
+%%Pages: 1
+%%EndComments
+
+%%BeginDefaults
+%%EndDefaults
+
+%%BeginProlog
+%
+% Display a color image.  The image is displayed in color on
+% Postscript viewers or printers that support color, otherwise
+% it is displayed as grayscale.
+%
+/DirectClassImage
+{
+  %
+  % Display a DirectClass image.
+  %
+  colorspace 0 eq
+  {
+    /DeviceRGB setcolorspace
+    <<
+      /ImageType 1
+      /Width columns
+      /Height rows
+      /BitsPerComponent 8
+      /Decode [0 1 0 1 0 1]
+      /ImageMatrix [columns 0 0 rows neg 0 rows]
+      compression 0 gt
+      { /DataSource pixel_stream /RunLengthDecode filter }
+      { /DataSource pixel_stream /RunLengthDecode filter } ifelse
+    >> image
+  }
+  {
+    /DeviceCMYK setcolorspace
+    <<
+      /ImageType 1
+      /Width columns
+      /Height rows
+      /BitsPerComponent 8
+      /Decode [1 0 1 0 1 0 1 0]
+      /ImageMatrix [columns 0 0 rows neg 0 rows]
+      compression 0 gt
+      { /DataSource pixel_stream /RunLengthDecode filter }
+      { /DataSource pixel_stream /RunLengthDecode filter } ifelse
+    >> image
+  } ifelse
+} bind def
+
+/PseudoClassImage
+{
+  %
+  % Display a PseudoClass image.
+  %
+  % Parameters:
+  %   colors: number of colors in the colormap.
+  %
+  currentfile buffer readline pop
+  token pop /colors exch def pop
+  colors 0 eq
+  {
+    %
+    % Image is grayscale.
+    %
+    currentfile buffer readline pop
+    token pop /bits exch def pop
+    /DeviceGray setcolorspace
+    <<
+      /ImageType 1
+      /Width columns
+      /Height rows
+      /BitsPerComponent bits
+      /Decode [0 1]
+      /ImageMatrix [columns 0 0 rows neg 0 rows]
+      compression 0 gt
+      { /DataSource pixel_stream /RunLengthDecode filter }
+      {
+        /DataSource pixel_stream /RunLengthDecode filter
+        <<
+           /K -1
+           /Columns columns
+           /Rows rows
+        >> /CCITTFaxDecode filter
+      } ifelse
+    >> image
+  }
+  {
+    %
+    % Parameters:
+    %   colormap: red, green, blue color packets.
+    %
+    /colormap colors 3 mul string def
+    currentfile colormap readhexstring pop pop
+    currentfile buffer readline pop
+    [ /Indexed /DeviceRGB colors 1 sub colormap ] setcolorspace
+    <<
+      /ImageType 1
+      /Width columns
+      /Height rows
+      /BitsPerComponent 8
+      /Decode [0 255]
+      /ImageMatrix [columns 0 0 rows neg 0 rows]
+      compression 0 gt
+      { /DataSource pixel_stream /RunLengthDecode filter }
+      { /DataSource pixel_stream /RunLengthDecode filter } ifelse
+    >> image
+  } ifelse
+} bind def
+
+/DisplayImage
+{
+  %
+  % Display a DirectClass or PseudoClass image.
+  %
+  % Parameters:
+  %   x & y translation.
+  %   x & y scale.
+  %   label pointsize.
+  %   image label.
+  %   image columns & rows.
+  %   class: 0-DirectClass or 1-PseudoClass.
+  %   colorspace: 0-RGB or 1-CMYK.
+  %   compression: 0-RLECompression or 1-NoCompression.
+  %   hex color packets.
+  %
+  gsave
+  /buffer 512 string def
+  /pixel_stream currentfile def
+
+  currentfile buffer readline pop
+  token pop /x exch def
+  token pop /y exch def pop
+  x y translate
+  currentfile buffer readline pop
+  token pop /x exch def
+  token pop /y exch def pop
+  currentfile buffer readline pop
+  token pop /pointsize exch def pop
+  /Helvetica findfont pointsize scalefont setfont
+  x y scale
+  currentfile buffer readline pop
+  token pop /columns exch def
+  token pop /rows exch def pop
+  currentfile buffer readline pop
+  token pop /class exch def pop
+  currentfile buffer readline pop
+  token pop /colorspace exch def pop
+  currentfile buffer readline pop
+  token pop /compression exch def pop
+  class 0 gt { PseudoClassImage } { DirectClassImage } ifelse
+  grestore
+} bind def
+%%EndProlog
+%%Page:  1 1
+%%PageBoundingBox: 0 0 829 505
+userdict begin
+%%BeginData:       166399 Binary Bytes
+DisplayImage
+0 0
+829.414 505.447
+12
+1106 674
+0
+0
+0
+В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В Ь ▌В В В В В В В В В В В В В В В В В В В В В В В В В в ╚В В В В В В В В В В В В В В В В В В В В В В В В В ▒ Є■J■N■Q■T■X■[■^■a■d■g■h■j■kяВ В В В В В В В В В В В В В В В В В В В В В В В В └ ї■C■H■L■O■S■V■Y■]■`■c■e■g■h■i■k°l■mЄВ В В В В В В В В В В В В В В В В В В В В В В В В ╠ °■;■A■G■J■N■Q■U■X■[■^■b■d■e■f■h■i■j√l√m°nяВ В В В В В В В В В В В В В В В В В В В В В В В В ╪ ■■1р■b■c■e■f■g■i■j■k√m°n√o■pЄВ В В В В В В В В В В В В В В В В В В В В В В В В █ ╬■g■h■j■k■l√n°o■pЄ■И°В В В В В В В В В В В В В В В В В В В В В В В В В ъ ь■Ф°У■Т■С√Р■Пя■k■l■n√o√pї■З√И■Й■К°В В В В В В В В В В В В В В В В В В В В В В В В В Ё ї°Х√Ф√У√Т√С■Р√П■О■НЄ■o■pЄ■З√И■Й√К■Л■М°В В В В В В В В В В В В В В В В В В В В В В В В В ∙ ї■Ч√Ц■Х°Ф√У√Т√С√Р■П■О■Н■М■Лщ■З√И■Й√К■Л√М■Н■О■П√В В В В В В В В В В В В В В В В В В В В В В В В В   °■Ш°Ч■Ц√Х√Ф√У√Т√С√Р■П■О■Н■М√Л■К■Й°°И√Й■К■Л√М■Н■О■П■Р■С■Т√В В В В В В В В В В В В В В В В В В В В В В В В Ж √■Щ°Ш√Ч√Ц■Х√Ф√У√Т√С√Р■П■О■Н■М■Л√К√Й■Ж°■Й■К√Л■М■Н■О■Р■С■Т√Ф√Х√В В В В В В В В В В В В В В В В В В В В В В В В П °°Щ√Ш√Ч√Ц√Х■Ф√У√Т■С√Р√П■О■Н■М■Л√К√Й■З■Е°■Л■Н■О■П■С■Т■У■Х√Ц√Ч√Ш√В В В В В В В В В В В В В В В В В В В В В В В В Х °■Ъ°Щ√Ш√Ч√Ц√Х√Ф■У√Т■С√Р√П■О■Н■М√Л■К■Й■И■З■Е■Г°■С■Т■У■Х■Ц■Ч√Ш√Щ√Ъ√Ы√В В В В В В В В В В В В В В В В В В В В В В В В Ш √■Ы√Ъ√Щ√Ш√Ч√Ц√Х√Ф√У■Т√С■Р√П■О■Н■М■Л√К■Й■И■З■Е√Г■В√■Ц■Ч■Ш■Щ√Ъ√Ы√Ь√Э■Ю■Я√В В В В В В В В В В В В В В В В В В В В В В В В Ю √√Ы√Ъ√Щ√Ш√Ч√Ц√Х√Ф√У√Т■С■Р√П■О■Н■М■Л√К√Й■З■Е■Д■Г■В■Б√■Ы√Ь√Э√Ю√Я°а√б√В В В В В В В В В В В В В В В В В В В В В В В В д √■Ь√Ы√Ъ√Щ√Ш√Ч√Ц√Х√Ф√У√Т■С√Р■П■О■Н■М■Л■К√Й■И■З■Ж■Д■Г√В■Б√°Ю√Я√а°б√в√г√В В В В В В В В В В В В В В В В В В В В В В В В к √■Э■Ь√Ы√Ъ√Щ√Ш√Ч√Ц√Х√Ф√У■Т√С√Р■П■О■Н■М■Л■К√Й■И■З■Ж■Д■Г■В√Б■А√■Я√а√б°в√г°д√В В В В В В В В В В В В В В В В В В В В В В В В н √√Э■Ь√Ы√Ъ√Щ√Ш√Ч√Ц√Х√Ф√У■Т√С√Р■П■О■Н■М■Л■К√Й■И■З■Ж■Д■Г■В■Б√А■√■б√в°г√д°е√ж√В В В В В В В В В В В В В В В В В В В В В В В В │ √■Ю√Э■Ь√Ы√Ъ√Щ√Ш√Ч√Ц√Х√Ф■У√Т√С√Р■П■О■Н■М■Л√К■Й■И■З■Е■Д■Г■В■Б■А√√√г°д√е°ж√з√и√В В В В В В В В В В В В В В В В В В В В В В В В ╢ √■Ю√Э■Ь■Ы°Ъ√Щ√Ш√Ч√Ц√Х√Ф■У√Т√С■Р√П■О■Н■М■Л√К■Й■И■З■Е■Д■Г■В■Б■А■√~√■д√е√ж°з√и°й°В В В В В В В В В В В В В В В В В В В В В В В В ╝ °■Ю√Э■Ь■Ы°Ъ°Щ■Ш√Ч√Ц√Х√Ф■У√Т√С■Р√П■О■Н■М■Л√К■Й■И■З■Е■Д■Г■В■Б■А√√~√■ж√з°и√й°к√л√В В В В В В В В В В В В В В В В В В В В В В В В ╝ √°Ю■Э■Ь√Ы√Ъ°Щ√Ш■Ч√Ц√Х√Ф■У√Т√С■Р√П■О■Н■М■Л√К■Й■И■З■Е■Д■Г■В■Б■А√■~√}√■и°й√к°л°м■н√В В В В В В В В В В В В В В В В В В В В В В В В ┬ °°Ю■Э√Ь■Ы√Ъ°Щ√Ш■Ч√Ц√Х√Ф■У√Т■С√Р√П■О■Н■М■Л■К√Й■И■З■Е■Д■Г■В■Б■А■√~■}√|√√к°л√м°н√о°В В В В В В В В В В В В В В В В В ╨ щВ В В В В В П √■Я°Ю■Э√Ь■Ы√Ъ√Щ°Ш■Ч√Ц√Х√Ф■У√Т■С√Р■П√О■Н■М■Л■К√Й■И■З■Е■Д■Г■В■Б■А■√~■}■|■{√■л°м√н°о°п■░√В В В В В В В В В В В В В В В В В ╓ ї■=■;ЄВ В В В В В Т √■Я°Ю■Э√Ь■Ы√Ъ√Щ°Ш■Ч√Ц√Х√Ф■У√Т■С√Р■П■О■Н■М■Л√К√Й■И■З■Е■Д■Г■В■Б■А■√~■}■|■{■z√°н√о°п°░√▒√В В В В В В В В В В В В В В В В В ▄ °■L■J■H■F■D■B■?■<■2■)■■В В В В В В Ю √√Я°Ю■Э■Ь√Ы√Ъ√Щ°Ш■Ч√Ц√Х√Ф■У√Т■С√Р■П■О■Н■М■Л√К√Й■И■З■Е■Д■Г■В■Б■А■√~■}■|√{√°о√п°░°▒√▓√В В В В В В В В В В В В В В В В В ▀ √■\■Z■X■U■S■Q■O■M■K■I■F■D■B■:■1■(■■ √В В В В В В ░ √√Я°Ю■Э■Ь√Ы√Ъ√Щ√Ш√Ч√Ц√Х■Ф√У√Т■С√Р■П√О■М■Л√К■Й√И■Ж■Е■Д■Г■В■Б■А■√~■}√|■{■z√■п°░°▒°▓°│√В В В В В В В В В В В В В В В В В х √■f√e■c■a■_■]■Z■X■V■T■R■P■M■KщВ В В В В В ╣ √їЯ■Ю√Э■Ь■Ы°Ъ√Щ√Ш√Ч√Ц■Х√Ф√У√Т■С√Р■П√О■Н■Л√К■Й√И■Ж■Е√Г■В■Б■А■■~√}■|√{■z√■░°▒°▓ї│√┤√В В В В В В В В В В В В В В В В В ш √■n■m■l√k■j■i■h■f■d■b■`■]■[■YрВ В В В В В ┐ √їЯ■Ю√Э■Ь■Ы√Ъ°Щ√Ш√Ч√Ц■Х√Ф√У√Т■С√Р■П√О■Н■М√К■Й√И■Ж■Е√Г■В■Б■А■■~√}■|√{■z■y√°▓°│ї┤°╡√В В В В В В В В В В В В В В В В В ю √√u■t■s■r■q√p■o■n■m■l■k■i■g°■6■9■<■?■A■B■C°В В В В В В ┬ √°Я√Ю√Э■Ь■Ы√Ъ°Щ√Ш√Ч√Ц■Х√Ф■У√Т√С√Р■П√О■Н■М■Л■К■Й√И■Ж■Е√Г■В■Б■А■■~■}√|■{√z■y√°│°┤Є╡√╢√В В В В В В В В В В В В В В В В В ё √■}■|√{■z■y■x■w√v■u■t■s■r■q√■2■4■7■9■<■?■B■C√D■F√В В В В В В ╚ √■а°Я√Ю√Э■Ь■Ы√Ъ√Щ°Ш√Ч√Ц■Х√Ф■У√Т√С√Р■П√О■Н■М■Л■К■Й√И■Ж■Е■Г√В■Б■А■■~■}√|■{■z√y■x√√┤ї╡ї╢°╖√В В В В В В В В В В В В В В В В В Ї √■Д■Г■В■Б■А■√~■}■|■{■z■y■x√■0■2■5■6■:■=■@■B√C■E■F■G√В В В В В В ╦ √■а°Я√Ю√Э■Ь■Ы√Ъ√Щ°Ш√Ч√Ц√Х■Ф■У√Т√С√Р■П√О■Н■М■Л■К√Й■И■Ж■Е■Г√В■Б■А■■~■}■|√{■z■y√x√√╡ї╢Є╖√╕√В В В В В В В В В В В В В В В В В ў √■Л■К■Й■И■З■Ж■Е■Д■Г■В■Б■А■■~√■/■1■3■4■7■;■>■@√B■D■E■F■H■I√В В В В В В ╬ √■а°Я√Ю√Э■Ь■Ы√Ъ√Щ°Ш√Ч√Ц√Х■Ф√У■Т√С√Р■П√О■Н■М■Л■К√Й■И■Ж■Е■Г√В■Б■А■■~■}■|√{■z■y■x√w√■╢ї╖Є╕√╣√В В В В В В В В В В В В В В В В В · √■П√О■Н√М√Л■К■Й■И■З■Ж■Е√■-■/■1■2■4■8■;■=■@■B■C■D■E■G■H■I■K√В В В В В В ╤ √√а°Я■Ю√Э■Ь■Ы√Ъ√Щ°Ш√Ч√Ц√Х■Ф√У■Т√С√Р■П√О■Н■М■Л√К■Й■И■Ж■Е√Г■В■Б■А■■~■}■|■{√z■y■x■w■v°Є╕я╣■║√В В В В В В В В В В В В В В В В В ¤ √■У■Т√С■Р√П√О■Н√М■Л°■-■/■0■2■5■8■;■=■?■B■C■D■F■G■H■I■K√В В В В В В ╤ √√а°Я■Ю√Э■Ь■Ы√Ъ√Щ√Ш°Ч√Ц√Х√Ф■У■Т√С√Р■П√О■Н■М■Л√К■Й■И■Ж■Е√Г■В■Б■А■■~■}■|■{√z■y■x■w■v■u√°╕Є╣ї║√В В В В В В В В В В В В В В В В В   √■Ш■Ч■Ц■Х■Ф√У√Т■С√Р√П√■+■.■/■0■3■6■8■:■=■@■B■C■E■F■G■H■I■K■L√В В В В В В ╫ °°а√Я√Ю■Э■Ь■Ы√Ъ√Щ√Ш√Ч°Ц√Х√Ф■У■Т√С√Р■П■О√Н■М■Л√К■Й■И■Ж■Е√Г■В■Б■А■■~■}■|■{√z■y■x■w■v■u√■╕Є╣ь║√В В В В В В В В В В В В В В В В Д √√Ы■Ъ■Щ■Ш■Ч√Ц√Х■Ф√У°■,√.■1■4■5■7■:■=■@■C■D■E√F■H■I■K■L√В В В В В В ╫ °°а√Я√Ю■Э■Ь■Ы°Ъ■Щ√Ш√Ч°Ц√Х√Ф■У√Т■С√Р■П■О√Н■М■Л√К■Й■И■Ж■Е√Г■В■Б■А■■~■}■|■{■z■y■x■w√v■u■t√°╣Є║ї╗√В В В В В В В В В В В В В В В В З °■Я■Ю√Э■Ь■Ы■Ъ√Щ■Ш√Ч■Ц√■)√,■/■2■4■5■7■:■=■@■C■D√E■F■H■J■K■M■N√В В В В В В ┌ √їа√Я√Ю■Э■Ь√Ы√Ъ√Щ√Ш■Ч√Ц°Х√Ф√У■Т■С√Р■П■О√Н■М■Л■К√Й■И■Ж■Е√Г■В■Б■А■■~■}■|■{■z■y■x■w■v■u■t■s√■╣Є║я╗√В В В В В В В В В В В В В В В В З √■д■г■в■б√а■Я■Ю■Э√Ь■Ы■Ъ°■)■*■-■0√3■4■7■;■>■A■C√D■E■G■H■J■K■M■N√В В В В В В ┌ √їа√Я■Ю√Э■Ь√Ы√Ъ√Щ√Ш■Ч√Ц√Х°Ф√У■Т■С√Р■П■О■Н■М√Л■К√Й■И■Ж■Е■Д■Г■В■Б■А■■~■}■|■{■z■y■x■w■v■u■t■s√ї║ц╗√В В В В В В В В В В В В В В В В К √■и■з■ж■е■д√г■в■б■а√Я■Ю√■'■(■+■.■1√2■4■8■;■>■A■C√D■E■G■I■J■L■M■N■P√В В В В В В ▌ √°а°Я■Ю√Э■Ь■Ы°Ъ√Щ√Ш√Ч■Ц√Х√Ф√У√Т■С√Р■П■О■Н■М■Л√К√Й■И■Ж■Е■Д■Г■В■Б■А■■~√}■|■{■z■x■w■v■u■t■s■r√ь╗Є╝√В В В В В В В В В В В В В В В В Н √■м■л√к■й■и■з√ж■е■д■г■в■б√■&■(■,■/√0■2■5■8■;■>■A■C√D■F■G■I■K■L■M■O■P√В В В В В В ▌ √°а°Я■Ю√Э■Ь■Ы√Ъ°Щ√Ш√Ч■Ц√Х√Ф√У■Т√С√Р■П■О■Н■М■Л√К■Й√И■Ж■Е■Д■Г■В■Б■А■■~√}■|■{■z■x■w■v■u■t■s■r√°╗ц╝√В В В В В В В В В В В В В В В В Н √■п■о√н■м■л■к√й■и■з√ж√■$■%■)■-√/■0■3■5■8■;■>■A■C√D■F■H■I■K■L■M■O■P√В В В В В В ▌ √√аїЯ■Ю√Э■Ь■Ы√Ъ√Щ°Ш√Ч■Ц√Х√Ф√У■Т√С√Р■П■О■Н■М■Л√К■Й√И■Ж■Е√Г■В■Б■А■■~√}■|■{■z■y■w■v■u■t■s■r√■╗▌╝√В В В В В В В В В В В В В В В В Р √√▒■░√п■о■н√м■л■к■й■и√■#■%■*√-■.■1■3■6■9■;■>■A■C■D■E■F■H■J■K■L■N■O■P■Q√В В В В В В р √√а°Я√Ю■Э√Ь■Ы√Ъ√Щ√Ш°Ч√Ц■Х√Ф√У■Т√С√Р■П■О■Н■М■Л■К√Й■И■З■Ж■Д■Г■В√Б■А■■~√}■|■{■z■y■w■v■u■s■r√q√щ╝ї╜√В В В В В В В В В В В В В В В В У √°│°▓■▒■░■п√о■н■м■л√■"■&■+√,■/■1■4■6■8■;■>■A■C■D■E■G■H√J■L■N■O■P■Q√В В В В В В р √√а°Я√Ю■Э√Ь■Ы√Ъ√Щ√Ш√Ч°Ц■Х√Ф√У■Т√С√Р■П■О■Н■М■Л■К√Й■И■З■Ж■Д■Г■В■Б√А■■~■}√|■{■z■y■x■v■u■t■r■q■p√■╝р╜√В В В В В В В В В В В В В В В В У √°╡ї┤■│■▓■▒√░■п√■ ■#■'√*■-■/■2■4■6■8■;■>■A■C■D■E■G■H■I■K■L■N■O■P■Q√В В В В В В р √√а°Я√Ю■Э■Ь√Ы√Ъ√Щ√Ш√Ч√Ц√Х√Ф√У■Т√С√Р■П■О■Н■М■Л■К√Й■И■З■Ж■Д■Г■В■Б√А■■~■}■|√{■z■y■x■v■u■t■r■q■p√┌╜√В В В В В В В В В В В В В В В В Ц √ї╖°╢√╡■┤√│■▓√■ ■$√(■+■-■0■2■4■6■8■;■>■A■C■D■F■G■H■I■K■L■N■O■P■R√В В В В В В р √√а°Я√Ю■Э■Ь√Ы√Ъ√Щ√Ш√Ч■Ц°Х√Ф√У■Т√С√Р■П■О■Н■М■Л■К√Й■И■З■Ж■Д■Г■В■Б√А■■~■}■|■{√z■y■x■w■u■t■s■q■p■o√▌╜√В В В В В В В В В В В В В В В В Щ °ї╣ї╕√╖■╢√╡√■!■%■&■(■+■.■0■2■4■6■8■;■>■A■C■D√F■H■I■K■L■N■O■P■R■S√В В В В В В у √√а°Я√Ю■Э■Ь■Ы°Ъ√Щ√Ш√Ч■Ц√Х°Ф√У■Т√С√Р■П■О■Н■М■Л√К■Й■И■З■Е■Д■Г■В■Б■А√■~■}■|■{■z√y■x■w■u■t■s■q■p■o√▌╜√В В В В В В В В В В В В В В В В Щ √√╝ї╗°║°╣■╕√■■"■$■%■)■,■.■0■2■3■6■9■<■>■A■C■D■E■F■H■I■K■L■N■O■P■R■S√В В В В В В у √√а°Я√Ю■Э■Ь■Ы√Ъ°Щ√Ш√Ч■Ц√Х°Ф√У■Т√С√Р■П■О■Н■М■Л√К■Й■И■З■Е■Д■Г■В■Б■А√■~■}■|■{■z■y√x■w■v■t■s■q■p■o√у╜√╝√В В В В В В В В В В В В В В В В Щ √√╛ї╜ї╝°╗√■■"■#■&■)■,■/■0■2■4■6■9■<■?■B■C■D■E■F■H■I■K■L■N■O■Q■R■S√В В В В В В у √√а°Я√Ю■Э■Ь■Ы√Ъ°Щ√Ш√Ч■Ц√Х√Ф√У√Т√С√Р■П■О■Н■М■Л√К■Й■И■З■Е■Д■Г■В■Б■А√■~■}■|■{■z■y■x■w√v■t■s■r■p■o√┌╝√В В В В В В В В В В В В В В В В Ь √°└°┐ї╛°╜√■■!■#■&■*■-■/■0■2■4■6■9■<■?■A■C■D■E■G■H■I■K■L■N■O■Q■R■S√В В В В В В у √√а°Я√Ю■Э■Ь■Ы√Ъ°Щ√Ш√Ч■Ц√Х√Ф√У√Т√С■Р√П■О■Н■М■Л√К■Й■И■З■Е■Д■Г■В■Б■А√■~■}■|■{■z■y■x■w■v■u■t■s■r■p■o■n√р╝■╗√В В В В В В В В В В В В В В В В Я °°┬°┴°└°┐■╛√■■ ■#■'■*■-■/■0■2■4■6■9■<■?■A■C■D■E■G■H■I■K■L■N■O■Q■R■S√В В В В В В у √√а°Я√Ю■Э■Ь■Ы√Ъ°Щ√Ш√Ч√Ц■Х√Ф√У√Т√С■Р√П■О■Н■М■Л√К■Й■И■З■Е■Д■Г■В■Б■А√■~■}■|■{■z■y■x■w■v■u■t■s■r■p■o■n√у╝√╗√В В В В В В В В В В В В В В В В Я √°─°├°┬ї┴√■■■ ■$■(■*■-■/■0■2■4■6■9■<■?■A■C■D■E■G■H■I■K■L■N■O■Q■R■S√В В В В В В ц √їа√Я√Ю■Э■Ь■Ы√Ъ°Щ√Ш√Ч√Ц■Х√Ф√У√Т■С√Р√П■О■Н■М■Л√К■Й■И■З■Е■Д■Г■В■Б■А√■~■}√|■{■y■x■w■v■u■t■s■r■q■o■n√щ╝ї╗√В В В В В В В В В В В В В В В В Я √я┼°─°├■┬√■■■!■%■(■*■-■/■0■2■4■6■9■<■?■B■C■D■E■G■H■I■K■L■N■O■Q■R■T√В В В В В В ц √їа√Я√Ю■Э■Ь■Ы√Ъ°Щ√Ш√Ч√Ц■Х√Ф√У■Т√С√Р√П■О■Н■М■Л√К■Й■И■З■Е■Д■Г■В■Б■А■√~■}√|■{■z■x■w■v■u■t■r■q■p■o■n√я╝я╗√В В В В В В В В В В В В В В В В Я √■╞ї╟°╞°┼√─√■■■"■%■'■*■-■/■1■2■4■6■9■<■?■B■C■D■F■G■H■I■K■M■N■P■Q■R■T√В В В В В В ц √їа√Я√Ю■Э■Ь■Ы√Ъ°Щ√Ш√Ч√Ц■Х√Ф√У■Т√С√Р■П√О■Н■М■Л√К■Й■И■З■Е■Д■Г■В■Б■А■■~√}√|■{■z■x■w■v■u■t■r■q■p■o■n■l√ї╝Є╗°║√В В В В В В В В В В В В В В В В в √ь╚ї╟√╞√■■■"■%■'■*■-■/■1■2■4■7■:■<■?■B■C■D■F■G■H■I■K■M■N■P■Q■S■T°В В В В В В щ √їа√Я√Ю■Э■Ь■Ы√Ъ°Щ√Ш√Ч√Ц√Х■Ф√У■Т√С√Р■П■О√Н■М■Л√К■Й■И■З■Е■Д■Г■В■Б■А√■~■}√|■{■z■x■w■v■u■t■r■q■p■o■n■l√√╝я╗ї║√В В В В В В В В В В В В В В В В в √у╔°╚√■■■#■%■'■*■-■/■1■2■4■7■9■<■?■B■C■D■F■G■H■I■K■M■N■P■Q■S■T°В В В В В В щ √їа√Я√Ю■Э■Ь■Ы√Ъ°Щ√Ш√Ч√Ц√Х■Ф√У■Т√С√Р■П■О√Н■М■Л■К√Й■И■З■Ж■Д■Г■В■Б■А√■~■}■|√{■z■y■w■v■u■s■r■q■p■n■m■l√я╗я║√В В В В В В В В В В В В В В В В е √┌╩√■■■■"■%■(■*■-■/■1■3■4■7■9■<■?■B■C■D■F■G■H■J■K■M■N■P■Q■S■T°В В В В В В щ √їа√Я√Ю■Э■Ь■Ы√Ъ°Щ√Ш√Ч√Ц√Х■Ф√У■Т√С√Р■П■О■Н√М■Л■К√Й■И■З■Ж■Д■Г■В■Б■А√■~■}■|■{√z■y■w■v■t■s■r■q■p■n■m■l√ї╗ї║ї╣√В В В В В В В В В В В В В В В В е √┌╦√■■■ ■"■%■(■+■-■/■1■2■4■7■9■<■?■B■C■D■F■G■H■J■K■M■N■P■Q■S■T°В В В В В В щ √їа√Я√Ю■Э■Ь■Ы√Ъ°Щ√Ш√Ч√Ц√Х■Ф√У√Т■С√Р■П■О■Н■М√Л■К√Й■И■З■Е■Д■Г■В■Б■А√■~■}■|■{■z■y■x■w■v■u■s■r■q■p■n■m■l√ї║ї╣ї╕√В В В В В В В В В В В В В В В В е √щ╠Є═√■■■ ■"■%■(■+■-■/■1■2■4■7■9■<■?■B■C■E■F■G■H■J■K■M■N■P■Q■S■T■U√В В В В В В щ √їа√Я√Ю■Э■Ь■Ы√Ъ°Щ√Ш√Ч√Ц√Х√Ф■У√Т■С√Р■П■О■Н■М■Л√К√Й■И■З■Е■Д■Г■В■Б■А√■~■}■|■{■z■y■x■w■v■u■s■r■q■o■n■m■l■j√ї╣ї╕ї╖√В В В В В В В В В В В В В В В В и √▌╬■═√■■■ ■"■%■(■+■-■/■0■2■4■7■9■<■?■B■D■E■F■G■H■J■K■M■N■P■Q■S■T■U√В В В В В В щ √їа√Я√Ю■Э■Ь■Ы√Ъ°Щ√Ш√Ч√Ц√Х√Ф■У√Т■С√Р■П■О■Н■М■Л√К■Й√И■Ж■Е■Д■Г■В■Б■А■√~■}■|■{■z■y■x■w■v■u■s■r■q■o■n■m■l■j√ї╕ї╖ї╢√В В В В В В В В В В В В В В В В и √у╧°╬°■■ ■"■%■(■+■-■/■0■2■4■6■9■<■?■C■D■E■F■G■H■J■K■M■N■P■R■S■T■U√В В В В В В щ √їа√Я√Ю■Э■Ь■Ы°Ъ√Щ√Ш√Ч√Ц√Х√Ф■У√Т■С√Р■П■О■Н■М■ЛЄ■Ж■Е■Д■Г■В■Б■А■■~√}√|■{■y■x■w√u■s■r■q■o■n■m■k■j√ї╖ї╢ї╡√В В В В В В В В В В В В В В В В и √щ╨Є╧°■■ ■"■%■(■*■-■.■0■2■4■6■9■<■@■B■D■E■F■G■H■I■K■M■O■P■R■S■T■U√В В В В В В щ √їа√Я√Ю■Э■Ь■Ы°Ъ√Щ√Ш√Ч√Ц√Х√Ф■У√Т╫■Е■Г√В■Б■А■■~■}°|■{■z■x■w■u■t■s■r■q■o■n■m■k■j√ї╢ї╡ї┤√В В В В В В В В В В В В В В В В л √ь╤я╨√■■■■ ■#■%■(■*■-■/■0■2■4■6■:■=■@■B■C■D■F■G■H■J■L■M■O■P■R■S■T■U√В В В В В В ь °їа√Я√Ю■Э■Ь■Ы°Ъ√Щ√Ш√Ч√Ц√Х√Ф╬■Е■Г■В√Б■А■■~■}■|°{■z■x■w■u■t■s■r■q■o■n■m■k■j√ї╡Є┤°│√В В В В В В В В В В В В В В В В л √Є╥щ╤√■■■■ ■#■%■'■*■-■/■0■2■4■7■:■=■@■B■C■D√F■H■J■L■M■O■P■R■S■T■U√В В В В В В ь °їа√Я√Ю■Э■Ь■Ы°Ъ√Щ√Ш√Ч√Ц■Хя°gь■Ц■Э√■Е■Г■В■Б√А■■~■}■|■{■z■y■z■x■w■u■t■s■r■q■o■n■m■k■j√ї┤я│√▓√В В В В В В В В В В В В В В В В л √┌╥√■■■■ ■#■%■'■+■-■/■0■2■4■7■:■=■?■B■C√E■F■H■J■L■N■O■Q■R■S■T■U√В В В В В В ь °°а°Я√Ю■Э■Ь■Ы°Ъ√Щ√Ш√Чя■h√gщ■Д■Л■Т■П√■Е■Г■В■Б■А√■~■}■|■{■z■y√x■w■v■t■s■r■q■o■n■m■k■j√■┤ї│Є▓√▒√В В В В В В В В В В В В В В В В л √■╥▌╙√■■■■ ■"■$■(■+■-■/■1■2■5■7■:■=■?■A■C■D■E■G■I■K■L■N■O■Q■R■S■T■U√В В В В В В ь √■б°а°Я√Ю■Э■Ь■Ы°Ъ√Щь°h■gь■С°■И■О■╣°■Г■В■Б■А■√~■}■|■{■z■y■x√w■v■t■s■r■q■o■n■m■k■j°ї▓я▒■░√В В В В В В В В В В В В В В В В л √ь╙Є╘■╙√■■■■ ■!■%■(■+■-■/■1■3■5■7■:■<■?■B■C■D■F■G■I■K■L■N■O■Q■R■S■T■U√В В В В В В ь √■б°а°Я■Ю√Э■Ь■Ы√ЪьїhщЄС√■К■╗°■Г■В■Б■А■√~■}■|■{■z■y■x■w■v√u■s■r■q■o■n■l■k■j■i√Є▒Є░√п√В В В В В В В В В В В В В В В В о √°╙у╘√■■■■■!■%■)■+■.■/■1■3■4■7■:■<■@■C■D■E■F■H■I■K■L■N■O■Q■R■S■T■U√В В В В В В ь √■б°а°Я■Ю√Э■Ььїhц°РЄСя■Г■В■Б■А■√~■}■|■{■z■y■x■w■v■u■t■s■r■q■o■n■m■k√i√Є░яп■о√В В В В В В В В В В В В В В В В о √ц╘ї╒√■■■■■"■&■)■+■.■0■2■3■4■7■:■=■@■C■D■E■F■H■J■K■L■N■O■Q■R■S■T■U√В В В В В В ь √■б°а√Я√Юь■i°hуьР√Сь■Г■В■Б■А■√~■}■|■{■z■y■x■w■v■u■t■s■r■q■o■n■m■k■i■h√япяо√В В В В В В В В В В В В В В В В о √Є╘щ╒√■■■■■"■&■)■,■.■0■1■3■4■7■:■=■@■C■D■E■G■H■J■K■L■N■O■Q■R■S■T■U■В В В В В В щ √■б°а■Яь√i°hЄ■УїщРу■Г■В■Б■А■√~■}■|■{√z■x■w■v■u■t■s■r■q■o■n■m■k■i■h√■пяоЄн√В В В В В В В В В В В В В В В В ▒ √√╘р╒√■■■■■■#■'■)■,■.■0■1■2■4■7■;■>■A■C■D■E■G■H■J■K■L■N■O■Q■R■S■T√В В В В В В ь °■б■аьїiя■Ф■УїщРЄ■Q■Uя■В■Б■А■√~■}■|■{■z■y■x■w■v■u■t■s■r■q■o■n■m■k■i■h√√ощн√м√В В В В В В В В В В В В В В В В ▒ √┌╒√■■■■■■#■'■)■,■.■/■1■2■4■7■;■>■A■C■D■F■G■H■J■K■L■N■O■Q■R■S■T√В В В В В В ь цїiь■Ф■Уї■ПьРЄ■P■V■[■`я■В■Б■А■√~■}■|■{√z■x■w■v■u■t■s■r■p■o■n■m■k■j■h√Єньм√В В В В В В В В В В В В В В В В ▒ √ї╒°╓я╒√■■■■■ ■$■'■*■,■.■/■0■2■4■8■;■>■A■C■D■F■G■H■I■K■L■N■O■Q■R■S■T√В В В В В В я яЄiя°Ф■Уї°ПЄРЄ■O■V■[■`■d■fя■В■Б■А■√~■}■|■{√z■x■w■v■u√s■q■p■o■n■m■k■j■h√щмїл√В В В В В В В В В В В В В В В В ▒ √щ╓Є╒√■■■■■ ■$■'■)■,■-■/■0■2■5■8■;■>■A■C■D■F■G■H■I■K■L■M■O■Q■R■S■T√В В В В В В √ ьїjь■ХїФїЄП°РЄ■M■U■\■_■a■d■f■hя■В■Б■А■√~■}■|■{√z■y■w■v■u■s■r■q■p■o■n■m■k■j■h√√мщл√к√В В В В В В В В В В В В В В В В ▒ √ц╓ї╒√■■■■■!■%■'■)■+■-■.■0■3■5■9■;■>■A■C■D■E■G■H■I■K■L■M■O■Q■R■S■T√В В В В В И щїjь√Ц√Х√ФїщПЄ■L■S■X■\■_■a■c■e■g■oя■В■Б■А√■~■}■|√{■z■y■w■v■u■s■r■q■p■o■n■l■k■j■h√Єльк√В В В В В В В В В В В В В В В В ▒ √ц╓ї╒√■■■■■!■%■'■)■+■,■.■1■3■5■9■;■>■A■C■D■E■G■H■I■K■L■M■O■P■R■S■U√В В В В В Ч цїkь√ЧїЦ■Х■Фї■ОяПя■K■N■R■W■[■^■`■b■d■f■kь■В■Б■А√■~■}■|√{■z■y■w■v■u■t■r■q■p■o■m■l■k■j■h√щкїй√В В В В В В В В В В В В В В В В ▒ √у╓°╒√■■■■■"■$■&■(■*■,■/■1■3■6■9■<■>■A■C■D■E■F■H■I■K■L■M■O■P■R■S■U√В В В В В г цЄkьїЧїЦ■Хї°ОїПЄ■J■K■L■N■Q■V■Z■^■`■b■d■e■i■t√■┼√■A√■Б■А√■~■}■|√{■z■y■w■v■u■t■r■q■p■n■m■l■k■i■h√°кщй■и√В В В В В В В В В В В В В В В В ▒ √√╒ц╓√╒√■■■■■"■$■&■(■*■-■/■2■4■6■9■;■>■A■C■D■E■F■H■I■J■L■M■O■P■R■T■U°В В В В В ╡ уЄlь°ШїЧїЦїЄО°Пї■J■L√M■O■P■T■Y■]■_■a■c■d■g■n■А√■╦■╞■■A√■Б■А√■~■}√|■{■z■y■w■v■u■t■r■q■o■n■m■l■j■i■h√яйяи√В В В В В В В В В В В В В В В В ▒ √┌╒√■■■■■!■#■%■'■+■-■0■2■4■6■9■;■>■A■C■D■E■F■H■I■J■L■M■O■P■R■T■U°В В В В В ┴ уЄmщ■ЩїШЄЧ√ЦїщОї■K■L■M■N■O■P■R■S■W■\■^■a■b■d■e■l■x■Й■О■╟°■@√■Б■А√■~■}√|■{■z■y■w■v■u■t■r■q■o■n■m■k■j■i■h√■йьиїз√В В В В В В В В В В В В В В В В ▒ √┌╒√■■■■■!■#■%■(■+■.■0■3■5■6■9■;■>■A■C■D■E■F■G■I■J■L■M■O■Q■R■T■U°В В В В В ╨ уяmщїЩїШЄЧ■ЦїїОїНї■K■L■M■N■O■P■Q■S■T■V■[■^■`■a■c■d■j■q■Д■М■╝■╟°■@√■Б■А√■~■}√|■{■z■y■w■v■u■t■r■q■o■n■m■k■j■i■g√°ищз■ж√В В В В В В В В В В В В В В В В ▒ √ь╘я╒√■■■■■ ■#■%■(■,■/■1■3■4■6■9■;■>■A■C■D■E■F■G■I■J■L■M■O■Q■R■T■U°В В В В В ▄ уЄnц°ЪїЩЄШїЧїщНї■K■L■M■N■O■P■Q■S■T■V■W■Y■]■_■a■b■d■h■o■|■Й■П■╜■╟■─■┬ї■В■Б■А■■~■}√|■{■z■y■x■v■u■t■r■q■o■n■m■k■j■i■g√язяж√В В В В В В В В В В В В В В В В ▒ √┌╘√■■■■■ ■"■%■)■,■/■1■3■4■6■9■;■>■A■B■D■E■F■G■I■J■L■M■O■Q■R■T■U°В В В В В ы рЄoц°ЫїЪ°ЩЄШїЧ°щМї■L■M√N■O■P■Q■R■T■U■W■X■Z■]■^■`■a■c■f■m■t■З■Н■С■└■╟■┼■┬√■@√■Б■А■■~■}√|■{■z■y■x■v■u■t■r■q■o■n■m■k■j■h■g°щж°е√В В В В В В В В В В В В В В В В ┤ °■╙▌╘√■■■■■ ■#■&■)■-■0■1■3■4■6■9■;■>■A■B■D■E■F■G■I■J■L■M■O■Q■S■T■U°В В В В В · у√oїpцьЫЄЪ°ЩїШ°Ч°√МяЛї■L■M■N■O■P■Q■R■S■T■U■W■X■Y■[■\■^■_■a■b■d■k■r■А■К■Р■║√╟■┼■├√■@√■Б■А■■~■}√|■{■z■y■x■v■u■t■r■q■p■n■m■k■j■h■g°°ж°еьВ В В В В В В В В В В В В В В В ┤ √┌╙√■■■■■■ ■#■'■*■-■0■1■3■4■6■9■;■>■A■B■C■E■F■G■I■J■L■M■O■Q■S■T■U°В В В В Р ▌√pїqуїЬьЫїЪ°ЩїШ°Ч°ьЛї■L■M■N■O■P■Q■R■S■T■U■V■X■Y√[■\■]■^■`■a■c■i■p■y■З■Н■У■╗√╟■┼■├√■@√■Б■А■■~■}√|■{■z■y■x■v■u■t■s■q■p■n■m■k■j■h■g°■е▌В В В В В В В В В В В В В В В В ┤ √┌╙√■■■■■■ ■$■'ї■2■4■6■9■;■>■Aщ■N■O■Q■S■T■U°В В В В е ╫√qЄrц√ЭяЬьЫЄЪ°Щ°Ш√Ч°°ЛЄК°■L■M■N■O■P■Q■R■S■T■U■V■X■Y■Z√[■\■]■^■_■a■b■g■n■u■Е■Л■Р■Х■╜√╟■┼■─√■@√■Б■А■■~■}√|■{■z■y■x■v■u■t■s■q■p■n■m■k■j■h■g■fщЄЧ√В В В В В В В В В В В В В В В В ┤ √┌╥√■■■■■■ ■$■(ц■>╦В В В В ║ ╤ьsц°Ю°ЭьЬяЫяЪ°Щ°Ш■Ч°■ЛїК√Йї■K■L■M■N■P■Q■R■S■U■V■W■X■Y√Z■[■\■]■^■_■`■b■e■l■s■}■И■О■Ф■╕■╛√╟■┼■─■└ї■Б■А■■~■}■|√{■z■y■x■v■u■t■s■q■p■n■m■k■j■h■g■f°уЧ√В В В В В В В В В В В В В В В В ┤ √┌╥√■■■■■■!■%■(╘°]╤В В В В с ╤цtу■а°Я°Ю√ЭьЬьЫяЪ√Щ°Ш°їК°Йї■J√K■M■N■O■P■Q■S■T■U■V■X■Y√Z■[■\■]■^■_■`■a■c■j■q■x■Е■Л■С■Ч■╣■└√╟■╞■─■┴√■@√■А■■~■}■|√{■z■y■x■v■u■t■s■q■p■n■m■k■j■h■g√▌Ч√В В В В В В В В В В В В В В В В ┤ √┌╤√■■■■■■"■%■)ї°Э╘°]╤В В В П ╤уv▌■в°б√а°Я°Ю√ЭяЬьЫяЪ°Щ√Ш°√КїЙ■И°√I■J■K■L■M■N■O■Q■R■S■T■V■W√Y■Z■[■\■]■^■_■`■a■b■h■o■v■Б■И■О■Ф■┤■╗√╟■╚■╞■┼■┴√■@√■А■■~■}■|√{■z■y■x■v■u■t■s■q■p■n■m■k■j■i■g√▌Ч√В В В В В В В В В В В В В В В В ┤ √┌╤√■■■■■■"■&■(√■С√√ЭЄЬ╬√^╦В В В ┐ ╤рw╫°г°в°б√а°Я°Ю√ЭяЬяЫьЪ°Щ°■КїЙ°И°■H■I■J■K√L■M■O■P■Q■R■T■U■V■X■Y■Z■[■\■]■^■_■`√a■f■m■t■{■Ж■М■С■Ч■╢■╝√╟■╚■╞■┼■┬√■@√■А■■~■}■|√{■z■y■x■v■u■t■s■q■p■n■m■k■j■i■g√▌Ч√В В В В В В В В В В В В В В В В ┤ √┌╨√■■■■■■#■&■(■√е■К√уЬ┼√_╦В В В Є ╦°yцx╫°еїд°г°в°б√а°Я°Ю√ЭЄЬьЫьЪ√Щ°°ЙїИ°√H√I■J■K■L■M■N■O■P■R■S■T■U■V■Y■Z■[■\■]■^■_■`√a■c■k■r■y■Г■Й■П■Х■Ы■╖■╛√╟■╚■╞■┼■┬√■?√■А■■~■}■|√{■z■y■w■v■u■t■s■q■p■n■m■k■j■i■g√▌Ч√В В В В В В В В В В В В В В В В ┤ √■╧р╨■╧√■■■■■■#■&√√з■И■Г√╫Ы┐ї`╣В В ╩ ╢яzяy╫уеїд°г°в°б√а°Я°Ю√ЭЄЬяЫьЪ■Щ°√ЙЄИ■З°■G√H√I■K■L√M■N■P■Q■R■S■U■V■W■Z■[■\■]■^■_■`√a■b■h■p■w■~■Ж■М■Т■Ш■▓■╣■┐√╟■╚■╟■┼■├■└ї■А■■~■}■|■{√z■y■w■v■u■t■s■q■p■n■m■k■j■i■g√▌Ч√В В В В В В В В В В В В В В В В ┤ √■╬▌╧√■■■■■ ■#■&√√й■Б■В■|Є╫Ъц√├╫■a√b√c■dбВ л др{°z╫яжреїд°г°в°б√а°Я°Ю√ЭїЬьЫяЪ■Щ°ЄИ√З°■F■G√H√I■J■L√M■N■O■P■Q■S■T■U■V■X■[■\■]■^■_■`√a■b■d■l■t■|■Д■К■П■Х■Ы■│■║■┴√╟■╚■╟■┼■├■└√■?√■■~■}■|■{√z■x■w■v■u■t■s■q■p■n■m■k■j■i■g√▌Ч√В В В В В В В В В В В В В В В В ┤ √■═▌╬√■■■■■ ■#■%√√л■к■А■{у╫Ъья┬╘√d√e√f■gВВ╕┐|╘▌ж▌еїд°г°в°б°а√Я°Ю°Э√ЬьЫяЪ°їИїЗ°■F√G√H■I■J■K■L■M√N■O■Q■R■S■T■U■W■Y■\■]■^■_√`■a■b■c■i■q■y■Б■З■Н■У■Ш■Ю■╡■╝°╟■╚■╟■╞■├■└√■?√■■~■}■|■{√z■x■w■v■u■t■s■q■p■n■m■k■j■i■g√▌Ч√В В В В В В В В В В В В В В В В ┤ √√╠√═ц╬√■■■■■ ■#■%√■н√м■■y√■У√Тц╫Щьц┬┐■g√h°i√j°k√lВЬу|┌}┼Єз┌ж┌е°дїг°в°б°а√Я°Ю°Э√ЬяЫяЪ°√ИїЗ■Ж°■E√F■G√H√I■J■L■M√N■O■P■Q■R■S■U■V■X■Z■]■^■_√`■a■b■c■f■n■v■~■Д■К■Р■Ц■Ь■░■╖■╜°╟√╚■╞■─■└√■?√■■~■}■|■{√z■x■w■v■u■t■s■q■p■n■m■k■j■i■g√▌Ч√В В В В В В В В В В В В В В В В ┤ √√╦√╠ц═√■■■■■ ■#■%√■п√о■u√■Ч■Ц■ФЄУц┌Щь°┴у┬■┴н√k°l√m°n√o°p°q╘їvяwьxьyьz┼{│▌з┌ж╫е√дЄг°в°б°а√Я°Ю°Э√ЬяЫїЪ°■ИїЗ°Ж°■E√F√G√H■I■J■K■L√N√O■P■R■S■T■U■V■X■[■]■_√`■a■b■c■d■k■s■{■Б■З■Н■У■Щ■Я■▒■╕■┐°╟√╚■╞■─■┴√■?√■■~■}■|■{■z■y■x■w■v■u■t■s■q■p■n■m■k■j■i■g√▌Ч√В В В В В В В В В В В В В В В В ┤ √√╩°╦щ╠√■■■■■ ■"■%√■▒√░■п√■Щ■Ш■Ц■Х°ФЄУц°ЩуШь╘┴я└°┐к■n√o°pїqїrїsїtїuїvїwьxьyяzкуи┌з┌ж╘е■дяг°в°б°а√Я°Ю°Э√ЬЄЫїЪ°°ЗїЖ°■D√E√F√G■H√I■J■L■M°O■P■Q■R■S■T■V■W■Y■\■^■_■`■a■b■c■d■h■p■x■~■Г■К■С■Ц■Ь■м■│■║■└°╟√╚■╞■─√┴ї■■~■}■|■{■z■y■x■w■v■u■t■s■q■p■n■m■k■j■i■g√щЧяВ В В В В В В В В В В В В В В В ┤ √°╔√╩°╦Є╠√■■■■■■"■%√■│■▓√▒√■Ь■Ъ■Ш■Ч√ХяФїУущШ°Чьу┴я└я┐Є╛я╜√╝ВД■лякяйьи╤з▌ж╬е■дяг°в°б°а°Я√Ю°Э√ЬЄЫ√Ъ°√ЗїЖ√Е°√D■E√F√G√H■I■J■K■M■N√O√P■Q■R■T■U■V■X■Z■]■_■`■a■b■c■d■e■l■t■|■А■Ж■Н■Ф■Ъ■Я■о■┤■╗■┬°╟√╚■╞■┼√┴√■?√■~■}■|■{■z■y■x■w■v■u■t■s■q■p■n■m■k■j■i■g√°ЧрВ В В В В В В В В В В В В В В В ┤ √■╟√╚°╔√╩Є╦√■■■■■■"√√╡■┤√│√■Ю■Ь■Ы■Щ■Ш■ЦЄХьФ√УцяШ°Ч°Ць√┴ц└я┐Є╛я╜Є╝я╗Є║√╣В▐°нямялякяйьи╤з▌ж╦е■дЄгїв°б°а°Я√Ю°Э√ЬїЫ√Ъ°їЖ°Е°■C√D√E√F√G■H√I■J■L■M■O°P■Q■R■S■T■U■W■Y■[■^■`■a■b■c■d■e■i■q■y■~■В■И■Р■Ч■Э■г■п■╢■╜■╞°╟√╚■╟■┼■┬■┴√■?√■~■}■|■{■z■y■x■w■v■u■t■r■q■p■n■m■k■j■i■gцїЯ■а√В В В В В В В В В В В В В В В В ┤ √■╞√╟°╚√╔°╩■╦■╩√■■■■■■"√√╖■╢√╡√■Я■Ю■Э■Ы■Ъ■Ш■Ч°ЦьХЄФ√УцяЧ°Ц√Хьь└я┐Є╛я╜Є╝я╗Є║Є╣я╕ї╖ї╢ї╡ї┤ї│ї▓ї▒ї░їпяоянямялякяйщи╘з▌ж╚е■дїгЄв°б°а°Я√Ю°Э√Ь°Ы■Ъ°°ЖЄЕ°√C√D√E■F√G√H■I■J■K■M■N■O■P°Q■R■S■U■V■W■Z■\■_■a■b■c■d■e■f■n■v■{■■Д■Л■Т■Ъ■а■к■▒■╖■╛■╞°╟√╚■╟■┼■┬■┴√■?√■~■}■|■{■z■y■x■w■v■u■t■r■q■p■n■m■k■j■i■gїїЮїЯ√а√В В В В В В В В В В В В В В В В ┤ √■┼°╞√╟°╚√╔√╩√■■■■■■"√√╣■╕■╖■╢√■л■Я■Ю■Э■Ы■Ъ■Щ√ЧЄЦЄХЄФїУщ°Ч°ЦїХ√Фьщ┐Є╛я╜Є╝Є╗Є║я╣я╕ї╖ї╢ї╡ї┤ї│ї▓Є▒ї░їпїоьнямялякяйщи╫з┌ж┼е■д°гяв°б°а°Я√Ю°Э√Ь°Ы°■ЖЄЕ■Д°√B■C√D√E√F√G√H■I■K■L■M■O■P°Q■R■S■T■U■V■X■[■]■_■b■c■d■e■f■k■s■y■}■Б■З■О■Х■Ь■г■м■▓■╣■└■╞°╟√╚■╟■╞■├■┴√■?√■~■}■|■{■z■y■x■w■v■u■t■r■q■p■n■m■k■j■h■g√ЄЮїЯ°а√В В В В В В В В В В В В В В В В ┤ √√─√┼°╞√╟°╚■╔√■■■■■■!√√╗■╕■╡■▓√■│■к■а■Ю■Э■Ь■Ъ■Щ■Ш°ЧїЦЄХЄФяУщ°Ц°ХїФ■Уь°┐я╛Є╜я╝Є╗Є║Є╣щ╕ї╖ї╢ї╡ї┤ї│ї▓ї▒ї░їп°ощнямялякяйци┌з┌ж┬е■д√гьв°б°а°Я√Ю°Э√Ь√Ы√■ЖїЕ°Д°√B√C√D√E■F√G√H■I■J■K■M■N■O√Q°R■S■T■V■W■Y■[■^■`■c■d■e■f■h■p■v■{■■Г■Й■С■Ш■Я■ж■н■┤■║■┴■╞√╟ї╚■╞■├■┴■┬ї√}■|■{■z■y■x■w■v■u■t■r■q■p■n■m■k■j■h■g√°ЮЄЯ√а√б√В В В В В В В В В В В В В В В В ┤ √°┬√├√─°┼√╞■╟√■■■■■■!°■┴■└■┐■╛√■┤■▓■и■а■Я■Э■Ь■Ы■Щ■ШїЧЄЦїХїФщУ■Тщ°Х°ФїУ■ТЄя╛Є╜я╝Є╗Є║Є╣Є╕ь╖ї╢ї╡ї┤ї│ї▓ї▒ї░Єп√ощнямялякяйци┌з┌ж┐е■д■гьвїб°а°Я°Ю√Э√Ь■Ы√°ЕїД°√A√B■C√D√E√F√G√H■I■K■L■M■O■P■Q°R■S■T■U■V■W■Z■\■_■a■d■e√f■m■t■x■|■Б■Е■М■У■Ы■в■и■п■╡■╝■├■╞√╟ї╚■╟■┼■┴■┬√■?■√}■|■{■z■y■x■w■v■u■t■r■q■p■n■m■k■j■h■g√√ЮїЯ°а°б√В В В В В В В В В В В В В В В В ┤ √°┴■└√┴√┬°├√─√■■■■■■!щ■│■╡■│■▒■з■а■Я■Э■Ь■Ы■Щ■ШЄЧЄЦїХїФцУ√ТьїФїУ°ТЄ√╛Є╜я╝Є╗Є║Є╣Є╕ь╖ї╢ї╡ї┤Є│ї▓ї▒ї░їп°оьнямялякяйуи▌з┌ж╝е■д■гявЄб°а°Я°Ю√Э√Ь√√Е°Д√Г°√A√B√C√D√E■F√G√H■I■J■K■M■N■P■Q√R°S■T■U■W■X■[■]■`■b■e√f■i■q■v■z■~■В■И■П■Ц■Э■е■к■░■╖■╜√╞√╟ї╚■╟■╞√┬√■?√√|■{■z■y■x■w■v■u■s■r■q■p■n■m■k■j■h■g√■ЮїЯ°а°б■в√В В В В В В В В В В В В В В В В ╖ °ї└°┐°└√┴■┬√■■■■■■!√■Юї■Ь■п■╕■╡■▓■░■е■а■Я■Ю■Ь■Ы■Ъ■Щ■ШЄЧЄЦїХЄФцУ°Ть■ФїУ°Т■Ся°╜Є╝Є╗Є║Є╣я╕щ╖ї╢ї╡ї┤ї│ї▓ї▒ї░їп°оьнямьлякяйциЄз┼ж╣е■д■гЄвяб°а°Я°Ю√Э■Ь√■ЕїД√Г°■@√A√B■C√D√E√F√G√H■I■J■L■N■O■P√R°S■T■U■V■W■Y■\■^■a■c■e■f■g■n■s■w■|■А■Д■К■Т■Щ■а■ж■м■▓■╕■┐√╞√╟Є╚■╞■─■┬√■?√■|√{■z■y■x■w■v■u■s■r■q■p■n■m■k■j■h■f√°Яїа°б√в√В В В В В В В В В В В В В В В В ╖ √Є┐ь╛■┐°■■■■■■!√°Ю√■Ь■о■╝■╢■┤■▒■п■г■б■Я■Ю■Э■Ы■Ъ■Щ°ШїЧЄЦїХяФцУ°Ть√УїТ°Сяї╝Є╗Є║Є╣Є╕щ╖Є╢ї╡ї┤ї│ї▓ї▒ї░Єп√оЄнцмялякяйуиЄз╚ж╢е■д■гївьб°а°Я°Ю√Э√■Е°Д°Г√√?■@■A√B√C√D√E■F√G√H■I■J■K■M■N■P■Q■R√S°T■U■V■X■Z■]■_■b■d■f■g■k■q■u■y■~■В■Ж■Н■Х■Ь■г■и■н■│■║■┴■╞°╟√╚■╔√╚■╟■┼■┬√■?√■|■{√z■y■x■w■v■u■s■r■q■p■n■m■k■j■h■f√√Яїа°б√в■г√В В В В В В В В В В В В В В В В ╖ √■┐Є╛Є╜√╝√■
+■■■■■√°Ю√■С■Э■о■╝■╖■╡■│■▒■о■в■б■Я■Ю■Э■Ь■Ъ■ЩїШЄЧїЦ°ХщФцУ°ТьїТ°С√РЄ■╝Є╗Є║Є╣Є╕я╖ь╢ї╡Є┤ї│ї▓ї▒ї░їп°о°нумялякяйуиЄз╚ж│е■д■г°вьбїа°Я°Ю■Э√°Д°Г■В√■>■?√@■A■B√C√D√E√F√G■H√I■J■K■M■O■P■R√S°T√U■W■X■[■]■`■b■e■g■h■n■s■w■{■■Д■Й■Р■Ч■Я■е■к■п■╡■╗■┬■╞°╟√╚■╔°╚■╞√├ї■|■{■z■y■x■w■v■u■t■s■r■q■p■n■m■k■j■h■f√■Яїа√б°в√г√В В В В В В В В В В В В В В В В ╖ √■╛Є╜Є╝√╗√■
+■■■■■√°Ю√■С■Э■о■╖■╣■╢■┤■▓■░■н■в■б■а■Ю■Э■Ь■Ы■ЩЄШЄЧ°ЦїХцФщУїТь■ТїС√Р√ПЄ√╗Є║Є╣Є╕Є╖ц╢ї╡ї┤ї│ї▓ї▒ї░Єп√оїнцмялякяйриЄз╬ж┌е■д╫е■д■г√вьбЄа°Я°Ю√√Д°Г√В√■=■>■?√@√B√C√D■E√F√G√H√I■J■L■N■P■Q√S√T°U■V■W■Y■\■^■a■c■f■h■l■p■t■y■}■Б■Ж■М■У■Ъ■б■ж■м■▒■╢■╜■─■╞°╟√╚■╔°╚■╟■─■├ї■|■{■z■y■x■w■v■u■t■s■r■q■p■n■m■k■i■h■f√їа√б°в√г■д√В В В В В В В В В В В В В В В В ╖ √√╜Є╝Є╗■║√■
+■■■■■√°Ю√■С■Э■и■░■╝■╖■╡■│■▒■п■м■в■б■а■Я■Э■Ь■Ы■Ъ■ЩЄШїЧїЦЄХцФьУЄТь°С°Р√Пя√║Є╣Є╕я╖ц╢ї╡ї┤ї│ї▓ї▒Є░їп°о°нцмялякяйриЄз╬ж┌е√д╫е■д■г■вьбяа°Я√Ю√■Д°Г°В√■=√>■?■@■A■B√C√D√E√F√G■H√I■J■K■L■N■P■R■S√T√U°V■X■Z■]■_■b■d■g■i■n■r■v■{■■Г■З■О■Ц■Э■г■и■н■▓■╕■╛√╞°╟√╚■╔°╚■╟■┼■├√■?√■{■z■y■x■w■v■u■t■s■r■q■p■n■m■k■i■h■f√√а°б°в√г√д√В В В В В В В В В В В В В В В В ╖ √√╝Є╗я║√■
+■■■■■√°Ю√■С■Э■в■░■╝■╕■╢■┤■▓■░■о■л■г■б■а■Я■Ю■Ь■Ы■Ъ°ЩїШїЧїЦяХцФяУяТьїР√П√Оя°╣Є╕я╖ь╢ь╡ї┤ї│ї▓ї▒ї░їп°о°ньмщлякяйуияз╬ж┌е√д╘е■д■г■вябьа°Я■Ю√їГ°В√■<■=√>■?■@■A■B√C√D■E√F√G√H√I■J■K■M■O■P■R√T√U°V■W■Y■[■^■`■c■e■h■k■p■t■x■|■Б■Е■К■С■Ш■Я■д■к■п■┤■╣■└√╞°╟√╚■╔ї╚■╞■├√■?√■{■z■y■x■w■v■u■t■s■r■q■p■n■m■k■i■h■f√■а°б°в√г√д■е√В В В В В В В В В В В В В В В В ╖ √°╗Є║Є╣√■
+■■■■■√°Ю√■С■Э■в■░■╝■╗■╖■╡■│■▒■п■н■к■г■в■а■Я■Ю■Э■Ь■ЪїЩїШїЧ°ЦщХщФяУьТь√Р√П√О√НЄЄ╕Є╖я╢ц╡ї┤ї│ї▓ї▒ї░Єп°о√нЄмулякяйуиьзьж┐е°д╘е■д■г■вЄбьаїЯ√°ГїВ√√<■=■>√?■@■A■B■C√D√E√F■G√H√I■J■K■L■M■O■Q■S°U√V°W■Z■\■_■a■d■f■i■m■q■v■z■~■Г■З■Н■Ф■Ы■б■ж■м■▒■╢■╗■┴√╞√╟°╚■╔ї╚■╟■┼√■?√■{■z■y■x■w■v■t■s■r■q■p■o■n■m■k■i■h■f√°б√в°г√д√е√В В В В В В В В В В В В В В В В ╖ °■║■я╣ї╕√■
+■■■■■ √°Ю√■С■Ь■в■░■╗■╜■╕■╢■┤■▓■░■о■м■й■г■в■б■Я■Ю■Э■Ь■Ы■ЪїЩїШ°ЧїЦцХяФьУщТь√П√О√Н√МЄ■╕Є╖Є╢у╡ї┤ї│ї▓ї▒Є░їп°о°нїмулякяйуиьзяж╝еїд╫е√д■г■вїбьаїЯ√√ГїВ°■;■<√=■>√?■@■A■B■C■D√E√F√G√H√I■J■K■L■N■O■Q■S■U√V°W√X■[■]■`■b■e■g■j■o■s■w■|■А■Д■Й■П■Ч■Э■в■и■н■▓■╖■╝■├√╞√╟°╚■╔Є╚■╞√■?√√{■z■x■w■v■t■s■r■q■p■o■n■m■k■i■h■f°■б√в°г√д√е■ж√В В В В В В В В В В В В В В В В ╖ ╬■■■■■■ √°Ю√■С■Ь■в■п■▓■╝■╣■╖■╢■│■▒■п■н■л■и■г■в■б■а■Я■Э■Ь■Ы■ЪЄЩ°ШїЧїЦуХїФцУщТя√П√О√Н√Мя√╖Є╢у╡Є┤ї│ї▓ї▒ї░Єп°о√нїмулякяйуищзЄж╝еЄд╫е√д■г■в°бьаїЯ√■ГЄВ°■:■;■<√=■>√?■@■A■B■C■D√E√F■G√H√I■J■K■L■M■N■P■R■T■V√W√X°Y■\■^■a■c■f■h■l■p■u■y■~■В■Ж■Л■Т■Щ■Я■д■к■п■┤■╣■╛■─√╞√╟√╚√╔Є╚■╟■─ї■|■{■z■y■w■v■u■s■r■q■p■o■n■l■k■i■h■f°√в°г√д√е√ж√В В В В В В В В В В В В В В В В ╖ √°░▌■■■■■■ √°Ю√■С■Ь■в■п■▓■╝■╜■╕■╖■╡■▓■░■о■м■к■ж■д■в■б■а■Я■Ю■Э■Ы√ЪїЩїШїЧЄЦщХїФуУщТ■Ся√О√Н√М√Ля°╢щ╡ь┤ї│ї▓ї▒Є░їп°о√нїмцлщкяйщицзяж┐еЄд╘е√д■г■в√бьа°Я°ЄВ■Б°■:√;■<■=√>■?√@■A■B■C√E√F√G√H■I√J■K■L■M■N■P■R■T■V■X°Y°Z■]■_■b■d■g■i■n■r■w■{■■Д■И■О■Х■Ы■б■ж■л■▒■╢■╗■└°╞√╟√╚°╔ї╚■╟■┼√■?√■{■z■y■w■v■u■s■r■p■o■n■m■l■k■i■h■f°■в°г√д√е°ж√В В В В В В В В В В В В В В В В ╖ √┌░√■■■■■√°Ю°■С■Ь■в■п■▓■╝■╜■╣■╕■╢■┤■▓■п■н■л■й■е■д■г■в■а■Я■Ю■Э■Ь°ЪїЩїШ°ЧщЦяХїФуУьТ°Ся√Н√М√Л√КЄя╡ц┤ї│ї▓Є▒ї░їпїо√н°мьлукяйщиузЄж┐еяд╘е√д■г■в■бьа°Я°їВ√Б°■9■:√;■<■=√>■?√@■A■B■C√E■F√G√H√I■J■K■L■M■N■O■Q■S■U■W■Y°Z°[■^■`■c■e■h■k■o■t■y■}■Б■Ж■К■С■Ч■Э■в■и■н■▓■╖■╝■┴√╞°╟√╚°╔ї╚■╟■╞√■?√■{■z■y■w■v■u■s■r■q■o■n■m■l■j■i■g■f°√г°д√е°ж■з√В В В В В В В В В В В В В В В В ╖ √┌░√■■■■■√°Ю√■М■С■Ь■в■п■▒■╗■╜■║■╣■╖■╡■│■▒■о■м■к■и■е■д■г■в■б■Я■Ю■Э■Ь■Ы°ЪїЩїШ√ЧуЦїХяФцУяТЄСЄ■Н√М√Л√К√Йї■╡▌┤ї│ї▓ї▒ї░Єп°о√н°мЄл▌кяйщиузЄж┬ещд╘е√д■г■в■бяа°Я√°ВїБ°√9■:■;√<■=■>√?√@■A■B■D■E√F√G√H■I√J■K■L■M■N■O■Q■S■U■W■Z°[√\■]■_■a■d■g■i■l■q■v■z■■Г■З■М■У■Щ■Я■д■й■п■┤■╣■╛■├√╞°╟√╚°╔ї╚√╟√■?√■{■z■y■x■v■u■t■r■q■o■n■m■k■j■i■g■f°■г√д°е√ж°з√В В В В В В В В В В В В В В В В ╖ √┌░√■■■■■√°Ю√■Н■С■Ь■в■п■▒■┤■╝■╛■║■╕■╢■┤■▓■░■н■л■й■з■ж■д■г■в■б■а■Я■Э■Ь■ЫЄЪїЩ√ШїЧщЦїХьФщУяТЄС√РЄ■М√Л√К√Й■Иїщ┤я│ї▓ї▒Є░їп°о°н°мїл▌кяйщирзЄж┼ецдце■жЄе√д■г■в■бЄа°Я√√ВЄБ√■7■8√9■:■;√<■=■>√?√@■A■C■D■E■F√G√H√I■J■K■L√M■N■P■R■T■U■X■Z°\√]■^■`■c■e■h■j■n■s■w■|■Б■Е■Й■П■Х■Ы■а■ж■л■░■╢■╗■└■┼√╞°╟√╚°╔ї╚√╟√■?√■{■z■y■x■v■u■t■r■q■o■n■m■k■j■i■g■f°■д°е√ж°з√и√В В В В В В В В В В В В В В В В ╖ √┌░√■■■■■√°Ю√■Н■С■Ь■в■о■▒■│■╝■╛■╗■╣■╖■╡■│■▒■п■м■к■и■з■ж■е■д■в■б■а■Я■Ю■Ь°ЫїЪ°Щ√ШяЧяЦїХщФьУяТЄС°Ря√Л√К√Й■Иї°┤ц│ї▓ї▒ї░Єп°о√н°мїлркьйьи▌зЄжяе╝дуе■жЄе√д■г■в■бїа°Я√■ВяБ√√7■8■9√:■;■<√=■>√?■@■A■B■C■D■E■F√G■H√I√J■K■L■M■N■O■P■R■T■V■X■Z√]°^■_■a■d■f■i■k■p■t■y■~■В■З■Л■Т■Ч■Э■в■и■н■▓■╖■╝■┴■┼√╞√╟°╚°╔ї╚°╟ї■{■z■y■x■w■u■t■r■q■o■n■m■k■j■i■g■f°√е√ж°з°и■й√В В В В В В В В В В В В В В В В ╖ √┌░√■■■■■√°Ю√■Н■С■Ь■б■о■▒■│■╝■╜■╗■║■╕■╢■┤■▓■░■о■л■к■й■з■ж■е■д■г■в■а■Я■Э■ЬїЫїЪ√Щ√ШщЧїЦїХцФяУяТЄСЄРЄ■Л√К√Й√Иїц│ї▓ї▒ї░Єп°о°н√мїлцкцйьи┌зїжяе╣дуе■жЄе√д■г■в■б°а°Я√ьБ√■6■7√8■9√:■;■<√=■>√?■@■A■B■C■D■E■F■G√H√I■J■K■L√M■N■O■Q■R■T■V■Y■[■]■^°_■`■b■e■g■j■m■r■v■{■А■Д■Й■Н■Ф■Щ■Ю■д■й■п■┤■╣■╛■├°╞√╟°╚°╔Є╚√╟√■?√■z■y■x■w■u■t■s■q■p■n■m■k■j■i■g■f°√ж°з√и°й■к√В В В В В В В В В В В В В В В В ╖ √┌░√■■■■■√°Ю√■Н■С■Ы■б■о■░■│■╗■╜■╛■╗■╣■╖■╡■│■▒■п■н■л■к■й■и■ж■е■д■г■в■б■Ю°ЬЄЫ√Ъ√Щ°ШщЧ°ЦЄХщФяУяТЄСяРЄ√К√Й√И■Зїя│ї▓ї▒Є░їпїо√н°м°лькрйьи┌зЄжяе╣дуе■жїе°д■г■в■б√а°Я√ьБ√■5■6■7√8■9■:√;■<■=√>■?√@■A■B■C■D■E■F■G■H√I√J■K■L■M■N■O■P■Q■S■U■W■Y■[■^■_°`■a■c■f■h■k■o■s■x■}■Б■Ж■К■Р■Х■Ы■а■ж■л■░■╡■╗■└■├°╞√╟√╚ї╔Є╚√╟√■?√■z■y■x■w■u■t■s■q■p■n■m■k■j■h■g■f°°з√и°й°к√В В В В В В В В В В В В В В В В ╖ √┌░√■■■■■√°Ю√■Н■Т■Ы■б■и■░■│■╖■╝■╛■╝■║■╕■╢■┤■▓■░■о■н■м■к■й■и■з■ж■д■г■в■а■ЭЄЬ°Ы√Ъ√ЩЄШяЧ°ЦяХьФяУяТЄСяР■ПЄ■К√Й√И√Зї■│ь▓ї▒ї░Єп°о°н√мїлїк┌йьи╫зїжяе╢дце■жЄе°д■г■в■б■аїЯ■ьБ√■5√6■7■8√9■:√;■<■=√>■?√@■A■B■C■D■E■F√H√I■J■K■L√M■N■O■P■Q■S■U■W■Z■\■^■`√a√b■d■g■i■l■p■u■z■~■Г■И■М■Т■Ч■Э■в■з■н■▓■╖■╝■┴■─√╞°╟√╚ї╔Є╚√╟√■?√■z■y■x■w■v■t■s■q■p■n■m■k■j■i■g■e°°и°й°к√л°В В В В В В В В В В В В В В В В ║ √┌░√■■■■■√√Ю■Э√■О■Т■Ы■б■з■░■│■╡■╝■╛■╜■╗■╣■╖■╢■│■▒■░■о■н■м■л■й■и■з■ж■е■г■б■Я°ЭїЬ√Ы√Ъ√ЩьШїЧїЦяХяФяУяТЄСЄР°ПЄ√Й√И°ЗЄї▓ї▒Є░їпїо√н°м°лїк▌йщи╫зЄжЄе╢дуе■жЄе°д■г■в■б■а√Я√яБ■А√■4■5√6■7■8√9■:■;√<■=√>■?√@■A■B■C■D■E■G■H√I√J■K■L■M■N■O■P■Q■R■T■V■X■Z■\■_■a√b√c■e■h■j■m■r■w■{■А■Е■Й■О■У■Щ■Ю■д■й■п■┤■╣■╛■┴■┼■╞ї╟√╚ї╔Є╚√╟√■>√■z■y■x■w■v■t■s■q■p■o■m■k■j■i■g■e°■и°й√кїл■м°В В В В В В В В В В В В В В В В ║ √┌░√■■■■■√√Ю■Э√■О■Т■Ы■б■з■░■▓■╡■╗■╜■┐■╝■║■╕■╖■╡■│■▒■░■п■н■м■л■к■и■з■ж■д■в■а■ЮїЭ°Ь√Ы√Ъ√ЩьШїЧїЦяХяФяУяТЄСїРЄП■Ої■Й√И°З■ЖЄ■▓Є▒ї░їпїо°н√м°лїкрйци╘зїжяе┼д°г√дуе■жЄе°д■г■в■б■а■Я√їБ°А√√4■5■6√7■8■9√:■;√<■=■>√?√@■A■B■C■D■F■G■H√I■J■K√L■M■N■O■P■Q■R■T■V■X■[■]■_■a√c√d■f■i■k■o■t■x■}■В■Ж■Л■Р■Х■Ы■а■е■л■░■╡■║■╛■┬■╞Є╟√╚Є╔ї╚°╟ї■z■y■x■w■v■u■s■r■p■o■m■l■j■i■g■e°■й°к°лїм°В В В В В В В В В В В В В В В В ║ √┌░√■■■■√°Ю√√О■Т■Ы■б■з■░■▓■╡■╗■╜■╛■╜■╗■╣■╕■╢■┤■│■▒■░■п■н■м■л■к■й■и■е■г■б■Я√ЮїЭ√Ь√Ы√ЪїЩЄШїЧїЦяХьФЄУяТЄС°РЄП°Ої√И√ЗїЖї°▒ї░Єпїо√н√м°лїкцйри╘зЄжЄе╘дуг■дуе■жЄе°д■г■в■б■а■Я√°Б°А√■3√4■5■6√7■8■9√:■;■<√=■>√?■@√A■B■C■D■F■G■H■I√J■K■L■M■N■O■P√Q■S■U■W■Y■[■]■`■b√d√e■g■j■m■q■v■z■■Д■И■Н■С■Ч■Ь■в■з■н■▓■╖■╝■┐■├Є╟°╚Є╔ї╚°╟√■?√■y■x■w■v■u■s■r■p■o■m■l■j■i■g■e°√к°лїм√н°В В В В В В В В В В В В В В В В ║ їр░√■■■■√√Ю■Э√√О■Т■Ы■б■з■п■▓■┤■╗■╝√╛■╝■║■╣■╖■╢■┤■│■▓■░■п■о■н■л■к■й■з■д■в■а■ЯїЮ√Э√Ь√Ы√ЪяЩ°ШїЧїЦяХьФЄУяТЄС√РяПїОЄ°З°Ж■ЕїЄ░їпїо°н√м°лїкяй┌и╤зїжЄеяд┬г■дще√жЄе°д■г■в■б■а√°Б°А√■2■3■4√5■6■7√8■9■:√;■<■=√>√?■@√A■B■C■E■F■G■H■I■J■K√L■M■N■O■P■Q■R■S■U■W■Y■\■^■`■b■d■e√f■i■k■n■s■w■|■Б■Е■К■О■У■Щ■Ю■д■й■о■┤■╣■╝■└■─ї╟ї╚Є╔ї╚°╟√■?√■x■w■v■u■t■s■r■p■o■m■l■j■i■g■e°√лїмїн■о°В В В В В В В В В В В В В В В В ║ ╬■■■■√√Ю■Э√■О■П■Т■Ы■б■ж■п■▓■┤■╖■╝■╛■┐■╜■╗■║■╕■╖■╢■╡■│■▓■▒■п■о■н■м■к■и■ж■г■б°Я°Ю√Э√Ь√Ы√ЪяЩ°ШїЧїЦяХьФЄУяТЄС■РяПїО√НЄ√З°Ж√Еї√░Єпїо√н√м°лїкїй╫и╬зЄжЄеяд╦г°в■г■дье√жЄе°д■г■в■б√°Б°А°■2■3■4√5■6■7√8■9■:√;■<■=√>√?■@√A■B■D■E■F■G■H■I■J■K■L■M■N■O■P√Q■R■T■U■W■Z■\■^■`■c■e°g■j■l■p■t■y■~■В■З■Л■Р■Х■Ъ■а■е■л■░■╡■║■╜■┴■┼°╟Є╚Є╔ї╚°╟√■?√■x■w■v■u■t■s■r■p■o■n■l■j■i■g■e■b√°мЄнїо√В В В В В В В В В В В В В В В В ║ √√╗┌■■■■√√Ю■Э√■О■П■Т■Ъ■а■ж■п■▒■┤■╖■╗■╜■┐■╛■╝■╗■╣■╕■╖■╢■╡■│■▓■▒■п■о■н■л■й■з■е■в■аїЯ√Ю√Э√Ь√Ы°ЪЄЩїШ°ЧїЦьХяФЄУяТїС■РяПЄОїНї■З√ЖїЕїїпїо√н°м√лїкїй▌и┼зїжЄеяд╬гяв■г■дяе√жїеїд■г■в■б√√БїА√■1■2■3■4■5√6■7■8√9■:■;√<■=√>■?√@√A■C■D■E■F■G■H■I■J√L■M■N■O■P■Q■R■S■T■V■X■Z■\■_■a■c■e°h■k■m■q■v■{■■Д■И■Н■С■Ч■Ь■в■з■н■▓■╖■║■╛■┬■╞°╟ї╚я╔ї╚°╟√■>√■x■w■v■u■t■s■r■p■o■n■l■j■i■g■e■b√■мїнїо°п√В В В В В В В В В В В В В В В В ║ √┌╗√■■■■√√Ю■Э√■О■П■Т■Ъ■а■ж■п■▒■┤■╢■╗■╜■╛■┐■╜■╝■╗■║■╕■╖■╢■╡■┤■▓■▒■░■о■м■к■и■ж■д■б°а√Я√Ю√Э√Ь√ЫїЪїЩїШ°ЧїЦьХяФЄУЄТїС■РьПїОЄН■Мї√ЖїЕ■Дї■пЄо√н√м°л°кїйуи┐зЄжїеяд╤гцв■г■дЄе■жЄеїд■г■в√■БЄА√■/■1■2■3■4■5■6√7■8√9■:■;√<■=√>■?√@■A■B■C■D■E■F■G■H■I■K■L■M■N■O■P√Q■R■S■T■V■X■[■]■_■a■d■f■h√i■l■n■s■x■|■Б■Е■К■О■У■Щ■Ю■г■й■о■┤■╕■╗■┐■├■╞√╟Є╚я╔Є╚°╟ї■x■w■v■u■t■s■q■p■o■n■l■j■i■g■e■b√√нїоЄп■░√В В В В В В В В В В В В В В В В ║ √Є╝щ╗√■■■■√■Ю√Э√√П■Т■Ъ■а■ж■п■▒■┤■╢■╗■╝■╛■└■╛■╜■╝■╗■║■╣■╖■╢■╡■┤■▓■▒■░■н■л■й■з■е■г■б°а√Я√Ю√Э√Ь√ЫїЪїЩїШ°ЧїЦьХяФЄУЄТ°С■РьПЄОїН°МЄїЕ√Дї°о√н°м√лїкїйщи╝зЄжЄеяд╫гув■б■в■г■д°е√жЄе°д√г√■БЄА√■.■0■1■2■3■4■5■6√7■8■9√:■;■<√=■>√?√@■A■B■C■D■E■F■G■H■J■K■L■M■N■O■P■Q■R■S■T■U■W■Y■[■]■`■b■d■f■i■j■k■m■p■u■z■~■Г■З■Л■Р■Х■Ъ■а■е■л■░■╡■╕■╝■└■─√╟Є╚ь╔Є╚°╟√■?√■w■v■u■t■r■q■p■o■n■l■j■i■g■e■b√°оЄпї░√В В В В В В В В В В В В В В В В ║ √┌╝√■■■■√■Ю√Э√√П■Т■Ъ■а■ж■о■▒■│■╢■╕■╝■╛√┐■╛■╜■╝■╗■║■╣■╕■╢■╡■┤■│■▒■п■м■к■и■ж■д■в√б√а√Я√Ю√Э√Ь√ЫїЪїЩїШ°ЧїЦьХяФЄУЄТ√С■РщПїОЄНїМЄ√ЕїДЄ√н√м°л°кїйяирз√ж▌зяжїеяд╫гьвяб■в■г■д√е√жїе°д√г√■БЄА°■.■0■1■2■3■4■5■6■7√8■9√:■;■<√=■>√?√@■A■B■C■D■E■F■G■I■J■L■M■N■O■P√Q■R■S■T■U■W■Y■\■^■`■b■e■g■i■k■l■n■r■w■{■А■Д■Й■Н■Т■Ч■Ь■б■з■м■▓■╡■╣■╜■┴■─■╟Є╚щ╔Є╚°╟√■?√■w■v■t■s■r■q■p■o■m■l■k■i■g■e■b√Єпї░°▒√В В В В В В В В В В В В В В В В ║ √┌╝√■■■■√■Ю√Э√■П■Р■Т■Ъ■а■ж■о■▒■│■╢■╕■╗■╜■┐■└■┐■╛■╜■╝■╗■║■╣■╕■╖■╡■┤■▓■░■о■л■й■з■е■г°б√а√Я√Ю√Э√Ь°Ы°ЪїЩїШ°ЧЄЦяХяФЄУЄТ■С■РщПЄОїНЄМ■ЛЄ■ЕїД■ГЄ√м√л°кїйїи▌зЄжузяжЄеЄдргцвцб■в■г■д√е■ж°е√д°г■в√яА√■-■/■0■1√2■4■5■6■7√8■9■:√;■<■=√>√?■@√A■B■C■D■E■F■H■I■J■L■M■N■O■P■Q■R■S■T■U■V■X■Z■\■^■a■c■e■g■j■l■m■o■t■x■}■Б■Ж■К■П■У■Ш■Ю■г■й■о■│■╢■║■╛■┴■┼Є╚у╔ї╚°╟√■?√■v■u■t■s■r■q■p■o■m■l■j■i■g■e■b√√пї░Є▒■▓√В В В В В В В В В В В В В В В В ║ √┌╝√■■■■√■Ю■Э°■П■Р■Т■Ъ■а■ж■о■░■│■╡■╕■╗■╜■╛√└■┐■╛■╜■╗■║■╣■╕■╖■╢■╡■│■▒■п■н■к■и■ж■д√в√б√а√Я√Ю√Э√Ь°Ы°ЪїЩїШ°ЧЄЦяХяФЄУїТ■С■РцПїОЄНїМ°ЛЄїД°Г°°л√кїйїи▌зьжьзщжїеядяг▌в▌б■в■г■д°е°д√г√в√яА√■,■-■/■0°2■4■5■6■7■8√9■:√;■<■=√>√?■@√A■B■C■D■E■G■H■I■J■L■M■N■O■P■Q■R■S■T■U■V■X■Z■]■_■a■c■f■h■j■l■n■q■u■z■~■Г■З■М■Р■Х■Ъ■а■е■к■░■┤■╖■╗■┐■┬■╞ї╚Є╔■╩Є╔ї╚°╟√■?√■v■u■t■s■r■q■p■n■m■l■j■i■g■e■b√°░Є▒ї▓√В В В В В В В В В В В В В В В В ║ √р╝√╜√■■°■Ю√Э√■П√Р■Т■Ъ■а■ж■л■░■│■╡■╕■╗■╝■╛√└■┐■╛■╜■╝■╗■║■╣■╕■╖■╢■┤■▓■░■о■м■й■з■е■г√в√б√а√Я√Ю°Э■Ь°Ы°ЪїЩ°ШїЧЄЦяХяФЄУ°Т■С■РцПЄОїНЄМїЛЄ°Д°Г■В°√кЄйїицз▌жїзщжЄеЄдягрвубїа■б■в■г■д■е√д°г√в√яА√■+■,■.■/■0°2■4■5■6■7■8√9■:■;√<■=√>■?√@√A■B■C■D■E■G■H■I■K■M■N■O■P■Q■R■S■T√U■W■Y■[■]■_■b■d■f■h■k■m■o■r■w■{■А■Д■Й■Н■Т■Ц■Ь■б■з■м■▒■╡■╕■╝■┐■├■╟°╚ї╔ї╩ї╔щ╚ї■v■u■t■s■r■q■o■n■m■l■j■i■g■e■b√■░ї▒ї▓°│√В В В В В В В В В В В В В В В В ║ √я╜ї╝°╜√■■■√■Ю√Э√■П√Р■Т■Ъ■Я■е■л■░■│■╡■╕■║■╝■╜■┐■┴■└■┐■╛■╝■╗■║■╣■╕■╖■╢■╡■│■▒■п■н■л■и■ж■д■г√в√б°а√Я√Ю■Э■ЬїЫїЪ°Щ°ШїЧЄЦяХЄФЄУ°Т■С■РуПїОЄНїМЄЛ√Кї√Д°Г■В°■кїйїищзьж°еЄж√зцжїеЄдягрвщбща■б■в■г√д°г√в√ьА√■+■,■.■/■1√2■3■4■5√7■8■9√:■;√<■=√>■?√@√A■B■C■D■F■G■H■I■K■M■N■O■P■Q■R■S■T■U■V■W■Y■[■^■`■b■d■f■i■k■m■p■t■x■}■Б■Ж■К■П■У■Ш■Ю■г■й■о■▓■╡■╣■╜■└■─°╚°╔ї╩■╦■╩ї╔щ╚ї■v■u■t■s■r■q■o■n■m■k■j■i■g■e■b√°▒°▓Є│■┤√В В В В В В В В В В В В В В В В ║ √▌╜■╛√■■■√■Ю√Э√■П■Р■С■Т■Щ■Я■е■л■░■▓■╡■╖■║■╗■╜■┐√└■┐■╛■╜■╝■╗■║■╣■╕■╖■╡■│■▒■п■н■л■й■з■е°г√в√б√а√Я√Ю■Э■ЬїЫїЪ°Щ°ШїЧЄЦяХЄФЄУ√Т■С■РуПЄОїНЄМїЛїКї■ДїГ■В°√йїиязцжЄе╫жЄеЄдягцвьб▌а■б■в°г°в■б√яА√■*■+■-■.■/■1√2■3■4■5√7■8■9√:■;■<√=√>■?√@■A√B■C■E■F■G■H■J■L■M■N■O■P■Q■S■T√U■V■W■Y■\■^■`■b■e■g■i■k■n■q■v■z■~■Г■З■М■Р■Х■Ъ■Я■е■к■п■│■╢■║■╛■┴■┼√╚°╔°╩°╦√╩°╔щ╚√■?√■u■t■s■r■p■o■n■m■k■j■h■g■e■b√√▒°▓°│ї┤√В В В В В В В В В В В В В В В В ║ √р╜√╛√■■■√°Э√√Р■С■Т■Щ■Я■е■л■░■▓■╡■╖■╣■╗■╜■╛■└■┴■└■┐■╜■╝■╗■║■╣■╕■╖■╢■┤■▓■░■о■м■к■и■ж√д√г√в√б√а°Я■Э√ЬїЫїЪ°Щ°Ш°ЧьЦЄХЄФЄУ■Т■С■РрПїОЄНїМЄЛїКї■ДїГ■Вї°иїзужще┌жїеЄдягщвьбра°Я■а■б■в■г√в√б√яА√■)■*■+■-■.■0■1√2■3■4■5■7√8■9■:√;■<√=■>√?√@■A√B■D■E■F■G■H■J■L■N■O■P■Q■R■S■T■U■V■W■X■Z■\■^■a■c■e■g■j■m■o■s■w■|■А■Е■Й■Н■Т■Ц■Ь■б■з■м■░■│■╖■╗■┐■┬■╞■╚√╔°╩Є╦√╩°╔щ╚√■?√■u■t■s■r■p■o■n■m■k■j■h■g■e■b√■▒°▓°│°┤√╡√В В В В В В В В В В В В В В В В ║ √ц╜ї╛√■■■√°Э√√Р■С■Т■Щ■Я■е■л■п■▓■┤■╢■╣■╗■╝■╛■└■┴■└■┐■╛■╜■╝■╗■║■╣■╕■╖■╡■│■▒■п■н■л■й■з■е√д√г°в√б√а■Я■Ю■Э√ЬїЫїЪ°Щ°Ш°ЧьЦЄХЄФїУ■Т■С√РуПЄОїНЄМїЛЄК■ЙїїГ√В°√иїзщжрержЄеЄдЄгьвщбцаьЯ■а■б√в√б√яА√■(■)■*■,■-■.■0■1√2■3■4■5■7■8√9■:√;■<√=■>√?■@√A■B■C■D■E■F■G■I■K■L■N■O■P■Q■R■S■T■U■V■W■X■Z■]■_■a■c■f■h■k■n■q■t■y■}■В■Ж■Л■П■У■Ш■Э■г■и■н■▒■┤■╕■╝■┐■├■╟√╔°╩°╦√╠√╦■╩ї╔ь╚√■?√■u■t■s■r■p■o■n■l■k■j■h■g■e■b√√▓°│°┤°╡■╢√В В В В В В В В В В В В В В В В ╜ √ц╜ї╛■┐√■■■√°Э√■Р√С■Т■Щ■Я■е■л■п■▒■┤■╢■╕■╗■╝■╜■┐√┴■└■╛■╜■╝■╗■║■╣■╕■╖■╢■┤■▓■░■о■м■к■и■ж√е√д√г√в√б√а■Ю■Э°ЬїЫїЪ°Щ°Ш°ЧяЦяХЄФ°У■Т■С√РрПїОЄНїМїЛЄК√Й■Иї°Г√В■Г°°зьжяе°дяецжїеЄдягявьбщарЯ■а°б√яА°■(■)■+■,■-■/■0■1√2■3■4■6■7■8√9■:■;√<■=√>√?■@√A■B■C■D■E■F■G■I■K■M■N■O■P■Q■R■S■U■V■W■X■Y■[■]■_■b■d■g■j■l■o■r■v■z■■Г■И■М■С■Х■Ъ■Я■е■к■о■▒■╡■╣■╜■└■─■╟√╔√╩°╦ї╠■╦√╩°╔щ╚ї■u■t■s■r■p■o■n■l■k■j■h■g■d■b√■▓°│°┤°╡√╢√В В В В В В В В В В В В В В В В ╜ √р╛√┐√■
+■■■√°Э√■Р√С■У■Щ■Я■е■л■п■▒■│■╢■╕■║■╝■╜■┐■└■┴■└■┐■╛■╜■╝■╗■║■╣■╕■╖■╡■│■░■о■м■к■й■з■ж√е√д√г√в√б■а■Я■Ю■Э°ЬїЫ°ЪїЩ°ШїЧЄЦяХїФ°У■Т■С√РрПїОЄНїМЄЛЄК■Й°И°°Г√В■ГїяжьеядЄеьжЄеЄдЄгївщбьа┌Я■Ю■Я°а√яА√■'■(■)■+■,■-■/■0■1√2■3■4■6■7■8■9√:■;√<■=√>√?■@√A■B■C■D■E■F■H■I■K■M■O√P■R■S■T■U■V■W■X■Y■[■^■`■b■e■h■k■n■q■s■w■|■А■Е■Й■О■Т■Ч■Ь■б■ж■л■п■▓■╢■║■╛■┴■┼■╟■╔°╩√╦√╠■═√╠■╦√╩°╔щ╚ї■u■t■s■r■p■o■n■l■k■i■h■g■d■b√°│°┤°╡°╢°В В В В В В В В В В В В В В В В └ √у╛°┐√■
+■■■√√Э°■Р■С■Т■У■Щ■Я■е■м■о■▒■│■╡■╖■║■╗■╜■╛■└■┬■┴■┐■╛■╜■╝■╗■║■╣■╕■╖■╡■│■▒■п■н■л■к■и■з■ж√е°д√г√в■б■Я■Ю√Э°ЬїЫ°ЪїЩ°ШїЧЄЦЄХЄФ√У■Т■С√РрПЄОїНЄМїЛЄК√Й√И■Зї√Г√В√Г°°жьецдЄеяжїеЄдїгївщбьа▌ЯЄЮ■Я■а√яА√■%■'■(■*■+■,■.■/■0■1√2■3■4■6■7■8■9√:■;■<√=√>■?√@√A■B■C■D■E■F■H■J■L■N■O■P■Q■R■S■T■U■V■W■Y■Z■\■^■a■d■g■i■l■o■r■u■y■}■В■Ж■Л■П■Ф■Ш■Э■г■и■м■п■│■╖■╗■┐■┬■╞■╟■╔√╩√╦√╠°═■╠√╦■╩°╔щ╚√■?√■t■s■r■p■o■n■l■k■i■h■f■d■a√■│°┤°╡°╢√╖°В В В В В В В В В В В В В В В В └ √щ╛ї┐■└√■
+■■■√√Э°√С■Т■У■Щ■а■з■м■о■░■▓■╡■╖■╣■╗■╝■╛■└√┴■└■┐■╛■╜■╝■╗■║■╣■╕■╢■┤■▓■░■о■м■л■й■и■з√ж√е√д√г■в■б■а■Я■Ю√Э°ЬїЫ°Ъ°ЩїШїЧЄЦЄХЄФ■У■Т■С√Р▌ПїОЄНїМЄЛїК√Й√И√З■Ж°°Г■В°Г°яеяд■гЄдяе°жїе°дЄгївїб°а√бьауЯцЮ√ЄА■Б°■&■'■(■*■+■,■.■/■0■1√2■3■4■6■7■8■9■:√;■<√=√>■?√@■A√B■C■D■E■F■H■J■L■N■O■P■Q■R■S■T■V■W■X■Y■Z■]■_■b■e■h■k■n■p■s■v■{■■Г■И■М■С■Х■Ъ■Я■е■й■н■░■┤■╕■╝■┐■├■╞■╚■╔√╩√╦√╠°═√╠■╦√╩√╔щ╚√■?√■t■s■r■p■o■n■l■k■i■h■f■d■a°√┤°╡°╢°╖■╕√В В В В В В В В В В В В В В В В └ √ь╛ї┐√└√■
+■■√°Э√■Р■С√Т■У■Ъ■б■и■м■о■░■▓■┤■╢■╣■╗■╝■╜■┐■┴■┬■┴■┐■╛■╜■╝■╗■║√╣■╖■╡■│■▒■п■н■м■к■й√з√ж√е√д√г■в■а■Я■Ю°ЭїЬ°Ы°Ъ°ЩїШїЧЄЦЄХЄФ■Т■С√Р▌ПЄОїНЄМЄЛ°К√Й√И°З√Ж°√Г■В°Гї√еьд°гЄдцеїд°гЄвїб┌ащЯ┌Ю√°А°Б√■$■&■'■)■*■+■-■.■/°1■2■3■4■6■7■8■9■:√;■<■=√>√?√@■A√B■C■D■E■G■I■K■L■N■P√Q■R■T■U■V■W■X■Y■[■^■a■d■f■i■l■o■r■u■x■|■Б■Е■Й■О■Т■Ч■Ы■б■ж■к■н■▒■╡■╣■╜■└■─■╞■╚√╩√╦√╠Є═■╠√╦■╩√╔√╚я╔√■?√■t■s■r■p■o■n■l■k■i■h■f■d■a■_√■┤°╡°╢°╖√╕√В В В В В В В В В В В В В В В В └ √√┐ї╛°┐ї└√■
+■■√°Э√√С√Т■Х■Ь■г■к■м■о■п■▒■┤■╢■╕■║■╝■╜■┐■└■┬■┴■└■┐■╛■╜■╝■╗■║■╣■╕■╢■┤■▓■░■о■н■л■к■и√з°ж√е■д■г■в■б■а■ЯїЭїЬ°Ы°Ъ°ЩїШїЧЄЦЄХїФ■Т■С√Р┌ПїОЄНїМяЛ√К√Й√И°З√Ж■Еї■Г■ВїГ°ядягядЄе°дїг°в■б√в°бїаїЯЄаьЯ┌Ю√Э√°А°Б√■#■%■&■'■)■*■+■-■.■/°1■2■3■4■6■7√9■:■;√<■=√>√?√@■A√B■C■D■E■G■I■K■M■O■P■Q■R■S■T■U■V■W■X■Z■\■_■b■e■h■k■m■p■s■v■y■~■В■З■Л■П■Ф■Ш■Э■г■з■л■о■▓■╢■║■╛■┴■┼■╞■╚√╩√╦√╠√═√╬√═■╠■╦■╩р╔ї■t■s■r■p■o■n■l■k■i■h■f■d■a■_√√╡°╢°╖°╕■╣√В В В В В В В В В В В В В В В В └ √щ┐°└√┴√■
+■■√°Э√√С■Т■У■Ц■Э■д■к■м■о■п■▒■│■╡■╕■║■╝■╜■╛■└√┬■└■┐■╛■╜■╝■╗√║■╕■╢■┤■▓■▒■п■о■м■л■й√и√з√ж√е■д■в■б■а■Я■ЮїЭ°ЬїЫ°Ъ°Щ°ШЄЧЄЦЄХ°Ф■Т■С√Р┌ПЄОїНЄМЄЛ√К√Й√И°З√Ж°Е°■Г■ВїГ■Д°√дугЄд°е■дїгївябїаьЯ√ащЯрЮЄЭ√√АїБ√■$■%■&■(■)■*■,■-■.■0ї1■3■4■6■7√9■:■;√<■=■>°?■@√A√B■C■D■F■H■I■K■M■O■P■Q■R■S■T■U■V■X■Y■Z■]■a■c■f■i■l■o■r■t■w■{■■Д■И■Н■С■Х■Ъ■Я■д■и■л■п■│■╖■╗■┐■┬■┼■╟■╚■╩√╦√╠√═ї╬■═√╠■╦■╩у╔ї■t■s■r■q■o■n■l■k■i■h■f■c■a■_√■╡°╢°╖°╕√╣√В В В В В В В В В В В В В В В В └ √ь┐°└°┴√■
+■■√°Э√■С√Т■У■Ш■Я■ж■к■м■о■п■▒■│■╡■╖■║■╗■╜■╛■┐■┴■┬■┴■└■┐■╛■╜■╝■╗■║■╣■╖■╡■│■▓■░■п■н■м■к■й√и√з√ж■е■д■г■в■б■а√ЮїЭ°ЬїЫ°Ъ°Щ°ШЄЧїЦЄХ°Ф■Т■С√Р╫ПїОЄНЄМїЛ√К√Й√И°З√Ж°Е√Д°■ВїГ■Д°Єг■вягЄд■е■д√гївїб■а°б°аїЯ°ЮуЯуЮьЭ√°А°Б√■"■$■%■&■(■)■*■,■-■/■0ї1■3■4■6■7■9√:■;■<√=■>√?√@√A■B√C■E■F■H■J■L■N■P■Q√R■S■U■V■W■X■Y■Z■^■b■e■h■j■m■p■s■v■x■|■Б■Е■К■О■У■Ч■Ь■б■е■й■м■░■┤■╕■╝■┐■├■┼■╟■╚■╩√╦√╠√═Є╬■═■╠√╦■╩ц╔√■?√■s■r■q■o■n■l■k■i■h■f■c■a■_√°╢°╖°╕°╣√В В В В В В В В В В В В В В В В └ √Є┐ї└°┴■┬√■
+■■√°Э√■С√Т■Х■Щ■а■з■й■л■н■п■▒■▓■╡■╖■╣■╗■╝■╛■┐■┴■┬■┴■└■┐■╛■╜■╝√╗■║■╕■╢■┤■│■▒■░■о■н■л■к■й°и√з■ж■е■г■в■б■а■Я√ЮїЭ°ЬїЫ°Ъ°Щ°ШїЧЄЦЄХ√Ф■Т■С√Р╫ПЄОїНяМїЛ■К√Й√И°З√Ж°Е√Д■ГїїГ√Д°√гївЄгяд■г√вїбЄа■б°а√ЯьЮьЯцЮуЭ√°А°Б√■"■$■%■'■(■)■+■,■-■/■0ї1■3■4■6■7■9√:■;■<√=■>√?√@√A■B■C■D■E■G■H■J■L■N■P■Q■R■S■T■U■V■W■X■Y■Z■_■c■f■i■l■o■q■t■w■z■~■В■З■Л■Р■Ф■Щ■Э■в■ж■й■н■▒■╡■╣■╜■└■─■┼■╟■╔■╩■╦√╠√═ь╬■═■╠■╦√╩щ╔√■>√■s■r■q■o■n■l■k■i■h■f■c■`■_√■╢°╖°╕°╣√║√В В В В В В В В В В В В В В В В └ √ї┐°└ї┴√┬√■
+■■√°Э√■С■Т■У■Ц■Ы■в■з■й■л■н■п■░■▓■┤■╢■╣■╗■╝■╛■┐■└√┬■┴■└■┐■╛■╜■╝■╗■║■╣■╖■╡■┤■▓■▒■п■о■м■л■к√й√и■з■ж■е■д■г■в■б■Я°ЮїЭ°Ь°ЫїЪ°Щ°ШїЧЄЦЄХ■Ф■Т■С√Р╘ПїОЄНяМ°Л■К√Й√И°З√Ж°Е√Д°Г°їГ√ДїЄвЄгїд■г■в°бїа√ЯЄа√Я°ЮїЭ√ЮїЯьЮ╫Э√√А°Б°■"■%■&■'■(■)■+■,■.■/■0ї1■3■4■6■7■9■:√;■<■=√>■?√@°A■B■C■D■E■G■I■K■M■N■P■Q■R■S■T■U■V■W■X■Z■[■`■d■g■j■m■p■s■u■x■{■А■Д■И■Н■С■Ц■Ъ■Я■г■з■к■о■▓■╢■║■╛■┴■─■╞■╟■╔■╩■╦√╠√═щ╬■═■╠■╦■╩щ╔√■>√■s■r■q■o■n■l■k■i■h■f■c■`■_√°╖°╕°╣°║√В В В В В В В В В В В В В В В В └ √я└ї┴°┬√■■■√°Э√√Т■У■Ш■Э■д■з■й■л■н■п■░■▓■┤■╢■╕■║■╝■╜■┐■└√┬■┴■└■┐■╛■╜√╝■╗■║■╕■╢■╡■│■▓■░■п■н■л√к√й√и■з■ж■д■г■в■б■а■Я°ЮїЭ°Ь°ЫїЪ°Щ°ШїЧЄЦїХ■Ф■Т■С√Р╘ПЄОЄНяМ√Л■К√Й√И°З√Ж°Е√Д°Г■Вї°Г°Д°Євяг■д■г√в■б°аяЯ°а√Я√ЮьЭ°Ю■ЯьЮрЭ°Ь√°А°Б√■ ■#■%■&■'■(■*■+■,■.■/■0ї1■3■4■6■7■9■:■;√<■=■>√?√@√A√B■C■D■E■G■I■K■M■O■Q■R√S■T■U■W■X■Y■Z■[■a■e■i■l■n■q■t■w■z■}■Б■Ж■К■О■У■Ч■Ь■а■д■з■л■п■│■╖■╗■╛■┬■─■╞■╟■╔■╦√╠√═ц╬√═■╠■╦■╩щ╔ї■s■r■q■o■n■l■k■i■h■f■c■`■_√√╖°╕°╣°║■╗√В В В В В В В В В В В В В В В В └ √Є└°┴ї┬■├√■■■√√Э°√Т■Х■Щ■Ю■е■з■й■л■н■п■░■▓■│■╡■╕■║■╝■╜■╛■└■┴■├■┬■┴■└■┐■╛■╜■╝■╗■║■╣■╖■╢■┤■│■▒■░■о■м√л√к■й■и■з■ж■е■д■г■в■а√ЯїЮ°Э°Ь°ЫїЪ°Щ√ШЄЧЄЦ°Х■Ф■Т■С°Р╘ПїОяНЄМ√Л■К√Й√И°З√Ж°Е√Д°Г√В■Б°°ГїД°ївяг√в■б√а°Я°ЮяЯ√Ю°Э°Ь°ЭщЮуЭяЬ√√А°Б°■ ■#■%■&■'■(■*■+■-■.■/Є1■3■4■6■7■9■:■;√<■=■>■?°@√A√B■C■D■F■H■J■K■M■O■Q■R■S■T■U■V■W■X■Y■Z■\■b■g■j■m■p■r■u■x■{■~■Г■З■М■Р■Ф■Щ■Э■б■е■и■м■░■┤■╕■╝■┐■├■─■╞■╚■╔■╦√╠√═у╬■═√╠■╦■╩ь╔ї■s■r■p■o■n■l■k■i■h■f■c■`■_√°╕°╣°║°╗°В В В В В В В В В В В В В В В В ├ √°└ї┴°┬°├√■■√°Э√■С■Т■У■Ц■Ы■а■е■з■й■л■н■п■░■▓■│■╡■╖■║■╝■╜■╛■┐■┴√┬■┴■└■┐√╛■╜■╝■╗■║■╕■╖■╡■┤■▓■▒■п■н■м√л√к■й■и■з■е■д■г■в■б■а√Я°ЮїЭ°Ь°ЫїЪ°Щ√ШЄЧЄЦ√Х■Ф■Т■С°Р╘ПЄОяНїМ√Л√К■Й°И√З√Ж°Е√Д°Г√В√Бї√Г°Д■Е°Єв°г√в■б√а√ЯьЮ°Я√Ю√ЭяЬ°ЭЄЮцЭщЬ√°А°Б√■■!■#■%■'■(■)■*■+■-■.■/Є1■3■4■6■7■9■:■;■<√=■>■?√@√A√B√C■D■F■H■J■L■N■P■Q■R■S■T■U■V■W■X■Y■[■]■c■h■k■n■q■t■w■y■|■А■Д■Й■Н■Т■Ц■Ъ■Ю■б■е■й■н■▒■╡■╣■╜■└■├■┼■╞■╚■╔■╦■╠√═▌╬■═■╠■╦√╩я╔√■>√■r■p■o■n■l■k■i■h■f■c■`■_√√╕°╣°║°╗√╝√В В В В В В В В В В В В В В В В ├ √√└ї┴°┬ї├√■■√°Э√√Т■У■Ш■Ь■б■д■ж■и■л■н■о■░■▒■│■╡■╖■╣■╗■╜■╛■┐■└■┬■├■┬■┴■└■┐■╛■╜√╝■╗■╣■╕■╢■╡■│■▒■░■о■н■м√л■к■й■и■з■ж■е■д■в■б■а°Я°ЮїЭ°Ь°ЫїЪ√Щ°ШїЧЄЦ√Х■Ф■Т■С°Р╤ПїОьН°М√Л√К■Й°И√З√Ж°Е√Д°Г√В°Б■А°■ГїД√Е√Єв■г√в■б√а■Я°Ю°ЭїЮ■Я√Ю√Э√ЬїЫ√Ь°Э√ЮщЭрЬ√√АїБ√■■!■#■%■'■(■)■*■,■-■.■0Є1■3■4■6■7■9■:■;■<√=■>■?√@√A√B√C■E■G■H■J■L■N■P■R■S√T■U■V■W■Y■Z■[■^■d■i■l■o■r■u■x■{■~■В■Ж■К■П■У■Ш■Ы■Я■в■ж■к■о■▓■╢■║■╛■┴■├■┼■╞■╚■╩■╦■╠√═┌╬■═■╠■╦■╩■╔Є╩√■>√■q■p■o■n■l■k■i■h■f■c■`■^°°╣°║°╗°╝√В В В В В В В В В В В В В В В В ├ √■└°┴ї┬°├√─√■■√°Э√■Т■У■Х■Щ■Ю■в■д■ж■и■к■м■о■░■▒■│■┤■╢■╣■╗■╝■╛■┐■└■┴■├■┬■┴■└√┐■╛■╜■╝■╗■║■╕■╖■╢■┤■▓■▒■п■о■н√м■л■к■й■и■ж■е■д■г■в■б■а°Я°Ю°ЭїЬїЫ°Ъ√Щ√ШЄЧЄЦ■Х■Ф■Т■С°Р╤ПЄОьН°М■Л√К■Й°И√З°Ж√Е√Д°Г√В°Б√А■°°Д°Е√яв■б√а■Я√ЮьЭїЮ√Э√ЬяЫ°ЬцЭ▌Ь√°А°Б√■■■"■#■&■'■(■)■*■,■-■.√0ї1■3■4■6■7■9■:■;■<■=√>■?■@°A√B√C■E■G■I■K■M■N■P■R■S■T■U■V■W■X■Y■Z■[■_■e■j■m■q■t■v■y■|■■Г■И■М■Р■Х■Щ■Ь■Я■г■з■л■п■│■╖■╗■╛■┬■├■┼■╟■╚■╩■╦°═┌╬√═■╠■╦я╩√■>√■q■p■o■n■l■k■i■h■f■c■`■^°√╣√║°╗°╝√╜√В В В В В В В В В В В В В В В В ├ √°┴°┬ї├°─√■■√°Э√■Т■У■Ц■Ы■Я■в■д■ж■и■к■м■о■░■▒■│■┤■╢■╕■║■╝■╜■┐■└■┴√├■┬■┴■└■┐√╛■╜■╝■╗■╣■╕■╢■╡■│■▓■░■п√н■м■л■к■й■и■з■ж■е■г■в■б■аїЯ°Ю°ЭїЬїЫ°Ъ√Щ√ШЄЧїЦ■Х■Ф■Т■С°Р╤ПяОьН√М■Л√К■Й°И√З°Ж√Е√Д°Г√В°Б√А√°°Д°Е√їв■б√а■Я√Ю■ЭЄЬ°Э√Ю°Э√Ь√Ы√Ъ°Ы°ЬяЭуЬїЫ√°А√Б■А√■■■"■$■&√(■)■+■,■-■/√0°1■2■3■4■6■7■9■:■;■<■=■>√?■@√A√B√C■D■E■G■I■K■M■O■Q■R■S■T■U■V■W■X■Y■Z■[■`■f■k■o■r■u■x■{■}■А■Е■Й■О■Т■Ц■Ъ■Э■а■д■и■м■░■┤■╕■╝■┐■┬■├■┼■╟■╚■╩■╠√═╘╬■═■╠√╦я╩ї■q■p■o■n■l■k■i■h■f■c■`■^■]√°║°╗°╝°╜√В В В В В В В В В В В В В В В В ├ √√┴°┬ї├°─■┼√■■√°Э√■Т■У■Ш■Ь■а■в■д■ж■и■к■м■о■░■▒■│■┤■╢■╕■║■╝■╜■╛■└■┴■┬■├■┬■┴√└■┐√╛■╜■╝■║■╣■╖■╢■┤■│■▒■░■о√н■м■л■к■й■з■ж■е■д■г■в■б■аїЯ°ЮїЭ°ЬїЫ√Ъ√Щ°ШЄЧ°Ц■Х■Ф■Т■С°Р°П■О┌ПяОяН√М■Л√К■Й°И√З°Ж√Е°Д√Г√В°Б√А°°√ДїЕ°■в√б■а■Я√Ю■Э√Ь√Ы°Ь°Э■Ю√Э√Ь√ЫїЪ°Ы°Ь°ЭцЬьЫ√√А■Б√А°■■■"■$■&■(■)■*■+■,■-■/°0√1■2■3■4■6■7■9■:√<■=■>■?√@√A√B√C■D■F■H■J■K■M■O■Q■S■T√U■V■W■X■Z■[■\■a■g■l■p■s■v■y■|■■В■Ж■Л■П■Ф■Ч■Ъ■Ю■б■е■й■н■▒■╡■╣■╜■└■┬■─■┼■╟■╔■╩■╠√═Є╬у╧■╬■═■╠■╦я╩ї■q■p■o■m■l■k■i■h■f■c■`■^■]√√║°╗°╝°╜■╛√В В В В В В В В В В В В В В В В ├ √ї┬°├ї─√┼√■■√°Э√■У■Х■Щ■Ю■а■в■д■ж■и■к■м■о■п■▒■▓■┤■╡■╖■╣■╝■╜■╛■┐■┴■┬■─■├■┬■┴■└√┐√╛■╝■╗■║■╕■╖■╡■┤■▓■▒■п√о■м■л■к■й■и■з■ж■д■г■в■б√аїЯ°ЮїЭ°ЬїЫ√Ъ√Щ°ШЄЧ√Ц■Х■Ф■Т■С°Р°П■О╫ПяОЄН√М√Л■К■Й°И√З°Ж√Е°Д√Г√В°Б√А°■~°√Д°Е■Ж°■б■а√Я■Ю■Э√ЬїЫ°ЬїЭ√Ь√Ы√Ъ√Щ√Ъ°Ы°Ь■ЭьЬцЫ√яА√■■■ ■"■$■&■(■)■*■+■,■.■/°0√1■2■3■4■6■7■9■:■<√=■>■?√@■A√B°C■D■F■H■J■L■N■P■R■S■T■U■V■W■X■Y■Z■[■\■b■i■n■q■t■w■z■}■А■Г■И■М■С■Х■Ш■Ы■Я■в■ж■к■о■▓■╢■║■╜■┴■┬■─■┼■╟■╔■╩■╠■═√╬╫╧√╬■═■╠■╦Є╩√■>√■p■n■m■l■j■i■g■f■c■`■^■]√■║°╗√╝°╜°╛√В В В В В В В В В В В В В В В В ├ √√┬ї├°─ї┼√■■√°Э√■У■Ц■Ы■Ю■а■в■д■ж■и■к■м■о■п■▒■▓■┤■╡■╖■╣■╗■╜■╛■┐■┴■┬√├■┬√┴√└■┐■╛■╜■╝■║■╣■╕■╢■╡■│■▓■░■п■о■н■м■л■й■и■з■ж■е■д■г■в°аїЯ°ЮїЭ°Ь°Ы°Ъ√Щ°ШЄЧ■Ц■Х■Ф■Т■С°Р°П■О╘ПяОїН√М√Л■К■Й°И√З°Ж√Е°Д√Г°В√Б√Аї■}■|°їЕ√Ж√√Я■Ю■Э√Ь■Ы√Ъ°ЫїЬ■Э√Ь√Ы√ЪїЩ°Ъ√ЫщЬрЫ√ЄА°■■■ ■"■$■'■(■)■*■+■,■.■/ї0■1■2■3■4■6■7■9■:■<√=■>■?■@√A√B√C■D■E■G■H■J■L■N■P■R■S■T■U■V■W■X■Y■Z■[■]■c■j■o■r■u■y■|■~■Б■Е■Й■О■Т■Х■Щ■Ь■Я■г■з■л■п■│■╢■║■╛■┴■┬■─■╞■╟■╔■╦■╠■═√╬╘╧■╬√═■╠■╦ї╩√■>√■o■n■m■l■j■i■g■f■c■`■^■]√√╗°╝°╜°╛■┐√В В В В В В В В В В В В В В В В ├ √■┬°├ї─°┼√╞√■■√√Э■Ь√■У■Ш■Ь■Ю■а■б■г■е■з■й■л■о■п■▒■▓■┤■╡■╖■╣■╗■╝■╛■┐■└■┬■├■─■├■┬√┴√└■┐■╛■╜■╗■║■╕■╖■╢■┤■│■▒■░■п■н■м■л■к■й■и■з■е■д■г■в■б°аїЯ°ЮїЭїЬ√Ы√Ъ√Щ°ШЄЧ■Ц■Х■Ф■Т■С°Р°П√О╘ПяО°Н√М√Л■К√Й√И√З°Ж√Е°Д√Г°В√Б√Аї■~■|■{°°Е°Ж√■Ю√Э■Ь■ЫїЪїЫїЬ√Ы√Ъ√Щ√Ш√Щ°Ъ√ЫЄЬрЫ■Ъ√яА√■■■■!■#■%■'■)■*■+■,■-■.■/Є0■2■3■5■6■7■9■:■<■=√>■?■@√A√B√C■D■E■G■I■K■M■O■P■R■T■U√V■W■X■Y■Z■\■^■d■k■p■s■w■z■}■А■Г■З■Л■П■У■Ц■Ъ■Э■а■д■и■л■п■│■╖■╗■┐■┴■├■─■╞■╟■╔■╦■╠√╬╤╧√╬■═■╠√╦°╩√■>√■o■n■m■k■j■i■g■f■b■`■^■]√■╗°╝°╜°╛√┐√В В В В В В В В В В В В В В В В ├ √°├°─ї┼°╞√■■√√Э■Ь√■Ф■Щ■Ь■Ю■а■б■г■е■з■й■л■н■п■▒■▓■┤■╡■╢■╕■║■╝■╜■┐■└■┴■├■─√├■┬√┴√└■┐■╛■╝■╗■╣■╕■╢■╡■│■▓■▒■п■о■н■м■к■й■и■з■ж■е■д■в√б°аїЯїЮ°ЭїЬ√Ы√Ъ√Щ°ШїЧ■Ц■Х■Ф■Т√С√Р°П√ОщП√РяПяО√Н√М√Л■К√Й√И√З°Ж√Е°Д√Г°В√БЄА■■~■}■{■z°°Е°Ж°■Ь√Ы■Ъ■Щ°ЪїЫ√Ь√Ы√Ъ√ЩїШ√Щ°Ъ√Ы√ЬуЫїЪ√яА√■■■■!■#■%■'■)■*■+■,■-■.я0■2■3■5■6■7■9■:■<■=■>√?■@■A√B√C√D■E■G■I■K■M■O■Q■S■T■U■V■W■X■Y■Z■[■\■_■e■l■q■t■x■{■~■Б■Д■И■Н■Р■Ф■Ч■Ъ■Ю■б■д■и■м■░■┤■╕■╝■└■┴■├■─■╞■╚■╔■╦■═√╬╤╧°╬■═■╠■╦ї╩ї■p■n■m■k■j■i■g■f■b■`■^■]√°╝√╜°╛°┐■└°В В В В В В В В В В В В В В В В ╞ √■├ї─°┼ї╞■╟√■√°Э√■У■Ц■Ы■Ь■Ю■Я■б■г■е■з■й■л■н■п■░■▓■│■╡■╢■╕■║■╝■╜■┐■└■┴■┬√─√├■┬√┴√└■╛■╜■╗■║■╣■╖■╢■┤■│■▒■░■п■о■м■л■к■й■и■ж■е■д■г■в√б°аїЯїЮ°Э°Ь√Ы√Ъ°Щ°Ш°Ч■Ц■Х■Ф■Т√С√Р°П°ОяПїРяПяО√Н■М√Л■К√Й√И√З°Ж√Е°Д√Г°В√БЄА■■~■}■|■z■y°√Е°Ж■З°■Ы■Ъ°ЩїЪЄЫ√Ъ√ЩяШ√Щ°ЪцЫьЪ√яА√■■■■■!■#■%■'■)■*■+■,■-■.я0■2■3■5■6■7■9■:■<■=■>■?√@■A√B√C√D■F■H■J■L■M■O■Q■S■T■U■V■W■X■Y■Z■[■\■`■f■m■r■v■y■|■■В■Е■К■О■С■Х■Ш■Ы■Я■в■е■й■н■▒■╡■╣■╜■└■┬■├■┼■╞■╚■╩■╦■═■╬╬╧ї╬■═■╠■╦°╩ї■p■n■m■k■j■i■g■f■b■`■^■]√■╝°╜°╛°┐°└√В В В В В В В В В В В В В В В В ╞ √°─ї┼°╞°╟√■√√Э■Ь√■У■Ш■Ъ■Ь■Ю■Я■б■г■е■з■й■л■н■п■░■▓■│■╡■╢■╕■╣■╝■╜■╛■└■┴■┬■├√─√├√┬■┴■└■┐■╛■╝■╗■╣■╕■╖■╡■┤■▓■▒■░■о■н■м■л■к■и■з■ж■е■д■в°бїа°ЯїЮ°Э°Ь√Ы√Ъ√ЩїШ√Ч■Ц■Х■Ф√Т■С°Р√П°ОЄПяРяПЄО√Н■М√Л■К√Й√И°З√Ж√Е°Д√Г°В√БЄА■■~■}■|■{■y■x■v√√Е°Ж√З√яЩ°Ъ°Ы√Ъ°Щ√Ш√Ч°Ш√Щ°ЪяЫцЪ√яА√■■■■■!■#■%■'■*■+■,■-■.■/я0■2■3■5■6■8■9■;√=■>■?√@■A■B°C√D■F■H■J■L■N■P■R■S■U■V√W■X■Y■Z■[■\■a■h■n■s■w■z■}■Б■Д■З■Л■П■Т■Х■Щ■Ь■Я■г■ж■к■о■▓■╢■║■╛■└■┬■─■┼■╞■╚■╩■╦■═■╬╦╧°╬√═■╠°╦√■>√■n■m■k■j■h■g■e■b■`■^■]√°╜°╛°┐°└■┴√В В В В В В В В В В В В В В В В ╞ √√─°┼ї╞ї╟√■√√Э■Ь√■Ф■Щ■Ъ■Ь■Э■Я■б■г■е■з■й■л■н■п■░■▓■│■╡■╢■╕■╣■╗■╜■╛■┐■┴■┬■├√┼■─√├√┬■┴■└■┐■╜■╝■║■╣■╖■╢■╡■│■▓■░■п■о■н■м■к■й■и■з■ж■д■г■в°бїаїЯ°Ю°Э°Ь√Ы√Ъ√ЩїШ■Ч■Ц■Х■Ф■У■Т√С√Р√П°ОїП■Р■СяРяПїО√Н√М■Л■К√Й√И°З√Ж√Е°Д√Г°В√БяА■~■}■|■{■y■x■w■u°°Ж°З√√ШїЩ°Ъ√Ы√Ъ√Щ√ШїЧ°Ш√Щ°Ъ°ЫуЪ√яА°■■■■■!■#■%■(■*■+■,■-■.■/я0■2■3■5■6■8■9■;■=√>■?■@√A■B√C√D■E■F■H■J■L■N■P■R■T■U■V■W■X■Y■Z■[■\■]■b■i■o■u■x■{■■В■Е■И■М■Р■У■Ц■Ъ■Э■а■г■з■л■п■│■╖■╗■╛■┴■┬■─■┼■╟■╚■╩■╠■═╚╧°╬√═■╠°╦√■>√■o■m■k■j■h■g■e■b■`■^■\°■╜°╛√┐°└°┴√В В В В В В В В В В В В В В В В ╞ √ї┼°╞ї╟√╚√■√√Э■Ь√■Ц■Ш■Ъ■Ь■Э■Я■б■г■е■з■й■л■н■п■░■▓■│■┤■╢■╖■╣■╗■╜■╛■┐■└■┬■├°┼■─√├√┬■┴■┐■╛■╜■╗■║■╕■╖■╡■┤■│■▒■░■п■о■м■л■к■й■и■ж■е■д■г■в°бїаїЯ°Ю°Э√Ь√Ы√Ъ√ЩїШ■Ч■Ц■Х■Ф√У■Т√С■Р°П°О√П■Р°СяРяП°О√Н√М■Л√К■Й√И°З√Ж°Е√Д√Г°ВяБ√А■~■}■|■{■z■x■w■v■t°°Ж°З°√Ш°ЩЄЪ√Щ√Ш°Ч■Ц√Ч°Ш√Щ°Ъ■ЫцЪ√Щ√яА√■■■■■ ■"■$■&■(■*■+■,■-■.■/я0■2■3■5■6■8■9■;■=√>■?■@■A√B√C√D■E■G■I■K■M■O■P■R■T■U■V■W■X■Y■Z■[■\■]■c■j■p■v■y■|■А■Г■Ж■К■Н■Р■Ф■Ч■Ъ■Ю■б■д■и■м■░■┤■╕■╗■╛■┴■├■─■╞■╟■╔■╩■╠■═╚╧°╬°═■╠√╦√■=√■o■m■l■j■h■g■e■b■`■^√\√°╛√┐°└°┴■┬√В В В В В В В В В В В В В В В В ╞ √√┼ї╞°╟ї╚√■√■Э√Ь√■Ч■Ш■Ъ■Ь■Э■Я■а■в■д■ж■и■к■м■о■░■▒■│■┤■╢■╖■╣■║■╝■╛■┐■└■┬■─ї┼√─■├√┬■└■┐■╜■╝■╗■╣■╕■╢■╡■│■▓■▒■░■о■н■м■л■к■и■з■ж■е■г√вїб°аїЯ°Ю°Э√Ь√Ы√Ъ√Щ°Ш■Ч■Ц■Х√Ф■У√Т■С√Р√П√О■П√РЄСяРяП√О√Н√М■Л√К■Й√И°З√Ж°Е√Д√Г°ВьБ■А■■}■|■{■z■y■w■v■t■s°√Ж°З■И°√ШїЩ√Ъ√Щ√Ш°Ч°Ц√Ч°Ш√ЩцЪЄЩ√ЄА°■■■■■ ■"■$■&■(■*■,√-■.■/я0■2■3■5■6■8■:■<√>√?■@■A■B√C√D√E■G■I■K■M■O■Q■S■U■V■W√X■Y■Z■[■\■^■d■k■q■w■z■}■Б■Д■З■Л■О■С■Ф■Ш■Ы■Ю■в■е■й■н■▒■╡■╣■╝■┐■┬■├■┼■╞■╚■╔■╦■╠■╬╚╧ї╬°═■╠√╦ї■o■m■l■j■h■g■e■a■_■]√\√√╛√┐°└°┴√┬√В В В В В В В В В В В В В В В В ╞ √ї╞ї╟Є╚√■√■Э√Ь√■Ч■Ш■Ъ■Ы■Э■Я■а■в■д■ж■и■к■м■о■░■▒■│■┤■╢■╖■╣■║■╝■╜■┐■└■┬■─Є┼√─■├■┬■┴■└■╛■╜■╗■║■╣■╖■╢■┤■│■▓■░■п■о■н■м■к■й■и■з■ж■д°вїб°аїЯ°Ю√Э√Ь°Ы√Ъ√Щ√Ш■Ч■Ц√Х■Ф√У■Т√С■Р√П■О■П√РьСяРяП■О√Н√М■Л√К■Й√И°З√Ж°Е√Д°Г√ВьБ■А■√}■|■z■y■x■v■u■s■r■q√√Ж°З√И√°ШЄЩ√Ш°Ч√Ц■Х√Ц√Ч°Ш°ЩїЪьЩ√яА√■■■■■■ ■"■$■&■(■+■,■-■.■/ь0■2■3■5■6■8■:■<√>√?■@■A■B√C√D√E■G■I■K■M■O■Q■S■U■V■W■X■Y■Z■[■\■]■_■e■k■q■w■{■~■Б■Д■И■Л■П■Т■Х■Щ■Ь■Я■г■ж■к■о■▓■╢■╣■╝■┐■┬■─■┼■╟■╚■╔■╦■╠■╬┼╧°╬°═√╠■╦ї■o■m■l■j■i■g■e■a■_■]■\■[√■╛°┐√└°┴√┬■├√В В В В В В В В В В В В В В В В ╞ √√╞ї╟Є╚√╔√■√°Ь√■Ц■Ш■Ъ■Ы■Э■Ю■а■в■д■ж■и■к■м■о■░■▒■│■┤■╢■╖■╣■║■╝■╜■┐■└■┬■─я┼√─■├■┬■┴■┐■╛■╝■╗■╣■╕■╢■╡■┤■▓■▒■░■п■о■м■л■к■й■и■з■е■г°вїб°аїЯ°Ю√Э√Ь√Ы√Ъ√Щ√Ш■Ч√Ц■Х√Ф■У√Т■С√Р√П√Р■С√ТяСяРЄП√О■Н√М■Л√К■Й√И°З√Ж°Е√Д°Г√ВьБ■А■■~■}■|■{■y■x■v■u■t■r■q■p√■Ж°З°И√°Ш°Щ√Ш√Ч°Ц°Х√Ц√Ч°Ш°Щ■ЪцЩ√яА√■■■■■■ ■"■$■&■)■+■,■-■.■/ь0■2■3■5■6■8■:■<■>√?√@■A■B√C√D■E■F■H■J■L■N■P■R■S■U■W■X■Y■Z■[■\■]■^■`■e■k■q■w■{■■В■Е■И■М■П■У■Ц■Щ■Э■а■г■з■л■о■▓■╢■║■╜■┐■┬■─■┼■╟■╚■╩■╦■═■╬┼╧°╬°═√╠■╦√■=√■m■l■j■i■g■e■a■_■]■\■[√°┐√└°┴°┬■├√В В В В В В В В В В В В В В В В ╞ √■╞°╟ї╚Є╔√■√°Ь√■Ц■Ш■Щ■Ы■Э■Ю■а■в■д■ж■и■к■м■о■░■▒■│■┤■╡■╖■╕■║■╗■╜■┐■└■┬■─ї┼■╞√┼√─■├■┴■└■┐■╜■╝■║■╣■╖■╢■┤■│■▓■▒■░■о■н■м■л■к■й■и■е√г°вїбїа°Я°Ю√Э√Ь√Ы√Ъ√Щ√Ш■Ч■Ц√Х■Ф√У■Т√СїР■СїТяСяРїП√О■Н√М■Л√К■Й√И°З√Ж°Е√Д°ГщВ■Б■А■■~■}■|■{■z■x■w■u■t■s■q■p■n°°З°И°√Ш■Щ√Ш√Ч°ЦЄХ√Ц°Ч√ШрЩ■Ш√їАя■√■!■#■%■'■)■+■,■-■.■/ь0■2■3■5■7■9■;■=■>√?■@√A■B■C√D√E■F■H■J■L■N■P■R■T■V■X■Y■Z■[■\■]■^■_■a■f■k■q■w■|■■В■Ж■Й■М■Р■Ф■Ч■Ъ■Ю■б■д■и■л■п■│■╖■║■╜■└■├■─■╞■╟■╔■╩■╠■═┬╧°╬ї═√╠√■=√■m■l■j■i■g■e■a■_■]■\■[√√┐√└°┴°┬√├√В В В В В В В В В В В В В В В В ╞ √°╟°╚ь╔√■√°Ь√■Ц■Ш■Щ■Ы■Ь■Ю■а■в■д■ж■и■к■м■о■п■▒■▓■┤■╡■╖■╕■║■╗■╜■┐■└■┬■─°┼ї╞■┼√─■┬■┴■┐■╛■╝■╗■║■╕■╖■╡■┤■│■▓■░■п■о■н■м■к√й■ж°гїв°бїа°Я√Ю√Э√Ь√Ы°Ъ√Щ■Ш√Ч■Ц√Х■Ф√У■Т√С√Р■СяТяСяР°П√О√Н■М√Л■К■Й√И°З√Ж°Е√Д°ГщВ√Б■А■~■}■|■{■z■y■w■v■t■s■r■p■o■m°√З°И■Й°°Ш√Ч°Ц°Х√Ф√Х√Ц°Ч√ШьЩ■Ш╣■-■.■/√0■1Є0■2■4■6■7■9■;■=√?√@■A√B■C√D√E■F■H■J■M■O■P■R■T■V■Y■[■\■]■^■_■`■a■c■f■k■q■w■}■А■Г■Ж■К■Н■С■Ф■Ш■Ы■Ю■в■е■и■м■░■┤■╕■╗■╜■└■├■┼■╞■╚■╔■╦■╠■╬√╧√╨╬╧ї╬°═√╠√■=√■m■l■j■i■g■e■a■_■]■\■[√■┐√└°┴°┬√├■─°В В В В В В В В В В В В В В В В ╔ √■╟ї╚я╔√╩√■√√Ь°■Ц■Ч■Щ■Ы■Ь■Ю■а■в■д■ж■и■к■м■о■п■▒■▓■┤■╡■╖■╕■║■╝■╜■┐■┴■┬■─√┼я╞■┼■─■├■┬■└■┐■╜■╝■║■╣■╕■╢■╡■┤■▓■▒■░■п■о■м■л■к■й■з■д°гїв°бїа°Я√Ю√Э√Ь√Ы√Ъ√Щ√Ш■Ч√Ц■Х√Ф■У√Т°С√Т■УЄТяСяР√П√О√Н■М√Л■К■Й°И√З√Ж°Е√Д°ГцВ■Б■А■~■}■|■{■z■y■w■v■u■s■r■p■o■n■l■k√√З°И√Й√√Ш√Ч√Ц°ХїФ√Х√Ц°Ч√Ш°Щ┌■~■}■|■{■z■x╫■1Є0■2■4■6■7■9■;■=■?°@■A√B■C■D°E■G■I■K■M■O■Q■S■U■W■Z■\■]■^■_■`■a■b■d■f■l■q■w■}■Б■Д■З■К■О■С■Х■Щ■Ь■Я■г■ж■й■н■▒■╡■╕■╗■╛■┴■─■┼■╟■╚■╩■╦■╠■╬√╧я╨╫╧°╬°═°╠ї■m■k■j■i■g■e■a■_■]■\■[√√└°┴°┬√├°─√В В В В В В В В В В В В В В В В ╠ °°╚ї╔я╩ї°Ь√■Х■Ц■Ч■Щ■Ы■Ь■Ю■Я■б■г■е■з■й■л■н■п■▒■▓■┤■╡■╖■╕■║■╝■╜■┐■┴■┬■─■┼щ╞■┼■─■┬■┴■└■╛■╜■╗■║■╕■╖■╢■┤■│■▓■▒■░■о■н■м■л■к■з■е■д°гїв°бїа√Я°Ю√Э√Ь√Ы√Ъ√Щ■Ш√Ч■Ц√Х■Ф√У■Т√С■ТїУЄТяСяР■П√О√Н■М√Л■К√Й√И√З√Ж°Е√ДїГщВ■Б■А■■}■|■{■z■y■x■v■u■t■r■q■o■n■m■k■j√■З°И°Й√√Ч√Ц°ХяФ√Х√Ц°Чщ■Е√Д■Г■В√Б■А■■~√}■|■z■y■x■v■u■s■r■p■o■m■jщ°0■2■5■7■8■9■;■=■?√@√A■B√C■D√E■F■G■I■K■M■O■Q■S■U■W■Z■]■_■`■a■b■c■d■f■h■l■q■w■}■Б■Д■И■Л■О■Т■Ц■Щ■Э■а■г■з■к■о■▓■╢■╕■╗■╛■┴■─■╞■╟■╚■╩■╦■═■╬√╧┌╨ь╧°╬°═°╠ї■m■k■j■h■g■e■a■_■]■\■[√■└°┴°┬√├ї─√В В В В В В В В В В В В В В В В ╠ °√╚°╔щ╩ї°Ь√■Х■Ц■Ч■Щ■Ъ■Ь■Ю■Я■б■г■е■з■й■л■н■п■▒■▓■│■╡■╖■╣■╗■╝■╛■┐■┴■├■─у╞■┼■├■┬■└■┐■╛■╝■╗■╣■╕■╢■╡■┤■│■▓■░■п■о■н■м■л■и■ж√д°гїв°бїа√Я√Ю√Э√Ь√Ы°Ъ■Щ√Ш■Ч√Ц■Х√Ф■У°ТяУЄТяСЄР■П√О√Н■М√Л■К√Й√И√З°Ж√Е√ДрГ■В■Б■А■■}■|√{■y■x■w■u■t■r■q■p■n■m■k■j■i√■З°И√Й■К√√Ц°Х°Ф√У°Ф√Х■ЦщЄЕ■Д√Г■В■Б■А√■~■}■|■{■z■x■w■v■t■s■q■o■m■l■i■f■c■`■]Є■1■3■5√8■9■;■>√@°A■B■C√D√E■F■G■I■L■N■P■R■S■U■X■Z■]■`■a■b■c■d■e■g■j■l■r■w■}■В■Е■И■Л■П■У■Ц■Ъ■Ю■б■д■и■л■п■│■╢■╣■╝■┐■┴■─■╞■╟■╔■╩■╠■═■╬√╧╬╨°╧°╬ї═√╠ї■l■k■j■h■g■e■a■_■]■\■[°√┴°┬√├ї─■┼√В В В В В В В В В В В В В В В В ╠ √■╚ї╔ь╩√╦ї°Ь√√Ц■Ч■Щ■Ъ■Ь■Э■Я■б■г■е■з■й■л■н■п■░■▓■│■╡■╖■║■╗■╜■╛■┐■┴■├■─щ╞■╟√╞■─■├■┴■└■╛■╜■╝■║■╣■╖■╢■╡■┤■▓■▒■░■п■о■н■л■й■ж°дїг°вїб°а√Я√Ю√Э√Ь√Ы√Ъ√Щ■Ш√Ч■Ц√Х■Ф√У■ТщУЄТяСїР√П■О√Н■М√Л■К√Й√И√З°Ж√Е√ДрГ■В■Б■А■■~√|■{■z■x■w■v■t■s■q■p■o■m■l■j■i■h√°И°Й■К√°Х√ФЄУ°Фя■ЖщЕ√Д■Г■В√Б■А■√~■}■|■z■y■x■v■u■s■q■o■n■l■j■g■d■a■^■\■Y■VЄ■8√9■<■>√@√A√B■C■D√E√F■H■J■L■N■P■R■T■V■X■[■^■`■c■d■e■f■g■i■k■n■r■w■}■В■Ж■Й■М■Р■У■Ч■Ы■Ю■в■е■и■м■░■│■╢■╣■╝■┐■┬■┼■╞■╚■╔■╦■╠√╬√╧╬╨ї╧°╬°═√╠√■<√■k■i■h■g■d■a■_■]■\■[■Z√■┴°┬√├ї─√┼√В В В В В В В В В В В В В В В В ╠ √°╔Є╩Є╦√■
+√√Ь■Ы√■Ц√Ч■Ш■Ъ■Ь■Э■Я■б■г■е■з■й■л■н■п■░■▓■┤■╢■╕■║■╝■╜■╛■┐■┴■├■─ь╞°╟■╞■┼■─■┬■┴■┐■╛■╝■╗■╣■╕■╖■╢■┤■│■▓■▒■░■п■о■м■й■з■е°дїг°вїб√а√Я√Ю√Э°Ь√Ы√Ъ■Щ√Ш√Ч■Ц√Х■Ф°У√ФяУЄТяС°Р√П■О√Н√М■Л■К√Й√И√З°Ж√Е°ДуГ■В√Б■■~■}■|■{■z■y■w■v■t■s■r■p■o■n■l■k■i■h■g√√И°Й√К√°Ф°У√Т■УЄ√ЕцЖ°Е■Д■Г√В■Б√А■■~■}■|■{■z■x■w■u■s■r■p■n■l■k■h■f■c■`■]■Z■X■U■QЄ■9■<■>■@√A°B■C■D√E√F■H■J■L■N■P■R■T■V■X■[■^■a■c■e■f■g■h■j■m■o■r■x■}■Г■Ж■Й■Н■Р■Ф■Ш■Ы■Я■г■ж■й■н■▒■┤■╖■║■╝■┐■┬■┼■╟■╚■╩■╦■═√╬√╧╦╨°╧°╬ї═■╠√■<√■k■i■h■f■d■a■_■]■\■[■Z√°┬√├°─ї┼√В В В В В В В В В В В В В В В В ╠ √√╔°╩щ╦√■
+√√Ь■Ы√■Ц■Ч√Ш■Ъ■Ы■Э■Я■б■г■е■з■й■л■н■п■░■▓■┤■╢■╣■╗■╝■╜■╛■└■┴■├■┼я╞Є╟■╞■─■├■┬■└■┐■╜■╝■║■╣■╕■╢■╡■┤■│■▓■▒■░■п■н■к■и√е°дїг°вїб√а√Я√Ю√Э°Ь√Ы■Ъ√Щ√Ш■Ч√Ц■ХьФяУЄТяС√Р√П■О√Н√М■Л■К√Й√И√З°Ж√ЕЄДщГ√В■Б■А■~■}■|■{■z■y■x■v■u■s■r■q■o■n■l■k■j■h■g■e√√И°Й√К√■Ф°У√ТЄ√Д°ЕуЖ■Е√Д■Г■В√Б■А■√~■}■|■z■y■w■u■t■r■p■n■m■k■i■g■d■a■^■\■Y■V■T■P■K■F°■<■>■@√A√B√C■D√E√F■H■K■M■O■Q■S■U■V■Y■\■_■a■d■f■h■i■j■l■n■q■s■x■}■Г■З■К■Н■С■Х■Ш■Ь■а■г■з■к■н■▒■┤■╖■║■╜■└■├■┼■╟■╔■╩■╦■═√╬√╧╦╨°╧°╬Є═■╠ї■k■i■h■f■d■a■_■]■\■[■Z√√┬√├°─Є┼√В В В В В В В В В В В В В В В В ╠ √ї╩щ╦■╠√■
+√√Ь■Ы√√Ч■Ш■Щ■Ъ■Ы■Э■Я■б■г■е■з■й■л■н■п■░■│■╡■╖■╣■╗■╝■╜■┐■└■┴■├■┼Є╞я╟■╞■┼■─■┬■┴■┐■╛■╜■╗■║■╕■╖■╢■╡■┤■│■▓■▒■░■н■л■и■ж√е°дїг°в°б°а√Я√Ю√Э√Ь√Ы√Ъ■Щ√Ш√Ч■Ц√ХьФяУЄТЄС√Р√П√О■Н√М■Л√К■Й√И√З°Ж√Е▌Д√Г■В■Б■А■~■}■|■{■z■y■x■w■u■t■r■q■p■n■m■k■j■i■g■f■e√■И°Й°К√√У■ТЄ■В■Г√ДїЕцЖ√Е■Д■Г■В┬■b■`■]■Z■X■U■R■O■J■D■?°√A√B°C■D■E√F■G■I■K■M■O■Q■S■U■W■Y■\■_■b■d■g■i■j■k■n■p■r■u■x■~■Г■З■Л■О■Т■Х■Щ■Ь■а■д■з■л■о■▓■╡■╖■║■╜■└■├■╞■╟■╔■╩■╠■═√╬√╧╦╨°╧ї╬Є═ї■k■i■g■f■d■a■_■]■\■[■Z√■┬√├°─ї┼√╞√В В В В В В В В В В В В В В В В ╠ √√╩я╦Є╠√■
+√■Ь√Ы√■Ч√Ш■Щ■Ъ■Ы■Э■Ю■а■в■д■ж■и■к■м■п■▒■│■╢■╕■║■╗■╝■╛■┐■└■┬■├■┼ї╞Є╟√╚■╟■╞■┼■├■┬■└■┐■╜■╝■╗■╣■╕■╖■╢√┤■│■▓■▒■о■м■й■ж°еїд°г°в°б√а√Я°Ю√Э√Ь√Ы■Ъ√Щ√Ш■Ч√Ц■Х■Ф■ХяФЄУяТїС√Р√П√О■Н√М■Л√К■Й√И√З°Ж√Е┌Д■Г■В■Б■А■■}■|■{■z■y■x■w■u■t■s■q■p■n■m■l■j■i■g■f■e■c√■И√ЙїКь√Б■В■Г√ДЄЕяЖб■Y■V■T■Q■M■H■C■>■9√°B√C√D■E√F■G■I■K■M■O■Q■S■U■W■Z■]■_■b■e■g■j■l■m■o■r■t■v■y■~■Г■И■Л■П■Т■Ц■Щ■Э■б■д■и■м■п■▓■╡■╕■╗■╛■└■├■╞■╚■╔■╦■╠■═√╬√╧■╨√╤╘╨ї╧ї╬ї═ї■k■i■h■f■d■a■_■]■\■[■Z√√├°─ї┼ї╞√В В В В В В В В В В В В В В В В ╧ √■╩ї╦щ╠√■
+√■Ь√Ы√■Ч■Ш■Щ√Ъ■Ы■Э■Ю■а■в■д■ж■и■к■н■п■▓■┤■╢■╣■║■╗■╜■╛■┐■┴■┬■├■┼°╞Є╟°╚■╟■╞■┼■─■├■┴■└■╛■╜■╗■║■╣■╕■╢■╡√┤■│■▒■п■м■к■з■ж°еїд°гїв√б√а√Я√Ю°Э√Ь■Ы√Ъ√Щ■Ш√Ч■ЦїХяФЄУяТїС■Р√П√О√Н■М■Л√К■Й√И√З°Ж√Е┌Д■Г■В■Б■А■■}■|■{■z√y■w■v■t■s■r■p■o■m■l■k■i■h■g■e■d■b√°ЙїК°√■А√Б■В√Г■ДяЕ■ЖрїкцжЄе■ду■P■L■G■B■=■7°°C■D√E√F■G■J■L■N■P■R■T■V■X■Z■]■`■c■e■h■j■m■n■q■s■u■x■z■~■Д■Й■М■П■У■Ц■Ъ■Ю■б■е■й■м■░■│■╡■╕■╗■╛■┴■─■╟■╚■╩■╦√═√╬√╧■╨°╤╘╨°╧Є╬°═√■<√■i■h■f■c■a■^■\√[■Z√■├°─ї┼ї╞■╟√В В В В В В В В В В В В В В В В ╧ √°╦ц╠■═√■
+√°Ы√■Ш√Щ■Ъ√Ы■Ь■Ю■а■в■д■ж■й■л■о■░■│■╡■╖■╣■║■╝■╜■╛■└■┴■┬■├■┼√╞Є╟Є╚■╟■╞■─■├■┬■┴■┐■╛■╝■╗■║■╕■╖■╢√╡■┤■▓■░■н■к■и√ж°еїд°г°в√б°а√Я√Ю√Э√Ь√Ы■Ъ√Щ√Ш■Ч√ЦїХяФЄУяТ°С■Р√П√О√Н■М■Л√К■Й√И√З°ЖЄЕуД■Г√В■А■■~■|■{√z■y■w■v■u■s■r■p■o■n■l■k■i■h■g■f■d■c■`√√Й√К°■}√~■■А√Б■В√Г■ДїЕь°лщкцжЄеїд√гщ■F■@■;■6°■C√D√E■F■G■H■J■L■N■P■R■T■V■X■[■]■`■c■f■h■k■m■p■r■u■w■y■|■~■Д■Й■М■Р■У■Ч■Ы■Ю■в■ж■й■н■░■│■╢■╣■╝■╛■┴■─■╟■╔■╩■╠√═√╬√╧■╨Є╤┌╨°╧я╬√═√■;√■i■h■f■c■`■^■\■[√Z√°─ї┼ї╞√╟√В В В В В В В В В В В В В В В В ╧ √■╦ь╠Є═√■
+√°Ы√■Ш■Щ√Ъ■Ы√Ь■Ю■а■в■д■з■й■м■о■▒■│■╢■╕■╣■╗■╝■╜■┐■└■┴■┬■─■┼■╞Є╟√╚■╔°╚■╟■╞■┼■─■├■┴■└■┐■╜■╝■║■╣■╕■╖■╢√╡■│■░■о■л■и°ж°еїд°г°в√б√а°Я√Ю√Э√Ь■Ы√Ъ√Щ■Ш√Ч■ЦЄХяФЄУяТ√С√Р■П√О√Н■М√Л■К■Й√И°З√Ж╫Е■Д√Г■В■Б■■~■|√{■z■y■x■v■u■t■r■q■o■n■m■k■j■i■h■f■e■c■a■_√■Й■К°■{■|■}■~■√А■Б■В√Г■Дьялцкьжяе°дїгївя■?■:■5■,√√D■E√F■G■H■J■L■N■P■R■U■V■X■[■^■a■d■f■i■k■n■p■t■v■y■{■}■А■Д■К■Н■Р■Ф■Ш■Ы■Я■г■ж■к■н■▒■│■╢■╣■╝■┐■┬■┼■╟■╔■╩■╠√═√╬■╧√╨ь╤р╨ї╧я╬√═ї■i■h■f■c■`■^■\■[■Z■Y√√─°┼Є╞°╟√В В В В В В В В В В В В В В В В ╧ √Є╠щ═√■
+√√Ы√■Ш√Щ■Ъ√Ы■Ь■Э■Ю■а■в■е■з■к■м■п■▒■┤■╢■╕■║■╗■╝■╜■┐■└■┴■├■─■┼ї╟°╚ї╔■╚■╟■╞■┼■─■├■┬■┴■┐■╛■╝■╗■║■╣■╕■╖■╢■╡■┤■▒■о■м■й■з°ж°еїд°г°в√б√а°Я√Ю■Э√Ь√Ы■Ъ√Щ√Ш■Ч√ЦЄХяФЄУяТ■С√Р■П√О√Н■М√Л■К■Й√И°З√Ж╫Е■Д√Г■В■Б■■~■}■|■{■z■y■x■w■u■t■r■q■p■n■m■l■j■i■h■g■e■d■b■`■]ї■x■y■{■|√}■~■■А√Бь■мьлукяжяеїдїгїв°бЄ■9■3■*√√E■F√G■I■K■M■O■Q■S■U■W■Y■[■^■a■d■g■i■l■n■q■t■w■z■}■■Б■Д■К■О■С■Х■Ш■Ь■а■г■з■к■н■▒■┤■╖■╣■╝■┐■┬■┼■╚■╔■╦■╠√═√╬■╧√╨щ╤у╨Є╧ь╬ї■j■h■f■c■`■^√[■Z■Y■X√°┼Є╞ї╟√В В В В В В В В В В В В В В В В ╧ √√╠у═■╬√■
+√√Ы√■Ш■Щ√Ъ■Ы√Ь■Э■Ю■а■г■е■и■к■н■п■▓■┤■╖■╣■║■╗■╝■╛■┐■└■┬■├■─■┼°╟°╚я╔■╚■╟■╞■┼■─■┬■┴■└■┐■╜■╝■╗■║■╣■╕■╖■╢■┤■▓■п■м■к√з°жїе°д°г√в°б√а√Я√Ю√Э√Ь■Ы√Ъ√Щ■Ш√Ч■ЦяХяФЄУЄТ■С√Р√П■О√Н■М√Л■К√Й■И°З√Ж╫Е√Д■Г■В■Б■А■~■}■|■{■z■y■x■w■v■t■s■q■p■o■m■l■k■j■i■g■f■d■b■`■^°■v■x■y■z■{■|■}■~√ЄЄмцлщкяжяеїдїг°вїб√а■ЯЄ■)√■E■F√G■I■K■M■O■Q■S■U■W■Y■\■_■b■d■g■j■l■o■q■u■x■{■~■А■Г■Е■К■О■Т■Х■Щ■Э■а■д■з■к■н■▒■╡■╕■║■╜■└■┬■┼■╚■╩■╦■╠√═√╬■╧√╨у╤ц╨я╧Є╬ї■j■h■f■c■`■]■[√Z■Y■X√√┼ї╞Є╟■╚√В В В В В В В В В В В В В В В В ╧ √щ═Є╬ї°Ы√√Щ■Ъ√Ы■Ь√Э■Я■б■д■ж■й■л■о■░■│■╡■╖■╣■║■╗■╜■╛■┐■┴■┬■├■─■╞√╟√╚щ╔■╚■╟■╞■┼■─■├■┬■┴■└■╛■╜■╝■╗■║■╣■╕■╖■╡■▓■░■н■л■и√з°жїе°д°г√в°б√а√Я√Ю√Э■Ь√Ы√Ъ■Щ√Ш■Ч√ЦяХяФЄУЄТ■С■Р√П■О√Н■М√Л■К√Й■И°ЗяЖрЕ■Д■Г■В■Б■А■~■}■|■{■z■y■x■w■v■u■s■r■p■o■n■l■k■j■i■h■f■e■c■a°■t■v■w■y■z■{■|√}ЄїнЄмьлщкьжяе°дїг°в°б°а°Яї■(√■F√G■I■K■M■O■Q■T■V■X■Y■\■_■b■e■h■k■m■o■r■u■x■|■■В■Д■З■К■П■Т■Ц■Ъ■Э■б■д■з■к■н■▒■╢■╣■╗■╜■└■├■╞■╔■╩√╠√═√╬■╧√╨р╤ц╨я╧ї╬√■;√■h■f■c■`■]■[■Z√Y■X√■┼ї╞Є╟√╚√В В В В В В В В В В В В В В В В ╧ √Є═щ╬ї°Ы√■Щ√Ъ■Ы√Ь■Э■Ю■а■в■е■з■к■м■п■▒■┤■╢■╖■╕■║■╗■╝■╛■┐■└■┬■├■─■╞■╟√╚√╔ь╩■╔■╚■╞■┼■─■├■┬■┴■└■┐■╛■╜■╝■╗■║■╣■╕■╡■│■░■о■л■й°зЄжЄе■д√г√в°б√а√Я■Ю√Э√Ь√Ы■Ъ√Щ■Ш√Ч√ЦяХяФЄУїТ■С√Р■П■О√Н■М√Л■К√Й■И°З╫Ж°Е■Д■Г√В■А■■}■|■{■z■y■x■w■v■u■s■r■q■o■n√l■k■j■i■g■e°■q■s■t■v■w■x■z√{ЄЄнямьлщкьжяеїд°г°в°б°а°Я√Юя■G■H■J■L■N■P■R■T■V■X■Z■]■`■b■e■h■k■n■p■r■v■y■|■■Г■Ж■И■Л■Р■У■Ч■Ъ■Ю■б■д■з■к■о■▓■╢■║■╝■╛■└■├■╞■╔■╦√╠√═√╬■╧√╨┌╤щ╨я╧°╬√■;√■h■f■c■`■]■[■Z■Y√X√ї╞ї╟Є╚√В В В В В В В В В В В В В В В В ╥ √■═р╬■╧ї°Ы√■Щ■Ъ√Ы■Ь√Э■Ю■а■г■е■и■к■н■п■▓■┤■╢■╖■╕■╣■╗■╝■╜■┐■└■┴■├■─■┼■╟■╚√╔щ╩■╔■╚■╟■╞■┼■─■├■┬■└■┐■╛■╜√╝■╗■║■╕■╢■│■▒■о■л■йЄияз■ж■е■д°г√в√б√а√Я√Ю√Э■Ь√Ы√Ъ■Щ■Ш√Ч°ЦяХЄФщУ■Т√С■Р■П√О■Н√М■Л■К√Й■И°З╤Ж■Е■Д√Г■В■А■■}■|■{■z■y√x■w■u■t■r■q■p■n■m■l■k■j■i■g■f√■p■q■r■t■u■w■x■yї√оянямьлщкьжяе°д°г°в°б°а°ЯїЮ■Э°■■G■H■J■L■N■P■R■T■V■X■Z■]■`■c■f■i■k■n■q■s■v■y■}■А■Г■З■К■М■Р■Ф■Ч■Ы■Ю■б■д■з■л■о■▓■╖■╗■╜■┐■┴■─■╞■╔■╦√╠√═√╬■╧√╨╘╤ь╨ь╧√╬ї■h■f■c■`■]■[■Z■Y√X√°╞ї╟Є╚■╔√В В В В В В В В В В В В В В В В ╥ √щ╬Є╧ї√Ы■Ъ√√Ъ■Ы√Ь■Э■Ю■Я■б■д■ж■й■л■о■░■│■╡■╢■╖■╕■╣■╗■╝■╜■┐■└■┴■├■─■┼■╟√╔ц╩■╔■╚■╟■╞■┼■─■├■┬■┴■└■┐■╛■╜■╝■╗■║■╕■╢■│■▒■о■м°кяй°и■з■ж√д√г°в√б√а√Я√Ю■Э√Ь√Ы■Ъ√Щ■Ш■ЧїЦяХЄФьУ√Т■С■Р√П■О■Н√М■Л■К√Й■И°З╤Ж■Е√Д■Г■В■Б■■~■|■{■z√y■x■w■u■t■s■q■p■n√m■l■k■j√■l■n■o■p■r■s■u■vї°оьнямщлькьжяе°д°г√в°бїа°ЯїЮ√Эї■H■J■L■N■P■S■U■W■Y■[■^■`■c■f■i■l■o■q■t■w■z■}■Б■Д■З■К■О■Р■Ф■Ш■Ы■Ю■б■д■з■л■о■▓■╖■╝■╛■└■┬■─■╟■╩■╦√╠√═√╬■╧√╨√╤√╥┌╤я╨ь╧■╬ї■h■f■c■`■]■[■Z■Y■X■W√■╞Є╟ї╚°╔√В В В В В В В В В В В В В В В В ╥ √Є╬щ╧ї√Ы■Ъ√■Ъ√Ы■Ь√Э■Ю■а■в■е■з■к■м■п■▒■│■┤■╢■╖■╕■╣■║■╝■╜■╛■└■┴■┬■─■┼■╟■╔√╩Є╦ї╩■╔■╚■╟■╞■┼■├■┬√┴■└■┐■╛■╜■╝■╗■╣■╢■┤■▒■о√мЄлЄк■й■з■ж■е√д√г°в√б√а■Я√Ю√Э■Ь√Ы√Ъ■Щ■Ш√ЧїЦяХЄФьУ■Т√С■Р■П√О■Н■М■Л√К■Й■ИьЗ▌Ж√Е■Д■Г■В■Б■■~■|■{√z■y■x■w■v■t■s■r■p■o■n■m■l■k■j√■k■m■n■p■q■s■t°Єоьньмьлькьжяе°д°г°в°б°а°ЯїЮ√Э√Ь°■K■M■O■Q■S■U■W■Y■[■^■a■d■g■i■l■o■r■t■w■z■~■Б■Д■И■Л■О■С■Х■Ш■Ы■Ю■б■д■и■л■о■▓■╖■╝■┐■┴■├■┼■╚■╩■╦√╠√═√╬■╧√╨√╤°╥┌╤ь╨я╧ї■h■f■c■`■]■[■Z■Y■X■W√Є╟ї╚ї╔√В В В В В В В В В В В В В В В В ╥ √√╬у╧■╨ї√Ы■Ъ√■Ъ■Ы√Ь■Э■Ю■Я■б■г■е■и■к■н■п■▓■│■┤■╡■╢■╕■╣■║■╝■╜■╛■└■┴■┬■─■┼■╟■╔■╩ц╦■╩■╔■╚■╟■╞■┼■─■├■┬■┴■└■┐■╛■╜■╝■╗■╣■╢■┤■▒■пїням√л■й■и■ж■е°д√г°в■б√а√Я√Ю■Э√Ь√Ы■Ъ■Щ√Ш■ЧЄЦяХЄФяУ√Т■С■Р■П°О■Н■Л√К■Й√И╘ЗїЖ■Е■Д■Г■В■Б■А■~■}■|■{■z■y■x■w■v■u■s■r■p■o√n■m°■i■k■l■n■o■q°щоьнямьляк■йьжье√д°г°в°б°а°Я°Ю°Э°Ь°■M■O■Q■S■U■W■Y■\■^■a■d■g■j■m■o■r■u■x■{■~■В■Е■И■Л■П■Т■Х■Ш■Ы■Ю■б■е■и■л■о■▓■╖■╝■└■┬■─■╞■╔√╦√╠√═√╬■╧√╨√╤Є╥┌╤я╨Є╧√■;√■f■c■`■^■[■Z■Y■X■W√°╟Є╚ї╔■╩√В В В В В В В В В В В В В В В В ╥ √■╬щ╧ї╨ї■Ы√Ъ√√Ы■Ь■Э√Ю■а■в■д■ж■й■л■о■░■▓■│■┤■╡■╢■╖■╣■║■╗■╜■╛■┐■┴■┬■─■┼■╟■╔р╦■╩■╔■╟■╞■┼■─√├■┬■┴■└■┐■╛■╜■╝■╣■╢■┤■▒°пЄо°н■м■л■й■и■з■ж■е°д√г√в√б√а√Я■Ю√Э√Ь■Ы■Ъ√Щ■Ш√ЧЄЦяХцФ√У■Т■С√Р■П√О■Н■М■Л■К■Й√И╬З√Ж■Е■Д■Г■В■Б■А■~■}■|■{■z■y■x■w■v■u■t■r■q■p■o■n■m√■f■i■j■l■m■o°■пцоянямяльк■йьжяеїд°г°в°б√а°Я°Ю°Э√Ь√Ы°■P■R■T■V■X■Z■\■_■b■d■g■j■m■p■s■u■x■|■■В■Е■Й■М■П■Т■Ц■Щ■Ь■Ю■в■е■и■л■о■▓■╖■╝■┴■├■┼■╟■╩√╦√╠√═√╬■╧√╨√╤ь╥▌╤я╨ї╧√■:√■f■b■`■^■[■Z■Y■X■W■V√√╟ї╚ї╔√╩√В В В В В В В В В В В В В В В В ╥ √щ╧Є╨ї■Ы√Ъ√■Ы■Ь√Э■Ю■Я■а■в■е■з■к■м■п■▒■▓■│■┤■╡■╢■╖■╣■║■╗■╜■╛■┐■└■┬■─■┼■╟■╔■╦°╠ь╦■╩■╔■╚■╟■╞■┼√─■├■┴■└■┐■╛■╜■╝■╣■╖■┤■▓Є░Єп■о■н■л■к■и■з■ж√е°д√г√в√б■а√Я√Ю√Э■Ь■Ы√Ъ■Щ√Ш√ЧЄЦяХцФ■У■Т√С■Р°П■О■Н■М■Л■К√И╦З■Ж■Е■Д√Г■В■А■■}■|■{■z■y■x■w■v■u■t■r■q■p■o°■c■f■h■j■k■m√°пцоянЄмьльк■йьжяеїд°г°в°б°а√Я°Ю√Э°Ь°Ы°■R■T■V■X■Z■\■_■b■e■h■k■m■p■s■v■y■|■■Г■Ж■Й■М■Р■У■Ц■Ъ■Э■Я■в■е■и■л■о■▓■╖■╝■┴■─■╞■╚°╦√╠√═√╬■╧√╨√╤щ╥▌╤ь╨°╧ї■f■b■`■^■\■Z■Y■X■W■U√■╟ї╚ї╔°╩√В В В В В В В В В В В В В В В В ╥ √я╧ь╨ї√Ъ°√Ь■Э√Ю■Я■б■г■е■и■к■н■п■▒■▓■│■┤■╡■╢■╖■╕■║■╗■╝■╛■┐■└■┬■├■┼■╟■╔■╦ц╠■╦■╩■╔■╚■╟■╞√┼■─■├■┬■┴■└■┐■╛■╝■╣■╖■┤ї▓Є▒√░■о■н■м■к■й■и■з■ж√е√д°г■в√б√а√Я■Ю√Э√Ь■Ы■Ъ■Щ√Ш°ЧЄЦяХщФ√У■Т■С■Р°П■О■Н■М■Л■К■ЙяИ┌З■Ж■Е√Д■Г■В■А■■}■|■{■z■y■x■w√v■t■s■r■q■p√■a■c■e■h■i°їпцоянЄмялщк■йьжяеїд°гїв√б√а√Я°Ю°Э√Ь°Ы°Ъ√■T■V■X■[■]■`■b■e■h■k■n■q■t■v■y■}■А■Г■Ж■К■Н■Р■У■Ч■Ъ■Ю■б■г■ж■и■л■о■▓■╖■╝■┴■┼■╟■╔√╦√╠°═■╬√╧√╨√╤┌╥ц╤я╨√╧ї■f■b■`■^■\■Z■Y■X■W■U√ї╚ї╔ї╩■╦√В В В В В В В В В В В В В В В В ╒ √Є╧щ╨ї√Ъ°■Ь√Э■Ю■Я■а■в■д■ж■й■л■о■п■░■▒■│■┤■╡■╢■╖■╕■╣■╗■╝■╜■┐■└■┬■├■┼■╟■╔■╩у╠■╦■╩■╔■╚■╟√╞■┼■─■┬√┴■└■┐■╝■║■╖■╡■┤Є│ї▓■░■п■н■м■л■й■и■з■ж°е√д√г√в√б√а■Я√Ю√Э■Ь■Ы■Ъ√Щ■ШїЧЄЦяХщФ■У■Т■С■РїП■О■Н■М■Л■К■Й╫ИїЗ■Ж√Е■Д■Г■В■Б■■~■|■{■z■y■x√w■v■u■s■r■q√■^■`■c■e■g°ЄпщоянЄмьлщк■йьжяе°д°г√в°б°а°Я√Ю°Э°Ь°Ы°Ъ°■W■Y■[■]■`■c■f■i■k■n■q■t■w■z■}■А■Д■З■К■Н■Р■Ф■Ч■Ы■Ю■в■д■з■й■м■п■▓■╖■╝■┴■╞■╚■╩√╦√╠√═√╬√╧√╨√╤╤╥ь╤я╨■╧ї■f■b■_■]■\■[■Y■W■V■U√°╚ї╔ї╩√╦√В В В В В В В В В В В В В В В В ╒ √ї╧щ╨■╤ї√Ъ√√Ь■Э√Ю■Я■б■г■е■з■й■м■о■п■░■▒■▓■│■╡■╢■╖■╕■╣■╗■╝■╜■┐■└■┬■├■┼■╟■╔■╩у╠■╦■╩■╔■╚°╟■╞■─■├■┬■┴■└■┐■╝■║■╖ї╡Є┤■│■▓■▒■п■о■м■л■к■й■з√ж°е√д√г√в■б√а√Я■Ю√Э■Ь■Ы√Ъ■Щ√Ш°ЧяЦЄХ■ФяХ■Ф■У■Т■СЄР■П■Н■М■Л■К■Й╬И■З√Ж■Е■Д■Г■В■Б■■~■|■{■z■y√x■w■v■u√s√■[■]■`■b°ьпщоЄнямялцк■йяжье√д°г°в°б°а√Я°Ю°Э°Ь°Ы°Ъ■Щ√■W■Y■[■^■`■c■f■i■l■o■r■t■w■z■~■Б■Д■З■К■О■С■Ф■Ч■Ы■Я■в■ж■и■л■н■п■│■╖■╝■┴■╞■╔√╦°╠√═√╬√╧√╨√╤╦╥я╤я╨√■:√■b■_■]■\■[■Y■X■V■U√°╚ї╔°╩°╦√В В В В В В В В В В В В В В В В ╒ √√╧ц╨√╤ї√Ъ√■Ь√Э■Ю■Я■а■в■д■ж■и■к■н■о■п■░■▒■▓■│■┤■╡■╖■╕■╣■║■╝■╜■╛■└■┬■├■┼■╟■╚■╩ї╠√═Є╠■╦■╔°╚■╟■╞■┼■─■├■┬■┴■┐■╜■║■╕√╖Є╢√╡■┤■▓■▒■п■о■н■л■к■й■и■з√ж°е√д■г√в√б√а■Я√Ю■Э√Ь■Ы■Ъ√Щ■ШїЧяЦрХ■Ф√У■Т■СїР■П■О■Н■М■Л■Й╬И√З■Ж■Е■Д■Г■В■Б■А■~■}■{■z√y■x■w■v■u■t√■X■Z■]■_°щпьоянЄмьлцк■йьжЄеїд√г°в°б°а√Я°Ю°Э°Ь°Ы°Ъ√Щ√■Z■\■^■a■d■g■i■l■o■r■u■x■{■~■Б■Д■И■Л■О■С■Х■Ш■Ы■Я■г■ж■й■м■о■▒■┤■╕■╜■┴■╞■╩√╦√╠√═°╬√╧√╨√╤■╥√╙╤╥я╤Є╨√■9√■b■_■]■\■[■Z■X■V■U√√╚ї╔ї╩°╦√В В В В В В В В В В В В В В В В ╒ √■╧щ╨ї╤°°Ъ√■Ь■Э√Ю■Я■а■г■е■з■й■л■н■о■п■░■▒■▓■│■┤■╡■╢■╕■╣■║■╝■╜■╛■└■┬■├■┼■╟■╚■╩■╦°╠я═■╠■╦■╩°╔■╚■╟■╞■─■├■┬■┴■┐■╜■║Є╕ї╖■╢■┤■│■▒■░■о■н■м■л■к■и√з√ж√е√д√г√в√б■а√Я■Ю√Э■Ь■Ы√Ъ■Щ√ШїЧяЦрХ■Ф■У■Т■С°Р■С■Р■П■О■Н■М■КЄЙ┌И■З■Ж■Е√Д■Г■Б■А■~■}√{■z■y■x■w■v■u■t■■U■W■Z■\°упяояньмщляк■йяжяе°д°гїв√б°а°Я√Ю°Э°Ь°Ы°Ъ√Щ■Ш√■\■^■a■d■g■j■m■p■r■u■x■{■~■В■Е■И■Л■П■Т■Х■Ш■Ь■Я■г■з■к■н■░■▓■╡■╣■╛■├■╟√╦°╠√═√╬√╧°╨√╤■╥°╙╤╥ь╤ї╨ї■b■_■]■[√Z■X■W■T√■╚ї╔ї╩ї╦√В В В В В В В В В В В В В В В В ╒ √щ╨Є╤°°Ъ√√Э■Ю√Я■б■г■е■з■к■л■м■о■п■░■▒■▓■│■┤■╡■╢■╖■╣■║■╗■╜■╛■└■┬■├■┼■╟■╚■╩■╦°╠я═■╠■╦ї╩■╔■╟■╞■┼■─■├■┬■└■╜■╗°║Є╣■╖■╢■┤■│■▒■░■п■н■м■л■к■й■и√з√ж√е√д√г■в√б√а√Я■Ю■Э■Ь√Ы■Ъ√Щ■ШЄЧяЦщХ■Ц■Х■Ф■У■Т■С■Р°С■Р■П■О■Н■М■К▌ЙяИ■З■Ж√Е■Д■Г■Б■А■■}■|■{■z■y■x■w■v■u√■T■W■Y°√░упяоьнямяльк■йяжЄеїд°г°вїб√а°Я°Ю√Э°Ь°Ы√Ъ°Щ■Ш°■_■b■e■g■j■m■p■s■v■y■|■■В■Е■Й■М■П■Т■Х■Щ■Ь■а■г■з■л■о■▒■│■╢■╗■┐■─■╚■╩■╦√╠°═√╬√╧√╨°╤■╥ц╙▌╥я╤°╨ї■b■_■]■[■Z√Y■W■U■R√ї╔°╩ї╦■╠√В В В В В В В В В В В В В В В В ╒ √ь╨я╤°°Ъ√■Э√Ю■Я■а■в■д■ж■и■к■л■м■н■о■░■▒■▓■│■┤■╡■╢■╖■╕■║■╗■╝■╛■└■┬■├■┼■╞■╚■╔■╦°╠ь═■╠°╦■╩■╔■╚■╟■┼■─■├■┬■└■╜■╝Є╗√║■╣■╕■╢■╡■│■▓■░■п■о■н■м■к■й■и√з°ж■е√д√г√в√б■а√Я■Ю■Э√Ь■Ы√Ъ■Щ√ШЄЧяЦ√ХяЦ■Х■Ф■У■ТяС■Р■П■О■М■Л╬Й■И■З■Ж√Е■Д■Г■В■А■■}■|■{■z■y■x■w■v°■T■V■Y√°░цпьоьнЄмьльк■иЄжяеїд°гїв°б°а°Я√Ю°Э√Ь°Ы√Ъ°Щ√Ш√■_■b■e■h■k■n■p■s■v■y■|■■Г■Ж■Й■М■П■У■Ц■Щ■Э■а■д■з■л■п■▓■╡■╖■╝■└■─■╟■╔■╦√╠√═√╬°╧√╨√╤√╥╘╙ь╥я╤√╨ї■b■`■]■[■Z■Y■X■W■U■R√°╔ї╩°╦√╠√В В В В В В В В В В В В В В В В ╒ √Є╨щ╤°√Ъ■Щ√■Э■Ю√Я■б■г■е■з■й■к■л■м■н■о■п■░■▓■│■┤■╡■╢■╖■╕■║■╗■╝■╛■└■┬■├■┼■╞■╚■╔■╦°╠ї═■╬√═ї╠■╦■╩■╔■╟■╞■┼■─■├■└ї╜ї╝■║■╣■╕■╢■╡■┤■▓■▒■п■о■н■м■л■к√и√з√ж√е√д√г■в√б√а■Я■Ю√Э■Ь■Ы√Ъ■Щ°ШЄЧ┌Ц■Х■Ф■У■ТЄС■Т■Р■П■О■Н■Л■К╤Й■И■З√Ж■Е■Д■Г■В■А■■}■|■{■z■y■x■w■v√■Q■S■U√ї░цпьоянямьльк■ияжяе°дїг°в°б°а°Я°Ю√Э√Ь°Ы√Ъ√Щ°Ш■Ч√■c■e■h■k■n■q■t■v■y■|■А■Г■Ж■Й■Н■Р■У■Ц■Ъ■Э■б■д■и■л■п■│■╢■╕■╜■┴■─■╞■╚■╦√╠√═√╬√╧°╨√╤√╥╬╙я╥ь╤√■9√■`■]■[■Z■Y■X■W■U■R√√╔ї╩ї╦√╠°В В В В В В В В В В В В В В В В ╪ √ї╨ц╤°√Ъ■Щ√√Ю■Я■а■в■д■ж■и■к√л■м■н■о■п■░■▒■▓■┤■╡■╢■╖■╕■╣■╗■╝■╛■└■┴■├■─■╞■╚■╔■╦ї╠°═°╬ї═■╠■╩■╔■╚■╟√┼■├■└√┐ї╛■╜■╝■╗■║■╕■╖■╡■┤■▓■▒■░■п■о■м■л■к■й√и√з√ж√е■д√г√в√б■а√Я■Ю■Э■Ь√Ы■Ъ√Щ°ШЄЧ▌Ц■Х√Ф■У■Т√С°Т■С■Р■П■Н■МяКрЙ■И√З■Ж■Е■Д■Г■В■Б■■~■|■{■z■y■x■w√■L■P■R√Є░цпьоянямьльк■иьжЄеїд°гїв°б√а°Я√Ю°Э√Ь√Ы√Ъ°Щ°Ш■Ч√■c■f■i■k■n■q■t■w■z■}■А■Г■З■К■Н■Р■Ф■Ч■Ъ■Ю■б■е■и■м■п■│■╖■╣■╛■└■├■┼■╟■╩■╠°═√╬√╧√╨√╤°╥╦╙я╥я╤√■8√■`■^■[■Z■Y■X■W■U■R√√╔°╩ї╦ї╠√В В В В В В В В В В В В В В В В ╪ √°╨у╤°√Ъ■Щ√■Ю√Я■а■г■е■з■й■к■л√м■н■о■п■░■▒■▓■│■╡■╢■╖■╕■╣■╗■╝■╛■└■┴■├■─■╞■╟■╔■╩ї╠ї═я╬■╠■╦■╩■╚■╟■╞■┼■├Є└■┐■╛■╜■╝■╗■║■╣■╖■╢■┤■│■▒■░■п■о■н■м■л■й°и√з■ж√е√д√г√в■б√а■Я■Ю■Э√Ь■Ы√Ъ■ЩїШЄЧцЦ■Ч√Ц■Х■Ф■УьТ■С■П■О■М■Л▌КїЙ√И■З■Ж■Е√Д■В■Б■■~■|■{■z■y■x■w√■L■O√я░цпьоянямялщк■ищжЄе°дїг°в°б√а√Я√Ю°Э√Ь√Ы°Ъ°Щ√Ш°Ч√■f■i■l■o■r■t■w■z■}■А■Д■З■К■О■С■Ф■Ч■Ы■Ю■в■е■й■м■░■┤■╖■╗■╜■└■┬■─■╟■╔■╦√═°╬√╧√╨√╤√╥┼╙ь╥Є╤ї■`■^■\■Y■X■W■V■U■R√■╔ї╩°╦Є╠√В В В В В В В В В В В В В В В В ╪ √√╨р╤°■Ъ√Щ√■Ю■Я■а■б■г■е■и■й■к■л■м√н■о■п■░■▒■▓■│■┤■╡■╖■╕■╣■║■╝■╛■┐■┴■├■─■╞■╟■╔■╩ї╠ї═°╬√╧■╬■═■╠■╩■╔■╚■╟■╞■├°┬√┴■┐■╛■╜■╝■╗■║■╣■╖■╢■╡■│■▓■▒■░■о■н■м■л■к■й√и√з√ж√е√д■г√в√б■а■Я■Ю√Э■Ь√Ы■Ъ√ЩїШЄЧ°ЦьЧ■Ц■Х■Ф■УьТ■С■Р■О■Н■Л╤К■Й■И■З■Ж√Е■Д■Г■Б■А■~■}■{■z√y√■G■L√ь░цпьоянямялщк■ищжяе°д√г°в°б√а√Я°Ю√Э°Ь°Ы√Ъ°Щ√Ш°Ч√■g■i■l■o■r■u■x■{■~■Б■Д■И■Л■О■С■Х■Ш■Ы■Ю■в■ж■й■н■░■┤■╕■╗■╜■┐■┴■├■╞■╚■╩√═√╬√╧°╨√╤√╥┬╙ь╥ї╤ї■_■]■\■Z■X■W■V■T■R√ї╩ї╦Є╠√В В В В В В В В В В В В В В В В ╪ √┌╤°■Ъ√Щ√√Я■а■в■д■ж■и■й■к■л■м■н■о√п■░■▒■▓■│■┤■╡■╢■╕■╣■║■╝■╛■┐■┴■┬■─■┼■╟■╔■╩■╦°╠ї═√╬°╧■╬■═■╠■╦■╩■╚■╟■╞■─°├■┬■┴■└■┐■╛■╜■╝■╗■╣■╕■╢■╡■│■▓■▒■░■п■о■н■л■к√й√и√з√ж■е√д√г√в■б■а√Я■Ю■Э√Ь■Ы√Ъ■ЩЄШ╫Ч■Ц■Х■Ф■У°ТїУ■Т■Р■П■Н■М╤К■Й■И■З√Ж■Е■Д■Г■Б■А■~■}■{√z■y√■G√щ░цпьоянЄмьлщк■ищжЄе°д√г°в°б√а°Я°Ю°Э√Ь°Ы°Ъ√Щ√Ш°Ч°■j■m■p■r■u■x■{■~■Б■Е■И■Л■П■Т■Х■Ш■Ы■Я■в■ж■к■н■▒■┤■╕■╗■╜■╛■└■├■┼■╟■╔■╠■═√╬√╧√╨°╤√╥ї╙р╘щ╙я╥°╤ї■_■\√[■X■V■U■S■Q√°╩ї╦я╠√В В В В В В В В В В В В В В В В ╪ √┌╤°√Щ°■Я■а■б■г■е■з■и■й■к■л■м■н■о■п√░■▒■▓■│■┤■╡■╢■╖■╣■║■╝■╜■┐■┴■┬■─■┼■╟■╚■╩■╦°╠ї═■╬ї╧■╬√═■╠■╩■╔■╚■╞√┼■─■├■┬■┴■└■┐■╛■╜■╝■╗■║■╕■╖■╡■┤■│■▓■░■п■о■н■м■л■к√й√и■з√ж√е√д√г■в■б√а■Я■Ю√Э■Ь√Ы■Ъ■ЩяШ┌Ч■Ц■Х■Ф■У■ТяУ■Т■С■П■О■МьЛуК■Й■И■З■Ж■Е■Д■Г■В■А■■}■|■{■z√■C√ц░цпьоянЄмьлщк■иьжЄе°д√гїв°б°а°Я°Ю°Э√Ь°Ы√Ъ√Щ°Ш■Ч√Ц√■j■m■p■s■v■y■{■~■В■Е■И■М■П■Т■Х■Щ■Ь■Я■г■ж■к■о■▒■╡■╕■╗■╜■┐■└■┬■─■╞■╔■╦■═√╬√╧√╨√╤°╥ї╙┌╘ь╙ь╥■╤ї■^■\■[■Z■Y■V■U■S■Q√°╩ї╦я╠√В В В В В В В В В В В В В В В В ╪ √я╤√╥Є╤°√Щ√■Я√а■в■д■ж■и√й■к■л■м■н■о■п■░√▒■▓■│■┤■╡■╢■╖■╣■║■╝■╜■┐■└■┬■├■┼■╟■╚■╩■╦ї╠√═■╬Є╧■╬√═■╠■╦■╩■╚√╟■╞■┼■├■┬■┴■└■┐■╛■╜■╝■╗■║■╕■╖■╡■┤■│■▓■▒■░■п■н■м■л■к√й√и√з√ж√е√д■г√в■б■а■Я√Ю■Э√Ь■Ы■Ъ√ЩЄШцЧ°Ш■Ч■Ц√Х■ФяУ■Ф■У■С■Р■О■Н┌Л√К■Л■К■Й■И■З■Ж√Е■Г■В■А■■}■|■{■z√■B√ц░цпьоянЄмщльк■иЄжЄеЄд°г°вїб°а°Я°Ю√Э√Ь√Ы°Ъ°Щ√Ш■Ч√Ц√■k■n■p■s■v■y■|■■В■Е■Й■М■П■У■Ц■Щ■Ь■а■г■з■к■о■▓■╡■╕■╗■╜■┐■└■┬■├■╞■╚■╩■╠■╬°╧√╨√╤°╥°╙╤╘я╙ь╥√■7√■\√Z■Y■W■T■R■P■N√■╩ї╦ь╠√В В В В В В В В В В В В В В В В ╪ √Є╤ї╥ї╤°√Щ√■Я■а■б■г■е■з■и■й√к■л■м■н■о■п■░■▒√▓■│■┤■╡■╢■╖■╕■║■╝■╜■┐■└■┬■├■┼■╞■╚■╩■╦ї╠√═■╬Є╧■╬■═√╠■╦■╩■╔■╚■╟■╞■┼■─■├■┴■└■┐■╛■╜■╝■╗■║■╣■╖■╢■╡■┤■▓■▒■░■п■о■н■м√к√й√и√з■ж°е√д■г■в■б■а√Я■Ю■Э√Ь■Ы√Ъ√ЩЄШЄЧяШ√Ч■Ц■Х■ФїУ°Ф■У■Т■Р■П■Н■М╤Л■К■Й■И■З■Ж■Е■Д■В■Б■■~■|■{√■=√у░цпьоянямьльк■зЄжяеїдїг°в°б°а°Я°Ю√Э√Ь√Ы√Ъ°Щ°Ш√Ч■Ц■Х√■n■q■t■v■y■|■■В■Ж■Й■М■Р■У■Ц■Ъ■Э■а■д■з■л■о■▓■╡■╕■╗■╛■┐■└■┬■├■┼■╟■╔■╠■╬√╧°╨√╤°╥°╙╬╘ь╙я╥ї■\■Z√Y■X■U■R■P■N√ї╦щ╠√В В В В В В В В В В В В В В В В ╪ √°╤ь╥°╤°√Щ√√а■б■г■е■з■и■й■к■л√м■н■о■п■░■▒■▓■│√┤■╡■╢■╖■╕■║■╗■╜■╛■└■┬■├■┼■╞■╚■╔■╦ї╠■═■╬°╧■╨■╧√╬■═√╠■╦■╩■╔■╚■╟■╞■┼■─■├■┬■┴■└■┐■╛■╜■╝■║■╣■╕■╢■╡■┤■│■▓■▒■п■о■н■м■л√к√й■и√з√ж√е√д■г■в■б√а■Я■Ю√Э■Ь√Ы■Ъ°Щ╘Ш√Ч■Ц■Х■Ф√УяФ■Т■С■П■О√М╘Л■К■Й■И√З■Е■Д■Г■В■А■~■|■{√■=√у░цпьоянямялщк■зяжяе°дїгїв√б°а°Я√Ю√Э√Ь√Ы°Ъ°Щ°Ш√Ч■Ц■Х√■n■q■t■w■z■}■■Г■Ж■Й■Н■Р■У■Ч■Ъ■Э■а■д■и■л■п■▓■╡■╕■╗■╛■┐■┴■┬■─■┼■╞■╚■╦■═√╧√╨√╤ї╥°╙╦╘ь╙Є╥ї■\■Z°X■W■R■O■M√ї╦ц╠√В В В В В В В В В В В В В В В В █ √√╤у╥■╤√°Щ√■а■б■в■д■ж■з■и■й■к■л■м√н■о■п■░■▒■▓■│■┤√╡■╢■╕■╣■║■╝■╜■╛■└■┴■├■─■╞■╚■╔√╦°╠■═■╬■╧°╨■╧√╬■═■╠√╦√╩■╔■╟■╞■┼■─■├■┬■┴■└■┐■╛■╜■╝■╗■╣■╕■╖■╢■┤■│■▓■▒■░■п■о■м√л■к√й√и√з√ж√е■д■г√в■б■а■Я√Ю■Э√Ь■Ы√Ъ°ЩрШ√Щ√Ш■Ч■Ц■ХцФ■У■С■Р■ОщМьЛ√М■Л■К■Й■И■З■Ж■Е■Д■В■Б■■}■{■■8√р░цпьоянямялщк■зяжяеїд°г°в°б°а√Я√Ю√Э√Ь°Ы°Ъ°Щ°Ш√Ч√Х°■r■t■w■z■}■А■Г■Ж■К■Н■Р■Ф■Ч■Ъ■Ю■б■е■и■м■п■▓■╡■╕■╗■╛■└■┴■┬■─■┼■╟■╚■╩■╠√╧√╨√╤ї╥°╙╦╘щ╙ї╥ї■\■Z■X√W■V■S■O■M√°╦у╠√В В В В В В В В В В В В В В В В █ √■╤▌╥√√Щ■Ш√■а■б■г■е■ж■з■и■й■к■л■м■н√о■п■░■▒■▓■│√┤■╡■╢■╕■║■╗■╝■╜■┐■└■┴■├■─■╞■╟■╔√╦√╠■═■╬√╧°╨■╧■╬√═■╠°╦■╩■╔■╚■╟■┼■─■├■┬■┴■└■┐■╛■╜■╝■╗■║■╕■╖■╢■╡■┤■│■▒■░■п■о■н■м■л√к√й√и√з√ж■е√д■г■в■б■а√Я■Ю√Э■Ь√Ы■ЪїЩщШїЩ√Ш■Ч■Ц■ХяФ√Х■Ф■У■Т■Р■П■Н╤М■Л■К■Й√И■Ж√Е■Г■Б■А■~Є▌░щпьоянЄмялцк■зяжяе°д°гїв°б√а√Я°Ю√Э√Ь°Ы°Ъ°Щ°Ш√Ч°Х√■r■u■x■{■}■А■Д■З■К■О■С■Ф■Ш■Ы■Ю■б■е■й■м■п■▓■╡■╕■╗■╛■└■┴■├■─■┼■╟■╚■╩■╦■╬°╨√╤ї╥°╙╚╘ц╙√╥ї■\■Z■X■W√V■T■O■M√√╦р╠√В В В В В В В В В В В В В В В В █ √┌╥√√Щ■Ш√■б■в■д■ж√з■и■й■к■л■м■н■о√п■░■▒■▓√│■┤■╡■╢■╣■║■╗■╜■╛■┐■└■┬■├■─■╞■╟■╔■╩■╦√╠■═■╬■╧°╨√╧■╬√═√╠√╦■╩■╔■╚■╟■╞■┼■─■├■┬■┴■└■┐■╛■╜■╗■║■╣■╕■╖■╡■┤■│■▓■▒■░■о■н■м√л√к√й√и√з√ж■е■д■г■в■б√а■Я√Ю■Э√Ь■Ы■ЪЄЩїШьЩ√Ш√Ч■Ц■Х°ФїХ√Ф■Т■С■П■Н╬М■Л■К■Й■И■Ж√Е■Д■В■Б■■■3√┌░щпьоянЄмялцк■зяжяе°д°г°в°б°а√Я√Ю°Э°Ь°Ы°Ъ√Щ°Ш■Ч■Ц√Х■Ф√■r■u■x■{■~■Б■Д■З■Л■О■С■Х■Ш■Ы■Я■в■е■й■м■п■▓■╡■╕■╗■╛■└■┬■├■─■╞■╟■╔■╩■╦■═■╧■╨°╤ї╥°╙┼╘ц╙■╥√■6√■Z■Y■W√U■S■P■L√√╦у╠■═√В В В В В В В В В В В В В В В В █ √┌╥√√Щ■Ш√■б■г■е■ж■з■и√й■к■л■м■н■о■п√░■▒√▓■│√┤■╖■╣■╗■╝■╜■╛■└■┴■┬■├■┼■╞■╟■╔■╩■╦■╠■═■╬√╧°╨√╧■╬■═ї╠■╦■╩■╔■╚■╟■╞■┼■─■├■┬■┴■└■┐■╛■╜■╝■║■╣■╕■╖■╢■╡■│■▓■▒■░■п■о■н■м√л√к√й√и√з■ж■е■д■г√в■б■а√Я■Ю√Э■Ь■Ы√Ъ╤Щ√Ш■Ч■Ц■Х■ФьХ■Ф■У■С■П■О√Н┌М■Н■М■Л√К■И■З√Ж■Е■Г■Б■А°╫░щпьоянЄмялцк■зьжЄе°д°г°в°б°а°Я°Ю°Э√Ь√Ы√Ъ°Щ√Ш√Ч■Ц√Х■Ф√■s■v■x■{■~■Б■Д■И■Л■О■Т■Х■Ш■Ь■Я■в■ж■й■м■п■▓■╡■╕■╗■╛■┴■┬■├■┼■╞■╟■╔■╩■╠■═■╬■╨°╤°╥ї╙°╘щ╒у╘ц╙■╥ї■Z■Y■W■U■T■R■Q■M√■╦у╠√═√В В В В В В В В В В В В В В В В █ √┌╥√■Щ√Ш√■б■г■е■ж■з■и■й√к■л■м■н■о√п■░√▒■▓■│■┤■╡■╖■║■╗■╜■╛■┐■└■┬■├■─■┼■╟■╚■╔■╩■╦■╠■═■╬■╧√╨■╤■╨■╧√╬°═√╠■╦■╩■╔■╚■╟■╞■┼■─■├■┬■┴■└■┐■╛■╜■╝■╗■║■╣■╖■╢■╡■┤■│■▓■░■п■о■н√м√л√к√й√и■з■ж■е■д√г■в■б√а■Я■Ю√Э■Ь√Ы■ЪрЩ°Ъ√Щ√Ш■Ч■ЦцХ■Ф■У■Т■Р■ОцНїМїН■М■Л■К■Й■З°Ж■Д■В■А°┌░цпьоянЄмьлщк■зяжье√д°гїв°б°а°Я°Ю√Э■Ь√Ы√Ъ°Щ°Ш√Ч■Ц√Х■Ф√■s■v■y■|■■Б■Е■И■Л■П■Т■Х■Щ■Ь■Я■г■ж■й■м■п■▓■╡■╕■╗■╛■┴■┬■─■┼■╞■╚■╔■╩■╠■═■╧■╨°╤°╥ї╙°╘ц╒у╘ц╙ї■Z■Y■W■U■T■R■P■N°ц╠°═√В В В В В В В В В В В В В В В В █ √┌╥√■Щ√Ш√■в■д■е■ж■з■и■й■к√л■м■н√о■п√░■▒■▓√│■╡■╕■║■╝■╜■╛■└■┴■┬■├■┼■╞■╟■╚■╩■╦■╠■═■╬√╧■╨√╤■╨■╧°╬°═■╠√╦■╩■╔■╟■╞■┼■─■├■┬■┴■└■┐■╛■╜■╝■╗■║■╣■╕■╖■╢■┤■│■▓■▒■░■п√н√м√л√к√й■и√з■ж■е■д■г■в√б■а■Я√Ю■Э√Ь■Ы√ЪщЩЄЪ√Щ√Ш■Ч■ЦЄХ√Ц√Х√Ф■Т■Р■П╬Н■М■Л■К■Й■З°Ж■Е■Г°╫░цпьоЄнямщльк■зяжье°д°г°вїб√а°Я√Ю√Э√Ь°Ы√Ъ°Щ°Ш■Ч■Ц■Х√Ф√■t■v■y■|■■В■Е■И■М■П■Т■Ц■Щ■Ь■а■г■ж■й■м■п■▓■╡■╕■╗■╛■┴■├■─■┼■╟■╚■╔■╦■╠■╬■╧■╨°╤°╥ї╙°╘у╒ц╘ц╙ї■[■Y■W■V■T■Q■O■M■J√ц╠°═√В В В В В В В В В В В В В В В В █ √┌╥√√Ш■Ч√■г√е■ж■з■и■й■к√л■м√н■о■п√░■▒√▓■┤■╢■╕■╗■╝■╛■┐■└■┴■├■─■┼■╞■╚■╔■╩■╦■╠■═■╬■╧■╨√╤√╨■╧Є╬■═√╠■╦■╩■╔■╚■╟■╞■┼■─■├■┬■┴■└■┐■╛■╜■╝■╗■╣■╕■╖■╢■╡■┤■▓■▒■░■п■о■н√м°л√к√й■и■з■ж■е■д■г√в■б■а√Я■Ю√Э■Ь√Ы√ЪїЩцЪ√Щ■Ш■Ч■Ц√ХяЦ√Х■Ф■Т■С■П■О╘Н■О■Н■М■Л■Й■И■З°Ж■Д°╫░цпьоянямьлькщжяе°д°г°в°б√а√Я°Ю°Э°Ь√Ы°Ъ√Щ√Ш√Ч■Ц■Х√Ф°■w■z■}■■В■Е■Й■М■П■У■Ц■Щ■Э■а■г■з■й■м■п■▓■╡■╕■╗■╛■┴■├■─■╞■╟■╚■╩■╦■╠■╬■╧■╨°╤°╥ї╙°╘р╒ц╘щ╙ї■[■Y■X■V■T■Q■O■M■K√щ╠Є═√В В В В В В В В В В В В В В В В ▐ √■╥■╙р╥√√Ш■Ч√■д■е√ж■з■и■й√к■л√м■н■о√п■░√▒■▓■┤■╖■╣■╗■╜■╛■└■┴■┬■├■┼■╞■╟■╚■╔■╩■╦■╠■═■╬■╧■╨√╤■╨ї╧°╬√═■╠■╦■╩■╔■╚■╟■╞■┼■─■├■┬■┴■└■┐■╛■╜■╝■╗■║■╣■╕■╢■╡■┤■│■▓■▒■░■о√н√м√л√к√й■и■з■ж■е■д√г■в■б√а■Я√Ю■Э√Ь■ЫрЪ√Ы√Ъ√Щ√Ш■ЧщЦ√Х■Ф■У■С■Р°ОуНїО√Н■Л■К■И°З■Ж■Е√╘░цпьоянямялщкщжяе°д°г√в°б°а°Я°Ю°Э√Ь√Ы√Ъ°Щ√Ш√Ч■Ц■Х√Ф°■w■z■}■А■Г■Ж■Й■Н■Р■У■Ц■Щ■Ь■Я■в■з■к■м■п■▓■╡■╕■╗■╛■┬■├■┼■╞■╟■╔■╩■╦■═■╬■╧■╨°╤°╥°╙ї╘р╒у╘ь╙√■5√■Y■X■V■T■Q■N■L■K√ь╠я═√В В В В В В В В В В В В В В В В ▐ √°╙у╥√√Ш■Ч√■д■е■ж√з■и√й■к■л√м■н√о■п√░■▒■▓■╡■╖■╣■╝■╛■┐■└■┴■├■─■┼■╞■╚■╔■╩■╦■╠■═■╬■╧■╨°╤°╨ї╧√╬■═■╠■╦■╩■╔■╚■╟■╞■┼√─■├■┬■┴■└■┐■╛■╜■╗■║■╣■╕■╖■╢■╡■│■▓■▒■░■п■о√н√м√л√к■й■и■з√ж■е■д■г■в√б■а√Я■Ю√Э■Ь√ЫщЪїЫ√Ъ√Щ√Ш■ЧцЦ■Х■Ф■У■Т■Р■ПцО■НьО■Н■Л■К■ИїЗ■Е√╘░цпьоянЄмялцкщжяе°д√г°в°б°а°Я°Ю°Э√Ь√Ы√Ъ°Щ√Ш√Ч■Ц■Х√Ф°■x■{■}■А■Г■Ж■К■Н■Р■У■Ц■Щ■Ь■Я■в■ж■л■н■п■▓■╡■╕■╗■┐■┬■├■┼■╞■╚■╔■╩■╠■═■╬■╧√╨√╤°╥°╙ї╘▌╒у╘ь╙ї■Y■X■V■T■Q■O■L■J√я╠ь═√В В В В В В В В В В В В В В В В ▐ √ї╙ц╥√■Ш■Ч°■д■е√ж■з√и■й■к√л■м√н■о√п■░■▒■│■╡■╕■║■╝■╛■┐■┴■┬■├■─■╞■╟■╚■╔■╩■╦■╠■═■╬■╧■╨°╤Є╨√╧√╬■═√╠■╦■╩■╔■╚■╟■╞■┼■─■├■┬■┴■└■┐■╛■╜■╝■╗■║■╕■╖■╢■╡■┤■│■▓■░■п√о√н√м√л√к■й■и■з■ж■е■д■г√в■б√а■Я√Ю■Э■Ь√ЫяЪьЫ√Ъ√Щ■Ш■Ч°Ц°Ч°Ц√Х■Ф■Т■С■П╘О√П■Н■М■К■ЙїЗ■Ж√╘░цпьоЄнЄмьлцкщжЄе°д°г°в°б°а°Я°Ю√Э°Ь√Ы√Ъ°Щ√Ш√Ч■Ц■Х°Ф√■x■{■~■Б■Г■З■К■Н■Р■У■Ц■Щ■Ь■Я■в■ж■л■о■░■▓■╡■╕■╝■┐■┬■─■┼■╟■╚■╔■╦■╠■═■╬√╧■╨√╤°╥°╙ї╘┌╒у╘я╙ї■Z■X■V■U■Q■O■L■J√я╠ь═√В В В В В В В В В В В В В В В В ▐ √Є╙щ╥√■Ш■Ч°■д√е■ж■з√и■й√к■л√м■н■о√п■░■▒■│■╢■╕■╗■╜■┐■└■┴■┬■─■┼■╞■╟■╚■╔■╩■╦■╠■═■╧■╨■╤■╥ї╤ї╨√╧■╬√═■╠■╦■╩■╔■╚■╟√╞■┼■─■├■┬■┴■└■┐■╜■╝■╗■║■╣■╕■╖■╡■┤■│■▓■▒■░■п√о√н√м√л■к■й■и■з■ж■е■д√г■в√б■а√Я■Ю■Э√Ь■Ы°ЪуЫ√Ъ√Щ■Ш■Ч■ЦьЧ■Ц√Х■Ф■У■С■Р┌ОїП■О■М■Л■ЙїИ°╘░цпьоЄнямьлщкьжяе°д°г°в°б°а°Я°Ю√Э°Ь√Ы√Ъ°Щ√Ш√Ч■Ц■Х°Ф√■y■{■~■Б■Д■З■К■Н■Р■У■Ц■Щ■Ь■Я■в■е■к■п■▒■│■╡■╣■╝■┐■┬■─■┼■╟■╚■╩■╦■╠■═√╬■╧■╨√╤°╥°╙ї╘╫╒у╘Є╙ї■Z■X■W■U■R■O■L■J√я╠ь═√В В В В В В В В В В В В В В В В ▐ √я╙ь╥√■Ш■Ч√■г√д■е■ж√з■и√й■к√л■м■н√о■п■░■▒■┤■╢■╣■╗■╛■┐■┴■┬■├■─■╞■╟■╚■╔■╩■╦■╠■═■╬■╧■╨■╤°╥ї╤°╨■╧■╬√═√╠■╦■╩■╔■╚■╟■╞■┼■─■├■┬■┴■└■┐■╛■╜■╝■║■╣■╕■╖■╢■╡■┤■▓■▒■░√п√о√н√м■л■к■й■и■з■ж√е■д■г√в■б■а√Я■Ю√Э■ЬцЫ°Ь√Ы√Ъ√Щ■ШцЧ√Ц■Х■Ф■У■Т■РїПьОяП■О■М■Л■ЙїИ°╘░цпьоянЄмщлькьжЄеїд°г°в°б°а°Я°Ю√Э√Ь°Ы√Ъ°Щ°Ш■Ч■Ц■Х°Ф√■y■|■■Б■Д■З■Й■М■П■Т■Х■Ш■Ы■Ю■б■е■к■п■▓■┤■╢■╣■╝■┐■┬■─■╞■╟■╚■╩■╦■╠√═■╬■╧√╨■╤°╥°╙°╘ї╒√╓у╒у╘ї╙ї■Z■X■W■U■R■O■L■I√я╠ь═√В В В В В В В В В В В В В В В В ▐ √щ╙Є╥√√Ч√■г√д■е√ж■з√и■й■к√л■м√н■о■п■░■▓■┤■╖■╣■╝■╛■└■┴■┬■─■┼■╞■╟■╚■╔■╩■╦■╠■═■╬■╧■╨■╤Є╥ї╤■╨■╧√╬√═■╠■╦■╩■╔■╚√╟■╞■┼■─■├■┬■┴■┐■╛■╜■╝■╗■║■╣■╖■╢■╡■┤■│■▓■▒■░√п√о√н■м■л■к√й■и■з■ж■е■д√г■в■б√а■Я√Ю■Э√ЬяЫяЬ√Ы√Ъ√Щ■ШщЧ√Ц√Х■Ф■Т■С╬П■О■Н■Л■КїИ√╤░цпьоянямьлькяжЄеїд°гїв°б°а°Я°Ю√Э√Ь°Ы√Ъ°Щ°Ш■Ч■Ц■Х°Ф√■y■|■■Б■Д■З■Л■М■П■Т■Х■Ш■Ы■Ю■б■д■к■п■│■╡■╖■╣■╝■┐■┬■┼■╞■╟■╔■╩■╦√╠■═■╬■╧√╨√╤°╥°╙°╘°╒°╓у╒у╘°╙√■3√■X■W■U■R■O■L■J√ь╠я═√В В В В В В В В В В В В В В В В ▐ √ц╙ї╥√√Ч√√г■д√е■ж√з■и■й√к■л√м■н■о■п■░■│■╡■╖■║■╝■┐■└■┬■├■─■┼■╞■╟■╚■╔■╩■╦■╠■═■╬■╧■╨■╤я╥°╤■╨√╧√╬√═■╠■╦■╩■╔■╚■╟■╞■┼■─■├■┬■┴■└■┐■╛■╜■╗■║■╣■╕■╖■╢■╡■│■▓■▒√░√п√о√н■м■л■к■й■и■з■ж■е■д√г■в√б■а√Я■Ю√Э√Ь°ЫщЬ√Ы√Ъ√Щ■Ш√Ч°ШїЧ■Ц√Х■Ф■У■С╫П°Р■П■Н■М■К°Й■И√╤░цпьоянямялщкЄжяеїд°гїв°б°а°Я°Ю√Э√Ь°Ы√Ъ°Щ°Ш■Ч■Ц√Х√Ф√■y■|■■В■Д■З■К■О■Р■Т■Х■Ш■Ы■Ю■б■д■й■о■│■╢■╕■║■╝■┐■┬■┼■╞■╚■╔■╩√╦■╠■═■╬√╧■╨√╤°╥°╙°╘°╒ї╓у╒у╘°╙ї■X■W■U■R■O■L■J■H√я╠я═°В В В В В В В В В В В В В В В В с √ц╙ї╥√√Ч√■г°д■е■ж√з■и√й■к√л■м■н√о■▒■│■╢■╕■║■╜■┐■┴■┬■├■┼■╞■╟■╚√╔■╩■╦■╠■═■╬■╧■╨√╤■╥√╙ї╥■╤√╨√╧√╬■═■╠■╦■╩√╔■╚■╟■╞■┼■─■├■┴■└■┐■╛■╜■╝■╗■╣■╕■╖■╢■╡■┤■│■▓■▒√░√п√о■н■м■л■к■й■и■з■ж√е■д■г√в■б√а■Я√Ю√ЭцЬ■Э√Ь√Ы√Ъ√ЩщШ√Ч√Ц■Х■Ф■У■Т■РуПяР■П■Н■М■Л°Й°╤░цпяоьнЄмялцкяжЄеїд°гїв°б°а°Я°Ю√Э√Ь°Ы√Ъ°Щ°Ш■Ч■Ц√Х√Ф√■y■|■■В■Е■З■К■О■С■У■Х■Ш■Ы■Ю■б■д■й■о■│■╢■╣■╗■╜■┐■┬■┼■╟■╚■╔■╩√╦■╠■═√╬■╧■╨√╤°╥°╙°╘°╒Є╓у╒у╘√╙ї■Y■W■U■R■O■L■J■H√ь╠я═√В В В В В В В В В В В В В В В В с √■╙▌╥√■Ч■Ц√■г°д■е√ж■з√и■й■к√л■м√н■п■▒■┤■╢■╕■╗■╜■└■┬■├■─■┼■╞■╟√╚■╔■╩■╦■╠■═■╬■╧√╨■╤■╥ї╙√╥√╤√╨√╧√╬■═■╠■╦■╩■╔■╚■╟■╞■┼■─■├■┬■┴■└■┐■╜■╝■╗■║■╣■╕■╖■╡■┤■│■▓■▒√░√п√о■н■м■л■к■й■и√з■ж■е■д√г■в√б■а√Я√Ю■ЭяЬЄЭ√Ь√Ы√Ъ■ЩщШ√Ч√Ц√Х■Ф■ТЄРїПщР■П■О■М■Л°Й°╤░цпяоянямьлщкяжяе°д°гїв°б°а°Я°Ю√Э√Ь°Ы√Ъ°Щ°Ш■Ч■Ц√Х√Ф√■z■|■■В■Е■З■К■Н■Т■Х■Ц■Ч■Ъ■Э■а■г■и■н■│■╖■║■╝■╛■└■┬■┼■╟■╚■╔√╩■╦■╠√═■╬■╧√╨■╤°╥°╙°╘°╒я╓у╒у╘■╙ї■Y■W■U■R■O■L■J■H√ь╠я═√В В В В В В В В В В В В В В В В с √┌╥√■Ч■Ц√їд√е■ж√з■и■й√к■л√м■н■п■▓■┤■╖■╣■╗■╛■└■┬■├■─■┼■╞√╟■╚■╔■╩■╦■╠■═■╬■╧√╨■╤■╥■╙■╘°╙■╥°╤√╨√╧■╬■═■╠■╦√╩■╔■╚■╟■╞■─■├■┬■┴■└■┐■╛■╜■╝■║■╣■╕■╖■╢■╡■┤■│■▓■▒√░√п■о■н√м■л■к■й■и■з■ж■е√д■г√в■б√а√Я■Ю√Э°ЬьЭ√Ь√Ы√Ъ■ЩцШ√Ч■Ц√Х■Ф■Т■С╬Р■О■Н■Л■К√Й°╤░цпяоянямьльк■йяжяе°д°гїв°б°а°Я°Ю√Э√Ь°Ы√Ъ°Щ°Ш■Ч■Ц√Х√Ф√■z■}■■В■Е■И■К■Н■С■Ц■Ш■Щ■Ы■Э■а■г■и■н■▓■╖■║■╜■┐■┴■├■┼■╟■╚√╔■╩■╦√╠■═■╬√╧■╨■╤°╥°╙°╘ї╒я╓у╒у╘ї■X■W■V■R■O■L■J■H√щ╠Є═√В В В В В В В В В В В В В В В В с √┌╥√■Ч■Ц√°д°е■ж√з■и√й■к√л■м■о■░■▓■╡■╖■║■╝■╛■┴■┬■├■─■┼√╞■╟■╚■╔■╩■╦■╠■═■╬√╧■╨■╤■╥■╙√╘√╙√╥°╤√╨√╧■╬■═■╠■╦■╩■╔■╚■╟■╞■┼■─■├■┬■┴■┐■╛■╜■╝■╗■║■╣■╖■╢■╡■┤■│■▓√▒√░√п■о■н■м■л■к■й■и■з■ж√е■д√г■в√б√а■Я√ЮрЭ√Ь√Ы°ЪЄЩїШ√Ч√Ц■Х■Ф■У■СрРїС√Р■О■Н■М°К√■▒╤░щпьоянямьльк■йьжЄе°дїг°в°б°а°Я√Ю°Э√Ь°Ы√Ъ°Щ°Ш■Ч■Ц■Х°Ф√■z■}■■В■Е■И■К■Н■Р■Х■Ъ■Ы■Ь■Ю■а■г■з■н■▓■╖■╗■╜■└■┬■─■╞■╟√╚■╔■╩√╦■╠■═■╬√╧■╨■╤°╥°╙°╘ї╒ь╓у╒ц╘√■1■■X■W■V■R■O■L■J■H√■╦ь╠Є═√В В В В В В В В В В В В В В В В с √┌╥√√Ц√√дїе√ж■з√и■й√к■л■м■о■░■│■╡■╕■║■╜■┐■┴■┬■├■─√┼■╞■╟■╚■╔■╩■╦■╠■═√╬■╧■╨■╤■╥■╙°╘√╙√╥√╤°╨■╧■╬■═√╠■╦■╩■╔■╟■╞■┼■─■├■┬■┴■└■┐■╛■╝■╗■║■╣■╕■╖■╢■╡■┤■│■▓√▒√░■п■о■н■м■л■к■й■и■з√ж■е√д■г√в■б√а√Я√ЮяЭ°Ю√Э√Ь√Ы√ЪьЩ°Ш■Ч√Ц√Х■У■ТцРяС√Р■П■Н■М°К√√▒╘░щпьоянямьльк■йьжяе°д°г°в°б°а°Я√Ю°Э√Ь√Ы°Ъ°Щ°Ш■Ч■Ц■Х°Ф√■z■}■А■В■Е■И■Л■Н■П■Ф■Щ■Э■Ю■а■б■г■з■м■▒■╖■╝■╛■┴■├■┼■╞■╟√╚■╔√╩■╦■╠■═√╬■╧■╨√╤√╥°╙°╘ї╒щ╓у╒ц╘ї√V■S■O■L■J■H√■╦щ╠ї═√В В В В В В В В В В В В В В В В с √┌╥√√Ц√√д°е°ж√з■и■й√к■л■м■п■▒■│■╢■╕■╗■╜■└■┴■┬■├√─■┼■╞■╟■╚■╔■╩■╦■╠√═■╬■╧■╨■╤■╥√╙°╘√╙√╥√╤°╨■╧■╬■═■╠■╦■╩■╔■╚■╟■╞■┼■─■├■┴■└■┐■╛■╜■╝■╗■║■╕■╖■╢■╡■┤■│√▓√▒■░■п■о■н■м■л√к■й■и■з■ж√е■д√г■в√б√а√Я■Ю°ЭяЮ√Э√Ь√Ы√ЪщЩ√Ш√Ч■Ц√Х■Ф■ТяС■РцС■Р■П■О■М■Л√К√√▒╘░щпьоянямьльк■йьжяе°д°г°в°б°а°Я√Ю°Э√Ь√Ы°Ъ°Щ°Ш■Ч■Ц■Х°Ф√■z■}■А■Г■Е■И■Л■Н■Р■У■Ш■Э■а■б■г■д■з■м■▒■╢■╗■┐■┴■─■┼■╞√╟■╚■╔√╩■╦■╠√═■╬■╧√╨■╤√╥ї╙°╘ї╒щ╓у╒щ╘ї■V■U■S■O■L■J■H√√╦ь╠√═√╠√В В В В В В В В В В В В В В В В с °▌╥√√Ц√■дїе°ж√з■и√й■к■л■н■п■▓■┤■╢■╣■╝■╛■└■┴■┬■├√─■┼■╞■╟■╚■╔■╩■╦√╠■═■╬■╧■╨■╤√╥■╙■╘■╒√╘√╙√╥√╤√╨■╧√╬■═■╠■╦■╔■╚■╟■╞■┼■─■├■┬■┴■└■╛■╜■╝■╗■║■╣■╕■╖■╢■╡√│√▓■▒■░√п■о■н■м■л■к■й■и■з■ж√е√д■г√в√б√а■ЯуЮ√Э√Ь°Ы■ЪщЩ√Ш√Ч√Ц■Х■Ф■У╤С■Р■П■О■Н°Л√°▒╫░щпьояньмьляк■йьжяе°д°г°в°б°а°Я√Ю°Э√Ь√Ы°Ъ°Щ°Ш■Ч■Ц■Х°Ф√■z■}■А■Г■Е■И■Л■Н■Р■Т■Ч■Ь■б■г■е■ж■и■м■▒■╢■╗■└■┬■─■┼■╞√╟■╚√╔■╩■╦√╠■═■╬√╧■╨■╤°╥°╙°╘ї╒ц╓у╒ь╘ї■U■T■R■O■L■J■H√√╦р╠√В В В В В В В В В В В В В В В В с °р╥■╤√■Ц■Х√їе°ж°з√и■й■к■л■н■░■▓■╡■╖■║■╝■╛■└■┴■┬√├■─■┼■╞■╟■╚■╔■╩√╦■╠■═■╬■╧■╨■╤√╥■╙■╘■╒°╘√╙√╥√╤√╨■╧■╬■═■╠■╦■╩■╔■╚■╟■╞■─■├■┬■┴■└■┐■╛■╜■╝■║■╣■╕■╖■╢■╡■┤√│√▓■▒■░■п■о■н■м■л■к■й■и■з√ж√е■д√г√в√б■а√ЯяЮ√Я√Ю√Э√Ь√ЫїЪяЩ√Ш■Ч√Ц√Х■У■ТцСЄТ■С√Р■О■Н√Л°°▒╫░щпьояньмьляк■йьжяе°д°г°в°б°а√Я°Ю°Э√Ь°Ы√Ъ°Щ°Ш■Ч■Ц■Х°Ф√■{■}■А■Г■Ж■И■Л■О■Р■У■Ц■Ы■а■е■ж■и■к■о■▓■╢■║■└■├√┼■╞√╟■╚√╔■╩√╦■╠■═√╬■╧■╨■╤°╥°╙°╘Є╒ц╓у╒я╘ї■T■S■R■P■L■J■H°√╦у╠√В В В В В В В В В В В В В В В В с ■,√у╥°╤√■Х√°еїж°з√и√й■л■о■░■│■╡■╕■╗■╜■╛■└■┴■┬√├■─■┼■╞■╟■╚■╔■╩√╦■╠■═■╬■╧■╨√╤■╥■╙■╘■╒ї╘√╙√╥√╤■╨√╧■╬■╠■╦■╩■╔■╚■╟■╞■┼■─■├■┬■└■┐■╛■╜■╝■╗■║■╣■╕■╖■╢√┤√│■▓■▒■░■п■о■н■м■л■к√й■и■з√ж■е√д√г√в■б√а√Я°ЮїЯ√Ю√Э√Ь√ЫьЪ°Щ√Ш√Ч■Ц√Х■Ф■ТяСщТ√С■Р■П■Н■М■Л√Є▒┌░щпьоьнямьляк■йьжяе°д°г°в°б°а√Я°Ю°Э√Ь°Ы√Ъ°Щ√Ш√Ч■Ц■Х°Ф√■{■}■А■Г■Ж■И■Л■О■Р■У■Х■Ъ■Я■д■и■к■л■п■┤■╕■╝■└■─√┼■╞√╟■╚√╔■╩√╦■╠√═■╬■╧■╨√╤√╥°╙ї╘ї╒у╓у╒Є╘ї■U■R■Q■O■L■J■H°√╦у╠√В В В В В В В В В В В В В В В В с ■,√√╥р╤√■Х√°е°жїз√и■й■к■м■п■▒■┤■╢■╣■╗■╜■╛■└■┴■┬√├■─■┼■╞■╟■╚■╔√╩■╦■╠■═■╬■╧√╨■╤■╥■╙■╘■╒ї╘°╙√╥√╤■╨■╧■╬■═■╠■╦■╩■╔■╚■╞■┼■─■├■┬■┴■└■┐■╛■╜■╗■║■╣■╕■╖■╢■╡■┤√│■▓■▒■░■п■о√н■м■л■к■й■и√з■ж√е√д√г■в√б√ащЯ√Ю√Э°Ь√ЫщЪ■Щ√Ш√Ч√Ц■Х■Ф■У╫Т√С■Р■П■О√М√Є▒┌░щпьоьнямьляк■йьжяе°д°г°в°б°а√Я°Ю°Э√Ь°Ы√Ъ°Щ√Ш√Ч■Ц■Х°Ф√■{■~■А■Г■Ж■Й■Л■О■Р■У■Х■Ш■Ю■г■и■л■н■▒■╡■╣■╜■└■├■─■┼■╞√╟■╚√╔■╩√╦■╠√═■╬■╧√╨■╤√╥°╙ї╘ї╒у╓р╒Є╘ї■S■P■N■L■J■H°°╦ц╠■╦√В В В В В В В В В В В В В В В В ф ■,√┌╤√■Х√√еїж°зїи■к■н■п■▓■┤■╖■╣■╗■╜■┐■└■┴√┬■├■─■┼■╞■╟■╚√╔■╩■╦■╠■═■╬■╧√╨■╤■╥■╙■╘■╒ї╘°╙°╥√╤■╧■╬■═■╠■╦■╩■╔■╚■╟■╞■┼■─■├■┴■└■┐■╛■╜■╝■╗■║■╣■╕■╢■╡√┤■│√▓■▒■░■п■о■н■м■л■к■й√и■з√ж√е√д■г√в√б■аяЯ■а√Я√Ю√Э√Ь√ЫщЪ√Щ√Ш■Ч√Ц√Х■У╫Т√С■Р■П■О√М√Є▒┌░щпьоьнямьляк■йьжяе°д°г°в°б°а√Я°Ю°Э√Ь°Ы√Ъ°Щ√Ш√Ч■Ц■Х°Ф√■{■~■Б■Г■Ж■Й■М■О■С■У■Ц■Ш■Э■в■з■н■п■▓■╢■║■╜■┐■┬■─■┼√╞■╟√╚■╔■╩√╦■╠√═■╬√╧■╨■╤√╥°╙ї╘Є╒у╓р╒ї╘ї■S■P■N■L■I■H°°╦я╠ї╦√В В В В В В В В В В В В В В В В ф ■,√▌╤■╨√■Х√■еїж°зїи■й■л■о■░■│■╡■╕■║■╝■╜■┐■└■┴√┬■├■─■┼■╞■╟√╚■╔■╩■╦■╠■═■╬√╧■╨■╤■╥■╙■╘■╒ї╘°╙ї╥■╤■╨■╧■╬■═■╠■╦■╔■╚■╟■╞■┼■─■├■┬■┴■└■┐■╜■╝■╗■║■╣■╕■╖■╢■╡√┤■│■▓■▒■░■п■о■н■м√л■к■й■и√з√ж■е√д√г√в■б√а°Я°а√Я√Ю√Э√ЬїЫяЪ√Щ√Ш√Ч■Ц√Х■ФьТяУ√Т√С■Р■О■Н■М√Є▒┌░щпьоьнямьляк■иьжяе°д°г°в°б°а√Я°Ю°Э√Ь°Ы√Ъ°Щ√Ш√Ч■Ц■Х°Ф√■|■~■Б■Г■Ж■Й■М■О■С■У■Ц■Ш■Ы■б■ж■л■░■┤■╖■╣■╝■╛■└■├■┼√╞■╟√╚■╔√╩■╦√╠■═√╬■╧■╨√╤■╥ї╙ї╘ї╒у╓▌╒°╘ї■S■P■M■K■I■H°ї╦√╠ь╦√В В В В В В В В В В В В В В В В ф ■-√р╤√╨Є■е°жїз°и■й■к■м■о■▒■│■╢■╕■║■╝■╜■┐■└■┴√┬■├■─■┼■╞■╟√╚■╔■╩■╦■╠■═√╬■╧■╨■╤■╥■╙■╘■╒ї╘°╙ї╥■╤■╨■╧■╬■═■╠■╦■╩■╔■╚■╟■╞■┼■├■┬■┴■└■┐■╛■╜■╝■╗■║■╕■╖■╢√╡■┤■│■▓■▒■░■п√о■н■м■л■к■й√и√з■ж√е√д√г■в√бьа√Я√Ю°Э√ЬяЫїЪ■Щ√Ш√Ч√Ц■Х■Ф■УїТщУ√Т√С■Р■П■Н■М√Є▒┌░щпьоьнямьляк■иьжяе°д°г°в°б°а√Я°Ю°Э√Ь°Ы√Ъ°Щ√Ш√Ч■ХїФ√■|■~■Б■Д■Ж■Й■М■О■С■У■Ц■Ш■Ы■а■е■к■░■│■╢■╕■║■╜■┐■┬■─■┼■╞■╟√╚■╔√╩■╦√╠■═√╬■╧■╨√╤■╥ї╙ї╘Є╒у╓▌╒√╘ї■S■P■M■K■I■H°┌╦√В В В В В В В В В В В В В В В В ф ■-√у╤°╨Єїж°зїи■й■л■н■п■▓■┤■╖■╣■║■╝■╜■┐■└√┴■┬■├■─■┼■╞√╟■╚■╔■╩■╦■╠■═√╬■╧■╨■╤■╥■╙■╘■╒ї╘°╙ї╥■╤■╨■╧■╬■═■╠■╦■╩■╔■╚■╟■╞■┼■─■├■┬■┴■┐■╛■╜■╝■╗■║■╣■╕■╖■╢■╡■┤■│■▓√▒■░■п■о■н■м■л√к■й√и■з√ж√е√д■г√в√бьа√Я√Ю√Э°ЬьЫ√Ъ√Щ√Ш■Ч√Ц■Х■Ф╫У■Т√С■Р■П√Н√Є▒┌░щпьоьнямьляк■иьжяе°д°г°в°б°а√Я°Ю°Э√Ь°Ы√Ъ°Щ√Ш√Ч■ХїФ√■|■■Б■Д■Ж■Й■М■П■С■Ф■Ц■Щ■Ы■Ю■д■й■п■│■┤■╖■╣■╝■╛■└■├■┼■╞√╟■╚■╔√╩■╦√╠■═√╬■╧√╨■╤√╥°╙Є╘ї╒р╓▌╒■╘ї■T■P■M■J■I■H°┌╦√В В В В В В В В В В В В В В В В ф ■-√ц╤ї╨Є°ж°зїи■й■к■л■н■░■▓■╡■╖■╣■║■╝■╜■┐■└√┴■┬■├■─■┼■╞√╟■╚■╔■╩■╦■╠√═■╬■╧■╨■╤■╥■╙я╘ї╙°╥■╤■╨■╧■╬■═■╠■╦■╩■╔■╚■╟■╞■┼■─■├■┬■┴■└■┐■╛■╜■╝■╗■╣■╕■╖■╢√╡■┤■│■▓■▒■░■п■о√н■м■л■к√й■и√з√ж√е■д√г√в■б°а√б√а√Я√Ю°Э√ЬщЫ■Ъ√Щ√Ш√Ч■Ц√Х╫У√Т√С■П■О■Н√Є▒┌░щпьоьнямяльк■иьжяе°д°г°в°б√а°Я°Ю°Э√Ь°Ы√Ъ°Щ√Ш√Ч■ХїФ√■}■■В■Д■З■Й■М■П■С■Ф■Ц■Щ■Ы■Ю■г■и■о■│■╡■╢■╕■║■╜■┐■┬■─■╞√╟■╚√╔■╩√╦■╠■═√╬■╧√╨■╤√╥ї╙ї╘ї╒р╓┌╒■╘ї■P■M■J■I■H°р╦√╩√В В В В В В В В В В В В В В В В ф ■-√ь╤я╨Є√жїз°и√й■л■м■о■▒■│■╢■╖■╣■║■╝■╛■┐■└√┴■┬■├■─■┼■╞√╟■╚■╔■╩■╦■╠√═■╬■╧■╨■╤■╥■╙я╘ї╙°╥■╤■╨√╧■╬■═■╠■╦■╩■╔■╚■╟■╞■┼■─■├■┴■└■┐■╛■╜■╝■╗■║■╣■╕■╖■╢■╡■┤■│■▓■▒√░■п■о■н■м■л√к■й√и√з√ж■е√д√г■вяб√а√Я°Ю°Э√ЬьЫ√Ъ■Щ√Ш√Ч√Ц■Х■Ф┌У√Т√С■Р■О■Н√Є▒┌░щпьоьнямяльк■иьжяе°д°г°в°б√а°Я°Ю°Э√Ь°Ы√Ъ°Щ√Ш√Ч■ХїФ√■}■■В■Д■З■К■М■П■Т■Ф■Ч■Щ■Ь■Ю■в■з■н■│■╡■╢■╖■╣■╝■╛■└■├■┼√╟■╚√╔■╩√╦■╠√═■╬√╧■╨■╤√╥ї╙ї╘Є╒р╓┌╒ї■Q■M■K■I■H°ц╦ї╩√В В В В В В В В В В В В В В В В ф ■-√я╤я╨■╧ї°ж°зїи■й■к■м■н■п■▒■┤■╢■╖■╣■╗■╝■╛■┐√└■┴■┬■├■─■┼√╞■╟■╚■╔■╩■╦√╠■═■╬■╧■╨■╤■╥√╙Є╘я╙√╥■╤■╨■╧■╬■═■╠■╦■╩■╔■╚■╟■╞■┼■─■├■┬■┴■└■╛■╜■╝■╗■║■╣■╕■╖■╢■╡■┤√│■▓■▒■░■п■о■н√м■л■к√й√и√з■ж√е√д■г√вяб√а√Я°Ю√ЭїЬЄЫ√Ъ√Щ√Ш■Ч√Ц■Х√Ф■УуФ√У■Т√С■Р√О√я▒▌░щпьоьнямяльк■иьжяе°д°г°в°б√а°Я°Ю°Э√Ь°Ы√Ъ°Щ√Ш√Ч■ХїФ√■}■А■В■Е■З■К■М■П■Т■Ф■Ч■Щ■Ь■Я■в■ж■м■▓■╡■╢■╕■╣■║■╜■┐■┬■─■╞■╟√╚■╔■╩√╦■╠√═■╬√╧■╨√╤√╥ї╙ї╘ї╒▌╓▌╒ї■Q■N■K■I■G°я╦ь╩√В В В В В В В В В В В В В В В В ф ■-√Є╤я╨√╧ї√жїз°и√й■л■м■о■░■▓■┤■╢■╕■╣■╗■╝■╛■┐√└■┴■┬■├■─■┼√╞■╟■╚■╔■╩■╦■╠√═■╬■╧■╨■╤■╥√╙Є╘я╙√╥■╤■╨■╧■╬■═■╠■╦■╩■╔■╚■╟■╞■┼■─■├■┬■┴■└■┐■╛■╜■╝■║■╣■╕√╖■╢■╡■┤■│■▓■▒■░√п■о■н■м■л√к√й√и■з√ж√е■д√г√вЄб√а°Я°Ю√ЭяЬ°Ы■Ъ√Щ√Ш√Ч■Ц√Х▌Ф√У√Т■С■Р■П■О√я▒▌░щпьоьнЄмьльк■ияжье°д°г°в°б√а°Я°Ю°Э√Ь°Ы√Ъ°Щ√Ш√Ч■ХїФ√■}■А■В■Е■И■К■Н■П■Т■Ф■Ч■Щ■Э■а■г■ж■л■▒■╢■╖■╕■╣■║■╝■╛■└■├■┼■╟√╚■╔√╩■╦■╠√═■╬√╧■╨√╤√╥ї╙ї╘Є╒р╓▌╒ї■Q■N■K■I■Gї√╦у╩√В В В В В В В В В В В В В В В В ф ■.√у╨°╧ї■жїз°и√й■к■м■н■п■░■│■╡■╢■╕■╣■╗■╝■╛■┐√└■┴■┬■├■─√┼■╞■╚■╔√╩■╦■╠√═■╬■╧■╨■╤√╥■╙Є╘я╙√╥■╤■╨■╧■╬■═■╠■╦■╩■╔■╚■╟■╞■┼■─■├■┬■┴■└■┐■╛■╜■╝■╗■║■╣■╕■╖■╢■╡■┤■│√▓■▒■░■п■о■н√м■л√к■й√и√з√ж■е√д√гїв√б°а°Я°Ю√ЭяЬ√Ы√Ъ■Щ√Ш√Ч√Ц■Х▌Ф√У√Т√С■П■О√я▒▌░щпьоянямьльк■ияжяеїд°г°в°б√а°Я°Ю°Э√Ь°Ы√Ъ°Щ√Ш■Ч■Ц■ХїФ√■~■А■Г■Е■И■К■Н■Р■Т■Х■Ч■Ъ■Э■б■д■з■к■░■╢■╖■╕■╣■╗■╝■╜■┐■┬■─■╞√╚■╔√╩■╦√╠■═√╬■╧√╨√╤√╥ї╙ї╘ї╒▌╓р╒ї■Q■N■K■I■Gї▌╩°В В В В В В В В В В В В В В В В ч ■.√ц╨ї╧ї■ж°зїи■й■к■л■н■о■п■▒■│■╡■╢■╕■╣■╗■╝■╛√┐■└■┴■┬■├■─■┼■╞■╟■╚■╔■╩√╦■╠√═■╬■╧■╨■╤√╥■╙Є╘я╙√╥■╤■╨■╧■╬■═■╠■╦√╩■╔√╟■╞■┼■─■┬■┴■└■┐■╛■╜■╝■╗■║■╣■╕■╖■╢√╡■┤■│■▓■▒■░√п■о■н■м√л■к√й√и√з■ж√е√д■гЄв√б°а°Я√Ю√ЭьЬ■Ы√Ъ√Щ√Ш■Ч√Ц■Х┌Ф■У√Т√С√П√я▒▌░щпьоянямьльк■зяжяе°дїг°в°б√а°Я°Ю√Э°Ь°Ы√Ъ√Щ°Ш■Ч■Ц■ХїФ√■~■Б■Г■Ж■И■Л■Н■Р■Т■Х■Ш■Ы■Ю■б■д■и■л■п■╡■╖■╕■║■╗■╝■╜■╛■└■├■┼■╟■╚√╔■╩■╦√╠■═√╬√╧√╨√╤√╥ї╙°╘ї╒┌╓р╒°■P■N■K■J■Gїу╩°╔√В В В В В В В В В В В В В В В В ъ ■!■.√щ╨Є╧їїз°и√й■к■м■н■п■░■▓■│■╡■╢■╕■╣■╗■╜■╛√┐■└■┴■┬■├■─■┼■╞■╟■╚■╔■╩√╦■╠■═√╬■╧■╨√╤■╥■╙Є╘я╙√╥■╤■╨■╧■╬■═■╠√╦■╩■╔■╚■╟■╞■┼■─■├■┬■┴■└■╛■╜■╝■╗■║√╣■╕■╖■╢■╡■┤■│■▓√▒■░■п■о√н■м■л√к√й√и■з√ж√е■д√гїв°б°а°Я√Ю√ЭяЬ√Ы■Ъ√Щ√Ш√Ч■Ц▌Х√Ф√У√Т■С■Р■П√я▒▌░щпьоянямьльк■зяжяе°д°гїв°б√а°Я°Ю√Э°Ь√Ы°Ъ√Щ°Ш■Ч■Ц■ХїФ√■~■Б■Г■Ж■И■Л■Н■Р■У■Ц■Щ■Ь■Я■в■е■и■л■п■┤■╕■╣■║■╗■╝■╜■┐■└■┬■─■╞■╚√╔■╩√╦■╠■═√╬√╧√╨√╤°╥ї╙°╘ї╒▌╓р╒ї■N■K■I■Gїь╩я╔√В В В В В В В В В В В В В В В В ъ ■"■.√я╨я╧■╬ї°з°и√й■к■л■н■о■░■▒■▓■│■╡■╢■╕■║■╗■╜■╛√┐■└■┴■┬■├■─■┼■╞■╟■╚■╔■╩■╦√╠■═√╬■╧■╨√╤■╥■╙ц╘√╙√╥■╤■╨■╧■╬■═√╠■╦■╩■╔■╚■╟■╞■┼■─■├■┬■┴■└■┐■╛■╜■╝■╗■║■╣■╕■╖■╢■╡√┤■│■▓■▒■░√п■о■н■м√л√к√й■и√з√ж■е√д°г√вїб°а√Я°ЮїЭ°Ь√Ы√Ъ■Щ√Ш√Ч√ЦрХ√Ф√У√Т■С■Р■П√я▒▌░щпьоянямьльк■зяжяе°д°гїв°б√а°Я°Ю√Э°Ь√Ы°Ъ√Щ°Ш■Ч■Ц■Х°Ф■У√■■Б■Д■Ж■И■Л■Н■Р■Т■Ц■Щ■Э■а■г■ж■й■м■п■│■╕■╣■║■╗■╜■╛■┐■└■┴■├■┼■╚√╔■╩√╦■╠√═√╬√╧√╨√╤°╥ї╙°╘°╒┌╓у╒ї■M■K■I■Gї┌╔√В В В В В В В В В В В В В В В В ъ ■#■.°ї╨я╧√╬ї√зїи√й■л■м■о■п■░■▓■│■┤■╡■╖■╕■║■╗■╜√╛■┐■└■┴■┬■├■─■╞√╟■╚■╔■╩■╦√╠■═■╬√╧■╨√╤■╥■╙ц╘√╙√╥■╤■╨■╧√╬■═■╠■╦■╩■╔■╚■╟■╞■┼■─■├■┬■┴■└■┐■╛■╜■╝■╗■║■╣√╕■╖■╢■╡■┤■│■▓√▒■░■п■о√н■м√л√к■й√и√з■ж√е√д°г√вїб°а√Я√ЮяЭ√Ь■Ы√Ъ√Щ√Ш■Ч√Ц▌Х√Ф■У√Т■С■Р■П√я▒р░цпьоянямьльк■зяжяе°д°г°в°б°а°Я°Ю√Э°Ь√Ы°Ъ√Щ°Ш■Ч■Ц■Х°Ф■У√■~■Б■Г■Ж■И■К■Н■П■Т■Х■Щ■Ь■а■г■з■к■н■░■│■╕■╣■╗■╝■╜■╛■┐■└■┬■├■─■╞■╚■╔■╩√╦■╠√═√╬√╧√╨√╤°╥Є╙°╘°╒▌╓у╒ї■N■K■I■Gї┌╔√В В В В В В В В В В В В В В В В ъ ■
+■/■4√°╨я╧ї╬°√з°и√й■к■л■н■о■░■▒■▓■│■┤■╡■╖■╕■║■╗■╜√╛■┐■└■┴■┬■─■┼■╞■╟√╚■╔■╩■╦√╠■═■╬√╧■╨■╤√╥■╙ц╘°╙■╥■╤■╨√╧■╬√═■╦■╩■╔√╚■╟■╞■┼■─■┬■┴■└■┐■╛■╜■╝√╗■║■╣■╕■╖■╢■╡■┤√│■▓■▒■░√п■о■н√м√л■к√й√и■з√ж√е■д°гїв°б°а√Я√ЮЄЭ√Ь√Ы■Ъ√Щ√Ш√Ч√ЦрХ√Ф√У√Т■С■Р√я▒р░цпьоянямьльк■зяжяе°д°г°в°б°а°Я°Ю√Э°Ь√Ы√Ъ°Щ°Ш■Ч■Ц■Х°Ф■У√■~■А■Г■Е■И■К■Н■П■С■Х■Ш■Ь■Я■г■ж■к■н■▒■┤■╖■║■╗■╝■╜■╛■┐■┴■┬■├■─■┼■╚■╔√╩■╦√╠√═√╬√╧√╨√╤°╥Є╙°╘°╒щ╓┌╒ї■N■K■H■Gї▌╔■╚√В В В В В В В В В В В В В В В В ъ ■$■/■4√√╨я╧Є╬°■з°и°й■л■м■о■п■░■▒■│■┤■╡■╢■╖■╕■║■╝√╜■╛■┐■└■┬■├■─■┼■╞■╟■╚■╔√╩■╦■╠√═■╬√╧■╨■╤√╥■╙ц╘°╙■╥√╤■╨√╧■╬■═■╠√╩■╔■╚■╟■╞■┼■─■├■┬■┴■┐■╛√╜■╝■╗■║■╣■╕■╖√╢■╡■┤■│■▓√▒■░■п■о√н√м■л√к√й■и√з√ж■е√д°гїв°б√а√Я√ЮЄЭ√Ь√Ы√Ъ√Щ■Ш√ЧрЦ√Х√Ф√У√Т■С■Р√я▒р░цпьоянямялщк■зяжяе°д°г°в°б°а°Я√Ю°Э°Ь√Ы√Ъ°Щ√Ш√Ч■Ц■Х°Ф√У√■А■Г■Е■З■К■М■П■С■Ф■Ш■Ы■Я■в■ж■й■н■░■┤■╖■║■╗■╝■╜■┐■└■┴■┬■├■─■╞■╟■╔√╩√╦√╠√═√╬√╧√╨√╤°╥Є╙√╘ї╒√╓╦╒ї■N■K√Hї┌╚√В В В В В В В В В В В В В В В В ъ ■%■/■4√■╨я╧Є╬■═°їи√й■к■м■н■п■░■▒■▓■│■┤■╡■╢■╖■╣■║■╝√╜■╛■└■┴■┬■├■─■┼■╞■╟■╚■╔■╩√╦■╠√═■╬■╧√╨■╤√╥■╙√╘■╒ь╘√╙√╥■╤√╨■╧■╬■═■╠■╦■╩■╔■╚■╟■╞■┼■─■├■┬■┴■└■┐■╛■╜■╝■╗√║■╣■╕■╖■╢■╡■┤√│■▓■▒■░√п■о■н√м√л√к■й√и√з■ж√е√дїг°в°б√а√Я√ЮЄЭ√Ь■Ы√Ъ√Щ√Ш√ЧрЦ√Х■Ф√У√Т■С°я▒р░цпьоянямялщк■зяжяе°д°г°в°б°а°Я√Ю°Э√Ь°Ы√Ъ°Щ√Ш√Ч■Ц■Х°Ф√У√■А■В■Е■З■Й■М■О■С■Ф■Ч■Ы■Ю■в■е■й■м■░■│■╖■╣■║■╝■╜■╛■┐■┴■┬■├■┼■╞■╟■╚■╔■╩√╦√╠√═√╬√╧√╨√╤ї╥ї╙°╘╣╒°■N■K√Hї┌╚√В В В В В В В В В В В В В В В В ъ ■%■/■5√я╧Є╬√═°°и√й■к■л■м■о■п■░■▒■▓■┤■╡■╢■╖■╕■╣■║■╝■╜■╛■┐■└■┴■┬■─√┼■╞■╟■╚■╔■╩√╦■╠■═√╬■╧√╨■╤■╥√╙√╘Є╒°╘°╙■╥√╤■╨■╧■╬■═■╠■╦■╩■╔√╚■╞■┼■─■├■┬■┴■└■┐■╛√╜■╝■╗■║■╣■╕■╖■╢√╡■┤■│■▓√▒■░■п■о√н√м√л■к√й√и■з√ж√е√дїг°в√б√а°ЯїЮ√Э√Ь√Ы■Ъ√Щ√Ш°ЧуЦ√Х√Ф√У√Т°я▒р░цпьоянямялщк■зяжяе°д°г°в°б°а°Я√Ю°Э√Ь°Ы√Ъ°Щ√Ш√Ч■Ц■Х°Ф√У√■Б■В■Д■З■Й■М■О■Р■У■Ч■Ъ■Ю■б■е■и■м■п■│■╢■╣■║■╗■╝■╜■┐■└■┴■├■─■┼■╞■╚■╔√╩√╦√╠√═√╬√╧√╨√╤°╥Є╙°╘╝╒ї■K√Hї┌╚√В В В В В В В В В В В В В В В В ъ ■&■/■5√ї╧я╬°═°°и√й■к■м■н■п■░■▒■▓■│■┤■╡■╢■╖■╕■╣■╗■╝■╜■╛■┐■└■┬■├■─■┼√╞■╟■╚■╔■╩√╦■╠■═√╬■╧■╨√╤■╥√╙°╘Є╒√╘ї╙■╥√╤■╧■╬■═■╠■╦√╩■╔■╚■╟■╞■┼■├■┬■┴■└√┐■╛■╜■╝■╗■║√╣■╕■╖■╢■╡■┤√│■▓■▒■░√п■о√н√м■л√к√й■и√з√ж■еїд°г°в√б√а√ЯЄЮ■Э√Ь√Ы√Ъ√Щ√Ш√ЧуЦ√Х√Ф√У√Т√ь▒р░цпьоянямялщкьжяе°д°г°в°б°а°Я√Ю°Э√Ь°Ы√Ъ√Щ°Ш√Ч■Ц°Ф°У√√Г■Д■Ж■Й■Л■О■Р■У■Ц■Ъ■Э■б■д■и■м■п■│■╢■╣■║√╗■╜■╛■┐■┴■┬■├■─■╞■╟■╚■╔√╩√╦√╠√═√╬√╧√╨√╤°╥Є╙°╘┼╒√╘ї■J√Hї┌╟√В В В В В В В В В В В В В В В В ъ ■'■/■5√°╧я╬ї═°√и√й■к■л■н■о■п■░■▒■▓■│■╡■╢■╖■╕■╣■║■╗■╝■╜■╛■└■┴■┬■├■─■┼■╞√╟■╚■╔■╩■╦√╠■═√╬■╧■╨√╤■╥°╙°╘ї╒ї╘√╙√╥■╤■╨■╬■═■╠√╦■╩■╔■╚■╟■╞■┼■─■├■┬■┴■└■┐■╛■╜√╝■╗■║■╣■╕■╖■╢√╡■┤■│■▓√▒■░■п√о√н■м√л√к■й√и√з■ж√еїд°г°в√б√а√ЯїЮ√Э√Ь■Ы√Ъ√Щ°ШуЧ√Ц√Х■Ф√У√Т√ь▒р░цпьоянЄмьлщкьжяе°д°г°в°б°а°Я√Ю°Э√Ь°Ы√Ъ√Щ°Ш√Ч■Ц°Ф°У√■В√Е■Ж■И■Л■Н■Р■Т■Ц■Щ■Э■а■д■и■л■п■▓■╢■╣■║√╗■╝■╜■┐■└■┴■┬■─■┼■╞■╚■╔√╩√╦√╠√═√╬√╧√╨√╤ї╥Є╙°╘┌╒щ╘ї■K√Hї┌╟√В В В В В В В В В В В В В В В В ъ ■)■0■5√√╧я╬Є═°■и°й■л■м■н■п■░■▒■▓■│■┤■╡■╢■╖■╕■╣■║■╗■╝■╛■┐■└■┴■┬■├■─■┼■╞■╟√╚■╔■╩■╦√╠■═■╬√╧■╨√╤√╥°╙√╘Є╒ї╘√╙■╥■╤■╨■╧√═■╠■╦■╩■╔■╚■╟■╞■┼■─■├■┬■┴■└√┐■╛■╜■╝■╗■║■╣■╕√╖■╢■╡■┤√│■▓■▒■░√п√о■н√м√л■к√й√и■з√ж°е°д°г√в√б√а°Я°Ю√Э√Ь√Ы√Ъ√Щ°ШцЧ√Ц√Х√Ф√У■Т√ь▒р░цпьоянЄмьлщкьжяе°д°г°в°б°а°Я√Ю°Э√Ь√Ы°Ъ√Щ°Ш√Ч■Ц°Ф°У√■Б■Е■З√И■Л■Н■П■Т■Х■Щ■Ь■а■г■з■л■о■▓■╡■╣■║√╗■╝■╜■╛■┐■└■┬■├■─■╞■╟■╚■╔√╩√╦√╠√═√╬√╧√╨√╤ї╥Є╙ї╘Є╒╫╘ї■J√Hї┌╞√В В В В В В В В В В В В В В В В ъ ■*■/■5√ь╬Є═■╠°■и√й■к■л■н■о■п■░■▒■▓■│■┤■╢■╖■╕■╣■║■╗■╝■╜■╛■┐■└√┬■├■─■┼■╞■╟■╚√╔■╩■╦■╠√═■╬√╧■╨√╤°╥√╙°╘я╒°╘■╙■╥■╤■╨■╧■╬■═■╠■╦■╩√╔■╟■╞■┼■─■├■┬√┴■└■┐■╛■╜■╝√╗■║■╣■╕■╖■╢√╡■┤■│■▓√▒■░√п■о√н√м■л√к√й■и√з√ж°е°д°г√в√б√а°Я°Ю√Э■Ь√Ы√Ъ°Щ√ШуЧ■Ц√Х√Ф√У■Т√ь▒р░цпьоянЄмьлщкьжяе°д°г°в°б°а°Я√Ю√Э°Ь√Ы°Ъ√Щ°Ш√Ч■Ц°Ф°У√■А■Д■Й°К■Н■П■Т■Х■Ш■Ь■Я■г■ж■к■о■▒■╡■╕■║√╗√╝■╜■╛■└■┴■┬■─■┼■╞■╚√╔√╩√╦√╠√═√╬√╧■╨√╤ї╥я╙╝╘°■J■H√■3°▌╞°В В В В В В В В В В В В В В В В э ■+■/■5°°╬ь═√╠°°й■л■м■н■о■░■▒■▓■│■┤■╡■╢■╖■╕■╣■║■╗■╝■╜■╛■└■┴■┬√├■─■┼■╞■╟■╚■╔√╩■╦■╠√═■╬■╧√╨°╤√╥°╙√╘щ╒√╘■╥■╤■╨■╧■╬■═■╠√╦■╩■╔■╚■╟■╞■┼■─■├■┬■┴■└■┐√╛■╜■╝■╗■║■╣■╕√╖■╢■╡■┤√│■▓■▒√░■п√о√н■м√л■к√й√и■з°ж°е°д√г√в°б√а°Я√Ю√Э√Ь√Ы√Ъ°Щ√ШцЧ√Ц√Х■Ф√У°ь▒р░цпьоянЄмялцкьжяе°д°г°в°б°а√Я°Ю√Э°Ь√Ы°Ъ√Щ°Ш√Ч■Ц°Ф°У√■А■Г■И°М■Н■П■С■Ф■Ш■Ы■Я■в■ж■й■н■▒■┤■╕■║√╗√╝■╜■╛■┐■└■┬■├■─■╞■╟■╚√╔■╩√╦√╠√═√╬√╧√╨√╤ї╥я╙┐╘ї■I√■3°ц╞°┼°В В В В В В В В В В В В В В В В э ■+■0■5°ь═Є╠°√й■к■м■н■о■п■░■▒■▓■│■┤■╡■╢■╖■╕■╣■║■╗■╝■╛■┐■└■┴■┬■├√─■┼■╞■╟■╚■╔■╩√╦■╠√═■╬■╧°╨√╤°╥√╙ї╘ь╒■╘■╥■╤■╨■╧■╬■═√╠■╦■╩■╔■╚■╟■╞■┼■─■├■┬■┴√└■┐■╛■╜■╝■╗■║√╣■╕■╖■╢√╡■┤■│■▓√▒■░√п√о■н√м■л√к√й■и√з°ж°е°д√г√в√б√аїЯ■Ю√Э√Ь°Ы√Ъ°Щ√ШщЧ√Ц√Х√Ф■У°ь▒р░цпьоянЄмялцкьжяе°д°г°в°б°а√Я°Ю√Э°Ь√Ы√Ъ°Щ°Ш√Ч■Ц°Ф°У√■А■Г■Ж■Л√О√П■С■Ф■Ч■Ы■Ю■в■е■й■м■░■┤■╖■║√╗√╝√╜■╛■└■┴■┬■─■┼■╞■╟√╔√╩√╦√╠√═√╬√╧√╨√╤ї╥я╙┬╘ї■I√■3√▌┼■─°В В В В В В В В В В В В В В В В э ■+■0■5■:√Є═ь╠°√й■л■м■н■о■п■▒■▓■│■┤■╡■╢■╖■╕■╣■║■╗■╝■╜■╛■┐■└■┴■┬■├■─√┼■╞■╟■╚■╔■╩√╦■╠■═√╬√╧√╨°╤√╥°╙я╘ї╒■╘■╙■╤■╨■╧√╬■═■╠■╦■╩■╔■╚■╟■╞■┼■─√├■┬■┴■└■┐■╛√╜■╝■╗■║■╣■╕√╖■╢■╡■┤√│■▓■▒√░√п■о√н■м√л√к■й√и√з°ж°е√д°г√в√б√а°Я√Ю√Э√Ь√Ы°Ъ√ЩцШ■Ч√Ц√Х√Ф■У°ь▒р░цпьоянЄмялцкьжяе°д°г°в°б°а√Я°Ю√Э°Ь√Ы√Ъ°Щ°Ш√Ч■Х√ФїУ√■А■Г■Е■К■О■Р°С■Ф■Ч■Ъ■Ю■б■е■и■м■░■│■╖■║√╗√╝√╜■╛■┐■└■┬■├■─■┼■╟■╚√╔√╩√╦√╠√═■╬√╧√╨√╤Є╥щ╙╦╘ї■I√■3°щ┼ї─°В В В В В В В В В В В В В В В В э ■+■1■6■:√√═ь╠ї╦√■й■к■м■н■о■п■░■▒■▓■│■┤■╡■╢■╖■╕■╣■║■╗■╝■╜■╛■┐■└■┴■┬■├■─■┼■╞√╟■╚■╔■╩■╦√╠■═√╬°╧√╨√╤°╥√╙щ╘■╒■╘■╙■╥■╤■╨√╧■╬■═■╠■╦√╩■╔■╟√╞■┼■─■├■┬■┴√└■┐■╛■╜■╝■╗√║■╣■╕■╖■╢√╡■┤■│■▓√▒√░■п√о■н√м√л■к√й√и√з°ж°е√д√г√в√б°а√Я√Ю√Э°Ь√Ы°Ъ√ЩщШ√Ч√Ц■Х°Ф°ь▒р░цпьоянЄмялцкьжяе°д°г°в°б°а√Я°Ю√Э√Ь°Ы√Ъ°Щ°Ш√Ч■Х√ФїУ√■А■Г■Е■Й■Н■С°У■Ф■Ч■Ъ■Э■б■д■и■л■п■│■╢■║√╗√╝√╜■╛√┐■┴■┬■├■┼■╞■╟■╚√╔√╩■╦√╠√═√╬√╧√╨√╤ї╥р╙╘╘ї■I√■3■.√р─■├°В В В В В В В В В В В В В В В В э ■+■1■6■:√ь╠я╦√■к■л■м■н■о■п■░■▒■▓■│■┤■╡■╢■╖■╕■╣■║■╗■╝■╛■┐√└■┴■┬■├■─■┼■╞■╟√╚■╔■╩■╦√╠■═°╬√╧√╨°╤√╥°╙ц╘■╙■╥■╤√╨■╧■╬■═√╠■╦■╩■╔■╚■╟■╞■┼■─■├√┬■┴■└■┐■╛■╜√╝■╗■║■╣√╕■╖■╢■╡√┤■│■▓■▒√░√п■о√н√м■л√к√й■и°з°ж°е√д√г√в√б°а√Я√Ю√Э°Ь√Ы°Ъ√ЩьШ√Ч√Ц√Х√Ф°ь▒р░цпяоьнЄмялцкяжье°д°г°в°б°а√Я√Ю°Э√Ь°Ы√Ъ°Щ°Ш√Ч■Х√ФїУ√■А■Г■Е■И■М■Р°Х■Ц■Ш■Ъ■Э■а■д■з■л■о■▓■╡■╕■║■╗√╝√╜■╛√┐■└■┴■├■─■┼■╟■╚√╔√╩√╦√╠√═√╬√╧√╨√╤Є╥р╙╫╘°■I√■2■-√щ─Є├√В В В В В В В В В В В В В В В В э ■+■1■6■:√ї╠ь╦√╩√■к■м■н■о■п■░■▒■▓■│■┤■╡■╢■╖■╕■╣■║■╗■╝■╜■╛■┐■└√┴■┬■├■─■┼■╞■╟■╚√╔■╩■╦√╠√═√╬°╧√╨√╤√╥ь╙Є╘■╙■╥■╤√╨■╧■╬√═■╠■╦■╩■╔■╚■╟■╞√┼■─■├■┬■┴■└√┐■╛■╜■╝■╗√║■╣■╕■╖√╢■╡■┤■│■▓√▒√░■п√о√н■м√л√к■й√и°з°ж√е√д°г√в√б√а√Я°Ю√Э√Ь°Ы√Ъ°ЩьШ■Ч√Ц√Х√Ф√щ▒у░упяоьнЄмялцкяжье°д°г°в°б°а√Я√Ю°Э√Ь°Ы√Ъ°Щ°Ш√Ч■Х√ФїУ√■А■Г■Е■З■Л■П■У√Ч■Ш■Ъ■Ь■Ю■а■г■з■к■о■▒■┤■╖■║■╗√╝√╜√╛■┐■└■┴■┬■├■┼■╞■╟■╚√╔√╩√╦√╠√═■╬√╧√╨√╤щ╥у╙р╘■╙°■I√■2■-√Є─Є├°┬√В В В В В В В В В В В В В В В В э ■+■1■6■:√■╠ь╦Є╩√■л■м■н■о■п■░■▒■▓■│■┤■╡■╢■╖■╕■╣■║■╗■╝■╜■╛■┐■└■┴■┬√├■─■┼■╞■╟■╚■╔√╩■╦√╠√═°╬√╧√╨°╤√╥ь╙ї╘■╙■╥■╤√╨■╧√╬■═■╠■╦■╩■╔√╚■╟■╞■┼■─■├■┬√┴■└■┐■╛■╜√╝■╗■║■╣■╕√╖■╢■╡■┤■│√▓√▒■░√п■о√н√м■л√к√й√и°з°ж√е√д√г√в√б°а√Я√Ю°Э√Ь°Ы√ЪьЩ√Ш√Ч√Ц√Х°щ▒у░упяоьнїмялукяжье°д°г°в°б√а°Я√Ю°Э√Ь√Ы°Ъ°Щ°Ш√Ч■Х√ФїУ°■Г■Е■З■К■О■Т■Ч√Щ■Ы■Э■Я■б■г■ж■к■н■░■│■╢■╕■║■╗■╝√╜√╛■┐√└■┴■├■─■┼■╞√╚√╔√╩■╦√╠√═√╬√╧√╨√╤у╥ц╙°╘ь╙я■2■-√ь├Є┬■┴√В В В В В В В В В В В В В В В В э ■+■1■6■:√я╦я╩■╔√■л■м■н■о■п■░■▒■▓■│■┤■╡■╢■╖■╕■╣■║■╗■╝■╜■╛■┐■└■┴■┬■├√─■┼■╞■╟■╚■╔■╩√╦√╠°═√╬√╧°╨√╤°╥ь╙°╘■╙■╥■╤√╨■╧■╬√═■╠√╦■╩■╔■╚■╟■╞■┼√─■├■┬■┴■└■┐√╛■╜■╝■╗■║■╣√╕■╖■╢■╡■┤√│√▓■▒√░■п√о√н■м√л√к√й√и°з√ж°е√д√г√в√б√а°Я√Ю°Э√Ь°Ы√ЪяЩ√Ш√Ч√Ц√Х°щ▒у░упяоянЄмялцк■йяжье°д°г°в°б√а°Я√Ю°Э√Ь°Ы√Ъ°Щ°Ш√Ч■Х√ФЄУ√■Г■Е■З■К■Н■С■Ц■Ъ■Ы■Э■Я■б■г■е■з■й■м■п■▒■┤■╖■╣■║■╗■╝■╜√╛■┐√└■┴■┬■├■─■╞■╟■╚√╔√╩√╦√╠√═√╬√╧√╨√╤р╥╬╙я■2■/√Є├ї┬ї┴√В В В В В В В В В В В В В В В В э ■,■1■6■;°√╦ь╩°╔√■л■м■н■о■п■▒■▓■│■┤■╡■╢■╖■╕■╣■║■╗■╝√╜■╛■┐■└■┴■┬■├■─√┼■╞■╟■╚■╔■╩√╦°╠√═√╬°╧√╨√╤я╥ї╙√╘■╙■╥√╤■╨√╧■╬√═■╠√╦■╩■╔√╚■╟■╞■┼■─■├■┬√┴■└■┐■╛■╜■╝■╗■║√╣■╕■╖■╢■╡√┤√│■▓√▒■░√п√о■н√м√л■к√й°и°з√ж√е√д√г°в√б√а°Я√Ю√Э°Ь°Ы√ЪяЩ√Ш■Ч°Ц■Х°щ▒у░цпьоянЄмялцк■йяжье°д°г°в°б√а°Я√Ю°Э√Ь°Ы√Ъ°Щ°Ш√Ч■Х°ФїУ√■Г■Е■З■К■М■Р■Х■Щ■Э■Я■б■г■д■ж■з■й■к■н■░■│■╢■╕■║■╗■╝■╜√╛■┐√└√┴■┬■─■┼■╞√╚√╔√╩√╦√╠√═√╬■╧°╨ї╤р╥╫╙я■2■0√√├Є┬Є┴■└√В В В В В В В В В В В В В В В В э ■,■1■6■;■@√ь╩ї╔√╚√■л■м■н■о■п■▒■▓■│■┤■╡■╢■╕■╣■║■╗■╝■╜■╛√┐■└■┴■┬■├■─■┼√╞■╟■╚■╔■╩°╦√╠√═°╬√╧√╨°╤я╥ї╙■╘■╙■╥√╤■╨√╧■╬√═■╠°╦■╩■╔■╚■╟■╞√┼■─■├■┬■┴■└■┐■╛■╜■╝√╗■║■╣■╕■╖■╢√╡■┤√│√▓■▒√░√п■о√н√м■л√к√й°и°з√ж√е√д√г√в√б°а√Я°Ю√Э°Ь√Ы°ЪЄЩ√Ш√Ч√Ц■Х°щ▒у░цпьоянЄмялцк■йяжье°д°г°в°б√а°Я√Ю°Э√Ь°Ы√Ъ°Щ°Ш√Ч■Х°ФїУ√■Г■Е■З■К■М■П■Ф■Ш■Ь■Я■б■в■д■е■з■и■к■м■п■▓■┤■╖■╣■║■╗■╝■╜■╛■┐√└√┴■┬■├■─■╞■╟√╚√╔√╩√╦■╠√═√╬√╧°╨Є╤▌╥▌╙Є■2■0√ї┬Є┴ї└√В В В В В В В В В В В В В В В В э ■,■2■7■;■A√ї╩я╔°╚√√л■м■н■о■п■▒■▓■│■┤■╡■╢■╖■╣■║■╗■╝√╜■╛■┐■└■┴■┬■├√─■┼■╞■╟■╚√╩√╦√╠°═√╬√╧°╨°╤Є╥ї╙■╘■╙■╥√╤■╨√╧■╬√═√╠√╦■╩■╔√╚■╟■╞■┼■─■├■┬■┴■└■┐■╛■╜√╝■╗■║■╣■╕√╖■╢■╡√┤√│■▓√▒√░■п√о√н■м√л√к√й°и√з√ж√е°д√г√в√б°а√Я°Ю√Э°Ь√ЫЄЪ√Щ√Ш√Ч°Ц°щ▒у░цпьоянЄмялцк■йяжье°д°г°в°б√а°Я√Ю°Э°Ь√Ы°Ъ√Щ°Ш√Ч■Х√ФЄУ√■Г■Е■З■К■М■О■Т■Ч■Ы■Я■а■в■г■е■ж■и■й■л■н■░■│■╢■╕■╣■║■╗■╝■╜■╛■┐■└√┴√┬■─■┼■╞■╟√╚■╔√╩√╦√╠√═√╬√╧°╨ь╤р╥у╙Є■2■0√■┬Є┴Є└√┐√В В В В В В В В В В В В В В В В э ■,■2■7■;■A√■╩ь╔ї╚■╟√√л√м■н■о■п■▒■▓■│■┤■╡■╢■╖■╣■║√╗■╝■╜■╛■┐■└■┴√┬■├■─■┼■╟■╔√╩√╦°╠√═√╬°╧√╨Є╤ї╥Є╙■╥√╤■╨√╧■╬√═°╠√╦■╩■╔■╚■╟■╞√┼■├■┬√┴■└■╛√╜■╝■╗■║■╣√╕■╖■╢√╡√┤■│√▓√▒■░√п■о√н√м√л■к°й°и√з√ж√е√д√г°в√б°а√Я√Ю°Э√Ь°ЫЄЪ√Щ√Ш√Ч√Ц√ц▒у░цпьоянЄмялцк■йяжье°д°г°в°б√а°Я°Ю√Э°Ь√Ы°Ъ°Щ√Ш√Ч■Х√ФїУ√Т√■Е■З■К■М■О■С■Х■Ъ■Ю■а■в■г■д■ж■з■й■к■м■п■▓■┤■╖■╣■║■╗■╝■╜■╛■┐■└√┴√┬■├■─■┼■╟√╚√╔√╩√╦√╠√═√╬°╧√╨щ╤▌╥ь╙Є■2■0√ї┴ї└Є┐√В В В В В В В В В В В В В В В В э ■,■2■7■;■A√я╔ї╚°╟√■лїм■н■о■п■░■▓■│■┤■╡■╢■╖√╣■║■╗■╝■╜■╛■┐√└■┴■┬■─■╞■╚√╔√╩√╦√╠√═°╬√╧√╨я╤ї╥ї╙■╥√╤■╨√╧■╬°═°╠■╦■╩■╔√╚■╟■╞■┼■├■┬√┴■└■┐■╛■╜■╝■╗■║√╣■╕■╖√╢■╡√┤√│■▓√▒√░■п√о√н√м■л√к°й√и°з√ж√е√д√г√в°б√а°Я√Ю°Э√Ь°ЫїЪ√Щ√Ш°Ч°ц▒у░цпьоянЄмялцк■йяжяеїд°г°в°б√а°Я°Ю°Э√Ь√Ы°Ъ√Щ°Ш√Ч■Х√ФїУ√Т√■Е■З■К■М■О■С■Ф■Щ■Э■а■б■г■д■ж■з■и■к■л■н■░■│■╢■╕■╣■║■╗■╝■╜■╛■┐■└■┴√┬■├■─■┼■╞■╟√╚√╔√╩√╦√╠√═√╬°╧√╨у╤▌╥ї╙Є■2■0√■┴Є└Є┐√╛√В В В В В В В В В В В В В В В В э ■,■2■7■<■A√°╔я╚°╟■╞√■л°м°н■о■п■░■▓■│■┤■╡■╢■╖■╕■╣■║■╗■╝■╜√╛■┐■└■┬■┼■╟■╚√╔√╩√╦°╠√═√╬√╧ї╨ї╤ї╥°╙√╥√╤■╨√╧■╬Є═√╠■╦■╩■╔■╚■╟■╞■┼■├√┬■┴■└■┐■╛■╜■╝√╗■║■╣■╕√╖■╢√╡√┤■│√▓√▒■░√п√о■н√м√л√к°й√и√з√ж√е°д√г√в°б√а°Я√Ю°Э√Ь°Ы°Ъ°Щ√Ш√Ч°ц▒у░цпьоянЄмялцк■йяжяе°дїг°в°б√а°Я°Ю√Э°Ь√Ы°Ъ√Щ°Ш√Ч■Х√ФїУ√Т√■Е■И■К■М■П■С■У■Ч■Ь■Я■б■в■д■е■з■и■к■л■м■п■▓■╡■╖■╕■╣■║■╗■╝■╜■╛■┐■└■┴■┬■├√─■┼√╟√╚■╔√╩°╦√╠√═√╬°╧√╨▌╤р╥√╙Є■1■/√°└Є┐Є╛√В В В В В В В В В В В В В В В В э ■,■2■7■<■A°я╚ї╟°╞√√мїн√о■п■░■▓■│■┤■╡■╢■╖■╕■╣■║■╗√╝■╜■┐■┴■─■┼■╞■╟■╚√╔√╩√╦√╠√═√╬°╧ї╨ї╤ї╥√╙√╥√╤■╨√╧°╬ї═■╠■╦■╩■╔■╚■╟■╞■─√├√┬■└■┐■╛■╜√╝■╗■║■╣■╕√╖√╢√╡■┤√│√▓■▒√░√п■о√н√м√л√к°й√и√з√ж√е√д°г√в√б°а√Я°Ю°Э√Ь°Ы°Ъ√Щ√Ш√Ч°щ▒р░цпьоянЄмялцк■йяжЄеїд°гїв°б√а°Я°Ю√Э√Ь°Ы°Ъ√Щ°Ш√Ч■Х■ФїУїТ√■И■К■М■П■С■У■Ц■Ъ■Я■а■в■г■е■ж■и■й■л■м■о■░■│■╢■╕■╣■║■╗■╝■╜■╛■┐■└■┴■┬√├■─■┼■╞■╟√╚√╔√╩°╦√╠√═√╬°╧°╨▌╤р╥Є■1■/√Є┐Є╛°╜√В В В В В В В В В В В В В В В В э ■,■2■7■<■B■H√ї╚ї╟ї╞■┼√√м°нїо■п■░■▓■│■┤■╡■╢■╖■╕■╣√║■╗■╛■└■├■─■┼■╞■╟√╚√╔√╩√╦√╠√═√╬√╧Є╨°╤ї╥√╙√╥√╤■╨√╧ї╬°═√╠■╦■╔■╚■╟■╞√─√├■┬■└■┐■╛√╜■╝■╗■║■╣√╕√╖√╢■╡√┤√│■▓√▒√░■п√о√н√м■л°к√й√и√з°ж√е√д√г°в√б°а√Я°Ю√Э°Ь°Ы√Ъ°Щ√Ш■Ч√ц▒▌░щпьоянЄмялцк■ияжЄеїд°г°вїб√а°Я√Ю°Э√Ь°Ы°Ъ√Щ°Ш√Ч■Х■ФїУ°Т■С√■И■К■Н■П■С■Ф■Ц■Щ■Э■а■в■г■д■ж■з■й■к■м■н■п■▓■╡■╖■╕■╣■║■╗■╝■╜■╛■┐■└■┴■┬■├■─√┼√╟√╚√╔√╩°╦√╠√═√╬°╧Є╨▌╤щ╥Є■1°ь╛Є╜■╝√В В В В В В В В В В В В В В В В э ■,■3■7■<■B■H√■╚я╟°╞°┼√■м°нїо°п■░■▓■│■┤■╡■╢√╖■╕■║■╝■┐■┴■├■─■┼■╞■╟√╚√╔√╩√╦√╠√═√╬°╧ї╨ї╤ї╥√╙■╥√╤■╨°╧Є╬√═■╠■╦■╔■╚■╟■╞■┼√─■├■┬■┴■┐√╛■╜■╝■╗■║√╣√╕■╖√╢√╡√┤■│√▓■▒√░√п√о■н√м√л°к√й√и√з√ж√е°д√г°в√б°а√Я°Ю√Э°Ь°Ы√Ъ√Щ√Ш■Ч√ц▒▌░щпьоянЄмьлщк■иЄжяеїд°г°в°б°а°Я√Ю°Э√Ь°Ы°Ъ√Щ°Ш√Ч■Х■ФїУ°Т■С√■И■К■Н■П■С■Ф■Ц■Ш■Ь■а■б■г■д■ж■з■и■к■л■н■о■▒■│■╢■╖■╕■╣■║■╗■╝■╜■╛■┐■└■┴■┬■├■─■┼■╞√╟√╚√╔√╩°╦√╠√═°╬√╧ь╨╬╤■╥ї■1°ц╜ї╝√В В В В В В В В В В В В В В В В э ■-■3■8■<■B■I√Є╟ї╞ї┼√їн°оїп√░■▓■│■┤√╡■╢■╣■╗■╛■└■┬■├■─■┼■╞√╟√╚√╔√╩√╦√╠√═√╬°╧ї╨ї╤°╥√╙■╥√╤■╨Є╧°╬√═■╠■╩■╔■╚■╟■╞√┼√─■┬■┴■└■┐■╛■╜■╝■╗√║■╣√╕√╖√╢√╡■┤√│■▓√▒√░√п■о√н√м√л√к√й°и√з√ж√е°д√г√в°б√а°Я√Ю°Э°Ь√Ы√Ъ°Щ■Ш°ц▒▌░щпьоянЄмьлщк■ияжяе°д°г°в°б°а°Я√Ю√Э°Ь°Ы√Ъ°Щ°Ш√Ч■Х■ФїУ°Т■С√■И■К■М■П■С■Ф■Ц■Щ■Ы■Я■б■в■д■е■з■и■й■л■м■о■п■▓■╡■╖■╕■╣■║■╗■╝■╜■╛■┐■└■┴■┬■├■─√┼■╞√╟√╚√╔√╩°╦√╠√═°╬√╧┌╨р╤ї■1°■╜у╝■╗°В В В В В В В В В В В В В В В В э ■-■3■8■<■B■I√°╟ї╞ї┼√─√°нїо°пї░■▓√│■╡■╕■║■╜■┐■┴■┬■├■─■┼■╞√╟√╚√╔√╩√╦√╠√═√╬°╧ї╨ї╤°╥√╙■╥√╤°╨ї╧√╬√═■╠■╩■╔■╚■╟√╞√┼■─■├■┴■└■┐■╛■╜√╝■╗■║√╣√╕√╖■╢√╡√┤■│√▓√▒√░■п√о√н■м°л√к√й√и√з°ж√е√д°г√в°б√а°Я√Ю°Э√Ь°Ы√Ъ√Щ■Ш√у▒▌░щпьоянЄмьлщк■иьжЄе°д°г°в°б°а√Я°Ю√Э°Ь°Ы√Ъ°Щ°Ш■Ч■Ц■Х■ФїУ°Т√С√■К■М■П■С■Ф■Ц■Щ■Ы■Ю■б■в■г■е■ж■и■й■л■м■н■п■▒■│■╢■╖■╕■╣■║■╗■╝■╜■╛■┐■└■┴■┬■├■─■┼√╞√╟°╚√╔√╩°╦√╠√═√╬ї╧┼╨■╤ї■1°°╝ц╗°В В В В В В В В В В В В В В В В э ■.■3■8■<■B■I■L√Є╞°┼ї─√√нїо°пї░°▒■┤■╢■╣■╗■╛■└■┴■┬■├■─■┼√╞√╟√╚√╔√╩√╦√╠√═■╬ї╧ї╨ї╤√╥√╙■╥√╤ї╨√╧√╬°═■╠■╩■╔■╚■╟°╞■┼■─■├■┴■└■┐■╛√╜■╝■╗√║√╣■╕√╖√╢√╡■┤√│√▓■▒√░√п√о■н√м°л√к√й√и√з√ж°е√д°г√в°б√а°Я√Ю°Э√Ь√Ы√Ъ°Щ√у▒р░цпьоянЄмьлщк■иьжяе°д√г°в°б°а√Я°Ю√Э°Ь°Ы√Ъ°Щ°Ш■Ч■Ц■Х■ФїУ°Т√С√■Л■М■П■С■Ф■Ц■Щ■Ы■Э■а■в■г■д■ж■з■й■к■м■н■п■░■▓■╡■╢■╖■╕■╣■║■╗■╝■╜■╛■┐■└■┴■┬■├■─■┼°╞√╟°╚√╔√╩°╦√╠√═°╬▌╧у╨ї■1√я╗ь║°В В В В В В В В В В В В В В В В э ■.■3■8■<■B■I■L√°╞ї┼ї─√├√■н°оїп°░°▒■│■╡■╕■║■╜■┐■└■┴■┬■├■─■┼√╞√╟√╚√╔√╩√╦√╠√═√╬ї╧ї╨°╤√╥√╙■╥°╤°╨√╧√╬°═■╠■╩■╔■╚°╟√╞■─■├■┬■└■┐√╛■╜■╝√╗√║■╣√╕√╖√╢■╡√┤√│■▓√▒√░√п■о√н√м√л√к√й°и√з√ж°е√д√г°в√б°а°Я√Ю√Э√Ь°Ы√Ъ■Щ°у▒р░цпьоянЄмьлщк■ищжЄе°д°г√в°б°а√Я°Ю√Э°Ь√Ы°Ъ√ЩїШ■Ч■Ц■Х■ФїУ°Т√С√■М■Н■П■С■Ф■Ц■Ш■Ы■Э■а■б■г■д■ж■з■и■к■л■н■о■░■▒■┤■╢■╖■╕■╣■║■╗■╝■╜■╛■┐■└■┴■┬■├√─■┼°╞ї╟√╚√╔√╩°╦√╠°═°╬╚╧ї■1√щ║Є╣°В В В В В В В В В В В В В В В В э ■/■3■8■=■C■I■L√■╞ї┼ї─ї├√°оїп°░°▒■│■┤■╖■╣■╝■╛■┐■└■┴■┬■├■─√┼√╞√╟√╚√╔√╩√╦√╠■═√╬ї╧ї╨°╤√╥√╙■╥ї╤■╨√╧°╬°═■╠■╩■╔√╚°╟■╞■┼■├■┬■└√┐■╛■╜√╝■╗√║√╣√╕■╖√╢√╡√┤■│√▓√▒■░√п√о√н√м√л√к√й√и√з°ж√е°д√г°в√б°а√Я°Ю√Э√Ь√Ы°Ъ°у▒р░цпьоянЄмьлщк■иьжяе°д°г√в°б°а√Я°Ю√Э°Ь√Ы°Ъ√ЩїШ■Ч■Ц■Х■ФїУ°Т√С■Р√■О■Р■С■У■Ц■Ш■Ы■Э■а■б■г■д■е■з■и■к■л■м■о■п■▒■▓■╡■╢■╖■╕■╣■║■╗■╝■╜■╛■┐■└■┴■┬■├■─■┼Є╞ї╟√╚√╔°╩√╦√╠°═у╬у╧ї■1√у╣°╕°В В В В В В В В В В В В В В В В э ■.■3■8■=■C■I■L√ї┼°─ї├√┬√°о°пї░√▒■▓■┤■╢■╕■║■╜■╛■┐■└■┴■┬■├■─√┼√╞√╟√╚√╔√╩√╦√╠■═°╬ї╧ї╨√╤√╥√╙√╥√╤√╨√╧°╬°═■╠■╩√╔°╚■╟■╞■┼■├■┬■┴■└■┐■╛■╜√╝√╗√║√╣■╕√╖√╢■╡√┤√│√▓■▒√░√п■о√н√м√л°к√й√и√з°ж√е°д√г°в√б°а√Я√Ю√Э°Ь√Ы■Ъїу▒р░цпьоянЄмьлщк■ищжЄе°д°г√в°б°а√Я°Ю√Э°Ь√Ы°Ъ°Щ°Ш■Ч■Ц■Х■ФїУ°Т√С■Р√■П■С■Т■У■Ц■Ш■Ы■Э■а■б■г■д■е■з■и■й■л■м■о■п■░■▓■┤■╢√╖■╕■╣■║■╗■╝■╜■╛■┐■└■┴■┬■├■─■┼я╞ї╟√╚√╔°╩√╦°╠°═╬╬ї■1√■╣у╕√╖√В В В В В В В В В В В В В В В В ъ ■-■4■8■=■C■J■L°■┼ї─ї├°┬√√о°пї░√▒■▓■┤■╡■╖■╣■╝■╜■╛■┐■└■┴■┬■├√─√┼√╞√╟√╚√╔√╩■╦√╠■═ї╬ї╧°╨√╤°╥■╙√╥√╤■╨√╧°╬ї═■╠√╩√╔°╚■╟■┼■─■┬■┴■└■┐■╛√╜√╝√╗■║√╣√╕√╖■╢√╡√┤√│■▓√▒■░√п■о°н√м√л√к√й°и√з√ж°е√д°г√в°б°а√Я√Ю√Э√Ь√Ы■Ъ°р▒р░цпьоянямялщк■зьжяе°д√г°в°б°а√Я°Ю°Э√Ь°Ы√Ъ°Щ°Ш■Ч■Ц■Х■ФїУ°Т√С■Р√■С■Т■У■Ф■Ц■Ш■Ы■Э■а■б■г■д■е■з■и■й■л■м■н■п■░■▒■│■╡■╢■╖■╕■╣■║■╗■╝■╜■╛■┐■└■┴■┬√├■─√┼Є╞Є╟√╚√╔°╩°╦°╠щ═у╬°■0√°╕щ╖√╢√В В В В В В В В В В В В В В В В ъ ■.■4■8■=■C■J■L°°─ї├ї┬■┴√■оїп°░√▒■▓■┤■╡■╖■╣■╗■╝■╜■╛■┐■└√┴■┬■├■─√┼√╞√╟√╚°╔■╩√╦■╠■═ї╬ї╧°╨√╤°╥■╙■╥√╤√╨■╧ї╬ї═■╠■╦√╩√╔√╚■╟■┼■─■┬■┴■└■┐√╛√╜■╝√╗√║√╣√╕■╖√╢√╡■┤√│√▓■▒√░■п√о°н√м√л√к√й√и°з√ж°е√д°г√в°б√а√Я√Ю√Э°Ь■Ыїр▒р░цпьоянямьльк■зьжЄе°д°г°в°б°а°Я√Ю°Э√Ь°Ы√Ъ°Щ°Ш■Ч■Ц■Х■ФїУ√Т°С√Р√■У■Ф■Х■Ч■Ш■Ъ■Э■Я■б■г■д■е■з■и■й■л■м■н■п■░■▒■│■┤■╡■╢■╖■╕■╣■║■╗■╝■╜■╛■┐■└■┴■┬■├■─ї┼Є╞Є╟√╚°╔√╩°╦°╠╤═°■0√Є╖я╢√╡√В В В В В В В В В В В В В В В В ъ ■/■4■9■=■D■K■L■N√√─°├ї┬ї┴√°п°░√▒■▓■│■╡■╖■╕■║√╗■╝■╜■╛■┐■└■┴■┬■├√─√┼√╞√╟√╚√╔■╩√╦■╠√═ї╬ї╧√╨√╤Є╥■╤√╨√╧ї╬ї═°╦√╩√╔■╚■╟■╞■─■├■┴■└√┐√╛■╜√╝√╗√║■╣√╕√╖√╢■╡√┤■│√▓■▒√░■п°о√н√м√л°к√й√и°з√ж°е√д°г√в°б■а√Я°Ю√Э√Ь■Ыїр▒р░цпьоянямьльк■зяжяе°д°г°в°б°а°Я°Ю√Э°Ь√Ы√Ъ°Щ°Ш■Ч■Ц■Х■Ф°У°Т√С°Р√■Ф■Х■Ц■Ш■Щ■Ъ■Э■Я■в■г■д■ж■з■и■й■л■м■н■п■░■▒■▓■│■┤√╢■╖■╕■╣■║■╗■╝■╜■╛■┐■└■┴■┬■├■─Є┼Є╞Є╟√╚°╔°╩°╦я╠у═°■0√ь╢ї╡√┤√В В В В В В В В В В В В В В В В э ■■/■4■9■=■D■K■M■N√ї├ї┬°┴√└√√пї░√▒■│■╡■╢■╕■╣■║√╗■╝■╜■╛■┐■└■┴■┬■├√─√┼°╞√╟√╚■╔■╩√╦■╠°═ї╬°╧√╨°╤°╥√╤■╨√╧Є╬ї═√╠√╦√╩√╔■╟■╞■─■├√┴■└■┐√╛√╜√╝■╗√║√╣√╕√╖■╢√╡■┤√│■▓√▒■░√п°о√н√м√л√к°й√и√з°ж√е°д√г°в√б√а√Я√Ю√Э√Ьї▌▒▌░щпьояньмьляк■зяжяеїд°г°в°б°а√Я°Ю°Э√Ь√Ы°Ъ√Щ°Ш■Ч■Ц■Х■Ф°У°Т√С√Р■П√■Х■Ц■Ч■Щ■Ъ■Ы■Э■Я■в■г■д■ж■з■и■к■л■м■н■о■п■░■▒■▓■│■┤■╢■╖■╕■╣■║■╗■╝■╜■╛■┐■└√┴■┬■├■─Є┼Є╞я╟°╚°╔°╩°╦┌╠°■0√ь╡ї┤√│√В В В В В В В В В В В В В В В В э ■■/■4■9■=■D■L■M■N°■├ї┬ї┴°└√■пї░√▒■│■┤■╢■╕■╣√║■╗√╝■╜■╛■┐■└■┴■┬√├√─√┼√╞√╟√╚■╔■╩√╦■╠°═ї╬°╧√╨ї╤■╥√╤√╨√╧Є╬ї═°╠√╦√╩■╔■╟■╞■┼■├■┬■┴■└√┐√╛√╜■╝√╗√║√╣■╕√╖■╢√╡■┤√│■▓√▒■░°п√о°н√м√л√к√й°и√з°ж√е°д√г√в√б√а√Я°Ю√Э■Ьї▌▒▌░щпьояньмьляк■зяжяеїд°г°в°б°а°Я°Ю√Э√Ь√Ы°Ъ√Щ°Ш■Ч■Ц■Х■Ф°У°Т√С√Р■П√■Ф■Ц■Ш■Ъ■Ы■Ь■Э■Я■б■г■д■ж■з■и■к√л■м■н■о■п■░■▒■▓■│■┤■╡■╖■╕■╣■║■╗■╝■╜■╛■┐■└■┴■┬■├°─Є┼Є╞я╟ї╚°╔°╩ї╦ц╠°■0√■╡я┤ї│√▓√В В В В В В В В В В В В В В В В э ■ ■/■4■9■>■E■L■M■N°√┬ї┴Є└■┐°°░√▒■│■┤■╢√╕■╣■║√╗■╝√╜■╛■┐■└■┴■┬√├°─√┼√╞■╟√╚■╔√╩■╦■╠ї═ї╬√╧√╨я╤√╨°╧ї╬°═ї╠°╦√╩■╔■╚■╞■┼■├■┬■┴√└√┐■╛√╜√╝■╗√║■╣°╕■╖√╢■╡√┤■│√▓■▒√░°п√о√н√м√л°к√й°и√з°ж√е°д√г√в√б√а√Я√Ю°Э°┌▒р░цпьояньмяльк■зяжяеїд°г°в°б°а°Я°Ю√Э√Ь√Ы°Ъ√Щ°Ш■Ч■Ц√Ф°У°Т√С√Р√П√■Х■Ч■Щ■Ы■Э■Ю■а■б■г■д■ж■з■и√й■к■л■м■н■о■п■░■▒■▓■│■┤■╡■╖■╕■╣■║■╗■╝■╜■╛■┐■└■┴■┬■├°─я┼Є╞ь╟°╚°╔°╩р╦°■0√°┤ї│ї▓√▒√В В В В В В В В В В В В В В В В э ■ ■-■4■9■>■E■L■M■N■O√°┴Є└ї┐°°░■▒■▓■┤■╢■╖■╕√╣■║√╗■╝■╜√╛■┐■└■┴√┬√├°─√┼■╞√╟■╚■╔√╩■╦√╠ї═°╬√╧°╨Є╤√╨√╧Є╬√═ї╠°╦√╩■╔■╚■╟■╞■┼■─■┬√┴■└√┐√╛■╜√╝■╗√║√╣√╕■╖√╢■╡√┤■│√▓■▒°░√п°о√н√м√л°к√й√и°з√ж°е√д√г√в√б√а√Я°Ю■Эї┌▒р░цпьоянямьльк■зяжяеїд°г°в°б°а°Я°Ю√Э√Ь√Ы°Ъ√Щ°Ш■Ч■Ц√Ф°У°Т√С√Р√П√■Х■Ч■Ш■Ъ■Ь■Ю■а■б■г■д■е■ж√з■и■й■к■л■м■н■о■п■░■▒■▓■│■┤■╡■╖■╕■║■╗■╝■╜■╛√┐■└■┴■┬■├ї─Є┼ь╞ь╟°╚°╔°╩щ╦я°│ї▓ї▒√░√В В В В В В В В В В В В В В В В э ■
+■.■5■9■>■E■L■M■O■P√■┴ї└ї┐ї╛√√░■▒■▓■┤■╡√╖■╕■╣√║■╗√╝■╜■╛√┐■└■┴°┬√├√─√┼■╞√╟■╚■╔√╩■╦√╠ї═°╬√╧ї╨°╤√╨°╧ї╬√═ї╠°╦°╩■╔■╚■╟■┼■─■├■┬√┴■└√┐√╛■╜√╝■╗√║√╣√╕√╖■╢√╡■┤√│■▓√▒√░°п√о°н√м√л√к°й√и°з√ж°е√д√г√в√б√а√Я√Ю■Эї┌▒р░цпьоянямьльк■зяжяеїд°г°в°б°а°Я°Ю√Э√Ь√Ы°Ъ√Щ°Ш■Ч■Ц√Ф°У°Т√С√Р√П√■Ф■Ц■Ш■Щ■Ы■Э■Я■б√г■д√е■ж■з■и■й■к■л■м■н■о■п■░■▒■▓■│■┤■╡■╖■╕■╣■╗■╝■╜■╛■┐■└■┴■┬√├Є─Є┼ь╞щ╟°╚°╔ц╩Є°▓ї▒ї░√п√В В В В В В В В В В В В В В В В э ■
+■.■5■9■>■E■L■M■O■P°■└ї┐Є╛√╜√■░■▒■▓■┤■╡■╢■╖√╕■╣■║√╗■╝√╜■╛■┐√└√┴°┬√├√─■┼■╞√╟■╚√╔■╩■╦°╠ї═√╬°╧ї╨√╤■╨ї╧°╬■═Є╠°╦°╩■╔■╚■╟■╞■┼■─■├■┬√┴■└√┐■╛√╜√╝■╗°║√╣■╕√╖■╢√╡■┤√│■▓°▒√░°п√о√н√м°л√к°й√и√з°ж√е√д√г√в√б√а°Я■Юї╫▒р░цпьоянямьлькьжяеїд°г°в°б°а°Я°Ю√Э√Ь√Ы°Ъ√Щ°Ш■Ч■Ц√Ф°У°Т√С√Р√П■О√■Х■Ч■Щ■Ы■Ь■Ю■а■в√г■д√е■ж■з■и■й■к■л■м■н■о■п■░■▒■▓■│■┤■╡■╖■╕■╣■╗■╝■╜■╛■┐■└■┴■┬√├я─я┼ь╞щ╟°╚°╔я╩Є°▒ї░їп√о√В В В В В В В В В В В В В В В В э ■
+■.■5■9■>■E■L■M■O■P■Q√°┐ї╛ї╜■╝°■▓■│■╡√╢■╖■╕√╣■║√╗■╝■╜√╛√┐√└√┴√┬√├√─■┼■╞√╟■╚√╔■╩■╦ї╠°═√╬ї╧я╨°╧√╬√═ї╠ї╦°╩√╔■╚■╟■┼■─■├√┬√┴■└√┐■╛√╜√╝■╗°║√╣√╕■╖√╢■╡√┤■│√▓√▒°░°п√о√н√м°л√к√й°и√з°ж√е√д√г√в■б°а√Я■Юї╫▒р░цпьоянямьлькьжяе°дїг°в°б°а°Я√Ю°Э√Ь√Ы°Ъ√Щ°Ш■Ч■Ц√Ф°У°Т√С√Р√П■О√■Х■Ц■Ш■Ъ■Ь■Ю■Я■б√г√д■е√ж■з■и■й■к■л■м■н■о■п■░■▒■▓■│■┤■╡■╢■╕■╣■╗■╝■╜■╛■┐■└■┴■┬°├я─ь┼ь╞ь╟°╚ь╔Є°░їпїо■н√В В В В В В В В В В В В В В В В ъ ■
+■.■5■:■>■E■L■M■O■P■Q√ї╛ї╜ї╝■╗√■│√╡■╢√╖■╕■╣√║■╗√╝√╜■╛√┐°└√┴√┬■├√─■┼√╞■╟■╚√╔■╩√╦°╠°═°╬ї╧ї╨°╧√╬√═°╠Є╦°╩√╔■╚■╟■╞■┼■─■├√┬√┴■└√┐■╛√╜■╝°╗√║√╣√╕■╖√╢■╡√┤■│°▓√▒°░√п√о°н√м√л°к√й°и√з√ж√е√д√г√в√б√а√Яї╘▒р░цпьоянямьлькьжяе°дїг°в°б°а°Я√Ю√Э°Ь√Ы°Ъ√Щ°Ш■Ч■Ц√Ф°У°Т√С√Р√П√О√■Ц■Ш■Щ■Ы■Э■Я■б■в√г√д■е√ж■з■и■й■к■л■м■н■о■п■░■▒√▓■┤■╡■╢■╕■╣■╗■╝■╜■┐■└■┴■┬Є├ь─ь┼ь╞ь╟°╚ї╔Є°пїоїн■м√В В В В В В В В В В В В В В В В ъ ■
+■.■5■:■?■E■L■M■O■P■R√■╛ї╜Є╝°╗√■┤■╡√╢■╖√╕■╣■║√╗√╝√╜√╛√┐°└√┴■┬■├√─■┼√╞■╟■╚√╔■╩√╦ї╠√═ї╬ї╧√╨°╧√╬√═√╠Є╦ї╩°╔■╚■╟■┼■─√├√┬√┴■└√┐■╛√╜√╝°╗√║■╣√╕√╖■╢√╡■┤√│√▓°▒√░°п√о√н°м√л°к√й√и°з√ж√е■д√г√в°б√а■Яї╘▒р░цпьоянямьлькьжяе°д°гїв°б°а√Я°Ю√Э°Ь√Ы°Ъ√Щ°Ш■Ч■Ц√Ф°У°Т√С√Р√П■О■Н√√Ч■Щ■Ъ■Ь■Ю■а■в√г√д√е■ж√з■и■й■к■л■м■н■о■п√░■▒■▓■│■╡■╢■╕■╣■║■╝■╜■┐■└■┴■┬я├щ─ь┼ь╞ь╟ї╚їїоїнїм■л√В В В В В В В В В В В В В В В В ъ ■
+■.■5■:■?■F■K■M■O■P■Q■S√√╜ї╝ї╗√║°■╡√╢■╖■╕√╣√║√╗√╝√╜√╛√┐√└√┴■┬√├■─■┼√╞■╟√╚■╔■╩°╦°╠°═ї╬ї╧■╨√╧√╬√═■╠я╦°╩ї╔■╚■╟■╞■┼■─√├√┬√┴■└√┐■╛√╜°╝√╗√║√╣■╕√╖■╢√╡■┤°│√▓°▒√░°п√о√н√м°л√к°й√и√з√ж√е√д√г√в√б√аї╤▒р░цпьоянямялщкьжяе°д°гїв°б°а√Я°Ю√Э°Ь√Ы°Ъ√Щ°Ш■Ч■Ц√Ф°У°Т√С√Р√П■О√Н√√Ш■Ъ■Ь■Э■Я■б■в√г√д√е■ж√з■и■й■к■л■м■н√о■п■░■▒■▓■│■╡■╢■╕■╣■║■╝■╜■┐■└■┴√┬ь├щ─ь┼ь╞ь╟■╚їїнїмїл■к√В В В В В В В В В В В В В В В В ъ ■
+■.■5■:■?■G■L■M■O■P■Q■S√°╝ї╗ї║√╣√■╡■╢√╖√╕√╣√║√╗√╝√╜√╛√┐■└√┴■┬√├■─■┼√╞■╟√╚■╔■╩°╦°╠ї═ї╬Є╧■╬√═√╠я╦°╩Є╔■╚■╟■┼■─°├√┬√┴■└√┐■╛√╜°╝°╗■║√╣√╕■╖√╢■╡√┤√│°▓√▒°░√п√о°н√м°л√к√й√и°з■ж√е√д√г√в°б■аї╤▒р░цпьоянЄмьлщкьжяе°д°г°вїб√а°Я°Ю√Э°Ь√Ы°Ъ√Щ°Ш■Ч■Ц√Ф°У√Т√С√Р√П√О√Н√√Щ■Ъ■Ы■Э■Я■а■в√г√д√е√ж■з√и■й■к■л√м■н■о■п■░■▒■▓■│■╡■╢■╖■╣■║■╝■╜■┐■└■┴ї┬ь├ь─щ┼ь╞Є╟їщлїк■й√В В В В В В В В В В В В В В В В ъ ■$■/■5■:■?■G√M■N■P■Q■S√ї╗ї║°╣√╕√■╡√╢√╖√╕√╣■║√╗√╝√╜°╛■┐√└■┴■┬√├■─√┼■╞■╟√╚■╔√╩°╦°╠ї═щ╬√═√╠я╦°╩Є╔■╚■╟■╞■┼■─°├√┬■┴√└√┐■╛°╜°╝√╗√║■╣√╕■╖√╢■╡√┤°│°▓√▒°░√п√о°н√м°л■к√й√и°з√ж√е√д√г√в√бї╬▒р░цпьоянЄмьлщкьжяе°д°г°в°б°а°Я√Ю°Э°Ь√Ы°Ъ√Щ√Ш√Ч■Ц■ФїУ√Т√С√Р√П√О√Н■М√√Ъ■Ы■Ь■Ю■а■в°г√д√е√ж■з√и■й■к■л■м√н■о■п■░■▒■▓■│■╡■╢■╖■╣■║■╝■╜■┐■└щ┬ь├ь─ь┼щ╞√╟°якяй°В В В В В В В В В В В В В В В В ъ ■$■/■5■:■?■G√M■N■P■Q■S°■╗ї║°╣°╕√╖√■╡■╢√╖√╕√╣√║√╗√╝√╜√╛■┐√└■┴■┬√├■─√┼■╞√╟■╚■╔√╩°╦ї╠ь═°╬√═√╠ї╦Є╩Є╔√╚■╟■┼√─°├■┬√┴√└√┐√╛°╜√╝√╗√║√╣■╕√╖■╢√╡√┤°│√▓°▒√░°п√о√н°м√л√к■й°и√з√ж√е√д√г√в√бї╬▒р░цпьоянЄмьлщкьжяе°д°г°в°б°а°Я√Ю°Э√Ь°Ы√Ъ°Щ√Ш√Ч■Х■ФїУ√Т√С√Р√П■О√Н°М√√Ы■Ь■Э■Я■б■в√г√д√е√ж√з■и√й■к■л■м√н■о■п■░■▒■▓■│■┤■╢■╖■╣■║■╝■╜■┐■└°┴ь┬щ├ь─ь┼я╞√°йуи°В В В В В В В В В В В В В В В В ъ ■$■/■5■:■@■G■M√N■P■Q■R■T√√║ї╣°╕°╖■╢√■╡√╢√╖√╕√╣√║√╗√╝√╜■╛■┐√└■┴√┬■├■─√┼■╞√╟■╚■╔√╩ї╦я╠щ═■╠√╦щ╩Є╔√╚■╟■╞■┼√─√├√┬√┴√└■┐ї╛°╜√╝■╗√║√╣■╕√╖■╢√╡°┤°│√▓°▒√░√п°о√н√м√л√к√й√и°з√ж√е√д√г√вї╦▒р░цпяоьнЄмьлщкьжяе°д°г°в°б°а√Я°Ю°Э√Ь°Ы√Ъ°Щ√Ш√Ч■Х■Ф°У°Т√С√Р■П√О√Н°М√√Ь√Э■Ю■а■в√г√д°е√ж√з■и√й■к■л■м■н√о■п■░■▒■▓■│■┤■╢■╖■╣■║■╝■╜■┐■└я┴ь┬ь├щ─ь┼√╞√цзїж°В В В В В В В В В В В В В В В В ъ ■$■/■5■:■@■G■M°O■Q■R■T√ї╣°╕°╖°╢√√╡√╢√╖√╕■╣√║√╗√╝√╜■╛■┐√└■┴√┬■├√─■┼■╞√╟■╚√╔√╩я╦щ╠■═√╠√╦щ╩Є╔°╚■╟√┼√─√├√┬√┴√└√┐ї╛√╜√╝√╗■║√╣√╕■╖√╢√╡°┤√│°▓√▒°░√п√о√н√м√л√к√й°и√з√ж√е√д√г√вї╦▒р░цпяоьнЄмьлщкьжяе°д°г°в°б°а√Я°Ю°Э√Ь°Ы√Ъ√Щ°Ш√Ч■Х■Ф°У°Т√С■Р√П√О■НїМ■Л√■Ь■Э√Ю■а■б■в√г√д√е√ж√з√и■й√к■л■м■н■о√п■░■▒■▓■│■┤■╢■╕■╣■╗■╝■╛■┐у┴ь┬ь├ь─я┼√яжье√■В В В В В В В В В В В В В В В В ъ ■$■/■5■:■@■G■M■N√P■Q■R■T°ї╕°╖°╢°╡√■╡√╢√╖√╕√╣√║√╗■╝√╜■╛√┐■└■┴√┬■├√─■┼■╞√╟■╚√╔ї╩ц╦Є╠√╦щ╩Є╔°╚■╟■╞√┼√─√├√┬√┴√└°┐°╛√╜√╝√╗√║■╣√╕■╖√╢°╡√┤°│°▓√▒°░√п√о■н√м√л√к√й°и°з√ж√е√д√гї╚▒р░цпяоьнЄмьлщкьжяе°д°г°в°б°а√Я°Ю√Э°Ь°Ы√Ъ√Щ°Ш√Ч■Х■Ф°У√Т√С√Р√П■О√Н°М√Л√■Ь■Э■Ю√Я■б■в√г√д√е√ж°з√и■й√к■л■м■н■о√п■░■▒■▓■│■╡■╢■╕■╣■╗■╝■╛■┐°└ц┴щ┬ь├ь─■┼°√ецд√г√■В В В В В В В В В В В В В В В В ъ ■$■/■6■;■@■G■M■N°P■R■T■U√■╕ї╖°╢°╡√┤√■╡√╢√╖√╕√╣√║√╗√╝■╜√╛■┐■└√┴■┬√├■─■┼√╞■╟√╚√╔щ╩у╦щ╩ї╔Є╚■╟■╞√┼√─√├√┬√┴°└°┐°╛√╜■╝√╗√║√╣■╕√╖√╢°╡√┤°│√▓°▒√░√п√о√н■м√л√к°й°и√з√ж√е√д√гї╚▒р░цпяоянямьльк■йьжяе°д°г°в°б°а√Я°Ю√Э°Ь√Ы°Ъ√Щ°Ш√Ч■Х■Ф°У√Т√С√Р√П■О√Н°М°Л√■Ь■Э■Я√а√в√г√д√е√ж√з√и√й■к√л■м■н■о■п■░√▒■▓■│■╡■╢■╕■╣■╗■╝■╛ц└ь┴ь┬щ├ї─√цгїв°■В В В В В В В В В В В В В В В В ъ ■$■/■6■;■@■G■M■N■O√Q■R■S■U√°╖°╢°╡°┤■│√■╡√╢√╖°╕√╣√║√╗■╝√╜■╛√┐■└■┴√┬■├√─■┼√╞■╟√╚я╔щ╩°╦ь╩я╔Є╚■╟■╞°┼√─√├√┬√┴ї└°┐√╛√╜√╝■╗√║√╣■╕√╖°╢√╡°┤°│√▓√▒√░√п√о√н√м■л√к°й°и√з√ж√е°дї┼▒р░щпьоянямьльк■йьжяе°д°г°в°б°а√Я°Ю√Э°Ь√Ы√Ъ°Щ°Ш√Ч■Х■Ф°У√Т√С√Р■П√О√Н√МїЛ√■Ы■Э■Ю■Я■а√в√г√д√е√ж√з°и√й■к■л√м■н■о■п■░■▒■▓■│■┤■╡■╖■╕■║■╗■╜■╛р└щ┴ь┬ь├■─√Євьб■а√■■В В В В В В В В В В В В В В В В ъ ■$■0■6■;■@■G■L■N■P■Q√R■S■U■W√°╢°╡°┤°│■▓√■╡√╢√╖√╕√╣°║√╗■╝■╜√╛■┐√└■┴√┬■├■─√┼√╞■╟Є╚я╔ц╩у╔Є╚√╟■╞√┼°─√├√┬°┴ї└√┐°╛■╜√╝√╗■║√╣√╕√╖°╢√╡°┤√│√▓√▒√░√п√о√н√м√л√к°й°и√з√ж√е√дї┼▒р░щпьоянямьльк■йяжье°д°г°в°б°а√Я°Ю√Э°Ь√Ы√Ъ√ЩїШ√Ч■Х■Ф√У°Т√С√Р√П■О√Н√М°Л√К√■Ь■Э■Ю■а■б√в√г√д√е√ж√з√и√й√к■л√м■н■о■п■░■▒■▓■│■┤■╡■╖■╕■║■╗■╜■╛°┐р└щ┴ь┬ї├√√бьаїЯ√■■В В В В В В В В В В В В В В В В ъ ■$■0■6■;■A■H■L■N■P■Q°S■U■W√ї╡°┤°│°▓√■╡√╢√╖√╕√╣ї║■╗√╝■╜■╛√┐■└√┴■┬√├■─√┼√╞ї╟я╚я╔√╩у╔я╚√╟√╞√┼°─√├√┬ї┴°└°┐√╛√╜■╝√╗√║■╣√╕°╖√╢°╡√┤√│√▓√▒√░√п√о√н√м√л√к°й°и√з√ж√е■дї┬▒р░щпьоянямьльк■йяжяеїд°г°в°б°а√Я√Ю°Э√Ь°Ы√Ъ√Щ°Ш°Ч■Х■Ф√У°Т√С√Р√П■О■Н°М°Л°К√■Ь■Ю■Я■а■б√в√г√д√е√ж√з√и√й√к■л■м■н■о■п■░■▒■▓■│■┤√╡■╖■╣■║■╝■╜ц┐ц└ь┴ь┬°ьЯїЮ√Э√■■В В В В В В В В В В В В В В В В ъ ■$■0■6■;■A■H■L■N■O■Q■S■T■S■T■W°■╡°┤°│√▓°▒°√╢√╖√╕ї╣√║√╗■╝√╜■╛√┐■└■┴√┬√├■─√┼ї╞Є╟я╚┌╔я╚°╟√╞√┼°─√├°┬ї┴°└√┐√╛√╜■╝√╗√║√╣√╕°╖√╢√╡√┤√│√▓√▒°░■п√о√н√м√л°к°й°и√з√ж√еї┬▒р░щпьоянямялщк■йяжяеїд°г°в°б°а√Я√Ю°Э√Ь√Ы°Ъ√Щ°Ш°Ч■Х■Ф°У√Т√С√Р■П√О■Н√М°ЛїК√■Ы■Э■Ю■Я√б√в√г√д√е√ж√з√и√й√к■л■м■н■о■п■░■▒■▓■│■┤■╡■╢■╖■╣■║■╝■╜┌┐щ└ь┴°┬°їЮЄЭ°Ь°■■В В В В В В В В В В В В В В В В ъ ■$■0■6■;■A■H■L■M■O■Q■R°T■W■Y√■┤°│°▓°▒°░√√╢√╖√╕я╣■║√╗■╝■╜√╛■┐√└■┴√┬√├√─√┼я╞я╟ц╚ї╔я╚ї╟√╞√┼°─√├Є┬°┴√└°┐■╛√╜√╝■╗√║√╣°╕√╖√╢√╡√┤√│√▓°▒√░√п■о√н√м√л°к°й°и√з√ж■еї┐▒р░щпьоянямялщк■йяжяеїд°г°в°б√а°Я√Ю°Э√Ь√Ы√Ъ°Щ°Ш°Ч■Х■Ф°У°Т√С■Р■П√О■Н√М°Л°К√Й√■Ы■Э■Я■а√б°в√г√д√е■ж√з√и√й°к■л■н■о■п■░■▒■▓■│■┤■╡■╢■╖■╣■║■╝■╜°╛┌┐ь└ь┴√√ЭЄЬЄЫ■Ъ√■■■В В В В В В В В В В В В В В В В ъ ■$■0■6■;■A■H■K■M■O■Q■R■T√U■V■Y°■│°▓°▒°░√п°■╢√╖°╕Є╣√║■╗√╝■╜■╛√┐√└√┴■┬√├√─я┼Є╞Є╟▌╚ь╟°╞√┼√─ї├Є┬°┴√└√┐√╛■╜√╝√╗■║°╣√╕√╖√╢√╡√┤√│√▓°▒√░√п√о■н√м°л°к°й°и√з√жї┐▒у░цпьоянямялщк■йяжяе°дїг°в°б√а°Я√Ю√Э°Ь√Ы°Ъ√ЩїШ√Ч■Х■Ф°У√Т√С■Р√П√О■Н°М√Л°К√Й√■Ъ■Ь■Ю■Я°б°в√г√д√е√ж√з√и√й°к■м■о■п■▒■▓■│■┤■╡■╢■╖■╕■╣■╗■╝ц╛р┐ь└°┴√ЄЫїЪїЩ√■■■В В В В В В В В В В В В В В В В ъ ■$■0■7■<■A■H■K■M■N■Q■R■T■U■V■W■X°√▓°▒°░°п√о√■╢√╖Є╕ї╣■║√╗■╝√╜■╛√┐√└√┴√┬√├ї─я┼ї╞╘╟ь╞ї┼°─ї├°┬°┴°└√┐■╛√╜√╝■╗√║√╣√╕√╖√╢√╡√┤°│√▓°▒√░√п√о√н■м°л°к°й°и√з■жї╝▒у░цпьоянЄмьлщк■йяжяе°дїг°в°б√а°Я√Ю°Э√Ь°Ы√Ъ°Щ°Ш√Ч■Х■Ф√У√Т°С■Р√П√О√Н√М√Л°К°Й√■Ъ■Ь■Ю■а°б°в√г√д√е√ж√з√и√й°к■л■н■п■░■▓■│■┤■╡■╢■╖■╕■╣■╗■╝┌╛у┐Є└√°ЪЄЩїШ■Ч°■■■В В В В В В В В В В В В В В В В ъ ■$■0■7■<■B■I■K■M■N■O■R■T■U√W■X■[°√▒°░°п°о■н°°╖я╕°╣■║■╗√╝√╜√╛■┐√└√┴√┬ї├Є─Є┼ц╞√╟я╞щ┼°─ї├°┬Є┴√└√┐√╛√╜■╝√╗■║°╣√╕√╖√╢√╡√┤°│√▓°▒√░√п√о√н√м°л°к°й√и√зЄ╝▒у░цпьоянЄмьлщк■ияжяе°д°гїв°б√а°Я√Ю°Э°Ь°Ы√Ъ°Щ√Ш■Ч■Ц■Х■Ф√У°Т√С√Р■П√О√Н√М°Л√К°Й°■Ъ■Ь■Ю■а°б°в√г√д√е√ж√з√и√йїк■м■о■░■▒■│■┤■╡■╢■╖■╕■╣■╗ї╜╘╛ь┐√└√■ЩїШїЧїЦ√■■■■
+В В В В В В В В В В В В В В В В ъ ■$■1■7■<■B■I■K■L■N■O■R■T■U■W■X■Y■Z■]√√░їп°о°н°■╢ї╖я╕■╣√║■╗√╝√╜√╛√┐√└√┴√┬я├Є─√┼▌╞у┼°─ї├°┬я┴°└√┐■╛√╜√╝■╗■║ї╣√╕√╖√╢√╡√┤°│√▓°▒√░√п√о√н√м°л°к°й°иЄ╣▒у░цпьоянЄмьлщк■ияжяе°д°гїв°б√а√Я°Ю°Э°Ь°Ы°Ъ°Ш√Ч■Ц■Х■Ф°У√Т√С√Р■П√О√Н√М°Л√К°Й■И√■Ш■Ъ■Ь■Ю■а°б°в°г√д■е√ж√з√и°й°к■л■о■п■▒■▓■┤■╢■╖■╕■╣■║■╗ц╜┌╛ї┐°°ЧїЦїХ√Ф√■■■■
+В В В В В В В В В В В В В В В В ъ ■$■1■7■<■B■I■K■L■N■O■P■T■U■W■Y■Z■[■]°√п°о°н°м■л√■╢я╖ї╕√╣√║√╗■╝√╜√╛√┐√└√┴я┬ї├°─╫┼у─ї├°┬щ┴√└√┐√╛■╜√╝■╗√║ї╣√╕√╖√╢√╡°┤√│√▓°▒√░√п√о√н°м°л°к°й√иї╢▒у░цпьоянЄмялцк■иЄжье°д°гїв°б√а°Я°Ю√Э°Ь■Ы√Ъ°Щ°Ш√Ч■Ц■Х■Ф°У√Т√С√Р√П■О√Н°М√Л°К√Й√И√■Ш■Ъ■Ь■Ю■Я■а√б°в°г√д√е√ж√з■иїй°к■м■п■░■▓■┤■╡■╖■╕■╣■║■╗┌╜▌╛√ЄХЄФ°У√■■■■■
+В В В В В В В В В В В В В В В В ъ ■$■1■7■<■B■I■K■L■M■O■P■S■U■W■X■Z■[■\■_√°о°н°м°л■к√√╢я╖°╕√╣√║√╗√╝√╜√╛■┐√└Є┴Є┬√├╬─■├я─ї├°┬ї┴ї└■┴°└√┐■╛√╜■╝√╗■║Є╣√╕√╖√╢√╡°┤√│√▓°▒√░√п√о√н°м°л°к°й■иї│▒у░цпьоянЄмялцк■иьжяе√д°гїв°б√а°Я√Ю√Э√Ь°Ы√Ъ°Щ°Ш√Ч■Ц■Х■Ф°У°Т√С■Р√П■О√Н°М√Л°К√Й■И√З√■Ш■Ъ■Ь■Ю√Я■а■б°в°г√д√е√ж√з√иЄй■к■л■о■░■▒■│■╡■╢■╕■╣■║ї╝╘╜Є╛°ьУЄТ■С√■■■■■
+В В В В В В В В В В В В В В В В ъ ■$■1■7■<■B■I■K■L■M■O■P■Q■U■W■X■Z■\■]■_°√н°м°л°к■й√°╢я╖ї╕√╣■║√╗√╝√╜√╛√┐ї└Є┴√┬√├р─╫├ї┬°┴ц└√┐√╛■╜√╝■╗■║я╣√╕√╖√╢√╡°┤√│√▓°▒°░■п√о°н°м°л°к√йї░▒у░цпьоянЄмялцк■ищжЄе°д°г°в°б■а√Я°Ю°Э√Ь°Ы√Ъ°Щ°Ш√Ч■Ц■Х■ФїУ√Т√С■Р√П√О■Н°М√Л√К√Й√И√З■Ж√■Ш■Ъ■Ь■Э■Ю■Я■а■б°в°г√д√е√ж√з°иЄй■к■н■п■▒■▓■┤■╢■╖■╣■╗ц╝╫╜√■РцС°Р°■■■■■
+В В В В В В В В В В В В В В В В ъ ■$■1■7■<■C■I■K■L■M■O■P■Q■S■W■X■Z■[■^■_■a√°м°л°к√й√и√ї╢Є╖°╕°╣√║√╗√╝■╜√╛°┐Є└°┴√┬╫├Є┬Є├ї┬°┴р└■┐√╛√╜■╝■╗■║я╣°╕√╖√╢√╡°┤√│■▓ї▒°░√п■о°н°м°л°к■йЄ│▒р░цпьоянЄмЄлук■ицжЄе°д■г√в°б°а°Я√Ю°Э°Ь√Ы°Ъ√Щ°Ш√Ч■Ц■Х■ФїУ√Т√С√Р■П√О√Н√М√Л√К√Й■И√З°Ж√■Ш■Ъ■Ы■Ь■Э■Ю■Я■а■б√вїг■д√е√ж√зїиЄй■м■о■░■▓■│■╡■╖■╕■║ї╗ц╝щ╜°ЄОьП■О√■■■■■■
+В В В В В В В В В В В В В В В В ъ ■$■1■8■=■C■I■J■L■M■N■P■Q■R■W■X■Z■[■]■_■a√°л°к°й°и■з°Є╢°╖ї╕°╣√║√╗√╝√╜√╛Є┐√└°┴░┬°┴°└ї┐Є└√┐√╛■╜■╝■╗■║ь╣°╕√╖√╢°╡√┤√│√▓°▒°░√п√о°н°м°л■к■йЄ░▒р░цпьоянїмялук■ищж√еїд°г°в°б°а°Я√Ю°Э°Ь√Ы°Ъ°Щ√Ш√Ч■Ц■Х■ФїУ°Т■С√Р■П√О■Н√М√Л√К√Й√И■З°Ж√Е√■Ш■Ъ■Ы■Ь√Э■Ю■Я■а■б■вїг√д√е√ж√зїиїй■л■н■п■▒■│■┤■╢√╕Є╣ї║ї╗Є╝√╜√рМ√Н°■■■■■■
+В В В В В В В В В В В В В В В В ъ ■$■1■8■=■C■I■J■L■M■N■P■Q■R■T■X■Z■[■\■_■a■c√°к°й°и√з√ж√■╡ї╢ї╖ї╕°╣√║√╗√╝√╜Є╛√┐√└°┴у┬р┴°┬°┴ї└ь┐√└√┐√╛■╜■╝■╗√║я╣ї╕√╖√╢°╡√┤√│√▓°▒°░√п√о°н°м√л√кЄн▒р░цпьоянїмЄлрк■иЄжЄеїд°г°в°б°а°Я°Ю√Э°Ь√Ы°Ъ°Щ°Ш■Ч■Ц■Х■ФїУ°Т■С√Р■П■О√Н√М√Л√К√Й■И√З■ЖїЕ■Д√■Ш■Щ■Ъ■Ы■Ь■Э■Ю■Я■а■б■вїг√д√е√ж°зїиїй■м■о■░■▓■┤■╡°╢Є╖ї╕ї╣ї║°┌К°■■■■■В В В В В В В В В В В В В В В В ч ■$■2■8■=■C■I■J■L■M■N■P■Q■R■T■V■Z■[■\■^■`■c°°й°и√з°ж■е°■╡ї╢°╖ї╕ї╣°║√╗√╝°╜°╛√┐√└╫┴■└▌┴ї└┌┐■╛■╜■╝√╗■║ь╣°╕√╖°╢°╡√┤√│√▓°▒°░√п°о°н√м√л■кЄк▒▌░щпьоянямялщк■зЄжЄеїд°г°в°б°а°Я°Ю°Э√Ь°Ы√Ъ°Щ°Ш■Ч■Ц■Х√Ф°У√Т√С■Р√П■О√Н■М°Л√К■Й√И■З√Ж°Е°Д√■Ш√Щ■Ъ■Ы■Ь■Э■Ю■Я■а■б■в°г√д√е√жїзїи°й■л■н■░■▒√│ї┤Є╡°╢ї╖°╕√┌Иї■■■■■В В В В В В В В В В В В В В В В ч ■$■2■8■=■C■I■J■K■M■N■O■Q■R■T■V■W■[■\■^■_■b■f√°и°з°ж√е√д√√╡°╢ї╖ї╕°╣ї║√╗°╝√╜°╛√┐╢└■┴ї└°┐√╛ц┐■╛■╜√╝■╗■║щ╣°╕√╖°╢°╡√┤√│√▓°▒°░√п°о°н√м√ляк▒▌░щпьоянЄмьлщк■зЄжяе°д°гїв°б√а°Я°Ю°Э√Ь°Ы√Ъ°Щ°Ш■Ч■Ц■Х√Ф°У√Т√С■Р√П■О■Н√М√Л√К√Й■И√З■Ж√ЕїД√Г√■Ш√Щ■Ъ■Ы√Ь■Э■Ю■Я■а■б■в√г√д√е√жЄзїи√й■к■м■п°▒°▓°│°┤°╡°╢√╖°┌Ж√■■■■■■■В В В В В В В В В В В В В В В В ч ■$■2■8■=■D■I■J■K■M■N■O■Q■R■T■V■X■Z■]■^■_■`■d°°з°ж√е√д°г√■╡ї╢°╖ї╕ї╣ї║°╗√╝√╜°╛°┐ц└ь┐у└°┐ь╛Є┐■╛√╜■╝■╗■║щ╣ї╕°╖√╢°╡√┤■│°▓°▒°░°п√о√н√м√л■кЄз▒▌░щпьоянЄмьлщк■зяжЄе°дїг°в°б°а√Я°Ю°Э√Ь°Ы√Ъ°Щ°Ш■Ч■Ц■Х■ФїУ√Т√С■Р■П√О■Н√М√Л■К√Й■И√З■Ж√Е°ДїГ■В√■Ш√Щ■Ъ√Ы■Ь■Э■Ю■Я■а√б■в■г°д√е√жЄзїи√й■л■н■п√░°▒°▓°│°┤°╡■╢√┌Д√■■■■■■■■В В В В В В В В В В В В В В В В ч ■$■2■8■=■D■H■J■K■L■N■O■P■R■T■V■X■Y■]■^■_■`■b■i√°ж°е√д°г√в■б√■╡°╢ї╖ї╕°╣Є║°╗√╝√╜°╛к┐╘╛■╜■╝■╗■║ц╣°╕ї╖°╢√╡√┤■│°▓°▒°░°п√о√н√м√лЄд▒▌░щпьоянЄмьлщк■зяжЄеїд°г°в°б°а°Я√Ю°Э√Ь°Ы√Ъ°Щ°Ш■Ч■Ц■Х■ФїУ√Т■С√Р■П■О√Н■М√Л√К■Й√И■З√Ж√Е√ДїГ°В√■Ш√Щ■Ъ√Ы■Ь√Э■Ю■Я■а■б■в■г°д√е°жЄзЄи■к■л■н■п°░°▒ї▓°│√┤√■БцВїБ√■■■■■■■■В В В В В В В В В В В В В В В В ч ■$■2■8■=■D■H■J■K■L■N■O■P■R■T■V■X■Y■[■^■_■`■b■g°°е√д°г√в°б√■╡ї╢ї╖ї╕Є╣°║°╗√╝√╜┬╛щ┐ї╛■╜щ╛ї╜■╝■╗√║ц╣°╕ї╖°╢√╡√┤■│°▓°▒ї░√п√о√н√м■л√■?√б▒▌░щпьоянЄмьлщк■зяжяе°д°г°в°б°а°Я√Ю°Э√Ь°Ы√Ъ°Щ°Ш■Ч■Ц√Ф°У√Т√С√Р■П■О√Н■М√Л■К√Й√И√З√Ж√Е■Д√ГїВ√Б√■Ш■Щ√Ъ√Ы■Ь√Э■Ю√Я■а■б■в■г√д√еїжЄзЄи■й■л■н■о√п°░°▒°▓■│√╫√■■■■■■■■■В В В В В В В В В В В В В В В В ч ■$■2■9■>■D■H■J■K■L■N■O■P■R■T■V■X■Z■[■]■`■a■b■g■k√°д°г√в°б√а■Я√■╡ї╢Є╖ї╕ї╣°║√╗°╝Є╜ь╛°╜╬╛Є╜√╛Є╜°╝√╗■║ц╣ї╕ї╖°╢√╡√┤■│°▓°▒°░√п√о√н√м■ляб▒р░цпьоянЄмьлщк■зяжяе°д°г°в°б°а°Я°Ю√Э°Ь√Ы√Ъ°Щ°Ш■Ч■Ц√Ф°У√Т√С■Р√П■О■Н√М■Л√К√Й√И√З°Ж■Е√Д√Г■ВїБ°√Щ√Ъ√Ы√Ь■Э■Ю√Я■а■б√в■г■д°еїжязїи■й■л■м√о°п°░√▒°┌}°■■■■■■■■■В В В В В В В В В В В В В В В В ч ■$■2■9■>■D■H■I■K■L■M■O■P■R■T■V■X■Z■[■]■_■a■c■g■k■p√°г√в°б√а√Я■Ю√√╡Є╢Є╖Є╕√╣°║√╗°╝┐╜ь╛у╜Є╝°╗■║у╣ї╕Є╖√╢√╡■┤√│√▓°▒√░їп√о√н√мяЮ▒р░цпьоянЄмьлщк■зяжяе°д°г°в°б°а°Я°Ю√Э°Ь√Ы√Ъ°Щ°Ш■Ч■Ц√Ф°У√Т√С■Р■П√О■Н■М√Л°К√Й√И√З√Ж√Е√Д■Г√В√Б√А°√Щ√Ъ√Ы√Ь■Э■Ю√Я■а√б■в■г■дїеЄжяз°и■й■л■м■н°о°п√╘{√■ ■■■■■■■■■В В В В В В В В В В В В В В В В ч ■$■2■9■>■E■H■I■K■L■M■O■P■R■T■V■X■Z■[■]■_■`■c■g■k■p°√в°б√а√Я°Ю■Э√ї╡Є╢Є╖°╕√╣°║°╗╤╝┼╜Є╝Є╗√║у╣Є╕Є╖√╢■╡■┤■│°▓°▒√░°пїо√н■мяЫ▒р░цпьоянЄмьлщк■зяжяе°д°гїв√б°а°Я°Ю√Э°Ь√Ы°Ъ√Щ°Ш■Ч■Ц√Ф√У√Т√С√Р■П√О■Н■М°Л√К√Й√И√З°Ж■Е√Д√Г■В√Б√А■°√Щ√Ъ√Ы√Ь■Э√Ю■Я■а√б■в√г■дЄеЄжяз√и■й■к■м√н√о°°xьyїx°■ ■■■■■■■■■В В В В В В В В В В В В В В В В ч ■$■2■9■>■E■H■I■K■L■M■O■P■R■U■W■X■Z■\■]■_■a■c■h■l■p■r√°б√а√Я°Ю√Э√Ь√■┤Є╡ї╢ї╖°╕√╣°║ц╗╦╝Є╜ь╝Є╗Є║√╣■╕щ╣я╕√╖√╢■╡■┤■│√▓ї▒°░√пЄо√н■мяШ▒р░цпьоянЄмьлщкьжяе°д°гїв°б√а°Я°Ю√Э°Ь√Ы°Ъ√Щ°Ш■Ч■Ц√Ф√У√Т√С√Р■П√О■Н√М√Л√К√Й°И√З■Ж√Е√Д√Г√В√Б■А√°√Щ√Ъ√Ы√Ь■Э√Ю■Я√а■б■в√г√дяеяжЄз√и■к√м°√t√uуv°■$■ ■■■■■■■■■В В В В В В В В В В В В В В В В ч ■$■2■9■>■E■H■I■J■L■M■N■P■R■U■W■X■Z■\■]■_■a■c■h■m■q■r■s√√а√Я°Ю√Э°Ь■Ы°√┤Є╡ї╢°╖√╕ї╣ь║┌╗╤╝Є╗Є║Є╣°╕ь╣ї╕√╖√╢■╡■┤√│■▓Є▒√░°пЄо°н■мяШ▒р░цпьоянЄмьлщкьжяе°дїг°в°б√а°Я°Ю√Э°Ь√Ы°Ъ√Щ°Ш■Ч■Ц■Ф°У√Т√С√Р■П√О■Н√М√Л√К°Й√И■З√Ж√Е√Д√Г√В■Б√А√√~√√Щ√Ъ√Ы■Ь√Э√Ю■Я√а■б√в■гїдяеяжЄз■и°■p√q°r√sяt°■8■$■ ■■■■■■■■■В В В В В В В В В В В В В В В В ч ■$■2■9■>■E■H■I■J■L■M■N■P■R■U■W■X■Z■\■]■_■a■c■h■m■q■r■s°√Я√Ю√Э°Ь√Ы√Ъ°ї┤Є╡√╢°╖°╕ь╣у║╫╗ї╝ї╗Є║Є╣р╕√╣√╕√╖√╢√╡■┤√│■▓■▒ь░°п°ояняХ▒р░цпьоянЄмьлщкьжяе°дїг°в°б√а°Я°Ю√Э°Ь√Ы°Ъ√Щ°Ш■Ч■Ц■Ф°У√Т√С√Р■П√О■Н√М°Л√К√Й√И■З√Ж■Е√Д√Г√В√Б√А√√~ї■Щ√Ъ√Ы■Ь√Э√Ю√Я■а■б√в■гядяеяж■зї√m°n√o°p√q√r°√8■#■!■■■■■■■■■В В В В В В В В В В В В В В В В ч ■$■2■9■?■E■G■I■J■K■M■N■P■R■U■W■Y■Z■\■^■_■a■c■h■l■q√s■t°■Ю√Э°Ь√Ы√Ъ°Щ°■│ї┤ї╡√╢ї╖Є╕ь╣■╕■╣┌║у╗Є║ї╣Є╕°╖ц╕■╖√╢√╡√┤√│■▓■▒щ░√п°оян■мЄП▒р░цпьоянЄмьлщкщжЄеїд°г°в°б√а°Я°Ю√Э°Ь√Ы°Ъ√Щ°Ш■Ч■Ц√Ф√У°Т√С■Р√П■О√Н√М√Л√К√Й■И√З■Ж√Е√Д√Г√В√Б√Аї■}■{ї√Ъ■Ы√Ь√Э√Ю√Я■а■б√в■гьдье°ж°√i°j√k°l√m°n°■9■8■7■#■!■■■■■■■■■В В В В В В В В В В В В В В В В ч ■$■2■:■?■F■G■I■J■K■M■N■P■S■U■W■Y■Z■\■^■_■a■c■h■l■q■r√t■u°√Ь°Ы√Ъ√Щ°Ш■Ч√°│ї┤°╡°╢Є╖щ╕■╖■╕ц╣╤║Є╣Є╕▌╖√╕■╖■╢√╡■┤√│√▓■▒√░цп√оян√м√■B√М▒р░цпьоянЄмьлщкщжяе°д°г°в°б√а°Я°Ю√Э°Ь√Ы°Ъ√Щ°Ш■Ч■Ц√Ф√У°Т√С■Р√П■О√Н■М√Л√К√Й√И■З√Ж√Е■Д√Г√В√БьА■~°zї√Ы√Ь√Э√Ю√Я■а√б■в°гьдЄеї■e°f√g°h√i°j■k°■:■9■8■7■"■!■■■■■■■■■В В В В В В В В В В В В В В В В ч ■$■2■:■?■F■G■I■J■K■M■N■P■S■U■W■Y■Z■\■^■_■a■d■h■m■q√r■t√u°■Ы°Ъ√Щ°Ш√Ч√Ц√ї│°┤ї╡ї╢ц╖■╢√╖ї╕╫╣ї║ї╣Є╕Є╖ї╢ц╖√╢■╡■┤■│■▓√▒√░уп√оЄн°м√■B√Й▒р░цпьоянЄмьлщкщжяе°д°г°в°б√а°Я°Ю√Э°Ь√Ы°Ъ√Щ°Ш■Ч■Ц√Ф°У√Т√С■Р√П■О√Н■М√Л√К√Й√И■З■Ж√Е√Д√Г√ВїБЄА■~■z°y■xї■Ы√Ь√Э√Ю√Я■а√б■вЄгьдї■a°b√c√d°e√f√gї■:√9■8■7■"■!■■■■■■■■■В В В В В В В В В В В В В В В В ъ ■
+■$■2■:■?■F■G■H■J■K■L■N■P■S■U■W■Y■[■\■^■`■a■d■h■m■q√r■s■u√v√√Ъ√Щ√Ш°Ч√Ц√Х■Ф√■▓°│Є┤ї╡щ╢°╡■╢√╖▌╕у╣Є╕Є╖┌╢°╖■╢■╡■┤■│■▓■▒√░√пьо■п°о°нїм°■B√Ж▒р░цпьоянЄмьлщкщжяе°д°г°в°б°а√Я°Ю°Э√Ь√Ы°Ъ√Щ°Ш■Ч■Ц√Ф√У°Т√С■Р√П■О√Н■М√Л√К√Й■И√З■Ж√Е√Д√Г√ВьБ√А■~■zїx■wь√Э√Ю√Я■а√б■вьг■дя√^°_√`°a√b°c°■<■;■:■9√8■7■"■!■■■■■■■■■В В В В В В В В В В В В В В В В ъ ■
+■$■2■:■?■F■G■H■J■K■L■N■Q■S■U■W■Y■[■\■^■`■a■d■h■m■q√r√s■u√w√■Щ√Ш√Ч°Ц√Х√Ф√У√√▓ї│Є┤щ╡°┤■╡√╢щ╖╤╕Є╖Є╢ї╡р╢■╡■┤■│■▓√▒■░■про°нЄм°■C√Г▒р░цпьоянямьлькщжяе°д°г°в°б°а√Я°Ю°Э√Ь√Ы°Ъ√Щ√Ш√Ч■Х√Ф√У°Т√С■Р√П■О√Н■М√Л√К■Й√И■З√Ж■Е°Д√ГЄВ°Б°А■~■{■x°w°vу■Я√а√б°вц■X■Y■Z√[√\°]√^°_■`°■<√;■:■9■8√7■#■!■■■■■■■■■В В В В В В В В В В В В В В В В ъ ■■$■2■:■?■E■G■H■J■K■L■N■Q■S■U■W■Y■[■\■^■`■a■d■i■m√q√r√s■u■w■x√√Ч°Ц√Х√Ф√У√Т■С√ї▓ї│ц┤°│■┤√╡ї╢╝╖ї╢╫╡ї╢■╡■┤■│√▓■▒■░■п■ощн√о°нїм°■п°В▒▒▒р░цпяоьнямьлькщжяе°д°г°в°б°а°Я√Ю°Э√Ь√Ы√Ъ°Щ√Ш√Ч■Х√Ф√У°Т√С■Р√П■О■Н√М√Л■К√Й√И■З√Ж■Е°ДїГ°В°Б°А■~■z■wїvїu┐■O■P■R■S■T■U■W■X°Y√Z°[■\°■B■=■<■;√:■9■8■7■6■#■!■■■■■■■■■В В В В В В В В В В В В В В В В ъ ■
+■$■2■:■@■E■G■H■I■K■L■N■Q■S■U■W■Y■[■]■^■`■b■d■i■m√q√r√s■t■u■x■y√■Ц°Х√Ф√У√Т√С√Р√■▒Є▓я│■┤■│√▓■▒■▓■│√┤√╡▌╢у╖Є╢Є╡ї┤▌╡■┤■│√▓■▒■░■п■о°н■мщнЄм°■E°√░Г▒р░цпяоьнямьлькщжяе°д°г°в°б°а°Я√Ю°Э√Ь√Ы√Ъ°Щ√Ш√Ч■Х■Ф°У°Т√С■Р√П■О■Н√М√Л■К√Й■И√З√Ж■ЕїД°Г°В°Б°А■~■z■wїuїt√s°■#■'■*щ■C■D■E■G■H■I■J■L■M■N■O■Q■R■S■T■U■V°W√X°■B■=√<■;■:■9√8■7■6■#■!■■■■■■■■■В В В В В В В В В В В В В В В В ъ ■
+■$■2■:■@■E■G■H■I■K■L■N■Q■S■U■W■Y■[■]■^■`■b■e■i■n√q√r√s√t■u√y√°Ф√У√Т√С√Р√П°°▒Є▓√│√▓√▒√░√▓■│√┤щ╡╤╢Є╡╘┤ї╡■┤√│■▓■▒■░■п■оцм°н°м■л°■F■E°°░Г▒р░цпяоьнямялщкщжяе°д°г°в°б°а°Я√Ю√Э√Ь√Ы°Ъ°Щ√Ш√Ч■Х■Ф°У°Т√С■Р√П■О■Н√М√Л■К√Й■И√З√Ж■ЕїД°Г°В°Б°А■}■z■w■uїt°sїrЄ■(■,■0■3■7■;■=■>■@■A■B■C■D■F■G■H■I■J■L■M■N■O■Q■R■Sя■C■>■=■<√;■:■9■8√7■6■#■!■■■■■■■■■В В В В В В В В В В В В В В В В ъ ■
+■$■2■;■@■E■F■H■I■J■L■O■Q■S■U■X■Y■[■]■^■`■b■e■i■n√q√r°s√t■u■x■z√√У√Т°С√Р√П√О■Н√■░ї▒°▓√▒√░√п■░■▒√▓■│ї┤╝╡ї┤я│┌┤■│■▓■▒■░■п■о°м■лум√л°■F■E°Є░Ж▒у░упяоьнЄмялщк■йщжяе°д°г°в√б°а°Я°Ю√Э√Ь√Ы°Ъ°Щ√Ш√Ч■Х■Ф°УїТ■С■Р√П■О■Н√М■Л√К√Й■И√З√Ж■ЕїД°Г°В°Б√А■■}■z■vїt°sїr√qу■5■9■;■<■=■?■@■A■B■C■E■F■G■H■Iщ■H■D■?■>■=■<■;√:■9■8■7√6■#■!■ ■■■■■■■■В В В В В В В В В В В В В В В В ъ ■■$■3■;■@■E■F■H■I■J■L■O■Q■S■U■X■Z■[■]■_■`■b■e■i■n°q√r√s√t√u■x°■Т√С°Р√П√О√Н√М√°░√▒√░√п°о■п■░√▒√▓■│╤┤я╡Є┤╘│я┤■│■▓■▒■░■п■о■мцлїм■л°■H■G°щ░Й▒у░цпьоьнЄмялщк■йщжЄе°д°г°в°б°а°Я°Ю√Э√Ь√Ы°Ъ°Щ°Ш■Ч■Х■ФїУ°Т■С■Р■П√О■Н√М■Л√К√Й■И√З√Ж√Е°Д°Г°В°Б√А■■}■z■v°tїs°r√q■o■n√m▌■:■;■=■>■?р■L■I■E■@■>√=■<■;■:√9■8■7■6■5■#■!■ ■■■■■■■■В В В В В В В В В В В В В В В В ъ ■■$■3■;■@■E■F■H■I■J■L■O■Q■S■U■X■Z■[■]■_■`■b■e■j■n■p√q√r√s√t√u■v■w°°Р√П√О√Н√М√Л■К°√░√п√о√н■м■о■п√░√▒√▓ь│╤┤Є│я▓▌│■┤■│■▓■▒■░■п■о■м√л√кул°■H■G°р░П▒у░цпьоянЄмьлщк■йьжяе°д°г°в°б°а°Я√Ю√Э√Ь°Ы°Ъ°Щ°Ш■Ч■Х■Ф°У°Т√С■Р■П√О■Н√М■Л√К√Й√И■З√Ж√Е°Д°Г°В√Б°А■■}■y■v°tїs√r■q■p■o■m■l√k√j√i√h╬■S■R■N■M■L■I■E■A■?■>■=√<■;■:■9√8■7■6■5■#■!■ ■■■■■■■■В В В В В В В В В В В В В В В В ъ ■■$■3■;■A■E■F■G■I■J■L■O■Q■S■V■X■Z■[■]■_■`■b■e■j■n■p√q√r√s°t√u√v°√П√О√Н√М√Л√К√Й°√о■н√м√л■м√о■п√░√▒°▓╝│╤▓я│■▓■▒■░■п■о■м■лщкїлї■Hї╫░Х▒р░щпьоянЄмщльк■йьжяе°д°г°в°б°а°Я√Ю√Э√Ь°Ы°Ъ°Щ°Ш■Ч■Х■Ф°У°Т■С√Р■П√О■Н√М√Л■К√Й√И■З√Ж√Е°Д°Г°В√Б°А■■}■y■v°t°s■r■q■p■o■n■m■l√k√j√i√h■g√f√e■dь■[■Y■W■V■T■Q√N■M■J■F■A■@■?■>■=■<√;■:■9■8√7■6■4■#■!■ ■■■■■■■■В В В В В В В В В В В В В В В В ъ ■■$■3■;■A■E■F■G■I■J■M■O■Q■S■V■X■Z■\■]■_■a■b■e■j■o■p√q°r√s√t√u√v■w√√О√Н√М√Л√К√Й√И■Зї√л√к■л■м■н■о√п√░√▒│▓я▒▌▓√│■▓■▒■░■п■о■н■л■к°йщк°■I■Hї╬░Ы▒р░щпьоянямялщк■йьжяе°д°г°в°б°а√Я°Ю√Э√Ь°Ы°Ъ°Щ√Ш√Ч■Х■Ф°У√Т√С√Р■П√О■Н√М√Л■К√Й√И■З√Ж√Е°Д°Г°В√Б°А■■}■y■v°t√s■q■p√o■n√m√l√k■j√i√h√g√f■e√d√c■b■a■_■\■Z■X■V■S√O■N■M■J■F■C■A■@√>■=■<■;√:■9■8■7√6■4■#■"■ ■■■■■■■■В В В В В В В В В В В В В В В В э √■$■3■;■A■D■F■G■I■J■M■O■Q■S■V■X■Z■\■]■_■a■b■f■j■o√p√q√r√s√t√u√v√w°√М√Л√К√Й√И√З√Жї√й■к■л■м√н■о√п√░щ▒╤▓╤▒ь▓√▒■п■о■н■л■кщй√кї■IЄ╚░Ю▒р░щпьоянямьльк■йьжяе°д°г°в°б√а°Я√Ю°Э√Ь°Ы°Ъ√Щ°Ш√Ч■Х■Ф√У°Т√С√Р■П√О■Н√М√Л■К√Й√И■З√Ж√Е°Д°Г√В°БїА■}■y■v√t■s■r■q√p■o√n√m√l√k√j■i√h√g■f√e√d√c■b■a■_■\■Z■V■R■P√O■M■K■G■D■C■B■@■>√=■<■;■:√9■8■7■6■5■3■#■"■ ■■■■■■■■В В В В В В В В В В В В В В В В э √■$■3■;■A■D■F■G■H■J■M■O■Q■S■V■X■Z■\■]■_■a■b■f■j■o√p√q√r√s√t°u√v■w■x°■Л√К√Й√И√З√Ж√Е■ДЄ■к■л√м√н■о√п°░╝▒ь░▌▒√▓√▒■░■о■н■л■кїиЄйї■J■Iї╝░д▒р░щпьоянямьльк■йьжяе°д°г°в°б√а√Я°Ю√Э°Ь°Ы°Ъ√Щ°Ш√Ч■Х°У°Т√С√Р■П√О■Н√М√Л■К√Й√И■З√Ж√Е°Д°Г√В°БїА■}■y■v■t■s√r■q√p√o√n■m√l√k√j■i√h■g√f√e√d√c■b■a■^■\■X■R√P■O■N■K■H■F■D■C■B■@■>■=√<■;■:■9√8■7■6■5■3■#■"■ ■■■■■■■■В В В В В В В В В В В В В В В В э √■$■3■<■A■D■F■G■H■J■M■O■Q■T■V■X■Z■\■^■_■a■c■f■k■o√p√q√r°s√t√u√v■w■x■yї■Й√И√З√Ж√Е√Д√Г■Вї√л√м√н■о√пМ░щ▒■░■о■н■л■кциї■JЄ■п╢░к▒р░щпьоянямьльк■йьжяе°д°г√в°б°а√Я°Ю°Э°Ь√Ы°Ъ√Щ°Ш√Ч■Х■Ф√У°Т√С√Р■П√О■Н√М√Л■К√Й√И■З√Ж√Е°Д√Г°В°БїА■}■y■u■t■s√r■q√p√o√n√m√l■k■j√i■h√g√f√e√d■c√b■a■^■Z■V■R■P■O■N■L■I■G■F■D■C■B■@■>■=■<√;■:■9■8√7■6■5■2■#■"■ ■■■■■■■■В В В В В В В В В В В В В В В В ъ √■3■<■B■D■E■G■H■K■M■O■Q■T■V■X■Z■\■^■_■a■c■f■k■o√p°q√r√s√t√u√v■w■x■y■zї√З√Ж√Е√Д√Г√В√Б■Аї■л√м√н■о╘пц░ьп▌░ї▒■░■о■н■л■к■йязЄ■K■Jї°п░░░▒р░щпьоянямьльк■ияжье°д√г°в°б°а°Я√Ю°Э°Ь√Ы°Ъ√Щ°Ш√Ч■Х■Ф°У√Т√С√Р■П√О√Н■М√Л■К√Й■И√З√Ж√Е√Д°Г°ВїБ°А■}■y■u√s√r√q■p√o√n√m■l■k√j■i√h√g√f√e■d√c■b■a■`■\■Y■V■R■P■O■L■J■I■G■F■D■C■B■@■>■=■<■;√:■9■8■7√6■5■1■#■"■ ■■■■■■■■
+В В В В В В В В В В В В В В В В э °■3■<■B■D■E■G■H■K■M■O■Q■T■V■X■Z■\■^■_■a■c■f■k√o√p√q√r√s√t√u√v■w■x■y■z■|■}ї√Е√Д√Г√В√Б√А√■~ї√м■н°оТпщ░■о■н■л■к■иЄжЄ■L■Kїїп░░н▒у░цпьоянямьльк■ияжье√д°г°в°б°а°Я°Ю√Э°Ь√Ы°Ъ√Щ°Ш√Ч■Х■Ф°У°Т■С√Р√П■О√Н■М√Л■К■Й√И√З√Ж√Е√Д°Г°ВїБ°А■|■y■u√s√r√q■p√o√n■m■l√k√j■i√h√g√f■e√d√c■a■`■_■\■Y■U■Q■O■M■L■J■I■G■F■E■C■B■@■>■=■<■;■:√9■8■7■6√5■1■$■"■ ■■■■■■■■
+В В В В В В В В В В В В В В В В э °■3■<■B■D■E■G■H■K■M■O■Q■T■V■X■[■\■^■`■a■c■g■k√o√p√q√r√s°t√u■v■w■x■y■z■|■}■~■ї√Г√В√Б√А√√~■}√|ї■м■нко╬п■о■м■к■й■з°еЄ■N■M■L■K°яп│░к▒у░цпьоянямьльк■ияжье√д°г°в°б°а°Я°Ю√Э°Ь√Ы√Ъ°Щ°Ш√Ч■Х■Ф°У°Т√С■Р√П■О■Н√М■Л√К■Й√И√З√Ж■Е°Д°ГїВ°Б√А■■|■x■u√s√r■q√p√o■n√m■l√k■j√i√h√g■f√e√d■c■b■a■`■_■\■Y■U■P■O■M■L■J■I■G■F■E■C■B■@■>■=■<■;■:■9√8■7■6■5■4■0■$■"■ ■■■■■■■■
+В В В В В В В В В В В В В В В В э °■3■<■B■D■E■F■H■K■M■O■R■T■V■X■[■\■^■`■a■c■g■k√o√p√q°r√s√t√u■v■w■x■y■z■|■}■~■■Бї■В√Б√А√√~√}■|√{■zЄнн╬о■н■л■к■и■з■дя■O■N■M■Lїьп│░к▒у░цпьоянямьльк■ияжье√д°г°в°б°а°Я°Ю√Э°Ь√Ы√Ъ°Щ°Ш√Ч■Х■Ф°У°Т√С■Р■П√О■Н■М√Л■К√Й√И√З■Ж√Е√ДїГїВ°Б√А■■|■x■u√s√r■q√p■o√n■m√l■k√j√i√h√g■f√e■d■c■b°a■_■\■X■T■Q■O■M■L■J■I■G■F■E■C■B■@■>■=√;■:■9■8■7√6■5■4■0■$■"■ ■■■■■■■■
+В В В В В В В В В В В В В В В В э °■3■<■B■D■E■F■I■K■M■O■R■T■V■X■[■\■^■`■b■c■g■l√o°p√q√r√s√t√u■v■w■x■y■z■|■}■~■А■Б■В■Гї■А√√~√}√|■{√z√y√xЄ╬м■л┌мун■м■л■й■ия■P■O√N■Mї√ощп╢░к▒у░цпьоянямялщк■ияжяе°д°г°в°б°а°Я√Ю°Э°Ь√Ы√Ъ°Щ°Ш√Ч■Х■Ф°У°Т■С√Р■П■О√Н■М√Л√К√Й■И√З■Ж√Е√ДЄГ°В√Б°А■■|■x■t√s■r√q√p■o√n■m√l■k√j√i√h■g√f■e■d■c°b√a■_■\■W■T■Q■O■M■L■J■I■G■F■E■C■B■@■>■<■;■:√9■8■7■6√5■4■/■$■"■ ■■■■■■■■
+В В В В В В В В В В В В В В В В э °■3■<■B■C■E■F■I■K■M■O■R■T■V■X■[■]■^■`■b■c■g■l■n√o√p√q√r√s√t√u■v■w■x■y■z■|■}■~■А■Б■В■Г■Е■Ж°√~√}√|√{■z√y√x√w√vярлїк╘льм■л■кь■Q■P■O■N■Mї°оцп╢░н▒▌░щпьоянямялщк■ияжье°д°г°в√б°а°Я√Ю°Э√Ь°Ы√Ъ°Щ°Ш√Ч■Х■Ф°У√Т√С■Р√П■О√Н■М√Л√К√Й■И√З■Ж√ЕїД°Г√В√Б°А√■{■x■t■s√r√q√p■o■n√m■l√k°j■i■h√g■f■e■d°c√b√a■_■[■X■T■Q■O■M■L■J■I■H■F■E■C■B■@■>■<■;■:■9√8■7■6■5√4■/■$■"■!■■■■■■■В В В В В В В В В В В В В В В В ъ °■3■=■B■C■E■F■I■K■M■O■R■T■V■Y■[■]■^■`■b■c■g■l■n√o√p√q√r°s√t■u■v■w■x■y■z■|■}■~■А■Б■В■Г■Е■Ж■З■Й°√|√{√z■y√x√w√v√u■t■sщЄк■й√и°й╫кьль■S■R■Q■P■O■NЄїоцп╢░н▒▌░щпьоянямялщк■ияжяеїд°г°в°б√а°Я√Ю°Э√Ь°Ы√Ъ°Щ°Ш■Ч■Ц■Х■Ф°У√Т√С■Р√П■О√Н■М√Л√К■Й√И■З√Ж√ЕїД√Г√В°Б°А√■{■x■t√s√r■q■p√o■n√m√l√k■j■i√h■g■f■e°d√c√b■a■`■^■[■X■T■Q■O■M■L■J■I■H■F■E■C■B■@■>■<■;■:■9■8√7■6■5■4■3■.■$■"■!■■■■■■■В В В В В В В В В В В В В В В В ъ °■3■=■B■C■E■F■I■K■M■P■R■T■V■Y■[■]■_■`■b■d■h■l■n√o√p°q√r√s√t■u■v■w■x■y■z■|■}■~■А■Б■В■Д■Е■Ж■З■Й■Кї√z■y√x√w√v√u■t√s√r■q▌√зїи┌й▌■S■R√Q■PяїньоЄп╢░░▒▌░щпьоянямялщк■ияжяеїд°г°в°б√а°Я√Ю°Э√Ь°Ы√Ъ°Щ°Ш■Ч■Ц■Х■Ф√У°Т√С■Р√П■О√Н■М√Л√К■Й√И√З√Ж√Е√Д√Г°В√Б°А°■{■x■t√s■r√q■p√o■n√m√l■k■j√i■h■g■f°e√d√c√b√`■^■[■W■T■Q■O■M■L■J■I■H■F■E■C■B■@■>■<■;■:■9■8■7√6■5■4■3■.■$■"■!■■■■■■■В В В В В В В В В В В В В В В В ъ °■3■=■B■C■D■G■I■K■M■P■R■T■V■Y■[■]■_■`■b■d■h■l■n°o√p√q√r√s√t■u■v■w■x■y■z■|■}■~■А■Б■В■Д■Е■Ж■И■Й■К■М■Н°■y■x√w√v√u√t■s√r√q√p■o√n■mЫ√U■T■S■R■QяЄмьнЄо°п╣░░▒р░цпьоянямьльк■зяжяеїд°г°в°б√а°Я√Ю°Э√Ь°Ы√Ъ°Щ°Ш■Ч■Ц■Х■Ф√У°Т√С■Р√П■О√Н■М√Л√К√Й■И√З√Ж■Е°Д√Г√В°БїА√■|■x■t√s■r√q■p√o√n■m■l√k■j■i■h■g°f√e°d■c√a√`■^■[■W■T■Q■O■M■L■J■I■H■F■E■C■B■@■>■<■;√9■8■7■6√5■4■3■-■$■"■!■■■■■■■В В В В В В В В В В В В В В В В ч °■=■B■C■D■G■I■K■M■P■R■T■V■Y■[■]■_■`■b■d■h■m√n√o√p√q√r√s√t■u■v■w■x■y■z■|■}■~■А■Б■В■Д■Е■Ж■И■Й■К■М■Н■Оя√u√t■s√r√q√p■o√n√m■l√k√j■i■h┼■Z√Y■X√W■V■U■T■S■Rщ■мїлямЄнїо°п┐░░▒р░цпьоянЄмщльк■зяжяеїд°г°в°б√а°Я°Ю√Э°Ь√Ы°Ъ√Щ°Ш■Ч■Ц■Х■Ф√У°Т√С√Р■П■О√Н√М■Л√К√Й√И■З■Ж√Е√Д√Г°В°БЄА■■|■x■t√s■r√q■p√o■n■m√l■k■j■i■h°g√fїe√b√a√`■^■[■W■T■Q■O■M■L■K■I■H■F■E■C■B■@■>■<■;■9√8■7■6■5√4■3■-■$■#■!■■■■■■■■В В В В В В В В В В В В В В В В ъ °■=■B■C■D■G■I■K■M■P■R■T■W■Y■[■]■_■a■b■d■h■m√n√o√p√q√r°s■t■u■v■w■x■y■z■|■}■~■А■Б■В■Д■Е■Ж■И■Й■К■М■Н■О■Р■Сщ■r√q√p■o√n√m√l■k√j√i■h√g■f√e√d■cЄ■_■^√]■\√[■Z■Y√X■W■V■U√TщрлїмїнЄоїп┬░│▒р░цпьоянЄмщльк■зяжяеїд°г°в°б°а°Я√Ю°Э√Ь√Ы°Ъ√Щ°Ш■Ч■Ц■Х■Ф√У°Т√С√Р■П√О■Н√М√Л■К√Й■И√З■Ж■Е√Д√Г°ВьБ√А■■{■x■t√s■r√q■p■o√n■m■l√k■j°h√gїf■d√b√a√`■_■^■[■W■T■Q■O■M■L■K■I■H■F■E■C■B■@■>■<■;■9■8√7■6■5■4√3■,■$■#■!■■■■■■■■В В В В В В В В В В В В В В В В ъ °■=■A■C■D■G■I■K■N■P■R■T■W■Y■[■]■_■a■b■d■h■m√n√o√p°q√r■s■t√u■v■w■x■y■{■|■}■~■А■Б■В■Д■Е■Ж■И■Й■К■М■Н■О■Р■С°Тщ√o■n√m√l√k■j√i■h√g√f■e√d■c√b■a√`■_√^■]√\■[■Z√Y■X■W√V■UьркїлїмїнЄоЄп╚░░▒р░цпьоянЄмьлщк■зяжяеїд°г°в°б°а°Я°Ю√Э√Ь√Ы°Ъ√Щ°Ш■Ч■Ц√Ф°У√Т√С√Р■П√О√Н■М√Л■К■Й√И■З√Ж■Е■Д°ГяВїБ√А■■{■w■t■s√r■q■p√o■n√m■l■k■j■i°hїg■f√c√b√a√`■_■^■[■W■T■Q■O■M■L■K■I■H■F■E■C■A■@■>■<■;■9■8■7√6■5■4■3■2■+■$■#■!■■■■■■■■В В В В В В В В В В В В В В В В ъ °■=■A■C■E■G■I■K■N■P■R■T■W■Y■[■]■_■a■b■d■i■m√n°o√p√q√r■s■t■u■v√w■x■y■{■|■}■~■А■Б■В■Д■Е■Ж■И■Й■К■М■Н■О■Р■С°Т√У■Ф■Ыщ■l√k■j√i√h■g√f√e■d√c■b√a■`√_■^√]■\■[√Z■Y√X■Wь╤к°лїмїнЄоЄп╦░н▒р░цпьоянЄмьлщк■зяжяеїд°г°в°б°а°Я°Ю√Э√Ь√Ы√Ъ°Щ°Ш■Ч■Ц√Ф√У°Т√С√Р■П√О■Н√М■Л√К■Й■И√З■Ж■Е√ДяГїВ√Б°А■■{■w■t■s■r√q■p√o■n■m■l■k√j°iїh√d√c√b√a√`■_■^■[■W■T■Q■O■M■L■K■I■H■F■E■C■A■@■>■<■;■9■8■7■6√5■4■3■2■+■$■#■!■■■■■■■■В В В В В В В В В В В В В В В В ъ °■>■A■B■E■G■I■K■N■P■R■T■W■Y■[■^■_■a■c■d■i√m√n√o√p√q√r■s■t■u■v■w■x■y■z■{■|■}■~■А■Б■В■Д■Е■Ж■И■Й■К■М■Н■П■Р■С°ТЄУ°Ыщ√h√g■f√e■d√c■b√a■`√_■^√]■\√[■ZуЄй╫к°лїмїнЄоЄп╦░н▒р░цпьоянЄмьлщк■зяжяеїд°г°в°б°а°Я√Ю√Э√Ь°Ы√Ъ°Щ°Ш■Ч■Ц√Ф√У°Т√С√Р■П√О■Н■М√Л■К√Й■И■З√Ж■Е°ДяГ°В√Б√А■■~■{■w√s√r■q√p■o■n■m■l√k°j°i■e√d√c√b√a√`√_■^■[■W■T■Q■O■N■L■K■I■H■F■E■C■A■@■>■<■;■9■8■7■6■5√4■3■2■*■$■#■!■■■■■■■■В В В В В В В В В В В В В В В В ъ °■>■A■B■E■G■I■K■N■P■R■U■W■Y■[■^■_■a■c■d■i√m√n√o√p√q√r■s■t■u■v■w■x■y■z■{■|■}■■А■Б■В■Д■Е■Ж■И■Й■К■М■Н■П■Р■С√ТьУ■ФЄЪЫщй╫к°лїмїнЄоЄп╦░н▒р░цпьоянямьльк■зяжяе°дїг°в°б°а√Я°Ю√Э√Ь°Ы√Ъ°Щ°Ш■Ч■Ц√Ф√У°Т√С√Р■П√О■Н■М■Л√К■Й√И■З√Ж√ЕїДїГ√В√Б°А■■~■{■w■t■s√r■q■p■o√n■m√l°k√j■g√e√d√c√b√a√`√_■^■[■W■T■P■O■N■L■K■I■H■F■E■C■A■@■>■<■;■9√7■6■5■4√3■2■*■%■#■!■■■■■■■■В В В В В В В В В В В В В В В В ч √■>■A■B■E■G■I■L■N■P■R■U■W■Y■[■^■_■a■c■e■i√m√n√o°p√q■r■s■t■u■v■w■x■y■z■{■|■}■■А■Б■В■Д■Е■Ж■И■Й■К■М■Н■П■Р■С√ТяУїФ■Щ°Ъ■Щ■Ъ■Ы│°ищй╫кїлїмїнЄоЄп╚░░▒р░цпьоянямьльк■зяжяе°д°гїв°б√а°Я√Ю°Э√Ь°Ы√Ъ°Щ°Ш■Ч■Ц√Ф√У°Т√С√Р■П■О■Н√М■Л■К√Й√И√З√Ж√ЕїД√Г√В°Б°А■■~■{■w■t√s■r■q■p√o■n√m°l■k■i■f°e√d√c√b√a√`√_■^■[■W■T■P■O■N■L■K■I■H■F■E■C■A■@■>■<■;■9■7√6■5■4■3√2■)■%■#■!■■■■■■■√В В В В В В В В В В В В В В В В ъ √■>■A■C■E■G■I■L■N■P■R■U■W■Y■[■^■`■a■c■e■i√m°n√o√p√q■r■s■t■u■v■w■x■y■z■{■|■}■■А■Б■В■Д■Е■Ж■И■Й■Л■М■Н■П■Р■С√ТяУяФьЩ■Ы■Ь■Ю√б■в■г°д°е°жцзЄияй┌кїлїмїнЄоЄп╚░░▒р░цпьояньмялькьжяе°д°г°вїб√а√Я°Ю°Э√Ь°Ы√Ъ°Щ°Ш■Ч■Ц√Ф√У°Т√С√Р■П■О■Н■М√Л√К√Й√И√З■Ж√ЕїД√Г■ВїБїА■~■{■w■t■s■r√q■p√o°n√m■j■g√f√e√d√c√b√a°`√_■^■[■W■T■P■O■N■L■K■I■H■F■E■C■A■@■>■<■;■9■7■6■5√4■3■2■1■)■%■#■!■■■■■■■■В В В В В В В В В В В В В В В В ч √■>■A■C■E■G■I■L■N■P■R■U■W■Y■\■^■`■a■c■e■j■l√m√n√o√p√q■r■s■t■u■v■w■x■y■z■{■|■}■■А■Б■В■Д■Е■Ж■И■Й■Л■М■Н■П■Р√С■ТЄУьФ√Х■Ш√ЩїШ■Ъ■Ь■Я√б■в■г■д√ецжьзЄияйукїлїмїнЄоЄп╚░░▒р░цпьоянямялщкьжяе°д°г°в°б°а√Я°Ю√Э°Ь°Ы√Ъ°Щ°Ш■Ч■Ц■Ф°У°Т√С■Р■П√О■Н√М√Л■К√Й√И√З√Ж√Е√Д■Г°ВїБїА■~■{■w■t■s■r√q°p√o■n■j■i■h■g√f√e√d√c√b√a√`√_√^■[■W■T■P■O■N■L■K■I■H■F■E■C■A■@■>■<■;■9■7■6■5■4√3■2■1■(■%■#■!■■■■■■■■В В В В В В В В В В В В В В В В ч √■>■A■C■E■G■I■L■N■P■S■U■W■Y■\■^■`■a■c■e■j■l√m√n√o√p√q■r■s■t■u■v■w■x■y■z■{■|■}■■А■Б■Г■Д■Е■Ж■И■Й■Л■М■Н■П■Р√С■ТЄУяФЄХ■ЧїШ■Щ■Ъ■Ы■Э■Я°б■в■г■ещжцзяиЄйщкїлїмїнЄоЄп╚░░▒р░цпьоянямЄлцкьжяе°д°г°в°б√а°Я°Ю√Э°Ь°Ы√Ъ°Щ°Ш■Ч■Ц■Ф°У°Т√С■Р√П■О√Н■М√Л√К■Й√И√З√Ж■Е√Д√ГїВїБ°А■~■z■w■t■s√r√q√p■o■k√j■i■h■g√f√e√d√c√b√a√`√_√^■[■W■T■Q■O■N■L■K■I■H■F■E■C■A■@■>■<■;■9■7■6■5■4■3√2■1■(■%■#■!■■■■■■■■В В В В В В В В В В В В В В В В ч √■?■A■C■E■G■J■L■N■P■S■U■W■Y■\■^■`■b■c■e■j■l√m√n°o√p■q■r■s■t■u■v■w■x■y■z■{■|■}■■А■Б■Г■Д■Е■Ж■И■Й■Л■М■Н■П■Р√С√ТїУяФяХ■Ц■Ч√Ш■Щ■Ъ√Ы■Ь■Э√а°б■в■д■еяжьзцияйяк°лїмїнЄоЄп╦░н▒р░цпьоянЄмялцкьжяе°д°г√в°б°а°Я°Ю√Э°Ь°Ы√Ъ°Щ√Ш√Ч■Ц■Ф°УїТ■С■Р√П■О■Н√М√Л√К■Й√И√З■Ж■Е√ДїГїВ°Б°А■~■z■w■t√s■r√q■p■m■l■k√j■i■h■g■f√e√d√c√b°a√`√_√^■[■W■T■Q■O■N■L■K■I■H■F■E■C■A■@■>■<■:■9■7√5■4■3■2√1■'■%■#■!■■■■■■■■В В В В В В В В В В В В В В В В ф ■■?■A■C■E■G■J■L■N■P■S■U■W■Y■\■^■`■b■c■f■j■l°m√n√o√p■q■r■s■t■u■v■w■x■y■z■{■|■}■■А■Б■Г■Д■Е■З■И■Й■Л■М■Н■П■Р√С√Т°УяФьХїЦ■Ш■Щ■Ъ■Ы■Ь■Э√Ю√а■б√в√г■д■еЄжЄзьиуйЄк°л°мїнЄоЄп╦░н▒р░цпьоЄнЄмьлцкьжЄе°д°г°в°б°а°Я°Ю°Э√Ь°Ы√Ъ°Щ√Ш√Ч■Ц■ФїУ°Т■С■Р√П■О■Н√М√Л√К■Й√И■З■Ж√Е√ДїГЄВ√Б°А■~■z■v■t√s■r■p■o■n■m■l■k√j■i■h■g■f√e√d√c√b√a√`√_√^■]■Z■W■T■Q■O■N■L■K■I■H■F■E■C■A■@■>■<■:■9■7■5√4■3■2■1■0■'■%■#■!■■■■■■■■В В В В В В В В В В В В В В В В ф ■■?■A■C■E■G■J■L■N■P■S■U■W■Z■\■^■`■b■c■f■j√l√m√n√o√p■q■r■s■t■u■v■w■x■y■z■{■|■}■■А■Б■Г■Д■Е■З■И■Й■Л■М■Н■П√Р■С√Т°УяФяХЄЦ■Ч■Ш■Щ■Ы■Ь■Э■Ю√Я√а■б√в√г°д■еїжїзяищйьк°л°мїнЄоЄп╦░н▒р░цпьоЄнЄмьлцкяжЄеїд°гїв°б√а°Я°Ю°Э√Ь°Ы√Ъ°Щ√Ш√Ч■Ц√Ф°У√Т√С■Р■П√О■Н√М√Л√К■Й■И√З■Ж√Е°ДЄГ√В√БїА■~■z■v■t■s■r■q■p■o■n■m■l√k■j■i■h■g■f√e√d√c√b√a√`√_√^■]■Z■W■T■Q■O■N■L■K■I■H■F■E■C■A■@■>■<■:■9■7■5■4√3■2■1■0■'■%■#■!■■■■■■√В В В В В В В В В В В В В В В В ф ■■?■A■C■E■G■J■L■N■Q■S■U■W■Z■\■^■`■b■d■f■k√l√m√n√o√p■q■r■s■t■u■v■w■x■y■z■{■|■}■■А■Б■Г■Д■Е■З■И■Й■Л■М■Н■П√Р■С√Т√УьФяХЄЦ■Ч■Ш■Щ■Ъ■Ы■Ь■Ю√Я√а√б√в√г■д°еЄж°зяияйькїл°м°няояп╬░н▒р░цпьоЄнямьлщкяжяе°дїг°в°б°а°Я√Ю°Э√Ь°Ы√Ъ°Щ√Ш√Ч■Ц√Ф°У√Т■С■Р√П√О■Н√М√Л■К√Й■И√З√Ж■ЕЄД√Г√ВїБ√А■■}■z■v■t■s■r■q■p■o■n■m■l√k■j■i■h■g■f■e√d√c√b°a√`√_√^■]■Z■W■T■Q■O■N■L■K■I■H■F■E■C■A■@■>■<■:■9■7■5■4■3√2■1■0■'■%■$■!■■■■■■√В В В В В В В В В В В В В В В В ф √■A■C■E■H■J■L■N■Q■S■U■W■Z■\■^■`■b■d■f■k√l√m°n■o√p■q■r■s■t■u■v■w■x■y■z■{■|■}■■А■Б■Г■Д■Е■З■И■Й■Л■М■Н■П√Р√С■Т√УяФяХяЦ■Ч■Ш■Щ■Ъ■Ы■Ь■Э■Ю■Я■а°б√в°г■д√е√ж■з°жїзїиьйЄкїлїм°нЄояп╚░░▒р░цпьоянЄмьлщкьжЄеїд°гїв°б√а°Я°Ю√Э√Ь√Ы√Ъ°Щ°Ш√Ч■Ц√Ф√У√Т√С■Р√П√О■Н√М√Л■К√Й√И■З√Ж°Е√Д√Г√ВїБ√А√■}■z■v■t■s■r■q■p■o■n■m■l√k■j■i■h■g■f■e√d√c√b√a√`√_√^√]■Z■W■T■Q■O■N■L■K■I■H■F■E■C■A■@■>■<■:■9■7■5■4■3■2√1■0■'■%■$■!■■■■■√В В В В В В В В В В В В В В В В с √■A■C■E■H■J■L■N■Q■S■U■W■Z■\■^■`■b■d■f■k°l√m√n■o■p■q√r■s■t■u■v■w■x■y■z■{■|■}■■А■Б■Г■Д■Е■З■И■Й■Л■М■Н■П√Р√С■Т√УяФяХяЦ■Ч■Ш■Щ■Ъ■Ы■Ь■Э■Ю■Я■а√б°в°г√д√е√жщзїиьйЄк°лїм°нЄоЄп┼░░▒р░цпьоянЄмьлщкьжяе°дїг°в°б√а°Я√Ю√Э√Ь√Ы°Ъ°Щ°Ш√Ч■Х■Ф√У°Т°С■Р√П■О■Н√М■Л√К√Й■И°З√Ж√Е■Д√ГЄВ√Б°А■■}■z■v■t■s■r■q■p■o■n■m■l√k■j■i■h■g■f■e√d√c√b√a√`√_√^√]■Z■W■T■Q■O■N■L■K■I■H■F■E■C■A■@■>■<■:■9■7■5■4■3■2■1√0■'■%■$■!■■■■■√В В В В В В В В В В В В В В В В с °■C■E■H■J■L■N■Q■S■U■X■Z■\■^■a■b■d■g√k√l√m√n■o■p■q■r■s■t√u■v■w■x■y■z■{■|■~■■А■Б■Г■Д■Е■З■И■Й■Л■М■О√П■Р√С√Т■УЄФьХяЦ■Ч■Ш■Щ■Ъ■Ы■Ь■Э■Ю■Я■а°б■в°г°д°е°ж°зщияйЄк°лїм°няоїп┬░│▒р░цпяоянямьлщкщжЄеїд°г°в√б°а√Я√Ю√Э°Ь°Ы°Ъ°Щ√Ш√Ч■Х■ФїУ°Т■С■Р√П■О■Н√М■Л√К√Й°И■З■Ж■Е√ДїГ°В°Б√А√■}■z■v■t■s■r■q■p■o■n■m■l√k■j■i■h■g■f■e■d√c°b√a√`√_√^√]■Z■W■T■Q■O■N■L■K■I■H■F■E■C■A■@■>■<■:■9■7■5■4■3■2■1■0■/■'■%■$■!■■■■■√В В В В В В В В В В В В В В В В ▐ √■C■F■H■J■L■O■Q■S■U■X■Z■\■^■a■b■d■g√k√l√m√n■o■p■q■r■s■t■u■v√w■x■y■z■{■|■~■■А■Б■Г■Д■Е■З■И■Й■Л■М■О√П■Р√С√Т■УЄФяХяЦ√Ч■Ш■Щ■Ъ■Ы■Ь■Э■Ю■Я■а°б√в√г■д°еяжїзщиЄйїкїл°м°няоЄп╚░░▒р░цпяоянямьлщкщжЄе°д°г°в°б√а√Я°Ю°Э°Ь√Ы°Ъ°Щ°Ш■Ч■Ц√Ф°У°Т■С■Р■П■О√Н■М°Л°К■Й■И■З■Ж■Е°ДїГ°В°Б√А√■}■z■v■t■s■r■q■p■o■n■m√l■k■j■i■h■g■f■e■d√c√b√a√`√_√^°]■Z■W■T■Q■O■N■L■K■I■H■F■E■C■A■?■>■<■:■9■7■5■4√2■1■0■/■'■%■#■ ■■■■√В В В В В В В В В В В В В В В В ╪ √■F■H■J■L■O■Q■S■U■X■Z■\■^■a■b■d■g√k√l√m√n■o■p■q■r■s■t■u■v■w■x√y■z■{■|■~■■А■Б■Г■Д■Е■З■И■Й■Л■М■О√П√Р■С√Т√У°ФьХяЦ√Ч■Ш■Щ■Ъ■Ы■Ь■Э■Ю■Я■а°б√в°г√д°жузїиьйЄк°л°м°няоЄп╬░к▒у░упяоянямьльк■йьжяе°д°г√в°бїа√Я°Ю°Э°Ь√Ы√Ъ°Щ√Ш√Ч■Х√Ф°У√Т■С■Р√П■О°Н√М■Л√К■Й■И■З√Ж√ЕїД√Г°В√Б°А√■}■z■v■t■s■r■q■p■o■n■m√l■k■j■i■h■g■f■e■d√c√b√a√`√_√^√]■\■Z■W■S■Q■O■N■L■K■J■H■F■E■C■A■?■>■<■:■9■7■5■3■2√1■0■/■'■&■#■ ■■■■√В В В В В В В В В В В В В В В В ╪ °■H■J■L■O■Q■S■U■X■Z■\■_■a■c■d■g√k°l√m■n■o■p■q■r■s■t■u■v■w■x■y■z√{■|■~■■А■В■Г■Д■Е■З■И■К■Л■М■О√П√Р■С√Т√У°ФяХьЦ√Ч■Ш■Щ■Ъ■Ы■Ь■Э■Ю■Я■а°б√в°г√д√е■жцзьиЄйЄк°л°м°няоЄп╦░н▒р░щпьоянямьльк■йьжяе°д°г°в°б°а°ЯїЮ√Э■Ь°Ы√Ъ°Щ√Ш√Ч■Х√Ф√У√Т√С√Р√П√О■Н■М■Л■К√Й■И√З√Ж√Е°Д°Г√В°Б√А°■}■y■v■t■s■r■q■p■o■n■m√l■k■j■i■h■g■f■e■d√c√b√a√`√_√^√]■\■Z■W■S■Q■O■N■L■K■J■H■F■E■C■A■?■>■<■:■9■7■5■3■2■1√0■/■'■&■#■ ■■■°В В В В В В В В В В В В В В В В ╒ √■H■J■L■O■Q■S■V■X■Z■\■_■a■c■d■g■j√k√l√m■n■o■p■q■r■s■t■u■v■w■x■y■z■{■|■}■~■■А■В■Г■Д■Е■З■И■К■Л■М√О■П√Р√С■Т√У°ФяХяЦ°Ч■Ш■Щ■Ъ■Ы■Ь■Э■Ю■Я√а√б°в√г°д√е°ж■з▌иЄйЄк°л°мїнїоЄп╚░н▒р░щпьояньмьляк■йьжяеїд°г°в°б°а√Я°Ю√Э√Ь√Ы°Ъ°Щ√Ш√Ч■Х■Ф√У°Т°С√Р■П■О■Н■М■Л√К√Й√И√З√Ж√Е√Д°Г√В°Б√А°■}■y■v■t■s■r■q■p■o■n■m√l■k■j■i■h■g■f■e■d■c√b√a√`√_√^°]■\■Z■W■S■Q■O■N■L■K■J■H■F■E■C■A■?■>■<■:■9■7■5■3■2■1■0■/■.■'■&■#■ ■■■√В В В В В В В В В В В В В В В В ╧ √■J■M■O■Q■S■V■X■Z■\■_■a■c■d■h■j√k√l√m■n■o■p■q■r■s■t■u■v■w■x■y■z■{■|■}■~■■А■В■Г■Д■Е■З■И■К■Л■М√О■П√Р√С■Т√У√ФяХьЦ°Ч■Ш■Щ■Ъ■Ы■Ь■Э■Ю■Я√а√б°в√г°д√еяж■зїирйїк°л°мїнЄоїп┼░░▒р░щпьоьнямьляк■йьжЄеїдїг°в°б√а√Я°Ю√Э°Ь√Ы°Ъ°Щ√Ш√Ч■Х■Ф°У°Т√С■Р■П■О■Н√М√Л√К√Й√И√Ж√Е°Д√Г°В√Б°А√■~■}■y■v■t■s■r■q■p■o■n■m√l■k■j■i■h■g■f■e■d■c√b√a√`√_√^√]√\■Z■W■S■Q■O■N■L■K■J■H■F■E■C■A■?■>■<■:■9■7■5■3■2■1■0■/■.■'■&■#■ ■■°В В В В В В В В В В В В В В В В ╧ °■M■O■Q■S■V■X■Z■\■_■a■c■e■h■j√k√l√m■n■o■p■q■r■s■t■u■v■w■x■y■z■{■|■}■~■■А■В■Г■Д■Ж■З■И■К■Л■М√О√П■Р√С■Т√У√ФяХяЦїЧ■Ш■Щ■Ъ■Ы■Ь■Э■Ю■Я√а√б°в√г°д°еяжїзуйЄк°л°мїнЄоЄп╚░░▒р░щпьоьнямяльк■йяжяе°д°гїв°б√а√Я°Ю°Э°Ь√Ы√Ъ°Щ°Ш√Ч■Х■Ф°У√Т√С■Р√П√О■Н√М√Л■К■Й■И√З√Ж√Е√Д°Г°В√Б°А√■~■}■y■v■t■s■r■q■p■o■n√m■l■k■j■i■h■g■f■e■d■c√b√a√`√_√^√]√\■Z■W■S■Q■O■N■L■K■J■H■F■E■C■A■?■>■<■:■9■7■5■3■2√0■/■.■(■&■#■ ■■°В В В В В В В В В В В В В В В В ╠ √■M■O■Q■S■V■X■Z■]■_■a■c■e■h■j°k√l■m■n■o■p■q■r■s■t■u■v■w■x■y■z■{■|■}■~■■А■В■Г■Д■Ж■З■И■К■Л■М√О√П■Р√С√Т■У√ФяХяЦїЧ■Ш■Щ■Ъ■Ы■Ь■Э■Ю■Я√а√б°в√г°д°еяжьз■и√йщкїл°мїнЄоЄп╬░к▒р░щпьоьнЄмялщк■йяжяе°д°г°в°б°а°Я°Ю√Э°Ь√Ы√Ъ°Щ°Ш√Ч■Х■Ф√У°Т°С■Р√П√О√Н■К√Й√И√З√Ж√Е√Д°Г√В°Б√А°■~■}■y■v■t■s■r■q■p■o■n√m■l■k■j■i■h■g■f■e■d■c■b√a√`√_°^√]√\■Z■W■S■Q■O■N■M■K■J■H■F■E■C■A■?■>■<■:■9■7■5■3■2■0√/■.■(■&■#■ ■■°В В В В В В В В В В В В В В В В ╠ °■O■Q■T■V■X■Z■]■_■a■c■e■h√j√k√l■m■n■o■p■q■r■s■t■u■v■w■x■y■z■{■|■}■~■■А■В■Г■Д■Ж■З■И■К■Л■М■Н■О√П■Р√С√Т■У√ФЄХяЦЄЧ■Ш■Щ■Ъ■Ы■Ь■Э■Ю■Я√а°б√в°г√д°еяжьзїи■йЄкїлїм°нЄояп╦░н▒у░цпьоянЄмьлщк■йяжяе°дїг°в°б°а√Я°Ю√Э°Ь°Ы√Ъ°Щ√Ш√Ч■Х■Ф°У°Т√С√Р■П■О■М■Л√К√Й√И√З√Ж√Е√Д√Г°В°Б√А°■~■}■y■v■t■s■r■q■p■o■n√m■l■k■j■i■h■g■f■e■d■c■b√a√`√_√^√]√\■[■Z■W■S■Q■O■N■M■K■J■H■F■D■C■A■?■>■<■:■9■7■5■3■2■0■/√.■(■&■#■ ■їВ В В В В В В В В В В В В В В В ╔ °■Q■T■V■X■Z■]■_■a■c■e■h√j√k√l■m■n■o■p■q■r■s■t■u■v■w■x■y■z■{■|■}■~■■А■В■Г■Д■Ж■З■И■К■Л■М■Н■О√П√Р■С√Т√У■ФЄХяЦЄЧ■Ш■Щ■Ъ■Ы■Ь■Э■Ю■Я√а°б√в°г√д°еЄжщзьи■й■кїлїмїнЄояп╦░н▒р░щпьоянямьльк■йяжье°дїг°в°б√а√Я°Ю√Э°Ь°Ы√Ъ√Щ°Ш√Ч■Х√Ф°У°Т■С■П√О■Н■М■Л√К√Й√И√З√Ж√Е√Д√Г°В√Б°А√√~■}■y■v■t■s■r■q■p■o■n√m■l■k■j■i■h■g■f■e■d■c■b√a√`√_√^√]√\■[■Z■W■S■Q■O■N■M■K■J■H■F■D■C■A■?■>■<■:■8■7■5■3■2■0■/■.■-■(■&■#■ ■°В В В В В В В В В В В В В В В В ╞ °■Q■T■V■X■Z■]■_■a■c■e■i√j√k√l■m■n■o■p■q■r■s■t■u■v■w■x■y■z■{■|■}■~■■А■В■Г■Д■Ж■З■И■К■Л■М■Н■О√П√Р■С√Т√У■ФїХьЦЄЧ■Ш■Щ■Ъ■Ы■Ь■Э■Ю■Я√а°б√в°г√д°еЄжщзьиїй■к■лїмїнЄоЄп┼░░▒р░щпьоянямьльк■иьжяеїд°г°в√б√а°Я°Ю°Э√Ь√Ы°Ъ√Щ°Ш√Ч■Х√Ф√У√Т√С■Р■П■О√Н■М■Л√К√Й√И√З√Ж√Е√Д√Г√В°Б°А√√~■}■y■v■t■s■r■q■p■o■n√m■l■k■j■i■h■g■f■e■d■c■b■a√`°_√^√]√\■[■Z■W■S■Q■O■N■M■K■J■H■F■D■C■A■?■>■<■:■8■7■5■3■2■0■/■.■-■(■&■#■ їВ В В В В В В В В В В В В В В В ├ °■T■V■X■[■]■_■a■c■e■i°j■k■l√m■n■o■p■q■r■s■t■u■v■w■x■y■z■{■|■}■~■■А■В■Г■Д■Ж■З■И■К■Л■М■Н√О■П√Р√С■Т√У√Ф°ХяЦяЧ■Ш■Щ■Ъ■Ы■Ь■Э■Ю■Я√а°б√в°г√д°еЄжщзьиїй°к√л√м√няоЄп┼░░▒р░щпьоянямялщк■иьжяе°д°г√в°б°а°Я°Ю°Э√Ь√Ы°Ъ°Щ√Ш√Ч■Х■Ф√У°Т√С■Р■П■О■Н√М■Л√К√Й√И√З√Ж√Е√Д√Г√В°Б√А°√~■}■y■v■t■s■r■q■p■o■n√m■l■k■j■i■h■g■f■e■d■c■b■a√`√_√^√]√\√[■Z■W■S■Q■P■N■M■K■J■H■F■D■C■A■?■>■<■:■8■7■5■3■2■0■/■.■-■(■&■#■ їВ В В В В В В В В В В В В В В В └ √■T■V■X■[■]■_■a■d■e√i√j■k■l■m■n■o√p■q■r■s■t■u■v■w■x■y■z■{■|■}■~■■А■В■Г■Д■Ж■З■И■К■Л√Н√О■П√Р√С■Т√У√Ф°ХяЦяЧ■Ш■Щ■Ъ■Ы■Ь■Э■Ю■Я√а°б√в°г°д°еїжьзщиїй°к√л°м√нїояп╚░н▒у░цпьоянЄмьлщк■ияжяе°д°гїв°б°а°Я√Ю√Э√Ь°Ы°Ъ√Щ°Ш■Ч■Ц■Х■Ф√У°Т√С■Р■П■О■Н√М■Л√К√Й√И√З√Ж√Е■Д√Г°В√Б°А√°~■}■y■u■t■s■r■q■p■o√n■m■l■k■j■i■h■g■f■e■d■c■b■a√`√_√^√]√\√[■Z■W■S■Q■P■N■M■K■J■H■F■D■C■A■?■>■<■:■8■7■5■3■2■0√.■-■(■&■#■ °В В В В В В В В В В В В В В В В ╜ °■V■X■[■]■_■a■d■e√i√j■k■l■m■n■o■p■q√r■s■t■u■v■w■x■y■z■{■|■}■~■■А■В■Г■Д■Ж■З■И■К■Л■М■Н√О√П■Р√С√Т■У√Ф√ХяЦьЧ■Ш■Щ■Ъ■Ы■Ь■Э■Ю■Я°а√б°в√г°д°еїжьзщиїй°к√л°м√няоїп╚░н▒у░цпьоянЄмьлщк■ияжье°д°гїв√б°а√Я°Ю√Э√Ь°Ы√Ъ√ЩїШ■Ч■Ц■Х■Ф√У°Т√С■Р■П■О■Н■М√Л√К√Й√И√З√Ж√Е■Д√Г°В√Б°А√°~■|■y■u■t■s■r■q■p■o√n■m■l■k■j■i■h■g■f■e■d■c■b■a√`√_√^√]√\√[■Z■W■S■Q■P■N■M■K■J■H■F■D■C■A■?■>■<■:■8■7■5■3■2■0■.√-■(■&■#°В В В В В В В В В В В В В В В В ╖ °■X■[■]■_■b■d■e√i√j■k■l■m■n■o■p■q■r■s√t■u■v■w■x■y■z■{■|■}■~■■Б■В■Г■Д■Ж■З■И■К■Л■М■Н√О√П■Р√С√Т■У√Ф√ХяЦяЧ√Ш■Щ■Ъ■Ы■Ь■Э■Ю■Я°а√б°в√г°д°еїжьзщиїй°к√л°м√нщоЄп╤░н▒р░щпьоянЄмьлщк■иьжяе°д°г°в°б°а√Я√Ю√Э√Ь√Ы°Ъ°Щ°Ш√Ч■Ц■Х■Ф√У°Т√С■Р■П■О■Н■М√Л√К√Й√И√З√Ж√Е■Д√Г√В°Б√А°√~■}■|■y■u■t■s■r■q■p■o√n■m■l■k■j■i■h■g■f■e■d■c■b■a√`■_√^√]√\√[√Z■W■S■Q■P■N■M■K■J■H■F■D■C■A■?■>■<■:■8■7■5■3■2■0■.■-■,■(■%■"°В В В В В В В В В В В В В В В В ╖ °■Y■[■]■_■b■d■f°i■j■k■l■m■n■o■p■q■r■s■t■u√v■w■x■y■z■{■|■}■~■■Б■В■Г■Д■Ж■З■Й■К■Л■М√Н■О√П√Р■С√Т√У■Ф√ХяЦяЧ√Ш■Щ■Ъ■Ы■Ь■Э■Ю■Я°а√б°в√г°д°еїжьзьиЄй°к√л°м√нцорпу░│▒▌░щпьоянЄмщльк■иьжяе°д°г°в°б√а■Я■Ю■ЭїЬїЫ°Ъ°Щ°Ш√Ч■Ц■Х■Ф√У°Т■С√Р■П■О■Н■М√Л√К√Й√И√З√Ж√Е■Д√Г√В°Б√А°√~■}■|■y■u■t■s■r■q■p■o√n■m■l■k■j■i■h■g■f■e■d■c■b■a√`■_√^√]√\√[√Z■V■S■Q■P■N■M■K■I■H■F■D■C■A■?■>■<■:■8■7■5■3■2■0■.■-■,■(■%°В В В В В В В В В В В В В В В В ▒ °■[■]■_■b■d■f■h√i■j■k■l■m■n■o■p■q■r■s■t■u■v■w√x■y■z■{■|■}■~■■Б■В■Г■Д■Ж■З■Й■К■Л■М√Н■О√П√Р■С√Т√У■Ф√ХЄЦяЧ°Ш■Щ■Ъ■Ы■Ь■Э■Ю■Я°а√б°в√г°д°е°жщзьиЄй°к√л°м°нщо╦пї░╢▒▌░щпьояньмьляк■иьжяе°д°г√в■а■Я√ЮЄЭїЬїЫ°Ъ°Щ°Ш√Ч■Ц■Х■Ф√У°Т■С■Р√П■О■Н■М√Л√К√Й√И√З√Ж√Е■Д√Г√В√Б°А√°~■}■|■y■u■t■s■r■q■p■o√n■m■l■k■j■i■h■g■f■e■d■c■b■a√`■_√^√]√\√[√Z■V■S■Q■P■N■M■K■I■H■F■D■C■A■?■=■<■:■8■7■5■3■2■0■.■-■,■(■%√В В В В В В В В В В В В В В В В л °■]■_■b■d■f■h√i■j■k■l■m■n■o■p■q■r■s■t■u■v■w■x■y■z√{■|■}■~■■Б■В■Г■Е■Ж■З■Й■К■Л■М√Н√О■П√Р√С■Т√У■Ф√ХЄЦяЧ°Ш■Щ■Ъ■Ы■Ь■Э■Ю√Я√а°б√в°г°д°е°жьзьиЄй°к√л°м°нщо╢п■░┬▒р░цпьоьнЄмялщк■ияжяе√д■г√в√б■а√Я°ЮїЭЄЬ°ЫїЪ°Щ°Ш√Ч■Ц■Х■Ф√У°Т■С■Р√П■О■Н■М√Л√К√Й√И√З√Ж■Е√Д√Г■В°Б°А√°~■}■|■y■u■t■s■r■q■p√o■n■m■l■k■j■i■h■g■f■e■d■c■b■a√`■_■^√]√\°[√Z■V■S■Q■P■N■M■K■I■H■F■D■C■A■?■=■<■:■8■7■5■3■1■0■.■-■,■(°В В В В В В В В В В В В В В В В л °■]■`■b■d■f■h√i■j■k■l■m■n■o■p■q■r■s■t■u■v■w■x■y■z■{■|√}■~■■Б■В■Г■Е■Ж■З■Й■К■Л■М√Н√О■П√Р√С■Т√У√Ф■ХїЦьЧ°Ш■Щ■Ъ■Ы■Ь■Э■Ю√Я√а°б√в°г°д°е°жьзьиЄй°к√л°м°нщозпЄ░▌▒р░цпьоьнїмЄлук■зЄжЄе°д√г√в■б√а√Я°ЮїЭЄЬ°Ы°ЪїЩ°Ш√Ч■Ц■Х■Ф√У°Т■С■Р■П√О■Н■М√Л√К√Й√И√З√Ж■Е√Д√Г■В°Б√А°√~√}■|■y■u■t■s■r■q■p√o■n■m■l■k■j■i■h■g■f■e■d■c■b√a■`■_■^√]√\√[√Z■Y■V■S■Q■P■N■M■K■I■H■F■D■C■A■?■=■<■:■8■7■5■3■1■0■.■,■+■(√В В В В В В В В В В В В В В В В е °■`■b■d■f√h■i■j■k■l■m■n■o■p■q■r■s■t■u■v■w■x■y■z■{■|■}■~√■Б■В■Г■Е■Ж■З■Й■К■Л√М■Н√О√П■Р√С■Т√У√Ф■ХїЦяЧїШ■Щ■Ъ■Ы■Ь■Э■Ю√Я√а°б√в°г°д°е°жязщияй√к√л°м°нщо┬п■ощпщ░ц▒р░цпьоян°мялрк■зїжяе°д√г■в√б√а√Я√ЮЄЭїЬїЫ°Ъ°Щ°Ш°Ч■Ц■Ф°У√Т√С■Р■П√О■Н■М√Л√К√Й√И√З√Ж■Е√Д■Г√В√Б°А°√~√}■|■y■u■t■s■r■q■p√o■n■m■l■k■j■i■h■g■f■e■d■c■b√a■`■_■^√]√\√[√Z■Y■V■S■Q■P■N■M■K■I■H■F■D■C■A■?■=■<■:■8■7■5■3■1■0■.■,■+■(√В В В В В В В В В В В В В В В В в °■b■d■f√h■i■j■k■l■m■n■o■p■q■r■s■t■u■v■w■x■y■z■{■|■}■~■■А■Б■В■Г■Е■Ж■З■Й■К■Л√М■Н√О√П■Р√С√Т■У√Ф√Х√ЦьЧїШ■Щ■Ъ■Ы■Ь■Э■Ю√Я√а°б√в°г°д°е°жязщияй√к°л√м°нцо┌пщощпщ░щ▒щ░ЄпЄоЄням┌л▌к■зїжЄеїд■г√в√б√а√Я√ЮїЭЄЬїЫ°Ъ°Щ°Ш°Ч■Ц■Ф°У√Т√С■Р■П■О√Н■М√Л√К√Й√И√З√Ж■Е√Д■Г√В√Б°А√°~√}■|■y■u■t■s■r■q■p√o■n■m■l■k■j■i■h■g■f■e■d■c■b√a■`■_■^■]°\√[√Z■Y■V■S■Q■P■N■M■K■I■H■F■D■C■A■?■=■<■:■8■7■5■3■1■0■.■,■+√В В В В В В В В В В В В В В В В Ь √■b■d■f√h■i■j■k■l■m■n■o■p■q■r■s■t■u■v■w■x■y■z■{■|■}■~■■А■Б■В■Г■Е■Ж■З■Й■К■Л√М√Н■О√П■Р√С√Т■У√Ф√Х√ЦяЧЄШ■Щ■Ъ■Ы■Ь■Э■Ю√Я°а√б°в√г°д°е°жязьиьй√к°л√мїнщоьп╘оьпщ░ь▒ц░ЄпЄоЄням▌л┌к■зїжЄе°д√г√в√б√а√Я√ЮїЭїЬЄЫ°Ъ°Щ°Ш°Ч■Ц■Ф°У√Т√С■Р■П■О√Н■М√Л√К√Й√И√З√Ж■Е√Д■Г√В√Б√А°√~°}■|■x■u■t■s■r■q■p√o■n■m■l■k■j■i■h■g■f■e■d■c■b√a■`■_■^■]√\√[√Z√Y■V■S■Q■P■N■M■K■I■H■F■D■C■A■?■=■<■:■8■7■5■3■1■0■.■,■+√В В В В В В В В В В В В В В В В Щ √■d■f√h■i■j■k■l■m■n■o■p■q■r■s■t■u■v■w■x■y■z■{■|■}■~■■А■Б■В■Г■Е■Ж■З■Й■К■Л√М√Н■О√П√Р■С√Т√У■Ф√Х√ЦяЧЄШ■Щ■Ъ■Ы■Ь■Э■Ю√Я°а√б°в°г°д°е°жЄзьиьй√к°л√мїнзощпщ░Є▒у░ЄпЄоЄнямрл┌к■й■зїжЄе°д√г√в√б√а√Я√ЮїЭїЬїЫїЪ°Щ°Ш°Ч■Ц■Ф°У√Т√С■Р■П■О■Н√М√Л√К√Й√И√З■Ж√Е√Д■Г√В√Б√А°√~°}■|■x■u■t■s■r■q√p■o■n■m■l■k■j■i■h■g■f■e■d■c■b√a■`■_■^■]√\√[√Z√Y■V■S■Q■P■N■M■K■I■H■F■D■C■A■?■=■<■:■8■7■5■3■1■0■.■,■+■В В В В В В В В В В В В В В В В У √■g√h■i■j■k■l■m■n■o■p■q■r■s■t■u■v■w■x■y■z■{■|■}■~■■А■Б■В■Г■Е■Ж■З■Й■К√Л■М√Н■О√П√Р■С√Т√У■Ф√Х√ЦЄЧяШ■Щ■Ъ■Ы■Ь■Э■Ю√Я°а√б°в°г°д°е°жЄзьиьй√к°л√мїнзощпщ░ї▒р░ЄпїоянЄм▌л▌к√й■зїжЄе°д√г√в√б√а√Я√Ю°ЭЄЬїЫ°ЪїЩ°Ш°Ч■Ц■Ф°У√Т√С■Р■П■О■Н√М√Л√К√Й√И√З■Ж√Е√Д■Г√В■Б°А√°~√}√|■x■u■t■s■r■q√p■o■n■m■l■k■j■i■h■g■f■e■d■c■b√a■`■_■^■]√\√[√Z√Y■V■S■Q■P■N■M■K■I■H■F■D■B■A■?■=■<■:■8■7■5■3■1■0■.■,√В В В В В В В В В В В В В В В В У √■g■h■i√j■k■l■m■n■o■p■q■r■s■t■u■v■w■x■y■z■{■|■}■~■■А■Б■В■Г■Е■Ж■З■Й■К√Л■М√Н√О■П√Р√С■Т√У√Ф■Х√ЦЄЧяШ■Щ■Ъ■Ы■Ь■Э■Ю√Я°а√б°в°г°д°е°жЄзьиьй√к°л√мїнзощпц░√▒р░ЄпЄоянЄмрл┌к√йЄжЄе°д√г√в√б■а√Я°Ю°ЭїЬЄЫ°Ъ°Щ°ШїЧ■Ц■Ф°У√Т√С■Р■П■О■Н√М√Л√К√Й√И√З■Ж√Е■Д√Г√В■Б°А√°~√}√|■x■u■t■s■r■q√p■o■n■m■l■k■j■i■h■g■f■e■d■c√b■a■`■_■^■]■\√[√Z√Y■X■V■S■Q■P■N■M■K■I■H■F■D■B■A■?■=■<■:■8■6■5■3■1■0■.√В В В В В В В В В В В В В В В В Н √■h■i■j■k■l√m■n■o■p■q■r■s■t■u■v■w■x■y■z■{■|■}■~■■А■Б■В■Г■Е■Ж■З■Й■К√Л■М√Н√О■П√Р√С■Т√У√Ф■Х√ЦЄЧяШ√Щ■Ы■Ь■Э■Ю√Я°а°б√в°г°д°е°жїзщиьй√к°л√мїндощпщ░■▒▌░ЄпЄоЄнямул┌к°йЄжЄе°д√г√в■б√а√Я°Ю°ЭїЬЄЫ°Ъ°Щ°Ш°Ч√Ц■Ф°У√Т■С√Р■П■О■Н√М√Л√К√Й√И√З■Ж√Е■Д√Г√В■Б√А°√~°}√|■x■u■t■s■r■q√p■o■n■m■l■k■j■i■h■g■f■e■d■c√b■a■`■_■^■]■\√[√Z√Y■X■V■S■Q■P■N■M■K■I■H■F■D■B■A■?■=■<■:■8■6■5■3■1■0√В В В В В В В В В В В В В В В В З √■i■j■k■l■m■n√o■p■q■r■s■t■u■v■w■x■y■z■{■|■}■~■■А■Б■В■Г■Е■Ж■З■Й■К√Л√М■Н√О√П■Р√С√Т■У√Ф√Х■ЦїЧяШ°Щ■Ъ■Ь■Э■Ю°Я√а°б√в°г°д°е°жїзщиьй√к°л√мЄнзощпщ░■▒▌░ЄпЄоЄнямцл┌кїйЄжЄе°д√г■в√б√а√Я°Ю°ЭїЬїЫїЪ°Щ°Ш°Ч√Ц■Ф°У√Т■С√Р■П■О■Н√М√Л√К√Й√И√З■Ж√Е■Д√Г√В■Б√А°√~°}√|■x■u■t■s■r■q√p■o■n■m■l■k■j■i■h■g■f■e■d■c√b■a■`■_■^■]■\√[√Z√Y■X■V■S■Q■P■N■M■K■I■H■F■D■B■A■?■=■<■:■8■6■5■3■1√В В В В В В В В В В В В В В В В В   √■j■k■l■m■n■o■p√q■r■s■t■u■v■w■x■y■z■{■|■}■~■■А■Б■В■Г■Е■Ж■З■Й■К√Л√М■Н√О√П■Р√С√Т■У√Ф√Х■ЦїЧяШ°Щ■Ъ■Ы■Э■Ю°Я√а°б√в°г°дїе°ж°зщиьй√к°л√мЄнзощп┬░Єпїоянямщл╫кїйЄжЄе°д■г√в√б√а√Я°Ю°Э°ЬЄЫїЪ°Щ°Ш°Ч√Ц■Ф√У°Т■С■Р√П■О■Н√М√Л√К√Й√И■З√Ж√Е■Д√Г■В√Б√А√°~√}°|■x■u■t■s■r√q■p■o■n■m■l■k■j■i■h■g■f■e■d■c√b■a■`■_■^■]■\■[√Z√Y√X■V■S■Q■P■N■M■K■I■H■F■D■B■A■?■=■<■:■8■6■5■3√В В В В В В В В В В В В В В В В В · °■l■m■n■o■p■q■r√s■t■u■v■w■x■y■z■{■|■}■~■■А■Б■В■Д■Е■Ж■И■Й√К■Л√М√Н■О√П√Р■С√Т√У■Ф√Х√Ц√ЧьШ°Щ■Ъ■Ы■Ь■Ю°Я√а°б°в°г°д°е°ж°зьищй√к°л√мЄндощп╚░япїоянямщл┌кЄйЄжЄе√д√г√в√б√а√Я°Ю°Э°ЬїЫїЪїЩ°Ш°Ч√Ц■Ф√У°Т■С■Р■П√О■Н√М√Л√К√Й√И■З√Ж√Е■Д√Г■В√Б√А√√~°}°|■x■u■t■s■r√q■p■o■n■m■l■k■j■i■h■g■f■e■d■c√b■a■`■_■^■]■\■[√Z√Y√X■V■S■Q■P■N■M■K■I■H■F■D■B■A■?■=■<■:■8■6■5°В В В В В В В В В В В В В В В В В ў °■m■n■o■p■q■r■s■t■u√v■w■x■y■z■{■|■}■~■■А■Б■В■Д■Е■Ж■И■Й√К■Л√М√Н■О√П√Р■С√Т√У■Ф√Х√Ц√ЧяШїЩ■Ъ■Ы■Ь■Ю°Я√а°б°в°г°д°е°ж°зьищй√к°л√мЄндощп╚░ЄпЄоянЄмщл┌кяйЄжЄе√д√г√в√б√а√Я°Ю°Э°ЬїЫїЪ°ЩїШ°Ч■Ц■Х■Ф√У°Т■С■Р■П√О■Н√М√Л√К√Й√И■З√Ж■Е√Д√Г■В√Б√А√√~°}√|■{■x■u■t■s■r√q■p■o■n■m■l■k■j■i■h■g■f■e■d■c√b■a■`■_■^■]■\■[√Z√Y√X■V■S■Q■P■N■M■K■I■H■F■D■B■A■?■=■<■:■8■6°В В В В В В В В В В В В В В В В В ю √■n■o■p■q■r■s■t■u■v■w√x■y■z■{■|■}■~■■А■Б■В■Д■Е■Ж■И■Й√К√Л■М√Н√О■П√Р√С■Т√У√Ф■Х√Ц√ЧяШїЩ■Ъ■Ы■Ь■Э■Ю√Я°а√б°в°г°д°е°ж°зьищй√к°л√мЄндощп╚░ЄпЄоЄнямьл╫кяйЄжЄе√д√г√в√б■а°Я°Ю√Э°ЬЄЫїЪ°Щ°Ш°Ч√Ц■Х■Ф√У°Т■С■Р■П■О√Н√М√Л√К√Й√И■З√Ж■Е√Д√Г■В√Б■А√°~√}°|■{■x■u■t■s■r√q■p■o■n■m■l■k■j■i■h■g■f■e■d√c■b■a■`■_■^■]■\■[■Z°Y√X■V■S■Q■P■N■M■K■I■G■F■D■B■A■?■=■<■:■8°В В В В В В В В В В В В В В В В В ш √■o■p■q■r■s■t■u■v■w■x■y√z■{■|■}■~■■А■Б■В■Д■Е■Ж■И■Й√К√Л■М√Н√О■П√Р√С■Т√У√Ф■Х√Ц√ЧЄШЄЩ■Ъ■Ы■Ь■Э■Ю√Я°а√б°в°г°д°е°ж°зьиьй°к°л√мяндоьп╚░Єпїоянямьл┌кьйЄжЄе√д√г√в■б√а°Я°Ю√Э°ЬїЫЄЪ°Щ°Ш°Ч√Ц■Х■Ф√У°Т■С■Р■П■О√Н√М√Л√К√Й■И√З√Ж■Е√Д√Г■В√Б■А√°~√}°|■{■x■u■t■s■r√q■p■o■n■m■l■k■j■i■h■g■f■e■d√c■b■a■`■_■^■]■\■[■Z√Y√X■W■V■S■Q■P■N■M■K■I■G■F■D■B■A■?■=■;■:°В В В В В В В В В В В В В В В В В т °■q■r■s■t■u■v■w■x■y■z■{√|■}■~■■А■Б■В■Д■Е■Ж■И√Й■К√Л√М■Н√О√П■Р√С√Т■У√Ф■Х√Ц√ЧЄШЄЩ■Ъ■Ы■Ь■Э■Ю√Я°а√б°в°г°д°е°жїзяиьйїк√л°мЄндощп╬░япїоянямял╫кьйЄжЄе√д√г■в√б√а°Я°Ю√Э°ЬїЫїЪїЩ°Ш°Ч√Ц■Х■Ф√У°Т■С■Р■П■О√Н√М√Л√К√Й■И√З√Ж■Е√Д■Г√В√Б■А√√~°}√|√{■x■u■t■s√r■q■p■o■n■m■l■k■j■i■h■g■f■e■d√c■b■a■`■_■^■]■\■[■Z√Y√X■W■V■S■Q■P■N■M■K■I■G■F■D■B■A■?■=■;°В В В В В В В В В В В В В В В В В ▄ °■r■s■t■u■v■w■x■y■z■{■|■}√~■■А■Б■В■Д■Е■Ж■И√Й■К√Л√М■Н√О√П■Р√С√Т■У√Ф√Х■Ц√ЧЄШЄЩ■Ъ■Ы■Ь■Э■Ю√Я°а°б°в°г°д°е°ж°зяиьйїк√л°мЄндощп╬░ЄпЄоянямял┌кщйЄжЄе√д■г√в√б√а°Я°Ю√Э°ЬїЫїЪїЩ°Ш°Ч√Ц■Х■Ф√У√Т√С■Р■П■О√Н√М√Л√К√Й■И√З√Ж■Е√Д■Г√В√Б■А√√~°}√|√{■x■u■t■s√r■q■p■o■n■m■l■k■j■i■h■g■f■e■d√c■b■a■`■_■^■]■\■[■Z√Y√X■W■V■S■R■P■N■M■K■I■G■F■D■B■A■?■=°В В В В В В В В В В В В В В В В В ╓ °■s■t■u■v■w■x■y■z■{■|■}■~■■А√Б■В■Д■Е■Ж■И√Й√К■Л√М√Н■О√П√Р■С√Т■У√Ф√Х■Ц√ЧїШяЩ■Ъ■Ы■Ь■Э■Ю°Я√а°б°в°г°д°е°ж°зяиьйїк√л°мЄндощп╬░ЄпЄоЄньмял▌кцйЄжЄе■д√г√в√б√а°Я°Ю√Э°Ь°ЫЄЪ°ЩїШ°Ч√Ц■Х■Ф√У√Т√С■Р■П■О√Н√М√Л√К√Й■И√З■Ж√Е√Д■Г√В■Б√А√√~√}°|√{■x■u■t■s√r■q■p■o■n■m■l■k■j■i■h■g■f■e■d√c■b■a■`■_■^■]■\■[■Z■Y√X√W■V■S■R■P■N■M■K■I■G■F■D■B■A■?°В В В В В В В В В В В В В В В В В ╨ ї■u■v■w■x■y■z■{■|■}■~■■А■Б■В■Г■Д■Е■Ж■И√Й√К■Л√М√Н■О√П√Р■С√Т√У■Ф√Х√Ц■ЧїШяЩ■Ъ■Ы■Ь■Э■Ю°Я√а°б°в°г°д°е°ж°зЄищйїк√л°мЄнбощп╘░япЄоЄнямьл▌кцйїжЄе√д√г√в√б√а°Я√Ю°Э°Ь°ЫїЪїЩ°ШїЧ√Ц■Х■Ф√У√Т■С√Р■П■О√Н√М√Л√К√Й■И√З■Ж√Е√Д■Г√В■Б√А√√~√}°|√{■x■u■t■s√r■q■p■o■n■m■l■k■j■i■h■g■f■e√d■c■b■a■`■_■^■]■\■[■Z■Y√X√W■V■S■R■P■N■M■K■I■G■F■D■B■A°В В В В В В В В В В В В В В В В В ╩ ї■v■w■x■y■z■{■|■}■~■■А■Б■В■Г■Д■Е■Ж√И■Й√К√Л■М√Н√О■П√Р■С√Т√У■Ф√Х√Ц■Ч°ШьЩ■Ъ■Ы■Ь■Э■Ю°Я√а°б°в°г°д°е°ж°зЄищйїк√л°мяндощп╘░япїоянямьлркуйїжЄе√д√г√в√б√а°Я√Ю°Э°Ь√ЫЄЪїЩ°Ш°Ч°Ц■Х°У√Т■С√Р■П■О√Н√М√Л√К■Й√И√З■Ж√Е√Д■Г√В■Б√А√■~°}√|°{■x■u■t■s√r■q■p■o■n■m■l■k■j■i■h■g■f■e√d■c■b■a■`■_■^■]■\■[■Z■Y√X√W■V■S■R■P■N■M■K■I■G■F■D■B°В В В В В В В В В В В В В В В В В ─ ї■w■x■y■z■{■|■}■~■■А■Б■В■Г■Д■Е■Ж√И■Й√К√Л■М√Н√О■П√Р√С■Т√У√Ф■Х√Ц√Ч√ШяЩ√Ъ■Ы■Ь■Э■Ю°Я√а°б°в°г°д°е°ж°зЄищйїк√л°мяндощп╘░ЄпЄоянямьлукрйїжЄе√д√г√в√б√а°Я√Ю°Э°Ь√ЫЄЪїЩ°Ш°Ч°Ц■Х°У√Т■С■Р√П■О√Н√М√Л√К■Й√И√З■Ж√Е■Д√Г√В■Б√А■√~√}°|°{■x■u■t■s√r■q■p■o■n■m■l■k■j■i■h■g■f■e√d■c■b■a■`■_■^■]■\■[■Z■Y■X√W√V■S■R■P■N■L■K■I■G■FїВ В В В В В В В В В В В В В В В В ╛ ї■x■y■z■{■|■}■~■■А■Б■В■Г■Д■Е■Ж√И√Й■К√Л√М■Н√О■П√Р√С■Т√У√Ф■Х√Ц√Ч■ШьЩ√Ъ■Ы■Ь■Э■Ю°Я√а°б°вїг°д°е°ж°зїиьйЄк√л°мянбоьп╘░ЄпЄоянямялукрй■иїжЄе√д√г√в■б°а°Я√Ю°Э°Ь√ЫїЪЄЩ°Ш°Ч°Ц■Х°У√Т■С■Р√П■О√Н√М√Л√К■Й√И√З■Ж√Е■Д√Г√В■Б√А■√~√}°|√{■z■x■u■t√s■r■q■p■o■n■m■l■k■j■i■h■g■f■e√d■c■b■a■`■_■^■]■\■[■Z■Y■X√W√V■S■R■P■N■L■K■I■G°В В В В В В В В В В В В В В В В В ╡ Є■z■{■|■}■~■■А■Б■В■Г■Д■Е■Ж√И√Й■К√Л√М■Н√О√П■Р√С√Т■У√Ф√Х■Ц√Ч√ШЄЩ°Ъ■Ы■Ь■Э√Ю√Я°а°б°в°г°д°е°ж°зїиьйЄк√л°мянбощп┌░япЄоЄньмялукрй■иїжЄе√д√г■в√б°а°Я√Ю°Э°Ь√ЫїЪїЩїШ°Ч°Ц■Х°У√Т■С■Р■П√О√Н√М√Л√К■Й√И■З√Ж√Е■Д√Г■В√Б√А■√~√}√|°{■z■w■u■t√s■r■q■p■o■n■m■l■k■j■i■h■g■f■e√d■c■b■a■`■_■^■]■\■[■Z■Y■X√W√V■S■R■P■N■L■K■I°В В В В В В В В В В В В В В В В В м ї■{■|■}■~■■А■Б■В■Г■Д■Е√З■И√Й√К■Л√М■Н√О√П■Р√С√Т■У√Ф√Х■Ц√Ч√ШЄЩ°Ъ■Ы■Ь■Э√Ю√Я°а°б°в°г°д°е°ж°зїиьйЄк√л°мянбощп┌░япїоянямьлцк▌й■иїжЄе■д√г√в√б°а°Я√Ю°Э°Ь√Ы°ЪЄЩ°ШїЧ°Ц■Х°У√Т■С■Р■П√О√Н√М√Л√К■Й√И■З√Ж√Е■Д√Г■В√Б√А■√~√}√|°{■z■w■u■t√s■r■q■p■o■n■m■l■k■j■i■h■g■f■e√d■c■b■a■`■_■^■]■\■[■Z■Y■X■W°V■S■R■P■N■L■K°В В В В В В В В В В В В В В В В В ж ї■|■}■~■■А■Б■В■Г■Д■Е√З■И√Й√К■Л√М√Н■О√П√Р■С√Т√У■Ф√Х√Ц■Ч√ШїЩїЪ■Ы■Ь■Э√Ю√Я°а°б°в°г°д°е°ж°з°ищйЄк√л°мьнро°н╦оьп┌░ЄпЄоянямьлщк┌й■иїжїе√д√г√в√б°а√Я°Ю°Э°Ь√Ы°ЪЄЩ°Ш°ЧїЦ■Х°У√Т■С■Р■П√О√Н√М√Л■К√Й√И■З√Ж√Е■Д√Г■В√Б√А■√~■}°|√{√z■w■u■t√s■r■q■p■o■n■m■l■k■j■i■h■g■f√e■d■c■b■a■`■_■^■]■\■[■Z■Y■X■W√V■U■S■R■P■N■L°В В В В В В В В В В В В В В В В В Э °■}■~■■А■Б■В■Г■Д■Е√З√И■Й√К■Л√М√Н■О√П√Р■С√Т√У■Ф√Х√Ц■Ч√ШїЩїЪ■Ы■Ь■Э√Ю√Я°а°б°в°г°д°е°ж°з°ищйЄк√л°мьнїоун╦ощп▌░ЄпЄоянямьльк╫й■иїжїе√д√г√в√б°а√Я°Ю°Э√Ь°Ы°ЪїЩїШ°Ч°Ц√Х°У√Т■С■Р■П√О√Н√М√Л■К√Й√И■З√Ж■Е√Д√Г■В√Б■А√√~■}°|√{√z■w■u■t√s■r■q■p■o■n■m■l■k■j■i■h■g■f√e■d■c■b■a■`■_■^■]■\■[■Z■Y■X■W√V■U■S■R■P■N°В В В В В В В В В В В В В В В В В Ч ї■■А■Б■В■Г■Д■Е√З√И■Й√К√Л■М√Н√О■П√Р√С■Т√У√Ф■Х√Ц√Ч■ШїЩїЪ■Ы■Ь■Э√Ю°Я√а°б°в°гїд°е°ж°з°иьйЄк°л√м┬н╦ощпр░япЄоЄньмьльк┌й√иїжїе√д√г√в√б°а√Я°Ю°Э√Ь°Ы°ЪїЩїШ°Ч°Ц√Х°У√Т■С■Р■П√О√Н√М√Л■К√Й√И■З√Ж■Е√Д√Г■В√Б■А√√~■}√|°{√z■w■u√t■s■r■q■p■o■n■m■l■k■j■i■h■g■f√e■d■c■b■a■`■_■^■]■\■[■Z■Y■X■W√V■U■S■R■P°В В В В В В В В В В В В В В В В В О °■А■Б■В■Г■Д■Е■Ж■З√И■Й√К√Л■М√Н√О■П√Р√С■Т√У√Ф■Х√Ц√Ч■Ш°ЩЄЪ■Ы■Ь■Э√Ю°Я°а°б°в°г°д°е°ж°з°ияйяк°л√м┐н╬ощпр░япЄоЄньмяльк┌й√и■зїжїе√д√г√в√б°а√Я°Ю°Э√Ь°Ы°ЪїЩїШ°Ч°Ц√Х√У√Т√С■Р■П√О√Н√М√Л■К√Й■И√З√Ж■Е√Д■Г√В√Б■А√√~■}√|°{√z■w■u√t■s■r■q■p■o■n■m■l■k■j■i■h■g■f√e■d■c■b■a■`■_■^■]■\■[■Z■Y■X■W■V√U■S■Q°В В В В В В В В В В В В В В В В В И °■Б■В■Г■Д■Е■Ж■З√И√Й■К√Л√М■Н√О√П■Р√С√Т■У√Ф√Х■Ц√Ч■Ш°ЩЄЪ■Ы■Ь■Э√Ю°Я°а°б°в°г°д°е°ж°з°ияйяк°л√м┐н╦оьпр░япїояньмяльк┌й√и■зїжїе√д√г■в°б°а√Я°Ю°Э√Ь°Ы°Ъ°ЩїШїЧ°Ц√Х√У√Т■С√Р■П√О√Н√М√Л■К√Й■И√З√Ж■Е√Д■Г√В√Б■А√■~√}√|√{°z■w■u√t■s■r■q■p■o■n■m■l■k■j■i■h■g■f√e■d■c■b■a■`■_■^■]■\■[■Z■Y■X■W■V√U■S°В В В В В В В В В В В В В В В В В В ■ °■Г■Д■Е■Ж■З√И√Й■К√Л√М■Н√О√П■Р√С√Т■У√Ф√Х■Ц√Ч√Ш■ЩяЪ■Ы■Ь■Э√Ю°Я°а°б°в°г°д°е°ж°з°ияйяк°л√м┐н╦ощпу░ЄпЄоянямьльк▌й°и■зїжїе√д■г√в°б√а°Я°Ю°Э√Ь°Ы°Ъ°ЩїШ°ЧїЦ■Х■Ф√У√Т■С√Р■П√О√Н√М■Л√К√Й■И√З■Ж√Е√Д■Г√В√Б■А√■~√}√|√{°z■w■u√t■s■r■q■p■o■n■m■l■k■j■i■h■g■f√e■d■c■b■a■`■_■^■]■\■[■Z■Y■X■W■V√U√В В В В В В В В В В В В В В В В В В ї °■Д■Е■Ж√З■И√Й√К■Л√М√Н■О√П√Р■С√Т√У■Ф√Х■Ц√Ч√Ш■ЩяЪ■Ы■Ь■Э√Ю°Я°а°б°в°г°д°е°ж°з°ияйяк°л√м╝н╬ощпц░япЄоянямьляк▌йїи■зїжїе■д√г√в°б√а°Я°Ю√Э°Ь°Ы°Ъ√ЩЄШ°Ч°Ц√Х■Ф√У√Т■С■Р√П√О√Н√М■Л√К√Й■И√З■Ж√Е√Д■Г√В■Б√А√■~√}■|°{√z■y■w■u√t■s■r■q■p■o■n■m■l■k■j■i■h■g√f■e■d■c■b■a■`■_■^■]■\■[■Z■Y■X■W■V°В В В В В В В В В В В В В В В В В В ь √■Е■Ж√З■И√Й√К■Л√М√Н■О√П√Р■С√Т√У■Ф√Х√Ц■Ч√Ш√ЩЄЪ■Ы■Ь■Э°Ю√Я°а°б°в°г°д°еїж°з°иЄйяк°л√м╝н╦оьпц░япЄоянямьляк▌йїи■зїж°е√д√г√в°б√а°Я°Ю√Э°Ь°Ы√Ъ°ЩЄШ°Ч°Ц√Х■Ф√У√Т■С■Р√П√О√Н√М■Л√К√Й■И√З■Ж√Е√Д■Г√В■Б√А√■~√}■|√{°z■y■w√u■t■s■r■q■p■o■n■m■l■k■j■i■h■g√f■e■d■c■b■a■`■_■^■]■\■[■Z■Y■X■W°В В В В В В В В В В В В В В В В В В ц °√З√И■Й√К√Л■М√Н√О■П√Р√С■Т√У■Ф√Х√Ц■Ч√Ш√ЩїЪ√Ы■Ь■Э°Ю°Я°а°б°в°г°д°е°ж°з°иЄйяк°л√м╝н╦ощпщ░япїояньмялькрйЄи■зїж°е√д√г√в°б√а°Я°Ю√Э°Ь°Ы√Ъ°ЩїШїЧ°Ц√Х■Ф√У√Т■С■Р√П√О√Н√М■Л√К■Й√И√З■Ж√Е■Д√Г√В■Б√А■√~√}■|√{°z■y■w√u■t■s■r■q■p■o■n■m■l■k■j■i■h■g√f■e■d■c■b■a■`■_■^■]■\■[■Z■YїВ В В В В В В В В В В В В В В В В В р ї√И■Й√К√Л■М√Н√О■П√Р√С■Т√У√Ф■Х√Ц√Ч■Ш√ЩїЪ√Ы■Ь■Э°Ю°Я°а°б°в°г°д°е°ж°з°иЄйяк°л√м╣н╬ощпщ░ЄпЄояньмялькрйЄиЄж°е√д√г√в°б√а°Я°Ю√Э°Ь°Ы√Ъ°ЩїШїЧ°Ц√Х■Ф√У√Т■С■Р√П√О√Н√М■Л√К■Й√И√З■Ж√Е■Д√Г√В■Б√А■√~√}■|√{√z√y■w√u■t■s■r■q■p■o■n■m■l■k■j■i■h■g√f■e■d■c■b■a■`■_■^■]■\■[їВ В В В В В В В В В В В В В В В В В ╘ ї√Й■К√Л√М■Н√О√П■Р√С■Т√У√Ф■Х√Ц√Ч■Ш√ЩїЪ√Ы■Ь■Э°Ю°Я°а°б°в°г°д°е°ж°з°иїйьк°л√м╣н╬ощпь░япЄояньмялькуйяиЄж°е√д√г√в√б°а°Я°Ю√Э°Ь°Ы√Ъ°Щ°ШїЧїЦ√Х■Ф√У√Т■С■Р√П√О√Н■М√Л√К■Й√И■З√Ж√Е■Д√Г√В■Б√А■√~√}■|√{√z√y■w√u■t■s■r■q■p■o■n■m■l■k■j■i■h■g√f■e■d■c■b■a■`■_■^■]їВ В В В В В В В В В В В В В В В В В ╚ ї■К√Л√М■Н√О√П■Р√С√Т■У√Ф√Х■Ц√Ч√Ш■Щ°Ъ°Ы■Ь√Э√Ю°Я°а°б°в°г°д°е°ж°з°иїйьк°л°м╝н╦ощпя░япЄоянямьлькцйьиЄж°е√д■г°в√б°а°Я√Ю°Э°Ь°Ы√Ъ°Щ°ШїЧ°Ц°Х■Ф√У√Т■С■Р√П√О√Н■М√Л√К■Й√И■З√Ж√Е■Д√Г■В√Б√А■√~■}√|√{√z√y■w√u■t■s■r■q■p■o■n■m■l■k■j■i■h√g■f■e■d■c■b■a■`■_їВ В В В В В В В В В В В В В В В В В ╝ Є√М√Н■О√П■Р√С√Т■У√Ф√Х■Ц√Ч√Ш■Щ°Ъ°Ы■Ь√Э√Ю°Я°а°б°в°г°д°е°жїз°и°йьк°л°м╝н╦ощпя░япЄоянямьлякцйщиїжїе■д√г°в√б°а°Я√Ю°Э°Ь√Ы°Ъ°Щ°ШїЧ°Ц°Х■Ф√У√Т■С■Р√П√О√Н■М√Л√К■Й√И■З√Ж√Е■Д√Г■В√Б√А■√~■}√|√{√z√y■w■v■u■t■s■r■q■p■o■n■m■l■k■j■i■h√g■f■e■d■c■b■aЄВ В В В В В В В В В В В В В В В В В ╢ я√Н■О√П√Р■С√Т√У■Ф√Х√Ц■Ч√Ш√Щ■ЪїЫ■Ь√Э√Ю°Я°аїб°в°г°д°е°ж°з°и°йьк°л°м╣н╬ощпЄ░япЄоьнямьлякцйщиїж°е√д√г°в√б°а°Я√Ю°Э°Ь√Ы°Ъ°Щ√ШЄЧ°Ц°Х■Ф√У■Т√С■Р√П√О√Н■М√Л■К√Й√И■З√Ж■Е√Д√Г■В√Б■А√√~■}√|√{■z°y■w■v■u■t■s■r■q■p■o■n■m■l■k■j■i■h√g■f■e■d■cЄВ В В В В В В В В В В В В В В В В В к я■О√П√Р■С√Т√У■Ф√Х√Ц■Ч√Ш√Щ■ЪїЫ■Ь√Э°Ю°Я°а°б°в°г°д°е°ж°з°и°йьк°л°м╣н╦ощп°░ьпЄояньмялькщйциїж°е√д√г°в√б°а°Я√Ю°Э°Ь√Ы°Ъ°Щ√ШїЧїЦ°Х■Ф√У■Т√С■Р√П√О√Н■М√Л■К√Й√И■З√Ж■Е√Д√Г■В√Б■А√√~■}√|■{√z°y■w■v■u■t■s■r■q■p■o■n■m■l■k■j■i■h√g■f■eЄВ В В В В В В В В В В В В В В В В В Ю я■П√Р√С■Т√У√Ф■Х√Ц√Ч■Ш√Щ√Ъ°Ы■Ь√Э°Ю°Я°а°б°в°г°д°е°ж°з°и°йьк°л°м╣н╦ощп√░щпЄояньмялькьйуиїж°е√д√г°в√б°а°Я√Ю°Э°Ь√Ы°Ъ°Щ√ШїЧїЦ°Х■Ф√У■Т■С√Р√П√О■Н√М√Л■К√Й■И√З√Ж■Е√Д√Г■В√Б■А√√~■}√|■{√z√y■x■w■v■u■t■s■r■q■p■o■n■m■l■k■j■i■h√g■fїВ В В В В В В В В В В В В В В В В В Т я■Р√С■Т√У√Ф■Х√Ц√Ч■Ш√Щ√Ъ°Ы■Ь√Э°Ю°Я°а°б°в°г°д°е°ж°з°и°йьк°лїм╣н╬о╦пЄояньмялькяйриїж°е√д√г√в°б°а√Я°Ю°Э°Ь√Ы°Ъ°Щ√ШїЧ°ЦїХ■Ф√У■Т■С√Р√П√О■Н√М√Л■К√Й■И√З√Ж■Е√Д■Г√В√Б■А√■~√}√|■{√z√y■x■w■v■u■t■s■r■q■p■o■n■m■l■k■j■i■h■gЄВ В В В В В В В В В В В В В В В В В Й я■С√Т■У√Ф√Х■Ц√Ч√Ш■Щ√Ъ°Ы■Ь√Э°Ю°Я°а°б°в°г°д°е°ж°з°иїйяк°лїм╣н╦о╤пяоянямьлякьйриїж°е√д√г√в°б°а√Я°Ю°Э√Ь°Ы°Ъ°Щ√Ш°ЧїЦ°Х√Ф√У■Т■С√Р√П√О■Н√М√Л■К√Й■И√З√Ж■Е√Д■Г√В√Б■А√■~√}√|■{√z√y■x■w■v■u■t■s■r■q■p■o■n■m■l■k■j■iЄВ В В В В В В В В В В В В В В В В В В ∙ Є■Т■У√Ф√Х■Ц√Ч√Ш■Щ√Ъ°Ы■Ь√Э°Ю°Я°а°б°вїг°д°е°ж°з°и°йяк°лїм╣н╦о╤пЄоьнямьлякьйриїж°е√д√г√в°б°а√Я°Ю°Э√Ь°Ы°Ъ√Щ°Ш°ЧїЦ°Х√Ф√У■Т■С√Р√П√О■Н√М■Л√К√Й■И√З■Ж√Е√Д■Г√В■Б√А√■~√}√|■{√z■y√x■w■v■u■t■s■r■q■p■o■n■m■l■kЄВ В В В В В В В В В В В В В В В В В В э я■Ф√Х√Ц■Ч√Ш■Щ√Ъ°Ы■Ь°Э°Ю°Я°а°б°в°г°д°е°ж°з°и°йЄкїлїм╣н╦о╤пЄояньмьлякьйриїж°е■д°г√в°б°а√Я°Ю°Э√Ь°Ы°Ъ√Щ°Ш°ЧїЦ°Х√Ф■У√Т■С√Р√П√О■Н√М■Л√К√Й■И√З■Ж√Е√Д■Г√В■Б√А√■~√}■|√{√z■y√x■w■v■u■t■s■r■q■p■o■n■mЄВ В В В В В В В В В В В В В В В В В В с я■Х√Ц■Ч√Ш√Щ■Ъ°Ы■Ь°Э°Ю°Я°а°б°в°г°д°е°ж°з°и°йЄкїлїм╢н╬о╤пЄояньмялькьйриїж√е√д°г√в°б°а√Я°Ю°Э√Ь°Ы°Ъ√Щ°Ш°ЧїЦ°Х√Ф■У√Т■С√Р√П■О√Н√М■Л√К■Й√И√З■Ж√Е■Д√Г√В■Б√А√■~√}■|√{√z■y√x■w■v■u■t■s■r■q■p■oяВ В В В В В В В В В В В В В В В В В В ╒ Є■Ц■Ч√Ш√Щ■Ъ√Ы√Ь°Э°Ю°Я°а°б°в°г°д°е°ж°з°и°йЄкїлЄм╣н╦о╘пЄояньмялькяйри■зїж√е√д√г°в°б°а√Я°Ю°Э√Ь°Ы°Ъ√Щ°Ш°Ч°ЦїХ√Ф■У√Т■С√Р√П■О√Н√М■Л√К■Й√И√З■Ж√Е■Д√Г√В■Б√А■√~√}■|√{■z√y√x■w■v■u■t■s■r■qяВ В В В В В В В В В В В В В В В В В В ╔ Є■Ч■Ш√Щ√Ъ■Ы√Ь°Э°Ю°Я°а°б°в°г°д°е°ж°з°и°йЄкїлЄм°нїм╬н╦о╫пЄоьнямьлькяйри■зїж√е√д√г°в°б√а°Я°Ю°Э√Ь°Ы°Ъ√Щ°Ш°Ч°ЦїХ■Ф√У√Т■С√Р√П■О√Н√М■Л√К■Й√И√З■Ж√Е■Д√Г√В■Б√А■√~√}■|√{■z√y√x■w■v■u■t■s■rЄВ В В В В В В В В В В В В В В В В В В ╜ Є√Щ√Ъ■Ы√Ь°Э°Ю°Я°а°б°в°г°дїе°ж°з°и°йїкїл▌м╦н╬о╫пЄоьнямьлякьйуи√зїж√е√д√г°в°б√а°Я°Ю√Э°Ь°Ы√Ъ°Щ°Ш°Ч°Ц°Х√Ф√У■Т√С√Р√П■О√Н■М√Л√К■Й√И■З√Ж√Е■Д√Г■В√Б√А■√~√}■|√{■z√y√x■w■v■u■tЄВ В В В В В В В В В В В В В В В В В В ▒ Є√Ъ√Ы√Ь√Э°ЮїЯ°а°б°в°г°д°е°ж°з°и°йїкїл▌м╦н╦о┌пЄоьнямьлякьйци°зїж√е√д√г°в°б√а°Я°Ю√Э°Ь°Ы√Ъ°Щ°Ш√Ч°ЦїХ√Ф√У■Т√С√Р√П■О√Н■М√Л√К■Й√И■З√Ж√Е■Д√Г■В√Б√А■√~■}√|√{■z√y■x√w■vїВ В В В В В В В В В В В В В В В В В В Я ї√Ы√Ь°Э°Ю°Я°а°б°в°г°д°е°ж°з°и°йїкїл▌м╦н╦о┌пЄояньмьлякьйци°зїж√е√д√г°в°б√а°Я°Ю√Э°Ь°Ы√Ъ°Щ°Ш√Ч°ЦїХ√Ф√У■Т√С√Р■П√О√Н■М√Л■К√Й√И■З√Ж■Е√Д√Г■В√Б√А■√~■}√|√{■z√y■x■wїВ В В В В В В В В В В В В В В В В В В У Є■Ь°Э°Ю°Я°а°б°в°г°д°е°ж°з°и°й°кял▌м╦н╬о▌пяояньмялькяйциїзїж■е√д°г°в°б√а°Я°Ю√Э°Ь°Ы√Ъ°Щ°Ш√Ч°ЦїХ√Ф√У■Т√С√Р■П√О√Н■М√Л■К√Й√И■З√Ж■Е√Д√Г■В√Б■А√√~■}√|■{√zяВ В В В В В В В В В В В В В В В В В В З Є√Э°Ю°Я°а°б°в°г°д°е°ж°з°и°й°кял▌м╦н╦орпЄоьньмялькяйщиЄз°ж√е√д°г°в√б°а°Я°Ю√Э°Ь°Ы√Ъ°Щ°Ш√Ч°ЦїХ√Ф√У■Т√С√Р■П√О√Н■М√Л■К√Й√И■З√Ж■Е√Д√Г■В√Б■А√√~■}√|ьВ В В В В В В В В В В В В В В В В В В В ў я■Ю°Я°а°б°в°г°д°е°жїз°и°й°кЄл▌м╦н╦орпЄоьнямьлькяйщиЄз°ж√е√д°г°в√б°а°Я√Ю°Э°Ь°Ы√Ъ°Щ°Ш√Ч°Ц°Х°Ф√У■Т√С√Р■П√О■Н√М√Л■К√Й■И√З√Ж■Е√Д■Г√В√Б■А√■~■}яВ В В В В В В В В В В В В В В В В В В В т я■Я°аїб°в°г°д°е°ж°з°и°й°кЄл┌м╬н╦орпЄоьнямьлякьйьияз°ж√е√д°г°в√б°а°Я√Ю°Э°Ь√Ы°Ъ°Щ√Ш°Ч°Ц°Х°Ф√У■Т√С√Р■П√О■Н√М√Л■К√Й■И√З√Ж■Е√Д■Г√В√Б■А■яВ В В В В В В В В В В В В В В В В В В В ╨ ь■а°б°в°г°д°е°ж°з°и°й°кЄл┌м╦н╬оупяоьнямьлякьйяиьз°ж√е√д°г°в√б°а°Я√Ю°Э°Ь√Ы°Ъ°Щ√Ш°Ч°Ц°Х°Ф√У■Т√С■Р√П√О■Н√М■Л√К√Й■И√З■Ж√Е√Д■Г√ВьВ В В В В В В В В В В В В В В В В В В В ╛ щ°в°г°д°е°ж°з°и°й°кЄл┌м╦н╦оцпяояньмялькьйяиьз°ж√е√д°г°в√б°а°Я√Ю°Э°Ь√Ы°Ъ°Щ√Ш°Ч°Ц√ХїФ√У■Т√С■Р√П√О■Н√М■Л√К√Й■И√З■Ж√Е√ДщВ В В В В В В В В В В В В В В В В В В В м ь°г°д°е°ж°з°и°й°кЄл╫м╬н╦оцпяояньмялькяйьиьз°ж■е°д°г√в°б°а°Я√Ю°Э°Ь√Ы°Ъ°Щ√Ш°Ч°Ц√ХїФ■У√Т√С■Р√П■О√Н√М■Л√К√Й■И√З■Ж■ЕщВ В В В В В В В В В В В В В В В В В В В Ъ щ√д°е°ж°зїи°й°кїл╫м╦н╬оцпЄоьньмялькяйьиьз√ж√е°д°г√в°б°а√Я°Ю°Э°Ь√Ы°Ъ°Щ√Ш°Ч°Ц√ХїФ■У√Т√С■Р√П■О√Н√М■Л√К■Й√ИцВ В В В В В В В В В В В В В В В В В В В Е щ√е°ж°з°и°й°кїл╫м╦н╦оьпяоьнямьлякьйьияз°ж√е°д°г√в°б°а√Я°Ю°Э√Ь°Ы°Ъ°Щ√Ш°Ч°Ц√Х°Ф√У√Т√С■Р√П■О√Н√М■Л√КуВ В В В В В В В В В В В В В В В В В В В В ї щ√ж°з°и°й°кїл╫м╦н╦оьпяоьнямьлякьйяиьз°ж√е°д°г√в°б°а√Я°Ю°Э√Ь°Ы°Ъ√Щ°Ш°Ч√Ц°Х°Ф√У√Т■С√Р√П■О√Н■М■ЛцВ В В В В В В В В В В В В В В В В В В В В р ц■з°и°й°кїл╘м╦н╬оьпяояньмьлякьйяиьз°ж√е°д°г√в°б°а√Я°Ю°Э√Ь°Ы°Ъ√Щ°Ш°Ч√Ц°Х°Ф√У√Т■С√Р√П■О■НщВ В В В В В В В В В В В В В В В В В В В В ╚ ц°й°кїл╘м╦н╦ояпяояньмялькьйяиьз°ж√е°д°г√в°б°а√Я°Ю°Э√Ь°Ы°Ъ√Щ°Ш°Ч√Ц°Х°Ф√У√Т■С√РщВ В В В В В В В В В В В В В В В В В В В В │ цїк°л╘м╦н╦ояпяояньмялькяйьиьз°ж√е°д√г°в°б√а°Я°Ю°Э√Ь°Ы°Ъ√Щ°Ш°Ч√Ц°Х°Ф√У√ТьВ В В В В В В В В В В В В В В В В В В В В Ы ц°л╤м╬н╦оЄпяоьньмялькяйьиьз°ж√е°д√г°в°б√а°Я°Ю√Э°Ь°Ы°Ъ√Щ°Ш°Ч√Ц°Х°ФьВ В В В В В В В В В В В В В В В В В В В В В   ц╫м╦н╬оЄпяоьнямьлякьйьиьз√ж°е°д√г°в°б√а°Я°Ю√Э°Ь°Ы√Ъ°Щ°Ш°Ч■ЦрВ В В В В В В В В В В В В В В В В В В В В В ч ▌ям╦н╦оїпяоьнямьлякьйяищз√ж°е°д√г°в°б√а°Я°Ю√Э°Ь°Ы√Ъ°Щ╫В В В В В В В В В В В В В В В В В В В В В В ╧ ╤╤н╦оїпяояньмьлякьйяиьз°ж°е°д√г°в°б√а°Я°Ю√Э°Ь■Ы╘В В В В В В В В В В В В В В В В В В В В В В е ╤цн╬о°пьояньмялькьйяиьз°ж°е√д°г°в°б√а°Я√Ю╦В В В В В В В В В В В В В В В В В В В В В В З ╦■н╦о√пьояньмялькяйьиязїж°е√д°г°в√б■а╦В В В В В В В В В В В В В В В В В В В В В В В т ┬ро√пяоьнямьлькяйьиязїж°е√д√г╬В В В В В В В В В В В В В В В В В В В В В В В ╕ ╝°о√пяоьнямьлякьйьиязїж╤В В В В В В В В В В В В В В В В В В В В В В В В ° ВУВ В В В В В В В В В В В В В В В В В В В В В В В ┬ В╔В В В В В В В В В В В В В В В В В В В В В В В В В ∙ ьВ В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В ═ ■ ° ■ В В В В В В В В В В В В В В В В В В В В В В В В В В   ■ ° ■ В В В В В В В В В В В В В В В В В В В В В В В В В В ¤ ■ ■ ■ В В В В В В В В В В В В В В В В В В В В В В В В В В ў ■ В В В В В В В В В В В В В В В В В В В В В В В В В В Ї ■ В В В В В В В В В В В В В В В В В В В В В В В В В В Ї ■ В В В В В В В В В В В В В В В В В В В В В В В В В З  А  А ї ■ В В В В В В В В В В В В В В В В В В В В В В В В В З  А  А В В В В В В В В В В В В В В В В В В В В В В В В В В ў  А  А В В В В В В В В В В В В В В В В В В В В В В В В В В ў  А  А В В В В В В В В В В В В В В В В В В В В В В В В В В ·  А  А  А  А В В В В В В В В В В В В В В В В В В В В В В В В В В ¤  А  А  А  А В В В В В В В В В В В В В В В В В В В В В В В В В В ¤  А  А  А  А В В В В В В В В В В В В В В В В В В В В В В В В В В   А  А  А  А  А  А В В В В В В В В В В В В В В В В В В В В В В В В В Д  А  А Є В В В В В В В В В В В В В В В В В В В В В В В В В В   А  А √ ■ В В В В В В В В В В В В В В В В В В В В В В В В В В   А  А ■ ■ В В В В В В В В В В В В В В В В В В В В В В В В В В ¤  А  А ■ В В В В В В В В В В В В В В В В В В В В В В В В В В ·  А ■ В В В В В В В В В В В В В В В В В В В В В В В В В В ў ■  А В В В В В В В В В В В В В В В В В В В В В В В В В Д   А  А√ Є В В В В В В В В В В В В В В В В В В В В В В В В В Н   А  А  А■  А  А В В В В В В В В В В В В В В В В В В В В В В В В В Д   А  А  А  А А  А В В В В В В В В В В В В В В В В В В В В В В В В В Д   А  А  А  А А  А В В В В В В В В В В В В В В В В В В В В В В В В В В    А  А  А А  А В В В В В В В В В В В В В В В В В В В В В В В В В ╖ ■ ° ■ ╫   А  А А  А В В В В В В В В В В В В В В В В В В В В В В В В В ╖ ■ ° ■ ╫   А  А А  А В В В В В В В В В В В В В В В В В В В В В В В В В ┤ ■ ■ ■ ╤   А А  А В В В В В В В В В В В В В В В В В В В В В В В В В ▒ ■ ■ А  А  ╫   А А  А В В В В В В В В В В В В В В В В В В В В В В В В В ┤ ■ А  ■ А  А  √ !А  А  А  А  А  А  А  А  А  А  А  А■ А  А В В В В В В В В В В В В В В В В В В В В В В В В В ║ А  А  ■ А  А  А  ■ /А  А  А  А  А  А  А  А  А  А  А  А  А  А  А  А  В В В В В В В В В В В В В В В В В В В В В В В В В ╖ А  А  ■ А  А  А  ■ А  А  А  В В В В В В В В В В В В В В В В В В В В В В В В В В 	 А  А  А  В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В В К А
+%%EndData
+end
+%%PageTrailer
+%%Trailer
+%%BoundingBox: -0 -0 829 505
+%%HiResBoundingBox: 0 0 829 505
+%%EOF

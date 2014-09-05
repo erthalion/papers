@@ -1,0 +1,629 @@
+\documentclass[14pt]{beamer}
+
+%encoding
+\usepackage[utf8]{inputenc}
+
+%language
+\usepackage[russian]{babel}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{tikz}
+\usepackage{adjustbox}
+\usepackage{marvosym}
+\usepackage{animate}
+\usetikzlibrary{shapes,arrows,positioning}
+\makeatletter
+\makeatother
+\graphicspath{{images/}}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, text width=11em, text centered, rounded corners, minimum height=2em]
+\tikzstyle{line} = [draw, -latex    ]
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm, minimum height=2em]
+
+\setbeamerfont{author in head/foot}{size=\small}
+\setbeamerfont{title in head/foot}{size=\footnotesize}
+\setbeamercovered{invisible}
+\setbeamertemplate{navigation symbols}{}%remove navigation symbols
+
+\title[Моделирование клапанов]{Математическое моделирование работы искусственного сердечного клапана}
+\date{}
+\author[Долгов Д.А.]{Выступающий: Долгов Д.А.}
+\institute{
+    Научный руководитель: д.ф.-м.н., профессор Захаров Ю.Н. \\
+    Кемеровский Государственный Университет \\
+    \vspace{0.7cm}
+    Кемерово, 2016г
+}
+\usetheme[numbers, totalnumbers, minimal, nologo]{Statmod}
+\usefonttheme[onlymath]{serif}
+
+\definecolor{statmodblue}{RGB}{100,10,30}
+\definecolor{statmodsand}{RGB}{244,215,103}
+
+\begin{document}
+\maketitle
+
+\begin{frame}
+\frametitle{Введение}
+\begin{itemize}
+    \item[\MVRightarrow] \textbf{Предмет исследования:} искусственный сердечный клапан
+    \item[\MVRightarrow] \textbf{Цель исследования:} моделирование работы клапана различных форм с учетом неоднородной структуры крови
+    \item[\MVRightarrow] \textbf{Актуальность:} характеристики искусственного сердечного клапана напрямую влияют на эффективность лечения
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Проблемы}
+\begin{itemize}
+  \item[\MVRightarrow] Чрезвычайная гибкость створок клапана
+  \item[\MVRightarrow] Сложная геометрия искусственного клапана
+  \item[\MVRightarrow] Неоднородная структура крови
+\end{itemize}
+\end{frame}
+
+%description of the problem
+\begin{frame}
+\frametitle{Актуальность}
+\begin{itemize}
+  \item[\MVRightarrow] Искусственные клапаны являются эффективным способом
+      лечения многих сердечно-сосудистых заболеваний.
+  \item[\MVRightarrow] Клапан должен удовлетворять большому количеству требований,
+      их экспериментальная проверка занимает большое количество времени, и не всегда
+      возможна.
+  \item[\MVRightarrow] Стремительное развитие медицины приводит к тому, что современные
+      исследования в области математического моделирования сердечно-сосудистой системы
+      учитывают далеко не все важные эффекты и явления. Например, неоднородную структуру
+      крови или некоторые виды искусственных клапанов.
+\end{itemize}
+\end{frame}
+\note{
+    объем регургитации - объем обратного течения (из желудочка в атриум)
+
+    Каждый год в мире
+    проводится примерно 250 000 операций по восстановлению или замене
+    поврежденных сердечных клапанов, и наблюдается тенденция к росту этого
+    числа - Institute D.C.R. {\em Adult cardiac surgery database, executive summary} \url{http://www.sts.org/sites/default/files/documents/2015Harvest2_ExecutiveSummary.pdf}, 2015.
+
+}
+
+\begin{frame}
+\frametitle{Цели}
+    \begin{itemize}
+        \item[\MVRightarrow] Разработка технологии решения нестационарной
+            трехмерной задачи о движении створок искусственного клапана внутри
+            крупных кровеносных сосудов и деформации их стенок под давлением
+            потока жидкости с учетом неоднородной структуры крови.
+        \item[\MVRightarrow] Моделирование работы клапана <<Юнилайн>> и
+            верификация результатов с помощью экспериментальных данных
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Задачи}
+    \begin{itemize}
+        \item[\MVRightarrow] Объединение разработанных алгоритмов моделирования
+            неоднородной несжимаемой жидкости с методом погруженной границы.
+        \item[\MVRightarrow] Моделирование возникновения аневризмы сосуда и
+            верификация результатов с помощью экспериментальных данных.
+        \item[\MVRightarrow] Проведение расчетов с использованием CAD модели
+            клапана <<Юнилайн>> при параметрах, соответствующих экспериментальному стенду.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Обзор исследований}
+    Существует множество исследований, которые расматривают только сам клапан и его деформации,
+    представляя поток в упрощенном виде или получая данные о давлении экспериментально. См. например:\\
+    \par
+    {\tiny
+        \begin{itemize}
+            \item[\MVRightarrow] Бокерия Л.А., Скопин И.И., Сазоненков М.А., Тумаев Е.Н., Механическое напряжение в створках митрального клапана и биопротеза в митральной позиции. Влияние геометрии фиброзного кольца на величину напряжения створок/Клиническая физиология кровообращения, 2008, №2
+            \item[\MVRightarrow] Сазоненков, М.А. Расчет напряжений в структурах нормального митрального клапана. / М.А. Сазоненков, Е.Н. Тумаев, И.И. Скопин // Бюллетень НЦ ССХ им. А.Н. Бакулева РАМН. Сердечно-сосудистые заболевания. Четырнадцатый Всероссийский съезд сердечно-сосудистых хирургов. – 2008. - Т 9, N 6. - с. 55.
+            \item[\MVRightarrow] Kunzelman K.S., Reimink M.S. et al  Annular dilatation increases stress in the mitral valve and delays coaptation: a finite element computer model. (1997) Cardiovasc Surg 5(4):427–434
+            \item[\MVRightarrow] Weinberg E. Dynamic simulation of heart mitral valve with transversely isotropic material model. Massachusetts Institute of Technology (2005)
+            \item[\MVRightarrow] Kim H.S. Nonlinear multi-scale anisotropic material and structural models for prosthetic and native aortic heart valves. Georgia Institute of Technology (2009)
+        \end{itemize}
+    }
+\end{frame}
+\note{
+    Отметить, что рассматриваются работы, посвященные именно математическому моделированию клапанов,
+    а не экспериментальному. На эту тему мало русскоязычных работ - даже в монографии "Искусственные клапаны сердца"
+    (Орловский, Гриценко, Юхнев, Евдокимов, Гавриленков),
+    где описан крупный вклад отечественных ученых в области клапанов, в разделе "Математическое моделирование" нет
+    упоминаний о русскоязычных работах.
+    Существует достаточно много (по крайней мере, зарубежных) исследований,
+    посвященных математическому моделированию сердечных клапанов. В ранних моделируются
+    только достаточно простые клапаны (по структуре, двумерные и проч.).
+    Существует много современных работ, которые изучают клапан только с точки зрения
+    эластичности, напряжений, возникающих при деформации и проч (при этом данные о давлении жидкости
+    берутся либо из эксперимента, либо упрощенные, например течение Пуазеля).
+    Самый перспективный вид исследований те, которые полноценно описывают взаимодействие потока и клапана,
+    т.е. IBM
+}
+
+\begin{frame}
+\frametitle{Обзор исследований}
+    Исследования, которые рассматривают полноценное взаимодействие ''жидкость-клапан'', зачастую относятся
+    к методу погруженной границы, т.к. он позволяет считать клапан сколь угодно тонким:
+    \par
+    {\tiny
+        \begin{itemize}
+            \item[\MVRightarrow] Орловский П.И., Гриценко В.В., Юхнев А.Д., Евдокимов С.В., Гавриленков В.И. Искусственные клапаны сердца. СПб. 2007. - 448с
+            \item[\MVRightarrow] Peskin, Charles S. "Numerical analysis of blood flow in the heart." Journal of computational physics 25.3 (1977): 220-252.
+            \item[\MVRightarrow] Luo, X. Y., et al. "Effect of bending rigidity in a dynamic model of a polyurethane prosthetic mitral valve." Biomechanics and modeling in mechanobiology 11.6 (2012): 815-827.
+            \item[\MVRightarrow] Flamini, Vittoria, Abe DeAnda, and Boyce E. Griffith. "Immersed boundary-finite element model of fluid-structure interaction in the aortic root." (2015).
+        \end{itemize}
+    }
+\end{frame}
+
+\begin{frame}
+\frametitle{Математическая модель и метод решения}
+    \begin{itemize}
+        \item[\MVRightarrow] Биологические характеристики системы
+        \item[\MVRightarrow] Моделирование потока неоднородной жидкости
+        \item[\MVRightarrow] Моделирование деформации створок клапана
+        \item[\MVRightarrow] Взаимодействие <<жидкость-сосуд-клапан>>
+    \end{itemize}
+\end{frame}
+
+% valves placement
+\begin{frame}
+\frametitle{Схема расположения клапанов}
+    \begin{center}
+        \includegraphics[width=8.5cm]{aorta_scheme.png}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Искусственный клапан}
+    \begin{center}
+        \vspace{1.0cm}
+        \includegraphics[width=6cm]{real_valve_3_1.png}
+        \includegraphics[width=3cm]{real_valve2_1.png}
+
+        \vspace{1.1cm}
+        \mbox{\scriptsize
+            <<Юнилайн>>, ФГБУ НИИ КПССЗ СО РАМН, г. Кемерово
+        }
+    \end{center}
+\end{frame}
+
+% valve tissue structure
+\begin{frame}
+\frametitle{Схема строения тканей}
+    \begin{center}
+        \includegraphics[width=8.5cm]{valve_tissue_structure.jpg}
+    \end{center}
+
+    \begin{spacing}{0.5}
+        \mbox{\scriptsize
+            Vesely, Ivan. <<Heart valve tissue engineering.>> Circulation research 97.8 (2005): 743-755.
+        }
+    \end{spacing}
+
+\end{frame}
+\note{
+    \begin{itemize}
+        \item коллагеновые волокна (collagen fibers)
+        \item слой эластина (белок) (elastin sheet)
+        \item гликозаминогликаны (glycosaminoglycan matrix)
+    \end{itemize}
+}
+
+% blood structure scheme
+\begin{frame}
+\frametitle{Схема структуры крови}
+    \begin{center}
+        \includegraphics[width=8.5cm]{blood_scheme3.png}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Описание модели}
+Рассмотрим задачу о течении крови внутри крупных сосудов с гибкими стенками и клапаном. Кровь является неоднородной и состоит из плазмы и взвешенных в ней форменных элементов. Клапан и стенки сосуда являются гибкими и изменяют свою форму под воздействием течения. Будем моделировать кровь как вязкую, несжимаемую двухкомпонентную жидкость, а стенки сосуда - как поверхность заданной формы, обладающую определенной жесткостью.
+\end{frame}
+
+%description of the problem: schema
+\begin{frame}
+\frametitle{Описание модели}
+    \begin{center}
+        \includegraphics[width=10cm]{aorta_valve_scheme_flat_computation.png}
+    \end{center}
+\end{frame}
+\note{$\Gamma_1$ - гибкие стенки, $\Gamma_2,\Gamma_3$ - вход/выход}
+
+% navier stokes equations
+\begin{frame}
+\frametitle{Моделирование течения}
+Система уравнений Навье-Стокса:
+\begin{gather}
+    \label{eq:motion}
+    \frac{\partial u}{\partial t} + (u \cdot \nabla) u = - \frac{1}{\rho} \nabla p + \nabla \cdot \sigma + f\\
+    \label{eq:continuity}
+    \frac{\partial \rho}{\partial t} + \nabla \cdot (\rho u) = 0
+\end{gather}
+где $\sigma = \mu (\nabla u + (\nabla u)^{T})$, $\bar{x} = (x, y, z) \in \Omega$ с начальными и краевыми условиями
+\begin{gather*}
+    u(\bar{x}, t_0) = u_0;\ \frac{\partial u}{\partial n}|_{\Gamma_2, \Gamma_3} = 0\\
+    p|_{\Gamma_2} = p_{in};\ p|_{\Gamma_3} = p_{out} \\
+\end{gather*}
+
+\end{frame}
+\note{Уравнения записаны в векторном виде, $\sigma$ - вязкий тензор напряжений}
+
+% concentration
+\begin{frame}
+\frametitle{Концентрация}
+Уравнение для расчета концентрации примеси в жидкости:
+\begin{gather}
+    \label{eq:concentration}
+    \frac{\partial c}{\partial t} + u \cdot \nabla c = 0
+\end{gather}
+с начальными и краевыми условиями
+\begin{gather*}
+    c(\bar{x}, 0) = c_0(\bar{x})\\
+    c(\bar{x}, t)|_{\Gamma_2} = c_s(\bar{x}, t)
+\end{gather*}
+
+\end{frame}
+
+% concentration: dependencies
+\begin{frame}
+\frametitle{Концентрация}
+Плотность и вязкость зависят от концентрации:
+\begin{gather}
+    \label{eq:concentration_viscosity}
+    \mu = c (\mu_2 - \mu_1) + \mu_1\\
+    \label{eq:concentration_density}
+    \rho = c (\rho_2 - \rho_1) + \rho_1
+\end{gather}
+
+где $\mu_1, \mu_2, \rho_1, \rho_2$ - вязкости и плотности обоих компонент.
+\end{frame}
+
+% boundary
+\begin{frame}
+\frametitle{Сопротивление деформации}
+В каждой точке сосуда и клапана определена поверхностная сила, которая стремится вернуть систему в равновесное положение
+\begin{gather}
+    \label{eq:strain_energy}
+    F =  \frac{\partial}{\partial s}(T \tau) + \frac{\partial^2}{\partial s^2} \Big( E \cdot I \frac{\partial^2}{\partial s^2} X \Big)
+\end{gather}
+\begin{gather}
+    \label{eq:define_boundary_force}
+    F = k \cdot \|X - X_0\|
+\end{gather}
+\end{frame}
+\note{$E$ - модуль Юнга, $I$ - момент инерции поперечного сечения, $T$ - напряжение фибры, $\tau$ - единичный тангенциальный вектор, касательный к фибре.}
+
+% solve method:immersed boundary
+\begin{frame}
+\frametitle{Взаимодействие}
+Уравнения, описывающие взаимодействие погруженной границы и жидкости:
+\begin{gather}
+    \label{eq:ibm_velocity}
+    \frac{\partial X}{\partial t} = \int_{\Omega_h} u \cdot \delta (\bar{x} - X)\; dx\; dy\; dz \\
+    \label{eq:ibm_force}
+    f = \int_{\Gamma_h} F \cdot \delta (\bar{x} - X)\; dq\; dr\; ds\\
+    \label{eq:no_slip}
+    \frac{\partial X}{\partial t} (q, r, s, t) = u(X(q, r, s, t), t)
+\end{gather}
+\end{frame}
+\note{Заглавные символы относятся к погруженной границе, обычные - к жидкости}
+
+% solve method
+\begin{frame}
+\frametitle{Метод решения}
+Будем рассматривать отдельно задачи вычисления параметров течения жидкости и параметров движения стенок сосуда и клапанов. Для этого введем в расчетной области сетки:
+\begin{itemize}
+    \item[\MVRightarrow] $\Omega_h = \Omega_h(x, y, z)$ - равномерная разнесенная сетка для расчета течения
+    \item[\MVRightarrow] $\Gamma_h = \Gamma_h(q, r, s, t)$ - дополнительная сетка, соотнесенная со стенками сосуда и лепестками клапана (в лагранжевых координатах)
+\end{itemize}
+
+\end{frame}
+\note{При обтекании жидкость какого-либо тела, она испытвает влияние силы давления рядом с границей тела (и сдвиговые силы, если есть условие прилипания). Исходя их этого обтекание тела можно моделировать с помощью поля внешних сил}
+
+% solve method: diagram
+\begin{frame}[fragile]
+\frametitle{Алгоритм}
+    \begin{adjustbox}{max totalsize={1.0\textwidth}{.7\textheight},center}
+        \begin{tikzpicture}[node distance = 2.5cm, auto]
+            \node[block]                           (init){
+                $u_0$, $p_0$, $\rho_0$, $\nu_0$
+            };
+
+            \node[block, fill=none, minimum height=25em, text width=14em]          (fluid) at (6.8, -5){
+                $\Omega$
+            };
+            \node[block, right=1cm of init]            (body_forces_initial){
+                массовые силы $f_{ijk} = 0$
+            };
+            \path[line] (init) --                  (body_forces_initial);
+
+            \node[block, below of=body_forces_initial]            (navier_stokes){
+                уравнения Навье-Стокса
+            };
+            \path[line] (body_forces_initial) --                  (navier_stokes);
+
+            \node[block, below of=navier_stokes]   (concentration){
+                вычисление концентрации $c_{n+1}$
+            };
+            \path[line] (navier_stokes) --         (concentration);
+
+            \node[block, below of=concentration]   (viscosity_density){
+                вычисление $\mu_{n+1}$, $\rho_{n+1}$
+            };
+            \path[line] (concentration) --         (viscosity_density);
+
+            \node[block, below of=viscosity_density]   (new_flow){
+                $u_{n+1}$, $p_{n+1}$, $\rho_{n+1}$, $\mu_{n+1}$
+            };
+            \path[line] (viscosity_density) --     (new_flow);
+
+            \node[block, fill=none, minimum height=25em, text width=14em]          (fluid) at (14.8, -5){
+                $\Gamma$
+            };
+            \node[block, right= of new_flow, anchor=west](boundary_velocity){
+                перенос скорости жидкости на границу, $U_n$
+            };
+            \path[line] (new_flow) --         (boundary_velocity);
+
+            \node[block, right=of viscosity_density, anchor=west](deformation){
+                новая форма границы $X_{n+1}(X_{n}, U_{n}, t)$
+            };
+            \path[line] (boundary_velocity) --         (deformation);
+
+            \node[block, right=of concentration, anchor=west](boundary_forces){
+                сопротивление деформации $F_{n}(X_{n+1}, X_{n})$
+            };
+            \path[line] (deformation) --         (boundary_forces);
+
+            \node[block, right=of navier_stokes, anchor=west](body_forces){
+                новое распределение массовых сил $f_{ijk}$
+            };
+            \path[line] (boundary_forces) --         (body_forces);
+            \path[line] (body_forces) --         (body_forces_initial);
+        \end{tikzpicture}
+    \end{adjustbox}
+\end{frame}
+
+% solve method:split scheme
+\begin{frame}
+\frametitle{Алгоритм решения: поток}
+Схема расщепления по физическим факторам:
+\begin{gather}
+    \label{eq:split_first}
+    \frac{u^* - u^n}{\triangle t} = - (u^n \cdot \nabla) u^n + \frac{1}{\rho} \nabla \sigma + f\\
+    \label{eq:split_second}
+    \rho \triangle p^{n+1} - (\nabla p \cdot \nabla p^{n+1}) = \frac{\rho^2 \nabla u^*}{\triangle t}\\
+    \label{eq:split_third}
+    \frac{u^{n+1} - u^*}{\triangle t} = - \frac{1}{\rho} \nabla p^{n+1}
+\end{gather}
+где $\nabla \sigma (u^n, \mu) = \mu \triangle u^n + (\nabla \mu \cdot \nabla) u^n + (\nabla \mu \cdot J_{u^n}) $
+\end{frame}
+\note{
+    \begin{itemize}
+        \item[\MVRightarrow] Решаем уравнение \eqref{eq:split_first} методом стабилизирующей поправки (Дугласа-Рекфорда)
+        \item[\MVRightarrow] Из уравнения \eqref{eq:split_second} методом бисопряженных градиентов определяем поле давления
+        \item[\MVRightarrow] Восстанавливаем окончательное поле вектора скорости по явным формулам \eqref{eq:split_third}
+    \end{itemize}
+}
+
+% solve method: boundary forces
+\begin{frame}
+\frametitle{Алгоритм решения: клапан}
+\begin{gather}
+    \label{eq:strain_energy}
+    F_{n} =  \frac{\partial}{\partial s}(T_{n} \tau_{n}) + \frac{\partial^2}{\partial s^2} \Big( E \cdot I \frac{\partial^2}{\partial s^2} X_{n} \Big)
+\end{gather}
+\end{frame}
+\note{$E$ - модуль Юнга, $I$ - момент инерции поперечного сечения, $T$ - напряжение фибры, $\tau$ - единичный тангенциальный вектор, касательный к фибре.}
+
+% solve method:ibm scheme
+\begin{frame}
+\frametitle{Взаимодействие}
+Интерполяция скорости на погруженную границу и распределение силы сопротивления деформации:
+\begin{gather}
+    \label{eq:interpolation}
+    U_n = \sum_{ijk}u_{ijk} \cdot D(x_{ijk} - x_n) h_{ijk}^3 \\
+    \label{eq:spreading}
+    f_{ijk} = \sum_n F_n \cdot D(x_{ijk} - x_n) h^2_n
+\end{gather}
+
+$D(x_n)$ соответствует $\delta(x - x_k)$.
+\end{frame}
+
+\begin{frame}
+\frametitle{Моделирование сердечного клапана}
+    \begin{itemize}
+        \item[\MVRightarrow] Динамика идеального клапана
+        \item[\MVRightarrow] Распределение примеси
+        \item[\MVRightarrow] Эффект скручивания створок
+        \item[\MVRightarrow] Динамика искусственного клапана <<Юнилайн>>
+        \item[\MVRightarrow] Распределение напряжений
+        \item[\MVRightarrow] Расход жидкости
+    \end{itemize}
+\end{frame}
+
+% totals and examples
+% use avconv -i video.avi -vsync 1 -r 10 -an -y 'data_%d.png'
+% to create series of png for animation
+
+\begin{frame}
+\frametitle{Динамика идеального клапана}
+    %\animategraphics[autoplay,loop,width=\textwidth]{20}{animation/valve_delaunay3/data_}{50}{50}
+    \animategraphics[autoplay,loop,width=\textwidth]{20}{animation/valve_delaunay3/data_}{1}{1}
+\end{frame}
+
+\begin{frame}
+\frametitle{Распределение примеси}
+    %\animategraphics[autoplay,loop,width=\textwidth]{20}{animation/valve_in_mixture/data_}{180}{180}
+    \animategraphics[autoplay,loop,width=\textwidth]{20}{animation/valve_in_mixture/data_}{1}{1}
+\end{frame}
+
+\begin{frame}
+\frametitle{Эффект скручивания створок}
+    %\animategraphics[autoplay,loop,width=\textwidth]{20}{animation/rotation/data_}{110}{110}
+    \animategraphics[autoplay,loop,width=\textwidth]{20}{animation/rotation/data_}{1}{1}
+\end{frame}
+
+\begin{frame}
+\frametitle{Динамика <<Юнилайн>>}
+    %\animategraphics[autoplay,loop,width=\textwidth]{20}{animation/real_valve/data_}{50}{50}
+    \animategraphics[autoplay,loop,width=\textwidth]{20}{animation/real_valve/data_}{1}{1}
+\end{frame}
+
+\begin{frame}
+\frametitle{Динамика <<Юнилайн>>}
+    %\animategraphics[autoplay,loop,width=\textwidth]{20}{animation/uniline_tracks/data_}{50}{50}
+    \animategraphics[autoplay,loop,width=\textwidth]{20}{animation/uniline_tracks/data_}{1}{1}
+\end{frame}
+
+\begin{frame}
+\frametitle{Распределение напряжений}
+    \begin{center}
+        \includegraphics[width=9cm]{valve_points.png}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Распределение напряжений}
+    \begin{center}
+        \includegraphics[width=10cm]{forces_active_point.png}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Распределение напряжений}
+    \begin{center}
+        \includegraphics[width=10cm]{forces_boundary_point.png}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Распределение напряжений}
+    \begin{center}
+        \includegraphics[width=10cm]{forces_passive_point.png}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Расход жидкости}
+    \begin{center}
+        \includegraphics[width=10cm]{flowrate.png}
+    \end{center}
+
+    %\begin{adjustbox}{max totalsize={1.0\textwidth}{.7\textheight},center}
+        %{\scriptsize
+            %International Journal for Numerical Methods in Biomedical Engineering 28.3 (2012): 317-345.
+            %%"Immersed boundary model of aortic heart valve dynamics with physiological driving and loading conditions." International Journal for Numerical Methods in Biomedical Engineering 28.3 (2012): 317-345.
+        %}
+    %\end{adjustbox}
+\end{frame}
+
+\begin{frame}
+\frametitle{Расход жидкости}
+    \begin{center}
+        \includegraphics[width=10cm]{flowrate_experiment_with_legend.png}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Расход жидкости}
+    \begin{center}
+        \includegraphics[width=10cm]{flow_rate_griffith_comparison3.png}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Расход жидкости}
+    \begin{center}
+        \includegraphics[width=10cm]{flow_rate_aorta.png}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Моделирование аневризмы сосуда}
+    \begin{itemize}
+        \item[\MVRightarrow] Динамика движения жидкости в сосуде с гибкими стенками
+        \item[\MVRightarrow] Распространение примеси при наличии стеноза
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Динамика в сосуде с гибкими стенками}
+    \animategraphics[autoplay,loop,width=0.9\textwidth]{20}{animation/aneurysm//data_}{60}{60}
+\end{frame}
+
+\begin{frame}
+\frametitle{Динамика в сосуде с гибкими стенками}
+    \begin{center}
+        \includegraphics[width=10cm]{aneurysm_tracks.png}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Стеноз небольшой степени}
+    %\animategraphics[autoplay,loop,width=\textwidth]{20}{animation/thrombus_light_stenosis/data_}{1}{95}
+    \animategraphics[autoplay,loop,width=0.9\textwidth]{20}{animation/thrombus_light_stenosis/data_}{1}{1}
+\end{frame}
+
+\begin{frame}
+\frametitle{Стеноз большой степени}
+    %\animategraphics[autoplay,loop,width=\textwidth]{20}{animation/thrombus_strong_stenosis/data_}{1}{121}
+    \animategraphics[autoplay,loop,width=0.9\textwidth]{20}{animation/thrombus_strong_stenosis/data_}{1}{1}
+\end{frame}
+
+\begin{frame}
+\frametitle{Результаты работы}
+    \begin{itemize}
+        \item[\MVRightarrow] Построенная модель работы искусственного сердечного
+            клапана, учитывающая течения крови с переменной плотностью и
+            вязкостью, а также гибкость створок клапана, позволяет получать физически непротиворечивые картины движения створок клапана и течения жидкости в сосудах с гибкими стенками для разных геометрий.
+        \item[\MVRightarrow] Расчеты, проведенные для клапана <<Юнилайн>>,
+            качественно согласуются с имеющимися данными, полученными
+            экспериментально и из других исследований.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Конференции}
+    {\tiny
+        \begin{itemize}
+            \item[\MVRightarrow] XIII Международная научно-практическая конференция имени А.Ф. Терпугова, г. Анжеро-Судженск, 2014
+            \item[\MVRightarrow] 53 Международная научная студенческая конференция, г. Новосибирск, 2015
+            \item[\MVRightarrow] VIII Международная конференция Лаврентьевские чтения по математике, механике и физике, г. Новосибирск, 2015
+            \item[\MVRightarrow] International Scientific and Practical Conference <<Computational and Informational Technologies in Science, Engineering and Education>>, Almaty, 2015
+            \item[\MVRightarrow] Международная конференция <<Устойчивость и процессы управления>>, г. Санкт-Петербург, 2015
+            \item[\MVRightarrow] Шестая научно-практическая сессия молодых ученых Кузбасса <<Наука-практике>> в области сердечно-сосудистых заболеваний, г. Кемерово, 2016
+        \end{itemize}
+    }
+\end{frame}
+
+\begin{frame}
+\frametitle{Публикации}
+    {\tiny
+        \begin{itemize}
+            \item[\MVRightarrow] Численное моделирование динамики жидкости в крупных кровеносных сосудах // Материалы XIII Международной научно-пракрической конференции имени А.Ф. Терпугова. — Томск: 2014. — С. 31–35.
+            \item[\MVRightarrow] Моделирование движения вязкой неоднородной жидкости в крупных кровеносных сосудах // Вестник Кемеровского Государственного Университета. — 2015. — Т. 1, № 2 (62). — С. 30–35.
+            \item[\MVRightarrow] Моделирование движения вязкой неоднородной жидкости в крупных кровеносных сосудах // Материалы 53-й международной научной студенческой конференции. — Новосибирск: 2015. — С. 212.
+            \item[\MVRightarrow] Моделирование движения вязкой неоднородной жидкости в искусственном сердечном клапане // VIII Международная конференция Лаврентьевские чтения по математике, механике и физике. — Новосибирск: 2015. — С. 104.
+            \item[\MVRightarrow] Numerical modeling of artificial heart valve // 8th International Conference CiTech 2015. — Almaty, Kazakhstan: 2015. — Pp. 33–43.
+            \item[\MVRightarrow] Mathematical modelling of artificial heart valve performance // «Stability and Control Processes» in Memory of VI Zubov (SCP), 2015 International Conference / IEEE. — 2015. — Pp. 518–521.
+            \item[\MVRightarrow] Математическое моделирование работы искусственного клапана сердца // Сборник тезисов докладов шестой научно-практической сессии молодых ученых Кузбасса «Наука-практике» в области сердечно-сосудистых заболеваний. — Кемерово: 2016. — С. 11-12.
+        \end{itemize}
+    }
+\end{frame}
+\note{
+    Готовятся к публикации статья в Russian Journal of Numerical Analysis and Mathematical Modelling
+    и в сборнике трудов конференции MIT в Сербии
+}
+
+\end{document}

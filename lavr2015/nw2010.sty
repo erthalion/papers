@@ -1,0 +1,55 @@
+% Òﬂ–ﬁÃÕ¡…ﬁ œﬁ√À≈œÕ¡ ﬂ–œﬁÃ’∆ÿ
+\textwidth          16cm
+\textheight         24cm
+\topmargin          -7mm
+\hoffset            -1in
+\oddsidemargin      30mm
+\evensidemargin     20mm
+
+% Òﬂ–ﬁÃÕ¡…ﬁ …Õ ÕÃ–’–— Õ¡
+\fancyhead{}
+\fancyhead[RO,LE]{\thepage}
+\fancyfoot{}
+\pagestyle{fancy}
+
+% ÈÕÀﬁÃƒÿ Õ“ÕœÀ ≈Ã’⁄ –≈…ﬂ–ﬁ
+
+\renewcommand{\title}[1]{\setcounter{equation}{0}\bigskip \begin{center} \Large \sf #1 \end{center}}
+\renewcommand{\author}[1]{{\centering \em #1\par}\bigskip}
+
+\newcommand{\inst}[1]{\par\parbox[t]{15cm}{\textsl{#1}} \bigskip}
+\newcommand{\add}[2]{\fancyhead[LO,RE]{#1}\addcontentsline{toc}{subsection}{\rm #1 \em #2}}
+
+\addto\captionsrussian{%
+\renewcommand\contentsname{{\Large\sf \cyr\CYRS\CYRO\CYRD\CYRE\CYRR\CYRZH\CYRA\CYRN\CYRI\CYRE}}
+\renewcommand\refname{\cyr\CYRL\CYRI\CYRT\CYRE\CYRR\CYRA\CYRT\CYRU\CYRR\CYRA}
+}
+
+\makeatletter
+\renewenvironment{thebibliography}[1]
+     {%
+     \bigskip\textsf{\refname}%
+      \@mkboth{\MakeUppercase\refname}{\MakeUppercase\refname}%
+      \list{\@biblabel{\@arabic\c@enumiv}}%
+           {\settowidth\labelwidth{\@biblabel{#1}}%
+            \leftmargin\labelwidth
+            \advance\leftmargin\labelsep
+            \@openbib@code
+            \usecounter{enumiv}%
+            \let\p@enumiv\@empty
+            \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+      \sloppy
+      \clubpenalty4000
+      \@clubpenalty \clubpenalty
+      \widowpenalty4000%
+      \sfcode`\.\@m%
+          \setlength{\itemsep}{0.1em}%
+      \setlength{\parskip}{0pt}%
+      \setlength{\parsep}{0pt}%
+    }
+     {\def\@noitemerr
+       {\@latex@warning{Empty `thebibliography' environment}}%
+      \endlist}
+\renewcommand\@biblabel[1]{#1.}
+\makeatother
+

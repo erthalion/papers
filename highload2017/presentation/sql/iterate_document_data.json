@@ -1,0 +1,7 @@
+{
+    "items": {
+        "item1": {"status": true},
+        "item2": {"status": true},
+        "item3": {"status": false}
+    }
+}

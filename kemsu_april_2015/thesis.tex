@@ -1,0 +1,51 @@
+\documentclass{article}
+\usepackage{amsthm,amsfonts,amsmath,amssymb}
+\usepackage[a5paper]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+\usepackage[final]{graphicx}
+\textwidth 11.5cm \textheight 16cm
+
+\begin{document}
+
+\begin{flushright}
+УДК 519.63    % вставить код УДК, наиболее точно характеризующий работу. См., например, http://pu.virmk.ru/doc/UDK/ 
+\end{flushright}
+
+\begin{center}
+%НАЗВАНИЕ ДОКЛАДА
+\textbf{МОДЕЛИРОВАНИЕ ДВИЖЕНИЯ ВЯЗКОЙ НЕОДНОРОДНОЙ ЖИДКОСТИ В КРУПНЫХ КРОВЕНОСНЫХ СОСУДАХ}
+\\
+\vspace{\baselineskip}
+%АВТОР
+Д. А. Долгов
+\\
+%ВУЗ
+Кемеровский государственный университет
+\end{center}
+\vspace{\baselineskip}
+%ТЕКСТ ТЕЗИСА
+
+В данной работе мы предлагаем новую математическую модель для описания динамики течения крови в крупных кровеносных сосудах и искусственном сердечном клапане, а также численный метод решения данной задачи. Исследование проводится совместно с НИИ КССЗ (Кемеровский кардиоцентр), в целях улучшения конструкции создаваемых искусственных клапанов.
+
+Рассмотрим нестационарную задачу о течении крови внутри сосуда. Будем моделировать кровь как вязкую несжимаемую двухкомпонентную жидкость, а стенки сосуда – как непроницаемую поверхность цилиндрической формы, обладающую заданной жесткостью. Задача о течении крови описывается нестационарной системой дифференциальных уравнений Навье-Стокса \cite{zaharov_miloshevich} с переменными вязкостью и плотностью. Т.к. физически кровь является неоднородной, то концентрацию примеси будем описывать уравнением конвекции \cite{zaharov_miloshevich}.  
+
+Для решения полученной задачи использован метод погруженной границы \cite{boyce}. Полученная модель и численный метод решения были применены для задач развития аневризмы сосуда и течения крови в аортальном клапане.
+
+\noindent\rule{50.0mm}{0.1mm}
+
+\begin{enumerate}
+\bibitem{zaharov_miloshevich}               % перед именем ссылки вставляется ФамилияИО докладчика, если несколько работ - то с номером
+\textit{H. Milosevic, N.A. Gaydarov, Y.N. Zakharov} Model of incompressible viscous fluid flow driven by  pressure difference in a given channel // International Journal of Heat and Mass Transfer, vol. 62, July 2013.
+
+\bibitem{boyce}
+\textit{E.G. Boyce} Immersed boundary model of aortic heart valve dynamics with physiological driving and loading conditions // International Journal for Numerical Methods in Biomedical Engineering, (2011).
+\end{enumerate}
+
+
+\begin{flushright}
+\textbf{\textit{Научный руководитель --- д-р физ.-мат. наук, проф.
+Ю.Н.~Захаров}}
+
+\end{flushright}
+\end{document}

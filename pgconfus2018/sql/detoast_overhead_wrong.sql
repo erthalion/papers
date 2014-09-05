@@ -1,0 +1,3 @@
+select data->'key1'->'key2' from table;
+
+select |\colorbox{RedOrange}{data->`key1`, data->`key2`}| from table;

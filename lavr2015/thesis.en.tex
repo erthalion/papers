@@ -1,0 +1,57 @@
+\documentclass[12pt,a4paper,twoside]{article}
+\usepackage{cmap}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+
+% "Включение" русского языка
+% cp866 - это "DOS-кодировка" текста, если Вы работаете
+% с Win-кодировкой, то используйте
+\usepackage[utf8]{inputenc}
+%\usepackage[cp866]{inputenc}
+\usepackage[english, russian]{babel}
+
+\usepackage{nw2010}
+
+
+\begin{document}
+
+% Название доклада
+\title{MODELING OF VISCOUS INHOMOGENEOUS FLUID FLOW IN ARTIFICIAL HUMAN HEART}
+
+% Автор(ы)
+% Если несколько - отделять запятой
+\author{D.\,A. Dolgov$^1$, Y.\,N. Zakharov$^1$}
+
+% Место работы: "Институт, город"
+% Если несколько - отделять новой строкой: \\ (два обратных слеша)
+\inst{$^1$Kemerovo State University}
+
+% Добавление в "Содержание"
+% В первых фигурных скобках - автор(ы), во вторых - название
+\add{Dolgov D.\,A., Zakharov Y.\,N.}{Modeling of viscous inhomogeneous fluid flow in artificial human heart}
+
+% Добавление в "Авторский указатель"
+% Каждый автор должен быть добавлен отдельно
+\index{Dolgov D.\,A.} \index{Zakharov Y.\,N.}
+
+
+%  -----  Т Е З И С Ы  -----
+
+In this paper we propose a mathematical model, which describes the viscous inhomogeneous fluid flow in artificial human heart, and a computational method of solution this problem.
+We consider nonstationary problem of the blood flow inside a vessel with valve. Blood is composed of plasma and suspended formed elements. Valve and vessel walls are flexible and can change their shape under the action of fluid flow. Blood is considered as a viscous incompressible two-component fluid, valve and vessel walls - as an inpenetrable surface with the specified stiffness. To describe the dynamic of artificial valve leaflets and flexible vessel walls we determine the forces, which attempting to return them to the initial configuration \cite{Griffith:Article}. This problem is described by the nonstationary system of the differential equations of Navier-Stokes \cite{Zakharov_Milosevic:Article} with the variable viscosity and density. Since blood is the inhomogeneous fluid, we can describe the admixture concentration by the convection equation \cite{Zakharov_Milosevic:Article}.
+
+We solve the resulting problem with the immersed boundary method \cite{Griffith:Article}. The influence of valves will be considered by the mass forces in the equation of fluid motion \cite{Griffith:Article}. Thus the algorithm of solution will be the following - fluid velocities will be computed by the splitting on the physical factors on the rectangular grid; then the convection equation will be solved, i.e. admixture concentration in the fluid domain will be determined, the viscosity and density will be recalculated. After this we will introduce a new lagrangian grid for the valve leafllet deformation, and calculate the forces opposing the deformation. And finally the new distribution of mass forces in the equation of fluid motion will be computed.
+
+This model and the computational method of solution were applied to the problems of blood flow in artificial aortic valve, and the growth of aneurism. The results of valves motion under the different pressure differentials were obtained for the first problem. Several calculations were performed, which demonstrated possibility of the aneurysm of vessel walls, and its effect on the admixture distribution for the second.
+
+This resears is being conducted in cooperation with "НИИ КССЗ (Кемеровский кардиоцентр)" to improve design of the artificial valves as part of the government contract 1.630.1.2014/K.
+
+\begin{thebibliography}{9}
+    \bibitem{Griffith:Article} Griffith B.\,E. {\em Immersed boundary model of aortic heart valve dynamics with physiological driving and loading conditions.} International Journal for Numerical Methods in Biomedical Engineering, 28(3) 2012, 317-345.
+
+	\bibitem{Zakharov_Milosevic:Article} Miloshevich H. Gaydarov N.\,A. Zakharov Y.\,N. {\em Model of incompressible viscous fluid flow driven by  pressure difference in a given channel.} International Journal of Heat and Mass Transfer, vol. 62, July 2013.
+
+\end{thebibliography}
+\end{document}

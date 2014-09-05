@@ -1,0 +1,383 @@
+graph {
+	overlap=false splines=true
+	abi
+	root -- abi
+	fscache
+	root -- fscache
+	vm
+	root -- vm
+	vsyscall32
+	abi -- vsyscall32
+	cdrom
+	dev -- cdrom
+	scsi
+	dev -- scsi
+	autoclose
+	cdrom -- autoclose
+	info
+	cdrom -- info
+	oa_max_sample_rate
+	i915 -- oa_max_sample_rate
+	default
+	parport -- default
+	anycast_delay
+	default -- anycast_delay
+	delay_first_probe_time
+	default -- delay_first_probe_time
+	gc_thresh2
+	default -- gc_thresh2
+	mcast_solicit
+	default -- mcast_solicit
+	retrans_time_ms
+	default -- retrans_time_ms
+	speed_limit_max
+	raid -- speed_limit_max
+	logging_level
+	scsi -- logging_level
+	"aio-max-nr"
+	fs -- "aio-max-nr"
+	"dir-notify-enable"
+	fs -- "dir-notify-enable"
+	"inode-nr"
+	fs -- "inode-nr"
+	"leases-enable"
+	fs -- "leases-enable"
+	nr_open
+	fs -- nr_open
+	"pipe-user-pages-hard"
+	fs -- "pipe-user-pages-hard"
+	quota
+	fs -- quota
+	register
+	binfmt_misc -- register
+	max_user_watches
+	epoll -- max_user_watches
+	max_queued_events
+	inotify -- max_queued_events
+	msg_default
+	mqueue -- msg_default
+	queues_max
+	mqueue -- queues_max
+	nfs_congestion_kb
+	nfs -- nfs_congestion_kb
+	nlm_timeout
+	nfs -- nlm_timeout
+	allocated_dquots
+	quota -- allocated_dquots
+	lookups
+	quota -- lookups
+	writes
+	quota -- writes
+	object_max_active
+	fscache -- object_max_active
+	acct
+	kernel -- acct
+	bootloader_version
+	kernel -- bootloader_version
+	core_pipe_limit
+	kernel -- core_pipe_limit
+	domainname
+	kernel -- domainname
+	hardlockup_panic
+	kernel -- hardlockup_panic
+	hung_task_panic
+	kernel -- hung_task_panic
+	kexec_load_disabled
+	kernel -- kexec_load_disabled
+	max_lock_depth
+	kernel -- max_lock_depth
+	msgmax
+	kernel -- msgmax
+	nmi_watchdog
+	kernel -- nmi_watchdog
+	overflowgid
+	kernel -- overflowgid
+	panic_on_oops
+	kernel -- panic_on_oops
+	perf_cpu_time_max_percent
+	kernel -- perf_cpu_time_max_percent
+	perf_event_mlock_kb
+	kernel -- perf_event_mlock_kb
+	"print-fatal-signals"
+	kernel -- "print-fatal-signals"
+	printk_ratelimit
+	kernel -- printk_ratelimit
+	randomize_va_space
+	kernel -- randomize_va_space
+	sched_child_runs_first
+	kernel -- sched_child_runs_first
+	sched_min_granularity_ns
+	kernel -- sched_min_granularity_ns
+	sched_rt_runtime_us
+	kernel -- sched_rt_runtime_us
+	sched_wakeup_granularity_ns
+	kernel -- sched_wakeup_granularity_ns
+	shm_next_id
+	kernel -- shm_next_id
+	shmmni
+	kernel -- shmmni
+	stack_tracer_enabled
+	kernel -- stack_tracer_enabled
+	"threads-max"
+	kernel -- "threads-max"
+	unknown_nmi_panic
+	kernel -- unknown_nmi_panic
+	watchdog
+	kernel -- watchdog
+	gc_delay
+	keys -- gc_delay
+	root_maxbytes
+	keys -- root_maxbytes
+	max
+	pty -- max
+	boot_id
+	random -- boot_id
+	urandom_min_reseed_secs
+	random -- urandom_min_reseed_secs
+	cpu0
+	sched_domain -- cpu0
+	domain0
+	cpu0 -- domain0
+	busy_factor
+	domain0 -- busy_factor
+	forkexec_idx
+	domain0 -- forkexec_idx
+	max_newidle_lb_cost
+	domain0 -- max_newidle_lb_cost
+	wake_idx
+	domain0 -- wake_idx
+	domain0
+	cpu1 -- domain0
+	domain0
+	cpu2 -- domain0
+	domain0
+	cpu3 -- domain0
+	actions_avail
+	seccomp -- actions_avail
+	bset
+	usermodehelper -- bset
+	core
+	net -- core
+	nf_conntrack_max
+	net -- nf_conntrack_max
+	bpf_jit_enable
+	core -- bpf_jit_enable
+	busy_read
+	core -- busy_read
+	dev_weight_tx_bias
+	core -- dev_weight_tx_bias
+	message_burst
+	core -- message_burst
+	netdev_max_backlog
+	core -- netdev_max_backlog
+	rmem_default
+	core -- rmem_default
+	tstamp_allow_data
+	core -- tstamp_allow_data
+	xfrm_acq_expires
+	core -- xfrm_acq_expires
+	cipso_cache_bucket_size
+	ipv4 -- cipso_cache_bucket_size
+	conf
+	ipv4 -- conf
+	icmp_echo_ignore_all
+	ipv4 -- icmp_echo_ignore_all
+	icmp_msgs_burst
+	ipv4 -- icmp_msgs_burst
+	igmp_link_local_mcast_reports
+	ipv4 -- igmp_link_local_mcast_reports
+	inet_peer_maxttl
+	ipv4 -- inet_peer_maxttl
+	ip_dynaddr
+	ipv4 -- ip_dynaddr
+	ip_local_port_range
+	ipv4 -- ip_local_port_range
+	ip_unprivileged_port_start
+	ipv4 -- ip_unprivileged_port_start
+	ipfrag_secret_interval
+	ipv4 -- ipfrag_secret_interval
+	route
+	ipv4 -- route
+	tcp_app_win
+	ipv4 -- tcp_app_win
+	tcp_base_mss
+	ipv4 -- tcp_base_mss
+	tcp_early_demux
+	ipv4 -- tcp_early_demux
+	tcp_fack
+	ipv4 -- tcp_fack
+	tcp_fin_timeout
+	ipv4 -- tcp_fin_timeout
+	tcp_keepalive_intvl
+	ipv4 -- tcp_keepalive_intvl
+	tcp_limit_output_bytes
+	ipv4 -- tcp_limit_output_bytes
+	tcp_max_syn_backlog
+	ipv4 -- tcp_max_syn_backlog
+	tcp_min_tso_segs
+	ipv4 -- tcp_min_tso_segs
+	tcp_notsent_lowat
+	ipv4 -- tcp_notsent_lowat
+	tcp_probe_interval
+	ipv4 -- tcp_probe_interval
+	tcp_retrans_collapse
+	ipv4 -- tcp_retrans_collapse
+	tcp_rmem
+	ipv4 -- tcp_rmem
+	tcp_syn_retries
+	ipv4 -- tcp_syn_retries
+	tcp_timestamps
+	ipv4 -- tcp_timestamps
+	tcp_wmem
+	ipv4 -- tcp_wmem
+	udp_mem
+	ipv4 -- udp_mem
+	all
+	conf -- all
+	lo
+	conf -- lo
+	accept_dad
+	all -- accept_dad
+	accept_ra_min_hop_limit
+	all -- accept_ra_min_hop_limit
+	accept_ra_rt_info_min_plen
+	all -- accept_ra_rt_info_min_plen
+	addr_gen_mode
+	all -- addr_gen_mode
+	disable_policy
+	all -- disable_policy
+	force_mld_version
+	all -- force_mld_version
+	ignore_routes_with_linkdown
+	all -- ignore_routes_with_linkdown
+	mc_forwarding
+	all -- mc_forwarding
+	ndisc_notify
+	all -- ndisc_notify
+	router_probe_interval
+	all -- router_probe_interval
+	router_solicitations
+	all -- router_solicitations
+	temp_prefered_lft
+	all -- temp_prefered_lft
+	use_tempaddr
+	all -- use_tempaddr
+	anycast_delay
+	bond0 -- anycast_delay
+	delay_first_probe_time
+	bond0 -- delay_first_probe_time
+	mcast_solicit
+	bond0 -- mcast_solicit
+	retrans_time_ms
+	bond0 -- retrans_time_ms
+	anycast_delay
+	enp0s31f6 -- anycast_delay
+	delay_first_probe_time
+	enp0s31f6 -- delay_first_probe_time
+	mcast_solicit
+	enp0s31f6 -- mcast_solicit
+	retrans_time_ms
+	enp0s31f6 -- retrans_time_ms
+	anycast_delay
+	lo -- anycast_delay
+	delay_first_probe_time
+	lo -- delay_first_probe_time
+	mcast_solicit
+	lo -- mcast_solicit
+	retrans_time_ms
+	lo -- retrans_time_ms
+	anycast_delay
+	wlp4s0 -- anycast_delay
+	delay_first_probe_time
+	wlp4s0 -- delay_first_probe_time
+	mcast_solicit
+	wlp4s0 -- mcast_solicit
+	retrans_time_ms
+	wlp4s0 -- retrans_time_ms
+	bond0
+	neigh -- bond0
+	wlp4s0
+	neigh -- wlp4s0
+	flush
+	route -- flush
+	gc_min_interval_ms
+	route -- gc_min_interval_ms
+	min_adv_mss
+	route -- min_adv_mss
+	anycast_src_echo_reply
+	ipv6 -- anycast_src_echo_reply
+	calipso_cache_enable
+	ipv6 -- calipso_cache_enable
+	flowlabel_state_ranges
+	ipv6 -- flowlabel_state_ranges
+	idgen_retries
+	ipv6 -- idgen_retries
+	ip6frag_time
+	ipv6 -- ip6frag_time
+	neigh
+	ipv6 -- neigh
+	ratelimit
+	icmp -- ratelimit
+	nf_conntrack_acct
+	netfilter -- nf_conntrack_acct
+	nf_conntrack_dccp_loose
+	netfilter -- nf_conntrack_dccp_loose
+	nf_conntrack_dccp_timeout_partopen
+	netfilter -- nf_conntrack_dccp_timeout_partopen
+	nf_conntrack_events
+	netfilter -- nf_conntrack_events
+	nf_conntrack_icmp_timeout
+	netfilter -- nf_conntrack_icmp_timeout
+	nf_conntrack_sctp_timeout_cookie_echoed
+	netfilter -- nf_conntrack_sctp_timeout_cookie_echoed
+	nf_conntrack_sctp_timeout_heartbeat_sent
+	netfilter -- nf_conntrack_sctp_timeout_heartbeat_sent
+	nf_conntrack_tcp_be_liberal
+	netfilter -- nf_conntrack_tcp_be_liberal
+	nf_conntrack_tcp_timeout_close_wait
+	netfilter -- nf_conntrack_tcp_timeout_close_wait
+	nf_conntrack_tcp_timeout_max_retrans
+	netfilter -- nf_conntrack_tcp_timeout_max_retrans
+	nf_conntrack_tcp_timeout_unacknowledged
+	netfilter -- nf_conntrack_tcp_timeout_unacknowledged
+	nf_log
+	netfilter -- nf_log
+	0
+	nf_log -- 0
+	12
+	nf_log -- 12
+	5
+	nf_log -- 5
+	9
+	nf_log -- 9
+	max_dgram_qlen
+	unix -- max_dgram_qlen
+	max_cgroup_namespaces
+	user -- max_cgroup_namespaces
+	max_mnt_namespaces
+	user -- max_mnt_namespaces
+	max_uts_namespaces
+	user -- max_uts_namespaces
+	admin_reserve_kbytes
+	vm -- admin_reserve_kbytes
+	dirty_background_bytes
+	vm -- dirty_background_bytes
+	dirty_ratio
+	vm -- dirty_ratio
+	extfrag_threshold
+	vm -- extfrag_threshold
+	legacy_va_layout
+	vm -- legacy_va_layout
+	memory_failure_recovery
+	vm -- memory_failure_recovery
+	mmap_rnd_compat_bits
+	vm -- mmap_rnd_compat_bits
+	oom_dump_tasks
+	vm -- oom_dump_tasks
+	overcommit_ratio
+	vm -- overcommit_ratio
+	stat_interval
+	vm -- stat_interval
+	vfs_cache_pressure
+	vm -- vfs_cache_pressure
+}
