@@ -221,14 +221,6 @@
     \end{itemize}
 \end{frame}
 
-% solve method: force distribution scheme
-\begin{frame}
-\frametitle{Схема распределения силы деформации}
-    \begin{center}
-        \includegraphics[width=11.5cm]{delta_function.png}
-    \end{center}
-\end{frame}
-
 % solve method:ibm scheme
 \begin{frame}
 \frametitle{Алгоритм решения}
@@ -241,6 +233,14 @@
 \end{gather}
 
 $D(x_n)$ соответствует $\delta(x - x_k)$, а $h_n$ - шаг сетки по погруженной границе.
+\end{frame}
+
+% solve method: force distribution scheme
+\begin{frame}
+\frametitle{Схема распределения силы деформации}
+    \begin{center}
+        \includegraphics[width=11.5cm]{delta_function.png}
+    \end{center}
 \end{frame}
 
 % solve method:boundary force, penalty method
@@ -333,7 +333,8 @@ $\vec{n}_{ml}$ - единичный нормальный вектор
 \begin{frame}
 \frametitle{Примеры}
 \begin{itemize}
-    \item \href{run:video/cylinder_density_pressure.avi}{Расчет распространения примеси}
+    \item \href{run:video/source_in_vessel.avi}{Расчет распространения примеси}
+    \item \href{run:video/thrombus_in_vessel.avi}{Размыв "тромба"}
 \end{itemize}
 \end{frame}
 
