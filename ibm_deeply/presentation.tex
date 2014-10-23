@@ -39,7 +39,7 @@
 %description of the problem
 \begin{frame}
 \frametitle{Введение}
-Рассмотрим задачу о течении крови внутри крупных сосудов с гибкими стенками и клапанами. Кровь будем моделировать как вязкую, несжимаемую однородную двухкомпонентную жидкость (плазма + форменные элементы: эритроциты, лейкоциты, тромбоциты), стенки сосуда и лепестки клапанов - как поверхность заданной формы, обладающую определенной жесткостью.
+Рассмотрим задачу о течении крови внутри крупных сосудов с гибкими стенками и клапанами. Кровь будем моделировать как вязкую, несжимаемую двухкомпонентную жидкость (плазма + форменные элементы: эритроциты, лейкоциты, тромбоциты), стенки сосуда и лепестки клапанов - как поверхность заданной формы, обладающую определенной жесткостью.
 \end{frame}
 
 %description of the problem: schema
@@ -59,7 +59,7 @@
     \label{eq:motion}
     \rho ( \frac{\partial u}{\partial t} + u \cdot \nabla u) = - \nabla p + \nabla \cdot \sigma + f\\
     \label{eq:continuity}
-    \nabla u = 0 
+    \nabla \cdot u = 0 
 \end{gather}
 где $\sigma = \mu (\nabla u + (\nabla u)^{T})$, с начальными условиями
 \begin{gather}
@@ -147,9 +147,9 @@
 В такой постановке необходимо добавить следующие уравнения, которые будут описывать взаимодействие погруженной границы и жидкости:
 \begin{gather}
     \label{eq:ibm_velocity}
-    \frac{\partial X}{\partial t} = \int_{\Gamma} u \cdot \delta (x - X)\; dx\; dy\; dz \\
+    \frac{\partial X}{\partial t} = \int_{\Omega} u \cdot \delta (x - X)\; dx\; dy\; dz \\
     \label{eq:ibm_force}
-    f = \int_{\Omega} F \cdot \delta (x - X)\; dq\; dr\; ds
+    f = \int_{\Gamma} F \cdot \delta (x - X)\; dq\; dr\; ds
 \end{gather}
 и условия прилипания
 \begin{gather}
@@ -165,7 +165,7 @@
 Для случая переменной плотности добавлять уравнениe:
 \begin{gather}
     \label{eq:ibm_density}
-    \rho = \int_{\Omega} M \cdot \delta (x - X)\; dq\; dr\; ds
+    \rho = \int_{\Gamma} M \cdot \delta (x - X)\; dq\; dr\; ds
 \end{gather}
 
 В существующих работах [2] есть доказательство того, что $\frac{\partial \rho}{\partial t} + u \cdot \nabla \rho = 0$ есть следствие из \eqref{eq:continuity}, \eqref{eq:ibm_density}, \eqref{eq:ibm_velocity}
@@ -215,7 +215,7 @@
 \setbeamercolor{alerted text}{fg=black,bg=}
 \usebeamercolor{normal text}
     \begin{itemize}
-        \item \alert<+>{С помощью схемы стабилизирующей поправки решаем уравнение \eqref{eq:split_first} и получаем промежуточное поле скорости $u^*$}
+        \item \alert<+>{Аппроксимируем уравнение \eqref{eq:split_first} с помощью схемы расщепления Дугласа-Рекфорда и решаем полученную систему методом прогонки}
         \item \alert<+>{Из уравнения \eqref{eq:split_second} методом бисопряженных градиентов определяем поле давления}
         \item \alert<+>{Восстанавливаем окончательное поле вектора скорости по явным формулам \eqref{eq:split_third}}
     \end{itemize}
