@@ -14,6 +14,7 @@
 \usepackage{bm}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\usepackage{marvosym}
 \graphicspath{{images/}}%путь к рисункам
 
 \setbeamerfont{author in head/foot}{size=\small}
@@ -120,8 +121,8 @@
 \frametitle{Метод решения}
 Будем рассматривать отдельно задачи вычисления параметров течения жидкости и параметров движения стенок сосуда и клапанов. Для этого введем в расчетной области сетки:
 \begin{itemize}
-    \item $\Omega_h = \Omega_h(x, y, z)$ - равномерная разнесенная сетка для расчета течения
-    \item $\Gamma_h = \Gamma_h(q, r, s, t)$ - дополнительная сетка, соотнесенная со стенками сосуда и лепестками клапана (в лагранжевых координатах)
+    \item[\MVRightarrow] $\Omega_h = \Omega_h(x, y, z)$ - равномерная разнесенная сетка для расчета течения
+    \item[\MVRightarrow] $\Gamma_h = \Gamma_h(q, r, s, t)$ - дополнительная сетка, соотнесенная со стенками сосуда и лепестками клапана (в лагранжевых координатах)
 \end{itemize}
 
 \end{frame}
@@ -139,11 +140,11 @@
 \begin{frame}
 \frametitle{Алгоритм}
     \begin{itemize}
-        \item Решаем задачу (\ref{eq:motion})-(\ref{eq:continuity})
-        \item Определяем концентрацию примеси с помощью (\ref{eq:concentration}) и пересчитываем $\rho, \mu$
-        \item Определяем деформацию сосуда и клапана под воздействием жидкости
-        \item По формулам (\ref{eq:strain_energy})-(\ref{eq:define_boundary_force}) вычисляем значение сил, противодействующих деформации
-        \item Находим новое распределение массовых сил в уравнении движения жидкости
+        \item[\MVRightarrow] Решаем задачу (\ref{eq:motion})-(\ref{eq:continuity})
+        \item[\MVRightarrow] Определяем концентрацию примеси с помощью (\ref{eq:concentration}) и пересчитываем $\rho, \mu$
+        \item[\MVRightarrow] Определяем деформацию сосуда и клапана под воздействием жидкости
+        \item[\MVRightarrow] По формулам (\ref{eq:strain_energy})-(\ref{eq:define_boundary_force}) вычисляем значение сил, противодействующих деформации
+        \item[\MVRightarrow] Находим новое распределение массовых сил в уравнении движения жидкости
     \end{itemize}
 \end{frame}
 
@@ -163,9 +164,9 @@
 \end{frame}
 \note{
     \begin{itemize}
-        \item Решаем уравнение \eqref{eq:split_first} методом стабилизирующей поправки (Дугласа-Рекфорда)
-        \item Из уравнения \eqref{eq:split_second} методом бисопряженных градиентов определяем поле давления
-        \item Восстанавливаем окончательное поле вектора скорости по явным формулам \eqref{eq:split_third}
+        \item[\MVRightarrow] Решаем уравнение \eqref{eq:split_first} методом стабилизирующей поправки (Дугласа-Рекфорда)
+        \item[\MVRightarrow] Из уравнения \eqref{eq:split_second} методом бисопряженных градиентов определяем поле давления
+        \item[\MVRightarrow] Восстанавливаем окончательное поле вектора скорости по явным формулам \eqref{eq:split_third}
     \end{itemize}
 }
 
@@ -216,8 +217,8 @@ $D(x_n)$ соответствует $\delta(x - x_k)$.
     \end{center}
 
 \begin{itemize}
-    \item \href{run:video/cylinder1.avi}{Деформация стенок сосуда}
-    \item \href{run:video/cylinder2.avi}{Аналогичный расчет на более мелкой сетке}
+    \item[\MVRightarrow] \href{run:video/cylinder1.avi}{Деформация стенок сосуда}
+    \item[\MVRightarrow] \href{run:video/cylinder2.avi}{Аналогичный расчет на более мелкой сетке}
 \end{itemize}
 \end{frame}
 
@@ -231,8 +232,8 @@ $D(x_n)$ соответствует $\delta(x - x_k)$.
     \end{center}
 
 \begin{itemize}
-    \item \href{run:video/source_in_vessel.avi}{Расчет распространения примеси}
-    \item \href{run:video/thrombus_in_vessel.avi}{Размыв "тромба"}
+    \item[\MVRightarrow] \href{run:video/source_in_vessel.avi}{Расчет распространения примеси}
+    \item[\MVRightarrow] \href{run:video/thrombus_in_vessel.avi}{Размыв "тромба"}
 \end{itemize}
 \end{frame}
 
@@ -245,8 +246,8 @@ $D(x_n)$ соответствует $\delta(x - x_k)$.
     \end{center}
 
 \begin{itemize}
-    \item \href{run:video/valves_closing_accurate_two.avi}{Движение клапана}
-    \item \href{run:video/valves_flow.avi}{Треки частиц}
+    \item[\MVRightarrow] \href{run:video/valves_closing_accurate_two.avi}{Движение клапана}
+    \item[\MVRightarrow] \href{run:video/valves_flow.avi}{Треки частиц}
 \end{itemize}
 \end{frame}
 
@@ -257,7 +258,7 @@ $D(x_n)$ соответствует $\delta(x - x_k)$.
     \end{center}
 
 \begin{itemize}
-    \item \href{run:video/valves_with_source.avi}{Распространение примеси в сосуде с клапаном}
+    \item[\MVRightarrow] \href{run:video/valves_with_source.avi}{Распространение примеси в сосуде с клапаном}
 \end{itemize}
 \end{frame}
 
