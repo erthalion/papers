@@ -18,7 +18,7 @@
 
 \documentclass[runningheads,a4paper]{llncs}
 
-\usepackage{amssymb}
+\usepackage{amssymb, amsmath}
 \setcounter{tocdepth}{3}
 \usepackage{graphicx}
 
@@ -114,10 +114,43 @@ one-way movement of the blood, can be an example of this kind of systems (see Fi
 
 \begin{figure}
 \centering
-\includegraphics[height=6.2cm]{images/aorta_scheme.png}
+\includegraphics[height=6.2cm]{images/aorta_scheme_gray.png}
 \caption{Aortic valve and its location inside heart}
 \label{fig:aortic_valve_example}
 \end{figure}
+
+We model the blood as a viscous incompressible inhomogeneous two component fluid with variable viscosity, and vessel wall and valve leaflets as a
+liquid impermeable surface with specified stiffness. Vessel and valve leaflets are deformed by a fluid pressure.
+
+\begin{figure}
+\centering
+\includegraphics[width=12.5cm]{images/area_3d.png}
+\caption{Scheme of the boundaries of the computational domain}
+\label{fig:area_3d}
+\end{figure}
+
+Because the source of the blood motion in vessels is the pressure during the cardiac cycle, we will describe the problem of the blood flow
+by the following nonstationary system of differential equations of Navier-Stokes \cite{gummel}:
+
+\begin{gather}
+    \label{eq:navier_stokes:motion}
+    \frac{\partial \vec{u}}{\partial t} + (\vec{u} \cdot \nabla) \vec{u} = - \frac{1}{\rho} \nabla p + \nabla \sigma + \vec{f}\\
+    \label{eq:navier_stokes:continuity}
+    \frac{\partial \rho}{\partial t} + \nabla \cdot (\rho \vec{u}) = 0 
+\end{gather}
+
+with the initial and boundary conditions:
+
+\begin{gather}
+    \label{eq:navier_stokes:velocity_conditions}
+    \vec{u}(\bar{x}, 0) = \vec{u}_0 \qquad \vec{u}|_{\Gamma_1, \Gamma_4} = \vec{u}_b \qquad u_{\Gamma_2, \Gamma3} = 0\\
+    \label{eq:navier_stokes:pressure_conditions}
+    p_{\Gamma_2} = p_{in} \qquad p_{\Gamma_3} = p_{out}
+\end{gather}
+
+where $\bar{x}=(x,y,z) \in \Omega$, $\vec{u}=(u,v,w)$ - velocity vector, $\vec{u}_b$ - velocity of the vessel wall and valve leaflet motion during the deformation,
+$\rho=\rho(\bar{x}, t)$ - density, $p=p(\bar{x}, t)$ - pressure, $\sigma = \mu (\nabla \vec{u} + (\nabla \vec{u})^T)$ - viscous stress tensor,
+$\mu = \mu(\bar{x}, t)$ - viscosity of fluid, $\vec{f} = \vec{f}(\bar{x}, t)$ - vector of body forces, which is futher used to determine form of the vessel and valve leaflets. 
 
 You are strongly encouraged to use \LaTeXe{} for the
 preparation of your camera-ready manuscript together with the
