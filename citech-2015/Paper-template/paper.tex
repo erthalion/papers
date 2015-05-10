@@ -131,7 +131,6 @@ liquid impermeable surface with specified stiffness. Vessel and valve leaflets a
 
 Because the source of the blood motion in vessels is the pressure during the cardiac cycle, we will describe the problem of the blood flow
 by the following nonstationary system of differential equations of Navier-Stokes \cite{gummel}:
-
 \begin{gather}
     \label{eq:navier_stokes:motion}
     \frac{\partial \vec{u}}{\partial t} + (\vec{u} \cdot \nabla) \vec{u} = - \frac{1}{\rho} \nabla p + \nabla \sigma + \vec{f}\\
@@ -140,7 +139,6 @@ by the following nonstationary system of differential equations of Navier-Stokes
 \end{gather}
 
 with the initial and boundary conditions:
-
 \begin{gather}
     \label{eq:navier_stokes:velocity_conditions}
     \vec{u}(\bar{x}, 0) = \vec{u}_0 \qquad \vec{u}|_{\Gamma_1, \Gamma_4} = \vec{u}_b \qquad u_{\Gamma_2, \Gamma3} = 0\\
@@ -151,6 +149,81 @@ with the initial and boundary conditions:
 where $\bar{x}=(x,y,z) \in \Omega$, $\vec{u}=(u,v,w)$ - velocity vector, $\vec{u}_b$ - velocity of the vessel wall and valve leaflet motion during the deformation,
 $\rho=\rho(\bar{x}, t)$ - density, $p=p(\bar{x}, t)$ - pressure, $\sigma = \mu (\nabla \vec{u} + (\nabla \vec{u})^T)$ - viscous stress tensor,
 $\mu = \mu(\bar{x}, t)$ - viscosity of fluid, $\vec{f} = \vec{f}(\bar{x}, t)$ - vector of body forces, which is futher used to determine form of the vessel and valve leaflets. 
+
+Density $\rho$ and viscosity $\mu$ are defined by following relations \cite{gummel}:
+\begin{gather}
+    \label{eq:viscosity}
+    \mu = c (\mu_2 - \mu_1) + \mu_1\\
+    \label{eq:density}
+    \rho = c (\rho_2 - \rho_1) + \rho_1
+\end{gather}
+
+where $\rho_1$, $\mu_1$ - density and viscosity if fluid (plasma), $\rho_2$, $\mu_2$ - density and viscosity of mixture (formed elements), $c$ - concentration of mixture. Concentration $c=c(\bar{x}, t)$, $c \in [0, 1]$ of mixture are determined as a solution of equation:
+\begin{gather}
+    \label{eq:convection}
+    \frac{\partial c}{\partial t} + \vec{u} \cdot \nabla c = 0
+\end{gather}
+
+with initial conditions:
+\begin{gather}
+    \label{eq:convection:conditions}
+    c(\bar{x}, 0) = c_0(\bar{x}), \bar{x} \in \Omega
+\end{gather}
+
+and boundary conditions at the inlet boundary:
+\begin{gather}
+    \label{eq:convection:conditions}
+    c(\bar{x}, t)|_{\Gamma_2} = c_s(\bar{x}, t)
+\end{gather}
+
+where $c_0, c_s$ are predefined functions.
+
+Lack of definition for one component of velocity vector at the inlet-outlet is the one of issues for computational solution of this kind of problems.
+It can be solved by the using the original equations (\ref{eq:navier_stokes:motion}) - (\ref{eq:navier_stokes:pressure_conditions}) at the boundaries
+$\Gamma_2$, $\Gamma_3$ for determine of missing components of the velocity vector (see details \cite{gummel}).
+
+Motion of the vessel walls and valve leaflets is defined by forces, which returned it to the original position. Valve leaflets can be deformated much more,
+than vessel walls. To describe the forces, arising due the valve deformation, we use following formula:
+
+\begin{gather}
+    \label{eq:boundary_force}
+    F = \frac{\partial}{\partial s} (T \tau) + \frac{\partial^2}{\partial s^2} (E \cdot I \frac{\partial^2}{\partial s^2} X)
+\end{gather}
+
+where $\bar{q} = (q, r, s) \in \Gamma_4$, $X(\bar{q})$ - function for describing the surface of leaflets at the moment $t$, the coordinates $q, r, s$ chosen so
+that the surface $X$ was presented by the large amount of parametric lines $s \rightarrow X(q^0, r^0, s)$, $T$ - tension, that arises due the stretching along $s$,
+$E$ - Young's modulus, $I$ - cross-sectional moment of inertia (see \cite{boyce_2011}, \cite{pescin_2002}). Physically the formula above means,
+that the valve leaflets are resist extension, compression (it's related to the first term with $T$, which is dependent on stiffness coefficient $k$),
+and bending (this related to the second term, where $E$ and $I$ are referred as a stiffness coefficient $k_b$). Formula (\ref{qs:boundary_force}) allows to
+take into account any changes of the valve shape.
+
+To compture forces, arising due the deformation of the vessel, we use another formula, which allows to take into account only small changes of the shape:
+
+\begin{gather}
+    \label{eq:boundary_force_simple}
+    F = k \|X - X_0\|
+\end{gather}
+
+where $\bar{q} = (q, r, s, t) \in \Gamma_1$, $X(\bar{q}, t)$, $X_0(\bar{q}, 0)$ - functions for describing the surface of vessel walls at the moment $t$ and at the initial time, $k$ - stiffness coefficient.
+
+As shown in the works \cite{pescin_1977}, \cite{boyce_2011}, for modeling of the interaction between vessel walls, valve leaflets and the fluid flow we need
+to compute the vector of body forces $f$ in the equation of Navier-Stokes, based on the force $F$, and determine current surface $X(\bar{q}, t)$ of the vessel and valve, based on the velocity vector field $\vec{u}(\bar{x}, t)$. This is done by using the following equations:
+\begin{gather}
+    \label{eq:interaction:velocity}
+    \frac{\partial X}{\partial t}(\bar{q}, t) = \int_{\Omega} \vec{u}(\bar{x}, t) \cdot \delta (x - X(\bar{q}, t))\; dx\; dy\; dz\\
+    \label{eq:interaction:force}
+    \vec{f}(\bar{x}, t) = \int_{\Gamma} \vec{F}(\bar{q}, t) \cdot \delta (x - X(\bar{q}, t))\; dq\; dr\; ds
+\end{gather}
+
+where $\bar{q} = (q, r, s) \in \Gamma$ - point at the vessel wall or valve leaflet, $X = X(\bar{q}, t)$ - function for describing the surface
+of vessel wall and valve leaflet at the momen $t$, $F = F(\bar{q}, t)$ - the force of resistanse to deformation,
+$\vec{u}(\bar{x}, t)$ - fluid velocity vector, $\vec{f}(\bar{x}, t)$ - vector of body forces, $\delta$ - Dirac delta function.
+
+Thus we build the model, which describes the motion of the viscous inhomogeneous incompressible fluid inside vessel with valve. In this model the fluid state
+and the surface $\Gamma_1 \cup \Gamma_4$ are determined independently from each other, and the influence of the valve leaflets on the fluid is reflected by
+relation (\ref{eq:interaction:force}) between the vector of body forces $\vec{f}(\bar{x}, t)$ from the equation (\ref{eq:navier_stokes:motion}) and the force of resistanse to deformation $F = F(\bar{q}, t)$ from the equations (\ref{eq:boundary_force}), (\ref{eq:boundary_force_simple}).
+
+\section{Method of solution}
 
 You are strongly encouraged to use \LaTeXe{} for the
 preparation of your camera-ready manuscript together with the
