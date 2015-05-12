@@ -22,6 +22,7 @@
 \setcounter{tocdepth}{3}
 \usepackage{graphicx}
 
+
 \usepackage{url}
 \urldef{\mailsa}\path|9erthaion6@gmail.com, zaxarovyn@rambler.ru|
 \newcommand{\keywords}[1]{\par\addvspace\baselineskip
@@ -32,7 +33,7 @@
 \mainmatter  % start of an individual contribution
 
 % first the title is needed
-\title{Numerical simulation of the dynamics of the artificial heart valve}
+\title{Numerical simulation of the artificial heart valve dynamics}
 
 % a short form should be given in case it is too long for the running head
 
@@ -108,7 +109,7 @@ mixture (formed elements) motion inside vessel.
 \section{Mathematical formulation of the problem}
 
 We consider a nonstationary problem of blood flow inside vessel with valve. Blood consists of the plasma and formed elements, which are approximately
-45\% of the entire volume \cite{karro}. Vessel walls and valve leaflets consists of the large number of thin collagen fibers, they are flexibe
+45\% of the entire volume \cite{caro}. Vessel walls and valve leaflets consists of the large number of thin collagen fibers, they are flexibe
 and can change their form depending on the fluid flow. The aortic valve, which are placed at the outlet from the left ventricle to the aorta, and provide
 one-way movement of the blood, can be an example of this kind of systems (see Fig. \ref{fig:aortic_valve_example}):
 
@@ -148,7 +149,9 @@ with the initial and boundary conditions:
 
 where $\bar{x}=(x,y,z) \in \Omega$, $\vec{u}=(u,v,w)$ - velocity vector, $\vec{u}_b$ - velocity of the vessel wall and valve leaflet motion during the deformation,
 $\rho=\rho(\bar{x}, t)$ - density, $p=p(\bar{x}, t)$ - pressure, $\sigma = \mu (\nabla \vec{u} + (\nabla \vec{u})^T)$ - viscous stress tensor,
-$\mu = \mu(\bar{x}, t)$ - viscosity of fluid, $\vec{f} = \vec{f}(\bar{x}, t)$ - vector of body forces, which is futher used to determine form of the vessel and valve leaflets. 
+$\mu = \mu(\bar{x}, t)$ - viscosity of fluid, $\vec{f} = \vec{f}(\bar{x}, t)$ - vector of body forces, which is futher used to determine form of the vessel and valve leaflets.
+Domain $\Omega$ is a vessel with boundary $\Gamma = \Gamma_1 \cup \Gamma_2 \cup \Gamma_3 \cup \Gamma_4$, where $\Gamma_1$ - vessel wall, $\Gamma_2$ and $\Gamma_3$ - intel and outlet, $\Gamma_4$ - valve leaflets (see Fig. \ref{fig:area_3d}).
+As shown in \cite{ragulin}, the problem (\ref{eq:navier_stokes:motion}) - (\ref{eq:navier_stokes:continuity}) has a unique solution.
 
 Density $\rho$ and viscosity $\mu$ are defined by following relations \cite{gummel}:
 \begin{gather}
@@ -194,7 +197,7 @@ where $\bar{q} = (q, r, s) \in \Gamma_4$, $X(\bar{q})$ - function for describing
 that the surface $X$ was presented by the large amount of parametric lines $s \rightarrow X(q^0, r^0, s)$, $T$ - tension, that arises due the stretching along $s$,
 $E$ - Young's modulus, $I$ - cross-sectional moment of inertia (see \cite{boyce_2011}, \cite{pescin_2002}). Physically the formula above means,
 that the valve leaflets are resist extension, compression (it's related to the first term with $T$, which is dependent on stiffness coefficient $k$),
-and bending (this related to the second term, where $E$ and $I$ are referred as a stiffness coefficient $k_b$). Formula (\ref{qs:boundary_force}) allows to
+and bending (this related to the second term, where $E$ and $I$ are referred as a stiffness coefficient $k_b$). Formula (\ref{eq:boundary_force}) allows to
 take into account any changes of the valve shape.
 
 To compture forces, arising due the deformation of the vessel, we use another formula, which allows to take into account only small changes of the shape:
@@ -216,12 +219,12 @@ to compute the vector of body forces $f$ in the equation of Navier-Stokes, based
 \end{gather}
 
 where $\bar{q} = (q, r, s) \in \Gamma$ - point at the vessel wall or valve leaflet, $X = X(\bar{q}, t)$ - function for describing the surface
-of vessel wall and valve leaflet at the momen $t$, $F = F(\bar{q}, t)$ - the force of resistanse to deformation,
+of vessel wall and valve leaflet at the momen $t$, $F = F(\bar{q}, t)$ - the force of resistance to deformation,
 $\vec{u}(\bar{x}, t)$ - fluid velocity vector, $\vec{f}(\bar{x}, t)$ - vector of body forces, $\delta$ - Dirac delta function.
 
 Thus we build the model, which describes the motion of the viscous inhomogeneous incompressible fluid inside vessel with valve. In this model the fluid state
 and the surface $\Gamma_1 \cup \Gamma_4$ are determined independently from each other, and the influence of the valve leaflets on the fluid is reflected by
-relation (\ref{eq:interaction:force}) between the vector of body forces $\vec{f}(\bar{x}, t)$ from the equation (\ref{eq:navier_stokes:motion}) and the force of resistanse to deformation $F = F(\bar{q}, t)$ from the equations (\ref{eq:boundary_force}), (\ref{eq:boundary_force_simple}).
+relation (\ref{eq:interaction:force}) between the vector of body forces $\vec{f}(\bar{x}, t)$ from the equation (\ref{eq:navier_stokes:motion}) and the force of resistance to deformation $F = F(\bar{q}, t)$ from the equations (\ref{eq:boundary_force}), (\ref{eq:boundary_force_simple}).
 
 \section{Method of solution}
 
@@ -252,7 +255,7 @@ To solve (\ref{eq:boundary_force}), (\ref{eq:boundary_force_simple}) we will use
     \frac{u^{n+1} - u^*}{\triangle t} = - \frac{1}{\rho} \triangle p^{n+1}
 \end{gather}
 
-Computational implementation of this scheme consists of 3 stages. At the beginning the intermediate field $u^*$  is computed from the known values of velocity
+Computational implementation of this scheme consists of three stages. At the beginning the intermediate field $u^*$  is computed from the known values of velocity
 from the previous time step. For this equation (\ref{eq:splitting:intermediate_velocity}) is solved by the method of stabilizing corrections \cite{yanenko}.
 After it a new pressure field is determined via the computational solution of (\ref{eq:splitting:poisson}) with the biconjugate gradient method usage.
 And at the last stage a final velocity vector field is calculated by the formula (\ref{eq:splitting:velocity}).
@@ -264,7 +267,7 @@ by the formulas (\ref{eq:viscosity}), (\ref{eq:density}).
 Next we need to determine the deformation of vessel walls and valve leaftets under influence of fluid flow, and also the distribution of body forces $f$
 in the equation of fluid motion basen on this deformation. We can calculate the deformation of vessel walls and valve leaflets at this particular fluid pressure
 and the appearing resistance forces using the equations (\ref{eq:interaction:velocity}) - (\ref{eq:interaction:force}), which are numerically integrated by
-the any of quadrature formulas, and equations (\ref{eq:boundary_forces}) - (\ref{eq:boundary_forces_simple}). After it we recalculate the body forces $f$
+the any of quadrature formulas, and equations (\ref{eq:boundary_force}) - (\ref{eq:boundary_force_simple}). After it we recalculate the body forces $f$
 and go to the next time step.
 
 \section{Results}
@@ -275,9 +278,9 @@ All calculations were performed in dimensionless variables. As a vessel, in whic
 radius $r = 0.11$ and wall stiffness $k = 1 \cdot 10^3$ was used, the domain $\tilde{\Omega}$ had the spatial parameters $1.0 \times 0.5 \times 0.5$,
 spatial steps $h_x = h_y = h_k = 0.01$, time step $\triangle t = 0.01$.
 
-The dynamics of valve with three leaflets under the influence of the fluid pressure with constans density and velosity is shown in Fig. \ref{fig:valve_1}.
-The pressure differential $p_{in} - p_{out}$ changes periodically from 0 to 6. Coefficient of stretching resistanse $k_b = 5 \cdot 10^3$ and coefficient of
-bending resistanse $k_b = 5 \cdot 10^3$ are specified for the valve leaflets.
+The dynamics of valve with three leaflets under the influence of the fluid pressure with constans density and velosity is shown in Fig. \ref{fig:valve} and Fig. \ref{fig:valve_with_particles}.
+The pressure differential $p_{in} - p_{out}$ changes periodically from 0 to 6. Coefficient of stretching resistance $k_b = 5 \cdot 10^3$ and coefficient of
+bending resistance $k_b = 5 \cdot 10^3$ are specified for the valve leaflets.
 
 
 \begin{figure}
@@ -294,8 +297,10 @@ $b$
 
 $c$
 
-\caption{Extended caption}
-\label{fig:valve_1}
+\caption{Dynamics of the Valve leaflets. Current leaflet shape is indicated by points, flow direction - by arrows.
+It shows a side view (I), front view (II) and rear view (III). $k_s = 5 \cdot 10^3$, $k_b = 5 \cdot 10^3$, $\rho_1 = \rho_2 = 1$,
+$\mu_1 = \mu_2 = 1 \cdot 10^{-2}$; a) $t=0$, b) $t=0.7$, c) $t=1.5$}
+\label{fig:valve}
 \end{figure}
 
 \begin{figure}
@@ -312,9 +317,19 @@ $b$
 
 $c$
 
-\caption{Scheme of the boundaries of the computational domain}
-\label{fig:valve_with_particles_1}
+\caption{Tracks of particles inside the valve. Flow direction is indicated by arrows. Calculation parameters are the same as for the Fig. \ref{fig:valve}
+It shows a side view (I) and front view (II). $k_s = 5 \cdot 10^3$, $k_b = 5 \cdot 10^3$, $\rho_1 = \rho_2 = 1$,
+$\mu_1 = \mu_2 = 1 \cdot 10^{-2}$; a) $t=0$, b) $t=0.7$, c) $t=1.5$}
+
+\label{fig:valve_with_particles}
 \end{figure}
+
+As can be seen from the Fig. \ref{fig:valve} and Fig. \ref{fig:valve_with_particles}, the valve opens when pressure differential is increased,
+and then returns to the original state when pressure is equalized.
+
+The Fig. \ref{fig:valve_in_mixture} shows the dynamics of the valve with three leaflets under the fluid pressure with variable viscosity and
+density. Pressure differential $p_{in} - p_{out}$ changes cyclically from 0 to 6. Coefficient of stretching resistance $k_s = 8 \cdot 10^3$ and coefficient of
+bending resistance $k_s = 6 \cdot 10^3$ are specified for the valve leaflets. At the $\Gamma_2$ a constant mixture flow is imposed with concentration $c_s = 0.45$.
 
 \begin{figure}
 \centering
@@ -330,123 +345,68 @@ $b$
 
 $c$
 
-\caption{Scheme of the boundaries of the computational domain}
-\label{fig:valve_in_mixture_1}
+\caption{Valve leaflets motion with variable viscosity and density. A constant mixture flow $c_s|_{\Gamma_2} = 0.45$ is imposed at the inlet,
+concentration of mixture at the initial moment $c_0 = 0.45$, $\rho_1=1$, $\rho_2=1.2$, $\mu_1 = 1 \cdot 10^2$, $\mu_2 = 1.2 \cdot 10^2$;
+a) $t = 4$, b) $t=5$, c) $t=6$}
+\label{fig:valve_in_mixture}
 \end{figure}
 
+As you can seen from the Fig. \ref{fig:valve_in_mixture}, initial uniform distribution of the mixture is disturbed by the leaflets motion. Over time
+mixture motion begins to have an oscillatory character corresponding to the cycles of valve dynamics. Besides that it can bee seen,
+that the mixture distribution along the section parallel to the axis $Oy$ is not symmetric, because the valve leaflets also are not symmetric about the axis $Oy$.
 
-\subsection{Citations}
+\section{Conclusion}
 
-For citations in the text please use
-square brackets and consecutive numbers: \cite{jour}, \cite{lncschap},
-\cite{proceeding1} -- provided automatically
-by \LaTeX 's \verb|\cite| \dots\verb|\bibitem| mechanism.
-
-\subsection{Page Numbering and Running Heads}
-
-There is no need to include page numbers. If your paper title is too
-long to serve as a running head, it will be shortened. Your suggestion
-as to how to shorten it would be most welcome.
-
-\section{LNCS Online}
-
-The online version of the volume will be available in LNCS Online.
-Members of institutes subscribing to the Lecture Notes in Computer
-Science series have access to all the pdfs of all the online
-publications. Non-subscribers can only read as far as the abstracts. If
-they try to go beyond this point, they are automatically asked, whether
-they would like to order the pdf, and are given instructions as to how
-to do so.
-
-Please note that, if your email address is given in your paper,
-it will also be included in the meta data of the online version.
-
-\section{BibTeX Entries}
-
-The correct BibTeX entries for the Lecture Notes in Computer Science
-volumes can be found at the following Website shortly after the
-publication of the book:
-\url{http://www.informatik.uni-trier.de/~ley/db/journals/lncs.html}
-
-\subsubsection*{Acknowledgments.} The heading should be treated as a
-subsubsection heading and should not be assigned a number.
-
-\section{The References Section}\label{references}
-
-In order to permit cross referencing within LNCS-Online, and eventually
-between different publishers and their online databases, LNCS will,
-from now on, be standardizing the format of the references. This new
-feature will increase the visibility of publications and facilitate
-academic research considerably. Please base your references on the
-examples below. References that don't adhere to this style will be
-reformatted by Springer. You should therefore check your references
-thoroughly when you receive the final pdf of your paper.
-The reference section must be complete. You may not omit references.
-Instructions as to where to find a fuller version of the references are
-not permissible.
-
-We only accept references written using the latin alphabet. If the title
-of the book you are referring to is in Russian or Chinese, then please write
-(in Russian) or (in Chinese) at the end of the transcript or translation
-of the title.
-
-The following section shows a sample reference list with entries for
-journal articles \cite{jour}, an LNCS chapter \cite{lncschap}, a book
-\cite{book}, proceedings without editors \cite{proceeding1} and
-\cite{proceeding2}, as well as a URL \cite{url}.
-Please note that proceedings published in LNCS are not cited with their
-full titles, but with their acronyms!
+Constructed model of blood flow with variable viscosity and density allows to get the patterns of leaflet deformation and mixture distribution 
+under the influence of flow inhomogeneous fluid.
 
 \begin{thebibliography}{4}
 
-\bibitem{jour} Smith, T.F., Waterman, M.S.: Identification of Common Molecular
-Subsequences. J. Mol. Biol. 147, 195--197 (1981)
+\bibitem{yoganathan} Yoganathan A.P., He Z.M., Jones S.C.: Fluid mechanics of heart valves. Annu. Rev. Biomed Eng 6:331--362 (2004)
 
-\bibitem{lncschap} May, P., Ehrlich, H.C., Steinke, T.: ZIB Structure Prediction Pipeline:
-Composing a Complex Biological Workflow through Web Services. In: Nagel,
-W.E., Walter, W.V., Lehner, W. (eds.) Euro-Par 2006. LNCS, vol. 4128,
-pp. 1148--1158. Springer, Heidelberg (2006)
+\bibitem{yacoub} Yacoub N, Takkenberg J.: Will heart valve tissue engineering change the world? Nat Clin Prac Cardiovas Med. 2:60--1 (2005)
 
-\bibitem{book} Foster, I., Kesselman, C.: The Grid: Blueprint for a New Computing
-Infrastructure. Morgan Kaufmann, San Francisco (1999)
+\bibitem{taylor} Taylor C.A., Hughes T.J.R., Zarins C.K.: Finite Element Modeling of Blood Flow in Arteries.
+Computer Methods in Applied Mechanics and Engineering, vol. 158, 155--196, (1998)
 
-\bibitem{proceeding1} Czajkowski, K., Fitzgerald, S., Foster, I., Kesselman, C.: Grid
-Information Services for Distributed Resource Sharing. In: 10th IEEE
-International Symposium on High Performance Distributed Computing, pp.
-181--184. IEEE Press, New York (2001)
+\bibitem{zhang} Zhang Y, Bajaj C.: Finite element meshing for cardiac analysis. ICES Technical Report, 4--26 (2004)
 
-\bibitem{proceeding2} Foster, I., Kesselman, C., Nick, J., Tuecke, S.: The Physiology of the
-Grid: an Open Grid Services Architecture for Distributed Systems
-Integration. Technical report, Global Grid Forum (2002)
+\bibitem{black} Black M.M., Howard I.C., Huang X., Patterson E.A.: A three-dimensional analysis of a bioprosthetic heart valve. J. Biomech 24(9), 793--801 (1991)
 
-\bibitem{url} National Center for Biotechnology Information, \url{http://www.ncbi.nlm.nih.gov}
+\bibitem{pescin_1977} Peskin C.S.: Numerical Analysis of Blood Flow in the Heart. JCP 25, 220--252 (1977)
+
+\bibitem{boyce_2011} Boyce E.G.: Immersed boundary model of aortic heart valve dynamics with physiological driving and loading conditions. International Journal for Numerical Methods in Biomedical Engineering. 1-29 (2011)
+
+\bibitem{ma_x_2013} Ma X., Gao H., Boyce E.G., Berry C., Luo X.: Image-based fluid–structure interaction model of the human mitral valve. Computers \& Fluids 71, 417–425 (2013)
+
+\bibitem{pilhwa_2010} Pilhwa L., Boyce E.G., Peskin C.S.: The immersed boundary method for advection-electrodiffusion with implicit timestepping and local mesh refinement. Comput Phys. 229(13), (2010)
+
+\bibitem{fai_2013} Fai T.G., Boyce E.G., Mori Y., Peskin C.S.: Immersed boundary method for variable viscosity and variable density problems using fast constant-coefficient linear solvers I: Numerical method and results. SIAM Journal on Scientific Computing, 35(5), B1132–B1161, (2013)
+
+\bibitem{jian} Jian D., Robert D.G., Aaron L.F., An immersed boundary method for twofluid mixtures// Journal of Computational Physics, Volume 262, 231--243, (2014)
+
+\bibitem{lee} Lee P., Boyce E.G., Peskin C.S.: The immersed boundary method for advection-electrodiffusion with implicit timestepping and local mesh refinement. Journal of computational physics, Volume 229, 5208-5227, (2010)
+
+\bibitem{gummel} Gummel E.E., Milosevic H., Ragulin V.V., Zakharov Y.N., Zimin A.I.: Motion of viscous inhomogeneous incompressible fluid of variable viscosity. Zbornik radova konferencije MIT 2013, Beograd, 267-274 (2014)
+
+\bibitem{geidarov} Geidarov N.A., Zakharov Y. N.,  Shokin Yi. I.: Solution of the problem of viscous fluid flow with a given pressure differential. Russian Journal of Numerical Analysis and Mathematical Modeling, V.26, No 1, pp. 39--48 (2011)
+
+\bibitem{milosevic} Milosevic H., Gaydarov N. A., Zakharov Y. N.: Model of incompressible viscous fluid flow driven by  pressure difference in a given channel. International Journal of Heat and Mass Transfer, vol. 62, July 2013 ISSN: 0017-9310, pp. 242--246, (2013)
+
+\bibitem{dolgov} Dolgov D. A., Zakharov Y. N.: Modeling of viscous inhomogeneous fluid flow in large blood vessels. Vestnik Kemerovo State University, 2 (62) T.1, pp. 30--35 (2015)
+
+\bibitem{caro} Caro C. G., Pedley Т. J., Schroter R. C., Seed W. A. The Mechanics of the Circulation. Moscow: Mir, p. 624 (1981)
+
+\bibitem{ragulin} Ragulin V.V. To the problem of flow viscous fluid through the limited area under given pressure differential. Dynamic of continuum: Novosibirsk, Vol 27. p. 78--92 (1976)
+
+\bibitem{pescin_2002} Peskin, C. S.: The immersed boundary method. Acta Numerica 11, 479–517 (2002).
+
+\bibitem{goldstain} Goldstein D., Handler R., Sirovich L.: Modeling a no-slip flow boundary with an external force field. Journal of computational physics, 105, 354-366 (1993)
+
+\bibitem{belotserkovsky} Belotserkovskii O. M.: Numerical modelingin mechanics of continuum. Moscow: Science, p. 520 (1984)
+
+\bibitem{yanenko} Yanenko N. N.: Method of fractional steps for solving multidimensional problems of mathematical physics. Novosibirsk: Science, p. 197 (1967)
 
 \end{thebibliography}
 
-
-\section*{Appendix: Springer-Author Discount}
-
-LNCS authors are entitled to a 33.3\% discount off all Springer
-publications. Before placing an order, the author should send an email,
-giving full details of his or her Springer publication,
-to \url{orders-HD-individuals@springer.com} to obtain a so-called token. This token is a
-number, which must be entered when placing an order via the Internet, in
-order to obtain the discount.
-
-\section{Checklist of Items to be Sent to Volume Editors}
-Here is a checklist of everything the volume editor requires from you:
-
-
-\begin{itemize}
-\settowidth{\leftmargin}{{\Large$\square$}}\advance\leftmargin\labelsep
-\itemsep8pt\relax
-\renewcommand\labelitemi{{\lower1.5pt\hbox{\Large$\square$}}}
-
-\item The final \LaTeX{} source files
-\item A final PDF file
-\item A copyright form, signed by one author on behalf of all of the
-authors of the paper.
-\item A readme giving the name and email address of the
-corresponding author.
-\end{itemize}
 \end{document}
