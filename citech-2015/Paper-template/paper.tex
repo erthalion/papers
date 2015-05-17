@@ -33,7 +33,7 @@
 \mainmatter  % start of an individual contribution
 
 % first the title is needed
-\title{Numerical simulation of the artificial heart valve dynamics}
+\title{Numerical modeling of artificial heart valve}
 
 % a short form should be given in case it is too long for the running head
 
@@ -43,7 +43,7 @@
 % their surnames. This ensures that the names appear correctly in
 % the running heads and the author index.
 %
-\author{D.A. Dolgov \and Y.N. Zakharov}
+\author{Dmitriy Dolgov \and Yury Zakharov}
 %
 \authorrunning{CITech-2015, Almaty, Kazakhstan, 2015 September 24-27}
 % (feature abused for this document to repeat the title also on left hand pages)
@@ -67,51 +67,50 @@ Kemerovo, Russia\\
 
 
 \begin{abstract}
-    In this paper we consider a mathematical model for describing the dynamics
-    of the artificial heart valve, which is moved by the viscous inhomogeneous
-    incompressible fluid flow with variable viscosity, and also a method
-    of the numerical simulation of this problem. We present the results of modeling
-    for the heart valve with three leaflets.
+    The paper is dedicated to the mathematical model describing dynamics of
+    an artificial heart valve being moved by inhomogeneous incompressible fluid flow
+    with variable viscosity, and its computational method. The modeling results of
+    tricuspid valve performance are presented.
 \keywords{viscous inhomogeneous fluid, artificial heart valve, immersed boundary method}
 \end{abstract}
 
 
 \section{Introduction}
-It is difficult to overestimate the importance of medical researches of the human blood circulatory system,
-because the knowledge from this area are extremely practical and significant. Each year, approximately 250 000
-procedures are performed in the world to repair or replace damaged heart valves \cite{yoganathan}, and this
-value tends to increase \cite{yacoub}. The solution of scientific and technical problems of the artificial valves 
-creation depends on correct understanding of the fluid flow interaction with valve leaflets. Mathematical modeling
-of the dynamics of artificial heart valves allows getting more complete understanding of processes inside them and helps
-to find the ways to improve their design. There are many researches devoted to the mathematical and numerical modeling
-of the dynamics of the heart valve. Most of them can be divided into two large groups.
+The importance of medical researches of human blood circulatory system can hardly be overestimated,
+because this kind of knowledge is extremely practical and significant. Annualy approximately 250 000
+surgeries are performed in the world to restore or replace damaged heart valves \cite{yoganathan}, and the
+quantity is expected to increase \cite{yacoub}. The solution of scientific and technical problems of the artificial valves 
+creation depends on correct understanding of the interaction between blood flow and valve leaflets. Mathematical modeling
+of artificial heart valves performance enables to get thorough understanding of its internal processes in order to improve its design.
+There are many researches devoted to the mathematical and numerical modeling
+of heart valve performance, based on which two main problem solution approaches were defined.
 
-First group is related to the finite element methods (\cite{taylor}, \cite{zhang}, \cite{black}). They may well handle
-the complex geometry of the heart, bu the necessity to take into account the interaction between the fluid and flexible walls
-leads to permanent rebuilding of the computational grid to meet the changing geometry of the object of research.
-This results to significant expenses of time and computational resources.
+First approach is related to the finite element methods (\cite{taylor}, \cite{zhang}, \cite{black}). They enable to take into consideration
+the complex geometry of heart, bu the necessity to take into account the interaction between fluid and flexible walls
+requires constant rebuilding of the computational grid to meet the changing geometry of the object of research.
+It appears to be time and computational resources consuming.
 
-In this paper we consider a second approach, which is related to the immersed boundary method (\cite{pescin_1977},
+(The second approach, which is related to the immersed boundary method, is under discussion in this paper (\cite{pescin_1977},
 \cite{boyce_2011}, \cite{ma_x_2013}, \cite{pilhwa_2010}). It can be used for the problems with complex geometry, and it doesn't
-require the grid modification.
+require grid modification.
 
-There are various improvements of this method, because of the need to model more and more complex problems. In the research \cite{fai_2013}
-a formulation of this method was proposed for the three dimensional problem of the flow of two non mixed (separated by flexible barriers)
-fluids of different viscosity and density. In the papers \cite{jian}, \cite{lee} an application of this method for the two dimensional problem of
-the two component fluid flow.
+There are various improvements of this method, in order to model more and more complex problems. In the research \cite{fai_2013}
+a formulation of this method was proposed for the three dimensional flow problem of two non mixed (separated by flexible barriers)
+fluids of different viscosity and density. In the papers \cite{jian}, \cite{lee} this method application in case of the two dimensional 
+problem of two component fluid flow is presented.
 
 We propose to describe the blood flow in the flexible large blood vessels and the artificial heart valve as a three dimensional
-nonstationary flow of the viscous incompressible fluid with variable viscosity and density (see \cite{gummel}, \cite{geidarov},
-\cite{milosevic}, \cite{dolgov}). Thus, the goal of this work is to build a mathematical model and a solution method of the problem
-of artificial heart leaflet dynamics inside a blood vessel in view of the inhomogeneous structure of the blood, and also about the
-mixture (formed elements) motion inside vessel.
+nonstationary flow of viscous incompressible fluid with variable viscosity and density (see \cite{gummel}, \cite{geidarov},
+\cite{milosevic}, \cite{dolgov}). Thus, the goal of this work is to develop a mathematical model and a solution method of the problem
+of artificial heart leaflet dynamics inside a blood vessel taking into account the inhomogeneous structure of the blood, and 
+admixture (formed elements) circulation inside a blood vessel.
 
-\section{Mathematical formulation of the problem}
+\section{Formulation of the problem}
 
-We consider a nonstationary problem of blood flow inside vessel with valve. Blood consists of the plasma and formed elements, which are approximately
-45\% of the entire volume \cite{caro}. Vessel walls and valve leaflets consists of the large number of thin collagen fibers, they are flexible
-and can change their form depending on the fluid flow. The aortic valve, which are placed at the outlet from the left ventricle to the aorta, and provide
-one-way movement of the blood, can be an example of this kind of systems (see Fig. \ref{fig:aortic_valve_example}):
+We consider a nonstationary problem of blood flow inside a vessel with a valve. Blood consists of plasma and formed elements, which are approximately
+45\% of the entire volume \cite{caro}. Vessel walls and valve leaflets consist of a large number of thin collagen fibers, they are flexible
+and can change their form depending on the fluid flow. For example, the tricuspid aortic valve, lies between the left ventricle and the aorta, and 
+prevents blood backflow (see Fig. \ref{fig:aortic_valve_example}):
 
 \begin{figure}
 \centering
@@ -121,17 +120,17 @@ one-way movement of the blood, can be an example of this kind of systems (see Fi
 \end{figure}
 
 We model the blood as a viscous incompressible inhomogeneous two component fluid with variable viscosity, and vessel wall and valve leaflets as a
-liquid impermeable surface with specified stiffness. Vessel and valve leaflets are deformed by a fluid pressure.
+fluid impermeable surface with specified stiffness. Vessel and valve leaflets are deformed under the fluid pressure.
 
 \begin{figure}
 \centering
 \includegraphics[width=12.5cm]{images/area_3d.png}
-\caption{Scheme of the boundaries of the computational domain}
+\caption{Computational domain boundaries}
 \label{fig:area_3d}
 \end{figure}
 
-Because the source of the blood motion in vessels is the pressure during the cardiac cycle, we will describe the problem of the blood flow
-by the following nonstationary system of differential equations of Navier-Stokes \cite{gummel}:
+Since blood circulates through vessels under the pressure created by cardiac beats then the problem of the blood flow
+can be described by Navier-Stokes nonstationary system of differential equations \cite{gummel}:
 \begin{gather}
     \label{eq:navier_stokes:motion}
     \frac{\partial \vec{u}}{\partial t} + (\vec{u} \cdot \nabla) \vec{u} = - \frac{1}{\rho} \nabla p + \nabla \sigma + \vec{f}\\
@@ -147,10 +146,11 @@ with the initial and boundary conditions:
     p_{\Gamma_2} = p_{in} \qquad p_{\Gamma_3} = p_{out}
 \end{gather}
 
-where $\bar{x}=(x,y,z) \in \Omega$, $\vec{u}=(u,v,w)$ - velocity vector, $\vec{u}_b$ - velocity of the vessel wall and valve leaflet motion during the deformation,
+where $\bar{x}=(x,y,z) \in \Omega$, $\vec{u}=(u,v,w)$ - velocity vector, $\vec{u}_b$ - velocity of the vessel walls and valve leaflets motion under deformation,
 $\rho=\rho(\bar{x}, t)$ - density, $p=p(\bar{x}, t)$ - pressure, $\sigma = \mu (\nabla \vec{u} + (\nabla \vec{u})^T)$ - viscous stress tensor,
-$\mu = \mu(\bar{x}, t)$ - viscosity of fluid, $\vec{f} = \vec{f}(\bar{x}, t)$ - vector of body forces, which is further used to determine form of the vessel and valve leaflets.
-Domain $\Omega$ is a vessel with boundary $\Gamma = \Gamma_1 \cup \Gamma_2 \cup \Gamma_3 \cup \Gamma_4$, where $\Gamma_1$ - vessel wall, $\Gamma_2$ and $\Gamma_3$ - inlet and outlet, $\Gamma_4$ - valve leaflets (see Fig. \ref{fig:area_3d}).
+$\mu = \mu(\bar{x}, t)$ - fluid viscosity, $\vec{f} = \vec{f}(\bar{x}, t)$ - body forces vector, which is further used to determine form of the vessel and valve leaflets.
+Domain $\Omega$ is a vessel with boundary $\Gamma = \Gamma_1 \cup \Gamma_2 \cup \Gamma_3 \cup \Gamma_4$, where $\Gamma_1$ - blood vessel wall,
+$\Gamma_2$ and $\Gamma_3$ - inflow and outflow domains, $\Gamma_4$ - valve leaflets (see Fig. \ref{fig:area_3d}).
 As shown in \cite{ragulin}, the problem (\ref{eq:navier_stokes:motion}) - (\ref{eq:navier_stokes:continuity}) has a unique solution.
 
 Density $\rho$ and viscosity $\mu$ are defined by following relations \cite{gummel}:
@@ -161,7 +161,8 @@ Density $\rho$ and viscosity $\mu$ are defined by following relations \cite{gumm
     \rho = c (\rho_2 - \rho_1) + \rho_1
 \end{gather}
 
-where $\rho_1$, $\mu_1$ - density and viscosity if fluid (plasma), $\rho_2$, $\mu_2$ - density and viscosity of mixture (formed elements), $c$ - concentration of mixture. Concentration $c=c(\bar{x}, t)$, $c \in [0, 1]$ of mixture are determined as a solution of equation:
+where $\rho_1$, $\mu_1$ - fluid density and viscosity (plasma), $\rho_2$, $\mu_2$ - admixture density and viscosity (formed elements), $c$ - admixture concentration.
+Admixture concentration $c=c(\bar{x}, t)$, $c \in [0, 1]$ is determined as a solution of equation:
 \begin{gather}
     \label{eq:convection}
     \frac{\partial c}{\partial t} + \vec{u} \cdot \nabla c = 0
@@ -173,34 +174,34 @@ with initial conditions:
     c(\bar{x}, 0) = c_0(\bar{x}), \bar{x} \in \Omega
 \end{gather}
 
-and boundary conditions at the inlet boundary:
+and boundary conditions at the inflow boundary:
 \begin{gather}
     \label{eq:convection:conditions}
     c(\bar{x}, t)|_{\Gamma_2} = c_s(\bar{x}, t)
 \end{gather}
 
-where $c_0, c_s$ are predefined functions.
+where $c_0, c_s$ are specified functions.
 
-Lack of definition for one component of velocity vector at the inlet-outlet is the one of issues for computational solution of this kind of problems.
-It can be solved by the using the original equations (\ref{eq:navier_stokes:motion}) - (\ref{eq:navier_stokes:pressure_conditions}) at the boundaries
-$\Gamma_2$, $\Gamma_3$ for determine of missing components of the velocity vector (see details \cite{gummel}).
+One of the issues determined for this kind of problem computational solutions is the lack of one component of velocity vector in the inflow-outflow areas.
+It can be solved by using the original equations (\ref{eq:navier_stokes:motion}) - (\ref{eq:navier_stokes:pressure_conditions}) at the boundaries
+$\Gamma_2$, $\Gamma_3$ to determine the missing components of the velocity vector (see details \cite{gummel}).
 
-Motion of the vessel walls and valve leaflets is defined by forces, which returned it to the original position. Valve leaflets can be deformated much more,
-than vessel walls. To describe the forces, arising due the valve deformation, we use following formula:
+Motion of the vessel walls and valve leaflets is defined by the forces, which return them to the original position. Valve leaflets can be deformated much more,
+than vessel walls. To describe the forces, arising due to the valve deformation, the following formula is used:
 
 \begin{gather}
     \label{eq:boundary_force}
     F = \frac{\partial}{\partial s} (T \tau) + \frac{\partial^2}{\partial s^2} (E \cdot I \frac{\partial^2}{\partial s^2} X)
 \end{gather}
 
-where $\bar{q} = (q, r, s) \in \Gamma_4$, $X(\bar{q})$ - function for describing the surface of leaflets at the moment $t$, the coordinates $q, r, s$ chosen so
-that the surface $X$ was presented by the large amount of parametric lines $s \rightarrow X(q^0, r^0, s)$, $T$ - tension, that arises due the stretching along $s$,
-$E$ - Young's modulus, $I$ - cross-sectional moment of inertia (see \cite{boyce_2011}, \cite{pescin_2002}). Physically the formula above means,
-that the valve leaflets are resist extension, compression (it's related to the first term with $T$, which is dependent on stiffness coefficient $k$),
-and bending (this related to the second term, where $E$ and $I$ are referred as a stiffness coefficient $k_b$). Formula (\ref{eq:boundary_force}) allows taking
-into account any changes of the valve shape.
+where $\bar{q} = (q, r, s) \in \Gamma_4$, $X(\bar{q})$ - function for describing the valve leaflets surface at the moment $t$, the coordinates $q, r, s$ are chosen 
+so that the surface $X$ is presented by the large amount of parametric lines $s \rightarrow X(q^0, r^0, s)$, $T$ - tension,
+that arises due to the stretching along $s$, $E$ - Young's modulus, $I$ - cross-sectional moment of inertia (see \cite{boyce_2011}, \cite{pescin_2002}).
+Physically the formula above means, that the valve leaflets resist stretching, (it's related to the first term with $T$,
+which is dependent on stiffness coefficient $k$), and bending (it's related to the second term, where $E$ and $I$ are referred as a stiffness coefficient $k_b$).
+Formula (\ref{eq:boundary_force}) allows taking into account any changes of the valve shape.
 
-To compute forces, arising due the deformation of the vessel, we use another formula, which allows taking into account only small changes of the shape:
+To compute the forces, arising due to the deformation of the vessel, another formula is used, which allows taking into account only small shape changes:
 
 \begin{gather}
     \label{eq:boundary_force_simple}
@@ -209,8 +210,9 @@ To compute forces, arising due the deformation of the vessel, we use another for
 
 where $\bar{q} = (q, r, s, t) \in \Gamma_1$, $X(\bar{q}, t)$, $X_0(\bar{q}, 0)$ - functions for describing the surface of vessel walls at the moment $t$ and at the initial time, $k$ - stiffness coefficient.
 
-As shown in the works \cite{pescin_1977}, \cite{boyce_2011}, for modeling of the interaction between vessel walls, valve leaflets and the fluid flow we need
-to compute the vector of body forces $f$ in the equation of Navier-Stokes, based on the force $F$, and determine current surface $X(\bar{q}, t)$ of the vessel and valve, based on the velocity vector field $\vec{u}(\bar{x}, t)$. This is done by using the following equations:
+Researches \cite{pescin_1977}, \cite{boyce_2011} show, that in order to the interaction between vessel walls, valve leaflets and the fluid flow it is necessary
+to compute the field of external body forces $f$ in the Navier-Stokes equation, based on the force $F$, and determine the current form $X(\bar{q}, t)$ 
+of the vessel and the valve, based on the fluid field of velocities $\vec{u}(\bar{x}, t)$. The following equations are used for this purpose:
 \begin{gather}
     \label{eq:interaction:velocity}
     \frac{\partial X}{\partial t}(\bar{q}, t) = \int_{\Omega} \vec{u}(\bar{x}, t) \cdot \delta (x - X(\bar{q}, t))\; dx\; dy\; dz\\
@@ -218,34 +220,36 @@ to compute the vector of body forces $f$ in the equation of Navier-Stokes, based
     \vec{f}(\bar{x}, t) = \int_{\Gamma} \vec{F}(\bar{q}, t) \cdot \delta (x - X(\bar{q}, t))\; dq\; dr\; ds
 \end{gather}
 
-where $\bar{q} = (q, r, s) \in \Gamma$ - point at the vessel wall or valve leaflet, $X = X(\bar{q}, t)$ - function for describing the surface
-of vessel wall and valve leaflet at the momen $t$, $F = F(\bar{q}, t)$ - the force of resistance to deformation,
-$\vec{u}(\bar{x}, t)$ - fluid velocity vector, $\vec{f}(\bar{x}, t)$ - vector of body forces, $\delta$ - Dirac delta function.
+where $\bar{q} = (q, r, s) \in \Gamma$ - point at the vessel wall or valve leaflet, $X = X(\bar{q}, t)$ - function for describing the vessel
+and valve surfaces at the moment $t$, $F = F(\bar{q}, t)$ - the force of deformation resistance at given point,
+$\vec{u}(\bar{x}, t)$ - fluid flow velocity vector, $\vec{f}(\bar{x}, t)$ - body forces vector, $\delta$ - Dirac delta function.
 
-Thus, we build the model, which describes the motion of the viscous inhomogeneous incompressible fluid inside vessel with valve. In this model the fluid state
-and the surface $\Gamma_1 \cup \Gamma_4$ are determined independently from each other, and the influence of the valve leaflets on the fluid is reflected by
-relation (\ref{eq:interaction:force}) between the vector of body forces $\vec{f}(\bar{x}, t)$ from the equation (\ref{eq:navier_stokes:motion}) and the force of resistance to deformation $F = F(\bar{q}, t)$ from the equations (\ref{eq:boundary_force}), (\ref{eq:boundary_force_simple}).
+Thus the model describing the motion of the viscous inhomogeneous incompressible fluid inside vessel with valve is built. This model enables to determine
+the fluid state and the surface form $\Gamma_1 \cup \Gamma_4$ independently of each other. The valve leaflets influence on the fluid is described by 
+correlation (\ref{eq:interaction:force}) between the vector of body forces $\vec{f}(\bar{x}, t)$ from (\ref{eq:navier_stokes:motion}) 
+and the force of deformation resistance $F = F(\bar{q}, t)$ from (\ref{eq:boundary_force}), (\ref{eq:boundary_force_simple}).
 
-\section{Method of solution}
+\section{Solution method}
 
-As it was mentioned before, in this work we using the immersed boundary method \cite{pescin_1977}, which are based on that when fluid flows over a body,
-it exerts a normal force on the surface, and if the surface is no-slip, the fluid also exerts a shear force. The surface exerts the same force of opposite sign.
-This means that fluid flow around a body can be modeled by a corresponding field of the external body forces \cite{goldstain}.
+As it was mentioned before, immersed boundary method is used in the paper \cite{pescin_1977}. This method is based on the fact, that in case of flowing 
+over a body the fluid is effected by surface force and shear force if the body has no-slip boundary condition. The body surface is influenced by the same
+forces of opposite sign. It means that fluid flowing over the body can be modeled by a corresponding field of the external body forces \cite{goldstain}.
 
-Accordingly to the immersed boundary method, we will determine the fluid flow in the parallelepiped $\tilde{\Omega}$, which contains $\Omega$.
-No-slip conditions are imposed at the boundaries if $\tilde{\Omega}$.
-For the computation of the fluid flow we will use rectangular uniform staggered grid $\tilde{\Omega_h}$ with grid spacing $h_x$, $h_y$, $h_z$ and 
+According to the immersed boundary method, we determine the fluid flow in the parallelepiped $\tilde{\Omega}$, which contains $\Omega$.
+$\tilde{\Omega}$ has no-slip boundary conditions.
+To compute of the fluid flow we use rectangular uniform staggered grid $\tilde{\Omega_h}$ with grid spacing $h_x$, $h_y$, $h_z$ and 
 staggered arrangement of cells, where the pressure, velocity divergence and concentration are computed at the center of cell, the velocity vector components
-and vector of external forces - at the boundaries of cell. To determine the deformation of the surface $\Gamma_1 \cup \Gamma_4$ we will introduce additional
-area $\tilde{\Gamma}$ with Lagrangian coordinate system, which is related to the vessel walls and valve leaflets. In the $\tilde{\Gamma}$ we will construct
-a new grid $\tilde{\Gamma_h}$, which cells are corresponding to the points at the $\Gamma_1 \cup \Gamma_2$. Algorithm of solution consists of the several steps:
-at the grid $\tilde{\Gamma_h}$ we will solve the problem (\ref{eq:navier_stokes:motion})-(\ref{eq:navier_stokes:pressure_conditions}); then we will solve
-the convection equation (\ref{eq:convection}), i.e. determine the concentration of mixture and recalculate the density and viscosity. After it we will use
-the formulas (\ref{eq:boundary_force}), (\ref{eq:boundary_force_simple}) and (\ref{eq:interaction:velocity}), (\ref{eq:interaction:force}) to determine position of
-leaflets and the vessel form.
+and vector of external forces are computed at the boundaries of cell. To determine the deformation of the surface
+$\Gamma_1 \cup \Gamma_4$ we introduce additional area $\tilde{\Gamma}$ with Lagrangian coordinate system, which is related to the vessel
+walls and valve leaflets. In the $\tilde{\Gamma}$ we construct a new grid $\tilde{\Gamma_h}$, with cells corresponding to the points at the $\Gamma_1 \cup \Gamma_2$.
+Solution algorithm consists of several steps:
+at the grid $\tilde{\Gamma_h}$ the problem (\ref{eq:navier_stokes:motion})-(\ref{eq:navier_stokes:pressure_conditions}) is solved; then the convection equation 
+(\ref{eq:convection}) is solved, i.e. the concentration of admixture is determined in the solution domain and the density and viscosity are recalculated.
+Then formulas (\ref{eq:boundary_force}), (\ref{eq:boundary_force_simple}) and (\ref{eq:interaction:velocity}), (\ref{eq:interaction:force}) are used to
+determine the position of leaflets and the vessel form.
 
-Differential equation (\ref{eq:boundary_force}), (\ref{eq:convection:conditions}) is solved by the finite difference method.
-To solve (\ref{eq:boundary_force}), (\ref{eq:boundary_force_simple}) we will use the splitting on physical factors scheme \cite{belotserkovsky}:
+Differential equation (\ref{eq:navier_stokes:motion}), (\ref{eq:convection:conditions}) is solved by the finite difference method.
+To solve (\ref{eq:navier_stokes:motion}), (\ref{eq:navier_stokes:pressure_conditions}) splitting schemes due to physical factors are used \cite{belotserkovsky}:
 \begin{gather}
     \label{eq:splitting:intermediate_velocity}
     \frac{u^* - u^n}{\triangle t} = - (u^n \cdot \nabla) u^* - \frac{1}{\rho} \nabla \sigma + f^n\\
@@ -255,30 +259,31 @@ To solve (\ref{eq:boundary_force}), (\ref{eq:boundary_force_simple}) we will use
     \frac{u^{n+1} - u^*}{\triangle t} = - \frac{1}{\rho} \triangle p^{n+1}
 \end{gather}
 
-Computational implementation of this scheme consists of three stages. At the beginning the intermediate field $u^*$  is computed from the known values of velocity
-from the previous time step. For this equation (\ref{eq:splitting:intermediate_velocity}) is solved by the method of stabilizing corrections \cite{yanenko}.
-After it a new pressure field is determined via the computational solution of (\ref{eq:splitting:poisson}) with the biconjugate gradient method usage.
-And at the last stage a final velocity vector field is calculated by the formula (\ref{eq:splitting:velocity}).
+Numerical implementation of this scheme consists of three stages. At the beginning the intermediate field $u^*$  is computed using the known values of velocity
+from the previous time step. Thus equation (\ref{eq:splitting:intermediate_velocity}) is solved by the method of stabilizing corrections \cite{yanenko}.
+Then a new pressure field is determined via the computational solution of (\ref{eq:splitting:poisson}) using biconjugate gradient method.
+At the last stage a final velocity vector field is calculated according to the formula (\ref{eq:splitting:velocity}).
 
-After fluid flow parameters determining it is necessary to calculate new values of density and velocity. To do that a new time step for the convection
+As soon as fluid flow parameters are determined it is necessary to calculate new values of density and velocity. To do that a new time step for the convection
 equation (\ref{eq:convection}) must be done using the obtained values of velocity components, and the density and viscosity are recalculated
 by the formulas (\ref{eq:viscosity}), (\ref{eq:density}).
 
-Next we need to determine the deformation of vessel walls and valve leaflets under influence of fluid flow, and also the distribution of body forces $f$
-in the equation of fluid motion based on this deformation. We can calculate the deformation of vessel walls and valve leaflets at this particular fluid pressure
-and the appearing resistance forces using the equations (\ref{eq:interaction:velocity}) - (\ref{eq:interaction:force}), which are numerically integrated by
-the any of quadrature formulas, and equations (\ref{eq:boundary_force}) - (\ref{eq:boundary_force_simple}). After it we recalculate the body forces $f$
-and go to the next time step.
+Next it is necessary to determine the deformation of vessel walls and valve leaflets being influenced by of fluid flow, and also the distribution of body forces $f$
+in the fluid motion equation based on this deformation. It is possible to calculate the deformation of vessel walls and valve leaflets under this particular fluid pressure
+and the resistance forces by using the equations (\ref{eq:interaction:velocity}) - (\ref{eq:interaction:force}), which are numerically integrated by
+using any of quadrature formulas, and equations (\ref{eq:boundary_force}) - (\ref{eq:boundary_force_simple}). Afterwards, the body forces $f$
+are recalculated, and move to the next time step.
 
 \section{Results}
 
-We present several results of methodical calculations for the cases of constant and variable density and viscosity, whose purpose is to demonstrate the operability
-of the described method and the possibility to get with its help the patterns of  leaflet deformation and mixture distribution inside the valve.
-All calculations were performed in dimensionless variables. As a vessel, in which the valve was located, a circular cylinder with length $l = 1$,
-radius $r = 0.11$ and wall stiffness $k = 1 \cdot 10^3$ was used, the domain $\tilde{\Omega}$ had the spatial parameters $1.0 \times 0.5 \times 0.5$,
+Some results of methodical calculations for the cases with constant and variable density and viscosity, which are aimed to demonstrate the described method 
+validation and the possibility to get the patterns of leaflet deformation and admixture distribution inside the valve.
+All calculations were performed in dimensionless variables. 
+A circular cylinder with length $l = 1$, radius $r = 0.11$ and wall stiffness $k = 1 \cdot 10^3$ was used as a vessel with a valve,
+the domain $\tilde{\Omega}$ had spatial parameters $1.0 \times 0.5 \times 0.5$,
 spatial steps $h_x = h_y = h_k = 0.01$, time step $\triangle t = 0.01$.
 
-The dynamics of valve with three leaflets under the influence of the fluid pressure with constant density and velocity is shown in Fig. \ref{fig:valve} and Fig. \ref{fig:valve_with_particles}.
+Fig. \ref{fig:valve} and Fig. \ref{fig:valve_with_particles} show tricuspid valve dynamics effected by the pressure of fluid with constant density and velocity.
 The pressure differential $p_{in} - p_{out}$ changes periodically from 0 to 6. Coefficient of stretching resistance $k_b = 5 \cdot 10^3$ and coefficient of
 bending resistance $k_b = 5 \cdot 10^3$ are specified for the valve leaflets.
 
@@ -297,8 +302,8 @@ $b$
 
 $c$
 
-\caption{Dynamics of the Valve leaflets. Current leaflet shape is indicated by points, flow direction - by arrows.
-It shows a side view (I), front view (II) and rear view (III). $k_s = 5 \cdot 10^3$, $k_b = 5 \cdot 10^3$, $\rho_1 = \rho_2 = 1$,
+\caption{Dynamics of the Valve leaflets. Current leaflet shape is indicated by points, arrows indicate flow direction.
+Side view (I), front view (II) and rear view (III). $k_s = 5 \cdot 10^3$, $k_b = 5 \cdot 10^3$, $\rho_1 = \rho_2 = 1$,
 $\mu_1 = \mu_2 = 1 \cdot 10^{-2}$; a) $t=0$, b) $t=0.7$, c) $t=1.5$}
 \label{fig:valve}
 \end{figure}
@@ -317,19 +322,19 @@ $b$
 
 $c$
 
-\caption{Tracks of particles inside the valve. Flow direction is indicated by arrows. Calculation parameters are the same as for the Fig. \ref{fig:valve}
-It shows a side view (I) and front view (II). $k_s = 5 \cdot 10^3$, $k_b = 5 \cdot 10^3$, $\rho_1 = \rho_2 = 1$,
+\caption{Tracks of particles inside the valve. Flow direction is indicated by arrows. Calculation parameters are the same as in the Fig. \ref{fig:valve}
+Side view (I) and front view (II). $k_s = 5 \cdot 10^3$, $k_b = 5 \cdot 10^3$, $\rho_1 = \rho_2 = 1$,
 $\mu_1 = \mu_2 = 1 \cdot 10^{-2}$; a) $t=0$, b) $t=0.7$, c) $t=1.5$}
 
 \label{fig:valve_with_particles}
 \end{figure}
 
-As can be seen from the Fig. \ref{fig:valve} and Fig. \ref{fig:valve_with_particles}, the valve opens when pressure differential is increased,
-and then returns to the original state when pressure is equalized.
+As can be seen in the Fig. \ref{fig:valve} and Fig. \ref{fig:valve_with_particles}, the valve opens when pressure differential is increased,
+and then reverts to the original state when pressure is balanced.
 
-The Fig. \ref{fig:valve_in_mixture} shows the dynamics of the valve with three leaflets under the fluid pressure with variable viscosity and
+The Fig. \ref{fig:valve_in_mixture} shows the motion dynamics of the tricuspid valve under the pressure of fluid with variable viscosity and
 density. Pressure differential $p_{in} - p_{out}$ changes cyclically from 0 to 6. Coefficient of stretching resistance $k_s = 8 \cdot 10^3$ and coefficient of
-bending resistance $k_s = 6 \cdot 10^3$ are specified for the valve leaflets. At the $\Gamma_2$ a constant mixture flow is imposed with concentration $c_s = 0.45$.
+bending resistance $k_s = 6 \cdot 10^3$ are specified for the valve leaflets. Constant admixture flow with concentration $c_s = 0.45$ is set at $\Gamma_2$.
 
 \begin{figure}
 \centering
@@ -345,20 +350,21 @@ $b$
 
 $c$
 
-\caption{Valve leaflets motion with variable viscosity and density. A constant mixture flow $c_s|_{\Gamma_2} = 0.45$ is imposed at the inlet,
-concentration of mixture at the initial moment $c_0 = 0.45$, $\rho_1=1$, $\rho_2=1.2$, $\mu_1 = 1 \cdot 10^2$, $\mu_2 = 1.2 \cdot 10^2$;
+\caption{Valve leaflets motion in a vessel with variable viscosity and density. A constant admixture flow $c_s|_{\Gamma_2} = 0.45$ at the inflow,
+admixture concentration at the initial time $c_0 = 0.45$, $\rho_1=1$, $\rho_2=1.2$, $\mu_1 = 1 \cdot 10^2$, $\mu_2 = 1.2 \cdot 10^2$;
 a) $t = 4$, b) $t=5$, c) $t=6$}
 \label{fig:valve_in_mixture}
 \end{figure}
 
-As you can see from the Fig. \ref{fig:valve_in_mixture}, initial uniform distribution of the mixture is disturbed by the leaflets motion. Over time
-mixture motion begins to have an oscillatory character corresponding to the cycles of valve dynamics. Besides that it can bee seen,
-that the mixture distribution along the section parallel to the axis $Oy$ is not symmetric, because the valve leaflets also are not symmetric about the axis $Oy$.
+Fig. \ref{fig:valve_in_mixture} shows, that initial uniform admixture distribution is interrupted by the valve leaflets motion. Eventually oscillatory mode of
+admixture motion can be recognized that corresponds to valve operating cycle. 
+Moreover the Fig. \ref{fig:valve_in_mixture} shows that admixture distribution over a cross section being parallel to axis $Oy$
+is not symmetric because the valve leaflets are not symmetric about the axis $Oy$ as well.
 
 \section{Conclusion}
 
-Constructed model of blood flow with variable viscosity and density allows getting the patterns of leaflet deformation and mixture distribution 
-under the influence of flow inhomogeneous fluid.
+Constructed model of blood flow with variable viscosity and density allows to get the patterns of leaflet deformation and admixture distribution 
+effected by inhomogeneous fluid flow.
 
 \begin{thebibliography}{4}
 
