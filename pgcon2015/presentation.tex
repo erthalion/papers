@@ -1,0 +1,449 @@
+\documentclass[14pt, compress]{beamer}
+
+% can be compiled by xelatex -shell-escape presentation.tex
+
+\usetheme[usetitleprogressbar]{m}
+
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+\usepackage{listings}
+\usepackage{marvosym}
+\usepackage[T1]{fontenc}
+\usepackage{color}
+\usepackage{xcolor}
+
+\definecolor{light-gray}{gray}{0.95}
+
+\usepgfplotslibrary{dateplot}
+\renewcommand{\ttdefault}{pcr}
+
+\lstset{
+  language=SQL,
+  escapeinside={(*@}{@*)},
+  basicstyle=\tiny\ttfamily,
+  keywordstyle=\bfseries,
+  backgroundcolor=\color{light-gray},
+  breaklines=true,
+  framexleftmargin=10pt,
+  framexrightmargin=10pt,
+  framextopmargin=10pt,
+  framexbottommargin=10pt,
+}
+
+\title{Update and Delete operations for jsonb}
+\subtitle{providing some needed functions and operators for jsonb}
+\date{\today}
+\author{Andrew Dunstan, Dmitry Dolgov}
+\institute{}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+\begin{frame}[fragile]
+  \frametitle{Hstore}
+
+  Hstore is a key-value binary storage.
+  Doesn't support tree-like nested structures,
+  but there is a nested version of hstore.
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{JSONB}
+
+  Binary JSON storage. JSONB was introduced in PostgreSQL 9.4 and
+  supports fast lookups and simple expression search queries using
+  Generalized Inverted Indexes (GIN). It supposed to be document-oriented
+  and was designed for the schema-less data.
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Lack of some JSONB functionality}
+
+  \begin{itemize}
+      \item[\MVRightarrow] Get element at arbitrary path ( \#> )
+      \item[\MVRightarrow] Delete element at arbitrary path  ( ? )
+      \item[\MVRightarrow] Update element at arbitrary path ( ? )
+      \item[\MVRightarrow] Add a new element to arbitrary path ( ? )
+  \end{itemize}
+
+\end{frame}
+
+\section{New features}
+
+\begin{frame}[fragile]
+  \frametitle{jsonbx}
+
+  Pgxn extension for PostgreSQL 9.4, which contains implementation of
+  some missing functionality. It based on nested version of hstore
+  and provided this functions for the corresponding patch for 9.5
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{jsonb\_pretty}
+
+  \begin{lstlisting}[]
+select jsonb_pretty('{"a":"test","b":[1,2,3],"c":"test3","d":{"dd":"test4","dd2":{"ddd":"test5"}}}'::jsonb);
+
+        jsonb_pretty        
+----------------------------
+ {                         +
+     "a": "test",          +
+     "b": [                +
+         1,                +
+         2,                +
+         3                 +
+     ],                    +
+     "c": "test3",         +
+     "d": {                +
+         "dd": "test4",    +
+         "dd2": {          +
+             "ddd": "test5"+
+         }                 +
+     }                     +
+ }
+(1 row)
+  \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{jsonb\_set: replace}
+
+  jsonb\_set(jsonb, text[ ], jsonb)
+
+  \begin{lstlisting}[
+      basicstyle=\footnotesize\ttfamily,
+      showstringspaces=false,
+  ]
+select jsonb_set(
+    '{"n":null, "a":{"b": 2}}'::jsonb,
+    '{n}',
+    '[1,2,3]'
+);
+
+            jsonb_set                                 
+-------------------------------------
+{"a": {"b": 2}, "n": [1, 2, 3]}
+ (1 row)
+ 
+  \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{jsonb\_set: create}
+  jsonb\_set(jsonb, text[ ], jsonb)
+
+  \begin{lstlisting}[
+      basicstyle=\footnotesize\ttfamily,
+      showstringspaces=false,
+  ]
+select jsonb_set(
+    '{"a":{"b": 2}}'::jsonb,
+    '{c}',
+    '[1,2,3]',
+    (*@\alert{true}@*)
+);
+
+            jsonb_set                                 
+-------------------------------------
+{"a": {"b": 2}, (*@\alert{"c": [1, 2, 3]}@*)}
+ (1 row)
+ 
+  \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Path format for jsonb update functions}
+
+  \begin{itemize}
+      \item[\MVRightarrow] Path is an array of element for each nesting level
+      \item[\MVRightarrow] Each element is a key (if target is an object) or index (if target is an array)
+      \item[\MVRightarrow] Negative idx value is supported (countdown from the last key/element)
+  \end{itemize}
+
+\end{frame}
+\note{probably jsquery can be more useful for this}
+
+\begin{frame}[fragile]
+  \frametitle{Path format: Examples}
+
+  \begin{lstlisting}[
+      basicstyle=\footnotesize\ttfamily,
+      showstringspaces=false,
+  ]
+select jsonb_set(
+    '{"a":{"b": (*@\alert{2}@*)}'::jsonb,
+    '{a, b}'
+    '[1,2,3]'
+);
+
+            jsonb_set                                 
+-------------------------------------
+{"a": {"b": (*@ \alert{[1, 2, 3]} @*)}}
+ (1 row)
+ 
+  \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Path format: Examples}
+
+  \begin{lstlisting}[
+      basicstyle=\footnotesize\ttfamily,
+      showstringspaces=false,
+  ]
+select jsonb_set(
+    '{"a":{"b": [1, 2, (*@\alert{3}@*)]}}'::jsonb,
+    '{a, b, -1}'
+    '4'
+);
+
+            jsonb_set                                 
+-------------------------------------
+{"a": {"b": [1, 2,(*@ \alert{4}@*)]}}
+ (1 row)
+ 
+  \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{jsonb\_delete}
+
+  jsonb\_delete(jsonb, text)
+
+  \begin{lstlisting}[
+      basicstyle=\footnotesize\ttfamily,
+      showstringspaces=false,
+  ]
+select jsonb_delete(
+    '{"a":1 , "b":2, "c":3}'::jsonb,
+    'a'
+);
+
+   jsonb_delete   
+------------------
+ {"b": 2, "c": 3}
+(1 row)
+
+  \end{lstlisting}
+\end{frame}
+\note{jsonb\_delete(jsonb, text) allow to delete only top level key from object}
+
+\begin{frame}[fragile]
+  \frametitle{jsonb\_delete}
+
+  jsonb\_delete(jsonb, int)
+
+  \begin{lstlisting}[
+      basicstyle=\footnotesize\ttfamily,
+      showstringspaces=false,
+  ]
+select jsonb_delete(
+    '["a", "b", "c"]'::jsonb,
+    2
+);
+
+  jsonb_delete   
+----------------
+   ["a", "b"]
+(1 row)
+
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{jsonb\_delete}
+
+  jsonb\_delete(jsonb, text[])
+
+  \begin{lstlisting}[
+      basicstyle=\footnotesize\ttfamily,
+      showstringspaces=false,
+  ]
+select jsonb_delete(
+    '{"a":1 , "b":{"f": (*@\alert{[2, 3, 4]}@*) "c":5}'::jsonb,
+    {b, f, -1}
+);
+
+            jsonb_delete   
+--------------------------------------
+ {"a":1, "b": {"f": (*@\alert{[2, 3]}@*)}, "c": 5}
+(1 row)
+
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{jsonb\_delete}
+
+  \begin{lstlisting}[
+      basicstyle=\footnotesize\ttfamily,
+      showstringspaces=false,
+  ]
+select '{"a":1 , "b":2, "c":3}'::jsonb - 'a'::text;
+
+     ?column?     
+------------------
+ {"b": 2, "c": 3}
+(1 row)
+
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{jsonb\_concat}
+  jsonb\_concat(jsonb, jsonb)
+
+  (aka "shallow concatenation")
+
+  \begin{lstlisting}[
+      basicstyle=\footnotesize\ttfamily,
+      showstringspaces=false,
+  ]
+select jsonb_concat(
+    '{"a": 1, "b": [2, 3]}'::jsonb,
+    '{"a": 4, "c": [5, 6]}'::jsonb
+);
+            jsonb_concat            
+------------------------------------
+ {"a": 4, "b": [2, 3], "c": [5, 6]}
+(1 row)
+
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{jsonb\_concat}
+  \begin{lstlisting}[
+      basicstyle=\footnotesize\ttfamily,
+      showstringspaces=false,
+  ]
+select 
+    '{"a": 1, "b": [2, 3]}'::jsonb ||
+    '{"a": 4, "c": [5, 6]}'::jsonb;
+
+              ?column?              
+------------------------------------
+ {"a": 4, "b": [2, 3], "c": [5, 6]}
+(1 row)
+
+  \end{lstlisting}
+\end{frame}
+\note{
+    This operator is questionable, and I'm not sure how it will be in 9.5,
+    but I think it will be present in this form in jsonbx extension
+}
+
+\section{Plans for the future}
+
+\begin{frame}[fragile]
+  \frametitle{General thoughts}
+
+  There are still missing functionality and improvements, that can be useful for JSONB.
+  Some of them will be implented as parts of jsonbx extension (for 9.5), and will be proposed for 9.6
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{jsonb\_delete}
+  jsonb\_delete(jsonb, jsonb)
+
+  \begin{lstlisting}[
+      basicstyle=\footnotesize\ttfamily,
+      showstringspaces=false,
+  ]
+select jsonb_delete_jsonb(
+    '{"a": 1, "b": {"c": 2}, (*@\alert{"f": [4, 5]}@*)}'::jsonb,
+    '{"a": 4, (*@\alert{"f": [4, 5]}@*), "c": 2}'::jsonb
+);
+
+      jsonb_delete
+----------------------------
+  {"a": 1, "b": {"c": 2}}
+(1 row)
+
+  \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{jsonb\_intersection}
+  jsonb\_intersection(jsonb, jsonb)
+
+  \begin{lstlisting}[
+      basicstyle=\footnotesize\ttfamily,
+      showstringspaces=false,
+  ]
+select jsonb_intersection(
+    '{(*@\alert{"a":2}@*), "d": {"f": 3}, (*@\alert{"g":[4, 5]}@*)}'::jsonb,
+    '{(*@\alert{"a":2}@*), "f": 3, (*@\alert{"g":[4, 5]}@*)}'::jsonb
+);
+
+   jsonb_intersection
+--------------------------
+  {"a": 2, "g": [4, 5]}
+(1 row)
+
+  \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{jsonb\_deep\_merge}
+  jsonb\_deep\_merge(jsonb, jsonb)
+
+  \begin{lstlisting}[
+      basicstyle=\footnotesize\ttfamily,
+      showstringspaces=false,
+  ]
+select jsonb_deep_merge(
+    '{"a": (*@\alert{\{"b":1\}}@*)}'::jsonb,
+    '{"a": (*@\alert{\{"c":2\}}@*)}'::jsonb
+);
+
+     jsonb_deep_merge            
+-------------------------------
+   {"a": (*@\alert{\{"b":1, "c":2\}}@*)}
+(1 row)
+
+  \end{lstlisting}
+
+\end{frame}
+\note{
+    Form of this function is questionable,
+    but I think it will be present in this form in jsonbx extension
+}
+
+\begin{frame}[fragile]
+  \frametitle{Shortlist}
+  
+  \begin{itemize}
+      \item[\MVRightarrow] Operations with keys and values?
+      \item[\MVRightarrow] Integration with Jsquery?
+      \item[\MVRightarrow] More elegant syntax?
+  \end{itemize}
+
+\end{frame}
+
+\section{Conclusion}
+
+\begin{frame}{Summary}
+
+  Jsonbx extension provide minimum required functionality for the purpose of updating JSONB in PostgreSQL 9.4\\
+  Corresponding patch provide the same amount of new functions for PostgreSQL 9.5\\
+  Work is in progress, and development of jsonb will be continued (for 9.4 and 9.5 separately)
+
+\end{frame}
+
+\plain{Questions?}
+
+\end{document}
