@@ -1,0 +1,268 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                                                                 %%%
+%%%     Saint-Petersburg state University                           %%%
+%%%     faculty of Applied Mathematics - Control Processes          %%%
+%%%                                                                 %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                                                                 %%%
+%%%     A template for preparing the article printed in the         %%%
+%%%     MikTeX package, for the annual conference of postgraduates  %%%
+%%%     and students                                                %%%
+%%%                                                                 %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                                                                 %%%
+%%%                        THE BASIC RULES                          %%%
+%%%                                                                 %%%
+%%%     1. for main elements of the article you should              %%%
+%%%        to use the below described construction                  %%%
+%%%     2. to modify the style file is denied                       %%%
+%%%                                                                 %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                                                                 %%%
+%%%                Last modified date: 22.01.2015                   %%%
+%%%                                                                 %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{article}
+\usepackage{pmstyle15eng}
+
+\begin{document}
+\hyphenation{SPbSU}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                     UDK | AUTHOR | TITLE                        %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% UDC code for your article you can get: http://udc.biblio.uspu.ru/
+\udk{UDC 123.456}
+
+%%%   1 author
+%\author{Surname~N.}
+
+%%%   2 author
+\author{Surname~N., Surname~N.}
+
+%%% Title
+\title{This is the title of your abstract}
+
+\renewcommand{\thefootnote}{ }
+{\footnotetext{{\it Surname Name} -- Ph.D., Associate Professor,  Saint-Petersburg state University; e-mail: email@email.com, phone: +0(000)00000000}}
+{\footnotetext{{\it Surname Name} -- D.Sc., Professor, Saint-Petersburg state University; e-mail: email@email.com, phone: +0(000)00000000}}
+
+% if your work was performed with financial support of X company - use next string
+{\footnotetext{The work was performed with financial support of X company}}
+%
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%                Article Recomendations                   %%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Only TWO pages!!! 
+
+\razdel{The header}
+The title of the document consists of a mandatory type declarations and connection of the stylesheet file
+\begin{verbatim}
+\documentclass{article} \usepackage{pmstyle15eng}
+\end{verbatim}
+
+After the start of the document using \verb=\udk{UDC 123.456}= set UDC(Universal decimal classification) article number
+which can be defined on the website \\ http://www.udcc.org/udcsummary/php/index.php?id=25403\&lang=en , then use \verb=\author{Surname~I.}= declared surname and initials of the author (or authors).
+
+The title of the article is specified by the command \verb=\title{Title}=.
+
+\razdel{Sections and subsections} Immediately after the header section, it is desirable to write a few sentences as a small announcement for this section.
+\podrazdel{Sections} The design of the sections using commands
+\begin{verbatim}\razdel{Numbered section}\end{verbatim}
+è
+\begin{verbatim}\razdel[n]{Unnumbered section}\end{verbatim}
+The dot in the section name and after that set is not required, it is generated automatically.
+
+\podrazdel{Subsections} If you use numbered sections, it can be divided into subsections teams
+\begin{verbatim}\podrazdel{Subsection}\end{verbatim}
+and
+\begin{verbatim}\podpodrazdel{SubSubsection}\end{verbatim}
+
+\razdel{Punctuation, abbreviations.} We consider several cases.
+\podrazdel{Dash} Dash parts of sentences or single words e.g. (faculty of  Applied Mathematics~--- Control Processes). Use \verb=---=. Remember that the dash can not be separated from the preceding word,use: \verb=~=.
+\Example[n] Code <<\verb=Function~--- is a mapping of one set to .=>>\linebreak gives <<Function~--- is a mapping of one set to .>>
+\podrazdel{A short dash} To separate intervals of numbers use : \verb=--=.
+\Example[n] Code <<\verb=1941--1945=>> gives <<1941--1945>>.
+
+\podrazdel{Again on the dash and the hyphen} Remember that a hyphen is typed double surname, and two or more names of different people correctly dial a dash.
+\Example[n] Equation Mendeleev~--- Clayperon summarizes the laws of Boyle~--- Marriott, Charles and Gay-Lussac.
+
+\podrazdel{Links to sources} References to sources are made with
+command \verb|\cite{reference}|. Similarly:
+\verb|\cite{ref1, ref2}|.
+
+\razdel{Mathematical formulas} Fractional decimal numbers: 3,1415\ldots
+
+When using formulas remember following rules.
+
+Use <<$\leqslant$>> and <<$\geqslant$>> with commands \verb=\leqslant= and
+\verb=\geqslant=.
+
+Use commands \verb=\left(= è \verb=\right)= for braces auto height.
+
+\Example[n] Code
+\begin{verbatim}(\sum_{i=1}^n(i+\frac{1}{i})^2)^{\tfrac{1}{2}}\end{verbatim}
+gives a not good result
+$$(\sum_{i=1}^n(i+\frac{1}{i})^2)^{\tfrac{1}{2}},$$
+if use \verb=\left(= è \verb=\right)=
+results
+$$\left(\sum_{i=1}^n\left(i+\frac{1}{i}\right)^2\right)^{\tfrac{1}{2}}.$$
+
+Necessarily enter the straight type: $\sin$, $\max$, $\mathrm{rank}$, $\operatorname{det}$.
+
+\Example[n] System of equations
+$$\left\{
+\begin{aligned}
+    \frac{dx_i}{dt}&=f_i(t,x_1,
+\ldots,x_n),\quad &&i=\overline{1,k},\\
+    \frac{dx_j}{dt}&=f_j(t,x_1,\ldots,x_k),\quad &&j=\overline{k+1,n}.
+\end{aligned}\right.
+$$
+
+{\bf Some useful commands:}
+
+\noindent
+\verb=\widetilde= gives beautiful (noticeable) the tilde over a variable: $\widetilde x$;
+
+\noindent
+\verb=\widehat= gives beautiful (visible) hat over a variable: $\widehat x$;
+
+\noindent
+\verb=\varnothing= set $\varnothing$;
+
+\noindent
+\verb=\setminus= represents the set difference $A\setminus B$.
+
+\razdel{Special} Such paragraphs as theorems, lemmas, etc
+are made using the following commands:
+
+\begin{verbatim}\Theorem{Numbered theorem.}\end{verbatim}
+
+\Theorem{This is the theorem text.}
+
+\begin{verbatim}\Theorem[n]{Unnumbered theorem.}\end{verbatim}
+
+\Theorem[n]{This is the theorem text.}
+
+\begin{verbatim}\TheoremCite{Reference}{Numbered theorem with the reference.}\end{verbatim}
+
+\TheoremCite{billings}{This is the theorem text.}
+
+\begin{verbatim}\TheoremCite[n]{Reference}{Unnumbered theorem with the reference.}\end{verbatim}
+
+\TheoremCite[n]{billings}{This is the theorem text.}
+
+
+Lemma, the hypothesis statement, definition, example, observation and investigation are set by commands received from command to theorem replacement \verb=\Theorem= for \verb=\Lemma=, \verb=\Hypothesis=, \verb=\Statement=, \verb=\Definition=, \verb=\Example=, \verb=\Remark= è \verb=\Corollary=. \linebreak For example unnumbered Lemma with reference is set by command \verb=\LemmaCite[n]=.
+
+
+\Definition  {Definition (numbered) is set by command \verb=\Definition=}
+\Definition[n]  {Definition (without a number) is set by command \verb=\Definition[n]=}
+
+The proof begins with the command \verb=\Proof=.
+
+\razdel{Extra} We consider several cases.
+\podrazdel{Tables} Tables should have a title. The dot after the name is not assigned. Tables may be numbered:
+\begin{verbatim}
+    \Table{Title}{Width and Align}{Body}
+\end{verbatim}
+and unnumbered
+\begin{verbatim}
+    \Table[n]{Title}{Width and Align}{Body}
+\end{verbatim}
+
+To move to a new row in the table is introduced to simplify the command \verb=\nextline=, which automatically creates a horizontal line separating the entire width of the table. The total width of the columns must not exceed 7 centimeters. The font size in the table is less than in the main text.
+
+Example,
+\Table{Numbered}{|p{1cm}|p{3cm}|p{3cm}|}{
+\centering\textbf{\No{}} & \centering{\textbf{Data 1}} & \centering{\textbf{Data 2}} \nextline
+\centering10223 & First & First \nextline
+\centering10223 & Second & Second \nextline
+\centering10223 & Third & Third \nextline
+}
+
+\noindent and
+\Table[n]{Unnumbered}{|r|c|l|}{
+8 & 1 & 6 \nextline
+3 & 5 & 7 \nextline
+4 & 9 & 2 \nextline
+}
+
+\podrazdel{Figures} Figures can be located out of the text, or are in the text with wrap.
+
+Use
+\begin{verbatim}
+    \Figure{Figure width}{Eps filename}{Caption}
+\end{verbatim}
+to create a figure fixed width, located outside of the text. Image captions are required(NO the point at the end). The figures are numbered automatically.
+
+\Figure{0.4\textwidth}{Fig1.eps}{Example\label{template_fig1}}
+
+To create a figure with wrap use
+\begin{verbatim}
+\WrapFigure{number of strings}{width of figure padding}
+{figure width}{Eps filename}{Caption}
+\end{verbatim}
+
+\WrapFigureR{11}{0.4\textwidth}{0.6\textwidth}{Fig1.eps}{Figure in text\label{template_fig2}}
+Fig.~\ref{template_fig2} used with parameters: 11 strings, width of figure padding~--- 0,5 of text width, figure width~--- 0,8 of padding width.
+To position the picture on the right in the text, you can use the command \verb=\WrapFigureR=. This command gives a result like this paragraph.
+
+\podrazdel{Lists} Marked (\verb=\MList{options}=)
+
+\MList{
+\ITEM option 1;
+\ITEM option 2;
+\ITEM option 3.}
+or ordered (\verb=\NList{options}=) lists:
+\NList{
+\ITEM First.
+\ITEM Second.
+\ITEM Third.}
+ use \verb=\ITEM= instead \verb=\item=.
+
+\podrazdel{Code} The program code is executed by using environment \verb=verbatim=. Use code
+\begin{verbatim}
+\begin{verbatim}
+void main()
+{
+    int i = 6;
+    ++i+i++;
+}
+\ånd{verbatim}
+\end{verbatim}
+will look like
+\begin{verbatim}
+void main()
+{
+    int i = 6;
+    ++i+i++;
+}
+\end{verbatim}
+Separate names of the functions, commands, variables from the program format in the text with the command \verb=\verb=.
+
+\razdel{References}
+References should be placed in order of mention in the text. In the list of references includes ONLY publications referenced in the text! The references are defined by the command \verb=\cite{label}=, where \verb=label=~--- this is an assigned unique identifier. The bibliography is created by the environment \verb=thebibliography=. Each source starts with the command \verb=\bibitem{label}=. For Web links use the command \verb=\url{about:blank}=.
+
+%%%% References
+\begin{thebibliography}{7}
+
+\bibitem{billings} Billings~S.\:A., Fadzil~M.\:B., Sulley J., Johnson~P.\:M. Identification of a non-linear difference equation model of an industrial diesel generator // Mechanical Systems and Signal Processing. 1988. Vol.~2, No~1. P.~59--76.
+\bibitem{booton}  Booton~R.\:C. Nonlinear control systems with random inputs // Trans. IRE Profes. Group on Circuit Theory. 1954. Vol.~CT1, No~1. P.~9--18.
+\bibitem{boydchua} Boyd~S., Chua~L.\:O. Fading memory and the problem of approximating nonlinear operators with Voltterra series // IEEE Trans. Circuits Syst. 1985. Vol.~CAS-32, No~11. P.~1150--1161.
+\bibitem{garain} Garain~U. Identification of mathematical expressions in document images // Proc. of th 10th Int. Conf. on
+Document Analysis and Recognition (ICDAR). 2009. P.~1340--1344.
+\bibitem{leewang} Lee~H.\:\:J., Wang~J.-S. Design of a mathematical expression understanding system // Pattern Recognition
+Letters. 1997. Vol.~18, No~3. P.~289--298.
+\bibitem{parall} LAM/MPI Parallel Computing [Internet resource]: \url{URL: http://www.osc.edu/lam.html} (date: 17.03.13).
+
+\bibitem{ltxwb}  LaTeX on Wikibooks [Internet resource]: \url{URL: http://en.wikibooks.org/wiki/LaTeX} (date: 25.11.14).
+
+
+\end{thebibliography}
+\end{document}
