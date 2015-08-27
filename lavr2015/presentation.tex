@@ -15,10 +15,27 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{setspace}
+\usepackage{tikz}
+\usepackage{adjustbox}
+\usepackage{marvosym}
+\usetikzlibrary{shapes,arrows,positioning}
+\makeatletter
+%\@ifundefined{verbatim@out}{\newwrite\verbatim@out}{}
+\makeatother
 \graphicspath{{images/}}%путь к рисункам
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, text width=11em, text centered, rounded corners, minimum height=2em]
+\tikzstyle{line} = [draw, -latex    ]
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm, minimum height=2em]
 
 \setbeamerfont{author in head/foot}{size=\small}
 \setbeamerfont{title in head/foot}{size=\footnotesize}
+\setbeamercovered{invisible}
+\setbeamertemplate{navigation symbols}{}%remove navigation symbols
 
 \title[Моделирование движения жидкости в клапане]{Моделирование движения вязкой неоднородной жидкости в искусственном сердечном клапане}
 \date{\today}
@@ -41,6 +58,79 @@
 \begin{frame}
 \frametitle{Введение}
 Рассмотрим задачу о течении крови внутри крупных сосудов с гибкими стенками и клапаном. Кровь является неоднородной и состоит из плазмы и взвешенных в ней форменных элементов. Клапан и стенки сосуда являются гибкими и изменяют свою форму под воздействием течения. Будем моделировать кровь как вязкую, несжимаемую двухкомпонентную жидкость, а стенки сосуда - как поверхность заданной формы, обладающую определенной жесткостью.
+\end{frame}
+
+% valves placement
+\begin{frame}
+\frametitle{Схема расположения клапанов}
+    \begin{center}
+        \includegraphics[width=8.5cm]{aorta_scheme.png}
+    \end{center}
+\end{frame}
+
+% valve tissue structure
+\begin{frame}
+\frametitle{Схема строения тканей}
+    \begin{center}
+        \includegraphics[width=8.5cm]{valve_tissue_structure.jpg}
+    \end{center}
+
+    \begin{spacing}{0.5}
+        \mbox{\scriptsize
+            Vesely, Ivan. "Heart valve tissue engineering." Circulation research 97.8 (2005): 743-755.
+        }
+    \end{spacing}
+
+\end{frame}
+\note{
+    \begin{itemize}
+        \item коллагеновые волокна (collagen fibers)
+        \item слой эластина (белок) (elastin sheet)
+        \item гликозаминогликаны (glycosaminoglycan matrix)
+    \end{itemize}
+}
+
+% blood structure scheme
+\begin{frame}
+\frametitle{Схема структуры крови}
+    \begin{center}
+        \includegraphics[width=8.5cm]{blood_scheme.png}
+    \end{center}
+\end{frame}
+
+% papers overview
+\begin{frame}
+\frametitle{Обзор исследований}
+    \begin{itemize}
+        \item Kunzelman K.S., Reimink M.S. et al  Annular dilatation increases stress in the mitral valve and delays coaptation: a finite element computer model. (1997) Cardiovasc Surg 5(4):427–434
+        \item Weinberg E. Dynamic simulation of heart mitral valve with transversely isotropic material model. Massachusetts Institute of Technology (2005)
+        \item Kim H.S. Nonlinear multi-scale anisotropic material and structural models for prosthetic and native aortic heart valves. Georgia Institute of Technology (2009)
+    \end{itemize}
+\end{frame}
+\note{
+    Отметить, что рассматриваются работы, посвященные именно математическому моделированию клапанов,
+    а не экспериментальному. На эту тему мало русскоязычных работ - даже в монографии "Искусственные клапаны сердца"
+    (Орловский, Гриценко, Юхнев, Евдокимов, Гавриленков),
+    где описан крупный вклад отечественных ученых в области клапанов, в разделе "Математическое моделирование" нет
+    упоминаний о русскоязычных работах.
+    Существует достаточно много (по крайней мере, зарубежных) исследований,
+    посвященных математическому моделированию сердечных клапанов. В ранних моделируются
+    только достаточно простые клапаны (по структуре, двумерные и проч.).
+    Существует много современных работ, которые изучают клапан только с точки зрения
+    эластичности, напряжений, возникающих при деформации и проч (при этом данные о давлении жидкости
+    берутся либо из эксперимента, либо упрощенные, например течение Пуазеля).
+    Самый перспективный вид исследований те, которые полноценно описывают взаимодействие потока и клапана,
+    т.е. IBM
+}
+
+% papers overview
+\begin{frame}
+\frametitle{Обзор исследований}
+    \begin{itemize}
+        \item Peskin, Charles S. "Numerical analysis of blood flow in the heart." Journal of computational physics 25.3 (1977): 220-252.
+        \item Luo, X. Y., et al. "Effect of bending rigidity in a dynamic model of a polyurethane prosthetic mitral valve." Biomechanics and modeling in mechanobiology 11.6 (2012): 815-827.
+        \item Flamini, Vittoria, Abe DeAnda, and Boyce E. Griffith. "Immersed boundary-finite element model of fluid-structure interaction in the aortic root." (2015).
+    \end{itemize}
 \end{frame}
 
 %description of the problem: schema
@@ -121,8 +211,8 @@
 \frametitle{Метод решения}
 Будем рассматривать отдельно задачи вычисления параметров течения жидкости и параметров движения стенок сосуда и клапанов. Для этого введем в расчетной области сетки:
 \begin{itemize}
-    \item $\Omega_h = \Omega_h(x, y, z)$ - равномерная разнесенная сетка для расчета течения
-    \item $\Gamma_h = \Gamma_h(q, r, s, t)$ - дополнительная сетка, соотнесенная со стенками сосуда и лепестками клапана (в лагранжевых координатах)
+    \item[\MVRightarrow] $\Omega_h = \Omega_h(x, y, z)$ - равномерная разнесенная сетка для расчета течения
+    \item[\MVRightarrow] $\Gamma_h = \Gamma_h(q, r, s, t)$ - дополнительная сетка, соотнесенная со стенками сосуда и лепестками клапана (в лагранжевых координатах)
 \end{itemize}
 
 \end{frame}
@@ -137,15 +227,82 @@
 \end{frame}
 
 % solve method: diagram
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{Алгоритм}
-    \begin{itemize}
-        \item Решаем задачу (\ref{eq:motion})-(\ref{eq:continuity})
-        \item Определяем концентрацию примеси с помощью (\ref{eq:concentration}) и пересчитываем $\rho, \mu$
-        \item Определяем деформацию сосуда и клапана под воздействием жидкости
-        \item По формулам (\ref{eq:strain_energy})-(\ref{eq:define_boundary_force}) вычисляем значение сил, противодействующих деформации
-        \item Находим новое распределение массовых сил в уравнении движения жидкости
-    \end{itemize}
+    \begin{adjustbox}{max totalsize={1.0\textwidth}{.7\textheight},center}
+        \begin{tikzpicture}[node distance = 2.5cm, auto]
+            \onslide<+->{
+                \node[block]                           (init){
+                    $u_0$, $p_0$, $\rho_0$, $\nu_0$
+                };
+            }
+
+            \onslide<+->{
+                \node[block, right=1cm of init]            (body_forces_initial){
+                    массовые силы $f_{ijk} = 0$
+                };
+                \path[line] (init) --                  (body_forces_initial);
+            }
+
+            \onslide<+->{
+                \node[block, below of=body_forces_initial]            (navier_stokes){
+                    уравнения Навье-Стокса
+                };
+                \path[line] (body_forces_initial) --                  (navier_stokes);
+            }
+
+            \onslide<+->{
+                \node[block, below of=navier_stokes]   (concentration){
+                    вычисление концентрации $c_{n+1}$
+                };
+                \path[line] (navier_stokes) --         (concentration);
+            }
+
+            \onslide<+->{
+                \node[block, below of=concentration]   (viscosity_density){
+                    вычисление $\nu_{n+1}$, $\rho_{n+1}$
+                };
+                \path[line] (concentration) --         (viscosity_density);
+            }
+
+            \onslide<+->{
+                \node[block, below of=viscosity_density]   (new_flow){
+                    $u_{n+1}$, $p_{n+1}$, $\rho_{n+1}$, $\nu_{n+1}$
+                };
+                \path[line] (viscosity_density) --     (new_flow);
+            }
+
+            \onslide<+->{
+                \node[block, right= of new_flow, anchor=west](boundary_velocity){
+                    перенос скорости жидкости на границу, $U_n$
+                };
+                \path[line] (new_flow) --         (boundary_velocity);
+            }
+
+            \onslide<+->{
+                \node[block, right=of viscosity_density, anchor=west](deformation){
+                    новая форма границы $X_{n+1}(X_{n}, U_{n}, t)$
+                };
+                \path[line] (boundary_velocity) --         (deformation);
+            }
+
+            \onslide<+->{
+                \node[block, right=of concentration, anchor=west](boundary_forces){
+                    сопротивление деформации $F_{n}(X_{n+1}, X_{n})$
+                };
+                \path[line] (deformation) --         (boundary_forces);
+            }
+
+            \onslide<+->{
+                \node[block, right=of navier_stokes, anchor=west](body_forces){
+                    новое распределение массовых сил $f_{ijk}$
+                };
+                \path[line] (boundary_forces) --         (body_forces);
+                \path[line] (body_forces) --         (body_forces_initial);
+            }
+
+        \end{tikzpicture}
+    \end{adjustbox}
 \end{frame}
 
 % solve method:split scheme
@@ -164,9 +321,9 @@
 \end{frame}
 \note{
     \begin{itemize}
-        \item Решаем уравнение \eqref{eq:split_first} методом стабилизирующей поправки (Дугласа-Рекфорда)
-        \item Из уравнения \eqref{eq:split_second} методом бисопряженных градиентов определяем поле давления
-        \item Восстанавливаем окончательное поле вектора скорости по явным формулам \eqref{eq:split_third}
+        \item[\MVRightarrow] Решаем уравнение \eqref{eq:split_first} методом стабилизирующей поправки (Дугласа-Рекфорда)
+        \item[\MVRightarrow] Из уравнения \eqref{eq:split_second} методом бисопряженных градиентов определяем поле давления
+        \item[\MVRightarrow] Восстанавливаем окончательное поле вектора скорости по явным формулам \eqref{eq:split_third}
     \end{itemize}
 }
 
@@ -217,8 +374,8 @@ $D(x_n)$ соответствует $\delta(x - x_k)$.
     \end{center}
 
 \begin{itemize}
-    \item \href{run:video/cylinder1.avi}{Деформация стенок сосуда}
-    \item \href{run:video/cylinder2.avi}{Аналогичный расчет на более мелкой сетке}
+    \item[\MVRightarrow] \href{run:video/cylinder1.avi}{Деформация стенок сосуда}
+    \item[\MVRightarrow] \href{run:video/cylinder2.avi}{Аналогичный расчет на более мелкой сетке}
 \end{itemize}
 \end{frame}
 
@@ -232,8 +389,8 @@ $D(x_n)$ соответствует $\delta(x - x_k)$.
     \end{center}
 
 \begin{itemize}
-    \item \href{run:video/source_in_vessel.avi}{Расчет распространения примеси}
-    \item \href{run:video/thrombus_in_vessel.avi}{Размыв "тромба"}
+    \item[\MVRightarrow] \href{run:video/source_in_vessel.avi}{Расчет распространения примеси}
+    \item[\MVRightarrow] \href{run:video/thrombus_in_vessel.avi}{Размыв "тромба"}
 \end{itemize}
 \end{frame}
 
@@ -246,8 +403,8 @@ $D(x_n)$ соответствует $\delta(x - x_k)$.
     \end{center}
 
 \begin{itemize}
-    \item \href{run:video/valves_closing_accurate_two.avi}{Движение клапана}
-    \item \href{run:video/valve_delaunay.avi}{Движение клапана (поверхность)}
+    \item[\MVRightarrow] \href{run:video/valves_closing_accurate_two.avi}{Движение клапана}
+    \item[\MVRightarrow] \href{run:video/valve_delaunay.avi}{Движение клапана (поверхность)}
 \end{itemize}
 \end{frame}
 
@@ -272,5 +429,10 @@ $D(x_n)$ соответствует $\delta(x - x_k)$.
     \begin{center}
         \includegraphics[width=10cm]{flow_rate_comparison.png}
     \end{center}
+
+    {\scriptsize
+        International Journal for Numerical Methods in Biomedical Engineering 28.3 (2012): 317-345.
+        %"Immersed boundary model of aortic heart valve dynamics with physiological driving and loading conditions." International Journal for Numerical Methods in Biomedical Engineering 28.3 (2012): 317-345.
+    }
 \end{frame}
 \end{document}
