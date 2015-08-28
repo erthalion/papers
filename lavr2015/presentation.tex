@@ -57,8 +57,11 @@
 %description of the problem
 \begin{frame}
 \frametitle{Введение}
-Рассмотрим задачу о течении крови внутри крупных сосудов с гибкими стенками и клапаном. Кровь является неоднородной и состоит из плазмы и взвешенных в ней форменных элементов. Клапан и стенки сосуда являются гибкими и изменяют свою форму под воздействием течения. Будем моделировать кровь как вязкую, несжимаемую двухкомпонентную жидкость, а стенки сосуда - как поверхность заданной формы, обладающую определенной жесткостью.
+Искусственные клапаны являются эффективным способом лечения многих сердечно-сосудистых заболеваний. Их конструктивные особенности делают их одними из самых сложных медицинских устройств, используемых в кардиохирургии. Требования к функционированию клапанов очень велики - необходимо, чтобы он минимизировал турбулентность, создавал небольшой объем регургитации, позволял избегать зон застоя, разделения потока и т.д.
 \end{frame}
+\note{
+    объем регургитации - объем обратного течения (из желудочка в атриум)
+}
 
 % valves placement
 \begin{frame}
@@ -102,9 +105,9 @@
 \begin{frame}
 \frametitle{Обзор исследований}
     \begin{itemize}
-        \item Kunzelman K.S., Reimink M.S. et al  Annular dilatation increases stress in the mitral valve and delays coaptation: a finite element computer model. (1997) Cardiovasc Surg 5(4):427–434
-        \item Weinberg E. Dynamic simulation of heart mitral valve with transversely isotropic material model. Massachusetts Institute of Technology (2005)
-        \item Kim H.S. Nonlinear multi-scale anisotropic material and structural models for prosthetic and native aortic heart valves. Georgia Institute of Technology (2009)
+        \item[\MVRightarrow] Kunzelman K.S., Reimink M.S. et al  Annular dilatation increases stress in the mitral valve and delays coaptation: a finite element computer model. (1997) Cardiovasc Surg 5(4):427–434
+        \item[\MVRightarrow] Weinberg E. Dynamic simulation of heart mitral valve with transversely isotropic material model. Massachusetts Institute of Technology (2005)
+        \item[\MVRightarrow] Kim H.S. Nonlinear multi-scale anisotropic material and structural models for prosthetic and native aortic heart valves. Georgia Institute of Technology (2009)
     \end{itemize}
 \end{frame}
 \note{
@@ -123,19 +126,36 @@
     т.е. IBM
 }
 
+\begin{frame}
+\frametitle{Обзор исследований}
+    Расматривают только сам клапан и его деформации, представляя поток в упрощенном виде или
+    вовсе получая данные о давлении экспериментально.
+\end{frame}
+
 % papers overview
 \begin{frame}
 \frametitle{Обзор исследований}
     \begin{itemize}
-        \item Peskin, Charles S. "Numerical analysis of blood flow in the heart." Journal of computational physics 25.3 (1977): 220-252.
-        \item Luo, X. Y., et al. "Effect of bending rigidity in a dynamic model of a polyurethane prosthetic mitral valve." Biomechanics and modeling in mechanobiology 11.6 (2012): 815-827.
-        \item Flamini, Vittoria, Abe DeAnda, and Boyce E. Griffith. "Immersed boundary-finite element model of fluid-structure interaction in the aortic root." (2015).
+        \item[\MVRightarrow] Peskin, Charles S. "Numerical analysis of blood flow in the heart." Journal of computational physics 25.3 (1977): 220-252.
+        \item[\MVRightarrow] Luo, X. Y., et al. "Effect of bending rigidity in a dynamic model of a polyurethane prosthetic mitral valve." Biomechanics and modeling in mechanobiology 11.6 (2012): 815-827.
+        \item[\MVRightarrow] Flamini, Vittoria, Abe DeAnda, and Boyce E. Griffith. "Immersed boundary-finite element model of fluid-structure interaction in the aortic root." (2015).
     \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Обзор исследований}
+    Рассматривают полноценное взаимодействие ''жидкость-клапан'', позволяют считать клапан сколь угодно тонким.
+    Не освещена тема потока жидкости с примесями.
+\end{frame}
+
+\begin{frame}
+\frametitle{Описание модели}
+Рассмотрим задачу о течении крови внутри крупных сосудов с гибкими стенками и клапаном. Кровь является неоднородной и состоит из плазмы и взвешенных в ней форменных элементов. Клапан и стенки сосуда являются гибкими и изменяют свою форму под воздействием течения. Будем моделировать кровь как вязкую, несжимаемую двухкомпонентную жидкость, а стенки сосуда - как поверхность заданной формы, обладающую определенной жесткостью.
 \end{frame}
 
 %description of the problem: schema
 \begin{frame}
-\frametitle{Введение}
+\frametitle{Описание модели}
     \begin{center}
         \includegraphics[width=8.5cm]{area_3d.png}
     \end{center}
@@ -238,6 +258,9 @@
             }
 
             \onslide<+->{
+                \node[block, fill=none, minimum height=25em, text width=14em]          (fluid) at (6.8, -5){
+                    $\Omega$
+                };
                 \node[block, right=1cm of init]            (body_forces_initial){
                     массовые силы $f_{ijk} = 0$
                 };
@@ -273,6 +296,9 @@
             }
 
             \onslide<+->{
+                \node[block, fill=none, minimum height=25em, text width=14em]          (fluid) at (14.8, -5){
+                    $\Gamma$
+                };
                 \node[block, right= of new_flow, anchor=west](boundary_velocity){
                     перенос скорости жидкости на границу, $U_n$
                 };
@@ -307,7 +333,7 @@
 
 % solve method:split scheme
 \begin{frame}
-\frametitle{Алгоритм решения}
+\frametitle{Алгоритм решения: поток}
 Схема расщепления по физическим факторам:
 \begin{gather}
     \label{eq:split_first}
@@ -326,6 +352,17 @@
         \item[\MVRightarrow] Восстанавливаем окончательное поле вектора скорости по явным формулам \eqref{eq:split_third}
     \end{itemize}
 }
+
+% solve method: boundary forces
+\begin{frame}
+\frametitle{Алгоритм решения: клапан}
+\begin{gather}
+    \label{eq:strain_energy}
+    F_{n} =  \frac{\partial}{\partial s}(T_{n} \tau_{n}) + \frac{\partial^2}{\partial s^2} \Big( E \cdot I \frac{\partial^2}{\partial s^2} X_{n} \Big)
+\end{gather}
+\end{frame}
+\note{$E$ - модуль Юнга, $I$ - момент инерции поперечного сечения, $T$ - напряжение фибры, $\tau$ - единичный тангенциальный вектор, касательный к фибре.}
+
 
 % solve method:immersed boundary
 \begin{frame}
@@ -430,9 +467,11 @@ $D(x_n)$ соответствует $\delta(x - x_k)$.
         \includegraphics[width=10cm]{flow_rate_comparison.png}
     \end{center}
 
-    {\scriptsize
-        International Journal for Numerical Methods in Biomedical Engineering 28.3 (2012): 317-345.
-        %"Immersed boundary model of aortic heart valve dynamics with physiological driving and loading conditions." International Journal for Numerical Methods in Biomedical Engineering 28.3 (2012): 317-345.
-    }
+    \begin{adjustbox}{max totalsize={1.0\textwidth}{.7\textheight},center}
+        {\scriptsize
+            International Journal for Numerical Methods in Biomedical Engineering 28.3 (2012): 317-345.
+            %"Immersed boundary model of aortic heart valve dynamics with physiological driving and loading conditions." International Journal for Numerical Methods in Biomedical Engineering 28.3 (2012): 317-345.
+        }
+    \end{adjustbox}
 \end{frame}
 \end{document}
