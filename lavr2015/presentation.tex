@@ -39,7 +39,7 @@
 
 \title[Моделирование движения жидкости в клапане]{Моделирование движения вязкой неоднородной жидкости в искусственном сердечном клапане}
 \date{\today}
-\author[Долгов Д.А.]{Долгов Д.А.\\ {\small аспирант кафедры вычислительной математики}\\ {\small Научный руководитель: Захаров Ю.Н.}}
+\author[Долгов Д.А.]{Долгов Д.А., Захаров Ю.Н.}
 \institute{Кемеровский Государственный Университет \\
     \vspace{0.7cm}
     \vspace{0.7cm}
@@ -71,6 +71,54 @@
     \end{center}
 \end{frame}
 
+\begin{frame}
+\frametitle{Обзор исследований}
+    Существует множество исследований, которые расматривают только сам клапан и его деформации,
+    представляя поток в упрощенном виде или вовсе получая данные о давлении экспериментально. См. например:\\
+    \par
+    {\tiny
+        \begin{itemize}
+            \item[\MVRightarrow] Бокерия Л.А., Скопин И.И., Сазоненков М.А., Тумаев Е.Н., Механическое напряжение в створках митрального клапана и биопротеза в митральной позиции. Влияние геометрии фиброзного кольца на величину напряжения створок/Клиническая физиология кровообращения, 2008, №2
+            \item[\MVRightarrow] Сазоненков, М.А. Расчет напряжений в структурах нормального митрального клапана. / М.А. Сазоненков, Е.Н. Тумаев, И.И. Скопин // Бюллетень НЦ ССХ им. А.Н. Бакулева РАМН. Сердечно-сосудистые заболевания. Четырнадцатый Всероссийский съезд сердечно-сосудистых хирургов. – 2008. - Т 9, N 6. - с. 55.
+            \item[\MVRightarrow] Kunzelman K.S., Reimink M.S. et al  Annular dilatation increases stress in the mitral valve and delays coaptation: a finite element computer model. (1997) Cardiovasc Surg 5(4):427–434
+            \item[\MVRightarrow] Weinberg E. Dynamic simulation of heart mitral valve with transversely isotropic material model. Massachusetts Institute of Technology (2005)
+            \item[\MVRightarrow] Kim H.S. Nonlinear multi-scale anisotropic material and structural models for prosthetic and native aortic heart valves. Georgia Institute of Technology (2009)
+        \end{itemize}
+    }
+\end{frame}
+\note{
+    Отметить, что рассматриваются работы, посвященные именно математическому моделированию клапанов,
+    а не экспериментальному. На эту тему мало русскоязычных работ - даже в монографии "Искусственные клапаны сердца"
+    (Орловский, Гриценко, Юхнев, Евдокимов, Гавриленков),
+    где описан крупный вклад отечественных ученых в области клапанов, в разделе "Математическое моделирование" нет
+    упоминаний о русскоязычных работах.
+    Существует достаточно много (по крайней мере, зарубежных) исследований,
+    посвященных математическому моделированию сердечных клапанов. В ранних моделируются
+    только достаточно простые клапаны (по структуре, двумерные и проч.).
+    Существует много современных работ, которые изучают клапан только с точки зрения
+    эластичности, напряжений, возникающих при деформации и проч (при этом данные о давлении жидкости
+    берутся либо из эксперимента, либо упрощенные, например течение Пуазеля).
+    Самый перспективный вид исследований те, которые полноценно описывают взаимодействие потока и клапана,
+    т.е. IBM
+}
+
+\begin{frame}
+\frametitle{Обзор исследований}
+    Исследования, которые рассматривают полноценное взаимодействие ''жидкость-клапан'', зачастую относятся 
+    к методу погруженной границы, т.к. он позволяет считать клапан сколь угодно тонким. Практически нет
+    известных нам русскоязычных работ по этой теме, а в существующих англоязычных мало освещена тема потока
+    жидкости с примесями:
+    \par
+    {\tiny
+        \begin{itemize}
+            \item[\MVRightarrow] Орловский П.И., Гриценко В.В., Юхнев А.Д., Евдокимов С.В., Гавриленков В.И. Искусственные клапаны сердца. СПб. 2007. - 448с
+            \item[\MVRightarrow] Peskin, Charles S. "Numerical analysis of blood flow in the heart." Journal of computational physics 25.3 (1977): 220-252.
+            \item[\MVRightarrow] Luo, X. Y., et al. "Effect of bending rigidity in a dynamic model of a polyurethane prosthetic mitral valve." Biomechanics and modeling in mechanobiology 11.6 (2012): 815-827.
+            \item[\MVRightarrow] Flamini, Vittoria, Abe DeAnda, and Boyce E. Griffith. "Immersed boundary-finite element model of fluid-structure interaction in the aortic root." (2015).
+        \end{itemize}
+    }
+\end{frame}
+
 % valve tissue structure
 \begin{frame}
 \frametitle{Схема строения тканей}
@@ -97,56 +145,10 @@
 \begin{frame}
 \frametitle{Схема структуры крови}
     \begin{center}
-        \includegraphics[width=8.5cm]{blood_scheme.png}
+        \includegraphics[width=8.5cm]{blood_scheme3.png}
     \end{center}
 \end{frame}
 
-% papers overview
-\begin{frame}
-\frametitle{Обзор исследований}
-    \begin{itemize}
-        \item[\MVRightarrow] Kunzelman K.S., Reimink M.S. et al  Annular dilatation increases stress in the mitral valve and delays coaptation: a finite element computer model. (1997) Cardiovasc Surg 5(4):427–434
-        \item[\MVRightarrow] Weinberg E. Dynamic simulation of heart mitral valve with transversely isotropic material model. Massachusetts Institute of Technology (2005)
-        \item[\MVRightarrow] Kim H.S. Nonlinear multi-scale anisotropic material and structural models for prosthetic and native aortic heart valves. Georgia Institute of Technology (2009)
-    \end{itemize}
-\end{frame}
-\note{
-    Отметить, что рассматриваются работы, посвященные именно математическому моделированию клапанов,
-    а не экспериментальному. На эту тему мало русскоязычных работ - даже в монографии "Искусственные клапаны сердца"
-    (Орловский, Гриценко, Юхнев, Евдокимов, Гавриленков),
-    где описан крупный вклад отечественных ученых в области клапанов, в разделе "Математическое моделирование" нет
-    упоминаний о русскоязычных работах.
-    Существует достаточно много (по крайней мере, зарубежных) исследований,
-    посвященных математическому моделированию сердечных клапанов. В ранних моделируются
-    только достаточно простые клапаны (по структуре, двумерные и проч.).
-    Существует много современных работ, которые изучают клапан только с точки зрения
-    эластичности, напряжений, возникающих при деформации и проч (при этом данные о давлении жидкости
-    берутся либо из эксперимента, либо упрощенные, например течение Пуазеля).
-    Самый перспективный вид исследований те, которые полноценно описывают взаимодействие потока и клапана,
-    т.е. IBM
-}
-
-\begin{frame}
-\frametitle{Обзор исследований}
-    Расматривают только сам клапан и его деформации, представляя поток в упрощенном виде или
-    вовсе получая данные о давлении экспериментально.
-\end{frame}
-
-% papers overview
-\begin{frame}
-\frametitle{Обзор исследований}
-    \begin{itemize}
-        \item[\MVRightarrow] Peskin, Charles S. "Numerical analysis of blood flow in the heart." Journal of computational physics 25.3 (1977): 220-252.
-        \item[\MVRightarrow] Luo, X. Y., et al. "Effect of bending rigidity in a dynamic model of a polyurethane prosthetic mitral valve." Biomechanics and modeling in mechanobiology 11.6 (2012): 815-827.
-        \item[\MVRightarrow] Flamini, Vittoria, Abe DeAnda, and Boyce E. Griffith. "Immersed boundary-finite element model of fluid-structure interaction in the aortic root." (2015).
-    \end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Обзор исследований}
-    Рассматривают полноценное взаимодействие ''жидкость-клапан'', позволяют считать клапан сколь угодно тонким.
-    Не освещена тема потока жидкости с примесями.
-\end{frame}
 
 \begin{frame}
 \frametitle{Описание модели}
@@ -251,82 +253,61 @@
 \frametitle{Алгоритм}
     \begin{adjustbox}{max totalsize={1.0\textwidth}{.7\textheight},center}
         \begin{tikzpicture}[node distance = 2.5cm, auto]
-            \onslide<+->{
-                \node[block]                           (init){
-                    $u_0$, $p_0$, $\rho_0$, $\nu_0$
-                };
-            }
+            \node[block]                           (init){
+                $u_0$, $p_0$, $\rho_0$, $\nu_0$
+            };
 
-            \onslide<+->{
-                \node[block, fill=none, minimum height=25em, text width=14em]          (fluid) at (6.8, -5){
-                    $\Omega$
-                };
-                \node[block, right=1cm of init]            (body_forces_initial){
-                    массовые силы $f_{ijk} = 0$
-                };
-                \path[line] (init) --                  (body_forces_initial);
-            }
+            \node[block, fill=none, minimum height=25em, text width=14em]          (fluid) at (6.8, -5){
+                $\Omega$
+            };
+            \node[block, right=1cm of init]            (body_forces_initial){
+                массовые силы $f_{ijk} = 0$
+            };
+            \path[line] (init) --                  (body_forces_initial);
 
-            \onslide<+->{
-                \node[block, below of=body_forces_initial]            (navier_stokes){
-                    уравнения Навье-Стокса
-                };
-                \path[line] (body_forces_initial) --                  (navier_stokes);
-            }
+            \node[block, below of=body_forces_initial]            (navier_stokes){
+                уравнения Навье-Стокса
+            };
+            \path[line] (body_forces_initial) --                  (navier_stokes);
 
-            \onslide<+->{
-                \node[block, below of=navier_stokes]   (concentration){
-                    вычисление концентрации $c_{n+1}$
-                };
-                \path[line] (navier_stokes) --         (concentration);
-            }
+            \node[block, below of=navier_stokes]   (concentration){
+                вычисление концентрации $c_{n+1}$
+            };
+            \path[line] (navier_stokes) --         (concentration);
 
-            \onslide<+->{
-                \node[block, below of=concentration]   (viscosity_density){
-                    вычисление $\nu_{n+1}$, $\rho_{n+1}$
-                };
-                \path[line] (concentration) --         (viscosity_density);
-            }
+            \node[block, below of=concentration]   (viscosity_density){
+                вычисление $\nu_{n+1}$, $\rho_{n+1}$
+            };
+            \path[line] (concentration) --         (viscosity_density);
 
-            \onslide<+->{
-                \node[block, below of=viscosity_density]   (new_flow){
-                    $u_{n+1}$, $p_{n+1}$, $\rho_{n+1}$, $\nu_{n+1}$
-                };
-                \path[line] (viscosity_density) --     (new_flow);
-            }
+            \node[block, below of=viscosity_density]   (new_flow){
+                $u_{n+1}$, $p_{n+1}$, $\rho_{n+1}$, $\nu_{n+1}$
+            };
+            \path[line] (viscosity_density) --     (new_flow);
 
-            \onslide<+->{
-                \node[block, fill=none, minimum height=25em, text width=14em]          (fluid) at (14.8, -5){
-                    $\Gamma$
-                };
-                \node[block, right= of new_flow, anchor=west](boundary_velocity){
-                    перенос скорости жидкости на границу, $U_n$
-                };
-                \path[line] (new_flow) --         (boundary_velocity);
-            }
+            \node[block, fill=none, minimum height=25em, text width=14em]          (fluid) at (14.8, -5){
+                $\Gamma$
+            };
+            \node[block, right= of new_flow, anchor=west](boundary_velocity){
+                перенос скорости жидкости на границу, $U_n$
+            };
+            \path[line] (new_flow) --         (boundary_velocity);
 
-            \onslide<+->{
-                \node[block, right=of viscosity_density, anchor=west](deformation){
-                    новая форма границы $X_{n+1}(X_{n}, U_{n}, t)$
-                };
-                \path[line] (boundary_velocity) --         (deformation);
-            }
+            \node[block, right=of viscosity_density, anchor=west](deformation){
+                новая форма границы $X_{n+1}(X_{n}, U_{n}, t)$
+            };
+            \path[line] (boundary_velocity) --         (deformation);
 
-            \onslide<+->{
-                \node[block, right=of concentration, anchor=west](boundary_forces){
-                    сопротивление деформации $F_{n}(X_{n+1}, X_{n})$
-                };
-                \path[line] (deformation) --         (boundary_forces);
-            }
+            \node[block, right=of concentration, anchor=west](boundary_forces){
+                сопротивление деформации $F_{n}(X_{n+1}, X_{n})$
+            };
+            \path[line] (deformation) --         (boundary_forces);
 
-            \onslide<+->{
-                \node[block, right=of navier_stokes, anchor=west](body_forces){
-                    новое распределение массовых сил $f_{ijk}$
-                };
-                \path[line] (boundary_forces) --         (body_forces);
-                \path[line] (body_forces) --         (body_forces_initial);
-            }
-
+            \node[block, right=of navier_stokes, anchor=west](body_forces){
+                новое распределение массовых сил $f_{ijk}$
+            };
+            \path[line] (boundary_forces) --         (body_forces);
+            \path[line] (body_forces) --         (body_forces_initial);
         \end{tikzpicture}
     \end{adjustbox}
 \end{frame}
@@ -393,26 +374,15 @@
 $D(x_n)$ соответствует $\delta(x - x_k)$.
 \end{frame}
 
-% solve method: force distribution scheme
-\begin{frame}
-\frametitle{Дельта-функция}
-    \begin{center}
-        \includegraphics[width=11.5cm]{delta_function.png}
-    \end{center}
-\end{frame}
-
 % totals and examples
 \begin{frame}
 \frametitle{Примеры}
     \begin{center}
-        \includegraphics[width=5cm]{cylinder1_avi.png}
-        \vspace{0.40mm}
         \includegraphics[width=5cm]{cylinder2_avi.png}
     \end{center}
 
 \begin{itemize}
-    \item[\MVRightarrow] \href{run:video/cylinder1.avi}{Деформация стенок сосуда}
-    \item[\MVRightarrow] \href{run:video/cylinder2.avi}{Аналогичный расчет на более мелкой сетке}
+    \item[\MVRightarrow] \href{run:video/cylinder2.avi}{Деформация стенок сосуда}
 \end{itemize}
 \end{frame}
 
@@ -434,13 +404,10 @@ $D(x_n)$ соответствует $\delta(x - x_k)$.
 \begin{frame}
 \frametitle{Примеры}
     \begin{center}
-        \includegraphics[width=5cm]{valves_closing_accurate_two_avi.png}
-        \vspace{0.40mm}
         \includegraphics[width=5cm]{valve_delaunay.png}
     \end{center}
 
 \begin{itemize}
-    \item[\MVRightarrow] \href{run:video/valves_closing_accurate_two.avi}{Движение клапана}
     \item[\MVRightarrow] \href{run:video/valve_delaunay.avi}{Движение клапана (поверхность)}
 \end{itemize}
 \end{frame}
