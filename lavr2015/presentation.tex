@@ -149,6 +149,13 @@
     \end{center}
 \end{frame}
 
+\begin{frame}
+\frametitle{Искусственный клапан}
+    \begin{center}
+        \includegraphics[width=6cm]{real_valve_3_1.png}
+        \includegraphics[width=3cm]{real_valve2_1.png}
+    \end{center}
+\end{frame}
 
 \begin{frame}
 \frametitle{Описание модели}
@@ -276,12 +283,12 @@
             \path[line] (navier_stokes) --         (concentration);
 
             \node[block, below of=concentration]   (viscosity_density){
-                вычисление $\nu_{n+1}$, $\rho_{n+1}$
+                вычисление $\mu_{n+1}$, $\rho_{n+1}$
             };
             \path[line] (concentration) --         (viscosity_density);
 
             \node[block, below of=viscosity_density]   (new_flow){
-                $u_{n+1}$, $p_{n+1}$, $\rho_{n+1}$, $\nu_{n+1}$
+                $u_{n+1}$, $p_{n+1}$, $\rho_{n+1}$, $\mu_{n+1}$
             };
             \path[line] (viscosity_density) --     (new_flow);
 
@@ -404,40 +411,40 @@ $D(x_n)$ соответствует $\delta(x - x_k)$.
 \begin{frame}
 \frametitle{Примеры}
     \begin{center}
-        \includegraphics[width=9cm]{valve_delaunay.png}
+        \includegraphics[width=9cm]{valve_delaunay3_2.png}
     \end{center}
 
 \begin{itemize}
-    \item[\MVRightarrow] \href{run:video/valve_delaunay.avi}{Движение клапана (поверхность)}
+    \item[\MVRightarrow] \href{run:video/valve_delaunay3.avi}{Движение клапана}
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Примеры}
     \begin{center}
-        \includegraphics[width=9cm]{valve_flow.png}
+        \includegraphics[width=9cm]{valve_markers3.png}
     \end{center}
 
 \begin{itemize}
-    \item[\MVRightarrow] \href{run:video/valve_flow.avi}{Поток внутри клапана}
+    \item[\MVRightarrow] \href{run:video/valve_markers_better.avi}{Поток внутри клапана}
 \end{itemize}
 \end{frame}
 
-\begin{frame}
-\frametitle{Примеры}
-    \begin{center}
-        \includegraphics[width=11cm]{aortic_valves.jpg}
-    \end{center}
+%\begin{frame}
+%\frametitle{Примеры}
+    %\begin{center}
+        %\includegraphics[width=11cm]{aortic_valves.jpg}
+    %\end{center}
 
-\begin{spacing}{0.5}
-{\scriptsize
-    Watton PN, Luo XY et al (2007) Dynamic modelling of prosthetic
-    chorded mitral valves using the immersed boundary method.
-    J Biomech 40(3):613–626 Watton PN, Luo XY et al (2008) Effect of ventricle motion on the
-}
-\end{spacing}
+%\begin{spacing}{0.5}
+%{\scriptsize
+    %Watton PN, Luo XY et al (2007) Dynamic modelling of prosthetic
+    %chorded mitral valves using the immersed boundary method.
+    %J Biomech 40(3):613–626 Watton PN, Luo XY et al (2008) Effect of ventricle motion on the
+%}
+%\end{spacing}
 
-\end{frame}
+%\end{frame}
 
 \begin{frame}
 \frametitle{График расхода жидкости}
