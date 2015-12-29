@@ -1,3 +1,3 @@
 #!/bin/bash
 
-pandoc --bibliography report.bib -o ${1}.pdf *.md -V lang:russian
+pandoc --filter pandoc-crossref --bibliography report.bib -M "eqnPrefix: " -o ${1}.docx *.md -V lang:russian
