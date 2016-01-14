@@ -1,3 +1,5 @@
 #!/bin/bash
 
-pandoc --filter pandoc-crossref --bibliography report.bib -M "eqnPrefix: " -o ${1}.docx *.md -V lang:russian
+FILES="experimental_facility.md math.md computation.md results.md conclusions.md biblio.md"
+
+pandoc --filter pandoc-crossref --bibliography report.bib -o ${1}.docx ${FILES} -V lang:russian
