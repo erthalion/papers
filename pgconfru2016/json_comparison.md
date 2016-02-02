@@ -135,11 +135,10 @@ SELECT * FROM json_data WHERE json_exists(document, '$.String' error_handler ON 
 ###Format transformations
 Convert to the relational format.
 ```sql
-SELECT * FROM json_data json,
-    json_table
-    ( json.document, '$'
-      columns
-        json_number     NUMBER      path '$.Number'
+SELECT * FROM json_data json, json_table(
+    json.document, '$'
+    columns
+    json_number     NUMBER      path '$.Number'
     );
 ```
 ###Documentation

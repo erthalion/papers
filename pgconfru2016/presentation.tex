@@ -148,7 +148,7 @@
             PG & \check & \check & \check & \check & \check & \check & \question & \check & \question \\
             Mysql & \check & \check & \check & \check & \check & \question & \question & \fail & \question \\
             Oracle & \fail & \check & \fail & \fail & \fail & \fail & \question & \question & \question \\
-            DB2 & \check & \fail & \fail & \fail & \fail & \fail & \fail & \question & \fail \\
+            DB2 & \check & \check & \fail & \fail & \fail & \fail & \fail & \question & \fail \\
             MSSql & \fail & \check & \fail & \fail & \fail & \fail & \question & \question & \fail \\
         \end{tabular}
     \end{adjustbox}
@@ -665,782 +665,135 @@ SELECT json_value(document, '$.Number' RETURNING NUMBER) FROM json_document;
 \end{frame}
 
 \begin{frame}[fragile]
-    \frametitle{Тест}
+  \frametitle{Полнотекстовый поиск}
 
-    \begin{adjustbox}{max totalsize={1.0\textwidth}{.7\textheight},center}
-        \begin{tikzpicture}[node distance = 2.5cm, auto]
-            \node[block] (hstore){
-                Hstore
-            };
+\vspace{-20pt}
+\begin{lstlisting}[
+  basicstyle=\footnotesize\ttfamily,
+  showstringspaces=false,
+]
+CREATE INDEX json_search_idx ON json_data (document)
+  INDEXTYPE IS CTXSYS.CONTEXT
+  PARAMETERS (
+      'section group CTXSYS.JSON_SECTION_GROUP SYNC (ON COMMIT)'
+  );
 
-            \node[block, below of=hstore] (nested_hstore){
-                Nested Hstore
-            };
+SELECT document FROM json_data WHERE json_textcontains(
+    document, '$.Array.Description', 'Some description'
+);
 
-            \node[block, below of=nested_hstore] (jsonb){
-                Jsonb
-            };
+\end{lstlisting}
 
-            \path[line] (hstore) -- (nested_hstore);
-            \path[line, dashed] (nested_hstore) -- (jsonb);
-
-        \end{tikzpicture}
-    \end{adjustbox}
-\end{frame}
-\note{
-  Hstore is a key-value binary storage.
-  Doesn't support tree-like nested structures,
-  but there is a nested version of hstore.
-
-  Binary JSON storage. JSONB was introduced in PostgreSQL 9.4 and
-  supports fast lookups and simple expression search queries using
-  Generalized Inverted Indexes (GIN). It supposed to be document-oriented
-  and was designed for the schema-less data.
-}
-
-\begin{frame}[fragile]
-    \frametitle{Many faces of jsonb}
-
-  \begin{itemize}
-      \item<+->
-          \begin{lstlisting}[
-              basicstyle=\footnotesize\ttfamily,
-              showstringspaces=false,
-          ]
-select '"string"'::jsonb;
-         
-          \end{lstlisting}
-
-      \item<+->
-          \begin{lstlisting}[
-              basicstyle=\footnotesize\ttfamily,
-              showstringspaces=false,
-          ]
-select '1'::jsonb;
-         
-          \end{lstlisting}
-
-      \item<+->
-          \begin{lstlisting}[
-              basicstyle=\footnotesize\ttfamily,
-              showstringspaces=false,
-          ]
-select 'true'::jsonb;
-         
-          \end{lstlisting}
-
-      \item<+->
-          \begin{lstlisting}[
-              basicstyle=\footnotesize\ttfamily,
-              showstringspaces=false,
-          ]
-select '[1, 2, 3]'::jsonb;
-         
-          \end{lstlisting}
-
-      \item<+->
-          \begin{lstlisting}[
-              basicstyle=\footnotesize\ttfamily,
-              showstringspaces=false,
-          ]
-select '["string", 1]'::jsonb;
-         
-          \end{lstlisting}
-
-      \item<+->
-          \begin{lstlisting}[
-              basicstyle=\footnotesize\ttfamily,
-              showstringspaces=false,
-          ]
-select '{"key": {"nested": "value"}}'::jsonb;
-         
-          \end{lstlisting}
-
-  \end{itemize}
+\begin{itemize}[label={\MVRightarrow}]
+    \item AL32UTF8
+    \item WE8ISO8859P1
+\end{itemize}
 
 \end{frame}
 \note{
- * When a naked
- * scalar value needs to be stored as a Jsonb value, what we actually store is
- * an array with one element, with the flags in the array's header field set
- * to JB\_FSCALAR | JB\_FARRAY.
-
- Note about deduplication and space trimming
+    Индекс специально для JSON
 }
 
 \begin{frame}[fragile]
-  \frametitle{Lack of some functionality}
-  Тест тест
-
-  \begin{itemize}
-      \item[\MVRightarrow] Get an element at arbitrary path ( \#> )
-      \item[\MVRightarrow] Delete an element at arbitrary path  ( ? )
-      \item[\MVRightarrow] Update an element at arbitrary path ( ? )
-      \item[\MVRightarrow] Add a new element to arbitrary path ( ? )
-  \end{itemize}
-
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{jsonbx}
-
-  Pgxn extension for PostgreSQL 9.4, which contains implementation of
-  some missing functionality. It based on nested version of hstore
-  and provided this functions for the corresponding patch for 9.5
-
-\end{frame}
-
-\section{Get data}
-
-\begin{frame}[fragile]
-  \frametitle{By key}
-
-  \begin{itemize}
-      \item
-          \begin{lstlisting}[
-              basicstyle=\footnotesize\ttfamily,
-              showstringspaces=false,
-          ]
-select '{"key": "value"}'::jsonb -> 'key';
-         
-          \end{lstlisting}
-
-      \item
-          \begin{lstlisting}[
-              basicstyle=\footnotesize\ttfamily,
-              showstringspaces=false,
-          ]
-select '{"key": "value"}'::jsonb ->> 'key';
-         
-          \end{lstlisting}
-
-  \end{itemize}
-
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{By index}
-
-  \begin{itemize}
-      \item
-          \begin{lstlisting}[
-              basicstyle=\footnotesize\ttfamily,
-              showstringspaces=false,
-          ]
-select '[(*@\alert{"string"}@*), 1]'::jsonb -> 0;
-         
-          \end{lstlisting}
-
-      \item
-          \begin{lstlisting}[
-              basicstyle=\footnotesize\ttfamily,
-              showstringspaces=false,
-          ]
-select '["string", (*@\alert{1}@*)]'::jsonb -> -1;
-         
-          \end{lstlisting}
-
-  \end{itemize}
-
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{By path}
-
-  \begin{itemize}
-      \item[\MVRightarrow] Point out an element inside a jsonb field
-      \item[\MVRightarrow] Technically, it's just an array of items
-      \item[\MVRightarrow] Each element is an index (include negative values) or a key
-      \item
-          \begin{lstlisting}[
-              basicstyle=\footnotesize\ttfamily,
-              showstringspaces=false,
-          ]
-'{first_key, second_key, 1, -1}'
-         
-          \end{lstlisting}
-
-  \end{itemize}
-
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{By path}
-
-  \begin{itemize}
-      \item
-          \begin{lstlisting}[
-              basicstyle=\footnotesize\ttfamily,
-              showstringspaces=false,
-          ]
-select '{
-    (*@\alert{"key"}@*): {(*@\alert{"nested\_key"}@*): "value"}
-}'::jsonb #> '{key, nested_key}'
-         
-          \end{lstlisting}
-
-      \item
-          \begin{lstlisting}[
-              basicstyle=\footnotesize\ttfamily,
-              showstringspaces=false,
-          ]
-
-select '{
-    (*@\alert{"key"}@*): [1, 2, (*@\alert{"string"}@*)]
-}'::jsonb #> '{key, -1}'
-         
-          \end{lstlisting}
-
-  \end{itemize}
-
-\end{frame}
-
-\section{Know your data}
-
-\begin{frame}[fragile]
-  \frametitle{Contains or contained?}
-
-  \begin{itemize}
-      \item
-          \begin{lstlisting}[
-              basicstyle=\footnotesize\ttfamily,
-              showstringspaces=false,
-          ]
-
-select
-    '{"a": 1, "b": 1}'::jsonb
-    @>
-    '{"a": 1}'::jsonb
-         
-          \end{lstlisting}
-
-      \item
-          \begin{lstlisting}[
-              basicstyle=\footnotesize\ttfamily,
-              showstringspaces=false,
-          ]
-
-select '[1]'::jsonb <@ '[1, 2]'::jsonb
-         
-          \end{lstlisting}
-
-
-  \end{itemize}
-
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{Equality}
-
-    \begin{lstlisting}[
-      basicstyle=\footnotesize\ttfamily,
-      showstringspaces=false,
-    ]
-
-select
-    '{"key":"value"}'::jsonb
-    <>
-    '{"key":"another_value"}'::jsonb;
-
-    \end{lstlisting}
-
-    \begin{lstlisting}[
-      basicstyle=\footnotesize\ttfamily,
-      showstringspaces=false,
-    ]
-
-select
-    '{"key":"value"}'::jsonb
-    =
-    '{"key":"another_value"}'::jsonb;
-
-    \end{lstlisting}
-
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{jsonb\_pretty}
-
-  \begin{lstlisting}[]
-select jsonb_pretty('{"a":"test","b":[1,2,3],"c":"test3","d":{"dd":"test4","dd2":{"ddd":"test5"}}}'::jsonb);
-
-        jsonb_pretty        
-----------------------------
- {                         +
-     "a": "test",          +
-     "b": [                +
-         1,                +
-         2,                +
-         3                 +
-     ],                    +
-     "c": "test3",         +
-     "d": {                +
-         "dd": "test4",    +
-         "dd2": {          +
-             "ddd": "test5"+
-         }                 +
-     }                     +
- }
-(1 row)
-  \end{lstlisting}
-
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{Aggregation}
+  \frametitle{Конвертирование}
 
   \vspace{-20pt}
-\begin{lstlisting}[]
-
-select * from test_agg;
- id |   data   
-----+----------
-  1 | value1
-  2 | value2
-(2 rows)
-         
-\end{lstlisting}
-
-\begin{lstlisting}[]
-
-select jsonb_pretty(jsonb_agg(test_agg)) from test_agg;
-         jsonb_pretty         
-------------------------------
- [                           +
-     {                       +
-         "id": 1,            +
-         "data": "value1"    +
-     },                      +
-     {                       +
-         "id": 2,            +
-         "data": "value2"    +
-     }                       +
- ]
-(1 row)
-
-\end{lstlisting}
-
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{Get keys}
-
 \begin{lstlisting}[
   basicstyle=\footnotesize\ttfamily,
   showstringspaces=false,
 ]
-
-select jsonb_object_keys(
-    '{"key": "value"}'::jsonb
-);
-
- jsonb_object_keys 
--------------------
- key
-(1 row)
-         
+SELECT * FROM json_data json,
+    json_table(
+        json.document, '$'
+        COLUMNS (
+            json_number NUMBER PATH '$.Number'
+        )
+    );
 \end{lstlisting}
 
 \end{frame}
 
-\section{Build \& transform}
+\section{DB2}
 
 \begin{frame}[fragile]
-  \frametitle{Build}
+    \frametitle{DB2}
 
+    DB2 11 for z/OS, тип данных JSON/BSON
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Получение данных}
+
+  \vspace{-20pt}
 \begin{lstlisting}[
   basicstyle=\footnotesize\ttfamily,
   showstringspaces=false,
 ]
-
-select jsonb_build_object('key', 'value');
- jsonb_build_object 
---------------------
- {"key": "value"}
-(1 row)
-
+SELECT JSON_VAL(DATA, 'PO.productName', 's:10') FROM  JSONPO;
 \end{lstlisting}
-
-\begin{lstlisting}[
-  basicstyle=\footnotesize\ttfamily,
-  showstringspaces=false,
-]
-
-select jsonb_object('{key, value}');
-   jsonb_object   
-------------------
- {"key": "value"}
-(1 row)
-
-\end{lstlisting}
-
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{Build}
-
-\begin{lstlisting}[
-  basicstyle=\footnotesize\ttfamily,
-  showstringspaces=false,
-]
-
-select jsonb_build_array('string', 1);                                                                                                                  
- jsonb_build_array 
--------------------
- ["string", 1]
-(1 row)
-
-\end{lstlisting}
-
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{Populate record}
-
-\begin{lstlisting}[
-  basicstyle=\footnotesize\ttfamily,
-  showstringspaces=false,
-]
-
-create type data_type as (key text, value text);
-
-select * from jsonb_populate_record(
-    null::data_type,
-    '{"key": "some_key", "value": "some_data"}'
-);
-
-   key    |   value   
-----------+-----------
- some_key | some_data
-(1 row)
-
-\end{lstlisting}
-
-\end{frame}
-
-
-\section{Manipulation with jsonb}
-
-\begin{frame}[fragile]
-  \frametitle{jsonb\_set: replace value}
-
-  \begin{lstlisting}[
-      basicstyle=\footnotesize\ttfamily,
-      showstringspaces=false,
-  ]
-select jsonb_set(
-    '{"n":null, "a":{"b": 2}}'::jsonb,
-    '{n}',
-    '[1,2,3]'
-);
-
-            jsonb_set                                 
--------------------------------------
-{"a": {"b": 2}, "n": [1, 2, 3]}
- (1 row)
- 
-  \end{lstlisting}
-
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{jsonb\_set: create mode by default}
-
-  \begin{lstlisting}[
-      basicstyle=\footnotesize\ttfamily,
-      showstringspaces=false,
-  ]
-select jsonb_set(
-    '{"a":{"b": 2}}'::jsonb,
-    '{c}',
-    '[1,2,3]'
-);
-
-            jsonb_set                                 
--------------------------------------
-{"a": {"b": 2}, (*@\alert{"c": [1, 2, 3]}@*)}
- (1 row)
- 
-  \end{lstlisting}
-
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{jsonb\_set: turn off the create mode}
-
-  \begin{lstlisting}[
-      basicstyle=\footnotesize\ttfamily,
-      showstringspaces=false,
-  ]
-select jsonb_set(
-    '{"a":{"b": 2}}'::jsonb,
-    '{c}',
-    '[1,2,3]',
-    (*@\alert{false}@*)
-);
-
-    jsonb_set    
------------------
- {"a": {"b": 2}}
-(1 row)
- 
-  \end{lstlisting}
-
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{jsonb\_delete: by key}
-
-  \begin{lstlisting}[
-      basicstyle=\footnotesize\ttfamily,
-      showstringspaces=false,
-  ]
-select '{"a":1 , "b":2, "c":3}'::jsonb - 'a';
-
-     ?column?     
-------------------
- {"b": 2, "c": 3}
-(1 row)
-
-  \end{lstlisting}
-\end{frame}
-\note{jsonb\_delete(jsonb, text) allow to delete only top level key from object}
-
-\begin{frame}[fragile]
-  \frametitle{jsonb\_delete: by index}
-
-  \begin{lstlisting}[
-      basicstyle=\footnotesize\ttfamily,
-      showstringspaces=false,
-  ]
-select '["a", "b", "c"]'::jsonb - 2;
-
-  ?column?  
-------------
- ["a", "b"]
-(1 row)
-
-  \end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{jsonb\_delete: by path}
-
-  \begin{lstlisting}[
-      basicstyle=\footnotesize\ttfamily,
-      showstringspaces=false,
-  ]
-
-select 
-    '{"a": {"b": [1, 2, (*@\alert{3}@*)]}}'::jsonb
-    #-
-    '{a, b, -1}';
-       ?column?       
-----------------------
- {"a": {"b": [1, 2]}}
-(1 row)
-
-  \end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{jsonb\_concat ("shallow concatenation")}
-
-  \begin{lstlisting}[
-      basicstyle=\footnotesize\ttfamily,
-      showstringspaces=false,
-  ]
-select 
-    '{"a": 1, "b": [2, 3]}'::jsonb
-    ||
-    '{"a": 4, "c": [5, 6]}'::jsonb
-
-              ?column?              
-------------------------------------
- {"a": 4, "b": [2, 3], "c": [5, 6]}
-(1 row)
-
-  \end{lstlisting}
-\end{frame}
-\note{
-    This operator is questionable, and I'm not sure how it will be in 9.5,
-    but I think it will be present in this form in jsonbx extension
-}
-
-\begin{frame}[fragile]
-\frametitle{jsonb\_concat ("shallow concatenation")}
-
-  \begin{lstlisting}[
-      basicstyle=\footnotesize\ttfamily,
-      showstringspaces=false,
-  ]
-select 
-    '{"key": {"nested_key": "value"}}'::jsonb
-    ||
-    '{"key": {"another_key": "another_value"}}'::jsonb
-
-                 ?column?                  
--------------------------------------------
- {"key": {"another_key": "another_value"}}
-(1 row)
-
-  \end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{jsonb\_concat ("shallow concatenation")}
-    Array will consume an object
-  \begin{lstlisting}[
-      basicstyle=\footnotesize\ttfamily,
-      showstringspaces=false,
-  ]
-select 
-    '{"key": "value"}'::jsonb
-    ||
-    '[1, 2, 3]'::jsonb 
-
-          ?column?           
------------------------------
- [{"key": "value"}, 1, 2, 3]
-(1 row)
-
-  \end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{jsonb\_concat ("shallow concatenation")}
-    Scalars are acting like arrays
-  \begin{lstlisting}[
-      basicstyle=\footnotesize\ttfamily,
-      showstringspaces=false,
-  ]
-select '"b"'::jsonb || '"a"'::jsonb
-
-  ?column?  
-------------
- ["b", "a"]
-
-  \end{lstlisting}
-\end{frame}
-
-\section{Performance}
-
-\section{Comparison}
-
-\section{Plans for the future}
-
-\begin{frame}[fragile]
-  \frametitle{Array-style subscripting}
-
-  \begin{itemize}
-      \item
-      \begin{lstlisting}[
-          basicstyle=\footnotesize\ttfamily,
-          showstringspaces=false,
-      ]
-update some_table
-    set jsonb_data['a']['a1']['a2'] = 42;
-
-      \end{lstlisting}
-
-      \item
-      \begin{lstlisting}[
-          basicstyle=\footnotesize\ttfamily,
-          showstringspaces=false,
-      ]
-select jsonb_data['a']['a1']['a2']
-    from some_table;
-
-      \end{lstlisting}
-  \end{itemize}
-
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{Jsonb pointer \& patch}
-
-  \begin{itemize}
-      \item[\MVRightarrow] Json pointer [\href{http://tools.ietf.org/html/rfc6901}{rfc6901}]
-      \item[\MVRightarrow] Json patch [\href{http://tools.ietf.org/html/rfc6902}{rfc6901}]
-  \end{itemize}
-
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{New functions and improvements}
-
-  There are still missing functionality and improvements, that can be useful for JSONB.
-  Some of them will be implented as parts of jsonbx extension (for 9.5), and will be proposed for 9.6
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{jsonb\_delete}
-
-  \begin{lstlisting}[
-      basicstyle=\footnotesize\ttfamily,
-      showstringspaces=false,
-  ]
-select jsonb_delete_jsonb(
-    '{"a": 1, "b": {"c": 2}, (*@\alert{"f": [4, 5]}@*)}'::jsonb,
-    '{"a": 4, (*@\alert{"f": [4, 5]}@*), "c": 2}'::jsonb
-);
-
-      jsonb_delete
-----------------------------
-  {"a": 1, "b": {"c": 2}}
-(1 row)
-
-  \end{lstlisting}
-
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{jsonb\_intersection}
-
-  \begin{lstlisting}[
-      basicstyle=\footnotesize\ttfamily,
-      showstringspaces=false,
-  ]
-select jsonb_intersection(
-    '{(*@\alert{"a":2}@*), "d": {"f": 3}, (*@\alert{"g":[4, 5]}@*)}'::jsonb,
-    '{(*@\alert{"a":2}@*), "f": 3, (*@\alert{"g":[4, 5]}@*)}'::jsonb
-);
-
-   jsonb_intersection
---------------------------
-  {"a": 2, "g": [4, 5]}
-(1 row)
-
-  \end{lstlisting}
-
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{jsonb\_deep\_merge}
-
-  \begin{lstlisting}[
-      basicstyle=\footnotesize\ttfamily,
-      showstringspaces=false,
-  ]
-select jsonb_deep_merge(
-    '{"a": (*@\alert{\{"b":1\}}@*)}'::jsonb,
-    '{"a": (*@\alert{\{"c":2\}}@*)}'::jsonb
-);
-
-     jsonb_deep_merge            
--------------------------------
-   {"a": (*@\alert{\{"b":1, "c":2\}}@*)}
-(1 row)
-
-  \end{lstlisting}
 
 \end{frame}
 \note{
-    Form of this function is questionable,
-    but I think it will be present in this form in jsonbx extension
+    's:10' - тип желаемых данных (в данном случае первые n байтов VARCHAR)
 }
 
-\section{Finish}
+\begin{frame}[fragile]
+  \frametitle{Конвертирование}
+
+  \vspace{-20pt}
+\begin{lstlisting}[
+  basicstyle=\footnotesize\ttfamily,
+  showstringspaces=false,
+]
+SYSTOOLS.BSON2JSON(DATA);
+SYSTOOLS.JSON2BSON(DATA);
+\end{lstlisting}
+
+\end{frame}
+
+\section{MSSql}
+
+\begin{frame}[fragile]
+    \frametitle{MSSql}
+
+    Sql Server 2016, тип данных JSON (внутри NVARCHAR)
+\end{frame}
+\note{
+    не бинарный тип, т.к. беспокоятся о совместимости
+}
+ 
+\begin{frame}[fragile]
+  \frametitle{Получение данных}
+
+\begin{lstlisting}[
+  basicstyle=\footnotesize\ttfamily,
+  showstringspaces=false,
+]
+SELECT JSON_VALUE(jsonInfo, '$.info.address[0].town');
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Конвертирование}
+
+  \vspace{-20pt}
+\begin{lstlisting}[
+  basicstyle=\footnotesize\ttfamily,
+  showstringspaces=false,
+]
+SELECT * FROM OPENJSON(json, N'$');
+
+SELECT field1, field2, field3
+    FROM table1
+    FOR JSON PATH, ROOT("RootKey");
+\end{lstlisting}
+
+\end{frame}
+
+\section{Производительность}
+
+\section{Заключение}
 
 \begin{frame}{Contacts}
     \begin{itemize}[label={}]
