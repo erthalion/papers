@@ -1,0 +1,85 @@
+introduction
+
+what is jsonb type?
+
+'"string"'::jsonb 
+(
+ * When a naked
+ * scalar value needs to be stored as a Jsonb value, what we actually store is
+ * an array with one element, with the flags in the array's header field set
+ * to JB_FSCALAR | JB_FARRAY.
+)
+
+'1'::jsonb -- convert to corresponding type if needed
+'true'::jsonb
+
+'[1, 2]'::jsonb
+'["string", 1]'::jsonb -- arrays of different types
+
+'{"key": "value"}'::jsonb
+'{"key": {"nested_key": "value"}}'::jsonb -- nested object
+
+
+what can we do with it?
+
+get an element
+
+jsonb_object_data -> 'some_field'
+jsonb_object_data ->> 'some_field' -- only text form
+
+jsonb_array_data -> 0
+
+'{"key": {"nested_key": "value"}}'::jsonb #> '{key, nested_key}' -- get by path
+'{"key": [1, 2, 3]}'::jsonb #> '{key, 0}' -- get by index
+'{"key": [1, 2, 3]}'::jsonb #> '{key, -1}' -- get by index, python style
+
+verify contains or not
+
+'{"a": 1, "b": 1}' @> '{"a": 1}'
+t
+
+'[1]' <@ '[1, 2]'
+
+verify if something exists inside
+
+'{"key": "value"}' ? 'key'
+'{"key": "value"}' ?| '{key, other_key}' -- exists any
+'{"key": "value"}' ?& '{key, other_key}' -- exists all
+
+check type of jsonb value
+
+jsonb_typeof('1'::jsonb)
+
+pretty output
+
+jsonb_pretty('{"a": 1}')
+
+update jsonb
+
+jsonb_set('{"a": 1}'::jsonb, '{a}', 2)
+jsonb_set('{"a": [1, 2, 3]}'::jsonb, '{a, 0}', 4) -- set by index
+jsonb_set('{"a": [1, 2, 3]}'::jsonb, '{a, -1}', 4) -- set by index, python style
+
+jsonb_set('{"a": 1}', '{b}', '2')
+jsonb_set('{"a": 1}', '{b}', '2', false) -- not allow to create if not exists
+
+few words about forgiveness (if prev before last element in path isn't exists, create if not exists by default)
+jsonb_set('{"a": 1}', '{b, c, d}', '2')
+
+delete element
+
+'{"key": "value"}'::jsonb - 'key'
+'[1, 2, 3]'::jsonb - 0
+'[1, 2, 3]'::jsonb - -1 -- python style
+'{"key": {"nested_key": "value"}}' #- '{key, nested_key}'
+
+concatenation ('shallow merge')
+
+'{"key": "value"}'::jsonb || '{"another_key": "value"}'::jsonb
+'{"key": "value"}'::jsonb || '{"key": "value"}'::jsonb
+'{"key": {"nested_key": "value"}}'::jsonb || '{"key": {"another_key": "another_value"}}'::jsonb -- override (why it's a shallow merge)
+'{"key": "value"}'::jsonb || '[1, 2, 3]'::jsonb -- array will consume object
+'"b"'::jsonb || '"a"'::jsonb -- act like two arrays
+  ?column?  
+------------
+ ["b", "a"]

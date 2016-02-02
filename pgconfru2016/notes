@@ -1,0 +1,15 @@
+add aggregation to convertion section
+jsquery is like mysql path features, but more advanced (e.g. type checking, length of array)
+mysql search in json values (not in property names)
+
+oracle - full text search
+
+indexing - for all non native data types it's possible, but it will be index on function or something, not a direct indexing
+
+json in DB2 is really a BSON and it's basically mongodb support inside DB2
+
+mssql has many convertion functions mostly because of concern about compatibility
+
+only oracle and mysql have a $, * directly in path (pg has throught jsquery)
+
+mssql propose the same approach to index json keys as mysql
