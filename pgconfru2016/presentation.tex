@@ -1,4 +1,5 @@
 \documentclass[14pt, compress, aspectratio=169]{beamer}
+%\documentclass[14pt, compress]{beamer}
 
 % can be compiled by xelatex -shell-escape presentation.tex
 
@@ -143,7 +144,7 @@
 
     \begin{adjustbox}{max totalsize={1.1\textwidth}{2.0\textheight},center}
         \begin{tabular}{c | c | c | c | c | c | c | c | c | c | c}
-            DB & Native & Select & Modify & Delete & Attributes & Indexing & Search & Convertion & Syntastic \\
+            DB & Native & Select & Modify & Delete & Attributes & Indexing & Search & Transform & Syntax \\
             \hline
             PG & \check & \check & \check & \check & \check & \check & \question & \check & \question \\
             Mysql & \check & \check & \check & \check & \check & \question & \question & \fail & \question \\
@@ -176,7 +177,7 @@
               basicstyle=\footnotesize\ttfamily,
               showstringspaces=false,
           ]
-select '"string"'::jsonb;
+select '"Ivan Pomidorov"'::jsonb;
          
           \end{lstlisting}
 
@@ -212,7 +213,7 @@ select '[1, 2, 3]'::jsonb;
               basicstyle=\footnotesize\ttfamily,
               showstringspaces=false,
           ]
-select '["string", 1]'::jsonb;
+select '[1, 2, "Epison one"]'::jsonb;
          
           \end{lstlisting}
 
@@ -352,9 +353,9 @@ select jsonb_typeof('1'::jsonb);
   \frametitle{Индексирование}
 
   \begin{itemize}[label={\MVRightarrow}]
-    \item GIN индекс для @> <@ ?
+    \item GIN индекс для "@>" "?" "?\&" "?|"
     \item jsonb\_path\_ops
-    \item jsquery: jsonb\_path\_value, jsonb\_path\_key
+    \item jsquery: jsonb\_path\_value\_ops, jsonb\_value\_path\_ops
   \end{itemize}
 
 \end{frame}
@@ -791,13 +792,133 @@ SELECT field1, field2, field3
 
 \end{frame}
 
+\begin{frame}[fragile]
+    \frametitle{Обзор по категориям}
+
+    \begin{adjustbox}{max totalsize={1.1\textwidth}{2.0\textheight},center}
+        \begin{tabular}{c | c | c | c | c | c | c | c | c | c | c}
+            DB & Native & Select & Modify & Delete & Attributes & Indexing & Search & Transform & Syntax \\
+            \hline
+            PG & \check & \check & \check & \check & \check & \check & \question & \check & \question \\
+            Mysql & \check & \check & \check & \check & \check & \question & \question & \fail & \fail \\
+            Oracle & \fail & \check & \fail & \fail & \fail & \fail & \question & \question & \question \\
+            DB2 & \check & \check & \fail & \fail & \fail & \fail & \fail & \question & \fail \\
+            MSSql & \fail & \check & \fail & \fail & \fail & \fail & \question & \question & \fail \\
+        \end{tabular}
+    \end{adjustbox}
+\end{frame}
+
 \section{Производительность}
+
+\section{pg\_nosql\_benchmark}
+
+\begin{frame}[fragile]
+    \frametitle{pg\_nosql\_benchmark}
+    \vspace{-35pt}
+    \begin{figure}
+        \includegraphics[width=0.6\textwidth,center]{i_made.jpg}
+    \end{figure}
+\end{frame}
+\note{
+    Отметить особенности, плюсы, минусы, не забыть про специфику данных
+}
+
+\begin{frame}[fragile]
+    \frametitle{pg\_nosql\_benchmark}
+    \begin{itemize}[label={\MVRightarrow}]
+        \item Amazon m4.xlarge, ubuntu 14.04
+        \item PostgreSQL 9.5b1
+        \item MySql 5.7.7
+        \item MongoDB 3.2.0
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Select}
+    \vspace{-35pt}
+    \begin{figure}
+        \includegraphics[width=0.7\textwidth,center]{select.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Insert}
+    \vspace{-35pt}
+    \begin{figure}
+        \includegraphics[width=0.7\textwidth,center]{insert.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Insert configured}
+    \vspace{-35pt}
+    \begin{figure}
+        \includegraphics[width=0.7\textwidth,center]{insert_configured.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Update}
+    \vspace{-35pt}
+    \begin{figure}
+        \includegraphics[width=0.7\textwidth,center]{update.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Update configured}
+    \vspace{-35pt}
+    \begin{figure}
+        \includegraphics[width=0.7\textwidth,center]{update_configured.png}
+    \end{figure}
+\end{frame}
+
+\section{ycsb}
+
+\begin{frame}[fragile]
+    \frametitle{YCSB}
+    \begin{itemize}[label={\MVRightarrow}]
+        \item YCSB 0.6.0
+        \item Amazon m4.xlarge, ubuntu 14.04
+        \item PostgreSQL 9.5b
+        \item MySql 5.7.7
+        \item MongoDB 3.2.1
+    \end{itemize}
+
+\end{frame}
+\note{
+    Специфика данных - записи меньше по размеру и без вложенности
+}
+
+\begin{frame}[fragile]
+    \frametitle{Workloadc: Пропускная способность}
+    \vspace{-35pt}
+    \begin{figure}
+        \includegraphics[width=0.7\textwidth,center]{throughput.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Workloadc: Среднее время задержки}
+    \vspace{-35pt}
+    \begin{figure}
+        \includegraphics[width=0.7\textwidth,center]{average_latency.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Load workloada: Пропускная способность}
+    \vspace{-35pt}
+    \begin{figure}
+        \includegraphics[width=0.7\textwidth,center]{load_throughput.png}
+    \end{figure}
+\end{frame}
 
 \section{Заключение}
 
 \begin{frame}{Contacts}
     \begin{itemize}[label={}]
-        \item \href{https://github.com/erthalion/jsonbx}{\github\ github.com/erthalion/jsonbx}
         \item \href{http://twitter.com/erthalion}{\twitter\ @erthalion}
         \item \email\ 9erthalion6 at gmail dot com
     \end{itemize}
