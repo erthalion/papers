@@ -376,7 +376,7 @@ u^*}{\triangle t} \label{eq:splitting:poisson}\end{equation}
 \(k=1 \cdot 10^{3}\). Для створок клапана заданы коэффициенты
 сопротивления растяжению \(k_s = 5 \cdot 10^{3}\) и скручиванию
 \(k_b = 2 \cdot 10^{3}\). Перепад давления \(p_{in} - p_{out}\)
-периодически меняется от 0 до 6. Область \(\tilde{\Omega}\) имеет
+периодически меняется от 0 до 6 по параболическому закону. Область \(\tilde{\Omega}\) имеет
 параметры \(10 \times 0.5 \times 0.5\), шаги по пространственной сетке
 \(\tilde{\Omega_h}\) \(h_x = h_y = h_z = 0.01\), шаг по времени
 \(\triangle t = 0.01\).
@@ -402,6 +402,37 @@ c
 \caption{Динамика створок клапана и треки некоторых частиц. Направление тока
     указано стрелкой. Показан вид сбоку (I) и вид спереди (II) a) $t=0$, b)
     $t=0.7$, c) $t=1.5$}
+\end{figure}
+
+Как можно увидеть из рис. \ref{fig:valve_motion}, створки клапана раскрываются
+при изменении разности давлений, а затем возвращаются в исходное положение при
+выравнивании давлений.
+
+На рис. \ref{fig:concentration_dynamics} показано изменение концентрации
+форменных элементов при прохождении потока жидкости через клапан. Изначально
+равномерное распределение форменных элементов со временем нарушается движением
+створок клапана.
+
+\begin{figure}[t]
+\label{fig:concentration_dynamics}
+\centering
+\includegraphics[width=10.5cm]{concentration_1_axes.png}
+
+a
+
+\includegraphics[width=10.5cm]{concentration_2_axes.png}
+
+b
+
+\includegraphics[width=10.5cm]{concentration_3_axes.png}
+
+c
+
+\caption{Движение створок клапана в сосуде с переменной вязкостью и плотностью.
+    На входе задается постоянный приток примеси $c_s|_{\Gamma_2} = 0.45$,
+    концентрация примеси в начальный момент времени $c_0=0.45$, $\rho_1=1,
+    \rho_2=1.2, \nu_1=1 \cdot 10^{-2}, \nu_2=1.2 \cdot 10^{-2}$; a) $t=0$, b)
+    $t=3$, c) $t=6$}
 \end{figure}
 
 На рис. \ref{fig:ideal_valve_stress} показана динамика движения одного
@@ -492,7 +523,7 @@ c
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=8.5cm]{valve_points.png}
+\includegraphics[width=8.5cm]{valve_points_eng.png}
 \caption{\label{fig:points_scheme}Схема расположения точек на фиброзном
 кольце}
 \end{figure}
@@ -506,10 +537,25 @@ c
 рис. \ref{fig:points_scheme}).
 
 \begin{figure}[t]
+\label{fig:surface_tension}
 \centering
-\includegraphics[width=8.5cm]{forces.png}
-\caption{\label{fig:fibrouse_forces}Зависимость напряжения от времени
-для трех точек на фиброзном кольце}
+\includegraphics[width=8.5cm]{forces_active_point_eng_bold.png}
+
+a
+
+\includegraphics[width=8.5cm]{forces_boundary_point_eng_adaptive_bold.png}
+
+b
+
+\includegraphics[width=8.5cm]{forces_passive_point_eng_adaptive_bold.png}
+
+c
+
+\caption{Зависимость напряжения от времени для трех точек на фиброзном кольце
+    для случаев без примеси (непрерывная линия) и с примесью (штриховая линия).
+    На первом графике (a) изображена зависимость для "Активной точки", на
+    втором (b) - для "Точки на границе", на третьем (c) - для "Пассивной
+    точки"}
 \end{figure}
 
 Как видно из рис. \ref{fig:fibrouse_forces}, качественно величина
@@ -521,13 +567,6 @@ c
 конфигурации при завершении цикла работы клапан эффективно является
 закрытым, т.к. в области его расположения резко изменяется давление и
 скорость.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=8.5cm]{pressure_limit.png}
-\caption{\label{fig:pressure_limit}Резкий перепад давления при закрытии
-клапана, точками обозначена поверхность фиброзного кольца}
-\end{figure}
 
 \section{Заключение}
 
