@@ -1,3 +1,7 @@
 #!/bin/bash
 
-convert -quality 100 heart_scheme.png eps3:heart_scheme.eps
+for file in *.png;
+do
+    echo $file
+    convert -quality 100 $file eps2:`echo $file | sed -e 's/\.png/\.eps/g'`
+done
