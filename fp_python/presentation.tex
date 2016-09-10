@@ -1,0 +1,216 @@
+\documentclass[14pt, compress, aspectratio=169]{beamer}
+
+% can be compiled by xelatex -shell-escape presentation.tex
+
+\usetheme[usetitleprogressbar]{m}
+
+\usepackage[utf8]{inputenc}
+\usepackage[russian, english]{babel}
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+\usepackage{listings}
+\usepackage{marvosym}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage[document]{ragged2e}
+\usepackage[export]{adjustbox}
+\usepackage{fontawesome}
+\usepackage{enumitem}
+\usepackage{minted}
+\usemintedstyle{tango}
+%\usemintedstyle{monokai}
+
+\usetikzlibrary{shapes,arrows,positioning}
+\graphicspath{{images/}}
+\newfontfamily{\FA}{FontAwesome}
+
+\definecolor{check}{rgb}{0.1,2,0.3}
+
+\def\twitter{{\FA \faTwitter}}
+\def\github{{\FA \faGithubSign}}
+\def\email{{\FA \faEnvelope}}
+\def\check{\textcolor{check}{\FA \faCheck}}
+\def\fail{\textcolor{fail}{\FA \faRemove}}
+\def\question{\textcolor{question}{\FA \faSearch}}
+
+\renewcommand{\ttdefault}{pcr}
+\newfontfamily{\ttfamily}{Fira Code}
+
+\title{FP в Python}
+\subtitle{это проще, чем вы думали}
+\date{\today}
+%\author{Дмитрий Долгов}
+\institute{}
+%\titlegraphic{\vspace{120pt}\hfill\includegraphics[height=1.5cm]{logo.png}}
+
+\begin{document}
+
+\maketitle
+
+\section{}
+
+\begin{frame}
+    \frametitle{Причины?}
+    \vspace{-35pt}
+    \begin{figure}
+        \includegraphics[width=0.8\textwidth,center]{first_option.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Причины?}
+    \vspace{-35pt}
+    \begin{figure}
+        \includegraphics[width=0.8\textwidth,center]{second_option.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Причины?}
+    \begin{itemize}[label={\MVRightarrow}]
+        \item FP - это парадигма, не привязанная к языку
+        \item Python - мультипарадигменный язык, позволяющий писать функционально
+        \item Это позволяет увидеть преимущества FP в вашем коде уже завтра
+    \end{itemize}
+\end{frame}
+
+
+\section{Краткое введение в FP}
+
+\begin{frame}[fragile]
+    \frametitle{Термины и определения}
+    \begin{itemize}[label={\MVRightarrow}]
+        \item Неизменяемость данных (immutability)
+        \item Чистые функции и side effects
+        \item Функции высшего порядка
+        \item Монады (?)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Неизменяемость}
+    Функциональные программы обычно оперируют \\
+    неизменяемыми данными. Вместо изменения оригинального\\
+    значения, изменяется его копия. Та часть данных,
+    которая сохранилась и в оригинальном объекте и в его копии,
+    переиспользуется, что предотвращает излишний расход памяти.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Чистые функции и side effects}
+    A function or expression is said to have a side effect if it modifies some
+    state or has an interaction with the outside world. For example, a
+    particular function might modify a global variable, modify one of its
+    arguments, raise an exception, perform IO operation, or call other
+    side-effecting functions.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Разделение данных и логики}
+    Abstract Data Type (ADT)
+\end{frame}
+
+\begin{frame}
+    \frametitle{Function composition}
+    Function composition is the act of pipelining the result of one function,
+    to the input of another, creating an entirely new function.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Монады}
+\end{frame}
+
+\section{FP parts in Python}
+
+\begin{frame}
+    \frametitle{What we can use in Python}
+    \vspace{-25pt}
+    \begin{itemize}[label={\MVRightarrow}]
+        \item Immutable data structures:
+            \begin{itemize}
+                \item string
+                \item tuple/namedtuple
+                \item fronzenset
+            \end{itemize}
+        \item Higher-order functions
+        \item List comprehension
+        \item Generators (another way to rewrite recursion)
+        \item itertools
+        \item functools
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{What we can't}
+    \begin{itemize}[label={\MVRightarrow}]
+        \item Tail recursion
+        \item Pure functions
+        \item Pattern matching \check
+        \item Automatic currying \check
+        \item Monads \check
+        \item ADT \check
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Стратегии}
+    \begin{itemize}[label={\MVRightarrow}]
+        \item Использование <<чистого>> Python
+        \item Собственные надстройки
+        \item Сторонние библиотеки
+    \end{itemize}
+\end{frame}
+
+\section{Examples}
+
+\setbeamercolor{background canvas}{bg=white}
+\begin{frame}[fragile]
+    \setbeamertemplate{section page}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-25pt}
+    \inputminted[
+        fontsize=\scriptsize\ttfamily,
+        %bgcolor=black,
+    ]{python}{examples/example1.py}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+    \setbeamertemplate{section page}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-25pt}
+    \inputminted[
+        fontsize=\scriptsize\ttfamily,
+        %bgcolor=black,
+    ]{python}{examples/example1_fp.py}
+    \end{center}
+\end{frame}
+\setbeamercolor{background canvas}{bg=palette primary.bg}
+
+\begin{frame}
+    \frametitle{Pattern matching}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Maybe}
+\end{frame}
+
+\section{Библиотеки}
+
+\begin{frame}
+    \frametitle{Список FP библиотек для Python}
+    \begin{itemize}[label={\MVRightarrow}]
+        \item Tail recursion
+        \item Pure functions
+        \item Pattern matching \check
+        \item Automatic currying \check
+        \item Monads \check
+        \item ADT \check
+    \end{itemize}
+\end{frame}
+
+\plain{Questions?}
+
+\end{document}
