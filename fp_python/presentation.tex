@@ -36,6 +36,9 @@
 \renewcommand{\ttdefault}{pcr}
 \newfontfamily{\ttfamily}{Fira Code}
 
+\definecolor{links}{HTML}{0099FF}
+\hypersetup{colorlinks, linkcolor=, urlcolor=links}
+
 \title{FP в Python}
 \subtitle{это проще, чем вы думали}
 \date{\today}
@@ -172,6 +175,18 @@
     \inputminted[
         fontsize=\scriptsize\ttfamily,
         %bgcolor=black,
+    ]{python}{examples/immutable.py}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+    \setbeamertemplate{section page}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-25pt}
+    \inputminted[
+        fontsize=\scriptsize\ttfamily,
+        %bgcolor=black,
     ]{python}{examples/list_comprehension.py}
     \inputminted[
         fontsize=\scriptsize\ttfamily,
@@ -265,28 +280,84 @@
     \end{center}
 \end{frame}
 
+\begin{frame}[fragile]
+    \setbeamertemplate{section page}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-25pt}
+    \inputminted[
+        fontsize=\scriptsize\ttfamily,
+        %bgcolor=black,
+    ]{python}{examples/curry_example.py}
+    \end{center}
+\end{frame}
+
 \setbeamercolor{background canvas}{bg=palette primary.bg}
-
-\begin{frame}
-    \frametitle{Pattern matching}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Maybe}
-\end{frame}
 
 \section{Библиотеки}
 
 \begin{frame}
     \frametitle{Список FP библиотек для Python}
+    \vspace{-25pt}
     \begin{itemize}[label={\MVRightarrow}]
-        \item Tail recursion
-        \item Pure functions
-        \item Pattern matching \check
-        \item Automatic currying \check
-        \item Monads \check
-        \item ADT \check
+        \item fn.py \url{github.com/kachayev/fn.py}
+        \item toolz \url{github.com/pytoolz/toolz}
+        \item PyMonad \url{github.com/fnl/pymonad}
+        \item PyFunctional \url{github.com/EntilZha/PyFunctional}
+        \item Coconat \url{github.com/evhub/coconut}
+        \item pyrsistent \url{github.com/tobgu/pyrsistent}
+        \item effect \url{github.com/python-effect/effect}
+        \item adt \url{github.com/llllllllll/adt}
     \end{itemize}
+\end{frame}
+
+\setbeamercolor{background canvas}{bg=white}
+\begin{frame}[fragile]
+    \setbeamertemplate{section page}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-25pt}
+    \inputminted[
+        fontsize=\scriptsize\ttfamily,
+        %bgcolor=black,
+    ]{python}{examples/fn.py}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+    \setbeamertemplate{section page}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-25pt}
+    \inputminted[
+        fontsize=\scriptsize\ttfamily,
+        %bgcolor=black,
+    ]{python}{examples/pymonad.py}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+    \setbeamertemplate{section page}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-25pt}
+    \inputminted[
+        fontsize=\scriptsize\ttfamily,
+        %bgcolor=black,
+    ]{python}{examples/pyfunctional.py}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+    \setbeamertemplate{section page}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-25pt}
+    \inputminted[
+        fontsize=\scriptsize\ttfamily,
+        %bgcolor=black,
+    ]{python}{examples/pyrsistent.py}
+    \end{center}
 \end{frame}
 
 \plain{Questions?}
