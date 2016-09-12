@@ -1,3 +1,5 @@
+from itertools import cycle, ifilter
+
 colors = cycle(["red", "green", "blue", "black"])
 data = (
     {"id": i, "color": colors.next()}
