@@ -35,9 +35,17 @@
 
 \renewcommand{\ttdefault}{pcr}
 \newfontfamily{\ttfamily}{Fira Code}
+\makeatletter
+\newcommand\HUGE{\@setfontsize\Huge{38}{47}}
+\makeatother
 
 \definecolor{links}{HTML}{0099FF}
 \hypersetup{colorlinks, linkcolor=, urlcolor=links}
+
+\setbeamerfont{section title}{family=\Book, size=\Huge, shape=\normalfont}
+\setbeamerfont{frametitle}{family=\Book, size=\large, shape=\normalfont}
+\setbeamerfont{title}{family=\Book, size=\HUGE, shape=\normalfont}
+\setbeamerfont{subtitle}{size=\Huge}
 
 \title{FP в Python}
 \subtitle{это проще, чем вы думали}
@@ -47,10 +55,19 @@
 %\titlegraphic{\vspace{120pt}\hfill\includegraphics[height=1.5cm]{logo.png}}
 
 \begin{document}
-
+\fontsize{19pt}{20}\selectfont
 \maketitle
 
 \section{}
+
+\begin{frame}{Contacts}
+    \begin{itemize}[label={}]
+        \item \includegraphics[scale=0.04]{mindojo_logo.png} Дмитрий Долгов, Mindojo
+        \item {\github\ github.com/erthalion}
+        \item {\twitter\ @erthalion}
+        \item \email\ 9erthalion6 at gmail dot com
+    \end{itemize}
+\end{frame}
 
 \begin{frame}
     \frametitle{Причины?}
@@ -183,7 +200,7 @@
     \begin{center}
     %\vspace{-25pt}
     \inputminted[
-        fontsize=\scriptsize\ttfamily,
+        fontsize=\large,
         %bgcolor=black,
     ]{python}{examples/immutable.py}
     \end{center}
@@ -195,11 +212,11 @@
     \begin{center}
     %\vspace{-25pt}
     \inputminted[
-        fontsize=\scriptsize\ttfamily,
+        fontsize=\large,
         %bgcolor=black,
     ]{python}{examples/list_comprehension.py}
     \inputminted[
-        fontsize=\scriptsize\ttfamily,
+        fontsize=\large,
         %bgcolor=black,
     ]{haskell}{examples/list_comprehension.hs}
     \end{center}
@@ -211,7 +228,7 @@
     \begin{center}
     %\vspace{-25pt}
     \inputminted[
-        fontsize=\scriptsize\ttfamily,
+        fontsize=\large,
         %bgcolor=black,
     ]{python}{examples/list_comprehension_chain.py}
     \end{center}
@@ -223,7 +240,7 @@
     \begin{center}
     %\vspace{-25pt}
     \inputminted[
-        fontsize=\scriptsize\ttfamily,
+        fontsize=\large,
         %bgcolor=black,
     ]{python}{examples/generators.py}
     \end{center}
@@ -235,7 +252,7 @@
     \begin{center}
     %\vspace{-25pt}
     \inputminted[
-        fontsize=\scriptsize\ttfamily,
+        fontsize=\large,
         %bgcolor=black,
     ]{python}{examples/maybe_example.py}
     \end{center}
