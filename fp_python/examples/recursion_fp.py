@@ -1,12 +1,12 @@
-def all_childrens(group_ids):
-    for g in group_ids:
-        yield g.id
+def all_childrens(node_ids):
+    for n in node_ids:
+        yield n.id
 
-        childrens = Model.objects(
-            parent_group__in=g.id
+        childrens = Node.objects(
+            parent__in=n.id
         ).values("id")
 
         for c in all_childrens(childrens):
             yield c
 
-list(all_childrens((root_group,)))
+list(all_childrens((root_node,)))

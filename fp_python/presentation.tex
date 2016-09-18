@@ -1,4 +1,4 @@
-\documentclass[14pt, compress, aspectratio=169]{beamer}
+\documentclass[18pt, compress, aspectratio=169]{beamer}
 
 % can be compiled by xelatex -shell-escape presentation.tex
 
@@ -25,6 +25,8 @@
 \newfontfamily{\FA}{FontAwesome}
 
 \definecolor{check}{rgb}{0.1,2,0.3}
+\definecolor{fail}{rgb}{2,0.1,0.1}
+\definecolor{question}{rgb}{0.9,0.9,0.0}
 
 \def\twitter{{\FA \faTwitter}}
 \def\github{{\FA \faGithubSign}}
@@ -50,9 +52,7 @@
 \title{FP в Python}
 \subtitle{это проще, чем вы думали}
 \date{\today}
-%\author{Дмитрий Долгов}
 \institute{}
-%\titlegraphic{\vspace{120pt}\hfill\includegraphics[height=1.5cm]{logo.png}}
 
 \begin{document}
 \fontsize{19pt}{20}\selectfont
@@ -60,7 +60,7 @@
 
 \section{}
 
-\begin{frame}{Contacts}
+\begin{frame}{Контакты}
     \begin{itemize}[label={}]
         \item \includegraphics[scale=0.04]{mindojo_logo.png} Дмитрий Долгов, Mindojo
         \item {\github\ github.com/erthalion}
@@ -71,7 +71,7 @@
 
 \begin{frame}
     \frametitle{Причины?}
-    \vspace{-35pt}
+    \vspace{-25pt}
     \begin{figure}
         \includegraphics[width=0.8\textwidth,center]{first_option.png}
     \end{figure}
@@ -79,7 +79,7 @@
 
 \begin{frame}
     \frametitle{Причины?}
-    \vspace{-35pt}
+    \vspace{-25pt}
     \begin{figure}
         \includegraphics[width=0.8\textwidth,center]{second_option.png}
     \end{figure}
@@ -89,7 +89,7 @@
     \frametitle{Причины?}
     \begin{itemize}[label={\MVRightarrow}]
         \item FP - это парадигма, не привязанная к языку
-        \item Python - мультипарадигменный язык, позволяющий писать функционально
+        \item Python - мультипарадигменный язык,\\ позволяющий писать функционально
         \item Это позволяет увидеть преимущества FP в вашем коде уже завтра
     \end{itemize}
 \end{frame}
@@ -114,72 +114,98 @@
         \item Чистые функции и side effects
         \item Функции высшего порядка
         \item Монады (?)
+        \item Abstract Data Type (ADT)
     \end{itemize}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Неизменяемость}
-    Функциональные программы обычно оперируют \\
-    неизменяемыми данными. Вместо изменения оригинального\\
-    значения, изменяется его копия. Та часть данных,
-    которая сохранилась и в оригинальном объекте и в его копии,
-    переиспользуется, что предотвращает излишний расход памяти.
+    \frametitle{Неизменяемость, персистентность}
+    \vspace{-20pt}
+    \begin{figure}
+        \includegraphics[width=1.0\textwidth,center]{Vault_Boy_text.png}
+    \end{figure}
 \end{frame}
 
 \begin{frame}
     \frametitle{Чистые функции и side effects}
-    A function or expression is said to have a side effect if it modifies some
-    state or has an interaction with the outside world. For example, a
-    particular function might modify a global variable, modify one of its
-    arguments, raise an exception, perform IO operation, or call other
-    side-effecting functions.
+    \vspace{-25pt}
+    \begin{figure}
+        \includegraphics[width=0.7\textwidth,center]{side_effect.jpg}
+    \end{figure}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Разделение данных и логики}
-    Abstract Data Type (ADT)
+    \frametitle{Функции высшего порядка и композиция}
+    \vspace{-25pt}
+    \begin{figure}
+        \includegraphics[width=0.53\textwidth,center]{function_composition.jpg}
+    \end{figure}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Function composition}
-    Function composition is the act of pipelining the result of one function,
-    to the input of another, creating an entirely new function.
+    \frametitle{Монады, ADT}
+    \vspace{-20pt}
+    \begin{figure}
+        \includegraphics[width=0.5\textwidth,center]{squirells.png}
+    \end{figure}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Монады}
-\end{frame}
+    \frametitle{Плюсы и минусы}
+    \vspace{-20pt}
+    \begin{columns}[T,onlytextwidth]
+    \column{0.5\textwidth}
+        \begin{itemize}[label={\MVRightarrow}]
+            \item <+->Разделение данных и логики \check
+            \item <+->Модульность, легкое написание тестов \check
+            \item <+->Распараллеливание кода \check
+        \end{itemize}
 
-\section{FP parts in Python}
+    \column{0.45\textwidth}
+        \begin{itemize}[label={\MVRightarrow}]
+            \item <+->Сложно \fail
+            \item <+->Страшно \fail
+            \item <+->Разработчики? \fail
+        \end{itemize}
+    \end{columns}
+    \end{frame}
+
+\section{Возможности Python для FP}
 
 \begin{frame}
-    \frametitle{What we can use in Python}
+    \frametitle{Что можно использовать?}
     \vspace{-25pt}
     \begin{itemize}[label={\MVRightarrow}]
-        \item Immutable data structures:
+        \item <+->Неизменяемые типы данных:
             \begin{itemize}
                 \item string
                 \item tuple/namedtuple
                 \item fronzenset
             \end{itemize}
-        \item Higher-order functions
-        \item List comprehension
-        \item Generators (another way to rewrite recursion)
-        \item itertools
-        \item functools
+        \item <+->Функции высшего порядка
+        \item <+->List comprehension
+        \item <+->Generators
+        \item <+->itertools
+        \item <+->functools
     \end{itemize}
 \end{frame}
 
 \begin{frame}
-    \frametitle{What we can't}
+    \frametitle{Что нет?}
+    \begin{overlayarea}{\textwidth}{.8\textheight}
     \begin{itemize}[label={\MVRightarrow}]
-        \item Tail recursion
-        \item Pure functions
-        \item Pattern matching \check
-        \item Automatic currying \check
-        \item Monads \check
-        \item ADT \check
+        \item <1->Хвостовая рекурсия \fail
+        \item <2->Чистые функции \fail
+        \item <3|only@3>Pattern matching \alt<3>{\fail}{\question}
+        \item <4->Pattern matching \alt<3>{\fail}{\question}
+        \item <5|only@5>Automatic currying \alt<5>{\fail}{\question}
+        \item <6->Automatic currying \alt<5>{\fail}{\question}
+        \item <7|only@7>Монады \alt<7>{\fail}{\question}
+        \item <8->Монады \alt<7>{\fail}{\question}
+        \item <9|only@9>ADT \alt<9>{\fail}{\question}
+        \item <10->ADT \alt<9>{\fail}{\question}
     \end{itemize}
+    \end{overlayarea}
 \end{frame}
 
 \begin{frame}
@@ -191,7 +217,7 @@
     \end{itemize}
 \end{frame}
 
-\section{Examples}
+\section{Примеры}
 
 \setbeamercolor{background canvas}{bg=white}
 \begin{frame}[fragile]
@@ -262,11 +288,9 @@
     \setbeamertemplate{section page}
     \frametitle{}
     \begin{center}
-    %\vspace{-25pt}
-    \inputminted[
-        fontsize=\scriptsize\ttfamily,
-        %bgcolor=black,
-    ]{python}{examples/recursion.py}
+        \begin{figure}
+            \includegraphics[width=0.5\textwidth,center]{tree.png}
+        \end{figure}
     \end{center}
 \end{frame}
 
@@ -276,7 +300,31 @@
     \begin{center}
     %\vspace{-25pt}
     \inputminted[
-        fontsize=\scriptsize\ttfamily,
+        fontsize=\large,
+        %bgcolor=black,
+    ]{python}{examples/recursion_1.py}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+    \setbeamertemplate{section page}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-25pt}
+    \inputminted[
+        fontsize=\large,
+        %bgcolor=black,
+    ]{python}{examples/recursion_2.py}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+    \setbeamertemplate{section page}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-25pt}
+    \inputminted[
+        fontsize=\large,
         %bgcolor=black,
     ]{python}{examples/recursion_fp.py}
     \end{center}
