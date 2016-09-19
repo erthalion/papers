@@ -5,4 +5,4 @@
 list(reversed(list(islice(count(), 5))))
 
 # slightly modified version in python
-fchain(islice, list, reversed, list, (count(), 5))
+fchain(list, reversed, list, islice, (count(), 5))

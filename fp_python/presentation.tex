@@ -224,7 +224,6 @@
     \setbeamertemplate{section page}
     \frametitle{}
     \begin{center}
-    %\vspace{-25pt}
     \inputminted[
         fontsize=\large,
         %bgcolor=black,
@@ -236,14 +235,11 @@
     \setbeamertemplate{section page}
     \frametitle{}
     \begin{center}
-    %\vspace{-25pt}
     \inputminted[
         fontsize=\large,
-        %bgcolor=black,
     ]{python}{examples/list_comprehension.py}
     \inputminted[
         fontsize=\large,
-        %bgcolor=black,
     ]{haskell}{examples/list_comprehension.hs}
     \end{center}
 \end{frame}
@@ -252,22 +248,8 @@
     \setbeamertemplate{section page}
     \frametitle{}
     \begin{center}
-    %\vspace{-25pt}
     \inputminted[
         fontsize=\large,
-        %bgcolor=black,
-    ]{python}{examples/list_comprehension_chain.py}
-    \end{center}
-\end{frame}
-
-\begin{frame}[fragile]
-    \setbeamertemplate{section page}
-    \frametitle{}
-    \begin{center}
-    %\vspace{-25pt}
-    \inputminted[
-        fontsize=\large,
-        %bgcolor=black,
     ]{python}{examples/generators.py}
     \end{center}
 \end{frame}
@@ -276,10 +258,8 @@
     \setbeamertemplate{section page}
     \frametitle{}
     \begin{center}
-    %\vspace{-25pt}
     \inputminted[
         fontsize=\large,
-        %bgcolor=black,
     ]{python}{examples/maybe_example.py}
     \end{center}
 \end{frame}
@@ -298,10 +278,8 @@
     \setbeamertemplate{section page}
     \frametitle{}
     \begin{center}
-    %\vspace{-25pt}
     \inputminted[
         fontsize=\large,
-        %bgcolor=black,
     ]{python}{examples/recursion_1.py}
     \end{center}
 \end{frame}
@@ -310,10 +288,8 @@
     \setbeamertemplate{section page}
     \frametitle{}
     \begin{center}
-    %\vspace{-25pt}
     \inputminted[
         fontsize=\large,
-        %bgcolor=black,
     ]{python}{examples/recursion_2.py}
     \end{center}
 \end{frame}
@@ -322,10 +298,8 @@
     \setbeamertemplate{section page}
     \frametitle{}
     \begin{center}
-    %\vspace{-25pt}
     \inputminted[
         fontsize=\large,
-        %bgcolor=black,
     ]{python}{examples/recursion_fp.py}
     \end{center}
 \end{frame}
@@ -334,11 +308,9 @@
     \setbeamertemplate{section page}
     \frametitle{}
     \begin{center}
-    %\vspace{-25pt}
     \inputminted[
-        fontsize=\scriptsize\ttfamily,
-        %bgcolor=black,
-    ]{python}{examples/curry_example.py}
+        fontsize=\large,
+    ]{python}{examples/curry_example1.py}
     \end{center}
 \end{frame}
 
@@ -346,10 +318,18 @@
     \setbeamertemplate{section page}
     \frametitle{}
     \begin{center}
-    %\vspace{-25pt}
     \inputminted[
-        fontsize=\scriptsize\ttfamily,
-        %bgcolor=black,
+        fontsize=\large,
+    ]{python}{examples/curry_example2.py}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+    \setbeamertemplate{section page}
+    \frametitle{}
+    \begin{center}
+    \inputminted[
+        fontsize=\large,
     ]{python}{examples/example1.py}
     \end{center}
 \end{frame}
@@ -358,84 +338,94 @@
     \setbeamertemplate{section page}
     \frametitle{}
     \begin{center}
-    %\vspace{-25pt}
     \inputminted[
-        fontsize=\scriptsize\ttfamily,
-        %bgcolor=black,
-    ]{python}{examples/example1_fp.py}
+        fontsize=\large,
+    ]{python}{examples/example2.py}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+    \setbeamertemplate{section page}
+    \frametitle{}
+    \begin{center}
+    \inputminted[
+        fontsize=\large,
+    ]{python}{examples/example3.py}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+    \setbeamertemplate{section page}
+    \frametitle{}
+    \begin{center}
+    \inputminted[
+        fontsize=\large,
+    ]{python}{examples/example4.py}
     \end{center}
 \end{frame}
 \note{http://programmers.stackexchange.com/questions/150837/maybe-monad-vs-exceptions}
+
+\begin{frame}
+    \vspace{7pt}
+    \begin{figure}
+        \includegraphics[width=1.0\textwidth,center]{mindblown.jpg}
+    \end{figure}
+\end{frame}
 
 \setbeamercolor{background canvas}{bg=palette primary.bg}
 
 \section{Библиотеки}
 
+\fontsize{15pt}{16}\selectfont
 \begin{frame}
     \frametitle{Список FP библиотек для Python}
+    \vspace{-35pt}
+    \begin{columns}[T,onlytextwidth]
+        \column{0.5\textwidth}
+        \begin{itemize}[label={\MVRightarrow}]
+            \item PyFunctional
+            \item toolz
+            \item adt
+            \item Coconat
+            \item pyrsistent
+            \item funcy
+            \item effect
+            \item hask
+            \item fn.py
+            \item PyMonad
+        \end{itemize}
+
+        \column{0.5\textwidth}
+        \begin{itemize}[label={}]
+            \item \href{github.com/EntilZha/PyFunctional}{EntilZha/PyFunctional}
+            \item \href{github.com/pytoolz/toolz}{pytoolz/toolz}
+            \item \href{github.com/llllllllll/adt}{llllllllll/adt}
+            \item \href{github.com/evhub/coconut}{evhub/coconut}
+            \item \href{github.com/Suor/funcy}{Suor/funcy}
+            \item \href{github.com/tobgu/pyrsistent}{tobgu/pyrsistent}
+            \item \href{github.com/python-effect/effect}{python-effect/effect}
+            \item \href{github.com/billpmurphy/hask}{billpmurphy/hask}
+            \item \href{github.com/kachayev/fn.py}{kachayev/fn.py}
+            \item \href{github.com/fnl/pymonad}{fnl/pymonad}
+        \end{itemize}
+
+    \end{columns}
+\end{frame}
+\fontsize{19pt}{20}\selectfont
+
+\begin{frame}
+    \frametitle{Зачем?}
     \vspace{-25pt}
     \begin{itemize}[label={\MVRightarrow}]
-        \item fn.py \url{github.com/kachayev/fn.py}
-        \item toolz \url{github.com/pytoolz/toolz}
-        \item PyMonad \url{github.com/fnl/pymonad}
-        \item PyFunctional \url{github.com/EntilZha/PyFunctional}
-        \item Coconat \url{github.com/evhub/coconut}
-        \item pyrsistent \url{github.com/tobgu/pyrsistent}
-        \item effect \url{github.com/python-effect/effect}
-        \item adt \url{github.com/llllllllll/adt}
+        \item Функции на все случаи жизни
+        \item Декоратор для каррирования
+        \item Персистентные типы данных
+        \item Синтаксис для функциональной композиции
+        \item Декоратор для обхода хвостовой рекурсии
+        \item Монады и ADT
     \end{itemize}
 \end{frame}
 
-\setbeamercolor{background canvas}{bg=white}
-\begin{frame}[fragile]
-    \setbeamertemplate{section page}
-    \frametitle{}
-    \begin{center}
-    %\vspace{-25pt}
-    \inputminted[
-        fontsize=\scriptsize\ttfamily,
-        %bgcolor=black,
-    ]{python}{examples/fn.py}
-    \end{center}
-\end{frame}
-
-\begin{frame}[fragile]
-    \setbeamertemplate{section page}
-    \frametitle{}
-    \begin{center}
-    %\vspace{-25pt}
-    \inputminted[
-        fontsize=\scriptsize\ttfamily,
-        %bgcolor=black,
-    ]{python}{examples/pymonad.py}
-    \end{center}
-\end{frame}
-
-\begin{frame}[fragile]
-    \setbeamertemplate{section page}
-    \frametitle{}
-    \begin{center}
-    %\vspace{-25pt}
-    \inputminted[
-        fontsize=\scriptsize\ttfamily,
-        %bgcolor=black,
-    ]{python}{examples/pyfunctional.py}
-    \end{center}
-\end{frame}
-
-\begin{frame}[fragile]
-    \setbeamertemplate{section page}
-    \frametitle{}
-    \begin{center}
-    %\vspace{-25pt}
-    \inputminted[
-        fontsize=\scriptsize\ttfamily,
-        %bgcolor=black,
-    ]{python}{examples/pyrsistent.py}
-    \end{center}
-\end{frame}
-\setbeamercolor{background canvas}{bg=palette primary.bg}
-
-\plain{Questions?}
+\plain{Вопросы?}
 
 \end{document}
