@@ -69,6 +69,26 @@
     \end{itemize}
 \end{frame}
 
+\begin{frame}[fragile]
+    \frametitle{Для кого?}
+    \begin{itemize}
+        \item <+->
+    \end{itemize}
+
+    \vspace{-40pt}
+    \begin{columns}[T,onlytextwidth]
+    \column{0.5\textwidth}
+    \begin{itemize}
+        \item <+->\includegraphics[width=7cm,height=4cm]{house1.jpeg}
+    \end{itemize}
+
+    \column{0.5\textwidth}
+    \begin{itemize}
+        \item <+->\includegraphics[width=7cm,height=4cm]{house2.png}
+    \end{itemize}
+    \end{columns}
+\end{frame}
+
 \begin{frame}
     \frametitle{Причины?}
     \vspace{-25pt}
@@ -92,6 +112,26 @@
         \item Python - мультипарадигменный язык,\\ позволяющий писать функционально
         \item Это позволяет увидеть преимущества FP в вашем коде уже завтра
     \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Плюсы и минусы}
+    \vspace{-20pt}
+    \begin{columns}[T,onlytextwidth]
+    \column{0.5\textwidth}
+        \begin{itemize}[label={\MVRightarrow}]
+            \item <+->Разделение данных и логики \check
+            \item <+->Модульность, легкое написание тестов \check
+            \item <+->Распараллеливание кода \check
+        \end{itemize}
+
+    \column{0.45\textwidth}
+        \begin{itemize}[label={\MVRightarrow}]
+            \item <+->Сложно \fail
+            \item <+->Страшно \fail
+            \item <+->Разработчики? \fail
+        \end{itemize}
+    \end{columns}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -150,26 +190,6 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Плюсы и минусы}
-    \vspace{-20pt}
-    \begin{columns}[T,onlytextwidth]
-    \column{0.5\textwidth}
-        \begin{itemize}[label={\MVRightarrow}]
-            \item <+->Разделение данных и логики \check
-            \item <+->Модульность, легкое написание тестов \check
-            \item <+->Распараллеливание кода \check
-        \end{itemize}
-
-    \column{0.45\textwidth}
-        \begin{itemize}[label={\MVRightarrow}]
-            \item <+->Сложно \fail
-            \item <+->Страшно \fail
-            \item <+->Разработчики? \fail
-        \end{itemize}
-    \end{columns}
-    \end{frame}
-
 \section{Возможности Python для FP}
 
 \begin{frame}
@@ -191,7 +211,7 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Что нет?}
+    \frametitle{Что отсутствует?}
     \begin{overlayarea}{\textwidth}{.8\textheight}
     \begin{itemize}[label={\MVRightarrow}]
         \item <1->Хвостовая рекурсия \fail
@@ -217,7 +237,7 @@
     \end{itemize}
 \end{frame}
 
-\section{Примеры}
+\section{Примеры (py2)}
 
 \setbeamercolor{background canvas}{bg=white}
 \begin{frame}[fragile]
