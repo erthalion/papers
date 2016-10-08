@@ -1,0 +1,47 @@
+# BSON
+
+http://crocodillon.com/blog/mongodb-for-dbas-introduction
+
+>>> bson.dumps({"a": 3, "b": u"xyz"})
+'\x17\x00\x00\x00\x10a\x00\x03\x00\x00\x00\x02b\x00\x04\x00\x00\x00xyz\x00\x00'
+^ length of doc      ^ key  ^value            ^ key  ^ value length ^ value
+                   ^ type of value          ^ type of value                 ^ end of object
+
+
+The same representation for disk/memory
+
+
+# JSONB
+
+Jsonb - on disk representation in form of a tree:
+
+int32 varlen
+root -> node -> node
+         |___-> node
+
+node -> header (uint32 whith is  type + length)
+     -> variable length content
+
+for one row in table:
+
+```
+analyze test;
+vacuum full;
+
+SELECT pg_relation_filepath(oid), relpages FROM pg_class WHERE relname = 'test';
+
+ pg_relation_filepath | relpages 
+----------------------+----------
+ base/40960/325477    |        0
+(1 row)
+```
+
+hexdump -C base/40960/325477
+
+>>> "10 03 00 00 00 61 62 00 00 20 00 00 00 00 80 03 00 78 79 7a 00 00 00 00".replace(" ", "").decode("hex")
+'\x10\x03\x00\x00\x00ab\x00\x00\x00\x00\x00\x00\x80\x03\x00xyz\x00\x00\x00\x00'
+   ^ length          ^ keys                                ^ values
+
+first int32 - object size in bytes
+
+JsonbValue - in memory serialized representation, object/array has elements in list representation
