@@ -115,6 +115,7 @@
   \maketitle
 }
 
+\fontsize{21pt}{23}\selectfont
 \section{}
 
 \begin{frame}{}
@@ -128,6 +129,9 @@
 
 \begin{frame}[fragile]
     \frametitle{}
+    \begin{center}
+        \textbf{Данные}
+    \end{center}
     \begin{itemize}[leftmargin=*]
         \item <+->
     \end{itemize}
@@ -135,26 +139,73 @@
     \vspace{-40pt}
 
     \begin{columns}[T,onlytextwidth]
-    \column{0.2\textwidth}
+    \column{0.5\textwidth}
     \begin{itemize}[leftmargin=*]
-        \item <+->\includegraphics[width=6cm,height=3.5cm]{house1.jpeg}
+        \item <+->\includegraphics[width=6cm,height=5cm]{relation.png}
     \end{itemize}
 
     \vspace{20pt}
 
-    \column{0.55\textwidth}
+    \column{0.5\textwidth}
     \begin{itemize}[leftmargin=*]
-        \item <+->\includegraphics[width=6cm,height=3.5cm]{house2.png}
+        \item <+->\includegraphics[width=6cm,height=5cm]{document.jpg}
     \end{itemize}
     \end{columns}
 \end{frame}
 
 \begin{frame}
     \frametitle{}
-    \vspace{-25pt}
-    \begin{figure}
-        \includegraphics[width=0.8\textwidth,center]{first_option.png}
-    \end{figure}
+    \begin{center}
+        \textbf{Данные нужно хранить в соответсвующем формате:}
+        \pause
+        \begin{itemize}[label={\MVRightarrow}]
+            \item <+-> Отдельные хранилища,\\ единый интерфейс
+            \item <+-> Единое хранилище,\\ разные форматы
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Отдельные хранилища}
+        \pause
+        \begin{itemize}[label={\MVRightarrow}]
+            \item <+-> Конкретный формат обрабатывается наилучщим образом \check
+            \item <+-> Производительность, дублирование \question
+            \item <+-> Вопросы интеграции компонентов \fail
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Единое хранилище}
+        \pause
+        \begin{itemize}[label={\MVRightarrow}]
+            \item <+-> Не требует интеграции \check
+            \item <+-> Производительность, дублирование \question
+            \item <+-> Поддержка со стороны БД \question
+        \end{itemize}
+    \end{center}
+\end{frame}
+\note{
+    если данные разного формата не сравнимы по объему, затраты на интеграцию
+    и инфраструктуру могут не окупиться.
+}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Где}
+        \pause
+        \begin{itemize}[label={\MVRightarrow}]
+            \item Не требует интеграции \check
+            \item Производительность, дублирование \question
+            \item Поддержка со стороны БД \question
+        \end{itemize}
+    \end{center}
 \end{frame}
 
 \begin{frame}
