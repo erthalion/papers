@@ -18,6 +18,7 @@
 \usepackage{enumitem}
 \usepackage{minted}
 \usemintedstyle{tango}
+\usepackage[normalem]{ulem}
 %\usemintedstyle{monokai}
 
 \usetikzlibrary{shapes,arrows,positioning}
@@ -40,6 +41,8 @@
 \makeatletter
 \newcommand\HUGE{\@setfontsize\Huge{32}{41}}
 \makeatother
+
+\renewcommand{\ULthickness}{2.0pt}
 
 \definecolor{links}{HTML}{0099FF}
 \hypersetup{colorlinks, linkcolor=, urlcolor=links}
@@ -198,375 +201,359 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-        \textbf{Где}
+        \textbf{Кто?}
+        \begin{itemize}[label={\MVRightarrow}]
+            \item Postgresql (hstore/json/jsonb)
+            \item MySQL (json)
+            \item Oracle
+            \item MSSql
+            \item db2
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\fontsize{13pt}{14}\selectfont
+\begin{frame}
+    \frametitle{}
+    \vspace{2em}
+    \centering
+    \begin{minipage}{32em}
+        \usebeamercolor[fg]{section title}
+        \usebeamerfont{section title}
+        Легкий способ начать \sout{бегать по утрам} использовать документы в реляционной базе
+    \end{minipage}
+\end{frame}
+\fontsize{17pt}{18}\selectfont
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \inputminted[
+        fontsize=\Large,
+    ]{sql}{sql/json_build.sql}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \inputminted[
+        fontsize=\Large,
+    ]{sql}{sql/json_agg.sql}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \inputminted[
+        fontsize=\Large,
+    ]{sql}{sql/load.sql}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \begin{itemize}[label={\MVRightarrow}]
+            \item Загрузка дампа из внешних источников
+            \item Некорректные данные с валидной структурой - json5
+            \item Битые данные - ручное исправление, линтеры
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\fontsize{13pt}{14}\selectfont
+\section{Производительность}
+\fontsize{17pt}{18}\selectfont
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Факторы}
         \pause
         \begin{itemize}[label={\MVRightarrow}]
-            \item Не требует интеграции \check
-            \item Производительность, дублирование \question
-            \item Поддержка со стороны БД \question
+            \item <+-> Структура данных на диске
+            \item <+-> Сериализация данных
+            \item <+-> Поддержка индексов
         \end{itemize}
+    \end{center}
+\end{frame}
+\note{
+    оптимизация по размеру и пробеганию
+}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Bson}
+    \begin{figure}
+        \includegraphics[width=1.0\textwidth,center]{bson.png}
+    \end{figure}
     \end{center}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Причины?}
-    \vspace{-25pt}
+    \frametitle{}
+    \begin{center}
+    \inputminted[
+        fontsize=\Large,
+    ]{python}{sql/bson.py}
+
     \begin{figure}
-        \includegraphics[width=0.8\textwidth,center]{second_option.png}
+        \includegraphics[width=1.0\textwidth,center]{bson_binary.png}
     \end{figure}
+
+    \end{center}
 \end{frame}
 
-\begin{frame}[fragile]
-    \frametitle{Причины?}
-    \begin{itemize}[label={\MVRightarrow}]
-        \item FP - это парадигма, не привязанная к языку
-        \item Python - мультипарадигменный язык,\\ позволяющий писать функционально
-        \item Это позволяет увидеть преимущества FP в вашем коде уже завтра
-    \end{itemize}
-\end{frame}
-
-\fontsize{15pt}{16}\selectfont
 \begin{frame}
-    \frametitle{Плюсы и минусы}
-    \vspace{-20pt}
-    \begin{columns}[T,onlytextwidth]
-    \column{0.5\textwidth}
-    \begin{itemize}[label={\MVRightarrow}, leftmargin=-0.05cm]
-            \item <+->Разделение данных и логики \check
-            \item <+->Модульность, легкое написание тестов \check
-            \item <+->Распараллеливание кода \check
-        \end{itemize}
+    \frametitle{}
+    \begin{center}
+    \textbf{Jsonb}
+    \begin{figure}
+        \includegraphics[width=1.0\textwidth,center]{jsonb.png}
+    \end{figure}
+    \end{center}
+\end{frame}
 
-    \column{0.4\textwidth}
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \inputminted[
+        fontsize=\Large,
+    ]{python}{sql/jsonb_binary.sql}
+
+    \begin{figure}
+        \includegraphics[width=1.0\textwidth,center]{jsonb_binary.png}
+    \end{figure}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{MySQL json}
+    \begin{figure}
+        \includegraphics[width=1.0\textwidth,center]{mysql_json.png}
+    \end{figure}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \textbf{Сериализация данных}
+    \begin{center}
         \begin{itemize}[label={\MVRightarrow}]
-            \item <+->Сложно \fail
-            \item <+->Страшно \fail
-            \item <+->Разработчики \fail
+            \item MongoDB - дерево Document -> Elements
+            \item Postgresql - JsonbValue со списком элементов
+            \item MySQL - ленивая структура с указателями
         \end{itemize}
-    \end{columns}
-\end{frame}
-\fontsize{17pt}{18}\selectfont
-
-\begin{frame}[fragile]
-    \frametitle{Кто?}
-    \begin{itemize}[label={\MVRightarrow}]
-        \item postgrest
-        \item pandoc
-        \item elm-compiler
-        \item purescript
-        \item aura (arch linux package manager)
-    \end{itemize}
-\end{frame}
-
-\fontsize{13pt}{14}\selectfont
-\section{Краткое введение в FP}
-\fontsize{17pt}{18}\selectfont
-
-\begin{frame}[fragile]
-    \frametitle{Термины и определения}
-    \begin{itemize}[label={\MVRightarrow}]
-        \item Неизменяемость данных (immutability)
-        \item Чистые функции и side effects
-        \item Функции высшего порядка
-        \item Монады (?)
-        \item Abstract Data Type (ADT)
-    \end{itemize}
+    \end{center}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Неизменяемость, персистентность}
-    \vspace{-10pt}
-    \begin{figure}
-        \includegraphics[width=1.1\textwidth,center]{Vault_Boy_text.png}
-    \end{figure}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Чистые функции и side effects}
-    \vspace{-20pt}
-    \begin{figure}
-        \includegraphics[width=0.9\textwidth,center]{side_effect.jpg}
-    \end{figure}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Функции высшего порядка и композиция}
-    \vspace{-25pt}
-    \begin{figure}
-        \includegraphics[width=0.73\textwidth,center]{function_composition.jpg}
-    \end{figure}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Монады, ADT}
-    \vspace{-25pt}
-    \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{squirells.png}
-    \end{figure}
-\end{frame}
-
-\fontsize{13pt}{14}\selectfont
-\section{Возможности Python для FP}
-\fontsize{17pt}{18}\selectfont
-
-\begin{frame}
-    \frametitle{Что можно использовать?}
-    \vspace{-25pt}
-    \begin{itemize}[label={\MVRightarrow}]
-        \item <+->Неизменяемые типы данных:
-            \begin{itemize}
-                \item string
-                \item tuple/namedtuple
-                \item fronzenset
-            \end{itemize}
-        \item <+->Функции высшего порядка
-        \item <+->List comprehension
-        \item <+->Generators
-        \item <+->itertools
-        \item <+->functools
-    \end{itemize}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Что отсутствует?}
-    \begin{overlayarea}{\textwidth}{.8\textheight}
-    \begin{itemize}[label={\MVRightarrow}]
-        \item <1->Хвостовая рекурсия \fail
-        \item <2->Чистые функции \fail
-        \item <3|only@3>Pattern matching \alt<3>{\fail}{\question}
-        \item <4->Pattern matching \alt<3>{\fail}{\question}
-        \item <5|only@5>Automatic currying \alt<5>{\fail}{\question}
-        \item <6->Automatic currying \alt<5>{\fail}{\question}
-        \item <7|only@7>Монады \alt<7>{\fail}{\question}
-        \item <8->Монады \alt<7>{\fail}{\question}
-        \item <9|only@9>ADT \alt<9>{\fail}{\question}
-        \item <10->ADT \alt<9>{\fail}{\question}
-    \end{itemize}
-    \end{overlayarea}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Стратегии}
-    \begin{itemize}[label={\MVRightarrow}]
-        \item Использование <<чистого>> Python
-        \item Собственные надстройки
-        \item Сторонние библиотеки
-    \end{itemize}
-\end{frame}
-
-\fontsize{13pt}{14}\selectfont
-\section{Примеры (py2)}
-\fontsize{17pt}{18}\selectfont
-
-\setbeamercolor{background canvas}{bg=white}
-\begin{frame}[fragile]
-    \setbeamertemplate{section page}
     \frametitle{}
+    \textbf{Индексы}
     \begin{center}
-    \inputminted[
-        fontsize=\normalsize,
-        %bgcolor=black,
-    ]{python}{examples/immutable.py}
-    \end{center}
-\end{frame}
-
-\begin{frame}[fragile]
-    \setbeamertemplate{section page}
-    \frametitle{}
-    \begin{center}
-    \inputminted[
-        fontsize=\normalsize,
-    ]{python}{examples/list_comprehension.py}
-    \inputminted[
-        fontsize=\normalsize,
-    ]{haskell}{examples/list_comprehension.hs}
-    \end{center}
-\end{frame}
-
-\begin{frame}[fragile]
-    \setbeamertemplate{section page}
-    \frametitle{}
-    \begin{center}
-    \inputminted[
-        fontsize=\normalsize,
-    ]{python}{examples/generators.py}
-    \end{center}
-\end{frame}
-
-\begin{frame}[fragile]
-    \setbeamertemplate{section page}
-    \frametitle{}
-    \begin{center}
-    \inputminted[
-        fontsize=\normalsize,
-    ]{python}{examples/maybe_example.py}
-    \end{center}
-\end{frame}
-
-\begin{frame}[fragile]
-    \setbeamertemplate{section page}
-    \frametitle{}
-    \begin{center}
-        \begin{figure}
-            \includegraphics[width=0.7\textwidth,center]{tree.png}
-        \end{figure}
-    \end{center}
-\end{frame}
-
-\begin{frame}[fragile]
-    \setbeamertemplate{section page}
-    \frametitle{}
-    \begin{center}
-    \inputminted[
-        fontsize=\normalsize,
-    ]{python}{examples/recursion_1.py}
-    \end{center}
-\end{frame}
-
-\begin{frame}[fragile]
-    \setbeamertemplate{section page}
-    \frametitle{}
-    \begin{center}
-    \inputminted[
-        fontsize=\normalsize,
-    ]{python}{examples/recursion_2.py}
-    \end{center}
-\end{frame}
-
-\begin{frame}[fragile]
-    \setbeamertemplate{section page}
-    \frametitle{}
-    \begin{center}
-    \inputminted[
-        fontsize=\normalsize,
-    ]{python}{examples/recursion_fp.py}
-    \end{center}
-\end{frame}
-
-\begin{frame}[fragile]
-    \setbeamertemplate{section page}
-    \frametitle{}
-    \begin{center}
-    \inputminted[
-        fontsize=\normalsize,
-    ]{python}{examples/curry_example1.py}
-    \end{center}
-\end{frame}
-
-\begin{frame}[fragile]
-    \setbeamertemplate{section page}
-    \frametitle{}
-    \begin{center}
-    \inputminted[
-        fontsize=\normalsize,
-    ]{python}{examples/curry_example2.py}
-    \end{center}
-\end{frame}
-
-\begin{frame}[fragile]
-    \setbeamertemplate{section page}
-    \frametitle{}
-    \begin{center}
-    \inputminted[
-        fontsize=\normalsize,
-    ]{python}{examples/example1.py}
-    \end{center}
-\end{frame}
-
-\begin{frame}[fragile]
-    \setbeamertemplate{section page}
-    \frametitle{}
-    \begin{center}
-    \inputminted[
-        fontsize=\normalsize,
-    ]{python}{examples/example2.py}
-    \end{center}
-\end{frame}
-
-\begin{frame}[fragile]
-    \setbeamertemplate{section page}
-    \frametitle{}
-    \begin{center}
-    \inputminted[
-        fontsize=\normalsize,
-    ]{python}{examples/example3.py}
-    \end{center}
-\end{frame}
-
-\begin{frame}[fragile]
-    \setbeamertemplate{section page}
-    \frametitle{}
-    \begin{center}
-    \inputminted[
-        fontsize=\normalsize,
-    ]{python}{examples/example4.py}
-    \end{center}
-\end{frame}
-\note{http://programmers.stackexchange.com/questions/150837/maybe-monad-vs-exceptions}
-
-\begin{frame}
-    \vspace{9pt}
-    \begin{figure}
-        \includegraphics[width=1.1\textwidth,center]{mindblown.jpg}
-    \end{figure}
-\end{frame}
-
-
-\fontsize{13pt}{14}\selectfont
-\section{Библиотеки}
-\fontsize{17pt}{18}\selectfont
-
-\fontsize{14pt}{15}\selectfont
-\begin{frame}
-    \frametitle{Список FP библиотек для Python}
-    \vspace{-35pt}
-    \begin{columns}[T,onlytextwidth]
-        \column{0.5\textwidth}
         \begin{itemize}[label={\MVRightarrow}]
-            \item PyFunctional
-            \item toolz
-            \item adt
-            \item Coconat
-            \item pyrsistent
-            \item funcy
-            \item effect
-            \item hask
-            \item fn.py
-            \item PyMonad
+            \item MongoDB - индексы для полей
+            \item Postgresql - общий индекс, индексы для полей
+            \item MySQL - виртуальные колонки для индексирования
         \end{itemize}
+    \end{center}
+\end{frame}
 
-        \column{0.5\textwidth}
+\fontsize{13pt}{14}\selectfont
+\section{Тестирование}
+\fontsize{17pt}{18}\selectfont
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-10pt}
+    \begin{figure}
+        \includegraphics[width=0.8\textwidth,center]{great_performance.jpg}
+    \end{figure}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
         \begin{itemize}[label={}]
-            \item \href{github.com/EntilZha/PyFunctional}{EntilZha/PyFunctional}
-            \item \href{github.com/pytoolz/toolz}{pytoolz/toolz}
-            \item \href{github.com/llllllllll/adt}{llllllllll/adt}
-            \item \href{github.com/evhub/coconut}{evhub/coconut}
-            \item \href{github.com/Suor/funcy}{Suor/funcy}
-            \item \href{github.com/tobgu/pyrsistent}{tobgu/pyrsistent}
-            \item \href{github.com/python-effect/effect}{python-effect/effect}
-            \item \href{github.com/billpmurphy/hask}{billpmurphy/hask}
-            \item \href{github.com/kachayev/fn.py}{kachayev/fn.py}
-            \item \href{github.com/fnl/pymonad}{fnl/pymonad}
+            \item YCSB 0.8, $10^{6}$
+            \item 16GB memory, 4 core 2.3GHz
+            \item Postgresql 9.5.4
+            \item MongoDB 3.2.9
+            \item MySQL 5.7.9
+            \item AWS EC2 m4.xlarge
+            \item 16GB memory, 4 core 2.3GHz
         \end{itemize}
-
-    \end{columns}
+    \end{center}
 \end{frame}
-\fontsize{17pt}{18}\selectfont
 
-\fontsize{15pt}{16}\selectfont
 \begin{frame}
-    \frametitle{Зачем?}
-    \vspace{-25pt}
-    \begin{itemize}[label={\MVRightarrow}]
-        \item Функции на все случаи жизни
-        \item Декоратор для каррирования
-        \item Персистентные типы данных
-        \item Синтаксис для функциональной композиции
-        \item Декоратор для обхода хвостовой рекурсии
-        \item Монады и ADT
-    \end{itemize}
+    \frametitle{}
+    \begin{center}
+        \textbf{Воспроизводимость}
+        \begin{itemize}[label={}]
+            \item \href{https://github.com/erthalion/YCSB}{erthalion/YCSB}
+            \item \href{https://github.com/erthalion/ansible-ycsb}{erthalion/ansible-ycsb}
+        \end{itemize}
+    \end{center}
 \end{frame}
 
-\plain{Вопросы?}
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \vspace{-10pt}
+    \textbf{Простая выборка по ключу с индексом}
+    \begin{figure}
+        \includegraphics[width=0.7\textwidth,center]{benchmarks/simple_select_throughput.png}
+    \end{figure}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \vspace{-10pt}
+    \textbf{Простая выборка по ключу с индексом}
+    \begin{figure}
+        \includegraphics[width=0.7\textwidth,center]{benchmarks/simple_select_latency_99.png}
+    \end{figure}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \vspace{-10pt}
+    \textbf{Простая выборка по ключу с индексом}
+    \begin{figure}
+        \includegraphics[width=0.7\textwidth,center]{benchmarks/simple_select_max_latency.png}
+    \end{figure}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \vspace{-10pt}
+    \textbf{Размер таблиц}
+    \begin{figure}
+        \includegraphics[width=0.7\textwidth,center]{benchmarks/table_size.png}
+    \end{figure}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \vspace{-10pt}
+    \textbf{Размер индексов}
+    \begin{figure}
+        \includegraphics[width=0.7\textwidth,center]{benchmarks/index_size.png}
+    \end{figure}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \vspace{-10pt}
+    \textbf{Выборка документов с большим количеством ключей}
+    \end{center}
+\end{frame}
+\note{
+    сериализация в ширину
+}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \vspace{-10pt}
+    \textbf{Выборка документов с большой вложенностью}
+    \end{center}
+\end{frame}
+\note{
+    сериализация в глубину
+}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \vspace{-10pt}
+    \textbf{Выборка среза по документам}
+    \end{center}
+\end{frame}
+\note{
+    множественный detoast
+}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \vspace{-10pt}
+    \textbf{Выборка документов без кэша}
+    \end{center}
+\end{frame}
+\note{
+    моделирование ситуации, когда данные не влезают в память
+    и идет активная работа с диском
+}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \vspace{-10pt}
+    \textbf{SET STORAGE EXTERNAL}
+    \end{center}
+\end{frame}
+\note{
+    хранение jsonb в распакованном формате
+}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \vspace{-10pt}
+    \textbf{Вставка записей}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \vspace{-10pt}
+    \textbf{Вставка и обновление}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \vspace{-10pt}
+    \textbf{Чтение последних}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \vspace{-10pt}
+    \textbf{Чтение, изменение, запись}
+    \end{center}
+\end{frame}
+
+\fontsize{25pt}{27}\selectfont
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Вопросы?}
+    \end{center}
+\end{frame}
 
 \end{document}
