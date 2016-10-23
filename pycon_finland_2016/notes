@@ -1,0 +1,18 @@
+#reduce time of talk
+#don't talk too much on one slide (more funny pictures)
+#try to mark problem more clear (what we will get from functional approach in python)
+#try to mix terms and definition with examples
+#try to make examples more evolutional (from "ugly" imperative code to "shiny" fp code)
+#note about immutability vs persistence
+#change examples from libraries to list of features
+#sort libraries by development activity
+#more explanation for slides with monad
+#make list in terms and definition more consistent with text explanation
+#avoid long text in explanations of terms
+#move pros & cons into separate list (e.g. separation data from logic)
+#make items in "what we can't" appear one at the time with different marks (first red, than green)
+#mention funcy & hask in libraries
+
+#large font if possible
+#name and company for title slide
+#note about python version and reduce removing in python3
