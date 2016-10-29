@@ -10,6 +10,7 @@ http://crocodillon.com/blog/mongodb-for-dbas-introduction
 
 The same representation for disk/memory
 
+Direct access for the first element (see mongo/bson/bsonobj.h:firstElement and note about the _id)
 
 # JSONB
 
@@ -45,3 +46,46 @@ hexdump -C base/40960/325477
 first int32 - object size in bytes
 
 JsonbValue - in memory serialized representation, object/array has elements in list representation
+
+
+# MYSQL JSON
+
+binary representation in form of a tree:
+
+first byte is a type
+
+header (for object/array) -> member/elements count
+                          -> size of binary value in bytes
+                          -> list of pointers to keys/values/elements
+
+body with actual values
+
+
+Values are parsed lazily, so that only the parts of the
+value that are interesting to the caller, are read. Array elements
+can be looked up in constant time using the element() function.
+Object members can be looked up in O(log n) time using the lookup()
+
+
+############################################################################################
+
+Add links to previous research/benchmarks
+
+
+###########################################################################################
+
+
+Add interesting story about migration or integration of nosql + sql ( ask Oleg)
+Clean up graphics (remove legend, place it at the start and keep colors)
+Group graphics with description before (what are we checking?)
+Rotate size chart on 90 deg to make them horizontal (remove frame, legend, add all info into bars)
+
+Sent intermediate result to prs@poborchy.ru for discussion
+
+At the end say some closing words:
+
+* you can see at your system and use this graphics to check whether or not you have such
+  edge cases, or plan about the future (e.g., if your system is more about data upgrading with small
+  amount of clients, then you can look at mongo, if you have many simultaneous clients, then PG).
+
+* you can try this out on work tomorrow

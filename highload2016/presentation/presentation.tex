@@ -159,7 +159,7 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-        \textbf{Данные нужно хранить в соответсвующем формате:}
+        \textbf{Данные нужно хранить в соответствующем формате:}
         \pause
         \begin{itemize}[label={\MVRightarrow}]
             \item <+-> Отдельные хранилища,\\ единый интерфейс
@@ -197,6 +197,16 @@
     если данные разного формата не сравнимы по объему, затраты на интеграцию
     и инфраструктуру могут не окупиться.
 }
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-10pt}
+    \begin{figure}
+        \includegraphics[width=0.9\textwidth,center]{cat_stories.jpg}
+    \end{figure}
+    \end{center}
+\end{frame}
 
 \begin{frame}
     \frametitle{}
@@ -408,10 +418,21 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-    \vspace{-10pt}
-    \textbf{Простая выборка по ключу с индексом}
+        \textbf{Простая выборка по ключу с Btree индексом}
+        \begin{itemize}[label={}]
+            \item "Маленький документ"
+            \item 10 полей
+            \item без вложенности
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-10pt}
     \begin{figure}
-        \includegraphics[width=0.7\textwidth,center]{benchmarks/simple_select_throughput.png}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/simple_select_throughput.png}
     \end{figure}
     \end{center}
 \end{frame}
@@ -419,46 +440,44 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-    \vspace{-10pt}
-    \textbf{Простая выборка по ключу с индексом}
+    %\vspace{-10pt}
     \begin{figure}
-        \includegraphics[width=0.7\textwidth,center]{benchmarks/simple_select_latency_99.png}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/simple_select_latency_99.png}
     \end{figure}
     \end{center}
 \end{frame}
 
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \vspace{-10pt}
-    \textbf{Простая выборка по ключу с индексом}
-    \begin{figure}
-        \includegraphics[width=0.7\textwidth,center]{benchmarks/simple_select_max_latency.png}
-    \end{figure}
-    \end{center}
-\end{frame}
+%\begin{frame}
+    %\frametitle{}
+    %\begin{center}
+    %\vspace{-10pt}
+    %\textbf{Простая выборка по ключу с индексом}
+    %\begin{figure}
+        %\includegraphics[width=0.7\textwidth,center]{benchmarks/simple_select_max_latency.png}
+    %\end{figure}
+    %\end{center}
+%\end{frame}
 
 \begin{frame}
     \frametitle{}
     \begin{center}
-    \vspace{-10pt}
-    \textbf{Размер таблиц}
+    %\vspace{-10pt}
     \begin{figure}
-        \includegraphics[width=0.7\textwidth,center]{benchmarks/table_size.png}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/table_size.png}
     \end{figure}
     \end{center}
 \end{frame}
 
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \vspace{-10pt}
-    \textbf{Размер индексов}
-    \begin{figure}
-        \includegraphics[width=0.7\textwidth,center]{benchmarks/index_size.png}
-    \end{figure}
-    \end{center}
-\end{frame}
+%\begin{frame}
+    %\frametitle{}
+    %\begin{center}
+    %\vspace{-10pt}
+    %\textbf{Размер индексов}
+    %\begin{figure}
+        %\includegraphics[width=0.7\textwidth,center]{benchmarks/index_size.png}
+    %\end{figure}
+    %\end{center}
+%\end{frame}
 
 \begin{frame}
     \frametitle{}
