@@ -418,6 +418,38 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
+        \textbf{Простая выборка по ключу с jsonb\_path\_ops индексом}
+        \begin{itemize}[label={}]
+            \item "Маленький документ"
+            \item 10 полей
+            \item без вложенности
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-10pt}
+    \begin{figure}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/workload_c_jsonb_path_ops/throughput.png}
+    \end{figure}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-10pt}
+    \begin{figure}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/workload_c_jsonb_path_ops/latency_99.png}
+    \end{figure}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
         \textbf{Простая выборка по ключу с Btree индексом}
         \begin{itemize}[label={}]
             \item "Маленький документ"
@@ -432,7 +464,7 @@
     \begin{center}
     %\vspace{-10pt}
     \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/simple_select_throughput.png}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/workload_c_btree/throughput.png}
     \end{figure}
     \end{center}
 \end{frame}
@@ -442,7 +474,7 @@
     \begin{center}
     %\vspace{-10pt}
     \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/simple_select_latency_99.png}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/workload_c_btree/latency_99.png}
     \end{figure}
     \end{center}
 \end{frame}
@@ -468,6 +500,16 @@
     \end{center}
 \end{frame}
 
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-10pt}
+    \begin{figure}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/index_size.png}
+    \end{figure}
+    \end{center}
+\end{frame}
+
 %\begin{frame}
     %\frametitle{}
     %\begin{center}
@@ -479,93 +521,157 @@
     %\end{center}
 %\end{frame}
 
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \vspace{-10pt}
-    \textbf{Выборка документов с большим количеством ключей}
-    \end{center}
-\end{frame}
-\note{
-    сериализация в ширину
-}
+%\begin{frame}
+    %\frametitle{}
+    %\begin{center}
+    %\vspace{-10pt}
+    %\textbf{Выборка документов с большим количеством ключей}
+    %\end{center}
+%\end{frame}
+%\note{
+    %сериализация в ширину
+%}
+
+%\begin{frame}
+    %\frametitle{}
+    %\begin{center}
+    %\vspace{-10pt}
+    %\textbf{Выборка документов с большой вложенностью}
+    %\end{center}
+%\end{frame}
+%\note{
+    %сериализация в глубину
+%}
+
+%\begin{frame}
+    %\frametitle{}
+    %\begin{center}
+    %\vspace{-10pt}
+    %\textbf{Выборка среза по документам}
+    %\end{center}
+%\end{frame}
+%\note{
+    %множественный detoast
+%}
+
+%\begin{frame}
+    %\frametitle{}
+    %\begin{center}
+    %\vspace{-10pt}
+    %\textbf{Выборка документов без кэша}
+    %\end{center}
+%\end{frame}
+%\note{
+    %моделирование ситуации, когда данные не влезают в память
+    %и идет активная работа с диском
+%}
+
+%\begin{frame}
+    %\frametitle{}
+    %\begin{center}
+    %\vspace{-10pt}
+    %\textbf{SET STORAGE EXTERNAL}
+    %\end{center}
+%\end{frame}
+%\note{
+    %хранение jsonb в распакованном формате
+%}
 
 \begin{frame}
     \frametitle{}
     \begin{center}
-    \vspace{-10pt}
-    \textbf{Выборка документов с большой вложенностью}
-    \end{center}
-\end{frame}
-\note{
-    сериализация в глубину
-}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \vspace{-10pt}
-    \textbf{Выборка среза по документам}
-    \end{center}
-\end{frame}
-\note{
-    множественный detoast
-}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \vspace{-10pt}
-    \textbf{Выборка документов без кэша}
-    \end{center}
-\end{frame}
-\note{
-    моделирование ситуации, когда данные не влезают в память
-    и идет активная работа с диском
-}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \vspace{-10pt}
-    \textbf{SET STORAGE EXTERNAL}
-    \end{center}
-\end{frame}
-\note{
-    хранение jsonb в распакованном формате
-}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \vspace{-10pt}
-    \textbf{Вставка записей}
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \vspace{-10pt}
-    \textbf{Вставка и обновление}
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \vspace{-10pt}
-    \textbf{Чтение последних}
+        \textbf{Выборка 50\%, обновление 50\%}
+        \begin{itemize}[label={}]
+            \item "Маленький документ"
+            \item 10 полей
+            \item без вложенности
+        \end{itemize}
     \end{center}
 \end{frame}
 
 \begin{frame}
     \frametitle{}
     \begin{center}
-    \vspace{-10pt}
-    \textbf{Чтение, изменение, запись}
+    %\vspace{-10pt}
+    \begin{figure}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/workload_a_mongo_config/throughput.png}
+    \end{figure}
     \end{center}
 \end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-10pt}
+    \begin{figure}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/workload_a_mongo_config/latency_99.png}
+    \end{figure}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Выборка 50\%, обновление 50\%}
+        \begin{itemize}[label={}]
+            \item "Большой документ"
+            \item 100 полей удвоенной длинны
+            \item без вложенности
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-10pt}
+    \begin{figure}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/workload_a_large_document/throughput.png}
+    \end{figure}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-10pt}
+    \begin{figure}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/workload_a_large_document/latency_99.png}
+    \end{figure}
+    \end{center}
+\end{frame}
+
+%\begin{frame}
+    %\frametitle{}
+    %\begin{center}
+    %\vspace{-10pt}
+    %\textbf{Вставка записей}
+    %\end{center}
+%\end{frame}
+
+%\begin{frame}
+    %\frametitle{}
+    %\begin{center}
+    %\vspace{-10pt}
+    %\textbf{Вставка и обновление}
+    %\end{center}
+%\end{frame}
+
+%\begin{frame}
+    %\frametitle{}
+    %\begin{center}
+    %\vspace{-10pt}
+    %\textbf{Чтение последних}
+    %\end{center}
+%\end{frame}
+
+%\begin{frame}
+    %\frametitle{}
+    %\begin{center}
+    %\vspace{-10pt}
+    %\textbf{Чтение, изменение, запись}
+    %\end{center}
+%\end{frame}
 
 \fontsize{25pt}{27}\selectfont
 \begin{frame}
