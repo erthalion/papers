@@ -51,6 +51,7 @@
 \setbeamerfont{frametitle}{family=\Book, size=\large, shape=\normalfont}
 \setbeamerfont{title}{family=\Book, size=\HUGE, shape=\normalfont}
 \setbeamerfont{subtitle}{size=\LARGE}
+\setbeamerfont{author}{family=\ExtraLight, size=\Large}
 \usebackgroundtemplate{\includegraphics[width=\paperwidth]{slide_background.jpg}}
 
 \setbeamertemplate{title page}
@@ -81,6 +82,16 @@
       \vspace*{0.5em}%
     }}
     \fi
+
+    \ifx\insertauthor\@empty\else
+    {{% \insertauthor is nonempty
+      \usebeamerfont{author}%
+      \usebeamercolor[fg]{author}%
+      \insertauthor%
+      \vspace*{0.5em}%
+    }}
+    \fi
+
     \vfill
     \vspace*{2em}
   \end{minipage}
@@ -109,6 +120,7 @@
 \title{NoSQL внутри SQL}
 \subtitle{приземленные вопросы\\ практического применения}
 \date{\today}
+\author{Дмитрий Долгов}
 \institute{}
 
 \begin{document}
@@ -267,8 +279,8 @@
     \begin{center}
         \begin{itemize}[label={\MVRightarrow}]
             \item Загрузка дампа из внешних источников
-            \item Некорректные данные с валидной структурой - json5
-            \item Битые данные - ручное исправление, линтеры
+            \item Некорректные данные с валидной структурой -- json5
+            \item Битые данные -- ручное исправление, линтеры
         \end{itemize}
     \end{center}
 \end{frame}
@@ -356,9 +368,9 @@
     \textbf{Сериализация данных}
     \begin{center}
         \begin{itemize}[label={\MVRightarrow}]
-            \item MongoDB - дерево Document -> Elements
-            \item Postgresql - JsonbValue со списком элементов
-            \item MySQL - ленивая структура с указателями
+            \item MongoDB -- дерево Document -> Elements
+            \item Postgresql -- JsonbValue со списком элементов
+            \item MySQL -- ленивая структура с указателями
         \end{itemize}
     \end{center}
 \end{frame}
@@ -423,6 +435,7 @@
             \item shared\_buffers
             \item effective\_cache\_size
             \item innodb\_buffer\_pool\_size
+            \item write concern
             \item transaction\_sync, method
         \end{itemize}
     \end{center}
@@ -491,6 +504,38 @@
     \end{figure}
     \end{center}
 \end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Простая выборка по ключу с Btree индексом}
+        \begin{itemize}[label={}]
+            \item "Сложный документ"
+            \item 3 уровня вложенности/4 потомка
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-10pt}
+    \begin{figure}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/workload_c_complex_object/throughput.png}
+    \end{figure}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-10pt}
+    \begin{figure}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/workload_c_complex_object/latency_99.png}
+    \end{figure}
+    \end{center}
+\end{frame}
+
 
 %\begin{frame}
     %\frametitle{}
@@ -598,6 +643,8 @@
             \item "Маленький документ"
             \item 10 полей
             \item без вложенности
+            \item обновление одного поля
+            \item transaction\_sync
         \end{itemize}
     \end{center}
 \end{frame}
@@ -627,8 +674,33 @@
     \begin{center}
         \textbf{Выборка 50\%, обновление 50\%}
         \begin{itemize}[label={}]
+            \item "Маленький документ"
+            \item 10 полей
+            \item без вложенности
+            \item обновление одного поля
+            \item journaled
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-10pt}
+    \begin{figure}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/workload_a_journaled/throughput.png}
+    \end{figure}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Выборка 50\%, обновление 50\%}
+        \begin{itemize}[label={}]
             \item "Большой документ"
-            \item 100 полей удвоенной длинны
+            \item 100 полей удвоенной длины
+            \item обновление одного поля
             \item без вложенности
         \end{itemize}
     \end{center}
