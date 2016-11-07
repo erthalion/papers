@@ -605,17 +605,7 @@
     \begin{center}
     %\vspace{-10pt}
     \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/table_size.png}
-    \end{figure}
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    %\vspace{-10pt}
-    \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/index_size.png}
+        \includegraphics[width=0.95\textwidth,center]{benchmarks/table_size.png}
     \end{figure}
     \end{center}
 \end{frame}
@@ -686,6 +676,29 @@
 %\note{
     %хранение jsonb в распакованном формате
 %}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Вставка документов}
+        \begin{itemize}[label={}]
+            \item "Маленький документ"
+            \item 10 полей
+            \item без вложенности
+            \item journaled
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-10pt}
+    \begin{figure}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/load_data/throughput.png}
+    \end{figure}
+    \end{center}
+\end{frame}
 
 \begin{frame}
     \frametitle{}
