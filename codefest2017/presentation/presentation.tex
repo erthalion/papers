@@ -1,4 +1,4 @@
-\documentclass[18pt, compress, aspectratio=169]{beamer}
+\documentclass[usenames,dvipsnames, 18pt, compress, aspectratio=169]{beamer}
 
 % can be compiled by xelatex -shell-escape presentation.tex
 
@@ -19,6 +19,8 @@
 \usepackage{minted}
 \usemintedstyle{tango}
 \usepackage[normalem]{ulem}
+\usepackage{tikz}
+\usetikzlibrary{mindmap}
 %\usemintedstyle{monokai}
 
 \usetikzlibrary{shapes,arrows,positioning}
@@ -238,6 +240,81 @@
     \end{center}
 \end{frame}
 
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{SQL/JSON стандарт}
+        \begin{itemize}[label={}]
+            \item Опубликован 15.12.2016
+            \item Oracle
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \begin{tikzpicture}[
+        mindmap, grow cyclic, every node/.style=concept, concept color=orange!40,
+        level 1/.append style={level distance=4cm,sibling angle=45},
+        level 2/.append style={level distance=2.5cm,sibling angle=45},
+        level 3/.append style={level distance=2.5cm,sibling angle=45}]
+
+    \node[scale=0.9] {SQL/JSON}
+        child [concept color=blue!30] { node[scale=0.9] {JSON item}
+            child [concept color=teal!30] { node[scale=0.9] {scalar}
+                child { node[scale=0.9] {text}}
+                child { node[scale=0.9] {numeric}}
+                child { node[scale=0.9] {boolean}}
+                child { node[scale=0.9] {datetime}}
+            }
+            child { node[scale=0.9] {null}}
+            child { node[scale=0.9] {object}}
+            child { node[scale=0.9] {array}}
+        }
+        child [concept color=yellow!30, clockwise from=250] { node[scale=0.9] {JSON sequence} };
+    \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \begin{tikzpicture}[
+        mindmap, grow cyclic, every node/.style=concept, concept color=orange!40,
+        level 1/.append style={level distance=4cm,sibling angle=45},
+        level 2/.append style={level distance=2.5cm,sibling angle=45},
+        level 3/.append style={level distance=2.5cm,sibling angle=45}]
+
+    \node[scale=0.9] {Functions}
+        child [concept color=teal!40] { node[scale=0.9] {Retrieval}
+            child { node[scale=0.9] {Exract value}}
+            child { node[scale=0.9] {Exract json}}
+            child { node[scale=0.9] {Path existence}}
+            child { node[scale=0.9] {Convert to relation}}
+            child { node[scale=0.9] {JSON correctness}}
+        }
+        child [concept color=purple!30, clockwise from=250] { node[scale=0.9] {Construction}
+            child { node[scale=0.9] {Create an object}}
+            child { node[scale=0.9] {Create an array}}
+            child { node[scale=0.9] {Create from relation}}
+        };
+    \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{SQL/JSON стандарт}
+        \begin{itemize}[label={\MVRightarrow}]
+            \item JSON\_QUERY
+            \item JSON item method
+            \item JSON filter expression
+        \end{itemize}
+    \end{center}
+\end{frame}
+
 \fontsize{13pt}{14}\selectfont
 \begin{frame}
     \frametitle{}
@@ -409,12 +486,12 @@
     \frametitle{}
     \begin{center}
         \begin{itemize}[label={}]
-            \item YCSB 0.8, $10^{6}$
-            \item Postgresql 9.5.4
-            \item MongoDB 3.2.9
+            \item PostgreSQL 9.5.4
             \item MySQL 5.7.9
-            \item AWS EC2 m4.xlarge
-            \item 16GB memory, 4 core 2.3GHz
+            \item MongoDB 3.2.9
+            \item YCSB 0.9
+            \item $10^6$ rows and operations
+            \item AWS EC2
         \end{itemize}
     \end{center}
 \end{frame}
@@ -433,13 +510,45 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
+        \textbf{AWS EC2}
+        \begin{itemize}[label={}]
+            \item m4.xlarge instance
+            \item separate instance (database and generator)
+            \item 16GB memory, 4 core 2.3GHz
+            \item Ubuntu 14.04
+            \item Same VPC and placement group
+            \item AMI that supports HVM virtualization type
+            \item at least 4 rounds of benchmark
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
         \textbf{Конфигурация}
         \begin{itemize}[label={}]
             \item shared\_buffers
             \item effective\_cache\_size
             \item innodb\_buffer\_pool\_size
-            \item write concern
-            \item transaction\_sync, method
+            \item write concern level (journaled or transaction\_sync)
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Виды документов}
+        \begin{itemize}[label={}]
+            \item “простой” документ
+            \item 10 ключей и значений (100 символов)
+            \item 
+            \item “большой” документ
+            \item 100 ключей и значений (200 символов)
+            \item 
+            \item “сложный” документ
+            \item 100 ключей, 3 уровня вложенности (100 символов)
         \end{itemize}
     \end{center}
 \end{frame}
