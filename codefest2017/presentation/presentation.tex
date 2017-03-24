@@ -556,11 +556,11 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-        \textbf{Простая выборка по ключу с jsonb\_path\_ops индексом}
+        \textbf{Простая выборка по ключу с}
         \begin{itemize}[label={}]
             \item "Маленький документ"
-            \item 10 полей
-            \item без вложенности
+            \item jsonb\_path\_ops
+            \item where data @> '{"key": "value"}'::jsonb
         \end{itemize}
     \end{center}
 \end{frame}
@@ -570,7 +570,7 @@
     \begin{center}
     %\vspace{-10pt}
     \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/workload_c_jsonb_path_ops/throughput.png}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/select_jsonb_path_ops_throughput.png}
     \end{figure}
     \end{center}
 \end{frame}
@@ -580,7 +580,29 @@
     \begin{center}
     %\vspace{-10pt}
     \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/workload_c_jsonb_path_ops/latency_99.png}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/select_jsonb_path_ops_latency_99.png}
+    \end{figure}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Простая выборка по ключу}
+        \begin{itemize}[label={}]
+            \item "Маленький документ"
+            \item jsonb\_path\_ops
+            \item where data @> jsonb\_build\_object('key', 'value')
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-10pt}
+    \begin{figure}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/select_jsonb_path_ops_no_parse_throughput.png}
     \end{figure}
     \end{center}
 \end{frame}
@@ -591,8 +613,7 @@
         \textbf{Простая выборка по ключу с Btree индексом}
         \begin{itemize}[label={}]
             \item "Маленький документ"
-            \item 10 полей
-            \item без вложенности
+            \item btree
         \end{itemize}
     \end{center}
 \end{frame}
@@ -602,7 +623,7 @@
     \begin{center}
     %\vspace{-10pt}
     \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/workload_c_btree/throughput.png}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/select_btree_throughput.png}
     \end{figure}
     \end{center}
 \end{frame}
@@ -612,7 +633,7 @@
     \begin{center}
     %\vspace{-10pt}
     \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/workload_c_btree/latency_99.png}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/select_btree_latency.png}
     \end{figure}
     \end{center}
 \end{frame}
@@ -623,7 +644,7 @@
         \textbf{Простая выборка по ключу с Btree индексом}
         \begin{itemize}[label={}]
             \item "Сложный документ"
-            \item 3 уровня вложенности/4 потомка
+            \item btree
         \end{itemize}
     \end{center}
 \end{frame}
@@ -633,7 +654,7 @@
     \begin{center}
     %\vspace{-10pt}
     \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/workload_c_complex_object/throughput.png}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/select_complex_btree_throughput.png}
     \end{figure}
     \end{center}
 \end{frame}
@@ -643,7 +664,7 @@
     \begin{center}
     %\vspace{-10pt}
     \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/workload_c_complex_object/latency_99.png}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/select_complex_btree_latency_99.png}
     \end{figure}
     \end{center}
 \end{frame}
@@ -654,7 +675,6 @@
         \textbf{Срез по документу}
         \begin{itemize}[label={}]
             \item "Большой документ"
-            \item 100 полей
             \item Из документа выбирается одно поле
         \end{itemize}
     \end{center}
@@ -665,7 +685,7 @@
     \begin{center}
     %\vspace{-10pt}
     \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/workload_c_select_one/throughput.png}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/select_slice_1_btree_throughput.png}
     \end{figure}
     \end{center}
 \end{frame}
@@ -676,7 +696,6 @@
         \textbf{Срез по документу}
         \begin{itemize}[label={}]
             \item "Большой документ"
-            \item 100 полей
             \item Из документа выбирается 10 полей
         \end{itemize}
     \end{center}
@@ -687,7 +706,7 @@
     \begin{center}
     %\vspace{-10pt}
     \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/workload_c_select_slice/throughput.png}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/select_slice_10_btree_throughput.png}
     \end{figure}
     \end{center}
 \end{frame}
@@ -698,6 +717,29 @@
     %\vspace{-10pt}
     \begin{figure}
         \includegraphics[width=0.9\textwidth,center]{hack.jpg}
+    \end{figure}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Масштабируемость}
+        \begin{itemize}[label={}]
+            \item "Маленький документ"
+            \item m4.large
+            \item m4.xlarge
+            \item m4.2xlarge
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-10pt}
+    \begin{figure}
+        \includegraphics[height=8cm,width=1.1\textwidth,center]{benchmarks/scalability_select_throughput.png}
     \end{figure}
     \end{center}
 \end{frame}
@@ -796,8 +838,6 @@
         \textbf{Вставка документов}
         \begin{itemize}[label={}]
             \item "Маленький документ"
-            \item 10 полей
-            \item без вложенности
             \item journaled
         \end{itemize}
     \end{center}
@@ -808,7 +848,17 @@
     \begin{center}
     %\vspace{-10pt}
     \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/load_data/throughput.png}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/insert_throughput.png}
+    \end{figure}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-10pt}
+    \begin{figure}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/insert_latency_99.png}
     \end{figure}
     \end{center}
 \end{frame}
@@ -819,8 +869,6 @@
         \textbf{Выборка 50\%, обновление 50\%}
         \begin{itemize}[label={}]
             \item "Маленький документ"
-            \item 10 полей
-            \item без вложенности
             \item обновление одного поля
             \item transaction\_sync
         \end{itemize}
@@ -832,7 +880,7 @@
     \begin{center}
     %\vspace{-10pt}
     \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/workload_a_mongo_config/throughput.png}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/update_btree_transaction_sync_throughput.png}
     \end{figure}
     \end{center}
 \end{frame}
@@ -842,7 +890,7 @@
     \begin{center}
     %\vspace{-10pt}
     \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/workload_a_mongo_config/latency_99.png}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/update_btree_transaction_sync_latency.png}
     \end{figure}
     \end{center}
 \end{frame}
@@ -853,8 +901,6 @@
         \textbf{Выборка 50\%, обновление 50\%}
         \begin{itemize}[label={}]
             \item "Маленький документ"
-            \item 10 полей
-            \item без вложенности
             \item обновление одного поля
             \item journaled
         \end{itemize}
@@ -866,7 +912,7 @@
     \begin{center}
     %\vspace{-10pt}
     \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/workload_a_journaled/throughput.png}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/update_btree_journaled_throughput.png}
     \end{figure}
     \end{center}
 \end{frame}
@@ -877,9 +923,7 @@
         \textbf{Выборка 50\%, обновление 50\%}
         \begin{itemize}[label={}]
             \item "Большой документ"
-            \item 100 полей удвоенной длины
             \item обновление одного поля
-            \item без вложенности
         \end{itemize}
     \end{center}
 \end{frame}
@@ -889,7 +933,7 @@
     \begin{center}
     %\vspace{-10pt}
     \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/workload_a_large_document/throughput.png}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/update_btree_large_throughput.png}
     \end{figure}
     \end{center}
 \end{frame}
@@ -899,7 +943,7 @@
     \begin{center}
     %\vspace{-10pt}
     \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/workload_a_large_document/latency_99.png}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/update_btree_large_latency.png}
     \end{figure}
     \end{center}
 \end{frame}
