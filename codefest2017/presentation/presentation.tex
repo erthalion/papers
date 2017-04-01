@@ -145,8 +145,27 @@
   \maketitle
 }
 
-\fontsize{21pt}{23}\selectfont
+\fontsize{17pt}{19}\selectfont
 \section{}
+
+\begin{frame}[fragile]
+    \frametitle{}
+    \vspace{10pt}
+    \begin{itemize}[leftmargin=*, label={\MVRightarrow}]
+        \item <+-> Данные бывают разные
+        \item <+-> Стандарт SQL/JSON
+        \item <+-> Как перестать волноваться\\
+                   и начать использовать документы
+        \item <+-> Важные факторы,\\
+                   влияющие на производительность
+        \item <+-> Бенчмарки
+        \begin{itemize}[leftmargin=*, label={*}]
+            \item <+-> Поиск и чтение документов
+            \item <+-> Вставка документов
+            \item <+-> Обновление документов
+        \end{itemize}
+    \end{itemize}
+\end{frame}
 
 \begin{frame}[fragile]
     \frametitle{}
@@ -216,16 +235,12 @@
     и инфраструктуру могут не окупиться.
 }
 
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{cat_stories.jpg}}%
 \begin{frame}
     \frametitle{}
-    \begin{center}
-    %\vspace{-10pt}
-    \begin{figure}
-        \includegraphics[width=0.9\textwidth,center]{cat_stories.jpg}
-    \end{figure}
-    \end{center}
 \end{frame}
 
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{slide_background.png}}
 \begin{frame}
     \frametitle{}
     \begin{center}
@@ -451,7 +466,7 @@
         \begin{itemize}[label={\MVRightarrow}]
             \item MongoDB -- дерево Document -> Elements
             \item Postgresql -- JsonbValue со списком элементов
-            \item MySQL -- древовидная структура
+            \item MySQL -- класс Value
         \end{itemize}
     \end{center}
 \end{frame}
@@ -472,16 +487,12 @@
 \section{Тестирование}
 \fontsize{17pt}{18}\selectfont
 
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{great_performance.jpg}}%
 \begin{frame}
     \frametitle{}
-    \begin{center}
-    %\vspace{-10pt}
-    \begin{figure}
-        \includegraphics[width=0.8\textwidth,center]{great_performance.jpg}
-    \end{figure}
-    \end{center}
 \end{frame}
 
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{slide_background.png}}
 \begin{frame}
     \frametitle{}
     \begin{center}
@@ -558,7 +569,7 @@
     \begin{center}
         \textbf{Простая выборка по ключу с}
         \begin{itemize}[label={}]
-            \item "Маленький документ"
+            \item "Простой документ"
             \item jsonb\_path\_ops
             \item where data @> '{"key": "value"}'::jsonb
         \end{itemize}
@@ -590,7 +601,7 @@
     \begin{center}
         \textbf{Простая выборка по ключу}
         \begin{itemize}[label={}]
-            \item "Маленький документ"
+            \item "Простой документ"
             \item jsonb\_path\_ops
             \item where data @> jsonb\_build\_object('key', 'value')
         \end{itemize}
@@ -612,7 +623,7 @@
     \begin{center}
         \textbf{Простая выборка по ключу с Btree индексом}
         \begin{itemize}[label={}]
-            \item "Маленький документ"
+            \item "Простой документ"
             \item btree
         \end{itemize}
     \end{center}
@@ -659,15 +670,15 @@
     \end{center}
 \end{frame}
 
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    %\vspace{-10pt}
-    \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/select_complex_btree_latency_99.png}
-    \end{figure}
-    \end{center}
-\end{frame}
+%\begin{frame}
+    %\frametitle{}
+    %\begin{center}
+    %%\vspace{-10pt}
+    %\begin{figure}
+        %\includegraphics[width=0.75\textwidth,center]{benchmarks/select_complex_btree_latency_99.png}
+    %\end{figure}
+    %\end{center}
+%\end{frame}
 
 \begin{frame}
     \frametitle{}
@@ -711,22 +722,18 @@
     \end{center}
 \end{frame}
 
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{hack.jpg}}%
 \begin{frame}
     \frametitle{}
-    \begin{center}
-    %\vspace{-10pt}
-    \begin{figure}
-        \includegraphics[width=0.9\textwidth,center]{hack.jpg}
-    \end{figure}
-    \end{center}
 \end{frame}
 
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{slide_background.png}}
 \begin{frame}
     \frametitle{}
     \begin{center}
         \textbf{Масштабируемость}
         \begin{itemize}[label={}]
-            \item "Маленький документ"
+            \item "Простой документ"
             \item m4.large
             \item m4.xlarge
             \item m4.2xlarge
@@ -755,15 +762,15 @@
     %\end{center}
 %\end{frame}
 
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    %\vspace{-10pt}
-    \begin{figure}
-        \includegraphics[width=0.95\textwidth,center]{benchmarks/table_size.png}
-    \end{figure}
-    \end{center}
-\end{frame}
+%\begin{frame}
+    %\frametitle{}
+    %\begin{center}
+    %%\vspace{-10pt}
+    %\begin{figure}
+        %\includegraphics[width=0.95\textwidth,center]{benchmarks/table_size.png}
+    %\end{figure}
+    %\end{center}
+%\end{frame}
 
 %\begin{frame}
     %\frametitle{}
@@ -837,7 +844,7 @@
     \begin{center}
         \textbf{Вставка документов}
         \begin{itemize}[label={}]
-            \item "Маленький документ"
+            \item "Простой документ"
             \item journaled
         \end{itemize}
     \end{center}
@@ -868,7 +875,7 @@
     \begin{center}
         \textbf{Выборка 50\%, обновление 50\%}
         \begin{itemize}[label={}]
-            \item "Маленький документ"
+            \item "Простой документ"
             \item обновление одного поля
             \item transaction\_sync
         \end{itemize}
@@ -900,7 +907,7 @@
     \begin{center}
         \textbf{Выборка 50\%, обновление 50\%}
         \begin{itemize}[label={}]
-            \item "Маленький документ"
+            \item "Простой документ"
             \item обновление одного поля
             \item journaled
         \end{itemize}
@@ -979,6 +986,19 @@
     %\textbf{Чтение, изменение, запись}
     %\end{center}
 %\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{}
+    \vspace{10pt}
+    \begin{itemize}[leftmargin=*, label={\MVRightarrow}]
+        \item <+-> Документов в RDBMS можно не бояться
+        \item <+-> Приведенные бенчмарки - "подсказки"
+        \item <+-> Необходимы свои тесты для нагрузки
+    \end{itemize}
+\end{frame}
+\note{
+    чтение, поиск и вставка - "правильный вид нагрузки" для реляционной базы данных по мнению финна (вспомнить имя)
+}
 
 \usebackgroundtemplate{\includegraphics[width=\paperwidth]{title_background.png}}%
 \fontsize{17pt}{18}\selectfont
