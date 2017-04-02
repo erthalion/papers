@@ -343,6 +343,12 @@
 \end{frame}
 \fontsize{17pt}{18}\selectfont
 
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{feature.jpg}}%
+\begin{frame}
+    \frametitle{}
+\end{frame}
+
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{slide_background.png}}
 \begin{frame}
     \frametitle{}
     \begin{center}
@@ -487,7 +493,7 @@
 \section{Тестирование}
 \fontsize{17pt}{18}\selectfont
 
-\usebackgroundtemplate{\includegraphics[width=\paperwidth]{great_performance.jpg}}%
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{great_performance3.jpg}}%
 \begin{frame}
     \frametitle{}
 \end{frame}
@@ -845,7 +851,7 @@
         \textbf{Вставка документов}
         \begin{itemize}[label={}]
             \item "Простой документ"
-            \item journaled
+            \item default write concern
         \end{itemize}
     \end{center}
 \end{frame}
@@ -856,6 +862,27 @@
     %\vspace{-10pt}
     \begin{figure}
         \includegraphics[width=0.75\textwidth,center]{benchmarks/insert_throughput.png}
+    \end{figure}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Вставка документов}
+        \begin{itemize}[label={}]
+            \item "Простой документ"
+            \item journaled
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-10pt}
+    \begin{figure}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/insert_throughput_journaled.png}
     \end{figure}
     \end{center}
 \end{frame}
@@ -997,7 +1024,7 @@
     \end{itemize}
 \end{frame}
 \note{
-    чтение, поиск и вставка - "правильный вид нагрузки" для реляционной базы данных по мнению финна (вспомнить имя)
+    чтение, поиск и вставка - "правильный вид нагрузки" для реляционной базы данных по мнению финна Markus Winand
 }
 
 \usebackgroundtemplate{\includegraphics[width=\paperwidth]{title_background.png}}%
