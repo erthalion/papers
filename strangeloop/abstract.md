@@ -6,7 +6,7 @@ actually happens when you're using one database. E.g. in the dimension of
 "normalization - denormalization" any document oriented database limits you in
 terms of reports and data joins, and any relational database limits you in
 terms of schema flexibility. And exactly because of that there is a clear trend
-amongst different databases to support data in different formats.
+among different databases to support data in different formats.
 
 Everyone already knows that PostgreSQL provides `jsonb` data type as a nice
 solution for the problem described above. It gives you flexibility of using
