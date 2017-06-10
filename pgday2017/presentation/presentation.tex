@@ -26,6 +26,7 @@
 \usepackage{verbatim}
 \usepackage{smartdiagram}
 \usesmartdiagramlibrary{additions}
+\usetikzlibrary{trees}
 %\usemintedstyle{monokai}
 
 \usetikzlibrary{shapes,arrows,positioning}
@@ -192,6 +193,93 @@
     \end{center}
 \end{frame}
 
+\fontsize{14pt}{16}\selectfont
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \tikzstyle{every node}=[
+        draw=gray,
+        thick,
+        anchor=west,
+        rounded corners,
+        top color=white,
+        bottom color=gray!10,
+        minimum width=2cm,
+        minimum height=1cm,
+    ]
+    \tikzstyle{empty}=[
+        draw=gray,
+        thick,
+        anchor=west,
+        rounded corners,
+        top color=white,
+        bottom color=gray!10,
+        minimum width=0cm,
+        minimum height=0cm,
+    ]
+    \tikzstyle{selected}=[draw=red,fill=red!30]
+    \tikzstyle{optional}=[dashed,fill=gray!50]
+    \begin{tikzpicture}[%
+      grow via three points={one child at (0.5,-1.2) and
+      two children at (0.5,-1.2) and (0.5,-2.4)},
+      edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
+      \node {\textbf{Jsonb}}
+        child { node {\textbf{document size}}}
+        child { node {\textbf{root}}}
+        child { node {\textbf{container}}
+          child { node {\textbf{JEntry}}
+              child { node {\textbf{JEntry}}}
+          }
+          child { node [empty] {...}}
+        }
+        child [missing] {}
+        child [missing] {}
+        child { node {\textbf{content}}};
+    \end{tikzpicture}
+
+    \end{center}
+\end{frame}
+
+\fontsize{14pt}{16}\selectfont
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \tikzstyle{every node}=[
+        draw=gray,
+        thick,
+        anchor=west,
+        rounded corners,
+        top color=white,
+        bottom color=gray!10,
+        minimum width=2cm,
+        minimum height=1cm,
+    ]
+    \tikzstyle{empty}=[
+        draw=gray,
+        thick,
+        anchor=west,
+        rounded corners,
+        top color=white,
+        bottom color=gray!10,
+        minimum width=0cm,
+        minimum height=0cm,
+    ]
+    \tikzstyle{selected}=[draw=red,fill=red!30]
+    \tikzstyle{optional}=[dashed,fill=gray!50]
+    \begin{tikzpicture}[%
+      grow via three points={one child at (0.5,-1.2) and
+      two children at (0.5,-1.2) and (0.5,-2.4)},
+      edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
+      \node {\textbf{JEntry}}
+        child { node {\textbf{length or offset}}}
+        child { node {\textbf{value type}}}
+        child { node {\textbf{value length}}};
+    \end{tikzpicture}
+
+    \end{center}
+\end{frame}
+
+\fontsize{17pt}{19}\selectfont
 \begin{frame}
     \frametitle{}
     \begin{center}
@@ -394,10 +482,10 @@
         \begin{itemize}[label={}]
             \item “простой” документ
             \item 10 ключей и значений (100 символов)
-            \item 
+            \item
             \item “большой” документ
             \item 100 ключей и значений (200 символов)
-            \item 
+            \item
             \item “сложный” документ
             \item 100 ключей, 3 уровня вложенности (100 символов)
         \end{itemize}
@@ -820,6 +908,55 @@
     \begin{figure}
         \includegraphics[width=0.75\textwidth,center]{benchmarks/update_btree_large_latency.png}
     \end{figure}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{JSON vs JSONB}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{TOAST\_TUPLE\_THRESHOLD}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Jsonb array}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Jsonb type convertion}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Relation vs jsonb (check, view/virtual fields etc)}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Index maintaining}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Cluster}
     \end{center}
 \end{frame}
 
