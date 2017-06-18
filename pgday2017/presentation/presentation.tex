@@ -225,16 +225,13 @@
       edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
       \node {\textbf{Jsonb}}
         child { node {\textbf{document size}}}
-        child { node {\textbf{root}}}
         child { node {\textbf{container}}
           child { node {\textbf{JEntry}}
-              child { node {\textbf{JEntry}}}
+              child { node {\textbf{Container}}}
           }
           child { node [empty] {...}}
-        }
-        child [missing] {}
-        child [missing] {}
-        child { node {\textbf{content}}};
+          child { node {\textbf{content}}}
+        };
     \end{tikzpicture}
 
     \end{center}
@@ -270,11 +267,51 @@
       grow via three points={one child at (0.5,-1.2) and
       two children at (0.5,-1.2) and (0.5,-2.4)},
       edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
-      \node {\textbf{JEntry}}
-        child { node {\textbf{length or offset}}}
-        child { node {\textbf{value type}}}
-        child { node {\textbf{value length}}};
+      \node {\textbf{Container}}
+        child { node {\textbf{type}}}
+        child { node {\textbf{number of items}}}
+        child { node {\textbf{JEntry}}
+            child { node {\textbf{length or offset}}}
+            child { node {\textbf{value type}}}
+            child { node {\textbf{value length}}}
+        };
     \end{tikzpicture}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Object}
+    \vspace{10pt}
+
+    \smartdiagramset{
+        uniform color list=gray!10 for 3 items,
+        uniform arrow color=true,
+        arrow color=black!70,
+        back arrow disabled=true,
+        module x sep=2.5cm,
+        text width=1.0cm,
+    }
+    \smartdiagram[flow diagram:horizontal]{
+        \textbf{Key}, \textbf{Key}, $\ldots$, \textbf{Value}, \textbf{Value}, $\ldots$
+    }
+
+    \textbf{Array}
+    \vspace{10pt}
+
+    \smartdiagramset{
+        uniform color list=gray!10 for 3 items,
+        uniform arrow color=true,
+        arrow color=black!70,
+        back arrow disabled=true,
+        module x sep=2.5cm,
+        text width=1.0cm,
+    }
+    \smartdiagram[flow diagram:horizontal]{
+        \textbf{Item}, \textbf{Item}, \textbf{Item}, \textbf{Item}, $\ldots$
+    }
 
     \end{center}
 \end{frame}
