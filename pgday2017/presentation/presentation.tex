@@ -183,13 +183,41 @@
 \fontsize{17pt}{18}\selectfont
 
 
+%\begin{frame}
+    %\frametitle{}
+    %\begin{center}
+    %\textbf{Jsonb}
+    %\begin{figure}
+        %\includegraphics[width=1.0\textwidth,center]{jsonb.png}
+    %\end{figure}
+    %\end{center}
+%\end{frame}
+
 \begin{frame}
     \frametitle{}
     \begin{center}
-    \textbf{Jsonb}
+        \textbf{Performance-related factors}
+        \pause
+        \begin{itemize}[label={\MVRightarrow}]
+            \item <+-> On disk representation
+            \item <+-> Memory representation
+            \item <+-> Indexing support
+        \end{itemize}
+    \end{center}
+\end{frame}
+\note{
+    оптимизация по размеру и пробеганию
+}
+
+\fontsize{17pt}{19}\selectfont
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+
     \begin{figure}
-        \includegraphics[width=1.0\textwidth,center]{jsonb.png}
+        \includegraphics[width=0.8\textwidth,center]{fry_disk_json.jpg}
     \end{figure}
+
     \end{center}
 \end{frame}
 
@@ -202,8 +230,8 @@
         thick,
         anchor=west,
         rounded corners,
-        top color=white,
-        bottom color=gray!10,
+        top color=gray!7,
+        bottom color=gray!7,
         minimum width=2cm,
         minimum height=1cm,
     ]
@@ -212,8 +240,8 @@
         thick,
         anchor=west,
         rounded corners,
-        top color=white,
-        bottom color=gray!10,
+        top color=gray!7,
+        bottom color=gray!7,
         minimum width=0cm,
         minimum height=0cm,
     ]
@@ -225,12 +253,12 @@
       edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
       \node {\textbf{Jsonb}}
         child { node {\textbf{document size}}}
-        child { node {\textbf{container}}
-          child { node {\textbf{JEntry}}
-              child { node {\textbf{Container}}}
+        child { node {\textbf{node}}
+          child { node {\textbf{node}}
+              child { node {\textbf{JEntry}}}
+              child { node {\textbf{content}}}
           }
           child { node [empty] {...}}
-          child { node {\textbf{content}}}
         };
     \end{tikzpicture}
 
@@ -246,18 +274,29 @@
         thick,
         anchor=west,
         rounded corners,
-        top color=white,
-        bottom color=gray!10,
+        top color=gray!7,
+        bottom color=gray!7,
         minimum width=2cm,
         minimum height=1cm,
     ]
+    %\tikzstyle{selected}=[
+        %draw=gray,
+        %thick,
+        %anchor=west,
+        %rounded corners,
+        %top color=red!7,
+        %bottom color=red!7,
+        %fill=red,
+        %minimum width=2cm,
+        %minimum height=1cm,
+    %]
     \tikzstyle{empty}=[
         draw=gray,
         thick,
         anchor=west,
         rounded corners,
-        top color=white,
-        bottom color=gray!10,
+        top color=gray!7,
+        bottom color=gray!7,
         minimum width=0cm,
         minimum height=0cm,
     ]
@@ -267,7 +306,51 @@
       grow via three points={one child at (0.5,-1.2) and
       two children at (0.5,-1.2) and (0.5,-2.4)},
       edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
-      \node {\textbf{Container}}
+      \node {\textbf{Jsonb}}
+        child { node {\textbf{document size}}}
+        child { node {\textbf{node}}
+          child { node [color=red!45, text=black, top color=red!25, bottom color=red!25] {\textbf{node}}
+              child { node [color=red!45, text=black, top color=red!25, bottom color=red!25] {\textbf{JEntry}}}
+              child { node {\textbf{content}}}
+          }
+          child { node [empty] {...}}
+        };
+    \end{tikzpicture}
+
+    \end{center}
+\end{frame}
+
+\fontsize{14pt}{16}\selectfont
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \tikzstyle{every node}=[
+        draw=gray,
+        thick,
+        anchor=west,
+        rounded corners,
+        top color=gray!7,
+        bottom color=gray!7,
+        minimum width=2cm,
+        minimum height=1cm,
+    ]
+    \tikzstyle{empty}=[
+        draw=gray,
+        thick,
+        anchor=west,
+        rounded corners,
+        top color=gray!7,
+        bottom color=gray!7,
+        minimum width=0cm,
+        minimum height=0cm,
+    ]
+    \tikzstyle{selected}=[draw=red,fill=red!30]
+    \tikzstyle{optional}=[dashed,fill=gray!50]
+    \begin{tikzpicture}[%
+      grow via three points={one child at (0.5,-1.2) and
+      two children at (0.5,-1.2) and (0.5,-2.4)},
+      edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
+      \node {\textbf{Node Header}}
         child { node {\textbf{type}}}
         child { node {\textbf{number of items}}}
         child { node {\textbf{JEntry}}
@@ -280,6 +363,8 @@
     \end{center}
 \end{frame}
 
+\tikzset{every shadow/.style={fill=none,shadow scale=0}}
+
 \begin{frame}
     \frametitle{}
     \begin{center}
@@ -287,7 +372,7 @@
     \vspace{10pt}
 
     \smartdiagramset{
-        uniform color list=gray!10 for 3 items,
+        uniform color list=gray!10!gray!10 for 6 items,
         uniform arrow color=true,
         arrow color=black!70,
         back arrow disabled=true,
@@ -334,32 +419,6 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-    \textbf{TOAST}
-
-    \smartdiagramset{
-        uniform color list=gray!10 for 4 items,
-        uniform arrow color=true,
-        arrow color=black!70,
-        back arrow disabled=true,
-        module x sep=3.5cm,
-        text width=2.5cm,
-    }
-    \smartdiagram[flow diagram:horizontal]{
-        Jsonb, Compression, Chunks, Toast table
-    }
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \textbf{JB\_OFFSET\_STRIDE}
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
     \textbf{Bson}
     \begin{figure}
         \includegraphics[width=1.0\textwidth,center]{bson.png}
@@ -394,18 +453,29 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-        \textbf{Performance-related factors}
-        \pause
-        \begin{itemize}[label={\MVRightarrow}]
-            \item <+-> Структура данных на диске
-            \item <+-> Сериализация данных
-            \item <+-> Поддержка индексов
-        \end{itemize}
+    \textbf{TOAST}
+    \vspace{20pt}
+
+    \smartdiagramset{
+        uniform color list=gray!10!gray!10 for 4 items,
+        uniform arrow color=true,
+        arrow color=black!70,
+        back arrow disabled=true,
+        module x sep=3.5cm,
+        text width=2.5cm,
+    }
+    \smartdiagram[flow diagram:horizontal]{
+        \textbf{Jsonb}, \textbf{Compression}, \textbf{Chunks}, \textbf{Toast table}
+    }
     \end{center}
 \end{frame}
-\note{
-    оптимизация по размеру и пробеганию
-}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{JB\_OFFSET\_STRIDE}
+    \end{center}
+\end{frame}
 
 \begin{frame}
     \frametitle{}
