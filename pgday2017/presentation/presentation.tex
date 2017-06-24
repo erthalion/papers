@@ -199,8 +199,8 @@
         \textbf{Performance-related factors}
         \pause
         \begin{itemize}[label={\MVRightarrow}]
-            \item <+-> On disk representation
-            \item <+-> Memory representation
+            \item <+-> On-disk representation
+            \item <+-> In-memory representation
             \item <+-> Indexing support
         \end{itemize}
     \end{center}
@@ -789,24 +789,24 @@
 
 \begin{frame}
     \frametitle{}
-    \textbf{Сериализация данных}
+    \textbf{In-memory representation}
     \begin{center}
         \begin{itemize}[label={\MVRightarrow}]
-            \item MongoDB -- дерево Document -> Elements
-            \item Postgresql -- JsonbValue со списком элементов
-            \item MySQL -- класс Value
+            \item MongoDB -- Document -> Elements
+            \item Postgresql -- JsonbValue
+            \item MySQL -- Value
         \end{itemize}
     \end{center}
 \end{frame}
 
 \begin{frame}
     \frametitle{}
-    \textbf{Индексы}
+    \textbf{Indexing support}
     \begin{center}
         \begin{itemize}[label={\MVRightarrow}]
-            \item Postgresql -- общий индекс, индексы для полей
-            \item MongoDB -- индексы для полей
-            \item MySQL -- виртуальные колонки для индексирования
+            \item Postgresql -- BTree, GIN
+            \item MongoDB -- BTree
+            \item MySQL -- virtual columns, BTree
         \end{itemize}
     \end{center}
 \end{frame}
