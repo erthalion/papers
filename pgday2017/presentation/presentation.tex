@@ -350,13 +350,13 @@
       grow via three points={one child at (0.5,-1.2) and
       two children at (0.5,-1.2) and (0.5,-2.4)},
       edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
-      \node {\textbf{Node Header}}
+      \node {\textbf{Jsonb Header}}
         child { node {\textbf{type}}}
         child { node {\textbf{number of items}}}
         child { node {\textbf{JEntry}}
-            child { node {\textbf{length or offset}}}
+            child { node {\textbf{length or offset?}}}
             child { node {\textbf{value type}}}
-            child { node {\textbf{value length}}}
+            child { node {\textbf{value length or offset}}}
         };
     \end{tikzpicture}
 
@@ -364,42 +364,6 @@
 \end{frame}
 
 \tikzset{every shadow/.style={fill=none,shadow scale=0}}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \textbf{Object}
-    \vspace{10pt}
-
-    \smartdiagramset{
-        uniform color list=gray!10!gray!10 for 6 items,
-        uniform arrow color=true,
-        arrow color=black!70,
-        back arrow disabled=true,
-        module x sep=2.5cm,
-        text width=1.0cm,
-    }
-    \smartdiagram[flow diagram:horizontal]{
-        \textbf{Key}, \textbf{Key}, $\ldots$, \textbf{Value}, \textbf{Value}, $\ldots$
-    }
-
-    \textbf{Array}
-    \vspace{10pt}
-
-    \smartdiagramset{
-        uniform color list=gray!10 for 3 items,
-        uniform arrow color=true,
-        arrow color=black!70,
-        back arrow disabled=true,
-        module x sep=2.5cm,
-        text width=1.0cm,
-    }
-    \smartdiagram[flow diagram:horizontal]{
-        \textbf{Item}, \textbf{Item}, \textbf{Item}, \textbf{Item}, $\ldots$
-    }
-
-    \end{center}
-\end{frame}
 
 \fontsize{17pt}{19}\selectfont
 \begin{frame}
@@ -416,13 +380,130 @@
     \end{center}
 \end{frame}
 
+\fontsize{14pt}{16}\selectfont
 \begin{frame}
     \frametitle{}
     \begin{center}
-    \textbf{Bson}
-    \begin{figure}
-        \includegraphics[width=1.0\textwidth,center]{bson.png}
-    \end{figure}
+    \tikzstyle{every node}=[
+        draw=gray,
+        thick,
+        anchor=west,
+        rounded corners,
+        top color=gray!7,
+        bottom color=gray!7,
+        minimum width=2cm,
+        minimum height=1cm,
+    ]
+    \tikzstyle{empty}=[
+        draw=gray,
+        thick,
+        anchor=west,
+        rounded corners,
+        top color=gray!7,
+        bottom color=gray!7,
+        minimum width=0cm,
+        minimum height=0cm,
+    ]
+    \tikzstyle{selected}=[draw=red,fill=red!30]
+    \tikzstyle{optional}=[dashed,fill=gray!50]
+    \begin{tikzpicture}[%
+      grow via three points={one child at (0.5,-1.2) and
+      two children at (0.5,-1.2) and (0.5,-2.4)},
+      edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
+      \node {\textbf{Bson}}
+        child { node {\textbf{document size}}}
+        child { node {\textbf{node}}
+          child { node {\textbf{node}}
+              child { node {\textbf{Header}}}
+              child { node {\textbf{Content}}}
+          }
+          child { node [empty] {...}}
+        };
+    \end{tikzpicture}
+
+    \end{center}
+\end{frame}
+
+\fontsize{14pt}{16}\selectfont
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \tikzstyle{every node}=[
+        draw=gray,
+        thick,
+        anchor=west,
+        rounded corners,
+        top color=gray!7,
+        bottom color=gray!7,
+        minimum width=2cm,
+        minimum height=1cm,
+    ]
+    \tikzstyle{empty}=[
+        draw=gray,
+        thick,
+        anchor=west,
+        rounded corners,
+        top color=gray!7,
+        bottom color=gray!7,
+        minimum width=0cm,
+        minimum height=0cm,
+    ]
+    \tikzstyle{selected}=[draw=red,fill=red!30]
+    \tikzstyle{optional}=[dashed,fill=gray!50]
+    \begin{tikzpicture}[%
+      grow via three points={one child at (0.5,-1.2) and
+      two children at (0.5,-1.2) and (0.5,-2.4)},
+      edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
+      \node {\textbf{Bson}}
+        child { node {\textbf{document size}}}
+        child { node {\textbf{node}}
+          child { node {\textbf{node}}
+              child { node [color=red!45, text=black, top color=red!25, bottom color=red!25] {\textbf{Header}}}
+              child { node {\textbf{Content}}}
+          }
+          child { node [empty] {...}}
+        };
+    \end{tikzpicture}
+
+    \end{center}
+\end{frame}
+
+\fontsize{14pt}{16}\selectfont
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \tikzstyle{every node}=[
+        draw=gray,
+        thick,
+        anchor=west,
+        rounded corners,
+        top color=gray!7,
+        bottom color=gray!7,
+        minimum width=2cm,
+        minimum height=1cm,
+    ]
+    \tikzstyle{empty}=[
+        draw=gray,
+        thick,
+        anchor=west,
+        rounded corners,
+        top color=gray!7,
+        bottom color=gray!7,
+        minimum width=0cm,
+        minimum height=0cm,
+    ]
+    \tikzstyle{selected}=[draw=red,fill=red!30]
+    \tikzstyle{optional}=[dashed,fill=gray!50]
+    \begin{tikzpicture}[%
+      grow via three points={one child at (0.5,-1.2) and
+      two children at (0.5,-1.2) and (0.5,-2.4)},
+      edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
+      \node {\textbf{Bson Header}}
+        child { node {\textbf{Value type}}}
+        child { node {\textbf{Key name}}}
+        child { node {\textbf{Value size}}};
+    \end{tikzpicture}
+
     \end{center}
 \end{frame}
 
@@ -440,13 +521,221 @@
     \end{center}
 \end{frame}
 
+\fontsize{14pt}{16}\selectfont
 \begin{frame}
     \frametitle{}
     \begin{center}
-    \textbf{MySQL json}
+    \tikzstyle{every node}=[
+        draw=gray,
+        thick,
+        anchor=west,
+        rounded corners,
+        top color=gray!7,
+        bottom color=gray!7,
+        minimum width=2cm,
+        minimum height=1cm,
+    ]
+    \tikzstyle{empty}=[
+        draw=gray,
+        thick,
+        anchor=west,
+        rounded corners,
+        top color=gray!7,
+        bottom color=gray!7,
+        minimum width=0cm,
+        minimum height=0cm,
+    ]
+    \tikzstyle{selected}=[draw=red,fill=red!30]
+    \tikzstyle{optional}=[dashed,fill=gray!50]
+    \begin{tikzpicture}[%
+      grow via three points={one child at (0.5,-1.2) and
+      two children at (0.5,-1.2) and (0.5,-2.4)},
+      edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
+      \node {\textbf{MySQL Json}}
+        child { node {\textbf{node}}
+          child { node {\textbf{node}}
+              child { node {\textbf{Type}}}
+              child { node {\textbf{Value}}}
+          }
+          child { node [empty] {...}}
+        };
+    \end{tikzpicture}
+
+    \end{center}
+\end{frame}
+
+\fontsize{14pt}{16}\selectfont
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \tikzstyle{every node}=[
+        draw=gray,
+        thick,
+        anchor=west,
+        rounded corners,
+        top color=gray!7,
+        bottom color=gray!7,
+        minimum width=2cm,
+        minimum height=1cm,
+    ]
+    \tikzstyle{empty}=[
+        draw=gray,
+        thick,
+        anchor=west,
+        rounded corners,
+        top color=gray!7,
+        bottom color=gray!7,
+        minimum width=0cm,
+        minimum height=0cm,
+    ]
+    \tikzstyle{selected}=[draw=red,fill=red!30]
+    \tikzstyle{optional}=[dashed,fill=gray!50]
+    \begin{tikzpicture}[%
+      grow via three points={one child at (0.5,-1.2) and
+      two children at (0.5,-1.2) and (0.5,-2.4)},
+      edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
+      \node {\textbf{MySQL Json}}
+        child { node {\textbf{node}}
+          child { node {\textbf{node}}
+              child { node {\textbf{Type}}}
+              child { node [color=red!45, text=black, top color=red!25, bottom color=red!25]{\textbf{Value}}}
+          }
+          child { node [empty] {...}}
+        };
+    \end{tikzpicture}
+
+    \end{center}
+\end{frame}
+
+\fontsize{14pt}{16}\selectfont
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \tikzstyle{every node}=[
+        draw=gray,
+        thick,
+        anchor=west,
+        rounded corners,
+        top color=gray!7,
+        bottom color=gray!7,
+        minimum width=2cm,
+        minimum height=1cm,
+    ]
+    \tikzstyle{empty}=[
+        draw=gray,
+        thick,
+        anchor=west,
+        rounded corners,
+        top color=gray!7,
+        bottom color=gray!7,
+        minimum width=0cm,
+        minimum height=0cm,
+    ]
+    \tikzstyle{selected}=[draw=red,fill=red!30]
+    \tikzstyle{optional}=[dashed,fill=gray!50]
+    \begin{tikzpicture}[%
+      grow via three points={one child at (0.5,-1.2) and
+      two children at (0.5,-1.2) and (0.5,-2.4)},
+      edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
+      \node {\textbf{MySQL Json Object}}
+        child { node {\textbf{Count of elements}}}
+        child { node {\textbf{Size}}}
+        child { node {\textbf{Pointers to keys}}}
+        child { node {\textbf{Pointers to values}}}
+        child { node {\textbf{Keys}}}
+        child { node {\textbf{Values}}};
+    \end{tikzpicture}
+
+    \end{center}
+\end{frame}
+\note{
+    Json value can be inlined (so, without pointer), if
+    it's a literal of small integer. All values are at the end
+    independently from nesting level (for PG all values for one
+    nesting level are at the end).
+}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \inputminted[
+        fontsize=\Large,
+    ]{bash}{sql/mysql.sh}
+
     \begin{figure}
-        \includegraphics[width=1.0\textwidth,center]{mysql_json.png}
+        \includegraphics[width=1.0\textwidth,center]{mysql_binary.png}
     \end{figure}
+
+    \end{center}
+\end{frame}
+
+\fontsize{14pt}{16}\selectfont
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \tikzstyle{every node}=[
+        draw=gray,
+        thick,
+        anchor=west,
+        rounded corners,
+        top color=gray!7,
+        bottom color=gray!7,
+        minimum width=2cm,
+        minimum height=0.5cm,
+    ]
+    \tikzstyle{empty}=[
+        draw=gray,
+        thick,
+        anchor=west,
+        rounded corners,
+        top color=gray!7,
+        bottom color=gray!7,
+        minimum width=0cm,
+        minimum height=0cm,
+    ]
+    \tikzstyle{selected}=[draw=red,fill=red!30]
+    \tikzstyle{optional}=[dashed,fill=gray!50]
+
+    \begin{columns}[T,onlytextwidth]
+    \column{0.1\textwidth}
+    \column{0.4\textwidth}
+    \begin{tikzpicture}[%
+      grow via three points={one child at (0.5,-1.0) and
+      two children at (0.5,-1.0) and (0.5,-2.0)},
+      edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
+      \node {\textbf{Bson}}
+        child { node {\textbf{Key}}}
+        child { node {\textbf{Value}}
+          child { node {\textbf{Key}}}
+          child { node {\textbf{Value}}}
+        }
+        child [missing] {}
+        child [missing] {}
+        child { node {\textbf{Key}}}
+        child { node {\textbf{Value}}}
+        child { node [empty] {...}};
+    \end{tikzpicture}
+
+    \column{0.4\textwidth}
+    \begin{tikzpicture}[%
+      grow via three points={one child at (0.5,-1.0) and
+      two children at (0.5,-1.0) and (0.5,-2.0)},
+      edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
+      \node {\textbf{Jsonb/MySQL Json}}
+        child { node {\textbf{Key}}}
+        child { node {\textbf{Key}}}
+        child { node {\textbf{Value}}
+          child { node {\textbf{Key}}}
+          child { node {\textbf{Value}}}
+        }
+        child [missing] {}
+        child [missing] {}
+        child { node {\textbf{Value}}}
+        child { node [empty] {...}};
+    \end{tikzpicture}
+    \column{0.1\textwidth}
+    \end{columns}
+
     \end{center}
 \end{frame}
 
@@ -469,11 +758,24 @@
     }
     \end{center}
 \end{frame}
+\note{
+    compression - mongodb - snappy
+                - pg - lz variation
+                - mysql - lz variation
+}
 
 \begin{frame}
     \frametitle{}
     \begin{center}
     \textbf{JB\_OFFSET\_STRIDE}
+
+    \begin{itemize}[label={\MVRightarrow}]
+        \item JEntry may contains a value lenght or offset
+        \item Offset = access speed
+        \item Length = compressibility
+        \item Every \textbf{JB\_OFFSET\_STRIDE}'th JEntry contains an offset, rest of them contain length.
+        \item Rest of them contain length.
+    \end{itemize}
     \end{center}
 \end{frame}
 
