@@ -756,6 +756,14 @@
     \smartdiagram[flow diagram:horizontal]{
         \textbf{Jsonb}, \textbf{Compression}, \textbf{Chunks}, \textbf{Toast table}
     }
+
+    \vspace{20pt}
+    \begin{itemize}[label={\MVRightarrow}]
+        \item TOAST\_TUPLE\_THRESHOLD bytes (normally 2 kB)
+        \item PostgreSQL and MySQL use LZ variation
+        \item MongoDB uses snappy block compression
+    \end{itemize}
+
     \end{center}
 \end{frame}
 \note{
