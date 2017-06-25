@@ -182,17 +182,6 @@
 \section{Internals}
 \fontsize{17pt}{18}\selectfont
 
-
-%\begin{frame}
-    %\frametitle{}
-    %\begin{center}
-    %\textbf{Jsonb}
-    %\begin{figure}
-        %\includegraphics[width=1.0\textwidth,center]{jsonb.png}
-    %\end{figure}
-    %\end{center}
-%\end{frame}
-
 \begin{frame}
     \frametitle{}
     \begin{center}
@@ -792,9 +781,10 @@
     \textbf{In-memory representation}
     \begin{center}
         \begin{itemize}[label={\MVRightarrow}]
-            \item MongoDB -- Document -> Elements
-            \item Postgresql -- JsonbValue
-            \item MySQL -- Value
+            \item Tree-like representation (JsonbValue, Document, Json\_dom)
+            \item Little bit more expensive but more convenient to work with
+            \item Mostly in use to modify data (except MySQL)
+            \item Most of the read operations use on-disk representation
         \end{itemize}
     \end{center}
 \end{frame}
