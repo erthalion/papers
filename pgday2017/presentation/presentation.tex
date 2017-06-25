@@ -170,10 +170,9 @@
     \begin{center}
         \pause
         \begin{itemize}[label={\MVRightarrow}]
-            \item <+-> Jsonb internals (a.k.a кишки)
-            \item <+-> Performance-related factors
-            \item <+-> How to shoot yourself in the foot
+            \item <+-> Jsonb internals and performance-related factors
             \item <+-> Benchmarks
+            \item <+-> How to shoot yourself in the foot
         \end{itemize}
     \end{center}
 \end{frame}
@@ -1288,16 +1287,6 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-    %\vspace{-10pt}
-    \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/select_jsonb_path_ops_no_parse_throughput.png}
-    \end{figure}
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
         \textbf{Document slice}
         \begin{itemize}[label={}]
             \item "large" document
@@ -1353,18 +1342,6 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-        \textbf{Select, GIN}
-        \begin{itemize}[label={}]
-            \item "simple" document
-            \item jsonb\_path\_ops
-            \item where data @> jsonb\_build\_object('key', 'value')
-        \end{itemize}
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
         \textbf{TOAST\_TUPLE\_THRESHOLD}
         \begin{itemize}[label={}]
             \item "simple" document
@@ -1382,6 +1359,28 @@
         \includegraphics[width=0.75\textwidth,center]{benchmarks/workload_c_toast.png}
     \end{figure}
 
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Select, GIN}
+        \begin{itemize}[label={}]
+            \item "simple" document
+            \item jsonb\_path\_ops
+            \item where data @> jsonb\_build\_object('key', 'value')
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-10pt}
+    \begin{figure}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/select_jsonb_path_ops_no_parse_throughput.png}
+    \end{figure}
     \end{center}
 \end{frame}
 
