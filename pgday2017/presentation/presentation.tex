@@ -1221,6 +1221,43 @@
     \frametitle{}
     \begin{center}
         \textbf{JSON vs JSONB}
+        \begin{itemize}[label={}]
+            \item "simple" document
+            \item btree
+            \item insert
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-10pt}
+    \begin{figure}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/postgresql_load_json_jsonb.png}
+    \end{figure}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{JSON vs JSONB}
+        \begin{itemize}[label={}]
+            \item "simple" document
+            \item btree
+            \item select
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-10pt}
+    \begin{figure}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/postgresql_select_json_jsonb.png}
+    \end{figure}
     \end{center}
 \end{frame}
 
@@ -1319,6 +1356,22 @@
     \frametitle{}
     \begin{center}
         \textbf{TOAST\_TUPLE\_THRESHOLD}
+        \begin{itemize}[label={}]
+            \item "simple" document
+            \item 40 threads
+            \item different document size
+            \item select
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \begin{figure}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/workload_c_toast.png}
+    \end{figure}
+
     \end{center}
 \end{frame}
 
