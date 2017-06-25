@@ -727,6 +727,9 @@
 
     \end{center}
 \end{frame}
+\note{
+    MySQL - pointers, PG - implicit element order
+}
 
 \begin{frame}
     \frametitle{}
@@ -770,8 +773,8 @@
         \item JEntry may contains a value lenght or offset
         \item Offset = access speed
         \item Length = compressibility
-        \item Every \textbf{JB\_OFFSET\_STRIDE}'th JEntry contains an offset, rest of them contain length.
-        \item Rest of them contain length.
+        \item Every \textbf{JB\_OFFSET\_STRIDE}'th JEntry contains an offset
+        \item Rest of them contain length
     \end{itemize}
     \end{center}
 \end{frame}
@@ -794,12 +797,16 @@
     \textbf{Indexing support}
     \begin{center}
         \begin{itemize}[label={\MVRightarrow}]
-            \item Postgresql -- BTree, GIN
-            \item MongoDB -- BTree
-            \item MySQL -- virtual columns, BTree
+            \item Postgresql -- single field, multiple fields, entire document
+            \item MongoDB -- single field, multiple fields
+            \item MySQL -- virtual columns, single field, multiple fields
         \end{itemize}
     \end{center}
 \end{frame}
+\note{
+    entire document - all posible paths are indexed
+    multiple fields - multicolumd index in postgresql, compount index in mongodb
+}
 
 \begin{frame}
     \frametitle{}
@@ -807,14 +814,14 @@
     \begin{center}
         \begin{itemize}[label={\MVRightarrow}]
             \item JGIN\_MAXLENGTH
-            \item Index rebuild
-            \item Different types of index
+            \item jsonb\_path
+            \item jsonb\_path\_ops
         \end{itemize}
     \end{center}
 \end{frame}
 
 \fontsize{13pt}{14}\selectfont
-\section{Тестирование}
+\section{Benchmarks}
 \fontsize{17pt}{18}\selectfont
 
 \usebackgroundtemplate{\includegraphics[width=\paperwidth]{great_performance3.jpg}}%
@@ -831,37 +838,12 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-        \begin{itemize}[label={}]
-            \item PostgreSQL 9.5.4
-            \item MySQL 5.7.9
-            \item MongoDB 3.2.9
-            \item YCSB 0.9
-            \item $10^6$ rows and operations
-            \item AWS EC2
-        \end{itemize}
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-        \textbf{Воспроизводимость}
-        \begin{itemize}[label={}]
-            \item \href{https://github.com/erthalion/YCSB}{erthalion/YCSB}
-            \item \href{https://github.com/erthalion/ansible-ycsb}{erthalion/ansible-ycsb}
-        \end{itemize}
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
         \textbf{AWS EC2}
         \begin{itemize}[label={}]
             \item m4.xlarge instance
             \item separate instance (database and generator)
             \item 16GB memory, 4 core 2.3GHz
-            \item Ubuntu 14.04
+            \item Ubuntu 16.04
             \item Same VPC and placement group
             \item AMI that supports HVM virtualization type
             \item at least 4 rounds of benchmark
@@ -872,10 +854,25 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-        \textbf{Конфигурация}
+        \begin{itemize}[label={}]
+            \item PostgreSQL 9.6.3
+            \item MySQL 5.7.9
+            \item MongoDB 3.4.4
+            \item YCSB 0.9
+            \item $10^6$ rows and operations
+            \item AWS EC2
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Configuration}
         \begin{itemize}[label={}]
             \item shared\_buffers
             \item effective\_cache\_size
+            \item max\_wal\_size
             \item innodb\_buffer\_pool\_size
             \item write concern level (journaled or transaction\_sync)
         \end{itemize}
@@ -885,16 +882,16 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-        \textbf{Виды документов}
+        \textbf{Document types}
         \begin{itemize}[label={}]
-            \item “простой” документ
-            \item 10 ключей и значений (100 символов)
+            \item “simple” document
+            \item 10 key/value pairs (100 characters)
             \item
-            \item “большой” документ
-            \item 100 ключей и значений (200 символов)
+            \item “large” document
+            \item 100 key/value pairs (200 characters)
             \item
-            \item “сложный” документ
-            \item 100 ключей, 3 уровня вложенности (100 символов)
+            \item “complex” document
+            \item 100 keys, 3 nesting levels (100 characters)
         \end{itemize}
     \end{center}
 \end{frame}
@@ -902,9 +899,9 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-        \textbf{Простая выборка по ключу с}
+        \textbf{Select, GIN}
         \begin{itemize}[label={}]
-            \item "Простой документ"
+            \item "simple" document
             \item jsonb\_path\_ops
             \item where data @> '{"key": "value"}'::jsonb
         \end{itemize}
@@ -934,31 +931,9 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-        \textbf{Простая выборка по ключу}
+        \textbf{Select, BTree }
         \begin{itemize}[label={}]
-            \item "Простой документ"
-            \item jsonb\_path\_ops
-            \item where data @> jsonb\_build\_object('key', 'value')
-        \end{itemize}
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    %\vspace{-10pt}
-    \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/select_jsonb_path_ops_no_parse_throughput.png}
-    \end{figure}
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-        \textbf{Простая выборка по ключу с Btree индексом}
-        \begin{itemize}[label={}]
-            \item "Простой документ"
+            \item "simple" document
             \item btree
         \end{itemize}
     \end{center}
@@ -987,9 +962,9 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-        \textbf{Простая выборка по ключу с Btree индексом}
+        \textbf{Select, BTree}
         \begin{itemize}[label={}]
-            \item "Сложный документ"
+            \item "complex" document
             \item btree
         \end{itemize}
     \end{center}
@@ -1018,64 +993,9 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-        \textbf{Срез по документу}
+        \textbf{Scalability}
         \begin{itemize}[label={}]
-            \item "Большой документ"
-            \item Из документа выбирается одно поле
-        \end{itemize}
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    %\vspace{-10pt}
-    \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/select_slice_1_btree_throughput.png}
-    \end{figure}
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-        \textbf{Срез по документу}
-        \begin{itemize}[label={}]
-            \item "Большой документ"
-            \item Из документа выбирается 10 полей
-        \end{itemize}
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    %\vspace{-10pt}
-    \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/select_slice_10_btree_throughput.png}
-    \end{figure}
-    \end{center}
-\end{frame}
-
-\usebackgroundtemplate{\includegraphics[width=\paperwidth]{hack.jpg}}%
-\begin{frame}
-    \frametitle{}
-\end{frame}
-
-%\usebackgroundtemplate{\includegraphics[width=\paperwidth]{slide_background.png}}
-\setbeamertemplate{background canvas}{
-\begin{tikzpicture}
-    \clip (0,0) rectangle (\paperwidth,\paperheight);
-    \fill[color=orange] (4cm, \paperheight-6pt) rectangle (\paperwidth-4cm,\paperheight);
-\end{tikzpicture}
-}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-        \textbf{Масштабируемость}
-        \begin{itemize}[label={}]
-            \item "Простой документ"
+            \item "simple" document
             \item m4.large
             \item m4.xlarge
             \item m4.2xlarge
@@ -1184,30 +1104,9 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-        \textbf{Вставка документов}
+        \textbf{Insert}
         \begin{itemize}[label={}]
-            \item "Простой документ"
-            \item default write concern
-        \end{itemize}
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    %\vspace{-10pt}
-    \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/insert_throughput.png}
-    \end{figure}
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-        \textbf{Вставка документов}
-        \begin{itemize}[label={}]
-            \item "Простой документ"
+            \item "simple" document
             \item journaled
         \end{itemize}
     \end{center}
@@ -1236,10 +1135,10 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-        \textbf{Выборка 50\%, обновление 50\%}
+        \textbf{Update 50\%, Select 50\%}
         \begin{itemize}[label={}]
-            \item "Простой документ"
-            \item обновление одного поля
+            \item "simple" document
+            \item Update one field
             \item transaction\_sync
         \end{itemize}
     \end{center}
@@ -1268,10 +1167,10 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-        \textbf{Выборка 50\%, обновление 50\%}
+        \textbf{Update 50\%, Select 50\%}
         \begin{itemize}[label={}]
-            \item "Простой документ"
-            \item обновление одного поля
+            \item "simple" document
+            \item Update one field
             \item journaled
         \end{itemize}
     \end{center}
@@ -1290,10 +1189,10 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-        \textbf{Выборка 50\%, обновление 50\%}
+        \textbf{Update 50\%, Select 50\%}
         \begin{itemize}[label={}]
-            \item "Большой документ"
-            \item обновление одного поля
+            \item "large" document
+            \item Update one field
         \end{itemize}
     \end{center}
 \end{frame}
@@ -1325,6 +1224,97 @@
     \end{center}
 \end{frame}
 
+\fontsize{13pt}{14}\selectfont
+\section{How to bring it down accidentally?}
+\fontsize{17pt}{18}\selectfont
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-10pt}
+    \begin{figure}
+        \includegraphics[width=0.55\textwidth,center]{wrong.jpg}
+    \end{figure}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Select, GIN}
+        \begin{itemize}[label={}]
+            \item "simple" document
+            \item jsonb\_path\_ops
+            \item where data @> jsonb\_build\_object('key', 'value')
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-10pt}
+    \begin{figure}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/select_jsonb_path_ops_no_parse_throughput.png}
+    \end{figure}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Document slice}
+        \begin{itemize}[label={}]
+            \item "large" document
+            \item One field from a document
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-10pt}
+    \begin{figure}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/select_slice_1_btree_throughput.png}
+    \end{figure}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Document slice}
+        \begin{itemize}[label={}]
+            \item "large" document
+            \item 10 fields from a document
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-10pt}
+    \begin{figure}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/select_slice_10_btree_throughput.png}
+    \end{figure}
+    \end{center}
+\end{frame}
+
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{hack.jpg}}%
+\begin{frame}
+    \frametitle{}
+\end{frame}
+
+%\usebackgroundtemplate{\includegraphics[width=\paperwidth]{slide_background.png}}
+\setbeamertemplate{background canvas}{
+\begin{tikzpicture}
+    \clip (0,0) rectangle (\paperwidth,\paperheight);
+    \fill[color=orange] (4cm, \paperheight-6pt) rectangle (\paperwidth-4cm,\paperheight);
+\end{tikzpicture}
+}
+
 \begin{frame}
     \frametitle{}
     \begin{center}
@@ -1332,26 +1322,19 @@
     \end{center}
 \end{frame}
 
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-        \textbf{Jsonb array}
-    \end{center}
-\end{frame}
+%\begin{frame}
+    %\frametitle{}
+    %\begin{center}
+        %\textbf{Jsonb array}
+    %\end{center}
+%\end{frame}
 
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-        \textbf{Jsonb type convertion}
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-        \textbf{Relation vs jsonb (check, view/virtual fields etc)}
-    \end{center}
-\end{frame}
+%\begin{frame}
+    %\frametitle{}
+    %\begin{center}
+        %\textbf{Jsonb type convertion}
+    %\end{center}
+%\end{frame}
 
 \begin{frame}
     \frametitle{}
@@ -1360,12 +1343,12 @@
     \end{center}
 \end{frame}
 
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-        \textbf{Cluster}
-    \end{center}
-\end{frame}
+%\begin{frame}
+    %\frametitle{}
+    %\begin{center}
+        %\textbf{Cluster}
+    %\end{center}
+%\end{frame}
 
 %\begin{frame}
     %\frametitle{}
@@ -1403,10 +1386,9 @@
     \frametitle{}
     \vspace{10pt}
     \begin{itemize}[leftmargin=*, label={\MVRightarrow}]
-        \item <+-> Документов в RDBMS можно не бояться
-        \item <+-> Приведенные бенчмарки - "подсказки"
-        \item <+-> Необходимы свои тесты для нагрузки
-        \item <+-> Где кластер?
+        \item <+-> Jsonb is more that good for many use cases
+        \item <+-> Benchmarks above are only "hints"
+        \item <+-> You need your own tests
     \end{itemize}
 \end{frame}
 \note{
@@ -1428,9 +1410,9 @@
       \usebeamerfont{title}%
       \usebeamercolor[fg]{title}%
       \if@noSmallCapitals%
-        Вопросы?
+        Questions?
       \else%
-        \scshape\MakeLowercase{Вопросы?}%
+        \scshape\MakeLowercase{Questions?}%
       \fi%
       \vspace*{0.3em}
 
