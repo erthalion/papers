@@ -46,6 +46,17 @@
 
 \renewcommand{\ttdefault}{pcr}
 \newfontfamily{\ttfamily}{Fira Code}
+
+\usefonttheme{professionalfonts} % using non standard fonts for beamer
+\usefonttheme{serif} % default family is serif
+\usepackage{fontspec}
+\setmainfont{Liberation Sans}
+%\setsansfont[BoldItalicFont={Liberation Sans}, ItalicFont={Liberation Sans}, BoldFont={Liberation Sans}]{Liberation Sans}
+\newfontfamily\ExtraLight{Liberation Sans}
+\newfontfamily\Light{Liberation Sans}
+\newfontfamily\Book{Liberation Sans}
+\newfontfamily\Medium{Liberation Sans}
+
 \makeatletter
 \newcommand\HUGE{\@setfontsize\Huge{32}{41}}
 \makeatother
@@ -87,7 +98,7 @@
       \if@noSmallCapitals%
         \inserttitle%
       \else%
-        \scshape\MakeLowercase{\inserttitle}%
+        \scshape{\color{black} \inserttitle}%
       \fi%
       \vspace*{0.3em}
     }}
@@ -103,14 +114,14 @@
     {{% \insertsubtitle is nonempty
       \usebeamerfont{subtitle}%
       \usebeamercolor[fg]{subtitle}%
-      \insertsubtitle%
+      {\color{black} \insertsubtitle}%
       \vspace*{3.0em}%
     }}
     \fi
 
     \usebeamerfont{author}%
     \usebeamercolor[fg]{author}%
-    \insertauthor%
+    {\color{black} \insertauthor}%
 
     \vfill
     \vspace*{2em}
@@ -125,7 +136,7 @@
   \begin{minipage}{22em}
     \usebeamercolor[fg]{section title}
     \usebeamerfont{section title}
-    \insertsectionHEAD\\[-1ex]
+    {\color{black} \insertsectionhead\\[-1ex]}
   \end{minipage}
   \par
 }
@@ -239,12 +250,12 @@
       grow via three points={one child at (0.5,-1.2) and
       two children at (0.5,-1.2) and (0.5,-2.4)},
       edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
-      \node {\textbf{Jsonb}}
-        child { node {\textbf{document size}}}
-        child { node {\textbf{node}}
-          child { node {\textbf{node}}
-              child { node {\textbf{JEntry}}}
-              child { node {\textbf{content}}}
+      \node {{Jsonb}}
+        child { node {{document size}}}
+        child { node {{node}}
+          child { node {{node}}
+              child { node {{JEntry}}}
+              child { node {{content}}}
           }
           child { node [empty] {...}}
         };
@@ -294,12 +305,12 @@
       grow via three points={one child at (0.5,-1.2) and
       two children at (0.5,-1.2) and (0.5,-2.4)},
       edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
-      \node {\textbf{Jsonb}}
-        child { node {\textbf{document size}}}
-        child { node {\textbf{node}}
-          child { node [color=red!45, text=black, top color=red!25, bottom color=red!25] {\textbf{node}}
-              child { node [color=red!45, text=black, top color=red!25, bottom color=red!25] {\textbf{JEntry}}}
-              child { node {\textbf{content}}}
+      \node {{Jsonb}}
+        child { node {{document size}}}
+        child { node {{node}}
+          child { node [color=red!45, text=black, top color=red!25, bottom color=red!25] {{node}}
+              child { node [color=red!45, text=black, top color=red!25, bottom color=red!25] {{JEntry}}}
+              child { node {{content}}}
           }
           child { node [empty] {...}}
         };
@@ -338,13 +349,13 @@
       grow via three points={one child at (0.5,-1.2) and
       two children at (0.5,-1.2) and (0.5,-2.4)},
       edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
-      \node {\textbf{Jsonb Header}}
-        child { node {\textbf{type}}}
-        child { node {\textbf{number of items}}}
-        child { node {\textbf{JEntry}}
-            child { node {\textbf{length or offset?}}}
-            child { node {\textbf{value type}}}
-            child { node {\textbf{value length or offset}}}
+      \node {{Jsonb Header}}
+        child { node {{type}}}
+        child { node {{number of items}}}
+        child { node {{JEntry}}
+            child { node {{length or offset?}}}
+            child { node {{value type}}}
+            child { node {{value length or offset}}}
         };
     \end{tikzpicture}
 
@@ -398,12 +409,12 @@
       grow via three points={one child at (0.5,-1.2) and
       two children at (0.5,-1.2) and (0.5,-2.4)},
       edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
-      \node {\textbf{Bson}}
-        child { node {\textbf{document size}}}
-        child { node {\textbf{node}}
-          child { node {\textbf{node}}
-              child { node {\textbf{Header}}}
-              child { node {\textbf{Content}}}
+      \node {{Bson}}
+        child { node {{document size}}}
+        child { node {{node}}
+          child { node {{node}}
+              child { node {{Header}}}
+              child { node {{Content}}}
           }
           child { node [empty] {...}}
         };
@@ -442,12 +453,12 @@
       grow via three points={one child at (0.5,-1.2) and
       two children at (0.5,-1.2) and (0.5,-2.4)},
       edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
-      \node {\textbf{Bson}}
-        child { node {\textbf{document size}}}
-        child { node {\textbf{node}}
-          child { node {\textbf{node}}
-              child { node [color=red!45, text=black, top color=red!25, bottom color=red!25] {\textbf{Header}}}
-              child { node {\textbf{Content}}}
+      \node {{Bson}}
+        child { node {{document size}}}
+        child { node {{node}}
+          child { node {{node}}
+              child { node [color=red!45, text=black, top color=red!25, bottom color=red!25] {{Header}}}
+              child { node {{Content}}}
           }
           child { node [empty] {...}}
         };
@@ -486,10 +497,10 @@
       grow via three points={one child at (0.5,-1.2) and
       two children at (0.5,-1.2) and (0.5,-2.4)},
       edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
-      \node {\textbf{Bson Header}}
-        child { node {\textbf{Value type}}}
-        child { node {\textbf{Key name}}}
-        child { node {\textbf{Value size}}};
+      \node {{Bson Header}}
+        child { node {{Value type}}}
+        child { node {{Key name}}}
+        child { node {{Value size}}};
     \end{tikzpicture}
 
     \end{center}
@@ -539,11 +550,11 @@
       grow via three points={one child at (0.5,-1.2) and
       two children at (0.5,-1.2) and (0.5,-2.4)},
       edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
-      \node {\textbf{MySQL Json}}
-        child { node {\textbf{node}}
-          child { node {\textbf{node}}
-              child { node {\textbf{Type}}}
-              child { node {\textbf{Value}}}
+      \node {{MySQL Json}}
+        child { node {{node}}
+          child { node {{node}}
+              child { node {{Type}}}
+              child { node {{Value}}}
           }
           child { node [empty] {...}}
         };
@@ -582,11 +593,11 @@
       grow via three points={one child at (0.5,-1.2) and
       two children at (0.5,-1.2) and (0.5,-2.4)},
       edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
-      \node {\textbf{MySQL Json}}
-        child { node {\textbf{node}}
-          child { node {\textbf{node}}
-              child { node {\textbf{Type}}}
-              child { node [color=red!45, text=black, top color=red!25, bottom color=red!25]{\textbf{Value}}}
+      \node {{MySQL Json}}
+        child { node {{node}}
+          child { node {{node}}
+              child { node {{Type}}}
+              child { node [color=red!45, text=black, top color=red!25, bottom color=red!25]{{Value}}}
           }
           child { node [empty] {...}}
         };
@@ -625,13 +636,13 @@
       grow via three points={one child at (0.5,-1.2) and
       two children at (0.5,-1.2) and (0.5,-2.4)},
       edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
-      \node {\textbf{MySQL Json Object}}
-        child { node {\textbf{Count of elements}}}
-        child { node {\textbf{Size}}}
-        child { node {\textbf{Pointers to keys}}}
-        child { node {\textbf{Pointers to values}}}
-        child { node {\textbf{Keys}}}
-        child { node {\textbf{Values}}};
+      \node {{MySQL Json Object}}
+        child { node {{Count of elements}}}
+        child { node {{Size}}}
+        child { node {{Pointers to keys}}}
+        child { node {{Pointers to values}}}
+        child { node {{Keys}}}
+        child { node {{Values}}};
     \end{tikzpicture}
 
     \end{center}
@@ -691,16 +702,16 @@
       grow via three points={one child at (0.5,-1.0) and
       two children at (0.5,-1.0) and (0.5,-2.0)},
       edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
-      \node {\textbf{Bson}}
-        child { node {\textbf{Key}}}
-        child { node {\textbf{Value}}
-          child { node {\textbf{Key}}}
-          child { node {\textbf{Value}}}
+      \node {{Bson}}
+        child { node {{Key}}}
+        child { node {{Value}}
+          child { node {{Key}}}
+          child { node {{Value}}}
         }
         child [missing] {}
         child [missing] {}
-        child { node {\textbf{Key}}}
-        child { node {\textbf{Value}}}
+        child { node {{Key}}}
+        child { node {{Value}}}
         child { node [empty] {...}};
     \end{tikzpicture}
 
@@ -709,16 +720,16 @@
       grow via three points={one child at (0.5,-1.0) and
       two children at (0.5,-1.0) and (0.5,-2.0)},
       edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
-      \node {\textbf{Jsonb/MySQL Json}}
-        child { node {\textbf{Key}}}
-        child { node {\textbf{Key}}}
-        child { node {\textbf{Value}}
-          child { node {\textbf{Key}}}
-          child { node {\textbf{Value}}}
+      \node {{Jsonb/MySQL Json}}
+        child { node {{Key}}}
+        child { node {{Key}}}
+        child { node {{Value}}
+          child { node {{Key}}}
+          child { node {{Value}}}
         }
         child [missing] {}
         child [missing] {}
-        child { node {\textbf{Value}}}
+        child { node {{Value}}}
         child { node [empty] {...}};
     \end{tikzpicture}
     \column{0.1\textwidth}
@@ -745,7 +756,7 @@
         text width=2.5cm,
     }
     \smartdiagram[flow diagram:horizontal]{
-        \textbf{Jsonb}, \textbf{Compression}, \textbf{Chunks}, \textbf{Toast table}
+        {Jsonb}, {Compression}, {Chunks}, {Toast table}
     }
 
     \vspace{20pt}
@@ -1474,7 +1485,7 @@
       \if@noSmallCapitals%
         Questions?
       \else%
-        \scshape\MakeLowercase{Questions?}%
+        \scshape{\color{black} Questions?}%
       \fi%
       \vspace*{0.3em}
 
@@ -1482,9 +1493,9 @@
       \fontsize{13pt}{14}\selectfont
       \usebeamercolor[fg]{subtitle}%
         \begin{itemize}[label={}]
-            \item {\github\ github.com/erthalion}
-            \item {\twitter\ @erthalion}
-            \item \email\ 9erthalion6 at gmail dot com
+            \item {\color{black} \github\ github.com/erthalion}
+            \item {\color{black} \twitter\ @erthalion}
+            \item {\color{black}\email\ 9erthalion6 at gmail dot com}
         \end{itemize}
       \vspace*{2.5em}%
 
