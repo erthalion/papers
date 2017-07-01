@@ -27,6 +27,8 @@
 \usepackage{smartdiagram}
 \usesmartdiagramlibrary{additions}
 \usetikzlibrary{trees}
+\usepackage{datetime}
+
 %\usemintedstyle{monokai}
 
 \usetikzlibrary{shapes,arrows,positioning}
@@ -74,39 +76,42 @@
 
 \setbeamerfont{section title}{family=\Book, size=\Huge, shape=\normalfont}
 \setbeamerfont{frametitle}{family=\Book, size=\large, shape=\normalfont}
-\setbeamerfont{title}{family=\Book, size=\HUGE, shape=\normalfont}
-\setbeamerfont{subtitle}{size=\LARGE}
-\setbeamerfont{author}{family=\ExtraLight, size=\normalsize}
+\setbeamerfont{title}{family=\Book, size=\Large, shape=\normalfont}
+\setbeamerfont{subtitle}{size=\small}
+\setbeamerfont{author}{family=\ExtraLight, size=\footnotesize}
+
+\newdateformat{specialdate}{\twodigit{\THEDAY}-\twodigit{\THEMONTH}-\THEYEAR}
 
 \setbeamertemplate{title page}
 {
 
-  \AddToShipoutPictureFG*{
-      \AtPagemyUpperTop{{\includegraphics[width=2.0cm,keepaspectratio]{logo.png}}}
-  }%
+  %\AddToShipoutPictureFG*{
+      %\AtPagemyUpperTop{{\includegraphics[width=2.0cm,keepaspectratio]{logo.png}}}
+  %}%
 
-  \vspace*{3.1cm}
+  \vspace*{2.1cm}
   \begin{minipage}[b][\paperheight]{\textwidth}
   \begin{center}
 
     \ifx\inserttitle\@empty\else
     {{% \inserttitle is nonempty
       \raggedright%
-      \linespread{1.0}%
+      %\linespread{1.0}%
       \usebeamerfont{title}%
       \usebeamercolor[fg]{title}%
+      %\vspace*{1.3em}
       \if@noSmallCapitals%
         \inserttitle%
       \else%
-        \scshape{\color{black} \inserttitle}%
+        \scshape{\color{black} \textbf{\begin{center}NOSQL\\ INSIDE SQL\end{center}}}%
       \fi%
       \vspace*{0.3em}
     }}
     \fi
 
-    \begin{tikzpicture}
-        \fill[color=orange] (3cm, \paperheight-6pt) rectangle (\paperwidth-3cm,\paperheight);
-    \end{tikzpicture}
+    %\begin{tikzpicture}
+        %\fill[color=orange] (3cm, \paperheight-6pt) rectangle (\paperwidth-3cm,\paperheight);
+    %\end{tikzpicture}
 
     \vspace*{0.5em}%
 
@@ -119,9 +124,15 @@
     }}
     \fi
 
+    \vspace*{1.0em}%
+
     \usebeamerfont{author}%
     \usebeamercolor[fg]{author}%
     {\color{black} \insertauthor}%
+
+    \vspace*{1.5em}
+    \fontsize{8pt}{10}\selectfont
+    {\color{black} 06-07-2017}%
 
     \vfill
     \vspace*{2em}
@@ -149,14 +160,15 @@
 \end{beamercolorbox}
 }
 
-\title{NoSQL inside SQL}
-\subtitle{strategy and tactics}
+\title{NOSQL INSIDE SQL}
+\subtitle{STRATEGY AND TACTICS}
 \date{\today}
-\author{Dmitry Dolgov}
+\author{DMITRY DOLGOV}
 \institute{}
 
 \begin{document}
 {
+  \usebackgroundtemplate{\includegraphics[width=\paperwidth]{template.png}}%
   \fontsize{17pt}{18}\selectfont
   \maketitle
 }
@@ -1320,6 +1332,18 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
+        \begin{itemize}[label={\MVRightarrow}]
+            \item Update one field of a document
+            \item DETOAST of a document\\
+                (select, constraints, procedures etc.)
+            \item Reindex of an entire document
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
         \textbf{Document slice}
         \begin{itemize}[label={}]
             \item "large" document
@@ -1431,12 +1455,12 @@
     %\end{center}
 %\end{frame}
 
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-        \textbf{Index maintaining}
-    \end{center}
-\end{frame}
+%\begin{frame}
+    %\frametitle{}
+    %\begin{center}
+        %\textbf{Index maintaining}
+    %\end{center}
+%\end{frame}
 
 %\begin{frame}
     %\frametitle{}
