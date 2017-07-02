@@ -1428,6 +1428,16 @@
     \end{center}
 \end{frame}
 
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Document slice}
+        \inputminted[
+            fontsize=\Large,
+        ]{sql}{sql/unwrap.sql}
+    \end{center}
+\end{frame}
+
 \usebackgroundtemplate{\includegraphics[width=\paperwidth]{hack.jpg}}%
 \begin{frame}
     \frametitle{}
@@ -1485,6 +1495,10 @@
     \end{figure}
     \end{center}
 \end{frame}
+\note{
+    for parse - `jsonb\_from\_cstring`
+    for no parse - `just datum\_to\_jsonb`
+}
 
 %\begin{frame}
     %\frametitle{}
