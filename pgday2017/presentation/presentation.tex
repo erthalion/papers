@@ -386,6 +386,21 @@
     \end{center}
 \end{frame}
 
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{JB\_OFFSET\_STRIDE}
+
+    \begin{itemize}[label={\MVRightarrow}]
+        \item JEntry may contains a value lenght or offset
+        \item Offset = access speed
+        \item Length = compressibility
+        \item Every \textbf{JB\_OFFSET\_STRIDE}'th JEntry contains an offset
+        \item Rest of them contain length
+    \end{itemize}
+    \end{center}
+\end{frame}
+
 \tikzset{every shadow/.style={fill=none,shadow scale=0}}
 
 \fontsize{17pt}{19}\selectfont
@@ -811,21 +826,6 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-    \textbf{JB\_OFFSET\_STRIDE}
-
-    \begin{itemize}[label={\MVRightarrow}]
-        \item JEntry may contains a value lenght or offset
-        \item Offset = access speed
-        \item Length = compressibility
-        \item Every \textbf{JB\_OFFSET\_STRIDE}'th JEntry contains an offset
-        \item Rest of them contain length
-    \end{itemize}
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
     \textbf{Alignment}
 
     \begin{itemize}[label={}]
@@ -984,6 +984,16 @@
     \end{center}
 \end{frame}
 
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-10pt}
+    \begin{figure}
+        \includegraphics[width=0.75\textwidth,center]{benchmarks/pg_select_cpu_20.png}
+    \end{figure}
+    \end{center}
+\end{frame}
+
 %\begin{frame}
     %\frametitle{}
     %\begin{center}
@@ -1024,16 +1034,6 @@
     %\end{figure}
     %\end{center}
 %\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    %\vspace{-10pt}
-    \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/pg_select_cpu_20.png}
-    \end{figure}
-    \end{center}
-\end{frame}
 
 \begin{frame}
     \frametitle{}
