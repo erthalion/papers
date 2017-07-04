@@ -188,6 +188,18 @@
 \end{tikzpicture}
 }
 
+\fontsize{17pt}{19}\selectfont
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+
+    \begin{figure}
+        \includegraphics[width=0.6\textwidth,center]{Postgresql_elephant.png}
+    \end{figure}
+
+    \end{center}
+\end{frame}
+
 \begin{frame}
     \frametitle{}
     \begin{center}
@@ -226,7 +238,7 @@
     \begin{center}
 
     \begin{figure}
-        \includegraphics[width=0.8\textwidth,center]{fry_disk_json.jpg}
+        \includegraphics[width=0.8\textwidth,center]{fry_disk_json2.jpg}
     \end{figure}
 
     \end{center}
@@ -375,6 +387,16 @@
 \end{frame}
 
 \tikzset{every shadow/.style={fill=none,shadow scale=0}}
+
+\fontsize{17pt}{19}\selectfont
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \inputminted[
+        fontsize=\Large,
+    ]{python}{sql/json_document.py}
+    \end{center}
+\end{frame}
 
 \fontsize{17pt}{19}\selectfont
 \begin{frame}
@@ -947,7 +969,7 @@
         \begin{itemize}[label={}]
             \item "simple" document
             \item jsonb\_path\_ops
-            \item where data @> '{"key": "value"}'::jsonb
+            \item where data @> '\{"key": "value"\}'::jsonb
         \end{itemize}
     \end{center}
 \end{frame}
@@ -962,15 +984,15 @@
     \end{center}
 \end{frame}
 
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    %\vspace{-10pt}
-    \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/select_jsonb_path_ops_latency_99.png}
-    \end{figure}
-    \end{center}
-\end{frame}
+%\begin{frame}
+    %\frametitle{}
+    %\begin{center}
+    %%\vspace{-10pt}
+    %\begin{figure}
+        %\includegraphics[width=0.75\textwidth,center]{benchmarks/select_jsonb_path_ops_latency_99.png}
+    %\end{figure}
+    %\end{center}
+%\end{frame}
 
 \begin{frame}
     \frametitle{}
@@ -993,15 +1015,15 @@
     \end{center}
 \end{frame}
 
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    %\vspace{-10pt}
-    \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/select_btree_latency.png}
-    \end{figure}
-    \end{center}
-\end{frame}
+%\begin{frame}
+    %\frametitle{}
+    %\begin{center}
+    %%\vspace{-10pt}
+    %\begin{figure}
+        %\includegraphics[width=0.75\textwidth,center]{benchmarks/select_btree_latency.png}
+    %\end{figure}
+    %\end{center}
+%\end{frame}
 
 \begin{frame}
     \frametitle{}
@@ -1176,15 +1198,15 @@
     \end{center}
 \end{frame}
 
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    %\vspace{-10pt}
-    \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/insert_latency_99.png}
-    \end{figure}
-    \end{center}
-\end{frame}
+%\begin{frame}
+    %\frametitle{}
+    %\begin{center}
+    %%\vspace{-10pt}
+    %\begin{figure}
+        %\includegraphics[width=0.75\textwidth,center]{benchmarks/insert_latency_99.png}
+    %\end{figure}
+    %\end{center}
+%\end{frame}
 
 \begin{frame}
     \frametitle{}
@@ -1209,15 +1231,15 @@
     \end{center}
 \end{frame}
 
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    %\vspace{-10pt}
-    \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/update_btree_transaction_sync_latency.png}
-    \end{figure}
-    \end{center}
-\end{frame}
+%\begin{frame}
+    %\frametitle{}
+    %\begin{center}
+    %%\vspace{-10pt}
+    %\begin{figure}
+        %\includegraphics[width=0.75\textwidth,center]{benchmarks/update_btree_transaction_sync_latency.png}
+    %\end{figure}
+    %\end{center}
+%\end{frame}
 
 \begin{frame}
     \frametitle{}
@@ -1262,15 +1284,15 @@
     \end{center}
 \end{frame}
 
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    %\vspace{-10pt}
-    \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/update_btree_large_latency.png}
-    \end{figure}
-    \end{center}
-\end{frame}
+%\begin{frame}
+    %\frametitle{}
+    %\begin{center}
+    %%\vspace{-10pt}
+    %\begin{figure}
+        %\includegraphics[width=0.75\textwidth,center]{benchmarks/update_btree_large_latency.png}
+    %\end{figure}
+    %\end{center}
+%\end{frame}
 
 \begin{frame}
     \frametitle{}
