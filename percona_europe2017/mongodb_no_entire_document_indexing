@@ -1,0 +1,169 @@
+> db.test.ensureIndex("a");
+{
+        "ok" : 0,
+        "errmsg" : "invalid parameter: expected an object (key)",
+        "code" : 10065
+}
+> db.test.ensureIndex({a: 1});
+{
+        "createdCollectionAutomatically" : false,
+        "numIndexesBefore" : 1,
+        "numIndexesAfter" : 2,
+        "ok" : 1
+}
+> db.test.ensureIndex();
+{
+        "ok" : 0,
+        "errmsg" : "invalid parameter: expected an object (key)",
+        "code" : 10065
+}
+> db.test.find({"a.a1": 1})
+{ "_id" : ObjectId("594fb0771973c29334f8612f"), "a" : { "a1" : 1, "a2" : 2 }, "b" : 2 }
+> db.test.find({"a.a1": 1}).explain()
+{
+        "queryPlanner" : {
+                "plannerVersion" : 1,
+                "namespace" : "test.test",
+                "indexFilterSet" : false,
+                "parsedQuery" : {
+                        "a.a1" : {
+                                "$eq" : 1
+                        }
+                },
+                "winningPlan" : {
+                        "stage" : "COLLSCAN",
+                        "filter" : {
+                                "a.a1" : {
+                                        "$eq" : 1
+                                }
+                        },
+                        "direction" : "forward"
+                },
+                "rejectedPlans" : [ ]
+        },
+        "serverInfo" : {
+                "host" : "erthalion",
+                "port" : 27017,
+                "version" : "3.2.0",
+                "gitVersion" : "45d947729a0315accb6d4f15a6b06be6d9c19fe7"
+        },
+        "ok" : 1
+}
+> db.test.find({"a": 1}).explain()
+{
+        "queryPlanner" : {
+                "plannerVersion" : 1,
+                "namespace" : "test.test",
+                "indexFilterSet" : false,
+                "parsedQuery" : {
+                        "a" : {
+                                "$eq" : 1
+                        }
+                },
+                "winningPlan" : {
+                        "stage" : "FETCH",
+                        "inputStage" : {
+                                "stage" : "IXSCAN",
+                                "keyPattern" : {
+                                        "a" : 1
+                                },
+                                "indexName" : "a_1",
+                                "isMultiKey" : false,
+                                "isUnique" : false,
+                                "isSparse" : false,
+                                "isPartial" : false,
+                                "indexVersion" : 1,
+                                "direction" : "forward",
+                                "indexBounds" : {
+                                        "a" : [
+                                                "[1.0, 1.0]"
+                                        ]
+                                }
+                        }
+                },
+                "rejectedPlans" : [ ]
+        },
+        "serverInfo" : {
+                "host" : "erthalion",
+                "port" : 27017,
+                "version" : "3.2.0",
+                "gitVersion" : "45d947729a0315accb6d4f15a6b06be6d9c19fe7"
+        },
+        "ok" : 1
+}
+> db.test.find({"a": 1})
+{ "_id" : ObjectId("58df69d70d4ea88210774079"), "a" : 1 }
+{ "_id" : ObjectId("594fb0561973c29334f8612e"), "a" : 1, "b" : 2 }
+> db.test.find({"a": 1}).explain()
+{
+        "queryPlanner" : {
+                "plannerVersion" : 1,
+                "namespace" : "test.test",
+                "indexFilterSet" : false,
+                "parsedQuery" : {
+                        "a" : {
+                                "$eq" : 1
+                        }
+                },
+                "winningPlan" : {
+                        "stage" : "FETCH",
+                        "inputStage" : {
+                                "stage" : "IXSCAN",
+                                "keyPattern" : {
+                                        "a" : 1
+                                },
+                                "indexName" : "a_1",
+                                "isMultiKey" : false,
+                                "isUnique" : false,
+                                "isSparse" : false,
+                                "isPartial" : false,
+                                "indexVersion" : 1,
+                                "direction" : "forward",
+                                "indexBounds" : {
+                                        "a" : [
+                                                "[1.0, 1.0]"
+                                        ]
+                                }
+                        }
+                },
+                "rejectedPlans" : [ ]
+        },
+        "serverInfo" : {
+                "host" : "erthalion",
+                "port" : 27017,
+                "version" : "3.2.0",
+                "gitVersion" : "45d947729a0315accb6d4f15a6b06be6d9c19fe7"
+        },
+        "ok" : 1
+}
+> db.test.find({"a.a1": 1}).explain()
+{
+        "queryPlanner" : {
+                "plannerVersion" : 1,
+                "namespace" : "test.test",
+                "indexFilterSet" : false,
+                "parsedQuery" : {
+                        "a.a1" : {
+                                "$eq" : 1
+                        }
+                },
+                "winningPlan" : {
+                        "stage" : "COLLSCAN",
+                        "filter" : {
+                                "a.a1" : {
+                                        "$eq" : 1
+                                }
+                        },
+                        "direction" : "forward"
+                },
+                "rejectedPlans" : [ ]
+        },
+        "serverInfo" : {
+                "host" : "erthalion",
+                "port" : 27017,
+                "version" : "3.2.0",
+                "gitVersion" : "45d947729a0315accb6d4f15a6b06be6d9c19fe7"
+        },
+        "ok" : 1
+}
+>

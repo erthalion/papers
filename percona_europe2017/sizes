@@ -1,0 +1,60 @@
+with compression
+
+empty table - 8192 bytes
+with one document - 1081344 (1056 kB)
+
+with performance
+
+with one document - 1073152 (1056 kB)
+
+
+table_schema | pg_toast
+table_name   | pg_toast_16385
+row_estimate | 0
+total_bytes  | 1073152
+index_bytes  | 32768
+toast_bytes  | NULL
+table_bytes  | 1040384
+total        | 1048 kB
+index        | 32 kB
+toast        | NULL
+table        | 1016 kB
+
+
+table_schema | pg_toast
+table_name   | pg_toast_16385
+row_estimate | 0
+total_bytes  | 1073152
+index_bytes  | 32768
+toast_bytes  | NULL
+table_bytes  | 1040384
+total        | 1048 kB
+index        | 32 kB
+toast        | NULL
+table        | 1016 kB
+
+
+
+compression
+
+table_name   | test
+row_estimate | 0
+total_bytes  | 1105920
+index_bytes  | 0
+toast_bytes  | 1097728
+table_bytes  | 8192
+total        | 1080 kB
+index        | 0 bytes
+toast        | 1072 kB
+table        | 8192 bytes
+
+table_name   | test
+row_estimate | 0
+total_bytes  | 1105920
+index_bytes  | 0
+toast_bytes  | 1097728
+table_bytes  | 8192
+total        | 1080 kB
+index        | 0 bytes
+toast        | 1072 kB
+table        | 8192 bytes

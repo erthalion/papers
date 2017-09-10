@@ -1,0 +1,42 @@
+(erthalion@[local]:5432) [erthalion] > SELECT *, pg_size_pretty(total_bytes) AS total
+    , pg_size_pretty(index_bytes) AS INDEX
+    , pg_size_pretty(toast_bytes) AS toast
+    , pg_size_pretty(table_bytes) AS TABLE
+  FROM (
+  SELECT *, total_bytes-index_bytes-COALESCE(toast_bytes,0) AS table_bytes FROM (
+      SELECT c.oid,nspname AS table_schema, relname AS TABLE_NAME
+              , c.reltuples AS row_estimate
+              , pg_total_relation_size(c.oid) AS total_bytes
+              , pg_indexes_size(c.oid) AS index_bytes
+              , pg_total_relation_size(reltoastrelid) AS toast_bytes
+          FROM pg_class c
+          LEFT JOIN pg_namespace n ON n.oid = c.relnamespace
+          WHERE relkind = 'r' AND relname LIKE 'test%'
+  ) a
+) a;
+-[ RECORD 1 ]+-----------
+oid          | 16385
+table_schema | public
+table_name   | test1
+row_estimate | 10000
+total_bytes  | 729088
+index_bytes  | 0
+toast_bytes  | 8192
+table_bytes  | 720896
+total        | 712 kB
+index        | 0 bytes
+toast        | 8192 bytes
+table        | 704 kB
+-[ RECORD 2 ]+-----------
+oid          | 16391
+table_schema | public
+table_name   | test2
+row_estimate | 0
+total_bytes  | 720896
+index_bytes  | 0
+toast_bytes  | 8192
+table_bytes  | 712704
+total        | 704 kB
+index        | 0 bytes
+toast        | 8192 bytes
+table        | 696 kB

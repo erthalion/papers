@@ -1,0 +1,80 @@
+----------------------------------------------------------------
+
+Some of jsonb functions are perform DETOAS if they're unexpectedly working with jsonb
+
+> create table test_jsonn (id integer, data jsonb);
+CREATE TABLE
+Time: 28.246 ms
+> insert into test_jsonn values(1, '{"a": 1}');
+INSERT 0 1
+Time: 1.252 ms
+> insert into test_jsonn values(2, '{"a": 2}');
+INSERT 0 1
+Time: 1.119 ms
+> insert into test_jsonn values(3, '{"a": 3}');
+INSERT 0 1
+Time: 1.376 ms
+> insert into test_jsonn values(4, '{"a": 4}');
+INSERT 0 1
+Time: 1.292 ms
+> select jsonb_agg(query) from (select id, data from test_jsonn) as query;
+INFO:  42P17: DETOAST
+LOCATION:  datum_to_jsonb, jsonb.c:881
+INFO:  42P17: DETOAST
+LOCATION:  datum_to_jsonb, jsonb.c:881
+INFO:  42P17: DETOAST
+LOCATION:  datum_to_jsonb, jsonb.c:881
+INFO:  42P17: DETOAST
+LOCATION:  datum_to_jsonb, jsonb.c:881
+Time: 1.084 ms
+
+
+> select to_jsonb('{"a": {"b": 1}}'::jsonb);
+INFO:  42P17: DETOAST
+LOCATION:  datum_to_jsonb, jsonb.c:881
+    to_jsonb
+-----------------
+ {"a": {"b": 1}}
+(1 row)
+
+-----------------------------------------------------------
+
+Avoid mutliple operation over jsonb at once like this:
+
+select jsonb_pretty(data), jsonb_pretty(jsonb_insert(data
+, '{b}', '"c"')) from test_jsonn;
+INFO:  42P17: DETOAST
+LOCATION:  pg_detoast_datum, fmgr.c:1835
+INFO:  42P17: DETOAST
+LOCATION:  pg_detoast_datum, fmgr.c:1835
+INFO:  42P17: DETOAST
+LOCATION:  pg_detoast_datum, fmgr.c:1835
+INFO:  42P17: DETOAST
+LOCATION:  pg_detoast_datum, fmgr.c:1835
+INFO:  42P17: DETOAST
+LOCATION:  pg_detoast_datum, fmgr.c:1835
+INFO:  42P17: DETOAST
+LOCATION:  pg_detoast_datum, fmgr.c:1835
+INFO:  42P17: DETOAST
+LOCATION:  pg_detoast_datum, fmgr.c:1835
+INFO:  42P17: DETOAST
+LOCATION:  pg_detoast_datum, fmgr.c:1835
+ jsonb_pretty | jsonb_pretty
+--------------+--------------
+ {           +| {           +
+     "a": 1  +|     "a": 1, +
+ }            |     "b": "c"+
+              | }
+ {           +| {           +
+     "a": 2  +|     "a": 2, +
+ }            |     "b": "c"+
+              | }
+ {           +| {           +
+     "a": 3  +|     "a": 3, +
+ }            |     "b": "c"+
+              | }
+ {           +| {           +
+     "a": 4  +|     "a": 4, +
+ }            |     "b": "c"+
+              | }
+(4 rows)
