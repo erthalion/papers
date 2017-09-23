@@ -1,0 +1,11 @@
+note about usage of jsonb inside infrastructure team
+note about why mongodb, mysql at the beginning
+note about depth limit
+
+json vs jsonb select - why is jsonb slower?
+- because we're not getting into it
+
+note about jsonb as an intermetiate between plain json (json in pg even) and totally normalized data
+
+- bad mysql throughput on select - there is some strange writing io, I haven't figured it out from where it comes
+(it looks like a situation with lack of memory that leads to a small swap, but it's not that bad and memory configured).
