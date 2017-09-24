@@ -1027,7 +1027,10 @@
             \item effective\_cache\_size
             \item max\_wal\_size
             \item innodb\_buffer\_pool\_size
+            \item innodb\_log\_file\_size
             \item write concern level (journaled or transaction\_sync)
+            \item checkpoint
+            \item eviction
         \end{itemize}
     \end{center}
 \end{frame}
@@ -1146,9 +1149,9 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-    %\vspace{-10pt}
+    \vspace{10pt}
     \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/select_complex_btree_throughput.png}
+        \includegraphics[width=0.8\textwidth,center]{benchmarks/select_complex_btree_throughput.png}
     \end{figure}
     \end{center}
 \end{frame}
@@ -1288,9 +1291,9 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-    %\vspace{-10pt}
+    \vspace{10pt}
     \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/insert_throughput_journaled2.png}
+        \includegraphics[width=0.8\textwidth,center]{benchmarks/insert_throughput_journaled2.png}
     \end{figure}
     \end{center}
 \end{frame}
@@ -1298,9 +1301,9 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-    %\vspace{-10pt}
+    %\vspace{10pt}
     \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/mongodb_update_cpu_usage.png}
+        \includegraphics[width=0.8\textwidth,center]{benchmarks/mongodb_update_cpu_usage.png}
     \end{figure}
     \end{center}
 \end{frame}
@@ -1308,9 +1311,9 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-    %\vspace{-10pt}
+    \vspace{10pt}
     \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/mongodb_update_io_queue_size.png}
+        \includegraphics[width=0.8\textwidth,center]{benchmarks/mongodb_update_io_queue_size.png}
     \end{figure}
     \end{center}
 \end{frame}
@@ -1415,9 +1418,9 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-    %\vspace{-10pt}
+    \vspace{10pt}
     \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/update_btree_large_throughput.png}
+        \includegraphics[width=0.8\textwidth,center]{benchmarks/update_btree_large_throughput.png}
     \end{figure}
     \end{center}
 \end{frame}
@@ -1447,9 +1450,9 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-    %\vspace{-10pt}
+    \vspace{10pt}
     \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/postgresql_load_json_jsonb.png}
+        \includegraphics[width=0.8\textwidth,center]{benchmarks/postgresql_load_json_jsonb.png}
     \end{figure}
     \end{center}
 \end{frame}
@@ -1469,9 +1472,9 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-    %\vspace{-10pt}
+    \vspace{10pt}
     \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/postgresql_select_json_jsonb.png}
+        \includegraphics[width=0.8\textwidth,center]{benchmarks/postgresql_select_json_jsonb.png}
     \end{figure}
     \end{center}
 \end{frame}
@@ -1491,9 +1494,9 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-    %\vspace{-10pt}
+    \vspace{10pt}
     \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/postgresql_load_jsonb_jdbc.png}
+        \includegraphics[width=0.8\textwidth,center]{benchmarks/postgresql_load_jsonb_jdbc.png}
     \end{figure}
     \end{center}
 \end{frame}
@@ -1513,9 +1516,9 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-    %\vspace{-10pt}
+    \vspace{10pt}
     \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/postgresql_run_jsonb_jdbc.png}
+        \includegraphics[width=0.8\textwidth,center]{benchmarks/postgresql_run_jsonb_jdbc.png}
     \end{figure}
     \end{center}
 \end{frame}
@@ -1570,9 +1573,9 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-    %\vspace{-10pt}
+    \vspace{10pt}
     \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/select_slice_1_btree_throughput.png}
+        \includegraphics[width=0.8\textwidth,center]{benchmarks/select_slice_1_btree_throughput.png}
     \end{figure}
     \end{center}
 \end{frame}
@@ -1591,9 +1594,9 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-    %\vspace{-10pt}
+    \vspace{10pt}
     \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/select_slice_10_btree_throughput.png}
+        \includegraphics[width=0.8\textwidth,center]{benchmarks/select_slice_10_btree_throughput.png}
     \end{figure}
     \end{center}
 \end{frame}
@@ -1638,6 +1641,7 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
+    \vspace{10pt}
     \begin{figure}
         \includegraphics[width=0.75\textwidth,center]{benchmarks/workload_c_toast.png}
     \end{figure}
@@ -1660,9 +1664,9 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-    %\vspace{-10pt}
+    \vspace{10pt}
     \begin{figure}
-        \includegraphics[width=0.75\textwidth,center]{benchmarks/select_jsonb_path_ops_no_parse_throughput.png}
+        \includegraphics[width=0.8\textwidth,center]{benchmarks/select_jsonb_path_ops_no_parse_throughput.png}
     \end{figure}
     \end{center}
 \end{frame}
