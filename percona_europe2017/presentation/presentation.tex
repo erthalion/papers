@@ -132,7 +132,7 @@
 
     \vspace*{1.5em}
     \fontsize{8pt}{10}\selectfont
-    {\color{black} 08-17-2017}%
+    {\color{black} 09-27-2017}%
 
     \vfill
     \vspace*{2em}
@@ -207,6 +207,7 @@
         \pause
         \begin{itemize}[label={\MVRightarrow}]
             \item <+-> Jsonb internals and performance-related factors
+            \item <+-> Tricky queries
             \item <+-> Benchmarks
             \item <+-> How to shoot yourself in the foot
         \end{itemize}
@@ -865,9 +866,9 @@
     \textbf{Indexing support}
     \begin{center}
         \begin{itemize}[label={\MVRightarrow}]
-            \item Postgresql -- single field, multiple fields, entire document
-            \item MongoDB -- single field, multiple fields
-            \item MySQL -- virtual columns, single field, multiple fields
+            \item Postgresql -- single path, multiple paths, entire document
+            \item MongoDB -- single path, multiple paths
+            \item MySQL -- virtual columns, single path, multiple paths
         \end{itemize}
     \end{center}
 \end{frame}
@@ -897,6 +898,7 @@
     \textbf{Pitfalls}
     \begin{center}
         \begin{itemize}[label={\MVRightarrow}]
+            \item No Json path out of the box (jquery, SQL/JSON)
             \item Queries with an array somewhere in the middle
             \item Iterating through document
             \item Update inside document
@@ -947,29 +949,6 @@
     \inputminted[
         fontsize=\large,
     ]{bash}{sql/iterate_document.sh}
-    \end{center}
-\end{frame}
-
-\fontsize{17pt}{19}\selectfont
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \inputminted[
-        fontsize=\Large,
-    ]{json}{sql/update_document_data.json}
-    \end{center}
-\end{frame}
-
-\fontsize{17pt}{19}\selectfont
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \inputminted[
-        fontsize=\Large,
-    ]{sql}{sql/update_document.sql}
-    %\inputminted[
-        %fontsize=\large,
-    %]{bash}{sql/update_document.sh}
     \end{center}
 \end{frame}
 
@@ -1165,29 +1144,6 @@
     %\end{figure}
     %\end{center}
 %\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-        \textbf{Scalability}
-        \begin{itemize}[label={}]
-            \item "simple" document
-            \item m4.large
-            \item m4.xlarge
-            \item m4.2xlarge
-        \end{itemize}
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    %\vspace{-10pt}
-    \begin{figure}
-        \includegraphics[height=8cm,width=1.1\textwidth,center]{benchmarks/scalability_select_throughput.png}
-    \end{figure}
-    \end{center}
-\end{frame}
 
 %\begin{frame}
     %\frametitle{}
@@ -1784,6 +1740,52 @@
   \end{center}
   \end{minipage}
 
+\end{frame}
+
+\fontsize{17pt}{19}\selectfont
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \inputminted[
+        fontsize=\Large,
+    ]{json}{sql/update_document_data.json}
+    \end{center}
+\end{frame}
+
+\fontsize{17pt}{19}\selectfont
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \inputminted[
+        fontsize=\Large,
+    ]{sql}{sql/update_document.sql}
+    %\inputminted[
+        %fontsize=\large,
+    %]{bash}{sql/update_document.sh}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Scalability}
+        \begin{itemize}[label={}]
+            \item "simple" document
+            \item m4.large
+            \item m4.xlarge
+            \item m4.2xlarge
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    %\vspace{-10pt}
+    \begin{figure}
+        \includegraphics[height=8cm,width=1.1\textwidth,center]{benchmarks/scalability_select_throughput.png}
+    \end{figure}
+    \end{center}
 \end{frame}
 
 \end{document}
