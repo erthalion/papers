@@ -1613,6 +1613,7 @@
             \item "simple" document
             \item jsonb\_path\_ops
             \item where data @> jsonb\_build\_object('key', 'value')
+            \item where data @> '\{"key": "value"\}'::jsonb
         \end{itemize}
     \end{center}
 \end{frame}
