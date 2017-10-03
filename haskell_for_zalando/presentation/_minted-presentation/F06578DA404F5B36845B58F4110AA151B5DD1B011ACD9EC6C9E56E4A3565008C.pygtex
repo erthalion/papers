@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{account} \PYG{o+ow}{::} \PYG{k+kt}{Currency} \PYG{k+kt}{USD}
+\PYG{n+nf}{account} \PYG{o+ow}{=} \PYG{k+kt}{Currency} \PYG{l+m+mf}{5.0}
+
+\PYG{n+nf}{transaction1} \PYG{o+ow}{::} \PYG{k+kt}{Currency} \PYG{k+kt}{USD}
+\PYG{n+nf}{transaction1} \PYG{o+ow}{=} \PYG{k+kt}{Currency} \PYG{l+m+mf}{5.0}
+
+\PYG{n+nf}{transaction2} \PYG{o+ow}{::} \PYG{k+kt}{Currency} \PYG{k+kt}{EUR}
+\PYG{n+nf}{transaction2} \PYG{o+ow}{=} \PYG{k+kt}{Currency} \PYG{l+m+mf}{5.0}
+
+\PYG{n+nf}{main} \PYG{o+ow}{=} \PYG{k+kr}{do}
+    \PYG{n}{print} \PYG{o}{\PYGZdl{}} \PYG{n}{add} \PYG{n}{account} \PYG{n}{transaction1} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Currency 10.0}
+    \PYG{n}{print} \PYG{o}{\PYGZdl{}} \PYG{n}{add} \PYG{n}{account} \PYG{n}{transaction2} \PYG{c+c1}{\PYGZhy{}\PYGZhy{} won\PYGZsq{}t compile}
+\end{Verbatim}

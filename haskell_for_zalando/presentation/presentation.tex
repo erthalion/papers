@@ -309,20 +309,62 @@
     \frametitle{}
     \begin{center}
     Explicit computation patters
+
+    \begin{flushleft}
+        Developer> I have a database query here
+        Developer> it may fail, so it's kinde unsafe
+        Compiler> Don't worry, I'll check all the deps
+        Compiler> and let you know if some of them
+        Compiler> are not ok with that
+    \end{flushleft}
     \end{center}
 \end{frame}
 
 \begin{frame}
     \frametitle{}
     \begin{center}
-    Referential transparency (a.k.a. refactoring without fear)
+    \inputminted[
+        fontsize=\large,
+    ]{haskell}{snippets/maybe.hs}
     \end{center}
 \end{frame}
 
 \begin{frame}
     \frametitle{}
     \begin{center}
-    Immutability (a.k.a. you can trust this function)
+    \inputminted[
+        fontsize=\large,
+    ]{haskell}{snippets/maybe_main.hs}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    The same for state, IO,\\ sequential calculations etc.
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    Referential transparency\\
+    a.k.a. refactoring without fear
+
+    \begin{figure}
+        \includegraphics[width=0.4\textwidth,center]{giant-jenga.jpg}
+    \end{figure}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    Immutability\\
+    a.k.a. you can trust this function
+    \begin{figure}
+        \includegraphics[width=0.6\textwidth,center]{immutability.png}
+    \end{figure}
     \end{center}
 \end{frame}
 
@@ -330,6 +372,9 @@
     \frametitle{}
     \begin{center}
     Explicit handling of side effects
+    \begin{figure}
+        \includegraphics[width=0.6\textwidth,center]{side_effects.jpg}
+    \end{figure}
     \end{center}
 \end{frame}
 
@@ -337,6 +382,12 @@
     \frametitle{}
     \begin{center}
     Tooling support, great ecosystem
+    \begin{itemize}[label={\MVRightarrow}]
+        \item stack
+        \item ghc
+        \item ghci
+        \item editors and IDEs
+    \end{itemize}
     \end{center}
 \end{frame}
 
@@ -344,6 +395,9 @@
     \frametitle{}
     \begin{center}
     Remarkable performance
+    \begin{figure}
+        \includegraphics[width=0.8\textwidth,center]{haskell_fast.png}
+    \end{figure}
     \end{center}
 \end{frame}
 

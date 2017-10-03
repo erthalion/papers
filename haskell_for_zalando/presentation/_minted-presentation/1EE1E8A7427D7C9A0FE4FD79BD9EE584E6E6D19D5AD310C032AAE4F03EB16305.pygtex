@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kr}{data} \PYG{k+kt}{USD}
+\PYG{k+kr}{data} \PYG{k+kt}{EUR}
+
+\PYG{k+kr}{newtype} \PYG{k+kt}{Currency} \PYG{n}{a} \PYG{o+ow}{=} \PYG{k+kt}{Currency} \PYG{k+kt}{Double} \PYG{k+kr}{deriving} \PYG{k+kt}{Show}
+
+\PYG{n+nf}{add} \PYG{o+ow}{::} \PYG{k+kt}{Currency} \PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Currency} \PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Currency} \PYG{n}{a}
+\PYG{n+nf}{add} \PYG{p}{(}\PYG{k+kt}{Currency} \PYG{n}{a}\PYG{p}{)} \PYG{p}{(}\PYG{k+kt}{Currency} \PYG{n}{b}\PYG{p}{)} \PYG{o+ow}{=} \PYG{k+kt}{Currency} \PYG{o}{\PYGZdl{}} \PYG{n}{a} \PYG{o}{+} \PYG{n}{b}
+\end{Verbatim}
