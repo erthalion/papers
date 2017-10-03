@@ -1,0 +1,12 @@
+$ ./currency_test.hs
+
+currency_test.hs:23:25: error:
+  • Couldn't match type ‘EUR’ with ‘USD’
+    Expected type: Currency USD
+      Actual type: Currency EUR
+  • In the second argument of ‘add’,
+      namely ‘transaction2’
+    In the second argument of ‘($)’,
+      namely ‘add account transaction2’
+    In a stmt of a 'do' block:
+      print $ add account transaction2
