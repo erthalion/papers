@@ -972,7 +972,7 @@
     \begin{center}
         \textbf{AWS EC2}
         \begin{itemize}[label={}]
-            \item m4.xlarge instance
+            \item m4.large instance
             \item separate instance (database and generator)
             \item 16GB memory, 4 core 2.3GHz
             \item Ubuntu 16.04
@@ -1335,7 +1335,7 @@
             \item "simple" document
             \item Update one field
             \item journaled
-            \item max wal size 1GB
+            \item max wal size 4GB
         \end{itemize}
     \end{center}
 \end{frame}
@@ -1505,6 +1505,16 @@
     \end{center}
 \end{frame}
 
+\fontsize{17pt}{19}\selectfont
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \inputminted[
+        fontsize=\Large,
+    ]{sql}{sql/detoast_overhead.sql}
+    \end{center}
+\end{frame}
+
 \begin{frame}
     \frametitle{}
     \begin{center}
@@ -1513,16 +1523,6 @@
             \item "large" document
             \item One field from a document
         \end{itemize}
-    \end{center}
-\end{frame}
-
-\fontsize{17pt}{19}\selectfont
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \inputminted[
-        fontsize=\Large,
-    ]{sql}{sql/detoast_overhead.sql}
     \end{center}
 \end{frame}
 
