@@ -1013,6 +1013,9 @@
         \end{itemize}
     \end{center}
 \end{frame}
+\note{
+    syscall `fdatasync` for mongodb under strace with `transaction\_sync`
+}
 
 \begin{frame}
     \frametitle{}
@@ -1038,7 +1041,7 @@
         \begin{itemize}[label={}]
             \item "simple" document
             \item jsonb\_path\_ops
-            \item where data @> '\{"key": "value"\}'::jsonb
+            %\item where data @> '\{"key": "value"\}'::jsonb
         \end{itemize}
     \end{center}
 \end{frame}
@@ -1608,12 +1611,10 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-        \textbf{Select, GIN}
+        \textbf{Index update}
         \begin{itemize}[label={}]
             \item "simple" document
-            \item jsonb\_path\_ops
-            \item where data @> jsonb\_build\_object('key', 'value')
-            \item where data @> '\{"key": "value"\}'::jsonb
+            \item Update one field
         \end{itemize}
     \end{center}
 \end{frame}
@@ -1623,7 +1624,7 @@
     \begin{center}
     \vspace{10pt}
     \begin{figure}
-        \includegraphics[width=0.8\textwidth,center]{benchmarks/select_jsonb_path_ops_no_parse_throughput.png}
+        \includegraphics[width=0.8\textwidth,center]{benchmarks/update_btree_wal_size_index_on_column.png}
     \end{figure}
     \end{center}
 \end{frame}
