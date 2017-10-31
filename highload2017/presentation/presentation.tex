@@ -341,7 +341,7 @@
         \begin{itemize}[label={}]
             \item "simple" document
             \item jsonb\_path\_ops
-            \item where data @> '\{"key": "value"\}'::jsonb
+            %\item where data @> '\{"key": "value"\}'::jsonb
         \end{itemize}
     \end{center}
 \end{frame}
@@ -1070,32 +1070,32 @@
                 - mysql - lz variation
 }
 
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-        \textbf{Select, GIN}
-        \begin{itemize}[label={}]
-            \item "simple" document
-            \item jsonb\_path\_ops
-            \item where data @> jsonb\_build\_object('key', 'value')
-            \item where data @> '\{"key": "value"\}'::jsonb
-        \end{itemize}
-    \end{center}
-\end{frame}
+%\begin{frame}
+    %\frametitle{}
+    %\begin{center}
+        %\textbf{Select, GIN}
+        %\begin{itemize}[label={}]
+            %\item "simple" document
+            %\item jsonb\_path\_ops
+            %\item where data @> jsonb\_build\_object('key', 'value')
+            %\item where data @> '\{"key": "value"\}'::jsonb
+        %\end{itemize}
+    %\end{center}
+%\end{frame}
 
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \vspace{10pt}
-    \begin{figure}
-        \includegraphics[width=0.8\textwidth,center]{benchmarks/select_jsonb_path_ops_no_parse_throughput.png}
-    \end{figure}
-    \end{center}
-\end{frame}
-\note{
-    for parse - `jsonb\_from\_cstring`
-    for no parse - `just datum\_to\_jsonb`
-}
+%\begin{frame}
+    %\frametitle{}
+    %\begin{center}
+    %\vspace{10pt}
+    %\begin{figure}
+        %\includegraphics[width=0.8\textwidth,center]{benchmarks/select_jsonb_path_ops_no_parse_throughput.png}
+    %\end{figure}
+    %\end{center}
+%\end{frame}
+%\note{
+    %for parse - `jsonb\_from\_cstring`
+    %for no parse - `just datum\_to\_jsonb`
+%}
 
 \begin{frame}
     \frametitle{}
@@ -1190,6 +1190,27 @@
                 (select, constraints, procedures etc.)
             \item Reindex of an entire document
         \end{itemize}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Index update}
+        \begin{itemize}[label={}]
+            \item "simple" document
+            \item Update one field
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \vspace{10pt}
+    \begin{figure}
+        \includegraphics[width=0.8\textwidth,center]{benchmarks/update_btree_wal_size_index_on_column.png}
+    \end{figure}
     \end{center}
 \end{frame}
 
