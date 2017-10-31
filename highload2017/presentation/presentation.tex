@@ -214,12 +214,24 @@
     \end{center}
 \end{frame}
 
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{mess.jpg}}%
+\begin{frame}
+    \frametitle{}
+\end{frame}
+
+\setbeamertemplate{background canvas}{
+\begin{tikzpicture}
+    \clip (0,0) rectangle (\paperwidth,\paperheight);
+    \fill[color=orange] (4cm, \paperheight-6pt) rectangle (\paperwidth-4cm,\paperheight);
+\end{tikzpicture}
+}
+
 \begin{frame}
     \frametitle{}
     \begin{center}
         \textbf{AWS EC2}
         \begin{itemize}[label={}]
-            \item m4.xlarge instance
+            \item m4.large instance
             \item separate instance (database and generator)
             \item 16GB memory, 4 core 2.3GHz
             \item Ubuntu 16.04
@@ -234,7 +246,7 @@
     \frametitle{}
     \begin{center}
         \begin{itemize}[label={}]
-            \item PostgreSQL 9.6.3
+            \item PostgreSQL 9.6.3/10
             \item MySQL 5.7.9/8.0
             \item MongoDB 3.4.4
             \item YCSB 0.13
@@ -1189,7 +1201,7 @@
             \item "simple" document
             \item Update one field
             \item journaled
-            \item max wal size 1GB
+            \item max wal size 5GB
         \end{itemize}
     \end{center}
 \end{frame}
@@ -1287,9 +1299,20 @@
     \end{center}
 \end{frame}
 
-\usebackgroundtemplate{\includegraphics[width=\paperwidth]{hack.jpg}}%
+%\usebackgroundtemplate{\includegraphics[width=\paperwidth]{hack.jpg}}%
+%\begin{frame}
+    %\frametitle{}
+%\end{frame}
+
 \begin{frame}
     \frametitle{}
+    \textbf{Solutions?}
+    \begin{center}
+        \begin{itemize}[label={\MVRightarrow}]
+            \item set storage external
+            \item different query
+        \end{itemize}
+    \end{center}
 \end{frame}
 
 \setbeamertemplate{background canvas}{
@@ -1370,6 +1393,16 @@
     \inputminted[
         fontsize=\large,
     ]{bash}{sql/iterate_document.sh}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \vspace{10pt}
+    \begin{figure}
+        \includegraphics[width=0.75\textwidth,center]{geek-meme-star-trek-han-solo.jpg}
+    \end{figure}
     \end{center}
 \end{frame}
 
@@ -1461,31 +1494,32 @@
     \end{center}
 \end{frame}
 
-\fontsize{13pt}{14}\selectfont
-\section{Benchmarks}
-\fontsize{17pt}{18}\selectfont
+%\fontsize{13pt}{14}\selectfont
+%\section{Benchmarks}
+%\fontsize{17pt}{18}\selectfont
 
-\usebackgroundtemplate{\includegraphics[width=\paperwidth]{great_performance3.jpg}}%
-\begin{frame}
-    \frametitle{}
-\end{frame}
+%\usebackgroundtemplate{\includegraphics[width=\paperwidth]{great_performance3.jpg}}%
+%\begin{frame}
+    %\frametitle{}
+%\end{frame}
 
-\setbeamertemplate{background canvas}{
-\begin{tikzpicture}
-    \clip (0,0) rectangle (\paperwidth,\paperheight);
-    \fill[color=orange] (4cm, \paperheight-6pt) rectangle (\paperwidth-4cm,\paperheight);
-\end{tikzpicture}
-}
+%\setbeamertemplate{background canvas}{
+%\begin{tikzpicture}
+    %\clip (0,0) rectangle (\paperwidth,\paperheight);
+    %\fill[color=orange] (4cm, \paperheight-6pt) rectangle (\paperwidth-4cm,\paperheight);
+%\end{tikzpicture}
+%}
 
-\fontsize{13pt}{14}\selectfont
-\section{How to bring it down accidentally?}
-\fontsize{17pt}{18}\selectfont
+%\fontsize{13pt}{14}\selectfont
+%\section{How to bring it down accidentally?}
+%\fontsize{17pt}{18}\selectfont
 
 \begin{frame}[fragile]
     \frametitle{}
     \vspace{10pt}
     \begin{itemize}[leftmargin=*, label={\MVRightarrow}]
         \item <+-> Jsonb is more that good for many use cases
+        \item <+-> Reasons for performance difference is mostly \\database itself
         \item <+-> Benchmarks above are only "hints"
         \item <+-> You need your own tests
     \end{itemize}
