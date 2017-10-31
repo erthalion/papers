@@ -29,8 +29,6 @@
 \usetikzlibrary{trees}
 \usepackage{datetime}
 
-%\usemintedstyle{monokai}
-
 \usetikzlibrary{shapes,arrows,positioning}
 \graphicspath{{images/}}
 \newfontfamily{\FA}{FontAwesome}
@@ -1283,9 +1281,26 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
+    \begin{overprint}
+    \onslide<1>
     \inputminted[
         fontsize=\Large,
+        escapeinside=||
     ]{sql}{sql/detoast_overhead.sql}
+
+    \onslide<2>
+    \inputminted[
+        fontsize=\Large,
+        escapeinside=||
+    ]{sql}{sql/detoast_overhead_ok.sql}
+
+    \onslide<3>
+    \inputminted[
+        fontsize=\Large,
+        escapeinside=||
+    ]{sql}{sql/detoast_overhead_wrong.sql}
+    \end{overprint}
+
     \end{center}
 \end{frame}
 
@@ -1365,9 +1380,25 @@
     \frametitle{}
     \begin{center}
         \textbf{Document slice}
+
+        \begin{overprint}
+        \onslide<1>
         \inputminted[
             fontsize=\Large,
+            escapeinside=||
         ]{sql}{sql/unwrap.sql}
+
+        \onslide<2>
+        \inputminted[
+            fontsize=\Large,
+            escapeinside=||
+        ]{sql}{sql/unwrap_highlight.sql}
+        \end{overprint}
+
+        \inputminted[
+            fontsize=\Large,
+        ]{sql}{sql/unwrap.sh}
+
     \end{center}
 \end{frame}
 
@@ -1385,9 +1416,20 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
+    \begin{overprint}
+    \onslide<1>
     \inputminted[
         fontsize=\Large,
+        escapeinside=||
     ]{sql}{sql/with_array.sql}
+
+    \onslide<2>
+    \inputminted[
+        fontsize=\Large,
+        escapeinside=||
+    ]{sql}{sql/with_array_highlight.sql}
+    \end{overprint}
+
     \inputminted[
         fontsize=\large,
     ]{bash}{sql/with_array.sh}
@@ -1408,9 +1450,20 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
+    \begin{overprint}
+    \onslide<1>
     \inputminted[
         fontsize=\Large,
+        escapeinside=||
     ]{sql}{sql/iterate_document.sql}
+
+    \onslide<2>
+    \inputminted[
+        fontsize=\Large,
+        escapeinside=||
+        ]{sql}{sql/iterate_document_highlight.sql}
+    \end{overprint}
+
     \inputminted[
         fontsize=\large,
     ]{bash}{sql/iterate_document.sh}
