@@ -1,0 +1,64 @@
+pg_wal/pg_wal_only_update - an example of writing the entire document to wal event after update of one field
+
+pg_wal - adding multiple new keys
+pg_wal_only_update - update one existing key
+pg_wal_only_update_visible - update one existing key with visible key values (strings not integers)
+
+
+about partial wal update for wiredtiger
+
+https://stackoverflow.com/questions/35813642/inc-edit-in-place-mongodb-3-2-wiredtiger
+
+Note The following is simplified for the sake of shortness and ease of
+understanding.  WiredTiger has a copy-on-write paradigm. On the other hand,
+documents are never fragmented. So if you modify it, it gets copied.
+
+BUT: Documents are synced to disk every so often to create a snapshot. Every
+60s by default, during which time durability is provided by the write ahead
+journal. WiredTiger is highly efficient in doing the disc sync.
+
+So between two snapshots, your $inc operations are written to the journal and
+applied to the in-memory representation of your document. Only when a new
+snapshot is created, the document actually is copied.
+
+So basically every edit to a document is in place, and only during the creation
+of a snapshot the heavy lifting is done.
+
+
+#############################################################################################
+
+for debian and hexdump
+
+https://sites.google.com/a/kossboss.com/main/linux---missing-hexdump---install-hexdump-on-debian
+
+apt-get install bsdmainutils
+
+journal for update mysql
+
+Server version: 5.7.20 MySQL Community Server (GPL)
+
+root@5820e0b66a6a:/var/lib/mysql# hexdump -C ib_logfile0 | grep aaabbb -A 20 -B 20
+00b9b150  1c 00 03 00 1f 00 03 00  0c 22 00 0c 26 00 0c 2a  |........."..&..*|
+00b9b160  00 61 61 61 62 62 62 63  63 63 03 61 61 61 03 62  |.aaabbbccc.aaa.b|
+00b9b170  62 62 03 63 63 63 29 18  03 00 04 00 01 80 06 80  |bb.ccc).........|
+00b9b180  06 80 07 7f ff 02 01 28  00 00 01 3c 01 10 00 00  |.......(...<....|
+00b9b190  00 07 08 00 7f 00 01 03  2f 00 03 00 2e 00 19 00  |......../.......|
+00b9b1a0  03 00 1c 00 03 00 1f 00  03 00 0c 22 00 0c 26 00  |..........."..&.|
+00b9b1b0  0c 2a 00 61 61 61 62 62  62 63 63 63 03 64 64 64  |.*.aaabbbccc.ddd|
+00b9b1c0  03 62 62 62 03 63 63 63  37 18 00 00 10 2e 2f 74  |.bbb.ccc7...../t|
+
+
+
+###########################################################################################
+
+journal update for postgresql
+
+\x00\x00\aaabbbcccdddbbbccc\x00\x00\x00\x000\x02\x00\x001
+
+journal update for mongodb
+
+\x8a4\x02aaa\x00\x04\x00\x00\x00ddd\x00\x00
+
+journal update for mysql
+
+\x0c\x2a\x00aaabbbccc\x03ddd\x03bbb\x03ccc7\x18\x00\x00\x10
