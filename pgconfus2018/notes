@@ -1,0 +1,5 @@
+select * from (select target, kind, (jsonb_populate_recordset(null::resource_type, items::jsonb)).* from resource) as resources where spec#>>'{template,metadata,labels,application}' = 'cdp-controller';
+create type resource_type as (spec jsonb, status jsonb);
+
+select count(*) from (select target, kind, jsonb_array_elements(items), jsonb_array_elements(items)->'spec'#>>'{template,metadata,labels,application}' application  from cdp_data.resource) as s where application = 'cdp-controller';
+select count(*) from (select target, kind, (jsonb_populate_recordset(null::resource_type, items::jsonb)).* from resource) as resources where spec#>>'{template,metadata,labels,application}' = 'cdp-controller';
