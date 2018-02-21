@@ -138,6 +138,10 @@ jsonb
 
 ## 4.7 Huge documents
 
+## 4.8 Alignment within a document
+
++- bits of alignment and total document size
+
 # 5. Extensions developers
 
 ## 5.1 JsonbValue vs raw container
@@ -153,3 +157,12 @@ Iterators, skip, find a single element etc.
 * Clone iterator
 
 * strings are not null terminated, don't forget about length
+
+## 5.4 Reasons to write an extension?
+
+It's possible to get something from working with jsonb on a low level. E.g. you
+somehow forced that all your documents have first key `_id`, and you don't want
+to create an index over it for some reason. If you'll create a function
+jsonb_get_id, that would return directly a value of the first key, then you may
+speed up e.g. seq scans, because for every key fetch you don't need to perform
+search within a document.
