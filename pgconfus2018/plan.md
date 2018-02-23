@@ -19,6 +19,9 @@ For extensions developers
 
 * you need to work with some external model that provided in the document form
 
+* because of some performance issues you want to keep number of relations as
+  small as possible (so, you denormalize some data)
+
 ## 3.2 When you don't need jsonb?
 
 We need to store this value, and probably we need to think about how to
