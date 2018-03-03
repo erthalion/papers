@@ -36,6 +36,11 @@ need to do so - e.g. if you relies too much on a document structure already.
 
 ## 3.4 Sign that you need to move to relation
 
+Split this slide to two - one when there is too much knowledge about a document
+structure in select itself (for this slide), and another is when there is too
+much knowledge in when part (it's for a separate slide with jsquery,
+wrap/unwrap etc).
+
 SELECT
     t_id AS id, t_created AS created,
     (CASE WHEN :minimal THEN t_tour::jsonb - 'shipments' ELSE t_tour END) AS tour
@@ -110,6 +115,10 @@ jsonb_explorer?
 From functionality point of view there is only one difference, in jsonb array
 you can put elements of different type. But it contradicts with the idea that
 your document should represents a single model.
+
+Syntax for jsonb is a bit weirder than for array in this case (especially for
+updates, but not after my patch), plus jsonb doesn't support slices and they
+have different start index (1 for array, 0 for jsonb).
 
 Performance difference?
 
