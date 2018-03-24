@@ -3,3 +3,28 @@ create type resource_type as (spec jsonb, status jsonb);
 
 select count(*) from (select target, kind, jsonb_array_elements(items), jsonb_array_elements(items)->'spec'#>>'{template,metadata,labels,application}' application  from cdp_data.resource) as s where application = 'cdp-controller';
 select count(*) from (select target, kind, (jsonb_populate_recordset(null::resource_type, items::jsonb)).* from resource) as resources where spec#>>'{template,metadata,labels,application}' = 'cdp-controller';
+
+
+
+(erthalion@[local]:5432) [erthalion] > insert into test_jsonb values( ((select '{' || string_agg
+('"field' || s.id || '"', ': {') from generate_series(1, 10000) as s(id)) || ': "some_value"' ||
+ (select string_agg('}', '') from generate_series(1, 10000))::text)::jsonb);
+INSERT 0 1
+Time: 24.095 ms
+(erthalion@[local]:5432) [erthalion] > select data #> (select array_agg('field' || s.id) from ge
+nerate_series(1, 10000) as s(id)) from test_jsonb;
+   ?column?
+--------------
+ "some_value"
+(1 row)
+
+Time: 12.047 ms
+(erthalion@[local]:5432) [erthalion] > update test_jsonb set data = jsonb_set(data,
+    (select array_agg('field' || s.id) from generate_series(1, 10000) as s(id)),
+    '"other_value"'
+);
+ERROR:  54001: stack depth limit exceeded
+HINT:  Increase the configuration parameter "max_stack_depth" (currently 2048kB), after ensuring the platform's stack depth limit is adequate.
+LOCATION:  check_stack_depth, postgres.c:3163
+Time: 13.715 ms
+

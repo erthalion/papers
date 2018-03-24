@@ -129,30 +129,35 @@ your system, otherwise you'll not not what'are you working with.
 
 # 4. DBA
 
-## 4.1 Update PG versions
+## 4.1 Limitations
+
+Size / nesting level (an issue with dependency from stack depth)
+
+## 4.2 Update PG versions
 
 Show an example with jsonb_populare_records
 
-## 4.2 Performance of indexes
+## 4.3 Performance of indexes
 
 When id in document, GIN jsonb_ops vs GIN jsonb_path_ops vs jsquery vs BTree
 
-## 4.3 Statistics
+## 4.4 Statistics
 
 Investigage if there are any details about how postgres collects statistics for
 jsonb
-
-## 4.4 Jsonb array vs array
 
 ## 4.5 Multiple detoasting
 
 ## 4.6 Write jsonb diffs to wal
 
+Logical decoding disables the same pages update diff. Also the algorithm to
+find out the diff is quite simple (get first diff byte from start and end).
+
 ## 4.7 Huge documents
 
 ## 4.8 Alignment within a document
 
-+- bits of alignment and total document size
+plus/minus bits of alignment and total document size
 
 # 5. Extensions developers
 
