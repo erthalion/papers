@@ -181,6 +181,122 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
+    \textbf{Introduction}
+
+        \begin{itemize}[label={}]
+            \item Less benchmarks
+            \item More opinionated best practices
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Introduction}
+
+        \begin{itemize}[label={}]
+            \item Application developers
+            \item DBAs
+            \item Extension developers
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\fontsize{13pt}{14}\selectfont
+\section{Application developers}
+\fontsize{17pt}{18}\selectfont
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{When jsonb?}
+        \begin{itemize}
+            \item <+->
+        \end{itemize}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item <+-> You have a distinct flexible model
+            \item <+-> You need to work with data provided in document oriented format
+            \item <+-> Workaround for technical issues (large number of tables or expensive alignment)
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+\note{
+    technical reasons - Because of some performance issues you want to keep
+    number of relations as small as possible (so, you denormalize some data),
+    or you're playing with alignment
+}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{When not jsonb?}
+        \begin{itemize}
+            \item <+->
+        \end{itemize}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item <+-> Flexibility "just in case"
+            \item <+-> Reluctance to create a migration
+            \item <+-> Use jsonb column as a "garbage can"
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Jsonb <-> Relation}
+
+        \begin{columns}[T,onlytextwidth]
+        \column{0.5\textwidth}
+        \begin{itemize}[leftmargin=*]
+            \item \includegraphics[width=6cm,height=5cm]{relation.png}
+        \end{itemize}
+
+        \vspace{20pt}
+
+        \column{0.5\textwidth}
+        \begin{itemize}[leftmargin=*]
+            \item \includegraphics[width=6cm,height=5cm]{document.jpg}
+        \end{itemize}
+        \end{columns}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{When to move from jsonb to relation?}
+        \begin{itemize}
+            \item <+->
+        \end{itemize}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item <+-> Queries rely significantly in information about\\
+                internal structure of documents
+            \item <+-> There are too many constraints for documents
+            \item <+-> Some parts of document are used much more\\
+                frequently than other
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+
+        \inputminted[
+            fontsize=\normalsize,
+        ]{sql}{sql/complex_where.sql}
+
     \end{center}
 \end{frame}
 
