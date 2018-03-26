@@ -1,5 +1,4 @@
-SELECT id AS id, created AS created
-FROM some_table
+SELECT id, created FROM some_table
 WHERE
 
 (data->>'name' = :a

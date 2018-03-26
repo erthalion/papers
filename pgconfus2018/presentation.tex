@@ -3,7 +3,7 @@
 % can be compiled by xelatex -shell-escape presentation.tex
 % lualatex -shell-escape presentation.tex
 
-\usetheme[]{m}
+\usetheme[]{metropolis}
 
 \usepackage[utf8]{inputenc}
 \usepackage[russian, english]{babel}
@@ -97,7 +97,7 @@
       \if@noSmallCapitals%
         \inserttitle%
       \else%
-        \scshape{\color{black} \textbf{\begin{center}NOSQL FOR\\POSTGRESQL\end{center}}}%
+        \scshape{\color{black} \textbf{\begin{center}\inserttitle\end{center}}}%
       \fi%
       \vspace*{0.3em}
     }}
@@ -150,8 +150,8 @@
 \end{beamercolorbox}
 }
 
-\title{NOSQL INSIDE SQL}
-\subtitle{BEST PRACTICES}
+\title{NOSQL\\ BEST PRACTICES}
+\subtitle{FOR POSTGRESQL}
 \date{\today}
 \author{DMITRY DOLGOV}
 \institute{}
@@ -163,10 +163,6 @@
   \maketitle
 }
 
-\fontsize{17pt}{19}\selectfont
-\section{}
-
-
 \AddToShipoutPictureBG{
   \AtPagemyUpperLeft{{\includegraphics[width=2.0cm,keepaspectratio]{logo.png}}}
 }%
@@ -177,6 +173,8 @@
     \fill[color=orange] (4cm, \paperheight-6pt) rectangle (\paperwidth-4cm,\paperheight);
 \end{tikzpicture}
 }
+
+\fontsize{17pt}{18}\selectfont
 
 \begin{frame}
     \frametitle{}
@@ -296,6 +294,54 @@
         \inputminted[
             fontsize=\normalsize,
         ]{sql}{sql/complex_where.sql}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Complicated conditions}
+        \begin{itemize}[label={\MVRightarrow}]
+            \item jsquery
+            \item SQL/JSON
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Complicated conditions}
+
+        \inputminted[
+            fontsize=\normalsize,
+        ]{sql}{sql/complex_where_jsquery.sql}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Complicated conditions}
+
+        \inputminted[
+            fontsize=\normalsize,
+        ]{sql}{sql/complex_where_standard.sql}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Complicated select}
+
+        \inputminted[
+            fontsize=\normalsize,
+        ]{sql}{sql/complex_select.sql}
 
     \end{center}
 \end{frame}
