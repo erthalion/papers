@@ -1,0 +1,39 @@
+digraph write {
+    layout=fdp
+    overlap=scalexy
+    splines=ortho
+
+    node [
+        shape="rectangle",
+        style="rounded",
+        pin=true,
+        width=1.5,
+        penwidth=2,
+        fontsize=16
+    ];
+    Memory [pos="2,10"]
+    Persistent [label="Storage", pos="4,10"]
+    Query1 [label="Query 1", pos="0,9"]
+    Query2 [label="Query 2", pos="0,8"]
+    Checkpoint [pos="0,7"]
+    node1_q1 [label="", pos="2,9", shape=circle, fixedsize=true, width=0.2]
+    node2_q1 [label="", pos="4,9", shape=circle, fixedsize=true, width=0.2]
+    node1_q2 [label="", pos="2,8", shape=circle, fixedsize=true, width=0.2]
+    node2_q2 [label="", pos="4,8", shape=circle, fixedsize=true, width=0.2]
+    node1_checkpoint [label="", pos="2,7", shape=circle, fixedsize=true, width=0.2]
+    node2_checkpoint [label="", pos="4,7", shape=circle, fixedsize=true, width=0.2]
+
+    Memory -> node1_q1 [dir=none]
+    Persistent -> node2_q1 [dir=none]
+    Query1 -> node1_q1 [label="Tuple"]
+    node1_q1 -> node2_q1 [label="WAL", style=dashed]
+
+    node1_q1 -> node1_q2 [dir=none]
+    node2_q1 -> node2_q2 [dir=none]
+    Query2 -> node1_q2 [label="Tuple"]
+    node1_q2 -> node2_q2 [label="WAL", style=dashed]
+
+    node1_q2 -> node1_checkpoint [dir=none]
+    node2_q2 -> node2_checkpoint [dir=none]
+    node1_checkpoint -> node2_checkpoint [label="Sync"]
+}

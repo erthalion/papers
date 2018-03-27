@@ -536,28 +536,6 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-    \textbf{Place for ID}
-
-        \begin{itemize}[label={\MVRightarrow}]
-            \item Inside a document
-            \item As as separate column
-        \end{itemize}
-
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-
-        \includegraphics[width=0.75\textwidth,center]{pg_id_place.png}
-
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
         \textbf{Multiple jsonb columns}
 
         \begin{itemize}[label={\MVRightarrow}]
@@ -667,21 +645,6 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-        \textbf{Indexing support}
-
-        \begin{itemize}[label={\MVRightarrow}]
-            \item GIN index (jsonb\_ops, jsonb\_path\_ops)
-            \item Functional BTree index
-            \item jsquery strategies for GIN
-            \item Partial indexes WIP
-        \end{itemize}
-
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
         \textbf{Jsonb array vs regular array}
 
         \begin{itemize}[label={\MVRightarrow}]
@@ -761,13 +724,110 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
+        \textbf{Indexing support}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item GIN index (jsonb\_ops, jsonb\_path\_ops)
+            \item Functional BTree index
+            \item jsquery strategies for GIN
+            \item Partial indexes WIP
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Place for ID}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item Inside a document
+            \item As as separate column
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+
+        \includegraphics[width=0.75\textwidth,center]{pg_id_place.png}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Place for ID}
+
+        \begin{flushleft}
+            PostgreSQL 11 have HOT updates for some expression indexes, which will
+            eliminate this problem.
+        \end{flushleft}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
     \textbf{Statistics}
 
-        \begin{itemize}[label={}]
-            \item Size 256 MB
-            \item Depth - max\_stack\_depth
-            \item Stack depth is different for create \& update
+        \begin{itemize}[label={\MVRightarrow}]
+            \item There is no proper selectivity estimation for jsonb
+            \item Optimizer can give wrong estimations for GIN and complex queries
+            \item Functional indexes
         \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\fontsize{13pt}{14}\selectfont
+\section{How much to write?}
+\fontsize{17pt}{18}\selectfont
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Jsonb vs Json}
+
+        \includegraphics[width=0.7\textwidth,center]{jsonb_header.png}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+
+        \includegraphics[width=0.8\textwidth,center]{wal.png}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{How much to write?}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item Every update leads to update of an entire document (but it's ok)
+            \item WAL can have a full document or just a diff
+            \item Old and new tuples fit into the same page - diff
+            \item Old and new tuples fit into the same page - full
+            \item If logical decoding is enabled - full
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{How much to write?}
 
     \end{center}
 \end{frame}
