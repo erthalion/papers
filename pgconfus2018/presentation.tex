@@ -592,6 +592,12 @@
             let \p1=(start), \p2=(right) in ($(\x1,\y1)+(1.5,1.3)$) -- node[] {} ($(\x1,\y2)+(12.0,1.3)$);
         \end{tikzpicture}
 
+        \begin{tikzpicture}[overlay,remember picture]
+            \draw[line width=1mm, color=red, rounded corners]
+            let \p1=(start), \p2=(right) in ($(\x1,\y1)+(9.5,0.8)$) rectangle ($(\x1,\y2)+(12.0,-2.1)$);
+        \end{tikzpicture}
+
+
     \end{center}
 \end{frame}
 
@@ -617,6 +623,11 @@
         \begin{tikzpicture}[overlay,remember picture]
             \draw[->, line width=1mm, color=white]
             let \p1=(start), \p2=(right) in ($(\x1,\y1)+(1.5,1.3)$) -- node[] {} ($(\x1,\y2)+(12.0,1.3)$);
+        \end{tikzpicture}
+
+        \begin{tikzpicture}[overlay,remember picture]
+            \draw[line width=1mm, color=red, rounded corners]
+            let \p1=(start), \p2=(right) in ($(\x1,\y1)+(-0.3,0.8)$) rectangle ($(\x1,\y2)+(2.3,-2.1)$);
         \end{tikzpicture}
 
     \end{center}
