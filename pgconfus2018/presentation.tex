@@ -633,6 +633,145 @@
     \end{center}
 \end{frame}
 
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Document slide: in the DB or on the app?}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item Amount of data passed from DB to application
+            \item Performance hit in some cases\\ (multiple detoasting)
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+
+        \includegraphics[width=0.75\textwidth,center]{select.png}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+
+        \includegraphics[width=0.75\textwidth,center]{select_slice.png}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Indexing support}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item GIN index (jsonb\_ops, jsonb\_path\_ops)
+            \item Functional BTree index
+            \item jsquery strategies for GIN
+            \item Partial indexes WIP
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Jsonb array vs regular array}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item Store elements of different type?\\
+                    Not really a "single model" idea.
+            \item Syntax is less natural (this may change)
+            \item Updates are slower
+            \item Arrays are 1-based, Jsonb 0-based
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+\note {
+    arrays are copied too, where exactly jsonb slower?
+}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+
+        \inputminted[
+            fontsize=\normalsize,
+        ]{sql}{sql/array_vs_jsonb.sql}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Some useful extensions}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item jsquery
+            \item postgres-json-schema
+            \item is\_jsonb\_valid
+            \item zson (jsonbc, custom compression methods WIP)
+            \item jsonb\_explorer
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+
+        \includegraphics[width=0.7\textwidth,center]{fuzzy.jpg}
+
+        \vspace{-2cm}
+        \tiny{\href{https://kickass-peanut.deviantart.com/}{@kickass-peanut}}
+
+    \end{center}
+\end{frame}
+\note {
+    "Types, please"
+}
+
+\fontsize{13pt}{14}\selectfont
+\section{DBAs}
+\fontsize{17pt}{18}\selectfont
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Limitations}
+
+        \begin{itemize}[label={}]
+            \item Size 256 MB
+            \item Depth - max\_stack\_depth
+            \item Stack depth is different for create \& update
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Statistics}
+
+        \begin{itemize}[label={}]
+            \item Size 256 MB
+            \item Depth - max\_stack\_depth
+            \item Stack depth is different for create \& update
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
 \fontsize{17pt}{18}\selectfont
 \begin{frame}
   \vspace*{2.5cm}
