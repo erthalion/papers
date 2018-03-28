@@ -645,6 +645,37 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item Plain Json
+            \item Binary Jsonb
+            \item Relation
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+
+        \includegraphics[width=0.75\textwidth,center]{json_vs_jsonb.png}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+
+        \includegraphics[width=0.75\textwidth,center]{jsonb_vs_relation.png}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
         \textbf{Jsonb array vs regular array}
 
         \begin{itemize}[label={\MVRightarrow}]
@@ -684,6 +715,14 @@
             \item zson (jsonbc, custom compression methods WIP)
             \item jsonb\_explorer
         \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Types, please}
 
     \end{center}
 \end{frame}
@@ -828,6 +867,146 @@
     \frametitle{}
     \begin{center}
     \textbf{How much to write?}
+
+    \vspace{1cm}
+    \begin{tikzpicture}
+        \draw[line width=0.5mm] (0,0) rectangle (2,1) node[pos=.5] {};
+        \draw[line width=0.5mm] (2,0) rectangle (4,1) node[pos=.5] {};
+        \draw[line width=0.5mm] (4,0) rectangle (6,1) node[pos=.5] {};
+        \draw[line width=0.5mm, fill=red!30] (6,0) rectangle (8,1) node[pos=.5] {DIFF};
+        \draw[line width=0.5mm] (8,0) rectangle (10,1) node[pos=.5] {};
+        \draw[line width=0.5mm] (10,0) rectangle (12,1) node[pos=.5] {};
+        \draw[->, line width=1mm, dashed] (0,-0.5) -- (6,-0.5);
+        \draw[<-, line width=1mm, dashed] (8,-0.5) -- (12,-0.5);
+    \end{tikzpicture}
+
+    \begin{tikzpicture}
+        \draw[line width=0.5mm] (0,0) rectangle (2,1) node[pos=.5] {\{};
+        \draw[line width=0.5mm, fill=red!30] (2,0) rectangle (4,1) node[pos=.5] {DIFF};
+        \draw[line width=0.5mm, fill=red!30] (4,0) rectangle (6,1) node[pos=.5] {};
+        \draw[line width=0.5mm, fill=red!30] (6,0) rectangle (8,1) node[pos=.5] {};
+        \draw[line width=0.5mm, fill=red!30] (8,0) rectangle (10,1) node[pos=.5] {DIFF};
+        \draw[line width=0.5mm] (10,0) rectangle (12,1) node[pos=.5] {\}};
+        \draw[->, line width=1mm, dashed] (0,-0.5) -- (2,-0.5);
+        \draw[<-, line width=1mm, dashed] (10,-0.5) -- (12,-0.5);
+    \end{tikzpicture}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Huge documents}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item TOAST has significant overhead (assemble, locks)
+            \item Other than that ~ linear degradation
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+
+        \includegraphics[width=0.7\textwidth,center]{document_size.png}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Alignment}
+
+    \begin{itemize}[label={}]
+        \item Variable-length portion is aligned to a 4-byte
+        \item \inputminted[fontsize=\Large]{sql}{sql/insert_align1.sql}
+        \item \begin{figure}
+            \includegraphics[width=0.58\textwidth,left]{align_short.png}
+        \end{figure}
+
+        \item \inputminted[fontsize=\Large]{sql}{sql/insert_align2.sql}
+        \item \begin{figure}
+            \includegraphics[width=0.75\textwidth,left]{align_long.png}
+        \end{figure}
+
+    \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\fontsize{13pt}{14}\selectfont
+\section{Extensions}
+\fontsize{17pt}{18}\selectfont
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Why to write an extension?}
+
+        \vspace{1cm}
+        \begin{itemize}[label={\MVRightarrow}]
+            \item Implement some convenient functionality\\ (e.g. jsonb intersection)
+            \item Create function optimized for your domain model
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Why to write an extension?}
+
+        \vspace{1cm}
+        \begin{flushleft}
+            findJsonbValueFromContainer -> binary search
+
+            \_id in a fixed position?
+        \end{flushleft}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item Raw Jsonb container when search for an element
+            \item Iterate through JsonbValue when update
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Reuse infrastructure}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item findJsonbValueFromContainer
+            \item JsonbIterator
+            \item addToParseState
+            \item worker functions
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Random tips}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item Clone iterator
+            \item String are not null-terminated
+        \end{itemize}
 
     \end{center}
 \end{frame}
