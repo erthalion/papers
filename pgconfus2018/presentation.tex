@@ -613,6 +613,32 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
+    \begin{overprint}
+    \onslide<1>
+    \inputminted[
+        fontsize=\Large,
+        escapeinside=||
+    ]{sql}{sql/detoast_overhead.sql}
+
+    \onslide<2>
+    \inputminted[
+        fontsize=\Large,
+        escapeinside=||
+    ]{sql}{sql/detoast_overhead_ok.sql}
+
+    \onslide<3>
+    \inputminted[
+        fontsize=\Large,
+        escapeinside=||
+    ]{sql}{sql/detoast_overhead_wrong.sql}
+    \end{overprint}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
 
         \includegraphics[width=0.75\textwidth,center]{select.png}
 
