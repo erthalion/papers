@@ -541,29 +541,32 @@
     \textbf{Multiple jsonb columns}
 
         \vspace{1cm}
+        \onslide<1,2,3,4>
         \begin{tcolorbox}[adjusted title= Table]
         \begin{tabular}{c|c|c|c|c|c}
-            \tikzmark{start} value & \tikzmark{right} value & value & value & value & value... \\\hline
+            \tikzmark{start}value & \tikzmark{right} value & value & value & value & value... \\\hline
         value & value & value & value & value & value... \\\hline
-        \tikzmark{end} value & value & value & value & value & value...
+        \tikzmark{end}value & value & value & value & value & value...
         \end{tabular}
         \end{tcolorbox}
 
-        \begin{tikzpicture}[overlay,remember picture]
-            \draw[->, line width=1mm]
-            let \p1=(start), \p2=(end) in ($(\x1,\y1)+(-1.2,0.2)$) -- node[] {} ($(\x1,\y2)+(-1.2,0.0)$);
-        \end{tikzpicture}
-
+        \onslide<2,3,4>
         \begin{tikzpicture}[overlay,remember picture]
             \draw[->, line width=1mm, color=white]
             let \p1=(start), \p2=(right) in ($(\x1,\y1)+(1.5,1.3)$) -- node[] {} ($(\x1,\y2)+(12.0,1.3)$);
         \end{tikzpicture}
 
+        \onslide<3,4>
         \begin{tikzpicture}[overlay,remember picture]
-            \draw[line width=1mm, color=red, rounded corners]
-            let \p1=(start), \p2=(right) in ($(\x1,\y1)+(9.5,0.8)$) rectangle ($(\x1,\y2)+(12.0,-2.1)$);
+            \draw[->, line width=1mm]
+            let \p1=(start), \p2=(end) in ($(\x1,\y1)+(-1.2,0.2)$) -- node[] {} ($(\x1,\y2)+(-1.2,0.0)$);
         \end{tikzpicture}
 
+        \onslide<4>
+        \begin{tikzpicture}[overlay,remember picture]
+            \draw[line width=1mm, color=red, rounded corners]
+            let \p1=(start), \p2=(right) in ($(\x1,\y1)+(9.3,0.8)$) rectangle ($(\x1,\y2)+(12.0,-2.1)$);
+        \end{tikzpicture}
 
     \end{center}
 \end{frame}
@@ -576,9 +579,9 @@
         \vspace{1cm}
         \begin{tcolorbox}[adjusted title= Table]
         \begin{tabular}{c|c|c|c|c|c}
-        \tikzmark{start} value... & \tikzmark{right} value & value & value & value & value \\\hline
+        \tikzmark{start}value... & \tikzmark{right} value & value & value & value & value \\\hline
         value... & value & value & value & value & value \\\hline
-        \tikzmark{end} value... & value & value & value & value & value
+        \tikzmark{end}value... & value & value & value & value & value
         \end{tabular}
         \end{tcolorbox}
 
@@ -594,7 +597,7 @@
 
         \begin{tikzpicture}[overlay,remember picture]
             \draw[line width=1mm, color=red, rounded corners]
-            let \p1=(start), \p2=(right) in ($(\x1,\y1)+(-0.3,0.8)$) rectangle ($(\x1,\y2)+(2.3,-2.1)$);
+            let \p1=(start), \p2=(right) in ($(\x1,\y1)+(-0.3,0.8)$) rectangle ($(\x1,\y2)+(2.1,-2.1)$);
         \end{tikzpicture}
 
     \end{center}
@@ -1060,12 +1063,58 @@
     \begin{center}
         \textbf{Why write an extension?}
 
-        \vspace{1cm}
-        \begin{flushleft}
-            findJsonbValueFromContainer -> binary search
+        \vspace{1.0cm}
 
-            \_id in a fixed position?
-        \end{flushleft}
+        \only<1>{
+            \begin{tikzpicture}
+                \draw[line width=0.5mm] (0,0) rectangle (2,1) node[pos=.5] {\{};
+                \draw[line width=0.5mm] (2,0) rectangle (4,1) node[pos=.5] {\textbf{\_id}};
+                \draw[line width=0.5mm] (4,0) rectangle (6,1) node[pos=.5] {};
+                \draw[line width=0.5mm] (6,0) rectangle (8,1) node[pos=.5] {};
+                \draw[line width=0.5mm] (8,0) rectangle (10,1) node[pos=.5] {};
+                \draw[line width=0.5mm] (10,0) rectangle (12,1) node[pos=.5] {\}};
+                \draw[->, line width=0.75mm, color=white] (0,-0.5) to [controls=+(-90:2) and +(-90:2)]  (7,-0.5);
+            \end{tikzpicture}
+        }
+
+        \only<2>{
+            \begin{tikzpicture}
+                \draw[line width=0.5mm] (0,0) rectangle (2,1) node[pos=.5] {\{};
+                \draw[line width=0.5mm] (2,0) rectangle (4,1) node[pos=.5] {\textbf{\_id}};
+                \draw[line width=0.5mm] (4,0) rectangle (6,1) node[pos=.5] {};
+                \draw[line width=0.5mm] (6,0) rectangle (8,1) node[pos=.5] {};
+                \draw[line width=0.5mm] (8,0) rectangle (10,1) node[pos=.5] {};
+                \draw[line width=0.5mm] (10,0) rectangle (12,1) node[pos=.5] {\}};
+                \draw[->, line width=0.75mm] (0,-0.5) to [controls=+(-90:2) and +(-90:2)]  (7,-0.5);
+            \end{tikzpicture}
+        }
+
+        \only<3>{
+            \begin{tikzpicture}
+                \draw[line width=0.5mm] (0,0) rectangle (2,1) node[pos=.5] {\{};
+                \draw[line width=0.5mm] (2,0) rectangle (4,1) node[pos=.5] {\textbf{\_id}};
+                \draw[line width=0.5mm] (4,0) rectangle (6,1) node[pos=.5] {};
+                \draw[line width=0.5mm] (6,0) rectangle (8,1) node[pos=.5] {};
+                \draw[line width=0.5mm] (8,0) rectangle (10,1) node[pos=.5] {};
+                \draw[line width=0.5mm] (10,0) rectangle (12,1) node[pos=.5] {\}};
+                \draw[->, line width=0.75mm] (0,-0.5) to [controls=+(-90:2) and +(-90:2)]  (7,-0.5);
+                \draw[->, line width=0.75mm] (7,-0.5) to [controls=+(-90:1) and +(-90:1)]  (5,-0.5);
+            \end{tikzpicture}
+        }
+
+        \only<4>{
+            \begin{tikzpicture}
+                \draw[line width=0.5mm] (0,0) rectangle (2,1) node[pos=.5] {\{};
+                \draw[line width=0.5mm] (2,0) rectangle (4,1) node[pos=.5] {\textbf{\_id}};
+                \draw[line width=0.5mm] (4,0) rectangle (6,1) node[pos=.5] {};
+                \draw[line width=0.5mm] (6,0) rectangle (8,1) node[pos=.5] {};
+                \draw[line width=0.5mm] (8,0) rectangle (10,1) node[pos=.5] {};
+                \draw[line width=0.5mm] (10,0) rectangle (12,1) node[pos=.5] {\}};
+                \draw[->, line width=0.75mm] (0,-0.5) to [controls=+(-90:2) and +(-90:2)]  (7,-0.5);
+                \draw[->, line width=0.75mm] (7,-0.5) to [controls=+(-90:1) and +(-90:1)]  (5,-0.5);
+                \draw[->, line width=0.75mm] (5,-0.5) to [controls=+(-90:1) and +(-90:1)]  (3,-0.5);
+            \end{tikzpicture}
+        }
 
     \end{center}
 \end{frame}
