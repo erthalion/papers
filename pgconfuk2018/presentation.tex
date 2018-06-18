@@ -207,20 +207,253 @@
 \section{Execution scheduling}
 \fontsize{17pt}{18}\selectfont
 
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+
+        \begin{minted}[fontsize=\normalsize]{bash}
+            # Experiment 1
+            transaction type: pg_long.sql
+            latency average = 1312.903 ms
+
+            # Experiment 2
+            SQL script 1: pg_long.sql
+             - weight: 1 (targets 50.0% of total)
+             - latency average = 1426.928 ms
+
+            SQL script 2: pg_short.sql
+             - weight: 1 (targets 50.0% of total)
+             - latency average = 303.092 ms
+        \end{minted}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Scheduling}
+
+        \vspace{1.0cm}
+
+        \only<1>{
+            \begin{tikzpicture}
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    dashed
+                ] (0,0) rectangle (2,2) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=red!30
+                ] (0.25,0.25) rectangle (1.75,1.75) node[pos=.5] {\textbf{T1}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.1cm,
+                    fill=red!30
+                ] (2.25,0.25) rectangle (2.75,0.75) node[pos=.5] {\textbf{c}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    dashed
+                ] (4,0) rectangle (6,2) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    color=white
+                ] (4.25,-1.25) rectangle (5.75,-2.75) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=blue!30
+                ] (4.25,0.25) rectangle (5.75,1.75) node[pos=.5] {\textbf{T2}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.1cm,
+                    fill=blue!30
+                ] (6.25,0.25) rectangle (6.75,0.75) node[pos=.5] {\textbf{c}};
+
+            \end{tikzpicture}
+        }
+
+        \only<2>{
+            \begin{tikzpicture}
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    dashed
+                ] (0,0) rectangle (2,2) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=red!30
+                ] (0.25,0.25) rectangle (1.75,1.75) node[pos=.5] {\textbf{T1}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.1cm,
+                    fill=red!30
+                ] (2.25,0.25) rectangle (2.75,0.75) node[pos=.5] {\textbf{c}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    dashed
+                ] (4,0) rectangle (6,2) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=red!30
+                ] (4.25,0.25) rectangle (5.75,1.75) node[pos=.5] {\textbf{T3}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=blue!30
+                ] (4.25,-1.25) rectangle (5.75,-2.75) node[pos=.5] {\textbf{T2}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.1cm,
+                    fill=blue!30
+                ] (6.25,0.25) rectangle (6.75,0.75) node[pos=.5] {\textbf{c}};
+
+            \end{tikzpicture}
+        }
+
+        \only<3>{
+            \begin{tikzpicture}
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    dashed
+                ] (0,0) rectangle (2,2) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=blue!30
+                ] (0.25,0.25) rectangle (1.75,1.75) node[pos=.5] {\textbf{T2}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.1cm,
+                    fill=red!30
+                ] (2.25,0.25) rectangle (2.75,0.75) node[pos=.5] {\textbf{c}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    dashed
+                ] (4,0) rectangle (6,2) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=red!30
+                ] (4.25,0.25) rectangle (5.75,1.75) node[pos=.5] {\textbf{T3}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    color=white
+                ] (4.25,-1.25) rectangle (5.75,-2.75) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.1cm,
+                    fill=blue!30
+                ] (6.25,0.25) rectangle (6.75,0.75) node[pos=.5] {\textbf{c}};
+
+            \end{tikzpicture}
+        }
+
+        \only<4>{
+            \begin{tikzpicture}
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    dashed
+                ] (0,0) rectangle (2,2) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=blue!30
+                ] (0.25,0.25) rectangle (1.75,1.75) node[pos=.5] {\textbf{T2}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.1cm,
+                    fill=red!30
+                ] (2.25,0.25) rectangle (2.75,0.75) node[pos=.5] {\textbf{c}};
+
+                \draw[
+                    <-,
+                    line width=0.75mm,
+                ] (2.5,0.25) to [controls=+(-90:2) and +(-90:2)]  (6.5,.5);
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    dashed
+                ] (4,0) rectangle (6,2) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=red!30
+                ] (4.25,0.25) rectangle (5.75,1.75) node[pos=.5] {\textbf{T3}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    color=white
+                ] (4.25,-1.25) rectangle (5.75,-2.75) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.1cm,
+                    fill=blue!30
+                ] (6.25,0.25) rectangle (6.75,0.75) node[pos=.5] {\textbf{c}};
+
+            \end{tikzpicture}
+        }
+
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+
+        \begin{minted}[fontsize=\normalsize]{bash}
+        # Experiment 1
+        12,396,382,649      cache-misses # 28.562%
+         2,750              cpu-migrations
+
+        # Experiment 2
+        20,665,817,234      cache-misses # 28.533%
+        10,460              cpu-migrations
+        \end{minted}
+
+    \end{center}
+\end{frame}
+
 \begin{frame}
     \frametitle{}
     \begin{center}
 
-        transaction type: pg\_long.sql
-        latency average = 1312.903 ms
-
-        SQL script 1: pg\_long.sql
-         - weight: 1 (targets 50.0\% of total)
-         - latency average = 1426.928 ms
-
-        SQL script 2: pg\_short.sql
-         - weight: 1 (targets 50.0\% of total)
-         - latency average = 303.092 ms
+        \includegraphics[width=1.0\textwidth,center]{migrations.png}
 
     \end{center}
 \end{frame}
