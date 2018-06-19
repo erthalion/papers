@@ -21,6 +21,7 @@
 \usemintedstyle{tango}
 \usepackage[normalem]{ulem}
 \usepackage{tikz}
+\usetikzlibrary{patterns}
 \usetikzlibrary{mindmap}
 \usepackage{graphicx}
 \usepackage{eso-pic}
@@ -454,6 +455,291 @@
     \begin{center}
 
         \includegraphics[width=1.0\textwidth,center]{migrations.png}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Tunables}
+
+        \begin{itemize}
+            \item <+->
+        \end{itemize}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item <+-> /proc/sys/kernel/sched\_migration\_cost\_ns
+            \item <+-> /proc/sys/kernel/sched\_min\_granularity\_ns
+            \item <+-> schedule policy (BATCH / OTHER)
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+    \textbf{pgbench and pg\_dump}
+
+        \begin{minted}[fontsize=\normalsize]{bash}
+            # Experiment 1
+            SCHED_OTHER
+            real    1m5.845s
+            user    0m9.573s
+            sys     0m3.475s
+
+            # Experiment 2
+            SCHED_BATCH and prioritized
+            real    0m51.771s
+            user    0m9.017s
+            sys     0m2.967s
+        \end{minted}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{HyperThreading}
+
+        \begin{itemize}
+            \item <+->
+        \end{itemize}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item <+-> Less deviation for latency
+            \item <+-> Share execution state and cache
+            \item <+-> Spin locks have significant impact
+            \item <+-> PAUSE instruction
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Latency rolling standard deviation}
+
+        \includegraphics[width=0.9\textwidth,center]{hyperthreading.png}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Latency rolling standard deviation, readonly}
+
+        \includegraphics[width=0.9\textwidth,center]{hyperthreading_readonly.png}
+
+    \end{center}
+\end{frame}
+
+\fontsize{13pt}{14}\selectfont
+\section{Virtualization?}
+\fontsize{17pt}{18}\selectfont
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Timekeeping}
+
+        \begin{itemize}
+            \item <+->
+        \end{itemize}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item <+-> Statistical sampling \\ (occasional incorrect charging)
+            \item <+-> Exact measurement (TSC time drift)
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Scheduling}
+
+        \vspace{1.0cm}
+
+        \only<1>{
+            \begin{tikzpicture}
+                \draw[
+                    line width=0.3mm,
+                    pattern=north west lines,
+                    pattern color=blue!30
+                    ] (0,3) rectangle (1,3.3) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=blue!30
+                    ] (0,-1) rectangle (6,-2) node[pos=.5] {\textbf{Hypervisor}};
+
+                \draw[
+                    <-,
+                    line width=0.75mm,
+                ] (1,1) to (3,-1);
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    dashed
+                ] (0,0) rectangle (2,2) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=red!30
+                ] (0.25,0.25) rectangle (1.75,1.75) node[pos=.5] {\textbf{VM1}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=gray!30
+                ] (4.25,0.25) rectangle (5.75,1.75) node[pos=.5] {\textbf{VM2}};
+
+            \end{tikzpicture}
+        }
+
+        \only<2>{
+            \begin{tikzpicture}
+                \draw[
+                    line width=0.3mm,
+                    pattern=north west lines,
+                    pattern color=blue!30
+                    ] (0,3) rectangle (2,3.3) node[pos=.5] {};
+
+                \draw[
+                    line width=0.3mm,
+                    pattern=north west lines,
+                    pattern color=gray!30,
+                    dashed
+                    ] (2,3) rectangle (4,3.3) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=blue!30
+                    ] (0,-1) rectangle (6,-2) node[pos=.5] {\textbf{Hypervisor}};
+
+                \draw[
+                    <-,
+                    line width=0.75mm,
+                ] (5,1) to (3,-1);
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=gray!30
+                ] (0.25,0.25) rectangle (1.75,1.75) node[pos=.5] {\textbf{VM1}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    dashed
+                ] (4,0) rectangle (6,2) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=red!30
+                ] (4.25,0.25) rectangle (5.75,1.75) node[pos=.5] {\textbf{VM2}};
+
+            \end{tikzpicture}
+        }
+
+        \only<3>{
+            \begin{tikzpicture}
+                \draw[
+                    line width=0.3mm,
+                    pattern=north west lines,
+                    pattern color=blue!30
+                    ] (0,3) rectangle (2,3.3) node[pos=.5] {};
+
+                \draw[
+                    line width=0.3mm,
+                    pattern=north west lines,
+                    pattern color=gray!30,
+                    dashed
+                    ] (2,3) rectangle (4,3.3) node[pos=.5] {};
+
+                \draw[
+                    line width=0.3mm,
+                    pattern=north west lines,
+                    pattern color=blue!30
+                    ] (4,3) rectangle (6,3.3) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=blue!30
+                    ] (0,-1) rectangle (6,-2) node[pos=.5] {\textbf{Hypervisor}};
+
+                \draw[
+                    <-,
+                    line width=0.75mm,
+                ] (1,1) to (3,-1);
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    dashed
+                ] (0,0) rectangle (2,2) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=red!30
+                ] (0.25,0.25) rectangle (1.75,1.75) node[pos=.5] {\textbf{VM1}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=gray!30
+                ] (4.25,0.25) rectangle (5.75,1.75) node[pos=.5] {\textbf{VM2}};
+
+            \end{tikzpicture}
+        }
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{vDSO}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item gettimeofday
+            \item clock\_gettime
+            \item XEN doesn't support vDSO for them
+            \item unnecessary context switches to a kernel
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Latency m4.xlarge XEN/TSC}
+
+        \includegraphics[width=0.9\textwidth,center]{hyperthreading.png}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Latency m5.xlarge KVM-CLOCK/TSC}
+
+        \includegraphics[width=0.9\textwidth,center]{hyperthreading.png}
 
     \end{center}
 \end{frame}
