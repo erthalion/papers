@@ -1314,6 +1314,75 @@
     \end{center}
 \end{frame}
 
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Dirty pages}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item vm.dirty\_ratio
+            \item vm.dirty\_background\_ratio
+            \item vm.dirty\_bytes
+            \item vm.dirty\_backround\_bytes
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Dirty pages}
+
+    \includegraphics[width=0.9\textwidth,center]{checkpoint_dirty_pages.png}
+
+    \end{center}
+\end{frame}
+
+\fontsize{13pt}{14}\selectfont
+\section{Containers?}
+\fontsize{17pt}{18}\selectfont
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{cgroups controllers}
+
+    \begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{itemize}[label={\MVRightarrow}]
+            \item cpu,cpuacct
+            \item cpuset
+            \item memory
+            \item devices
+            \item freezer
+            \item net\_cls
+            \item rdma
+        \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \begin{itemize}[label={\MVRightarrow}]
+            \item blkio
+            \item perf\_event
+            \item net\_prio
+            \item hugetlb
+            \item pids
+            \item rdma
+        \end{itemize}
+    \end{column}
+    \end{columns}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{CONFIG\_MEMCG\_KMEM}
+
+    \end{center}
+\end{frame}
+
 \fontsize{18pt}{18}\selectfont
 \begin{frame}
   \vspace*{2.5cm}
