@@ -1380,6 +1380,52 @@
     \begin{center}
     \textbf{CONFIG\_MEMCG\_KMEM}
 
+        \begin{itemize}[label={\MVRightarrow}]
+            \item Enabled in modern versions
+            \item PostgreSQL requires contiguous memory \\ for shared buffers
+            \item It's being allocated using slab
+            \item memory.kmem.limit\_in\_bytes is too high
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+
+        \begin{minted}[fontsize=\normalsize]{bash}
+# Host, normal
+ Zone: Normal
+ Free KiB in zone: 807232.00
+    Fragment size        Free fragments
+    4096                 29612
+    8192                 23308
+    16384                13495
+
+# Host with a container
+ Zone: Normal
+ Free KiB in zone: 109700.00
+    Fragment size        Free fragments
+    4096                 3405
+    8192                 7082
+    16384                1954
+        \end{minted}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Bad neighbor}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item buddy allocator can fail \\ to find a page of proper size
+            \item kernel will start a compaction process
+            \item compaction implementation \\ knows nothing about cgroups
+        \end{itemize}
+
     \end{center}
 \end{frame}
 
