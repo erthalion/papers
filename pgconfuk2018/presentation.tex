@@ -1813,6 +1813,75 @@ nvme dsm /dev/nvme1n01 --idr --slbs=55041560 --blocks=8
 \section{Containers?}
 \fontsize{17pt}{18}\selectfont
 
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{bklio controller}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item CFQ \& throttling policy (generic block layer)
+            \item No weight related options will work without CFQ
+            \item Advisable io scheduler for SSD is noop/none
+            \item Block layer do sampling to enforce throttling
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+
+        \vspace{0.3cm}
+        \begin{minted}[fontsize=\normalsize]{bash}
+8388   8388   postgres     blk_throtl_bio
+        blk_throtl_bio+0x1        [kernel]
+        dm_make_request+0x80      [kernel]
+        generic_make_request+0xf6 [kernel]
+        submit_bio+0x7d           [kernel]
+        blkdev_issue_flush+0x68   [kernel]
+        ext4_sync_file+0x310      [kernel]
+        vfs_fsync_range+0x4b      [kernel]
+        do_fsync+0x3d             [kernel]
+        sys_fdatasync+0x13        [kernel]
+        fdatasync+0x10            [libc-2.24.so]
+        XLogBackgroundFlush+0x17e [postgres]
+        WalWriterMain+0x1cb       [postgres]
+        PostmasterMain+0xfea      [postgres]
+        \end{minted}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{throttle\_sample\_time}
+
+		\begin{flushleft}
+		This is the time window that blk-throttle samples data, in millisecond.
+		blk-throttle makes decision based on the samplings. Lower time means cgroups
+		have more smooth throughput, but higher CPU overhead. This exists only when
+		CONFIG\_BLK\_DEV\_THROTTLING\_LOW is enabled.
+		\end{flushleft}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Throttling}
+
+		\begin{flushleft}
+		On traditional cgroup hierarchies, relationships between different controllers
+		cannot be established making it impossible for writeback to operate accounting
+		for cgroup resource restrictions and all writeback IOs are attributed to the
+		root cgroup.
+		\end{flushleft}
+
+    \end{center}
+\end{frame}
 
 \fontsize{18pt}{18}\selectfont
 \begin{frame}
