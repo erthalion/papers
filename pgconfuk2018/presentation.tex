@@ -1429,6 +1429,391 @@
     \end{center}
 \end{frame}
 
+\fontsize{13pt}{14}\selectfont
+\section{Storage IO}
+\fontsize{17pt}{18}\selectfont
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{WAL}
+
+        \vspace{1.0cm}
+
+        \only<1>{
+            \begin{tikzpicture}
+                \draw[
+                    -,
+                    line width=0.75mm,
+                    dashed
+                ] (-1,-2.5) to (9,-2.5);
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    pattern=north west lines,
+                    pattern color=green!30
+                    ] (-1,-3) rectangle (9,-4) node[pos=.5] {\textbf{storage}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=blue!30
+                    ] (0,0) rectangle (2,1) node[pos=.5] {\textbf{client}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    color=white
+                    ] (3,0) rectangle (5,1) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    color=white
+                    ] (6,0) rectangle (8,1) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    color=white
+                    ] (0.5,-1) rectangle (1.5,-2) node[pos=.5] {};
+
+            \end{tikzpicture}
+        }
+
+        \only<2>{
+            \begin{tikzpicture}
+                \draw[
+                    -,
+                    line width=0.75mm,
+                    dashed
+                ] (-1,-2.5) to (9,-2.5);
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    pattern=north west lines,
+                    pattern color=green!30
+                    ] (-1,-3) rectangle (9,-4) node[pos=.5] {\textbf{storage}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=blue!30
+                    ] (0,0) rectangle (2,1) node[pos=.5] {\textbf{client}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=gray!30
+                    ] (0.5,-1) rectangle (1.5,-2) node[pos=.5] {\textbf{W}};
+
+                \draw[
+                    <-,
+                    line width=0.75mm,
+                ] (1,-1) to (1,0);
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    color=white
+                    ] (3,0) rectangle (5,1) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    color=white
+                    ] (6,0) rectangle (8,1) node[pos=.5] {};
+
+            \end{tikzpicture}
+        }
+
+        \only<3>{
+            \begin{tikzpicture}
+                \draw[
+                    -,
+                    line width=0.75mm,
+                    dashed
+                ] (-1,-2.5) to (9,-2.5);
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    pattern=north west lines,
+                    pattern color=green!30
+                    ] (-1,-3) rectangle (9,-4) node[pos=.5] {\textbf{storage}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=blue!30
+                    ] (0,0) rectangle (2,1) node[pos=.5] {\textbf{client}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=gray!30
+                    ] (0.5,-1) rectangle (1.5,-2) node[pos=.5] {\textbf{W}};
+
+                \draw[
+                    <-,
+                    line width=0.75mm,
+                ] (1,-1) to (1,0);
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=blue!30
+                    ] (3,0) rectangle (5,1) node[pos=.5] {\textbf{client}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    color=white
+                    ] (6,0) rectangle (8,1) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=gray!30
+                    ] (3.5,-1) rectangle (4.5,-2) node[pos=.5] {\textbf{W}};
+
+                \draw[
+                    <-,
+                    line width=0.75mm,
+                ] (4,-1) to (4,0);
+
+            \end{tikzpicture}
+        }
+
+        \only<4>{
+            \begin{tikzpicture}
+                \draw[
+                    -,
+                    line width=0.75mm,
+                    dashed
+                ] (-1,-2.5) to (9,-2.5);
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    pattern=north west lines,
+                    pattern color=green!30
+                    ] (-1,-3) rectangle (9,-4) node[pos=.5] {\textbf{storage}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=blue!30
+                    ] (0,0) rectangle (2,1) node[pos=.5] {\textbf{client}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=gray!30
+                    ] (0.5,-1) rectangle (1.5,-2) node[pos=.5] {\textbf{W}};
+
+                \draw[
+                    <-,
+                    line width=0.75mm,
+                ] (1,-1) to (1,0);
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=blue!30
+                    ] (3,0) rectangle (5,1) node[pos=.5] {\textbf{client}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    color=white
+                    ] (6,0) rectangle (8,1) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=gray!30
+                    ] (3.5,-1) rectangle (4.5,-2) node[pos=.5] {\textbf{W}};
+
+                \draw[
+                    <-,
+                    line width=0.75mm,
+                ] (4,-1) to (4,0);
+
+                \draw[
+                    ->,
+                    line width=0.75mm,
+                ] (1.5,-1.5) to (3.5,-1.5);
+
+                \draw[
+                    ->,
+                    line width=0.75mm,
+                ] (4,-2) to (4,-3);
+
+            \end{tikzpicture}
+        }
+
+        \only<5>{
+            \begin{tikzpicture}
+                \draw[
+                    -,
+                    line width=0.75mm,
+                    dashed
+                ] (-1,-2.5) to (9,-2.5);
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    pattern=north west lines,
+                    pattern color=green!30
+                    ] (-1,-3) rectangle (9,-4) node[pos=.5] {\textbf{storage}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=blue!30
+                    ] (0,0) rectangle (2,1) node[pos=.5] {\textbf{client}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=gray!30
+                    ] (0.5,-1) rectangle (1.5,-2) node[pos=.5] {\textbf{W}};
+
+                \draw[
+                    <-,
+                    line width=0.75mm,
+                ] (1,-1) to (1,0);
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=blue!30
+                    ] (3,0) rectangle (5,1) node[pos=.5] {\textbf{client}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=blue!30
+                    ] (6,0) rectangle (8,1) node[pos=.5] {\textbf{writer}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=gray!30
+                    ] (3.5,-1) rectangle (4.5,-2) node[pos=.5] {\textbf{W}};
+
+                \draw[
+                    <-,
+                    line width=0.75mm,
+                ] (4,-1) to (4,0);
+
+                \draw[
+                    ->,
+                    line width=0.75mm,
+                ] (1.5,-1.5) to (3.5,-1.5);
+
+                \draw[
+                    ->,
+                    line width=0.75mm,
+                ] (4.5,-1.5) to (7,-1.5);
+
+                \draw[
+                    ->,
+                    line width=0.75mm,
+                ] (7,0) to (7,-3);
+
+            \end{tikzpicture}
+        }
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{WAL}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item bgwriter write to WAl \\
+                (transaction snaphots for replication)
+            \item logical decoding write more data to WAL
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{NVMe}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item better for resourse sharing (PCI express) \\
+                under the virtualization
+            \item /sys/block/sda/queue/scheduler [noop|none]
+            \item DSM operations
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{NVMe DSM}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item Expected lifetime
+            \item Sequential write/read prepare
+            \item Access frequency
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{DSM support}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item Command DWORD 11 in ioctl
+            \item fcntl SET\_FILE\_RW\_HINT
+            \item nvme-cli
+            \item Specify a start block and a range length
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+
+        \begin{minted}[fontsize=\normalsize]{bash}
+# get a start block
+hdparm --fibmap data_file
+data_file:
+ filesystem blocksize 4096, begins at LBA 0;
+ assuming 512 byte sectors.
+ byte_offset  begin_LBA    end_LBA    sectors
+           0   55041560   55041567          8
+
+# set dsm for sequential read optimized
+nvme dsm /dev/nvme1n01 --idr --slbs=55041560 --blocks=8
+        \end{minted}
+
+    \end{center}
+\end{frame}
+
+\fontsize{13pt}{14}\selectfont
+\section{Containers?}
+\fontsize{17pt}{18}\selectfont
+
+
 \fontsize{18pt}{18}\selectfont
 \begin{frame}
   \vspace*{2.5cm}
