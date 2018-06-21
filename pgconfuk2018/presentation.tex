@@ -515,6 +515,7 @@
             \item <+-> PAUSE instruction (skylake latency 140)
         \end{itemize}
 
+        \normalsize{Intel® 64 and IA-32 Architectures Optimization Reference Manual}
     \end{center}
 \end{frame}
 
@@ -557,6 +558,7 @@
             \item <+-> /sys/devices/system/clocksource/clocksource0/
         \end{itemize}
 
+        \normalsize{Timekeeping in VMware Virtual: Information Guide}
     \end{center}
 \end{frame}
 
@@ -722,6 +724,9 @@
             \item unnecessary context switches to a kernel
         \end{itemize}
 
+        \normalsize{\href{
+            https://blog.packagecloud.io/eng/2017/03/08/system-calls-are-much-slower-on-ec2/
+        }{Two frequently used system calls are ~77\% slower on AWS EC2}}
     \end{center}
 \end{frame}
 
@@ -1786,6 +1791,8 @@
             \item Specify a start block and a range length
         \end{itemize}
 
+        \normalsize{NVM Express Revision 1.3c May 24, 2018}
+
     \end{center}
 \end{frame}
 
@@ -1871,13 +1878,17 @@ nvme dsm /dev/nvme1n01 --idr --slbs=55041560 --blocks=8
 \begin{frame}
     \frametitle{}
     \begin{center}
-    \textbf{Throttling}
+    \textbf{blkio}
 
 		\begin{flushleft}
 		On traditional cgroup hierarchies, relationships between different controllers
 		cannot be established making it impossible for writeback to operate accounting
 		for cgroup resource restrictions and all writeback IOs are attributed to the
 		root cgroup.
+
+        \normalsize{\href{
+            https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?h=v4.14-rc4&id=3e1534cf4a2a8278e811e7c84a79da1a02347b8b
+        }{https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git}}
 		\end{flushleft}
 
     \end{center}
