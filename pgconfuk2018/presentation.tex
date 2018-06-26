@@ -474,8 +474,9 @@
 
         \begin{itemize}[label={\MVRightarrow}]
             \item <+-> /proc/sys/kernel/sched\_migration\_cost\_ns
+            \item <+-> /proc/sys/kernel/sched\_wakeup\_granularity\_ns
             \item <+-> /proc/sys/kernel/sched\_min\_granularity\_ns
-            \item <+-> schedule policy (BATCH / OTHER)
+            \item <+-> /proc/sys/kernel/sched\_latency\_ns
         \end{itemize}
 
     \end{center}
@@ -489,26 +490,66 @@
     \begin{center}
     \textbf{pgbench and pg\_dump}
 
-        \begin{minted}[fontsize=\normalsize]{bash}
-            # Experiment 1
-            SCHED_OTHER
-            real    1m5.845s
-            user    0m9.573s
-            sys     0m3.475s
+    \begin{minted}[fontsize=\scriptsize]{bash}
+real    1m38.990s
+user    1m9.127s
+sys     0m2.066s
 
-            # Experiment 2
-            SCHED_BATCH and prioritized
-            real    0m51.771s
-            user    0m9.017s
-            sys     0m2.967s
+     usecs               : count     distribution
+         0 -> 1          : 16       |                                        |
+         2 -> 3          : 4604     |**                                      |
+         4 -> 7          : 6812     |****                                    |
+         8 -> 15         : 14888    |*********                               |
+        16 -> 31         : 19267    |***********                             |
+        32 -> 63         : 65795    |****************************************|
+        64 -> 127        : 50454    |******************************          |
+       128 -> 255        : 16393    |*********                               |
+       256 -> 511        : 5981     |***                                     |
+       512 -> 1023       : 12300    |*******                                 |
+      1024 -> 2047       : 48       |                                        |
+      2048 -> 4095       : 0        |                                        |
         \end{minted}
 
     \end{center}
 \end{frame}
-\note{
-    try batch \& nice separately,
-    provide numbers about how much those numbers vary between runs
-}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+    \textbf{pgbench and pg\_dump}
+
+    \begin{minted}[fontsize=\scriptsize]{bash}
+real    1m32.030s
+user    1m8.559s
+sys     0m1.641s
+
+     usecs               : count     distribution
+         0 -> 1          : 1        |                                        |
+         2 -> 3          : 8        |                                        |
+         4 -> 7          : 25       |                                        |
+         8 -> 15         : 46       |*                                       |
+        16 -> 31         : 189      |*******                                 |
+        32 -> 63         : 119      |****                                    |
+        64 -> 127        : 96       |***                                     |
+       128 -> 255        : 93       |***                                     |
+       256 -> 511        : 238      |*********                               |
+       512 -> 1023       : 323      |************                            |
+      1024 -> 2047       : 1012     |****************************************|
+      2048 -> 4095       : 47       |*                                       |
+        \end{minted}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Latency rolling standard deviation}
+
+        \includegraphics[width=0.9\textwidth,center]{wakeup_granularity.png}
+
+    \end{center}
+\end{frame}
 
 \begin{frame}
     \frametitle{}
