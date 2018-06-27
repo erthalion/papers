@@ -474,16 +474,17 @@
 
         \begin{itemize}[label={\MVRightarrow}]
             \item <+-> /proc/sys/kernel/sched\_migration\_cost\_ns
+            \item <+-> 500000
             \item <+-> /proc/sys/kernel/sched\_wakeup\_granularity\_ns
+            \item <+-> 3000000
             \item <+-> /proc/sys/kernel/sched\_min\_granularity\_ns
+            \item <+-> 2250000
             \item <+-> /proc/sys/kernel/sched\_latency\_ns
+            \item <+-> 18000000
         \end{itemize}
 
     \end{center}
 \end{frame}
-\note{
-    add default values
-}
 
 \begin{frame}[fragile]{}
     \frametitle{}
@@ -565,7 +566,7 @@ sys     0m1.641s
             \item <+-> Less deviation for latency
             \item <+-> Share execution state and cache
             \item <+-> Spin locks have significant impact
-            \item <+-> PAUSE instruction (skylake latency 140)
+            \item <+-> PAUSE instruction (skylake latency 140 cycles)
         \end{itemize}
 
         \normalsize{Intel® 64 and IA-32 Architectures Optimization Reference Manual}
@@ -573,7 +574,6 @@ sys     0m1.641s
 \end{frame}
 \note{
     mention recent hyperthreading bug
-    units for skylake latency
 }
 
 \begin{frame}
@@ -585,10 +585,6 @@ sys     0m1.641s
 
     \end{center}
 \end{frame}
-\note{
-    put units, make graph thicker
-    mention in the title "read write"
-}
 
 \begin{frame}
     \frametitle{}
@@ -800,10 +796,6 @@ sys     0m1.641s
 
     \end{center}
 \end{frame}
-\note{
-    think how to formulate - stable lower?
-    or plot it differently
-}
 
 \begin{frame}
     \frametitle{}
@@ -814,10 +806,6 @@ sys     0m1.641s
 
     \end{center}
 \end{frame}
-\note{
-    think how to formulate - not significantly different?
-    or plot it differently
-}
 
 \fontsize{13pt}{14}\selectfont
 \section{Memory}
@@ -1821,14 +1809,12 @@ sys     0m1.641s
         \begin{itemize}[label={\MVRightarrow}]
             \item bgwriter write to WAl \\
                 (transaction snaphots for replication)
-            \item logical decoding write more data to WAL
+            \item with logical decoding turned on \\
+                more data is going to WAL
         \end{itemize}
 
     \end{center}
 \end{frame}
-\note{
-    not the logical decoding itself, but if logical decoding is enabled
-}
 
 \begin{frame}
     \frametitle{}
