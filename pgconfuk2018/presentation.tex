@@ -476,11 +476,11 @@
             \item <+-> /proc/sys/kernel/sched\_migration\_cost\_ns
             \item <+-> 500000
             \item <+-> /proc/sys/kernel/sched\_wakeup\_granularity\_ns
-            \item <+-> 3000000
+            \item <+-> 2000000
             \item <+-> /proc/sys/kernel/sched\_min\_granularity\_ns
-            \item <+-> 2250000
+            \item <+-> 1500000
             \item <+-> /proc/sys/kernel/sched\_latency\_ns
-            \item <+-> 18000000
+            \item <+-> 12000000
         \end{itemize}
 
     \end{center}
@@ -1382,17 +1382,14 @@ sys     0m1.641s
     \textbf{Dirty pages, r/w}
 
         \begin{itemize}[label={\MVRightarrow}]
-            \item vm.dirty\_ratio
-            \item vm.dirty\_background\_ratio
-            \item vm.dirty\_bytes
-            \item vm.dirty\_backround\_bytes
+            \item vm.dirty\_ratio               20
+            \item vm.dirty\_background\_ratio   10
+            \item vm.dirty\_bytes               0
+            \item vm.dirty\_backround\_bytes    0
         \end{itemize}
 
     \end{center}
 \end{frame}
-\note{
-    put default values
-}
 
 \begin{frame}
     \frametitle{}
@@ -1981,10 +1978,13 @@ nvme dsm /dev/nvme1n01 --idr --slbs=55041560 --blocks=8
       \fontsize{13pt}{14}\selectfont
       \usebeamercolor[fg]{subtitle}%
         \begin{itemize}[label={}]
-            \item {\color{black} \github\ github.com/erthalion}
+            \item {\color{black} \github\ \href{github.com/erthalion}
+                                               {\color{black}github.com/erthalion}}
+            \item {\color{black} \github\ \href{github.com/erthalion/ansible-ycsb}
+                                               {\color{black}github.com/erthalion/ansible-ycsb}}
             \item {\color{black} \twitter\ @erthalion}
-            \item {\color{black}\email\ dmitrii.dolgov at zalando dot de}
-            \item {\color{black}\email\ 9erthalion6 at gmail dot com}
+            \item {\color{black} \email\ dmitrii.dolgov at zalando dot de}
+            \item {\color{black} \email\ 9erthalion6 at gmail dot com}
         \end{itemize}
       \vspace*{2.5em}%
 
