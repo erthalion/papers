@@ -204,6 +204,23 @@
     \end{center}
 \end{frame}
 
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Plan}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item Execution scheduling
+            \item Scheduling \& virtualization
+            \item Memory management
+            \item Memory \& containers
+            \item Storage IO
+            \item Storage \& containers
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
 \fontsize{13pt}{14}\selectfont
 \section{Execution scheduling}
 \fontsize{17pt}{18}\selectfont
@@ -563,10 +580,10 @@ sys     0m1.641s
         \end{itemize}
 
         \begin{itemize}[label={\MVRightarrow}]
-            \item <+-> Less deviation for latency
             \item <+-> Share execution state and cache
             \item <+-> Spin locks have significant impact
             \item <+-> PAUSE instruction (skylake latency 140 cycles)
+            \item <+-> More deviation for latency
         \end{itemize}
 
         \normalsize{Intel® 64 and IA-32 Architectures Optimization Reference Manual}
