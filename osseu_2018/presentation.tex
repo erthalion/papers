@@ -48,6 +48,7 @@
 \def\twitter{{\FA \faTwitter}}
 \def\github{{\FA \faGithub}}
 \def\email{{\FA \faEnvelope}}
+\def\spin{{\FA \faSpinner}}
 \def\check{\textcolor{check}{\FA \faCheck}}
 \def\fail{\textcolor{fail}{\FA \faRemove}}
 \def\question{\textcolor{question}{\FA \faSearch}}
@@ -84,6 +85,100 @@
 \setbeamerfont{title}{family=\Book, size=\Large, shape=\normalfont}
 \setbeamerfont{subtitle}{size=\small}
 \setbeamerfont{author}{family=\ExtraLight, size=\footnotesize}
+
+\definecolor{cec1d24}{RGB}{236,29,36}
+\definecolor{cffffff}{RGB}{255,255,255}
+
+\newcommand{\ucmark}{\tikz[y=0.80pt,x=0.80pt,yscale=-0.02,xscale=0.02, inner sep=0pt, outer sep=0pt]%
+  {\path[fill=cec1d24,nonzero rule] (635.8833,600.0000) .. controls
+    (651.0771,599.6647) and (665.7558,591.6224) .. (673.9783,577.5525) .. controls
+    (682.1001,563.3625) and (681.7384,546.6500) .. (674.5074,533.1862) --
+    (378.4699,21.6487) .. controls (370.6590,8.7662) and (356.3424,0.0975) ..
+    (340.1099,-0.0063) .. controls (323.6499,0.0972) and (309.3362,8.7657) ..
+    (301.4862,21.6487) -- (5.4612,533.1862) .. controls (-1.7257,546.6500) and
+    (-2.0877,563.3625) .. (5.9903,577.5525) .. controls (14.2570,591.6225) and
+    (28.9353,599.6650) .. (44.0853,600.0000) -- (635.8853,600.0000);
+    \path[fill=cffffff,nonzero rule] (340.1208,75.7875) -- (71.0683,540.8450) --
+    (608.8933,540.8450) -- (340.1058,75.7950);
+    \path[fill=black,nonzero rule] (303.5900,225.7800) .. controls
+    (280.4500,225.7300) and (276.9200,248.1400) .. (276.8800,250.6200) .. controls
+    (276.9200,262.4400) and (285.4000,277.1700) .. (309.1600,279.4100) .. controls
+    (309.1600,279.4100) and (313.7700,280.0900) .. (313.6600,283.0900) .. controls
+    (313.7700,285.9400) and (313.7800,284.9700) .. (312.3400,286.5300) .. controls
+    (310.8500,288.2300) and (298.5500,299.6400) .. (298.3100,302.6600) .. controls
+    (296.9800,316.8800) and (300.1800,335.2800) .. (303.0900,345.9400) .. controls
+    (303.0900,345.9400) and (306.6000,354.7800) .. (303.8800,361.0000) .. controls
+    (301.0600,367.4700) and (289.0000,397.7400) .. (288.0000,399.5600) .. controls
+    (285.1300,404.8200) and (284.0000,409.1400) .. (285.8800,415.4100) .. controls
+    (284.6600,416.1100) and (264.4700,428.8800) .. (264.4700,428.8800) .. controls
+    (264.4700,428.8800) and (261.3500,421.5100) .. (253.5900,419.3800) .. controls
+    (245.7000,417.1100) and (239.1800,418.1800) .. (232.7200,405.9100) --
+    (226.8800,396.4100) .. controls (226.8800,396.4100) and (225.6700,392.9300) ..
+    (219.7500,391.6200) .. controls (213.9300,390.4900) and (206.1000,388.3000) ..
+    (202.8100,388.4700) .. controls (198.6100,388.8800) and (195.2200,387.7300) ..
+    (189.5900,394.2800) .. controls (185.0800,399.5300) and (112.8800,524.4700) ..
+    (112.8800,524.4700) -- (286.4100,524.4700) .. controls (286.4100,524.4700) and
+    (290.7100,524.0000) .. (289.5900,519.9700) .. controls (288.2700,516.1900) and
+    (267.3800,441.8100) .. (267.3800,441.8100) -- (291.4400,426.7500) .. controls
+    (291.4400,426.7500) and (293.3600,429.9900) .. (300.4400,426.7500) .. controls
+    (307.3800,423.4800) and (309.9700,421.7500) .. (309.9700,421.7500) .. controls
+    (309.9700,421.7500) and (313.9200,421.4900) .. (313.4100,413.0300) .. controls
+    (316.1700,411.3100) and (341.9700,395.0600) .. (341.9700,395.0600) .. controls
+    (341.9700,395.0600) and (332.8400,417.6000) .. (331.9100,427.5600) .. controls
+    (331.2100,437.4600) and (327.6900,504.1200) .. (327.6900,504.1200) .. controls
+    (327.6900,504.1200) and (328.1300,509.2200) .. (324.7800,510.2200) .. controls
+    (321.2800,511.1700) and (305.7200,515.5000) .. (305.7200,515.5000) .. controls
+    (305.7200,515.5000) and (301.3900,516.2100) .. (301.5000,519.7200) .. controls
+    (301.3900,523.0400) and (303.0200,524.3400) .. (304.9400,524.4700) .. controls
+    (306.9300,524.3400) and (355.7200,524.4700) .. (355.7200,524.4700) .. controls
+    (355.7200,524.4700) and (360.7100,525.0000) .. (361.5300,518.4100) .. controls
+    (362.3400,511.9900) and (371.5900,445.5000) .. (371.5900,445.5000) .. controls
+    (371.5900,445.5000) and (367.5700,444.4500) .. (367.6200,440.5000) .. controls
+    (367.5700,436.3200) and (367.5600,433.2000) .. (368.9400,431.5000) .. controls
+    (370.1600,429.9500) and (384.8300,413.0400) .. (394.8800,389.5300) .. controls
+    (396.4200,386.0300) and (397.5600,389.1300) .. (397.7800,390.0600) .. controls
+    (398.2100,390.7500) and (417.2800,442.6600) .. (419.4700,444.7200) .. controls
+    (421.8400,446.5600) and (473.3600,488.2300) .. (474.5000,489.0900) .. controls
+    (475.6400,489.8600) and (478.9100,492.1100) .. (479.0000,499.3800) .. controls
+    (478.9100,506.7600) and (475.9700,512.6300) .. (473.9700,514.9700) .. controls
+    (472.0500,517.1900) and (468.8000,520.4500) .. (468.6900,521.8400) .. controls
+    (468.8000,523.3800) and (470.2800,524.3400) .. (471.3400,524.4700) .. controls
+    (472.5600,524.3400) and (479.2500,524.3400) .. (479.8100,524.4700) .. controls
+    (480.5500,524.3400) and (489.3400,525.0100) .. (495.4100,514.1900) .. controls
+    (501.7300,503.5300) and (513.1200,484.3400) .. (513.1200,484.3400) .. controls
+    (513.1200,484.3400) and (515.5800,480.5600) .. (512.0600,478.2500) .. controls
+    (508.4000,476.0100) and (502.7100,474.7100) .. (499.3800,471.1200) .. controls
+    (495.8600,467.5500) and (462.9400,429.6400) .. (462.3400,428.8800) .. controls
+    (461.9600,428.3400) and (457.7100,423.7600) .. (452.2800,426.2200) .. controls
+    (450.7000,424.0900) and (448.8400,421.2200) .. (448.8400,421.2200) .. controls
+    (448.8400,421.2200) and (439.4600,364.4600) .. (429.5300,340.4100) .. controls
+    (431.8000,339.0000) and (434.8100,336.7200) .. (434.8100,336.7200) .. controls
+    (434.8100,336.7200) and (442.7200,343.5500) .. (449.3800,336.4400) .. controls
+    (456.0900,329.2300) and (455.6000,329.4100) .. (454.4100,326.1600) .. controls
+    (453.3200,322.9000) and (452.8300,321.9100) .. (450.4400,320.5900) .. controls
+    (448.2700,319.3000) and (444.5200,315.5500) .. (444.6200,308.9700) .. controls
+    (444.5200,302.5400) and (441.7400,284.8000) .. (438.5300,277.2800) .. controls
+    (435.5500,269.8300) and (434.5600,261.5500) .. (422.9100,256.4400) .. controls
+    (404.4800,248.2100) and (379.8000,243.3100) .. (361.8100,247.9700) .. controls
+    (356.8300,249.3000) and (340.8200,261.0500) .. (339.3100,261.9700) .. controls
+    (337.8900,262.6800) and (331.6400,265.2600) .. (332.1900,259.8400) .. controls
+    (333.4500,247.4700) and (322.7500,225.7300) .. (303.5900,225.7800) --
+    cycle(394.8800,275.9700) .. controls (394.8800,275.9700) and
+    (408.4700,275.8400) .. (411.5300,276.2200) .. controls (414.3400,276.5000) and
+    (416.0300,280.1900) .. (416.0300,280.1900) -- (429.0000,325.8800) --
+    (424.2500,328.7800) .. controls (421.5800,323.2700) and (397.9000,287.2600) ..
+    (393.0300,280.4700) .. controls (389.9100,276.1000) and (394.8800,275.9700) ..
+    (394.8800,275.9700) -- cycle(331.0000,332.8100) .. controls
+    (331.5700,332.7900) and (332.2200,332.9700) .. (332.7200,333.2800) .. controls
+    (337.8300,336.2000) and (347.5100,344.5400) .. (355.7200,356.0000) .. controls
+    (356.7000,357.3200) and (355.7200,361.2800) .. (355.7200,361.2800) --
+    (348.5900,376.0600) .. controls (348.5900,376.0600) and (317.8500,395.3700) ..
+    (315.5000,396.9100) .. controls (312.9600,398.3000) and (311.5500,396.9300) ..
+    (313.9400,393.7500) .. controls (327.6400,375.1200) and (332.7200,353.0000) ..
+    (329.5300,335.1200) .. controls (329.2600,333.4800) and (330.0500,332.8500) ..
+    (331.0000,332.8100) -- cycle;}}
+
+\pagenumbering{gobble}
 
 \newdateformat{specialdate}{\twodigit{\THEDAY}-\twodigit{\THEMONTH}-\THEYEAR}
 
@@ -132,7 +227,7 @@
 
     \vspace*{1.5em}
     \fontsize{8pt}{10}\selectfont
-    {\color{black} 03-07-2018}%
+    {\color{black} 22-10-2018}%
 
     \vfill
     \vspace*{2em}
@@ -199,7 +294,7 @@
     \frametitle{}
     \begin{center}
 
-        \includegraphics[width=0.85\textwidth,center,clip=true,trim=20cm 20cm 20cm 10cm]{sysctl_small.png}
+        \includegraphics[width=0.8\textwidth,center,clip=true,trim=20cm 20cm 20cm 10cm]{sysctl_small.png}
 
     \end{center}
 \end{frame}
@@ -209,17 +304,52 @@
     \begin{center}
     \textbf{Plan}
 
-        \begin{itemize}[label={\MVRightarrow}]
-            \item Execution scheduling
-            \item Scheduling \& virtualization
-            \item Memory management
-            \item Memory \& containers
-            \item Storage IO
-            \item Storage \& containers
+        \begin{itemize}[]
+            \item<+-> Overview
+            \item<+-> Resources
+                \begin{itemize}[label={\MVRightarrow}]
+                    \item Execution scheduling
+                    \item Memory management
+                    \item Storage IO
+                \end{itemize}
+            \item<+-> Abstracted layers
+                \begin{itemize}[label={\MVRightarrow}]
+                    \item Virtualization
+                    \item Containerization
+                \end{itemize}
+            \item<+-> How to look inside
         \end{itemize}
 
     \end{center}
 \end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Overview}
+
+        \begin{itemize}[]
+            \item Bidirectional resource management
+            \item IPC mechanisms
+            \item New hardware support
+            \item \ldots
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+\note{
+    Bidirectional resource management
+    - CPU, memory, IO, network ("from" way)
+    - fadvise and such ("to" way)
+
+    IPC mechanisms
+    - select, poll, epoll
+    - shared memory
+
+    New hardware support
+    - NVMe
+    - NUMA
+}
 
 \fontsize{13pt}{14}\selectfont
 \section{Execution scheduling}
@@ -502,6 +632,13 @@
 
     \end{center}
 \end{frame}
+\note{
+    sched\_wakeup\_granularity\_ns is about delays between cycles (explored in
+    later slides)
+
+    sched\_min\_granularity\_ns and sched\_latency\_ns work less obviously and
+    have an impact on how time proportions are calculated.
+}
 
 \begin{frame}[fragile]{}
     \frametitle{}
@@ -573,7 +710,7 @@ sys     0m1.641s
 \begin{frame}
     \frametitle{}
     \begin{center}
-    \textbf{HyperThreading}
+    \textbf{CPU hotplug and HyperThreading}
 
         \begin{itemize}
             \item <+->
@@ -614,218 +751,7 @@ sys     0m1.641s
 \end{frame}
 
 \fontsize{13pt}{14}\selectfont
-\section{Virtualization?}
-\fontsize{17pt}{18}\selectfont
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \textbf{Timekeeping}
-
-        \begin{itemize}
-            \item <+->
-        \end{itemize}
-
-        \begin{itemize}[label={\MVRightarrow}]
-            \item <+-> Statistical sampling \\ (occasional incorrect charging)
-            \item <+-> Exact measurement (TSC time drift)
-            \item <+-> /sys/devices/system/clocksource/clocksource0/
-        \end{itemize}
-
-        \normalsize{Timekeeping in VMware Virtual: Information Guide}
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-        \textbf{Scheduling}
-
-        \vspace{1.0cm}
-
-        \only<1>{
-            \begin{tikzpicture}
-                \draw[
-                    line width=0.3mm,
-                    pattern=north west lines,
-                    pattern color=blue!30
-                    ] (0,3) rectangle (1,3.3) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                    ] (0,-1) rectangle (6,-2) node[pos=.5] {\textbf{Hypervisor}};
-
-                \draw[
-                    <-,
-                    line width=0.75mm,
-                ] (1,1) to (3,-1);
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    dashed
-                ] (0,0) rectangle (2,2) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=red!30
-                ] (0.25,0.25) rectangle (1.75,1.75) node[pos=.5] {\textbf{VM1}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=gray!30
-                ] (4.25,0.25) rectangle (5.75,1.75) node[pos=.5] {\textbf{VM2}};
-
-            \end{tikzpicture}
-        }
-
-        \only<2>{
-            \begin{tikzpicture}
-                \draw[
-                    line width=0.3mm,
-                    pattern=north west lines,
-                    pattern color=blue!30
-                    ] (0,3) rectangle (2,3.3) node[pos=.5] {};
-
-                \draw[
-                    line width=0.3mm,
-                    pattern=north west lines,
-                    pattern color=gray!30,
-                    dashed
-                    ] (2,3) rectangle (4,3.3) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                    ] (0,-1) rectangle (6,-2) node[pos=.5] {\textbf{Hypervisor}};
-
-                \draw[
-                    <-,
-                    line width=0.75mm,
-                ] (5,1) to (3,-1);
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=gray!30
-                ] (0.25,0.25) rectangle (1.75,1.75) node[pos=.5] {\textbf{VM1}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    dashed
-                ] (4,0) rectangle (6,2) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=red!30
-                ] (4.25,0.25) rectangle (5.75,1.75) node[pos=.5] {\textbf{VM2}};
-
-            \end{tikzpicture}
-        }
-
-        \only<3>{
-            \begin{tikzpicture}
-                \draw[
-                    line width=0.3mm,
-                    pattern=north west lines,
-                    pattern color=blue!30
-                    ] (0,3) rectangle (2,3.3) node[pos=.5] {};
-
-                \draw[
-                    line width=0.3mm,
-                    pattern=north west lines,
-                    pattern color=gray!30,
-                    dashed
-                    ] (2,3) rectangle (4,3.3) node[pos=.5] {};
-
-                \draw[
-                    line width=0.3mm,
-                    pattern=north west lines,
-                    pattern color=blue!30
-                    ] (4,3) rectangle (6,3.3) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                    ] (0,-1) rectangle (6,-2) node[pos=.5] {\textbf{Hypervisor}};
-
-                \draw[
-                    <-,
-                    line width=0.75mm,
-                ] (1,1) to (3,-1);
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    dashed
-                ] (0,0) rectangle (2,2) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=red!30
-                ] (0.25,0.25) rectangle (1.75,1.75) node[pos=.5] {\textbf{VM1}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=gray!30
-                ] (4.25,0.25) rectangle (5.75,1.75) node[pos=.5] {\textbf{VM2}};
-
-            \end{tikzpicture}
-        }
-
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \textbf{vDSO}
-
-        \begin{itemize}[label={\MVRightarrow}]
-            \item gettimeofday
-            \item clock\_gettime
-            \item XEN doesn't support vDSO for them
-            \item unnecessary context switches to a kernel
-        \end{itemize}
-
-        \normalsize{\href{
-            https://blog.packagecloud.io/eng/2017/03/08/system-calls-are-much-slower-on-ec2/
-        }{Two frequently used system calls are ~77\% slower on AWS EC2}}
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \textbf{Latency m4.xlarge XEN/TSC, r/w}
-
-        \includegraphics[width=0.9\textwidth,center]{m4_clock_source.png}
-
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \textbf{Latency m5.xlarge KVM/TSC, r/w}
-
-        \includegraphics[width=0.9\textwidth,center]{m5_clock_source.png}
-
-    \end{center}
-\end{frame}
-
-\fontsize{13pt}{14}\selectfont
-\section{Memory}
+\section{Memory management}
 \fontsize{17pt}{18}\selectfont
 
 \begin{frame}
@@ -1419,101 +1345,6 @@ sys     0m1.641s
 \end{frame}
 
 \fontsize{13pt}{14}\selectfont
-\section{Containers?}
-\fontsize{17pt}{18}\selectfont
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \textbf{cgroups controllers}
-
-    \begin{columns}
-    \begin{column}{0.5\textwidth}
-        \begin{itemize}[label={\MVRightarrow}]
-            \item cpu,cpuacct
-            \item cpuset
-            \item memory
-            \item devices
-            \item freezer
-            \item net\_cls
-            \item rdma
-        \end{itemize}
-    \end{column}
-    \begin{column}{0.5\textwidth}
-        \begin{itemize}[label={\MVRightarrow}]
-            \item blkio
-            \item perf\_event
-            \item net\_prio
-            \item hugetlb
-            \item pids
-            \item rdma
-        \end{itemize}
-    \end{column}
-    \end{columns}
-
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \textbf{CONFIG\_MEMCG\_KMEM}
-
-        \begin{itemize}[label={\MVRightarrow}]
-            \item Enabled in modern versions
-            \item PostgreSQL requires contiguous memory \\ for shared buffers
-            \item It's being allocated using slab
-            \item memory.kmem.limit\_in\_bytes is too high
-        \end{itemize}
-
-    \end{center}
-\end{frame}
-
-\begin{frame}[fragile]{}
-    \frametitle{}
-    \begin{center}
-
-        \begin{minted}[fontsize=\normalsize]{bash}
-# Host, normal
- Zone: Normal
- Free KiB in zone: 807232.00
-    Fragment size        Free fragments
-    4096                 29612
-    8192                 23308
-    16384                13495
-
-# Host with a container
- Zone: Normal
- Free KiB in zone: 109700.00
-    Fragment size        Free fragments
-    4096                 3405
-    8192                 7082
-    16384                1954
-        \end{minted}
-
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \textbf{Bad neighbor}
-
-        \begin{itemize}[label={\MVRightarrow}]
-            \item buddy allocator can fail \\ to find a page of proper size
-            \item kernel will start a compaction process
-            \item compaction implementation \\ knows nothing about cgroups
-        \end{itemize}
-
-    \end{center}
-\end{frame}
-\note{
-    mention explicitely "bad neighbor",
-    don't forget to say that compaction can be cpu consuming
-    if there is a lot of memory
-}
-
-\fontsize{13pt}{14}\selectfont
 \section{Storage IO}
 \fontsize{17pt}{18}\selectfont
 
@@ -1852,7 +1683,7 @@ sys     0m1.641s
 
         \begin{itemize}[label={\MVRightarrow}]
             \item Expected lifetime
-            \item Sequential write/read prepare
+            \item Prepare for some workload (read/write)
             \item Access frequency
         \end{itemize}
 
@@ -1867,7 +1698,7 @@ sys     0m1.641s
         \begin{itemize}[label={\MVRightarrow}]
             \item Command DWORD 11 in ioctl
             \item fcntl SET\_FILE\_RW\_HINT
-            \item nvme-cli
+            \item nvme-cli (ioctl)
             \item Specify a start block and a range length
         \end{itemize}
 
@@ -1890,27 +1721,432 @@ data_file:
            0   55041560   55041567          8
 
 # set dsm for sequential read optimized
-nvme dsm /dev/nvme1n01 --idr --slbs=55041560 --blocks=8
+nvme dsm /dev/nvme1n01 --slbs=55041560 --blocks=1 --idr
         \end{minted}
 
     \end{center}
 \end{frame}
 
 \fontsize{13pt}{14}\selectfont
-\section{Containers?}
+\section{Virtualization}
 \fontsize{17pt}{18}\selectfont
 
 \begin{frame}
     \frametitle{}
     \begin{center}
-    \textbf{bklio controller}
+    \textbf{Timekeeping}
+
+        \begin{itemize}
+            \item <+->
+        \end{itemize}
 
         \begin{itemize}[label={\MVRightarrow}]
-            \item CFQ \& throttling policy (generic block layer)
-            \item No weight related options will work without CFQ
-            \item Advisable io scheduler for SSD is noop/none
-            \item Block layer do sampling to enforce throttling
+            \item <+-> Statistical sampling \\ (occasional incorrect charging)
+            \item <+-> Exact measurement (TSC time drift)
+            \item <+-> /sys/devices/system/clocksource/clocksource0/
         \end{itemize}
+
+        \normalsize{Timekeeping in VMware Virtual: Information Guide}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Scheduling}
+
+        \vspace{1.0cm}
+
+        \only<1>{
+            \begin{tikzpicture}
+                \draw[
+                    line width=0.3mm,
+                    pattern=north west lines,
+                    pattern color=blue!30
+                    ] (0,3) rectangle (1,3.3) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=blue!30
+                    ] (0,-1) rectangle (6,-2) node[pos=.5] {\textbf{Hypervisor}};
+
+                \draw[
+                    <-,
+                    line width=0.75mm,
+                ] (1,1) to (3,-1);
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    dashed
+                ] (0,0) rectangle (2,2) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=red!30
+                ] (0.25,0.25) rectangle (1.75,1.75) node[pos=.5] {\textbf{VM1}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=gray!30
+                ] (4.25,0.25) rectangle (5.75,1.75) node[pos=.5] {\textbf{VM2}};
+
+            \end{tikzpicture}
+        }
+
+        \only<2>{
+            \begin{tikzpicture}
+                \draw[
+                    line width=0.3mm,
+                    pattern=north west lines,
+                    pattern color=blue!30
+                    ] (0,3) rectangle (2,3.3) node[pos=.5] {};
+
+                \draw[
+                    line width=0.3mm,
+                    pattern=north west lines,
+                    pattern color=gray!30,
+                    dashed
+                    ] (2,3) rectangle (4,3.3) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=blue!30
+                    ] (0,-1) rectangle (6,-2) node[pos=.5] {\textbf{Hypervisor}};
+
+                \draw[
+                    <-,
+                    line width=0.75mm,
+                ] (5,1) to (3,-1);
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=gray!30
+                ] (0.25,0.25) rectangle (1.75,1.75) node[pos=.5] {\textbf{VM1}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    dashed
+                ] (4,0) rectangle (6,2) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=red!30
+                ] (4.25,0.25) rectangle (5.75,1.75) node[pos=.5] {\textbf{VM2}};
+
+            \end{tikzpicture}
+        }
+
+        \only<3>{
+            \begin{tikzpicture}
+                \draw[
+                    line width=0.3mm,
+                    pattern=north west lines,
+                    pattern color=blue!30
+                    ] (0,3) rectangle (2,3.3) node[pos=.5] {};
+
+                \draw[
+                    line width=0.3mm,
+                    pattern=north west lines,
+                    pattern color=gray!30,
+                    dashed
+                    ] (2,3) rectangle (4,3.3) node[pos=.5] {};
+
+                \draw[
+                    line width=0.3mm,
+                    pattern=north west lines,
+                    pattern color=blue!30
+                    ] (4,3) rectangle (6,3.3) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=blue!30
+                    ] (0,-1) rectangle (6,-2) node[pos=.5] {\textbf{Hypervisor}};
+
+                \draw[
+                    <-,
+                    line width=0.75mm,
+                ] (1,1) to (3,-1);
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    dashed
+                ] (0,0) rectangle (2,2) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=red!30
+                ] (0.25,0.25) rectangle (1.75,1.75) node[pos=.5] {\textbf{VM1}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=gray!30
+                ] (4.25,0.25) rectangle (5.75,1.75) node[pos=.5] {\textbf{VM2}};
+
+            \end{tikzpicture}
+        }
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{vDSO}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item gettimeofday
+            \item clock\_gettime
+            \item XEN doesn't support vDSO for them
+            \item unnecessary context switches to a kernel
+        \end{itemize}
+
+        \normalsize{\href{
+            https://blog.packagecloud.io/eng/2017/03/08/system-calls-are-much-slower-on-ec2/
+        }{Two frequently used system calls are ~77\% slower on AWS EC2}}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Latency m4.xlarge XEN/TSC, r/w}
+
+        \includegraphics[width=0.9\textwidth,center]{m4_clock_source.png}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Latency m5.xlarge KVM/TSC, r/w}
+
+        \includegraphics[width=0.9\textwidth,center]{m5_clock_source.png}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Locks}
+
+        \begin{itemize}
+            \item <+->
+        \end{itemize}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item <+-> Lock holder preemption problem
+            \item <+-> Lock waiter preemption problem
+            \item <+-> Intel PLE (pause loop exiting)
+            \item <+-> PLE\_Gap, PLE\_Window
+        \end{itemize}
+
+        \normalsize{Intel® 64 and IA-32 Architectures Software Developer's Manual, Vol. 3}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{vCPU}
+
+        \vspace{1.0cm}
+
+        \only<1>{
+            \begin{tikzpicture}
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=blue!30
+                    ] (0,-1.25) rectangle (6.5,-2.25) node[pos=.5] {\textbf{Hypervisor}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=red!30
+                ] (-0.5,-0.5) rectangle (1.0,1.0) node[pos=.5] {\textbf{vC1}};
+
+                \draw[
+                    line width=0.0mm,
+                    color=white,
+                ] (-0.5,1.0) rectangle (1.0,2.5) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=red!30
+                ] (1.5,-0.5) rectangle (3.0,1.0) node[pos=.5] {\textbf{vC2}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=gray!30
+                ] (3.5,-0.5) rectangle (5.0,1.0) node[pos=.5] {\textbf{vC3}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=gray!30
+                ] (5.5,-0.5) rectangle (7.0,1.0) node[pos=.5] {\textbf{vC4}};
+
+            \end{tikzpicture}
+        }
+
+        \only<2>{
+            \begin{tikzpicture}
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=blue!30
+                    ] (0,-1.25) rectangle (6.5,-2.25) node[pos=.5] {\textbf{Hypervisor}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=red!30
+                ] (-0.5,-0.5) rectangle (1.0,1.0) node[pos=.5] {\textbf{vC1}};
+
+                \draw[
+                    line width=0.0mm,
+                    color=white,
+                ] (-0.5,1.0) rectangle (1.0,2.5) node[pos=.5] {\ucmark};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    pattern=north west lines,
+                    pattern color=red!30
+                ] (1.5,-0.5) rectangle (3.0,1.0) node[pos=.5] {\textbf{vC2}};
+
+                \draw[
+                    line width=0.0mm,
+                    color=white,
+                ] (1.5,1.0) rectangle (3.0,2.5) node[pos=.5] {\color{black} \spin};
+
+                \draw[
+                    ->,
+                    line width=0.75mm,
+                ] (2.25,-0.5) to [controls=+(-135:0.8) and +(-45:0.8)]  (0.25,-0.5);
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=gray!30
+                ] (3.5,-0.5) rectangle (5.0,1.0) node[pos=.5] {\textbf{vC3}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=gray!30
+                ] (5.5,-0.5) rectangle (7.0,1.0) node[pos=.5] {\textbf{vC4}};
+
+            \end{tikzpicture}
+        }
+
+        \only<3>{
+            \begin{tikzpicture}
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=blue!30
+                    ] (0,-1.25) rectangle (6.5,-2.25) node[pos=.5] {\textbf{Hypervisor}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=gray!30
+                ] (-0.5,-0.5) rectangle (1.0,1.0) node[pos=.5] {\textbf{vC1}};
+
+                \draw[
+                    line width=0.0mm,
+                    color=white,
+                ] (-0.5,1.0) rectangle (1.0,2.5) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    pattern=north west lines,
+                    pattern color=red!30
+                ] (1.5,-0.5) rectangle (3.0,1.0) node[pos=.5] {\textbf{vC2}};
+
+                \draw[
+                    line width=0.0mm,
+                    color=white,
+                ] (1.5,1.0) rectangle (3.0,2.5) node[pos=.5] {\color{black} \spin};
+
+                \draw[
+                    ->,
+                    line width=0.75mm,
+                ] (2.25,-0.5) to [controls=+(-135:0.8) and +(-45:0.8)]  (0.25,-0.5);
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=gray!30
+                ] (3.5,-0.5) rectangle (5.0,1.0) node[pos=.5] {\textbf{vC3}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=red!30
+                ] (5.5,-0.5) rectangle (7.0,1.0) node[pos=.5] {\textbf{vC4}};
+
+                \draw[
+                    line width=0.0mm,
+                    color=white,
+                    ] (5.5,1.0) rectangle (7.0,2.5) node[pos=.5] {\ucmark};
+
+            \end{tikzpicture}
+        }
+
+    \end{center}
+\end{frame}
+
+\fontsize{13pt}{14}\selectfont
+\section{Containerization}
+\fontsize{17pt}{18}\selectfont
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{cgroups controllers}
+
+    \begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{itemize}[label={\MVRightarrow}]
+            \item cpu,cpuacct
+            \item cpuset
+            \item memory
+            \item devices
+            \item freezer
+            \item net\_cls
+            \item rdma
+        \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \begin{itemize}[label={\MVRightarrow}]
+            \item blkio
+            \item perf\_event
+            \item net\_prio
+            \item hugetlb
+            \item pids
+            \item rdma
+        \end{itemize}
+    \end{column}
+    \end{columns}
 
     \end{center}
 \end{frame}
@@ -1936,6 +2172,21 @@ nvme dsm /dev/nvme1n01 --idr --slbs=55041560 --blocks=8
         WalWriterMain+0x1cb       [postgres]
         PostmasterMain+0xfea      [postgres]
         \end{minted}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{bklio controller}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item CFQ \& throttling policy (generic block layer)
+            \item No weight related options will work without CFQ
+            \item Advisable io scheduler for SSD is noop/none
+            \item Block layer do sampling to enforce throttling
+        \end{itemize}
 
     \end{center}
 \end{frame}
@@ -1970,6 +2221,78 @@ nvme dsm /dev/nvme1n01 --idr --slbs=55041560 --blocks=8
             https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?h=v4.14-rc4&id=3e1534cf4a2a8278e811e7c84a79da1a02347b8b
         }{https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git}}
 		\end{flushleft}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{CONFIG\_MEMCG\_KMEM}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item Enabled in modern versions
+            \item PostgreSQL requires contiguous memory \\ for shared buffers
+            \item It's being allocated using slab
+            \item memory.kmem.limit\_in\_bytes is too high
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+
+        \begin{minted}[fontsize=\normalsize]{bash}
+# Host, normal
+ Zone: Normal
+ Free KiB in zone: 807232.00
+    Fragment size        Free fragments
+    4096                 29612
+    8192                 23308
+    16384                13495
+
+# Host with a container
+ Zone: Normal
+ Free KiB in zone: 109700.00
+    Fragment size        Free fragments
+    4096                 3405
+    8192                 7082
+    16384                1954
+        \end{minted}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Bad neighbour}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item buddy allocator can fail \\ to find a page of proper size
+            \item kernel will start a compaction process
+            \item compaction implementation \\ knows nothing about cgroups
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+\note{
+    mention explicitely "bad neighbor",
+    don't forget to say that compaction can be cpu consuming
+    if there is a lot of memory
+}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Bad neighbour}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item futex
+            \item inode lock contention
+        \end{itemize}
 
     \end{center}
 \end{frame}
