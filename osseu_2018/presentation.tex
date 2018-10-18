@@ -1660,10 +1660,9 @@ sys     0m1.641s
     \textbf{WAL}
 
         \begin{itemize}[label={\MVRightarrow}]
-            \item bgwriter write to WAl \\
-                (transaction snaphots for replication)
-            \item with logical decoding turned on \\
-                more data is going to WAL
+            \item Bufferer IO
+            \item fdatasync
+            \item Writeback error propagation
         \end{itemize}
 
     \end{center}
