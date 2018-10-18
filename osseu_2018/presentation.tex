@@ -285,6 +285,15 @@
     \frametitle{}
     \begin{center}
 
+        \includegraphics[width=1.0\textwidth,center]{acid_team.png}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+
             \includegraphics[width=0.75\textwidth,center,clip=true,trim=30cm 30cm 30cm 30cm]{pg_options.png}
 
     \end{center}
@@ -317,7 +326,6 @@
                     \item Virtualization
                     \item Containerization
                 \end{itemize}
-            \item<+-> How to look inside
         \end{itemize}
 
     \end{center}
@@ -2225,20 +2233,39 @@ nvme dsm /dev/nvme1n01 --slbs=55041560 --blocks=1 --idr
     \end{center}
 \end{frame}
 
+%\begin{frame}
+    %\frametitle{}
+    %\begin{center}
+    %\textbf{CONFIG\_MEMCG\_KMEM}
+
+        %\begin{itemize}[label={\MVRightarrow}]
+            %\item Enabled in modern versions
+            %\item PostgreSQL requires contiguous memory \\ for shared buffers
+            %\item It's being allocated using slab
+            %\item memory.kmem.limit\_in\_bytes is too high
+        %\end{itemize}
+
+    %\end{center}
+%\end{frame}
+
 \begin{frame}
     \frametitle{}
     \begin{center}
-    \textbf{CONFIG\_MEMCG\_KMEM}
+    \textbf{Bad neighbour}
 
         \begin{itemize}[label={\MVRightarrow}]
-            \item Enabled in modern versions
-            \item PostgreSQL requires contiguous memory \\ for shared buffers
-            \item It's being allocated using slab
-            \item memory.kmem.limit\_in\_bytes is too high
+            \item memory fragmentation
+            \item buddy allocator can fail \\ to find a page of proper size
+            \item kernel will start a compaction process
         \end{itemize}
 
     \end{center}
 \end{frame}
+\note{
+    mention explicitely "bad neighbor",
+    don't forget to say that compaction can be cpu consuming
+    if there is a lot of memory
+}
 
 \begin{frame}[fragile]{}
     \frametitle{}
@@ -2271,17 +2298,17 @@ nvme dsm /dev/nvme1n01 --slbs=55041560 --blocks=1 --idr
     \textbf{Bad neighbour}
 
         \begin{itemize}[label={\MVRightarrow}]
-            \item buddy allocator can fail \\ to find a page of proper size
-            \item kernel will start a compaction process
-            \item compaction implementation \\ knows nothing about cgroups
+            \item PGSemaphore* funcions make use of futex
+            \item Per-cpu hash table for futex with hash buckets
         \end{itemize}
-
     \end{center}
 \end{frame}
 \note{
-    mention explicitely "bad neighbor",
-    don't forget to say that compaction can be cpu consuming
-    if there is a lot of memory
+    futex is used in PGSemaphore* functions, and make use of a hash table (per
+    cpu) with hash buckets, which is a priority linked list, protected by
+    spinlock. If there are a lot of futex\_key's it can cause a lot of
+    collisions, and each add/remove from hash bucket cause contention on this
+    spin lock.
 }
 
 \begin{frame}
@@ -2290,8 +2317,6 @@ nvme dsm /dev/nvme1n01 --slbs=55041560 --blocks=1 --idr
     \textbf{Bad neighbour}
 
         \begin{itemize}[label={\MVRightarrow}]
-            \item PGSemaphore* funcions make use of futex
-            \item Per-cpu hash table for futex with hash buckets
             \item WAL segment/heap file creation
             \item inode lock contention
         \end{itemize}
