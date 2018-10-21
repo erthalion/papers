@@ -1698,6 +1698,7 @@ sys     0m1.641s
             \item Access frequency
         \end{itemize}
 
+        \normalsize{NVM Express Revision 1.3c May 24, 2018}
     \end{center}
 \end{frame}
 
@@ -1712,8 +1713,6 @@ sys     0m1.641s
             \item nvme-cli (ioctl)
             \item Specify a start block and a range length
         \end{itemize}
-
-        \normalsize{NVM Express Revision 1.3c May 24, 2018}
 
     \end{center}
 \end{frame}
@@ -2270,30 +2269,30 @@ nvme dsm /dev/nvme1n01 --slbs=55041560 --blocks=1 --idr
     if there is a lot of memory
 }
 
-\begin{frame}[fragile]{}
-    \frametitle{}
-    \begin{center}
+%\begin{frame}[fragile]{}
+    %\frametitle{}
+    %\begin{center}
 
-        \begin{minted}[fontsize=\normalsize]{bash}
-# Host, normal
- Zone: Normal
- Free KiB in zone: 807232.00
-    Fragment size        Free fragments
-    4096                 29612
-    8192                 23308
-    16384                13495
+        %\begin{minted}[fontsize=\normalsize]{bash}
+%# Host, normal
+ %Zone: Normal
+ %Free KiB in zone: 807232.00
+    %Fragment size        Free fragments
+    %4096                 29612
+    %8192                 23308
+    %16384                13495
 
-# Host with a container
- Zone: Normal
- Free KiB in zone: 109700.00
-    Fragment size        Free fragments
-    4096                 3405
-    8192                 7082
-    16384                1954
-        \end{minted}
+%# Host with a container
+ %Zone: Normal
+ %Free KiB in zone: 109700.00
+    %Fragment size        Free fragments
+    %4096                 3405
+    %8192                 7082
+    %16384                1954
+        %\end{minted}
 
-    \end{center}
-\end{frame}
+    %\end{center}
+%\end{frame}
 
 \begin{frame}
     \frametitle{}
