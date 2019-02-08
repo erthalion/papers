@@ -503,6 +503,71 @@ Detaching...
 \begin{frame}[fragile]{}
     \frametitle{}
     \begin{center}
+        \textbf{Writeback (cgroup v1)}
+
+        \begin{flushleft}
+        \begin{minted}[fontsize=\normalsize]{c}
+/* vmscan.c */
+/* The normal page dirty throttling mechanism
+ * in balance_dirty_pages() is completely broken
+ * with the legacy memcg and direct stalling in
+ * shrink_page_list() is used for throttling instead,
+ * which lacks all the niceties such as fairness,
+ * adaptive pausing, bandwidth proportional
+ * allocation and configurability.
+ */
+static bool sane_reclaim(struct scan_control *sc)
+        \end{minted}
+        \end{flushleft}
+
+    \end{center}
+\end{frame}
+\note{
+    default hierarchy is from cgroup v2
+}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \textbf{Writeback monitoring}
+
+        \begin{flushleft}
+        \begin{minted}[fontsize=\normalsize]{bash}
+=> perf record -e writeback:writeback_written
+kworker/u8:1 5816.288044: nr_pages=101429
+kworker/u8:1 5816.288129: nr_pages=9223372036854775789
+kworker/u8:3 5817.312319: nr_pages=101457
+        \end{minted}
+        \end{flushleft}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \textbf{Writeback monitoring}
+
+        \begin{flushleft}
+        \begin{minted}[fontsize=\normalsize]{bash}
+# pgbench insert
+=> ./io_timeouts.py -p bin/postgres
+Attaching...
+Listening...
+Detaching...
+[18335] END: MAX_SCHEDULE_TIMEOUT
+[18333] END: MAX_SCHEDULE_TIMEOUT
+[18331] END: MAX_SCHEDULE_TIMEOUT
+[18318] truncate pgbench_history: MAX_SCHEDULE_TIMEOUT
+        \end{minted}
+        \end{flushleft}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
         \textbf{Huge pages}
 
         \begin{itemize}[]
@@ -623,12 +688,16 @@ will self-tune queue depths to achieve that goal.
         \begin{itemize}[]
 			\item Futex
             \item Compaction
+            \item Readahead
             \item Filesystem
             \item ...
         \end{itemize}
 
     \end{center}
 \end{frame}
+\note {
+    readahead for io congested cgroups is not happen
+}
 
 \fontsize{18pt}{18}\selectfont
 \begin{frame}
