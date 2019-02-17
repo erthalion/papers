@@ -1180,6 +1180,17 @@ sys     0m1.641s
     \end{center}
 \end{frame}
 
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{Wakeup granularity, microsec}
+
+        \vspace{0.5cm}
+        \includegraphics[width=0.9\textwidth,center]{wakeup_granularity_2.png}
+
+    \end{center}
+\end{frame}
+
 \begin{frame}[fragile]{}
     \frametitle{}
     \begin{center}
@@ -1256,14 +1267,149 @@ shm:
 
     \end{center}
 \end{frame}
+\note{
+    flashback of the first problem
+}
 
 \begin{frame}
     \frametitle{}
     \begin{center}
-    \textbf{Wakeup granularity, microsec}
+    \textbf{Pages written, kernel}
 
-        \vspace{0.5cm}
-        \includegraphics[width=0.9\textwidth,center]{wakeup_granularity_2.png}
+        \includegraphics[width=0.84\textwidth,center]{writeback.png}
+
+    \end{center}
+\end{frame}
+\note{
+    pages written, but not by PostgreSQL (configured checkpoints)
+}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \textbf{Writeback (cgroup v1)}
+
+        \begin{flushleft}
+        \begin{minted}[fontsize=\normalsize]{c}
+/* vmscan.c */
+/* The normal page dirty throttling mechanism
+ * in balance_dirty_pages() is completely broken
+ * with the legacy memcg and direct stalling in
+ * shrink_page_list() is used for throttling instead,
+ * which lacks all the niceties such as fairness,
+ * adaptive pausing, bandwidth proportional
+ * allocation and configurability.
+ */
+static bool sane_reclaim(struct scan_control *sc)
+        \end{minted}
+        \end{flushleft}
+
+    \end{center}
+\end{frame}
+\note{
+    default hierarchy is from cgroup v2
+}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \textbf{Writeback}
+
+        \begin{flushleft}
+		\begin{minted}[fontsize=\normalsize]{bash}
+=> perf record -e writeback:writeback_written
+
+kworker/u8:1 reason=periodic   nr_pages=101429
+kworker/u8:1 reason=background nr_pages=MAX_ULONG
+kworker/u8:3 reason=periodic   nr_pages=101457
+        \end{minted}
+        \end{flushleft}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \textbf{Writeback}
+
+        \begin{flushleft}
+		\begin{minted}[fontsize=\normalsize]{bash}
+# pgbench insert workload
+=> io_timeouts.py bin/postgres
+
+[18335] END: MAX_SCHEDULE_TIMEOUT
+[18333] END: MAX_SCHEDULE_TIMEOUT
+[18331] END: MAX_SCHEDULE_TIMEOUT
+[18318] truncate pgbench_history: MAX_SCHEDULE_TIMEOUT
+        \end{minted}
+        \end{flushleft}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \textbf{Kubernetes}
+
+\begin{columns}
+\begin{column}{0.48\columnwidth}
+    \begin{minted}[fontsize=\normalsize,escapeinside=??]{yaml}
+resources:
+  requests:
+    memory: "64Mi" ?\tikzmark{memory_req}?
+    cpu: "250m"
+  limits:
+    memory: "128Mi" ?\tikzmark{memory_lim}?
+    cpu: "500m"
+    \end{minted}
+
+\end{column}
+
+\begin{column}{0.48\columnwidth}
+
+    \only<1>{
+        \begin{tikzpicture}[remember picture,
+            every node/.style={fill=red!30, rounded corners=0.2cm, minimum width=3cm},
+            ]
+          \draw node[] (soft_limit) {soft\_limits\_in\_bytes};
+          \draw node[rounded corners=0.2cm, below=0.5cm of soft_limit] (hard_limit) {limits\_in\_bytes};
+
+          \draw [overlay, ->, line width=3pt, red] (memory_req) -- (soft_limit.west);
+          \draw [overlay, ->, line width=3pt, red] (memory_lim) -- (hard_limit.west);
+        \end{tikzpicture}
+    }
+    \only<2>{
+        \begin{tikzpicture}[remember picture,
+            every node/.style={fill=red!30, rounded corners=0.2cm, minimum width=3cm},
+            ]
+          \draw node[] (soft_limit) {soft\_limits\_in\_bytes};
+          \draw node[rounded corners=0.2cm, below=0.5cm of soft_limit] (hard_limit) {limits\_in\_bytes};
+
+          \draw [overlay, ->, line width=3pt, red] (memory_req) -- (soft_limit.west);
+          \draw [overlay, ->, line width=3pt, red] (memory_lim) -- (hard_limit.west);
+        \end{tikzpicture}
+    }
+
+\end{column}
+\end{columns}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{K8S}
+
+        \begin{itemize}[]
+            \item directly manageable
+            \item requests $\not \to$ memory.soft\_limit\_in\_bytes
+            \item limits $\to$ memory.limit\_in\_bytes (OOM)
+            \item memory.kmem.limit\_in\_bytes
+            \item best efforts (not everything is accounted)
+        \end{itemize}
 
     \end{center}
 \end{frame}
