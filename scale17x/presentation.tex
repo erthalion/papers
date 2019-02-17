@@ -578,7 +578,7 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-    \textbf{Overview}
+    \textbf{Info sources}
 
         \begin{itemize}[]
             \item strace/GDB/Perf
@@ -882,6 +882,202 @@ fallocate(176, 0, 0, 50438144)          = -1 ENOSPC
     \end{center}
 \end{frame}
 
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+    \textbf{VM}
+
+        \begin{itemize}
+            \item <+->
+        \end{itemize}
+
+        \begin{itemize}[label={\MVRightarrow}]
+            \item <+-> Lock holder preemption problem
+            \item <+-> Lock waiter preemption problem
+            \item <+-> Intel PLE (pause loop exiting)
+            \item <+-> PLE\_Gap, PLE\_Window
+        \end{itemize}
+
+        \normalsize{Intel® 64 and IA-32 Architectures Software Developer's Manual, Vol. 3}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{vCPU}
+
+        \vspace{1.0cm}
+
+        \only<1>{
+            \begin{tikzpicture}
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=blue!30
+                    ] (0,-1.25) rectangle (6.5,-2.25) node[pos=.5] {\textbf{Hypervisor}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=red!30
+                ] (-0.5,-0.5) rectangle (1.0,1.0) node[pos=.5] {\textbf{vC1}};
+
+                \draw[
+                    line width=0.0mm,
+                    color=white,
+                ] (-0.5,1.0) rectangle (1.0,2.5) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=red!30
+                ] (1.5,-0.5) rectangle (3.0,1.0) node[pos=.5] {\textbf{vC2}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=gray!30
+                ] (3.5,-0.5) rectangle (5.0,1.0) node[pos=.5] {\textbf{vC3}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=gray!30
+                ] (5.5,-0.5) rectangle (7.0,1.0) node[pos=.5] {\textbf{vC4}};
+
+            \end{tikzpicture}
+        }
+
+        \only<2>{
+            \begin{tikzpicture}
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=blue!30
+                    ] (0,-1.25) rectangle (6.5,-2.25) node[pos=.5] {\textbf{Hypervisor}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=red!30
+                ] (-0.5,-0.5) rectangle (1.0,1.0) node[pos=.5] {\textbf{vC1}};
+
+                \draw[
+                    line width=0.0mm,
+                    color=white,
+                ] (-0.5,1.0) rectangle (1.0,2.5) node[pos=.5] {\ucmark};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    pattern=north west lines,
+                    pattern color=red!30
+                ] (1.5,-0.5) rectangle (3.0,1.0) node[pos=.5] {\textbf{vC2}};
+
+                \draw[
+                    line width=0.0mm,
+                    color=white,
+                ] (1.5,1.0) rectangle (3.0,2.5) node[pos=.5] {\color{black} \spin};
+
+                \draw[
+                    ->,
+                    line width=0.75mm,
+                ] (2.25,-0.5) to [controls=+(-135:0.8) and +(-45:0.8)]  (0.25,-0.5);
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=gray!30
+                ] (3.5,-0.5) rectangle (5.0,1.0) node[pos=.5] {\textbf{vC3}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=gray!30
+                ] (5.5,-0.5) rectangle (7.0,1.0) node[pos=.5] {\textbf{vC4}};
+
+            \end{tikzpicture}
+        }
+
+        \only<3>{
+            \begin{tikzpicture}
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=blue!30
+                    ] (0,-1.25) rectangle (6.5,-2.25) node[pos=.5] {\textbf{Hypervisor}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=gray!30
+                ] (-0.5,-0.5) rectangle (1.0,1.0) node[pos=.5] {\textbf{vC1}};
+
+                \draw[
+                    line width=0.0mm,
+                    color=white,
+                ] (-0.5,1.0) rectangle (1.0,2.5) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    pattern=north west lines,
+                    pattern color=red!30
+                ] (1.5,-0.5) rectangle (3.0,1.0) node[pos=.5] {\textbf{vC2}};
+
+                \draw[
+                    line width=0.0mm,
+                    color=white,
+                ] (1.5,1.0) rectangle (3.0,2.5) node[pos=.5] {\color{black} \spin};
+
+                \draw[
+                    ->,
+                    line width=0.75mm,
+                ] (2.25,-0.5) to [controls=+(-135:0.8) and +(-45:0.8)]  (0.25,-0.5);
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=gray!30
+                ] (3.5,-0.5) rectangle (5.0,1.0) node[pos=.5] {\textbf{vC3}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=red!30
+                ] (5.5,-0.5) rectangle (7.0,1.0) node[pos=.5] {\textbf{vC4}};
+
+                \draw[
+                    line width=0.0mm,
+                    color=white,
+                    ] (5.5,1.0) rectangle (7.0,2.5) node[pos=.5] {\ucmark};
+
+            \end{tikzpicture}
+        }
+
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+
+        \begin{minted}[fontsize=\normalsize]{bash}
+    # latency average = 17.782 ms
+    => modprobe kvm-intel ple_gap=128
+    => perf record -e kvm:kvm_exit
+    reason PAUSE_INSTRUCTION 306795
+    
+    # latency average = 16.858 ms
+    => modprobe kvm-intel ple_gap=0
+    => perf record -e kvm:kvm_exit
+    reason PAUSE_INSTRUCTION 0
+        \end{minted}
+
+    \end{center}
+\end{frame}
+
 \begin{frame}[fragile]{}
     \frametitle{}
     \begin{center}
@@ -984,6 +1180,83 @@ sys     0m1.641s
     \end{center}
 \end{frame}
 
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \textbf{Cache}
+
+        \begin{flushleft}
+		\begin{minted}[fontsize=\normalsize]{bash}
+# COS1 4 cache ways, COS 2 next 8 cache ways
+=> pqos -e "llc:1=0x000f;llc:2=0x0ff0;"
+SOCKET 0 L3CA COS1 => MASK 0xf
+SOCKET 0 L3CA COS2 => MASK 0xff0
+Allocation configuration altered.
+        \end{minted}
+        \end{flushleft}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+
+        \begin{flushleft}
+        \href{https://github.com/iovisor/bcc/}
+             {\color{black}\LARGE{github.com/iovisor/bcc/}}
+
+        \href{https://github.com/erthalion/postgres-bcc}
+             {\color{black}\LARGE{github.com/erthalion/postgres-bcc}}
+        \end{flushleft}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \textbf{Cache}
+
+        \begin{flushleft}
+		\begin{minted}[fontsize=\normalsize]{bash}
+
+=> llcache_per_query.py bin/postgres
+
+PID  QUERY                      CPU REFERENCE MISS   HIT%
+9720 UPDATE pgbench_tellers ... 0        2000 1000 50.00%
+9720 SELECT abalance FROM   ... 2        2000  100 95.00%
+...
+
+Total References: 3303100 Total Misses: 599100 Hit Rate: 81.86%
+        \end{minted}
+        \end{flushleft}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \textbf{Shared memory}
+
+        \begin{flushleft}
+		\begin{minted}[fontsize=\normalsize]{bash}
+=> shmem.py bin/postgres
+
+mmap:
+[20439]: 142M
+anon shm:
+[20439]: 56B
+shm:
+[postmaster.opts]: 0B
+[PostgreSQL.57332071]: 7K
+        \end{minted}
+        \end{flushleft}
+
+    \end{center}
+\end{frame}
+
 \begin{frame}
     \frametitle{}
     \begin{center}
@@ -994,29 +1267,6 @@ sys     0m1.641s
 
     \end{center}
 \end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \textbf{CPU hotplug and HyperThreading}
-
-        \begin{itemize}
-            \item <+->
-        \end{itemize}
-
-        \begin{itemize}[label={\MVRightarrow}]
-            \item <+-> Share execution state and cache
-            \item <+-> Spin locks have significant impact
-            \item <+-> PAUSE instruction (skylake latency 140 cycles)
-            \item <+-> More deviation for latency
-        \end{itemize}
-
-        \normalsize{Intel® 64 and IA-32 Architectures Optimization Reference Manual}
-    \end{center}
-\end{frame}
-\note{
-    mention recent hyperthreading bug
-}
 
 \begin{frame}
     \frametitle{}
@@ -2220,183 +2470,6 @@ nvme dsm /dev/nvme1n01 --slbs=55041560 --blocks=1 --idr
     \textbf{Latency m5.xlarge KVM/TSC, r/w}
 
         \includegraphics[width=0.9\textwidth,center]{m5_clock_source_2.png}
-
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \textbf{Locks}
-
-        \begin{itemize}
-            \item <+->
-        \end{itemize}
-
-        \begin{itemize}[label={\MVRightarrow}]
-            \item <+-> Lock holder preemption problem
-            \item <+-> Lock waiter preemption problem
-            \item <+-> Intel PLE (pause loop exiting)
-            \item <+-> PLE\_Gap, PLE\_Window
-        \end{itemize}
-
-        \normalsize{Intel® 64 and IA-32 Architectures Software Developer's Manual, Vol. 3}
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-        \textbf{vCPU}
-
-        \vspace{1.0cm}
-
-        \only<1>{
-            \begin{tikzpicture}
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                    ] (0,-1.25) rectangle (6.5,-2.25) node[pos=.5] {\textbf{Hypervisor}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=red!30
-                ] (-0.5,-0.5) rectangle (1.0,1.0) node[pos=.5] {\textbf{vC1}};
-
-                \draw[
-                    line width=0.0mm,
-                    color=white,
-                ] (-0.5,1.0) rectangle (1.0,2.5) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=red!30
-                ] (1.5,-0.5) rectangle (3.0,1.0) node[pos=.5] {\textbf{vC2}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=gray!30
-                ] (3.5,-0.5) rectangle (5.0,1.0) node[pos=.5] {\textbf{vC3}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=gray!30
-                ] (5.5,-0.5) rectangle (7.0,1.0) node[pos=.5] {\textbf{vC4}};
-
-            \end{tikzpicture}
-        }
-
-        \only<2>{
-            \begin{tikzpicture}
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                    ] (0,-1.25) rectangle (6.5,-2.25) node[pos=.5] {\textbf{Hypervisor}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=red!30
-                ] (-0.5,-0.5) rectangle (1.0,1.0) node[pos=.5] {\textbf{vC1}};
-
-                \draw[
-                    line width=0.0mm,
-                    color=white,
-                ] (-0.5,1.0) rectangle (1.0,2.5) node[pos=.5] {\ucmark};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    pattern=north west lines,
-                    pattern color=red!30
-                ] (1.5,-0.5) rectangle (3.0,1.0) node[pos=.5] {\textbf{vC2}};
-
-                \draw[
-                    line width=0.0mm,
-                    color=white,
-                ] (1.5,1.0) rectangle (3.0,2.5) node[pos=.5] {\color{black} \spin};
-
-                \draw[
-                    ->,
-                    line width=0.75mm,
-                ] (2.25,-0.5) to [controls=+(-135:0.8) and +(-45:0.8)]  (0.25,-0.5);
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=gray!30
-                ] (3.5,-0.5) rectangle (5.0,1.0) node[pos=.5] {\textbf{vC3}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=gray!30
-                ] (5.5,-0.5) rectangle (7.0,1.0) node[pos=.5] {\textbf{vC4}};
-
-            \end{tikzpicture}
-        }
-
-        \only<3>{
-            \begin{tikzpicture}
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                    ] (0,-1.25) rectangle (6.5,-2.25) node[pos=.5] {\textbf{Hypervisor}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=gray!30
-                ] (-0.5,-0.5) rectangle (1.0,1.0) node[pos=.5] {\textbf{vC1}};
-
-                \draw[
-                    line width=0.0mm,
-                    color=white,
-                ] (-0.5,1.0) rectangle (1.0,2.5) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    pattern=north west lines,
-                    pattern color=red!30
-                ] (1.5,-0.5) rectangle (3.0,1.0) node[pos=.5] {\textbf{vC2}};
-
-                \draw[
-                    line width=0.0mm,
-                    color=white,
-                ] (1.5,1.0) rectangle (3.0,2.5) node[pos=.5] {\color{black} \spin};
-
-                \draw[
-                    ->,
-                    line width=0.75mm,
-                ] (2.25,-0.5) to [controls=+(-135:0.8) and +(-45:0.8)]  (0.25,-0.5);
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=gray!30
-                ] (3.5,-0.5) rectangle (5.0,1.0) node[pos=.5] {\textbf{vC3}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=red!30
-                ] (5.5,-0.5) rectangle (7.0,1.0) node[pos=.5] {\textbf{vC4}};
-
-                \draw[
-                    line width=0.0mm,
-                    color=white,
-                    ] (5.5,1.0) rectangle (7.0,2.5) node[pos=.5] {\ucmark};
-
-            \end{tikzpicture}
-        }
 
     \end{center}
 \end{frame}
