@@ -1107,15 +1107,15 @@ sched_wakeup_granularity_ns
           to/.style={->,>=stealth',shorten >=1pt,semithick,font=\sffamily\footnotesize},
 		]
 			\draw node[fill=red!30] (bytecode) {Bytecode};
-			\draw node[dashed, minimum width=8cm, minimum height=1cm, above=0.5cm of bytecode]
-                (kernel) {Kernel};
+			\draw node[above=0.5cm of bytecode]
+                (func) {vfs\_read};
 			\draw node[split, fill=gray!30, below=0.5cm of bytecode] (stack)
                 {Stack \nodepart{second} \ldots};
 			\draw node[split, fill=yellow!30, left=0.5cm of stack] (regs)
                 {Regs \nodepart{second} \ldots};
 			\draw node[split, fill=blue!30, right=0.5cm of stack] (maps)
                 {Maps \nodepart{second} \ldots};
-            \draw[to] (bytecode) -- (kernel) {};
+            \draw[to] (bytecode) -- (func) {};
             \draw[to] (bytecode) -- (stack) {};
             \draw[to] (bytecode) -| (regs) {};
             \draw[to] (bytecode) -| (maps) {};
@@ -1790,6 +1790,16 @@ resources:
     \begin{center}
         \textbf{How to run: K8S?}
 
+		%\begin{minted}[fontsize=\normalsize]{yaml}
+    %spec:
+      %serviceAccountName: "bcc"
+      %hostPID: true
+      %containers:
+      %- name: "bcc"
+        %securityContext:
+            %privileged: true
+        %\end{minted}
+
 		\begin{minted}[fontsize=\normalsize]{bash}
     # 4 * 65536 + 14 * 256 + 96
     => export BCC_LINUX_VERSION_CODE 265824
@@ -1803,11 +1813,12 @@ resources:
     \begin{center}
         \textbf{How to break?}
 
-        \begin{itemize}[label={\MVRightarrow}]
-            \item <+-> perf in non interruptible sleep
-            \item <+-> evaluate unsafe expressions with perf
-            \item <+-> use old kernels
-        \end{itemize}
+        \begin{minted}[fontsize=\normalsize]{bash}
+# unsafe access
+=> perf probe -x bin/postgres --funcs
+=> perf probe -x bin/postgres 'ExecCallTriggerFunc trigdata->?'
+=> perf record probe_postgres:ExecCallTriggerFunc
+        \end{minted}
 
     \end{center}
 \end{frame}
@@ -1818,16 +1829,20 @@ resources:
         \textbf{How to break?}
 
         \begin{minted}[fontsize=\normalsize]{bash}
-        # perf record -e cache-misses,cpu-migrations
-
-        # Experiment 1
-        12,396,382,649      cache-misses # 28.562%
-         2,750              cpu-migrations
-
-        # Experiment 2
-        20,665,817,234      cache-misses # 28.533%
-        10,460              cpu-migrations
+# non interruptible sleep
+=> perf probe -x bin/postgres --funcs
+=> perf probe -x bin/postgres 'XLogInsertRecord fpw_lsn'
         \end{minted}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \textbf{How to break?}
+
+        \includegraphics[width=0.9\textwidth,center]{bcc_kernel_panic.png}
 
     \end{center}
 \end{frame}
