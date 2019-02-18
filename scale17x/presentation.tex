@@ -23,6 +23,7 @@
 \usepackage{tikz}
 \usetikzlibrary{patterns}
 \usetikzlibrary{mindmap}
+\usetikzlibrary{shapes.misc, fit}
 \usepackage{graphicx}
 \usepackage{eso-pic}
 \usepackage{verbatim}
@@ -1068,7 +1069,7 @@ fallocate(176, 0, 0, 50438144)          = -1 ENOSPC
     => modprobe kvm-intel ple_gap=128
     => perf record -e kvm:kvm_exit
     reason PAUSE_INSTRUCTION 306795
-    
+
     # latency average = 16.858 ms
     => modprobe kvm-intel ple_gap=0
     => perf record -e kvm:kvm_exit
@@ -1284,6 +1285,319 @@ shm:
     pages written, but not by PostgreSQL (configured checkpoints)
 }
 
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \textbf{Dirty pages}
+
+        \vspace{1.0cm}
+
+        \only<1>{
+            \begin{tikzpicture}[
+                box/.style={line width=0.5mm, rounded corners=0.2cm},
+                smallbox/.style={line width=0.5mm, rounded corners=0.1cm},
+                blue/.style={box, fill=blue!30},
+                red/.style={smallbox, fill=red!30},
+                white/.style={smallbox, fill=white!30},
+                border/.style={box, dashed},
+            ]
+                \draw[
+                    line width=0.5mm,
+                    color=white
+                    ] (-3.1,2.85) rectangle (0.1,1.65) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    pattern=north west lines,
+                    pattern color=blue!30
+                 ] (0,-1) rectangle (6,-2) node[pos=.5] {\textbf{OS Cache}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    pattern=north west lines,
+                    pattern color=green!30
+                ] (0,-2.25) rectangle (6,-3.25) node[pos=.5] {\textbf{Storage}};
+
+                \draw[blue] (-3,2.75) rectangle (0,1.75) node[pos=.5] {\textbf{bgw}};
+
+                \draw[color=white] (-3.1,2.85) rectangle (0.1,1.65) node[pos=.5] {};
+
+                \draw[blue] (-3,1.5) rectangle (0,0.5) node[pos=.5] {\textbf{linux}};
+
+                \draw[blue] (-3,0.25) rectangle (0,-0.75) node[pos=.5] {\textbf{chkp}};
+
+                \draw[red] (1.25,2.25) rectangle (1.75,2.75) node[pos=.5] {};
+
+                \draw[white] (4.25,2.25) rectangle (4.75,2.75) node[pos=.5] {};
+
+                \draw[white] (3.25,2.25) rectangle (3.75,2.75) node[pos=.5] {};
+
+                \draw[white] (2.25,2.25) rectangle (2.75,2.75) node[pos=.5] {};
+
+                \draw[white] (1.25,1.25) rectangle (1.75,1.75) node[pos=.5] {};
+
+                \draw[red] (4.25,1.25) rectangle (4.75,1.75) node[pos=.5] {};
+
+                \draw[white] (3.25,1.25) rectangle (3.75,1.75) node[pos=.5] {};
+
+                \draw[white] (2.25,1.25) rectangle (2.75,1.75) node[pos=.5] {};
+
+                \draw[white] (1.25,0.25) rectangle (1.75,0.75) node[pos=.5] {};
+
+                \draw[white] (4.25,0.25) rectangle (4.75,0.75) node[pos=.5] {};
+
+                \draw[red] (3.25,0.25) rectangle (3.75,0.75) node[pos=.5] {};
+
+                \draw[white] (2.25,0.25) rectangle (2.75,0.75) node[pos=.5] {};
+            \end{tikzpicture}
+        }
+
+        \only<2>{
+            \begin{tikzpicture}[
+                box/.style={line width=0.5mm, rounded corners=0.2cm},
+                smallbox/.style={line width=0.5mm, rounded corners=0.1cm},
+                blue/.style={box, fill=blue!30},
+                red/.style={smallbox, fill=red!30},
+                white/.style={smallbox, fill=white!30},
+                border/.style={box, dashed},
+            ]
+                \draw[
+                    line width=0.5mm,
+                    color=white
+                    ] (-3.1,2.85) rectangle (0.1,1.65) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    pattern=north west lines,
+                    pattern color=blue!30
+                    ] (0,-1) rectangle (6,-2) node[pos=.5] {\textbf{OS Cache}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    pattern=north west lines,
+                    pattern color=green!30
+                    ] (0,-2.25) rectangle (6,-3.25) node[pos=.5] {\textbf{Storage}};
+
+                \draw[blue] (-3,2.75) rectangle (0,1.75) node[pos=.5] {\textbf{bgw}};
+
+                \draw[border] (-3.1,2.85) rectangle (0.1,1.65) node[pos=.5] {};
+
+                \draw[blue] (-3,1.5) rectangle (0,0.5) node[pos=.5] {\textbf{linux}};
+
+                \draw[blue] (-3,0.25) rectangle (0,-0.75) node[pos=.5] {\textbf{chkp}};
+
+                \draw[red] (1.25,2.25) rectangle (1.75,2.75) node[pos=.5] {};
+
+                \draw[white] (4.25,2.25) rectangle (4.75,2.75) node[pos=.5] {};
+
+                \draw[white] (3.25,2.25) rectangle (3.75,2.75) node[pos=.5] {};
+
+                \draw[white] (2.25,2.25) rectangle (2.75,2.75) node[pos=.5] {};
+
+                \draw[white] (1.25,1.25) rectangle (1.75,1.75) node[pos=.5] {};
+
+                \draw[red] (4.25,1.25) rectangle (4.75,1.75) node[pos=.5] {};
+
+                \draw[white] (3.25,1.25) rectangle (3.75,1.75) node[pos=.5] {};
+
+                \draw[white] (2.25,1.25) rectangle (2.75,1.75) node[pos=.5] {};
+
+                \draw[white] (1.25,0.25) rectangle (1.75,0.75) node[pos=.5] {};
+
+                \draw[white] (4.25,0.25) rectangle (4.75,0.75) node[pos=.5] {};
+
+                \draw[white] (3.25,0.25) rectangle (3.75,0.75) node[pos=.5] {};
+
+                \draw[white] (2.25,0.25) rectangle (2.75,0.75) node[pos=.5] {};
+
+                \draw[red] (3.25,-1.25) rectangle (3.75,-1.75) node[pos=.5] {};
+
+                \draw[
+                    ->,
+                    line width=0.75mm,
+                ] (3.5,0.25) to (3.5,-1.25);
+
+             \end{tikzpicture}
+        }
+
+        \only<3>{
+            \begin{tikzpicture}[
+                box/.style={line width=0.5mm, rounded corners=0.2cm},
+                smallbox/.style={line width=0.5mm, rounded corners=0.1cm},
+                blue/.style={box, fill=blue!30},
+                red/.style={smallbox, fill=red!30},
+                white/.style={smallbox, fill=white!30},
+                border/.style={box, dashed},
+            ]
+                \draw[
+                    line width=0.5mm,
+                    color=white
+                    ] (-3.1,2.85) rectangle (0.1,1.65) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    pattern=north west lines,
+                    pattern color=blue!30
+                    ] (0,-1) rectangle (6,-2) node[pos=.5] {\textbf{OS Cache}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    pattern=north west lines,
+                    pattern color=green!30
+                    ] (0,-2.25) rectangle (6,-3.25) node[pos=.5] {\textbf{Storage}};
+
+                \draw[blue] (-3,2.75) rectangle (0,1.75) node[pos=.5] {\textbf{bgw}};
+
+                \draw[color=white] (-3.1,2.85) rectangle (0.1,1.65) node[pos=.5] {};
+
+                \draw[blue] (-3,1.5) rectangle (0,0.5) node[pos=.5] {\textbf{linux}};
+
+                \draw[border] (-3.1,1.6) rectangle (0.1,0.4) node[pos=.5] {};
+
+                \draw[blue] (-3,0.25) rectangle (0,-0.75) node[pos=.5] {\textbf{chkp}};
+
+                \draw[red] (1.25,2.25) rectangle (1.75,2.75) node[pos=.5] {};
+
+                \draw[white] (4.25,2.25) rectangle (4.75,2.75) node[pos=.5] {};
+
+                \draw[white] (3.25,2.25) rectangle (3.75,2.75) node[pos=.5] {};
+
+                \draw[white] (2.25,2.25) rectangle (2.75,2.75) node[pos=.5] {};
+
+                \draw[white] (1.25,1.25) rectangle (1.75,1.75) node[pos=.5] {};
+
+                \draw[red] (4.25,1.25) rectangle (4.75,1.75) node[pos=.5] {};
+
+                \draw[white] (3.25,1.25) rectangle (3.75,1.75) node[pos=.5] {};
+
+                \draw[white] (2.25,1.25) rectangle (2.75,1.75) node[pos=.5] {};
+
+                \draw[white] (1.25,0.25) rectangle (1.75,0.75) node[pos=.5] {};
+
+                \draw[white] (4.25,0.25) rectangle (4.75,0.75) node[pos=.5] {};
+
+                \draw[white] (3.25,0.25) rectangle (3.75,0.75) node[pos=.5] {};
+
+                \draw[white] (2.25,0.25) rectangle (2.75,0.75) node[pos=.5] {};
+
+                \draw[white] (3.25,-1.25) rectangle (3.75,-1.75) node[pos=.5] {};
+
+                \draw[red] (3.25,-2.5) rectangle (3.75,-3) node[pos=.5] {};
+
+                \draw[
+                    ->,
+                    line width=0.75mm,
+                ] (3.5,-1.75) to (3.5,-2.5);
+
+            \end{tikzpicture}
+        }
+
+        \only<4>{
+            \begin{tikzpicture}[
+                box/.style={line width=0.5mm, rounded corners=0.2cm},
+                smallbox/.style={line width=0.5mm, rounded corners=0.1cm},
+                blue/.style={box, fill=blue!30},
+                red/.style={smallbox, fill=red!30},
+                white/.style={smallbox, fill=white!30},
+                border/.style={box, dashed},
+            ]
+                \draw[
+                    line width=0.5mm,
+                    color=white
+                    ] (-3.1,2.85) rectangle (0.1,1.65) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    pattern=north west lines,
+                    pattern color=blue!30
+                    ] (0,-1) rectangle (6,-2) node[pos=.5] {\textbf{OS Cache}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    pattern=north west lines,
+                    pattern color=green!30
+                    ] (0,-2.25) rectangle (6,-3.25) node[pos=.5] {\textbf{Storage}};
+
+                \draw[blue] (-3,2.75) rectangle (0,1.75) node[pos=.5] {\textbf{bgw}};
+
+                \draw[color=white] (-3.1,2.85) rectangle (0.1,1.65) node[pos=.5] {};
+
+                \draw[blue] (-3,1.5) rectangle (0,0.5) node[pos=.5] {\textbf{linux}};
+
+                \draw[blue] (-3,0.25) rectangle (0,-0.75) node[pos=.5] {\textbf{chkp}};
+
+                \draw[border] (-3.1,0.35) rectangle (0.1,-0.85) node[pos=.5] {};
+
+                \draw[white] (1.25,2.25) rectangle (1.75,2.75) node[pos=.5] {};
+
+                \draw[white] (4.25,2.25) rectangle (4.75,2.75) node[pos=.5] {};
+
+                \draw[white] (3.25,2.25) rectangle (3.75,2.75) node[pos=.5] {};
+
+                \draw[white] (2.25,2.25) rectangle (2.75,2.75) node[pos=.5] {};
+
+                \draw[white] (1.25,1.25) rectangle (1.75,1.75) node[pos=.5] {};
+
+                \draw[white] (4.25,1.25) rectangle (4.75,1.75) node[pos=.5] {};
+
+                \draw[white] (3.25,1.25) rectangle (3.75,1.75) node[pos=.5] {};
+
+                \draw[white] (2.25,1.25) rectangle (2.75,1.75) node[pos=.5] {};
+
+                \draw[white] (1.25,0.25) rectangle (1.75,0.75) node[pos=.5] {};
+
+                \draw[white] (4.25,0.25) rectangle (4.75,0.75) node[pos=.5] {};
+
+                \draw[white] (3.25,0.25) rectangle (3.75,0.75) node[pos=.5] {};
+
+                \draw[white] (2.25,0.25) rectangle (2.75,0.75) node[pos=.5] {};
+
+                \draw[white] (4.25,-1.25) rectangle (4.75,-1.75) node[pos=.5] {};
+
+                \draw[red] (4.25,-2.5) rectangle (4.75,-3) node[pos=.5] {};
+
+                \draw[white] (1.25,-1.25) rectangle (1.75,-1.75) node[pos=.5] {};
+
+                \draw[red] (1.25,-2.5) rectangle (1.75,-3) node[pos=.5] {};
+
+                \draw[white] (3.25,-1.25) rectangle (3.75,-1.75) node[pos=.5] {};
+
+                \draw[red] (3.25,-2.5) rectangle (3.75,-3) node[pos=.5] {};
+
+                \draw[
+                    ->,
+                    line width=0.75mm,
+                ] (1.5,2.25) to (1.5,-1.25);
+
+                \draw[
+                    ->,
+                    line width=0.75mm,
+                ] (4.5,2.25) to (4.5,-1.25);
+
+                \draw[
+                    ->,
+                    line width=0.75mm,
+                ] (1.5,-1.75) to (1.5,-2.5);
+
+                \draw[
+                    ->,
+                    line width=0.75mm,
+                ] (4.5,-1.75) to (4.5,-2.5);
+
+            \end{tikzpicture}
+        }
+
+    \end{center}
+\end{frame}
+
 \begin{frame}[fragile]{}
     \frametitle{}
     \begin{center}
@@ -1383,8 +1697,20 @@ resources:
     \only<2>{
         \begin{tikzpicture}[remember picture,
             every node/.style={fill=red!30, rounded corners=0.2cm, minimum width=3cm},
+            crossed out/.style={
+                append after command={
+                    node [
+                        fit=(\tikzlastnode),
+                        draw=black!80,
+                        line width=5pt,
+                        thick,
+                        inner sep=-\pgflinewidth,
+                        cross out
+                    ] {}
+                }
+            }
             ]
-          \draw node[] (soft_limit) {soft\_limits\_in\_bytes};
+          \draw node[crossed out] (soft_limit) {soft\_limits\_in\_bytes};
           \draw node[rounded corners=0.2cm, below=0.5cm of soft_limit] (hard_limit) {limits\_in\_bytes};
 
           \draw [overlay, ->, line width=3pt, red] (memory_req) -- (soft_limit.west);
@@ -1398,992 +1724,89 @@ resources:
     \end{center}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]{}
     \frametitle{}
     \begin{center}
-    \textbf{K8S}
+        \textbf{Memory reclaim}
 
-        \begin{itemize}[]
-            \item directly manageable
-            \item requests $\not \to$ memory.soft\_limit\_in\_bytes
-            \item limits $\to$ memory.limit\_in\_bytes (OOM)
-            \item memory.kmem.limit\_in\_bytes
-            \item best efforts (not everything is accounted)
-        \end{itemize}
+        \begin{flushleft}
+        \begin{minted}[fontsize=\normalsize]{bash}
+# only under the memory pressure
+=> page_reclaim.py bin/postgres
+
+[7382] postgres: 928K
+[7138] postgres: 152K
+[7136] postgres: 180K
+[7468] postgres: 72M
+[7464] postgres: 57M
+[5451] postgres: 1M
+        \end{minted}
+        \end{flushleft}
 
     \end{center}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]{}
     \frametitle{}
     \begin{center}
-    \textbf{Latency rolling standard deviation, r/w}
+        \textbf{How to run?}
 
-        \includegraphics[width=0.9\textwidth,center]{hyperthreading_2.png}
+		\begin{minted}[fontsize=\normalsize]{bash}
+    # bcc + postgres-bcc
+
+    CONFIG_BPF=y
+    CONFIG_BPF_SYSCALL=y
+    CONFIG_NET_CLS_BPF=m
+    CONFIG_NET_ACT_BPF=m
+    CONFIG_BPF_JIT=y
+    CONFIG_BPF_EVENTS=y
+
+    debugfs on /sys/kernel/debug type debugfs (rw)
+        \end{minted}
 
     \end{center}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]{}
     \frametitle{}
     \begin{center}
-    \textbf{Latency rolling standard deviation, readonly}
+        \textbf{How to run: container?}
 
-        \includegraphics[width=0.9\textwidth,center]{hyperthreading_readonly_2.png}
+		\begin{minted}[fontsize=\normalsize]{bash}
+    # sometimes you also need to let perf know
+    # where to find debugging symbols, e.g. copy
+    # from /usr/lib/.debug/
+    docker run
+        --priviledged
+        --net=container:<container-id>
+        --ipc=container:<container-id>
+        \end{minted}
 
     \end{center}
 \end{frame}
 
-\fontsize{13pt}{14}\selectfont
-\section{Memory management}
-\fontsize{17pt}{18}\selectfont
-
-\begin{frame}
+\begin{frame}[fragile]{}
     \frametitle{}
     \begin{center}
-        \textbf{Dirty pages}
-
-        \vspace{1.0cm}
-
-        \only<1>{
-            \begin{tikzpicture}
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    pattern=north west lines,
-                    pattern color=blue!30
-                    ] (0,-1) rectangle (6,-2) node[pos=.5] {\textbf{OS Cache}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    pattern=north west lines,
-                    pattern color=green!30
-                    ] (0,-2.25) rectangle (6,-3.25) node[pos=.5] {\textbf{Storage}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                    ] (-3,2.75) rectangle (0,1.75) node[pos=.5] {\textbf{bgw}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    color=white
-                    ] (-3.1,2.85) rectangle (0.1,1.65) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                    ] (-3,1.5) rectangle (0,0.5) node[pos=.5] {\textbf{linux}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                    ] (-3,0.25) rectangle (0,-0.75) node[pos=.5] {\textbf{chkp}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=red!30
-                ] (1.25,2.25) rectangle (1.75,2.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (4.25,2.25) rectangle (4.75,2.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (3.25,2.25) rectangle (3.75,2.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (2.25,2.25) rectangle (2.75,2.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (1.25,1.25) rectangle (1.75,1.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=red!30
-                ] (4.25,1.25) rectangle (4.75,1.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (3.25,1.25) rectangle (3.75,1.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (2.25,1.25) rectangle (2.75,1.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (1.25,0.25) rectangle (1.75,0.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (4.25,0.25) rectangle (4.75,0.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=red!30
-                ] (3.25,0.25) rectangle (3.75,0.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (2.25,0.25) rectangle (2.75,0.75) node[pos=.5] {};
-            \end{tikzpicture}
-        }
-
-        \only<2>{
-            \begin{tikzpicture}
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    pattern=north west lines,
-                    pattern color=blue!30
-                    ] (0,-1) rectangle (6,-2) node[pos=.5] {\textbf{OS Cache}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    pattern=north west lines,
-                    pattern color=green!30
-                    ] (0,-2.25) rectangle (6,-3.25) node[pos=.5] {\textbf{Storage}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                    ] (-3,2.75) rectangle (0,1.75) node[pos=.5] {\textbf{bgw}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    dashed
-                    ] (-3.1,2.85) rectangle (0.1,1.65) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                    ] (-3,1.5) rectangle (0,0.5) node[pos=.5] {\textbf{linux}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                    ] (-3,0.25) rectangle (0,-0.75) node[pos=.5] {\textbf{chkp}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=red!30
-                ] (1.25,2.25) rectangle (1.75,2.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (4.25,2.25) rectangle (4.75,2.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (3.25,2.25) rectangle (3.75,2.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (2.25,2.25) rectangle (2.75,2.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (1.25,1.25) rectangle (1.75,1.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=red!30
-                ] (4.25,1.25) rectangle (4.75,1.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (3.25,1.25) rectangle (3.75,1.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (2.25,1.25) rectangle (2.75,1.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (1.25,0.25) rectangle (1.75,0.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (4.25,0.25) rectangle (4.75,0.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (3.25,0.25) rectangle (3.75,0.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (2.25,0.25) rectangle (2.75,0.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=red!30
-                ] (3.25,-1.25) rectangle (3.75,-1.75) node[pos=.5] {};
-
-                \draw[
-                    ->,
-                    line width=0.75mm,
-                ] (3.5,0.25) to (3.5,-1.25);
-
-             \end{tikzpicture}
-        }
-
-        \only<3>{
-            \begin{tikzpicture}
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    pattern=north west lines,
-                    pattern color=blue!30
-                    ] (0,-1) rectangle (6,-2) node[pos=.5] {\textbf{OS Cache}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    pattern=north west lines,
-                    pattern color=green!30
-                    ] (0,-2.25) rectangle (6,-3.25) node[pos=.5] {\textbf{Storage}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                    ] (-3,2.75) rectangle (0,1.75) node[pos=.5] {\textbf{bgw}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    color=white
-                    ] (-3.1,2.85) rectangle (0.1,1.65) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                    ] (-3,1.5) rectangle (0,0.5) node[pos=.5] {\textbf{linux}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    dashed
-                    ] (-3.1,1.6) rectangle (0.1,0.4) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                    ] (-3,0.25) rectangle (0,-0.75) node[pos=.5] {\textbf{chkp}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=red!30
-                ] (1.25,2.25) rectangle (1.75,2.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (4.25,2.25) rectangle (4.75,2.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (3.25,2.25) rectangle (3.75,2.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (2.25,2.25) rectangle (2.75,2.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (1.25,1.25) rectangle (1.75,1.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=red!30
-                ] (4.25,1.25) rectangle (4.75,1.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (3.25,1.25) rectangle (3.75,1.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (2.25,1.25) rectangle (2.75,1.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (1.25,0.25) rectangle (1.75,0.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (4.25,0.25) rectangle (4.75,0.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (3.25,0.25) rectangle (3.75,0.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (2.25,0.25) rectangle (2.75,0.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (3.25,-1.25) rectangle (3.75,-1.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=red!30
-                ] (3.25,-2.5) rectangle (3.75,-3) node[pos=.5] {};
-
-                \draw[
-                    ->,
-                    line width=0.75mm,
-                ] (3.5,-1.75) to (3.5,-2.5);
-
-            \end{tikzpicture}
-        }
-
-        \only<4>{
-            \begin{tikzpicture}
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    pattern=north west lines,
-                    pattern color=blue!30
-                    ] (0,-1) rectangle (6,-2) node[pos=.5] {\textbf{OS Cache}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    pattern=north west lines,
-                    pattern color=green!30
-                    ] (0,-2.25) rectangle (6,-3.25) node[pos=.5] {\textbf{Storage}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                    ] (-3,2.75) rectangle (0,1.75) node[pos=.5] {\textbf{bgw}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    color=white
-                    ] (-3.1,2.85) rectangle (0.1,1.65) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                    ] (-3,1.5) rectangle (0,0.5) node[pos=.5] {\textbf{linux}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                    ] (-3,0.25) rectangle (0,-0.75) node[pos=.5] {\textbf{chkp}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    dashed
-                    ] (-3.1,0.35) rectangle (0.1,-0.85) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (1.25,2.25) rectangle (1.75,2.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (4.25,2.25) rectangle (4.75,2.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (3.25,2.25) rectangle (3.75,2.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (2.25,2.25) rectangle (2.75,2.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (1.25,1.25) rectangle (1.75,1.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (4.25,1.25) rectangle (4.75,1.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (3.25,1.25) rectangle (3.75,1.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (2.25,1.25) rectangle (2.75,1.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (1.25,0.25) rectangle (1.75,0.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (4.25,0.25) rectangle (4.75,0.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (3.25,0.25) rectangle (3.75,0.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (2.25,0.25) rectangle (2.75,0.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (4.25,-1.25) rectangle (4.75,-1.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=red!30
-                ] (4.25,-2.5) rectangle (4.75,-3) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (1.25,-1.25) rectangle (1.75,-1.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=red!30
-                ] (1.25,-2.5) rectangle (1.75,-3) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=white!30
-                ] (3.25,-1.25) rectangle (3.75,-1.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=red!30
-                ] (3.25,-2.5) rectangle (3.75,-3) node[pos=.5] {};
-
-                \draw[
-                    ->,
-                    line width=0.75mm,
-                ] (1.5,2.25) to (1.5,-1.25);
-
-                \draw[
-                    ->,
-                    line width=0.75mm,
-                ] (4.5,2.25) to (4.5,-1.25);
-
-                \draw[
-                    ->,
-                    line width=0.75mm,
-                ] (1.5,-1.75) to (1.5,-2.5);
-
-                \draw[
-                    ->,
-                    line width=0.75mm,
-                ] (4.5,-1.75) to (4.5,-2.5);
-
-            \end{tikzpicture}
-        }
+        \textbf{How to run: K8S?}
+
+		\begin{minted}[fontsize=\normalsize]{bash}
+    # 4 * 65536 + 14 * 256 + 96
+    => export BCC_LINUX_VERSION_CODE 265824
+        \end{minted}
 
     \end{center}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]{}
     \frametitle{}
     \begin{center}
-    \textbf{Dirty pages, r/w}
+        \textbf{How to break?}
 
         \begin{itemize}[label={\MVRightarrow}]
-            \item vm.dirty\_ratio               20
-            \item vm.dirty\_background\_ratio   10
-            \item vm.dirty\_bytes               0
-            \item vm.dirty\_backround\_bytes    0
-        \end{itemize}
-
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \textbf{Dirty pages}
-
-    \includegraphics[width=0.9\textwidth,center]{checkpoint_dirty_pages_2.png}
-
-    \end{center}
-\end{frame}
-
-\fontsize{13pt}{14}\selectfont
-\section{Storage IO}
-\fontsize{17pt}{18}\selectfont
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-        \textbf{WAL}
-
-        \vspace{1.0cm}
-
-        \only<1>{
-            \begin{tikzpicture}
-                \draw[
-                    -,
-                    line width=0.75mm,
-                    dashed
-                ] (-1,-2.5) to (9,-2.5);
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    pattern=north west lines,
-                    pattern color=green!30
-                    ] (-1,-3) rectangle (9,-4) node[pos=.5] {\textbf{storage}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                    ] (0,0) rectangle (2,1) node[pos=.5] {\textbf{client}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    color=white
-                    ] (3,0) rectangle (5,1) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    color=white
-                    ] (6,0) rectangle (8,1) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    color=white
-                    ] (0.5,-1) rectangle (1.5,-2) node[pos=.5] {};
-
-            \end{tikzpicture}
-        }
-
-        \only<2>{
-            \begin{tikzpicture}
-                \draw[
-                    -,
-                    line width=0.75mm,
-                    dashed
-                ] (-1,-2.5) to (9,-2.5);
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    pattern=north west lines,
-                    pattern color=green!30
-                    ] (-1,-3) rectangle (9,-4) node[pos=.5] {\textbf{storage}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                    ] (0,0) rectangle (2,1) node[pos=.5] {\textbf{client}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=gray!30
-                    ] (0.5,-1) rectangle (1.5,-2) node[pos=.5] {\textbf{W}};
-
-                \draw[
-                    <-,
-                    line width=0.75mm,
-                ] (1,-1) to (1,0);
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    color=white
-                    ] (3,0) rectangle (5,1) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    color=white
-                    ] (6,0) rectangle (8,1) node[pos=.5] {};
-
-            \end{tikzpicture}
-        }
-
-        \only<3>{
-            \begin{tikzpicture}
-                \draw[
-                    -,
-                    line width=0.75mm,
-                    dashed
-                ] (-1,-2.5) to (9,-2.5);
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    pattern=north west lines,
-                    pattern color=green!30
-                    ] (-1,-3) rectangle (9,-4) node[pos=.5] {\textbf{storage}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                    ] (0,0) rectangle (2,1) node[pos=.5] {\textbf{client}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=gray!30
-                    ] (0.5,-1) rectangle (1.5,-2) node[pos=.5] {\textbf{W}};
-
-                \draw[
-                    <-,
-                    line width=0.75mm,
-                ] (1,-1) to (1,0);
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                    ] (3,0) rectangle (5,1) node[pos=.5] {\textbf{client}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    color=white
-                    ] (6,0) rectangle (8,1) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=gray!30
-                    ] (3.5,-1) rectangle (4.5,-2) node[pos=.5] {\textbf{W}};
-
-                \draw[
-                    <-,
-                    line width=0.75mm,
-                ] (4,-1) to (4,0);
-
-            \end{tikzpicture}
-        }
-
-        \only<4>{
-            \begin{tikzpicture}
-                \draw[
-                    -,
-                    line width=0.75mm,
-                    dashed
-                ] (-1,-2.5) to (9,-2.5);
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    pattern=north west lines,
-                    pattern color=green!30
-                    ] (-1,-3) rectangle (9,-4) node[pos=.5] {\textbf{storage}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                    ] (0,0) rectangle (2,1) node[pos=.5] {\textbf{client}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=gray!30
-                    ] (0.5,-1) rectangle (1.5,-2) node[pos=.5] {\textbf{W}};
-
-                \draw[
-                    <-,
-                    line width=0.75mm,
-                ] (1,-1) to (1,0);
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                    ] (3,0) rectangle (5,1) node[pos=.5] {\textbf{client}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    color=white
-                    ] (6,0) rectangle (8,1) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=gray!30
-                    ] (3.5,-1) rectangle (4.5,-2) node[pos=.5] {\textbf{W}};
-
-                \draw[
-                    <-,
-                    line width=0.75mm,
-                ] (4,-1) to (4,0);
-
-                \draw[
-                    ->,
-                    line width=0.75mm,
-                ] (1.5,-1.5) to (3.5,-1.5);
-
-                \draw[
-                    ->,
-                    line width=0.75mm,
-                ] (4,-2) to (4,-3);
-
-            \end{tikzpicture}
-        }
-
-        \only<5>{
-            \begin{tikzpicture}
-                \draw[
-                    -,
-                    line width=0.75mm,
-                    dashed
-                ] (-1,-2.5) to (9,-2.5);
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    pattern=north west lines,
-                    pattern color=green!30
-                    ] (-1,-3) rectangle (9,-4) node[pos=.5] {\textbf{storage}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                    ] (0,0) rectangle (2,1) node[pos=.5] {\textbf{client}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=gray!30
-                    ] (0.5,-1) rectangle (1.5,-2) node[pos=.5] {\textbf{W}};
-
-                \draw[
-                    <-,
-                    line width=0.75mm,
-                ] (1,-1) to (1,0);
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                    ] (3,0) rectangle (5,1) node[pos=.5] {\textbf{client}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                    ] (6,0) rectangle (8,1) node[pos=.5] {\textbf{writer}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=gray!30
-                    ] (3.5,-1) rectangle (4.5,-2) node[pos=.5] {\textbf{W}};
-
-                \draw[
-                    <-,
-                    line width=0.75mm,
-                ] (4,-1) to (4,0);
-
-                \draw[
-                    ->,
-                    line width=0.75mm,
-                ] (1.5,-1.5) to (3.5,-1.5);
-
-                \draw[
-                    ->,
-                    line width=0.75mm,
-                ] (4.5,-1.5) to (7,-1.5);
-
-                \draw[
-                    ->,
-                    line width=0.75mm,
-                ] (7,0) to (7,-3);
-
-            \end{tikzpicture}
-        }
-
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \textbf{WAL}
-
-        \begin{itemize}[label={\MVRightarrow}]
-            \item Bufferer IO
-            \item fdatasync
-            \item Writeback error propagation
-        \end{itemize}
-
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \textbf{NVMe}
-
-        \begin{itemize}[label={\MVRightarrow}]
-            \item better for resourse sharing (PCI express) \\
-                under the virtualization
-            \item /sys/block/sda/queue/scheduler [noop|none]
-            \item DSM operations
-        \end{itemize}
-
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \textbf{NVMe DSM}
-
-        \begin{itemize}[label={\MVRightarrow}]
-            \item Expected lifetime
-            \item Prepare for some workload (read/write)
-            \item Access frequency
-        \end{itemize}
-
-        \normalsize{NVM Express Revision 1.3c May 24, 2018}
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \textbf{DSM support}
-
-        \begin{itemize}[label={\MVRightarrow}]
-            \item Command DWORD 11 in ioctl
-            \item fcntl SET\_FILE\_RW\_HINT
-            \item nvme-cli (ioctl)
-            \item Specify a start block and a range length
+            \item <+-> perf in non interruptible sleep
+            \item <+-> evaluate unsafe expressions with perf
+            \item <+-> use old kernels
         \end{itemize}
 
     \end{center}
@@ -2392,444 +1815,22 @@ resources:
 \begin{frame}[fragile]{}
     \frametitle{}
     \begin{center}
+        \textbf{How to break?}
 
         \begin{minted}[fontsize=\normalsize]{bash}
-# get a start block
-hdparm --fibmap data_file
-data_file:
- filesystem blocksize 4096, begins at LBA 0;
- assuming 512 byte sectors.
- byte_offset  begin_LBA    end_LBA    sectors
-           0   55041560   55041567          8
+        # perf record -e cache-misses,cpu-migrations
 
-# set dsm for sequential read optimized
-nvme dsm /dev/nvme1n01 --slbs=55041560 --blocks=1 --idr
+        # Experiment 1
+        12,396,382,649      cache-misses # 28.562%
+         2,750              cpu-migrations
+
+        # Experiment 2
+        20,665,817,234      cache-misses # 28.533%
+        10,460              cpu-migrations
         \end{minted}
 
     \end{center}
 \end{frame}
-
-\fontsize{13pt}{14}\selectfont
-\section{Virtualization}
-\fontsize{17pt}{18}\selectfont
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \textbf{Timekeeping}
-
-        \begin{itemize}
-            \item <+->
-        \end{itemize}
-
-        \begin{itemize}[label={\MVRightarrow}]
-            \item <+-> Statistical sampling \\ (occasional incorrect charging)
-            \item <+-> Exact measurement (TSC time drift)
-            \item <+-> /sys/devices/system/clocksource/clocksource0/
-        \end{itemize}
-
-        \normalsize{Timekeeping in VMware Virtual: Information Guide}
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-        \textbf{Scheduling}
-
-        \vspace{1.0cm}
-
-        \only<1>{
-            \begin{tikzpicture}
-                \draw[
-                    line width=0.3mm,
-                    pattern=north west lines,
-                    pattern color=blue!30
-                    ] (0,3) rectangle (1,3.3) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                    ] (0,-1) rectangle (6,-2) node[pos=.5] {\textbf{Hypervisor}};
-
-                \draw[
-                    <-,
-                    line width=0.75mm,
-                ] (1,1) to (3,-1);
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    dashed
-                ] (0,0) rectangle (2,2) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=red!30
-                ] (0.25,0.25) rectangle (1.75,1.75) node[pos=.5] {\textbf{VM1}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=gray!30
-                ] (4.25,0.25) rectangle (5.75,1.75) node[pos=.5] {\textbf{VM2}};
-
-            \end{tikzpicture}
-        }
-
-        \only<2>{
-            \begin{tikzpicture}
-                \draw[
-                    line width=0.3mm,
-                    pattern=north west lines,
-                    pattern color=blue!30
-                    ] (0,3) rectangle (2,3.3) node[pos=.5] {};
-
-                \draw[
-                    line width=0.3mm,
-                    pattern=north west lines,
-                    pattern color=gray!30,
-                    dashed
-                    ] (2,3) rectangle (4,3.3) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                    ] (0,-1) rectangle (6,-2) node[pos=.5] {\textbf{Hypervisor}};
-
-                \draw[
-                    <-,
-                    line width=0.75mm,
-                ] (5,1) to (3,-1);
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=gray!30
-                ] (0.25,0.25) rectangle (1.75,1.75) node[pos=.5] {\textbf{VM1}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    dashed
-                ] (4,0) rectangle (6,2) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=red!30
-                ] (4.25,0.25) rectangle (5.75,1.75) node[pos=.5] {\textbf{VM2}};
-
-            \end{tikzpicture}
-        }
-
-        \only<3>{
-            \begin{tikzpicture}
-                \draw[
-                    line width=0.3mm,
-                    pattern=north west lines,
-                    pattern color=blue!30
-                    ] (0,3) rectangle (2,3.3) node[pos=.5] {};
-
-                \draw[
-                    line width=0.3mm,
-                    pattern=north west lines,
-                    pattern color=gray!30,
-                    dashed
-                    ] (2,3) rectangle (4,3.3) node[pos=.5] {};
-
-                \draw[
-                    line width=0.3mm,
-                    pattern=north west lines,
-                    pattern color=blue!30
-                    ] (4,3) rectangle (6,3.3) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                    ] (0,-1) rectangle (6,-2) node[pos=.5] {\textbf{Hypervisor}};
-
-                \draw[
-                    <-,
-                    line width=0.75mm,
-                ] (1,1) to (3,-1);
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    dashed
-                ] (0,0) rectangle (2,2) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=red!30
-                ] (0.25,0.25) rectangle (1.75,1.75) node[pos=.5] {\textbf{VM1}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=gray!30
-                ] (4.25,0.25) rectangle (5.75,1.75) node[pos=.5] {\textbf{VM2}};
-
-            \end{tikzpicture}
-        }
-
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \textbf{vDSO}
-
-        \begin{itemize}[label={\MVRightarrow}]
-            \item gettimeofday
-            \item clock\_gettime
-            \item XEN doesn't support vDSO for them
-            \item unnecessary context switches to a kernel
-        \end{itemize}
-
-        \normalsize{\href{
-            https://blog.packagecloud.io/eng/2017/03/08/system-calls-are-much-slower-on-ec2/
-        }{Two frequently used system calls are ~77\% slower on AWS EC2}}
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \textbf{Latency m4.xlarge XEN/TSC, r/w}
-
-        \includegraphics[width=0.9\textwidth,center]{m4_clock_source_2.png}
-
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \textbf{Latency m5.xlarge KVM/TSC, r/w}
-
-        \includegraphics[width=0.9\textwidth,center]{m5_clock_source_2.png}
-
-    \end{center}
-\end{frame}
-
-\fontsize{13pt}{14}\selectfont
-\section{Containerization}
-\fontsize{17pt}{18}\selectfont
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \textbf{cgroups controllers}
-
-    \begin{columns}
-    \begin{column}{0.5\textwidth}
-        \begin{itemize}[label={\MVRightarrow}]
-            \item cpu,cpuacct
-            \item cpuset
-            \item memory
-            \item devices
-            \item freezer
-            \item net\_cls
-            \item rdma
-        \end{itemize}
-    \end{column}
-    \begin{column}{0.5\textwidth}
-        \begin{itemize}[label={\MVRightarrow}]
-            \item blkio
-            \item perf\_event
-            \item net\_prio
-            \item hugetlb
-            \item pids
-            \item rdma
-        \end{itemize}
-    \end{column}
-    \end{columns}
-
-    \end{center}
-\end{frame}
-
-\begin{frame}[fragile]{}
-    \frametitle{}
-    \begin{center}
-
-        \vspace{0.3cm}
-        \begin{minted}[fontsize=\normalsize]{bash}
-8388   8388   postgres     blk_throtl_bio
-        blk_throtl_bio+0x1        [kernel]
-        dm_make_request+0x80      [kernel]
-        generic_make_request+0xf6 [kernel]
-        submit_bio+0x7d           [kernel]
-        blkdev_issue_flush+0x68   [kernel]
-        ext4_sync_file+0x310      [kernel]
-        vfs_fsync_range+0x4b      [kernel]
-        do_fsync+0x3d             [kernel]
-        sys_fdatasync+0x13        [kernel]
-        fdatasync+0x10            [libc-2.24.so]
-        XLogBackgroundFlush+0x17e [postgres]
-        WalWriterMain+0x1cb       [postgres]
-        PostmasterMain+0xfea      [postgres]
-        \end{minted}
-
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \textbf{bklio controller}
-
-        \begin{itemize}[label={\MVRightarrow}]
-            \item CFQ \& throttling policy (generic block layer)
-            \item No weight related options will work without CFQ
-            \item Advisable io scheduler for SSD is noop/none
-            \item Block layer do sampling to enforce throttling
-        \end{itemize}
-
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \textbf{throttle\_sample\_time}
-
-		\begin{flushleft}
-		This is the time window that blk-throttle samples data, in millisecond.
-		blk-throttle makes decision based on the samplings. Lower time means cgroups
-		have more smooth throughput, but higher CPU overhead. This exists only when
-		CONFIG\_BLK\_DEV\_THROTTLING\_LOW is enabled.
-		\end{flushleft}
-
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \textbf{blkio}
-
-		\begin{flushleft}
-		On traditional cgroup hierarchies, relationships between different controllers
-		cannot be established making it impossible for writeback to operate accounting
-		for cgroup resource restrictions and all writeback IOs are attributed to the
-		root cgroup.
-
-        \normalsize{\href{
-            https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?h=v4.14-rc4&id=3e1534cf4a2a8278e811e7c84a79da1a02347b8b
-        }{https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git}}
-		\end{flushleft}
-
-    \end{center}
-\end{frame}
-
-%\begin{frame}
-    %\frametitle{}
-    %\begin{center}
-    %\textbf{CONFIG\_MEMCG\_KMEM}
-
-        %\begin{itemize}[label={\MVRightarrow}]
-            %\item Enabled in modern versions
-            %\item PostgreSQL requires contiguous memory \\ for shared buffers
-            %\item It's being allocated using slab
-            %\item memory.kmem.limit\_in\_bytes is too high
-        %\end{itemize}
-
-    %\end{center}
-%\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \textbf{Bad neighbour}
-
-        \begin{itemize}[label={\MVRightarrow}]
-            \item memory fragmentation
-            \item buddy allocator can fail \\ to find a page of proper size
-            \item kernel will start a compaction process
-        \end{itemize}
-
-    \end{center}
-\end{frame}
-\note{
-    mention explicitely "bad neighbor",
-    don't forget to say that compaction can be cpu consuming
-    if there is a lot of memory
-}
-
-%\begin{frame}[fragile]{}
-    %\frametitle{}
-    %\begin{center}
-
-        %\begin{minted}[fontsize=\normalsize]{bash}
-%# Host, normal
- %Zone: Normal
- %Free KiB in zone: 807232.00
-    %Fragment size        Free fragments
-    %4096                 29612
-    %8192                 23308
-    %16384                13495
-
-%# Host with a container
- %Zone: Normal
- %Free KiB in zone: 109700.00
-    %Fragment size        Free fragments
-    %4096                 3405
-    %8192                 7082
-    %16384                1954
-        %\end{minted}
-
-    %\end{center}
-%\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \textbf{Bad neighbour}
-
-        \begin{itemize}[label={\MVRightarrow}]
-            \item PGSemaphore* funcions make use of futex
-            \item Per-cpu hash table for futex with hash buckets
-        \end{itemize}
-    \end{center}
-\end{frame}
-\note{
-    futex is used in PGSemaphore* functions, and make use of a hash table (per
-    cpu) with hash buckets, which is a priority linked list, protected by
-    spinlock. If there are a lot of futex\_key's it can cause a lot of
-    collisions, and each add/remove from hash bucket cause contention on this
-    spin lock.
-}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-    \textbf{Bad neighbour}
-
-        \begin{itemize}[label={\MVRightarrow}]
-            \item WAL segment/heap file creation
-            \item inode lock contention
-        \end{itemize}
-
-    \normalsize{\href{
-        https://www.usenix.org/system/files/conference/atc16/atc16_paper-min.pdf
-    }{Understanding Manycore Scalability of File Systems}}
-    \end{center}
-\end{frame}
-\note{
-    futex is used in PGSemaphore* functions, and make use of a hash table (per
-    cpu) with hash buckets, which is a priority linked list, protected by
-    spinlock. If there are a lot of futex\_key's it can cause a lot of
-    collisions, and each add/remove from hash bucket cause contention on this
-    spin lock.
-}
 
 \fontsize{18pt}{18}\selectfont
 \begin{frame}
