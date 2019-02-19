@@ -579,9 +579,30 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
+    \only<1> {
+        \textbf{Plan?}
+    }
+
+    \only<2> {
+        \textbf{A bit chaotic}
+        \vspace{0.5cm}
+
+        \includegraphics[width=0.6\textwidth,center]{anarchy.jpg}
+
+        \vspace{-0.55cm}
+        \tiny{\color{white}{dailymail.co.uk}}
+    }
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
     \textbf{Info sources}
 
         \begin{itemize}[]
+            \item source code
             \item strace/GDB/Perf
             \item procfs/sysfs
             \item BPF/eBPF/BCC
@@ -920,6 +941,7 @@ gettimeofday({tv_sec=1550586520, tv_usec=313499}, NULL) = 0
 
         \begin{flushleft}
 		\begin{minted}[fontsize=\normalsize]{bash}
+# perf record -e dTLB-loads,dTLB-stores -p PID
 # huge_pages on
 Samples: 832K of event 'dTLB-load-misses'
 Event count (approx.): 640614445 : ~19% less
@@ -947,10 +969,10 @@ Event count (approx.): 101471557
         \end{itemize}
 
         \begin{itemize}[label={\MVRightarrow}]
-            \item <+-> Lock holder preemption problem
-            \item <+-> Lock waiter preemption problem
-            \item <+-> Intel PLE (pause loop exiting)
-            \item <+-> PLE\_Gap, PLE\_Window
+            \item Lock holder preemption problem
+            \item Lock waiter preemption problem
+            \item Intel PLE (pause loop exiting)
+            \item PLE\_Gap, PLE\_Window
         \end{itemize}
 
         \normalsize{Intel® 64 and IA-32 Architectures Software Developer's Manual, Vol. 3}
@@ -1154,6 +1176,53 @@ sched_wakeup_granularity_ns
     \begin{center}
         Userspace
 
+        \only<1>
+        {
+		\begin{tikzpicture}[
+		  every node/.style={draw, solid, line width=0.5mm, rounded corners=0.2cm, minimum width=2cm},
+          split/.style={rectangle split, rectangle split parts=2},
+          to/.style={->,>=stealth',shorten >=1pt,semithick,font=\sffamily\footnotesize},
+		]
+            \draw[semithick] (-4,2.5) -- (4,2.5);
+			\draw node[fill=red!30] (bytecode) {Bytecode};
+			\draw node[above=0.5cm of bytecode, color=white]
+                (func) {vfs\_read};
+			\draw node[split, fill=gray!30, below=0.5cm of bytecode, color=white] (stack)
+                {Stack \nodepart{second} \ldots};
+			\draw node[split, fill=yellow!30, left=0.5cm of stack, color=white] (regs)
+                {Regs \nodepart{second} \ldots};
+			\draw node[split, fill=blue!30, right=0.5cm of stack, color=white] (maps)
+                {Maps \nodepart{second} \ldots};
+
+		 \end{tikzpicture}
+        }
+
+        \only<2>
+        {
+		\begin{tikzpicture}[
+		  every node/.style={draw, solid, line width=0.5mm, rounded corners=0.2cm, minimum width=2cm},
+          split/.style={rectangle split, rectangle split parts=2},
+          to/.style={->,>=stealth',shorten >=1pt,semithick,font=\sffamily\footnotesize},
+		]
+            \draw[semithick] (-4,2.5) -- (4,2.5);
+			\draw node[fill=red!30] (bytecode) {Bytecode};
+			\draw node[above=0.5cm of bytecode, color=white]
+                (func) {vfs\_read};
+			\draw node[split, fill=gray!30, below=0.5cm of bytecode] (stack)
+                {Stack \nodepart{second} \ldots};
+			\draw node[split, fill=yellow!30, left=0.5cm of stack] (regs)
+                {Regs \nodepart{second} \ldots};
+			\draw node[split, fill=blue!30, right=0.5cm of stack] (maps)
+                {Maps \nodepart{second} \ldots};
+            \draw[to] (bytecode) -- (stack) {};
+            \draw[to] (bytecode) -| (regs) {};
+            \draw[to] (bytecode) -| (maps) {};
+
+		 \end{tikzpicture}
+        }
+
+        \only<3>
+        {
 		\begin{tikzpicture}[
 		  every node/.style={draw, solid, line width=0.5mm, rounded corners=0.2cm, minimum width=2cm},
           split/.style={rectangle split, rectangle split parts=2},
@@ -1175,6 +1244,7 @@ sched_wakeup_granularity_ns
             \draw[to] (bytecode) -| (maps) {};
 
 		 \end{tikzpicture}
+        }
 
     \end{center}
 \end{frame}
@@ -1306,13 +1376,11 @@ Total References: 3303100 Total Misses: 599100 Hit Rate: 81.86%
     \begin{center}
 
         \begin{tikzpicture}
-          \draw (0,0) node[draw] (image) {\includegraphics[width=0.84\textwidth,center]{slide.png}};
+          \draw (0,0) node[draw] (image) {\includegraphics[width=0.7\textwidth,center]{slide.png}};
           \draw (-3,-3) node[fill=red!30, rounded corners=0.2cm] (popup) {Remember?};
 
           \draw [overlay, ->, line width=3pt, red] (popup) to [bend right] (image.center);
         \end{tikzpicture}
-
-        \fbox{}
 
     \end{center}
 \end{frame}
@@ -1764,35 +1832,71 @@ resources:
           \draw [overlay, ->, line width=3pt, red] (memory_lim) -- (hard_limit.west);
         \end{tikzpicture}
     }
-    \only<3>{
-        \begin{tikzpicture}[remember picture,
-            every node/.style={fill=red!30, rounded corners=0.2cm, minimum width=3cm},
-            crossed out/.style={
-                append after command={
-                    node [
-                        fit=(\tikzlastnode),
-                        draw=black!80,
-                        line width=5pt,
-                        thick,
-                        inner sep=-\pgflinewidth,
-                        cross out
-                    ] {}
-                }
-            }
-            ]
-          \draw node[crossed out] (soft_limit) {soft\_limits\_in\_bytes};
-          \draw node[rounded corners=0.2cm, below=0.5cm of soft_limit] (hard_limit) {limits\_in\_bytes};
-
-          \draw [overlay, ->, line width=3pt, red] (memory_req) -- (soft_limit.west);
-          \draw [overlay, ->, line width=3pt, red] (memory_lim) -- (hard_limit.west);
-        \end{tikzpicture}
-    }
 
 \end{column}
 \end{columns}
 
     \end{center}
 \end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+
+        \includegraphics[width=0.9\textwidth,center]{evil.jpg}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \textbf{Kubernetes}
+
+\begin{columns}
+\begin{column}{0.48\columnwidth}
+    \begin{minted}[fontsize=\normalsize,escapeinside=??]{yaml}
+resources:
+  requests:
+    memory: "64Mi" ?\tikzmark{memory_req}?
+    cpu: "250m"
+  limits:
+    memory: "128Mi" ?\tikzmark{memory_lim}?
+    cpu: "500m"
+    \end{minted}
+
+\end{column}
+
+\begin{column}{0.48\columnwidth}
+
+    \begin{tikzpicture}[remember picture,
+        every node/.style={fill=red!30, rounded corners=0.2cm, minimum width=3cm},
+        crossed out/.style={
+            append after command={
+                node [
+                    fit=(\tikzlastnode),
+                    draw=black!80,
+                    line width=5pt,
+                    thick,
+                    inner sep=-\pgflinewidth,
+                    cross out
+                ] {}
+            }
+        }
+        ]
+      \draw node[crossed out] (soft_limit) {soft\_limits\_in\_bytes};
+      \draw node[rounded corners=0.2cm, below=0.5cm of soft_limit] (hard_limit) {limits\_in\_bytes};
+
+      \draw [overlay, ->, line width=3pt, red] (memory_req) -- (soft_limit.west);
+      \draw [overlay, ->, line width=3pt, red] (memory_lim) -- (hard_limit.west);
+    \end{tikzpicture}
+
+\end{column}
+\end{columns}
+
+    \end{center}
+\end{frame}
+
 
 \begin{frame}[fragile]{}
     \frametitle{}
