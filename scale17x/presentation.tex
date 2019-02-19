@@ -629,6 +629,23 @@ fallocate(176, 0, 0, 50438144)          = -1 ENOSPC
 \begin{frame}[fragile]{}
     \frametitle{}
     \begin{center}
+    \textbf{vDSO}
+
+        \begin{minted}[fontsize=\normalsize]{bash}
+# strace -k -p PID on XEN
+gettimeofday({tv_sec=1550586520, tv_usec=313499}, NULL) = 0
+ > [vdso]() [0xef0]
+        \end{minted}
+
+        \href
+        {https://blog.packagecloud.io/eng/2017/03/08/system-calls-are-much-slower-on-ec2/}
+        {\color{black}\normalsize{Two frequently used system calls are ~77\% slower on AWS EC2}}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
 
         \begin{minted}[fontsize=\normalsize]{bash}
             # Experiment 1
@@ -883,6 +900,43 @@ fallocate(176, 0, 0, 50438144)          = -1 ENOSPC
     \end{center}
 \end{frame}
 
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \textbf{Huge pages}
+
+        \begin{itemize}[]
+            \item transparent vs classic
+			\item TLB misses are faster and less frequent
+        \end{itemize}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \textbf{Huge pages}
+
+        \begin{flushleft}
+		\begin{minted}[fontsize=\normalsize]{bash}
+# huge_pages on
+Samples: 832K of event 'dTLB-load-misses'
+Event count (approx.): 640614445 : ~19% less
+Samples: 736K of event 'dTLB-store-misses'
+Event count (approx.): 72447300 : ~29% less
+
+# huge_pages off
+Samples: 894K of event 'dTLB-load-misses'
+Event count (approx.): 784439650
+Samples: 822K of event 'dTLB-store-misses'
+Event count (approx.): 101471557
+        \end{minted}
+        \end{flushleft}
+
+    \end{center}
+\end{frame}
+
 \begin{frame}
     \frametitle{}
     \begin{center}
@@ -1098,14 +1152,14 @@ sched_wakeup_granularity_ns
 \begin{frame}
     \frametitle{}
     \begin{center}
-		\textbf{eBPF}
-        \vspace{1.0cm}
+        Userspace
 
 		\begin{tikzpicture}[
 		  every node/.style={draw, solid, line width=0.5mm, rounded corners=0.2cm, minimum width=2cm},
           split/.style={rectangle split, rectangle split parts=2},
           to/.style={->,>=stealth',shorten >=1pt,semithick,font=\sffamily\footnotesize},
 		]
+            \draw[semithick] (-4,2.5) -- (4,2.5);
 			\draw node[fill=red!30] (bytecode) {Bytecode};
 			\draw node[above=0.5cm of bytecode]
                 (func) {vfs\_read};
@@ -1243,6 +1297,22 @@ PID  QUERY                      CPU REFERENCE MISS   HIT%
 Total References: 3303100 Total Misses: 599100 Hit Rate: 81.86%
         \end{minted}
         \end{flushleft}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+
+        \begin{tikzpicture}
+          \draw (0,0) node[draw] (image) {\includegraphics[width=0.84\textwidth,center]{slide.png}};
+          \draw (-3,-3) node[fill=red!30, rounded corners=0.2cm] (popup) {Remember?};
+
+          \draw [overlay, ->, line width=3pt, red] (popup) to [bend right] (image.center);
+        \end{tikzpicture}
+
+        \fbox{}
 
     \end{center}
 \end{frame}
@@ -1683,7 +1753,7 @@ resources:
 
 \begin{column}{0.48\columnwidth}
 
-    \only<1>{
+    \only<2>{
         \begin{tikzpicture}[remember picture,
             every node/.style={fill=red!30, rounded corners=0.2cm, minimum width=3cm},
             ]
@@ -1694,7 +1764,7 @@ resources:
           \draw [overlay, ->, line width=3pt, red] (memory_lim) -- (hard_limit.west);
         \end{tikzpicture}
     }
-    \only<2>{
+    \only<3>{
         \begin{tikzpicture}[remember picture,
             every node/.style={fill=red!30, rounded corners=0.2cm, minimum width=3cm},
             crossed out/.style={
@@ -1870,8 +1940,8 @@ resources:
         \begin{itemize}[label={}]
             \item {\color{black} \github\ \href{github.com/erthalion}
                                                {\color{black}github.com/erthalion}}
-            \item {\color{black} \github\ \href{github.com/erthalion/ansible-ycsb}
-                                               {\color{black}github.com/erthalion/ansible-ycsb}}
+            \item {\color{black} \github\ \href{github.com/erthalion/postgres-bcc}
+                                               {\color{black}github.com/erthalion/postgres-bcc}}
             \item {\color{black} \twitter\ @erthalion}
             \item {\color{black} \email\ dmitrii.dolgov at zalando dot de}
             \item {\color{black} \email\ 9erthalion6 at gmail dot com}
