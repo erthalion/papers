@@ -1330,18 +1330,17 @@ sys     0m1.641s
     \begin{center}
         \textbf{Cache}
 
-        \begin{flushleft}
-		\begin{minted}[fontsize=\normalsize]{bash}
-# COS1 4 cache ways, COS 2 next 8 cache ways
-=> pqos -e "llc:1=0x000f;llc:2=0x0ff0;"
-SOCKET 0 L3CA COS1 => MASK 0xf
-SOCKET 0 L3CA COS2 => MASK 0xff0
-Allocation configuration altered.
-        \end{minted}
-        \end{flushleft}
+        \begin{itemize}[]
+            \item Cache contention
+            \item Intel RDT
+            \item Class of service
+        \end{itemize}
 
     \end{center}
 \end{frame}
+\note{
+    Resource Director Technology (RDT)
+}
 
 \begin{frame}
     \frametitle{}
@@ -1915,7 +1914,7 @@ resources:
         \begin{flushleft}
         \begin{minted}[fontsize=\normalsize]{bash}
 # only under the memory pressure
-=> page_reclaim.py
+=> page_reclaim.py --container 89c33bb3133f
 
 [7382] postgres: 928K
 [7138] postgres: 152K
@@ -1973,15 +1972,15 @@ resources:
     \begin{center}
         \textbf{How to run: K8S?}
 
-		%\begin{minted}[fontsize=\normalsize]{yaml}
-    %spec:
-      %serviceAccountName: "bcc"
-      %hostPID: true
-      %containers:
-      %- name: "bcc"
-        %securityContext:
-            %privileged: true
-        %\end{minted}
+        \begin{minted}[fontsize=\normalsize]{yaml}
+    spec:
+      serviceAccountName: "bcc"
+      hostPID: true
+      containers:
+      - name: "bcc"
+        securityContext:
+            privileged: true
+        \end{minted}
 
 		\begin{minted}[fontsize=\normalsize]{bash}
     # 4 * 65536 + 14 * 256 + 96
