@@ -656,57 +656,57 @@ gettimeofday({tv_sec=1550586520, tv_usec=313499}, NULL) = 0
     \end{center}
 \end{frame}
 
-\begin{frame}[fragile]{}
-    \frametitle{}
-    \begin{center}
+%\begin{frame}[fragile]{}
+    %\frametitle{}
+    %\begin{center}
 
-    \begin{overprint}
-        \onslide<1>
-        \begin{minted}[fontsize=\normalsize,escapeinside=||]{python}
-            # Experiment 1
-            transaction type: pg_long.sql
-            latency average = |\colorbox{White}{1312.903}| ms
-        \end{minted}
+    %\begin{overprint}
+        %\onslide<1>
+        %\begin{minted}[fontsize=\normalsize,escapeinside=||]{python}
+            %# Experiment 1
+            %transaction type: pg_long.sql
+            %latency average = |\colorbox{White}{1312.903}| ms
+        %\end{minted}
 
-        \onslide<2>
-        \begin{minted}[fontsize=\normalsize,escapeinside=||]{python}
-            # Experiment 1
-            transaction type: pg_long.sql
-            latency average = |\colorbox{White}{1312.903}| ms
+        %\onslide<2>
+        %\begin{minted}[fontsize=\normalsize,escapeinside=||]{python}
+            %# Experiment 1
+            %transaction type: pg_long.sql
+            %latency average = |\colorbox{White}{1312.903}| ms
 
-            # Experiment 2
-            SQL script 1: pg_long.sql
-             - weight: 1 (targets 50.0% of total)
-             - latency average = |\colorbox{White}{1426.928}| ms
+            %# Experiment 2
+            %SQL script 1: pg_long.sql
+             %- weight: 1 (targets 50.0% of total)
+             %- latency average = |\colorbox{White}{1426.928}| ms
 
-            SQL script 2: pg_short.sql
-             - weight: 1 (targets 50.0% of total)
-             - latency average = 303.092 ms
-        \end{minted}
+            %SQL script 2: pg_short.sql
+             %- weight: 1 (targets 50.0% of total)
+             %- latency average = 303.092 ms
+        %\end{minted}
 
-        \onslide<3>
-        \begin{minted}[fontsize=\normalsize,escapeinside=||]{python}
-            # Experiment 1
-            transaction type: pg_long.sql
-            latency average = |\colorbox{RedOrange}{\textbf{1312.903}}| ms
+        %\onslide<3>
+        %\begin{minted}[fontsize=\normalsize,escapeinside=||]{python}
+            %# Experiment 1
+            %transaction type: pg_long.sql
+            %latency average = |\colorbox{RedOrange}{\textbf{1312.903}}| ms
 
-            # Experiment 2
-            SQL script 1: pg_long.sql
-             - weight: 1 (targets 50.0% of total)
-             - latency average = |\colorbox{RedOrange}{\textbf{1426.928}}| ms
+            %# Experiment 2
+            %SQL script 1: pg_long.sql
+             %- weight: 1 (targets 50.0% of total)
+             %- latency average = |\colorbox{RedOrange}{\textbf{1426.928}}| ms
 
-            SQL script 2: pg_short.sql
-             - weight: 1 (targets 50.0% of total)
-             - latency average = 303.092 ms
-        \end{minted}
+            %SQL script 2: pg_short.sql
+             %- weight: 1 (targets 50.0% of total)
+             %- latency average = 303.092 ms
+        %\end{minted}
 
-    \end{overprint}
-    \end{center}
-\end{frame}
-\note{
-    mention that it was done on my laptop,
-    say few words about pgbench setup
-}
+    %\end{overprint}
+    %\end{center}
+%\end{frame}
+%\note{
+    %mention that it was done on my laptop,
+    %say few words about pgbench setup
+%}
 
 \begin{frame}
     \frametitle{}
@@ -718,146 +718,18 @@ gettimeofday({tv_sec=1550586520, tv_usec=313499}, NULL) = 0
         \only<1>{
             \begin{tikzpicture}
                 \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    dashed
-                ] (0,0) rectangle (2,2) node[pos=.5] {};
+                    -,
+                    line width=1.75mm,
+                    color=white,
+                ] (0,2) to (6,-1);
 
                 \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=red!30
-                ] (0.25,0.25) rectangle (1.75,1.75) node[pos=.5] {\textbf{T1}};
+                    -,
+                    line width=1.75mm,
+                    color=white,
+                ] (0,-1) to (6,2);
 
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=red!30
-                ] (2.25,0.25) rectangle (2.75,0.75) node[pos=.5] {\textbf{c}};
 
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    dashed
-                ] (4,0) rectangle (6,2) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    color=white
-                ] (4.25,-1.25) rectangle (5.75,-2.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                ] (4.25,0.25) rectangle (5.75,1.75) node[pos=.5] {\textbf{T2}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=blue!30
-                ] (6.25,0.25) rectangle (6.75,0.75) node[pos=.5] {\textbf{c}};
-
-            \end{tikzpicture}
-        }
-
-        \only<2>{
-            \begin{tikzpicture}
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    dashed
-                ] (0,0) rectangle (2,2) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=red!30
-                ] (0.25,0.25) rectangle (1.75,1.75) node[pos=.5] {\textbf{T1}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=red!30
-                ] (2.25,0.25) rectangle (2.75,0.75) node[pos=.5] {\textbf{c}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    dashed
-                ] (4,0) rectangle (6,2) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=red!30
-                ] (4.25,0.25) rectangle (5.75,1.75) node[pos=.5] {\textbf{T3}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                ] (4.25,-1.25) rectangle (5.75,-2.75) node[pos=.5] {\textbf{T2}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=blue!30
-                ] (6.25,0.25) rectangle (6.75,0.75) node[pos=.5] {\textbf{c}};
-
-            \end{tikzpicture}
-        }
-
-        \only<3>{
-            \begin{tikzpicture}
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    dashed
-                ] (0,0) rectangle (2,2) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=blue!30
-                ] (0.25,0.25) rectangle (1.75,1.75) node[pos=.5] {\textbf{T2}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=red!30
-                ] (2.25,0.25) rectangle (2.75,0.75) node[pos=.5] {\textbf{c}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    dashed
-                ] (4,0) rectangle (6,2) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    fill=red!30
-                ] (4.25,0.25) rectangle (5.75,1.75) node[pos=.5] {\textbf{T3}};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.2cm,
-                    color=white
-                ] (4.25,-1.25) rectangle (5.75,-2.75) node[pos=.5] {};
-
-                \draw[
-                    line width=0.5mm,
-                    rounded corners=0.1cm,
-                    fill=blue!30
-                ] (6.25,0.25) rectangle (6.75,0.75) node[pos=.5] {\textbf{c}};
-
-            \end{tikzpicture}
-        }
-
-        \only<4>{
-            \begin{tikzpicture}
                 \draw[
                     line width=0.5mm,
                     rounded corners=0.2cm,
@@ -908,6 +780,71 @@ gettimeofday({tv_sec=1550586520, tv_usec=313499}, NULL) = 0
             \end{tikzpicture}
         }
 
+        \only<2>{
+            \begin{tikzpicture}
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    dashed
+                ] (0,0) rectangle (2,2) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=blue!30
+                ] (0.25,0.25) rectangle (1.75,1.75) node[pos=.5] {\textbf{T2}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.1cm,
+                    fill=red!30
+                ] (2.25,0.25) rectangle (2.75,0.75) node[pos=.5] {\textbf{c}};
+
+                \draw[
+                    <-,
+                    line width=0.75mm,
+                ] (2.5,0.25) to [controls=+(-90:2) and +(-90:2)]  (6.5,.5);
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    dashed
+                ] (4,0) rectangle (6,2) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    fill=red!30
+                ] (4.25,0.25) rectangle (5.75,1.75) node[pos=.5] {\textbf{T3}};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.2cm,
+                    color=white
+                ] (4.25,-1.25) rectangle (5.75,-2.75) node[pos=.5] {};
+
+                \draw[
+                    line width=0.5mm,
+                    rounded corners=0.1cm,
+                    fill=blue!30
+                ] (6.25,0.25) rectangle (6.75,0.75) node[pos=.5] {\textbf{c}};
+
+                \draw[
+                    -,
+                    line width=1.75mm,
+                    color=red,
+                ] (0,2) to (6,-1);
+
+                \draw[
+                    -,
+                    line width=1.75mm,
+                    color=red,
+                ] (0,-1) to (6,2);
+
+            \end{tikzpicture}
+        }
+
+
     \end{center}
 \end{frame}
 
@@ -915,20 +852,135 @@ gettimeofday({tv_sec=1550586520, tv_usec=313499}, NULL) = 0
     \frametitle{}
     \begin{center}
 
-        \begin{minted}[fontsize=\normalsize]{bash}
-        # perf record -e cache-misses,cpu-migrations
-
-        # Experiment 1
-        12,396,382,649      cache-misses # 28.562%
-         2,750              cpu-migrations
-
-        # Experiment 2
-        20,665,817,234      cache-misses # 28.533%
-        10,460              cpu-migrations
-        \end{minted}
+        \includegraphics[width=0.5\textwidth,center]{mds.png}
 
     \end{center}
 \end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+    \textbf{MDS}
+
+    \begin{overprint}
+        \onslide<1>
+        \begin{minted}[fontsize=\normalsize,escapeinside=||]{python}
+# Children      Self  Symbol                                        
+# ........  ........  ...................................
+    71.06%     0.00%  [.] __libc_start_main
+    71.06%     0.00%  [.] PostmasterMain
+    56.82%     0.14%  [.] exec_simple_query
+    25.19%     0.06%  [k] entry_SYSCALL_64_after_hwframe
+    25.14%     0.29%  [k] do_syscall_64
+    23.60%     0.14%  [.] standard_ExecutorRun
+        \end{minted}
+
+        \onslide<2>
+        \begin{minted}[fontsize=\normalsize,escapeinside=||]{python}
+# Children      Self  Symbol                                        
+# ........  ........  ...................................
+    71.06%     0.00%  [.] __libc_start_main
+    71.06%     0.00%  [.] PostmasterMain
+    56.82%     0.14%  [.] exec_simple_query
+    25.19%     0.06%  [k] entry_SYSCALL_64_after_hwframe
+    25.14%     0.29%  [k] |\colorbox{RedOrange}{\textbf{do\_syscall\_64}}|
+    23.60%     0.14%  [.] standard_ExecutorRun
+        \end{minted}
+
+
+    \end{overprint}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+    \textbf{MDS}
+
+    \vspace{1.0cm}
+    \begin{overprint}
+        \onslide<1>
+        \begin{minted}[fontsize=\normalsize,escapeinside=||]{python}
+# Percent     Disassembly of kcore for cycles
+# ........    ................................
+    0.01% :   nopl   0x0(%rax,%rax,1)
+   28.94% :   verw   0xffe9e1(%rip)
+    0.55% :   pop    %rbx
+    3.24% :   pop    %rbp
+        \end{minted}
+
+        \onslide<2>
+        \begin{minted}[fontsize=\normalsize,escapeinside=||]{python}
+# Percent     Disassembly of kcore for cycles
+# ........    ................................
+    0.01% :   nopl   0x0(%rax,%rax,1)
+   28.94% :   |\colorbox{RedOrange}{\textbf{verw}}|   0xffe9e1(%rip)
+    0.55% :   pop    %rbx
+    3.24% :   pop    %rbp
+        \end{minted}
+
+
+    \end{overprint}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+    \textbf{MDS}
+
+    \vspace{1.0cm}
+    \begin{overprint}
+        \onslide<1>
+        \begin{minted}[fontsize=\normalsize,escapeinside=||]{python}
+# Overhead  Symbol                                        
+# ........  ...................................
+    25.19%  [k] native_safe_halt
+        \end{minted}
+
+        \onslide<2>
+        \begin{minted}[fontsize=\normalsize,escapeinside=||]{c}
+static inline __cpuidle void native_safe_halt(void)
+{
+	mds_idle_clear_cpu_buffers();
+	asm volatile("sti; hlt": : :"memory");
+}
+
+        \end{minted}
+
+        \onslide<3>
+        \begin{minted}[fontsize=\normalsize,escapeinside=||]{c}
+static inline __cpuidle void native_safe_halt(void)
+{
+	|\colorbox{RedOrange}{\textbf{mds\_idle\_clear\_cpu\_buffers();}}|
+	asm volatile("sti; hlt": : :"memory");
+}
+
+        \end{minted}
+
+
+    \end{overprint}
+    \end{center}
+\end{frame}
+
+%\begin{frame}[fragile]{}
+    %\frametitle{}
+    %\begin{center}
+
+        %\begin{minted}[fontsize=\normalsize]{bash}
+        %# perf record -e cache-misses,cpu-migrations
+
+        %# Experiment 1
+        %12,396,382,649      cache-misses # 28.562%
+         %2,750              cpu-migrations
+
+        %# Experiment 2
+        %20,665,817,234      cache-misses # 28.533%
+        %10,460              cpu-migrations
+        %\end{minted}
+
+    %\end{center}
+%\end{frame}
 
 \begin{frame}[fragile]{}
     \frametitle{}
