@@ -32,6 +32,7 @@
 \usetikzlibrary{trees}
 \usepackage{datetime}
 \usepackage{hyperref}
+\usepackage[normalem]{ulem}
 
 \usepackage{tcolorbox}
 \usepackage{tabularx}
@@ -388,28 +389,51 @@
     root is about chroot/pivot_root
 }
 
-\begin{frame}
+\begin{frame}[fragile]{}
     \frametitle{}
-    \begin{center}
 
-    \begin{tikzpicture}[]
+    \only<1>{
+        \begin{center}
+        \begin{tikzpicture}[]
 
-    \def\firstcircle{(0,0) circle (1.5cm)}
-    \def\secondcircle{(60:2cm) circle (1.5cm)}
-    \def\thirdcircle{(0:2cm) circle (1.5cm)}
+        \def\firstcircle{(0,0) circle (1.5cm)}
+        \def\secondcircle{(60:4cm) circle (1.5cm)}
+        \def\thirdcircle{(0:4cm) circle (1.5cm)}
 
-    \begin{scope}[shift={(3cm,-5cm)}, fill opacity=0.5, line width=0.5mm]
-        \fill[red] \firstcircle;
-        \fill[green] \secondcircle;
-        \fill[blue] \thirdcircle;
+        \begin{scope}[shift={(3cm,-5cm)}, fill opacity=0.5, line width=0.5mm]
+            \fill[red] \firstcircle;
+            \fill[green] \secondcircle;
+            \fill[blue] \thirdcircle;
 
-        \draw \firstcircle node [below] {\textbf{res}};
-        \draw \secondcircle node [above] {\textbf{limit}};
-        \draw \thirdcircle node [below] {\textbf{time}};
-    \end{scope}
-    \end{tikzpicture}
+            \draw \firstcircle node [] {\textbf{res}};
+            \draw \secondcircle node [] {\textbf{limit}};
+            \draw \thirdcircle node [] {\textbf{time}};
+        \end{scope}
+        \end{tikzpicture}
+        \end{center}
+    }
 
-    \end{center}
+    \only<2> {
+        \begin{center}
+        \begin{tikzpicture}[]
+
+        \def\firstcircle{(0,0) circle (1.5cm)}
+        \def\secondcircle{(60:2cm) circle (1.5cm)}
+        \def\thirdcircle{(0:2cm) circle (1.5cm)}
+
+        \begin{scope}[shift={(3cm,-5cm)}, fill opacity=0.5, line width=0.5mm]
+            \fill[red] \firstcircle;
+            \fill[green] \secondcircle;
+            \fill[blue] \thirdcircle;
+
+            \draw \firstcircle node [below] {\textbf{res}};
+            \draw \secondcircle node [above] {\textbf{limit}};
+            \draw \thirdcircle node [below] {\textbf{time}};
+        \end{scope}
+        \end{tikzpicture}
+        \end{center}
+    }
+
 \end{frame}
 
 \begin{frame}
@@ -824,10 +848,10 @@ sched_cfs_bandwidth_slice_us
                 \end{itemize}
 
                 \begin{itemize}[label={\MVRightarrow}]
-                    \item<+-> classic
-                    \item<+-> transparent
-                    \item<+-> isolation only per pod
-                    \item<+-> no soft limits or reclaim (SIGBUS)
+                    \item classic
+                    \item \sout{transparent}
+                    \item isolation only per pod
+                    \item no soft limits or reclaim (SIGBUS)
                 \end{itemize}
             \end{center}
         \end{column}
@@ -838,7 +862,7 @@ sched_cfs_bandwidth_slice_us
 \begin{frame}[fragile]{}
     \frametitle{}
     \begin{center}
-        \textbf{Huge pages}
+        \textbf{Huge pages experiment}
 
     \begin{overprint}
         \onslide<1>
@@ -883,45 +907,116 @@ Event count (approx.): 101471557
 
 \begin{frame}[fragile]{}
     \frametitle{}
-    \begin{center}
-        \textbf{LLCache}
+    \begin{columns}
+        \begin{column}{0.48\columnwidth}
+        \begin{minted}[fontsize=\normalsize]{yaml}
 
-        \begin{flushleft}
-		\begin{minted}[fontsize=\normalsize]{bash}
-=> pqos -s
-L3CA COS definitions for Socket 0:
-	L3CA COS0 => MASK 0xffff
-	L3CA COS1 => MASK 0xf
-	L3CA COS2 => MASK 0xff0
-	L3CA COS3 => MASK 0xfff
-Core information for socket 0:
-	Core 0, L2ID 0, L3ID 0 => COS0
-	Core 1, L2ID 1, L3ID 0 => COS0
-	Core 2, L2ID 0, L3ID 0 => COS0
-	Core 3, L2ID 1, L3ID 0 => COS0
+    resources:
+      requests:
+        cpu: "1000m"
+        memory: "1GB"
+        hugepages-1Gi: "1GB"
+        hugepages-2Mi: "1GB"
+      limits:
+        cpu: "2000m"
+        memory: "2GB"
+        hugepages-1Gi: "2GB"
+        hugepages-2Mi: "2GB"
         \end{minted}
-        \end{flushleft}
+        \end{column}
 
-    \end{center}
+        \begin{column}{0.48\columnwidth}
+            \vspace*{-2.5em}
+            \begin{center}
+            \fontsize{28pt}{30}\selectfont{\color{black} \textbf{What is missing?}}
+            \end{center}
+        \end{column}
+
+    \end{columns}
 \end{frame}
 
 \begin{frame}[fragile]{}
     \frametitle{}
-    \begin{center}
-        \textbf{LLCache}
+    \begin{columns}
+        \begin{column}{0.48\columnwidth}
+        \begin{minted}[fontsize=\normalsize]{yaml}
 
-        \begin{flushleft}
-		\begin{minted}[fontsize=\normalsize]{bash}
-# COS1 4 cache ways, COS 2 next 8 cache ways
-=> pqos -e "llc:1=0x000f;llc:2=0x0ff0;"
-SOCKET 0 L3CA COS1 => MASK 0xf
-SOCKET 0 L3CA COS2 => MASK 0xff0
-Allocation configuration altered.
+    resources:
+      requests:
+        cpu: "1000m"
+        memory: "1GB"
+        hugepages-1Gi: "1GB"
+        hugepages-2Mi: "1GB"
+      limits:
+        cpu: "2000m"
+        memory: "2GB"
+        hugepages-1Gi: "2GB"
+        hugepages-2Mi: "2GB"
         \end{minted}
-        \end{flushleft}
+        \end{column}
 
-    \end{center}
+        \begin{column}{0.48\columnwidth}
+            \begin{center}
+            \begin{minted}[fontsize=\normalsize]{yaml}
+resources:
+  requests:
+    io: "?"
+    llcache: "?"
+    network: "?"
+
+  limits:
+    io: "?"
+    llcache: "?"
+    network: "?"
+
+            \end{minted}
+            \end{center}
+        \end{column}
+
+    \end{columns}
 \end{frame}
+
+%\begin{frame}[fragile]{}
+    %\frametitle{}
+    %\begin{center}
+        %\textbf{LLCache}
+
+        %\begin{flushleft}
+		%\begin{minted}[fontsize=\normalsize]{bash}
+%=> pqos -s
+%L3CA COS definitions for Socket 0:
+	%L3CA COS0 => MASK 0xffff
+	%L3CA COS1 => MASK 0xf
+	%L3CA COS2 => MASK 0xff0
+	%L3CA COS3 => MASK 0xfff
+%Core information for socket 0:
+	%Core 0, L2ID 0, L3ID 0 => COS0
+	%Core 1, L2ID 1, L3ID 0 => COS0
+	%Core 2, L2ID 0, L3ID 0 => COS0
+	%Core 3, L2ID 1, L3ID 0 => COS0
+        %\end{minted}
+        %\end{flushleft}
+
+    %\end{center}
+%\end{frame}
+
+%\begin{frame}[fragile]{}
+    %\frametitle{}
+    %\begin{center}
+        %\textbf{LLCache}
+
+        %\begin{flushleft}
+		%\begin{minted}[fontsize=\normalsize]{bash}
+%# COS1 4 cache ways, COS 2 next 8 cache ways
+%=> pqos -e "llc:1=0x000f;llc:2=0x0ff0;"
+%SOCKET 0 L3CA COS1 => MASK 0xf
+%SOCKET 0 L3CA COS2 => MASK 0xff0
+%Allocation configuration altered.
+        %\end{minted}
+        %\end{flushleft}
+
+    %\end{center}
+%\end{frame}
 
 \begin{frame}
     \frametitle{}
@@ -1162,38 +1257,38 @@ kworker/u8:3 reason=periodic   nr_pages=101457
     \end{center}
 \end{frame}
 
-\begin{frame}[fragile]{}
-    \frametitle{}
-    \begin{center}
-        \textbf{Network}
+%\begin{frame}[fragile]{}
+    %\frametitle{}
+    %\begin{center}
+        %\textbf{Network}
 
-        \begin{itemize}[label={\MVRightarrow}]
-			\item vlanx
-            \item network class
-            \item traffic control
-        \end{itemize}
+        %\begin{itemize}[label={\MVRightarrow}]
+			%\item vlanx
+            %\item network class
+            %\item traffic control
+        %\end{itemize}
 
-    \end{center}
-\end{frame}
+    %\end{center}
+%\end{frame}
 
-\begin{frame}[fragile]{}
-    \frametitle{}
-    \begin{center}
-        \textbf{Noise}
+%\begin{frame}[fragile]{}
+    %\frametitle{}
+    %\begin{center}
+        %\textbf{Noise}
 
-        \begin{itemize}[label={\MVRightarrow}]
-			\item Futex
-            \item Compaction
-            \item Readahead
-            \item Filesystem
-            \item ...
-        \end{itemize}
+        %\begin{itemize}[label={\MVRightarrow}]
+			%\item Futex
+            %\item Compaction
+            %\item Readahead
+            %\item Filesystem
+            %\item ...
+        %\end{itemize}
 
-    \end{center}
-\end{frame}
-\note {
-    readahead for io congested cgroups is not happen
-}
+    %\end{center}
+%\end{frame}
+%\note {
+    %readahead for io congested cgroups is not happen
+%}
 
 \fontsize{18pt}{18}\selectfont
 \begin{frame}
