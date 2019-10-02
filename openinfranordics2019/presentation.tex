@@ -1114,6 +1114,9 @@ kworker/u8:3 reason=periodic   nr_pages=101457
 \begin{frame}[fragile]{}
     \frametitle{}
     \begin{center}
+        \begin{overprint}
+
+        \onslide<1>
         \begin{tikzpicture}[
             queue/.style={line width=0.5mm},
             connection/.style={-,>=stealth',semithick,rounded corners=5pt}
@@ -1216,6 +1219,119 @@ kworker/u8:3 reason=periodic   nr_pages=101457
                 (9.75, 2.0 + 2.5)  -- (9.75, 0.4 + 2.5)
                 node[black, midway, right=4pt, font=\normalsize, text width=3cm] {Software\\queue};
         \end{tikzpicture}
+
+        \onslide<2>
+        \begin{tikzpicture}[
+            queue/.style={line width=0.5mm},
+            connection/.style={-,>=stealth',semithick,rounded corners=5pt}
+            ]
+            \draw[fill=gray!20, rounded corners] (0, 0) rectangle (12, 8) node[pos=0.5] {};
+            \draw[fill=gray!40, rounded corners] (0.2, 0.2) rectangle (5.8, 7.8) node[pos=0.5, text depth=6cm] {I/O sched};
+            \draw[fill=gray!40, text depth=6cm] (6.2, 0.2) rectangle (11.8, 7.8) node[pos=0.5] {blkmq};
+
+            \draw[fill=yellow!60, rounded corners] (0.4, 5.3) rectangle (2.2, 6.0) node[pos=0.5] (noop) {\normalsize{\textbf{noop}}};
+            \coordinate[above=0.5 of noop] (noop-arrow);
+            \draw[fill=yellow!60, rounded corners] (1.9, 4.4) rectangle (3.7, 5.1) node[pos=0.5] (cfq) {\normalsize{\textbf{cfq}}};
+            \coordinate[above=0.5 of cfq] (cfq-arrow);
+            \draw[fill=yellow!60, rounded corners] (3.4, 3.5) rectangle (5.2, 4.2) node[pos=0.5] (deadline) {\normalsize{\textbf{deadline}}};
+            \coordinate[above=0.5 of deadline] (deadline-arrow);
+
+            \draw[connection, ->] (noop-arrow) to (noop);
+            \draw[connection, ->] (cfq-arrow) to (cfq);
+            \draw[connection, ->] (deadline-arrow) to (deadline);
+
+            \draw [thick,decorate,decoration={brace,amplitude=5pt}]
+                (2.75, 2.0)  -- (2.75, 0.4)
+                node[black, midway, right=4pt, font=\normalsize, text width=3cm] {Hardware\\queue};
+
+            \draw[fill=yellow!60, rounded corners] (0.4 + 6, 5.3) rectangle (2.2 + 6, 6.0) node[pos=0.5] (none) {\normalsize{\textbf{none}}};
+            \coordinate[above=0.5 of none] (none-arrow);
+            \draw[
+                fill=red!20,
+                dashed,
+                rounded corners,
+                line width=0.2mm
+            ]
+            (2.4 + 6 - 0.1, 5.3 - 0.1) rectangle (4.4 + 6 + 0.1, 6.0 + 0.1)
+            node[pos=0.5] {};
+            \draw[fill=yellow!60, rounded corners] (2.4 + 6, 5.3) rectangle (4.4 + 6, 6.0) node[pos=0.5] (kyber) {\normalsize{\textbf{kyber}}};
+            \coordinate[above=0.5 of kyber] (kyber-arrow);
+            \draw[fill=yellow!60, rounded corners] (4.6 + 6, 5.3) rectangle (5.4 + 6, 6.0) node[pos=0.5] (others)  {\normalsize{\textbf{...}}};
+            \coordinate[above=0.5 of others] (others-arrow);
+
+            \draw[connection, ->, shorten >=2pt] (none-arrow) to (none);
+            \draw[connection, ->] (kyber-arrow) to (kyber.north);
+            \draw[connection, ->, shorten >=3pt] (others-arrow) to (others.north);
+
+            \draw[queue] (2.0, 0.4) rectangle (2.5, 0.8) node[pos=0.5] {};
+            \draw[queue] (2.0, 0.8) rectangle (2.5, 1.2) node[pos=0.5] {};
+            \draw[queue] (2.0, 1.2) rectangle (2.5, 1.6) node[pos=0.5] {};
+            \draw[queue] (2.0, 1.6) rectangle (2.5, 2.0) node[pos=0.5] (top-hw-sched) {};
+            \coordinate[above=0.5 of top-hw-sched] (hw-sched-arrow);
+            \draw[connection, ->] (hw-sched-arrow) to (top-hw-sched.north);
+            \draw[connection] (noop.south) |- (hw-sched-arrow);
+            \draw[connection, rounded corners=0pt] (cfq.south) |- (hw-sched-arrow);
+            \draw[connection] (deadline.south) |- (hw-sched-arrow);
+
+            \draw[queue] (7.0 + 0.5, 0.4) rectangle (7.5 + 0.5, 0.8) node[pos=0.5] {};
+            \draw[queue] (7.0 + 0.5, 0.8) rectangle (7.5 + 0.5, 1.2) node[pos=0.5] {};
+            \draw[queue] (7.0 + 0.5, 1.2) rectangle (7.5 + 0.5, 1.6) node[pos=0.5] {};
+            \draw[queue] (7.0 + 0.5, 1.6) rectangle (7.5 + 0.5, 2.0) node[pos=0.5] (hw-queue-2) {};
+
+            \draw[queue, fill=black!50] (9.0 - 0.5, 0.4) rectangle (9.5 - 0.5, 0.8) node[pos=0.5] {};
+            \draw[queue, fill=black!50] (9.0 - 0.5, 0.8) rectangle (9.5 - 0.5, 1.2) node[pos=0.5] {};
+            \draw[queue] (9.0 - 0.5, 1.2) rectangle (9.5 - 0.5, 1.6) node[pos=0.5] {};
+            \draw[queue] (9.0 - 0.5, 1.6) rectangle (9.5 - 0.5, 2.0) node[pos=0.5] (hw-queue-1) {};
+
+            \draw [thick,decorate,decoration={brace,amplitude=5pt}]
+                (9.25, 2.0)  -- (9.25, 0.4)
+                node[black, midway, right=4pt, font=\normalsize, text width=3cm] {Hardware\\queue};
+
+            \draw[queue] (7.0, 0.4 + 2.5) rectangle (7.5, 0.8 + 2.5) node[pos=0.5] (sw-3-bottom) {};
+            \draw[queue] (7.0, 0.8 + 2.5) rectangle (7.5, 1.2 + 2.5) node[pos=0.5] {};
+            \draw[queue] (7.0, 1.2 + 2.5) rectangle (7.5, 1.6 + 2.5) node[pos=0.5] {};
+            \draw[queue] (7.0, 1.6 + 2.5) rectangle (7.5, 2.0 + 2.5) node[pos=0.5] (sw-3) {};
+            \coordinate[above=0.25 of sw-3] (sw-3-low);
+
+            \draw[queue] (8.0, 0.4 + 2.5) rectangle (8.5, 0.8 + 2.5) node[pos=0.5] (sw-2-bottom) {};
+            \draw[queue] (8.0, 0.8 + 2.5) rectangle (8.5, 1.2 + 2.5) node[pos=0.5] {};
+            \draw[queue] (8.0, 1.2 + 2.5) rectangle (8.5, 1.6 + 2.5) node[pos=0.5] {};
+            \draw[queue] (8.0, 1.6 + 2.5) rectangle (8.5, 2.0 + 2.5) node[pos=0.5] (sw-2) {};
+            \coordinate[above=0.25 of sw-2] (sw-2-low);
+            \coordinate[below=0.5 of sw-2-bottom] (sw-2-connection);
+
+            \draw[queue] (9.0, 0.4 + 2.5) rectangle (9.5, 0.8 + 2.5) node[pos=0.5] (top-sw-bottom) {};
+            \draw[queue] (9.0, 0.8 + 2.5) rectangle (9.5, 1.2 + 2.5) node[pos=0.5] {};
+            \draw[queue] (9.0, 1.2 + 2.5) rectangle (9.5, 1.6 + 2.5) node[pos=0.5] {};
+            \draw[queue] (9.0, 1.6 + 2.5) rectangle (9.5, 2.0 + 2.5) node[pos=0.5] (top-sw-queue) {};
+            \coordinate[above=0.5 of top-sw-queue] (sw-queue-arrow);
+            \draw[connection] (none.south) |- (sw-queue-arrow.north);
+            \draw[connection, rounded corners=0pt] (kyber.south) |- (sw-queue-arrow.north);
+            \draw[connection] (others.south) |- (sw-queue-arrow.north);
+
+            \coordinate[above=0.25 of top-sw-queue] (sw-queue-arrow-low);
+            \draw[connection, rounded corners=0pt] (sw-queue-arrow-low) |- (top-sw-queue.north);
+            \draw[connection, rounded corners=0pt] (sw-queue-arrow-low) |- (sw-2-low.north);
+            \draw[connection, rounded corners=0pt] (sw-queue-arrow-low) |- (sw-3-low.north);
+
+            \draw[connection, rounded corners=0pt] (sw-queue-arrow-low) -- (sw-queue-arrow);
+            \draw[connection, rounded corners=0pt] (sw-2-low) -- (sw-2);
+            \draw[connection, rounded corners=0pt] (sw-3-low) -- (sw-3);
+
+            \draw[connection, rounded corners=0pt] (sw-3-low) -- (sw-3);
+
+            \draw[connection, rounded corners=0pt] (sw-2-connection) -| (hw-queue-1.north);
+            \draw[connection, rounded corners=0pt] (sw-2-connection) -| (hw-queue-2.north);
+
+            \draw[connection, rounded corners=0pt] (sw-3-bottom) |- (sw-2-connection);
+            \draw[connection, rounded corners=0pt] (sw-2-bottom) |- (sw-2-connection);
+            \draw[connection, rounded corners=0pt] (top-sw-bottom) |- (sw-2-connection);
+
+            \draw [thick,decorate,decoration={brace,amplitude=5pt}]
+                (9.75, 2.0 + 2.5)  -- (9.75, 0.4 + 2.5)
+                node[black, midway, right=4pt, font=\normalsize, text width=3cm] {Software\\queue};
+        \end{tikzpicture}
+    \end{overprint}
 
     \end{center}
 \end{frame}
