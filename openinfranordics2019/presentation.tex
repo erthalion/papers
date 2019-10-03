@@ -142,7 +142,7 @@
 
     \vspace*{1.5em}
     \fontsize{8pt}{10}\selectfont
-    {\color{black} 03-09-2019}%
+    {\color{black} 03-10-2019}%
 
     \vfill
     \vspace*{2em}
@@ -1278,8 +1278,8 @@ kworker/u8:3 reason=periodic   nr_pages=101457
             \draw[queue] (7.0 + 0.5, 1.2) rectangle (7.5 + 0.5, 1.6) node[pos=0.5] {};
             \draw[queue] (7.0 + 0.5, 1.6) rectangle (7.5 + 0.5, 2.0) node[pos=0.5] (hw-queue-2) {};
 
-            \draw[queue, fill=black!50] (9.0 - 0.5, 0.4) rectangle (9.5 - 0.5, 0.8) node[pos=0.5] {};
-            \draw[queue, fill=black!50] (9.0 - 0.5, 0.8) rectangle (9.5 - 0.5, 1.2) node[pos=0.5] {};
+            \draw[queue] (9.0 - 0.5, 0.4) rectangle (9.5 - 0.5, 0.8) node[pos=0.5] {};
+            \draw[queue] (9.0 - 0.5, 0.8) rectangle (9.5 - 0.5, 1.2) node[pos=0.5] {};
             \draw[queue] (9.0 - 0.5, 1.2) rectangle (9.5 - 0.5, 1.6) node[pos=0.5] {};
             \draw[queue] (9.0 - 0.5, 1.6) rectangle (9.5 - 0.5, 2.0) node[pos=0.5] (hw-queue-1) {};
 
@@ -1300,8 +1300,8 @@ kworker/u8:3 reason=periodic   nr_pages=101457
             \coordinate[above=0.25 of sw-2] (sw-2-low);
             \coordinate[below=0.5 of sw-2-bottom] (sw-2-connection);
 
-            \draw[queue] (9.0, 0.4 + 2.5) rectangle (9.5, 0.8 + 2.5) node[pos=0.5] (top-sw-bottom) {};
-            \draw[queue] (9.0, 0.8 + 2.5) rectangle (9.5, 1.2 + 2.5) node[pos=0.5] {};
+            \draw[queue, fill=black!50] (9.0, 0.4 + 2.5) rectangle (9.5, 0.8 + 2.5) node[pos=0.5] (top-sw-bottom) {};
+            \draw[queue, fill=black!50] (9.0, 0.8 + 2.5) rectangle (9.5, 1.2 + 2.5) node[pos=0.5] {};
             \draw[queue] (9.0, 1.2 + 2.5) rectangle (9.5, 1.6 + 2.5) node[pos=0.5] {};
             \draw[queue] (9.0, 1.6 + 2.5) rectangle (9.5, 2.0 + 2.5) node[pos=0.5] (top-sw-queue) {};
             \coordinate[above=0.5 of top-sw-queue] (sw-queue-arrow);
