@@ -1,0 +1,397 @@
+\documentclass[usenames,dvipsnames, 18pt, compress, aspectratio=169]{beamer}
+
+% can be compiled by xelatex -shell-escape presentation.tex
+% lualatex -shell-escape presentation.tex
+
+\usetheme[]{metropolis}
+
+\usepackage[utf8]{inputenc}
+\usepackage[russian, english]{babel}
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+\usepackage{listings}
+\usepackage{marvosym}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage[document]{ragged2e}
+\usepackage[export]{adjustbox}
+\usepackage{fontawesome}
+\usepackage{enumitem}
+\usepackage{minted}
+\usemintedstyle{tango}
+\usepackage[normalem]{ulem}
+\usepackage{tikz}
+\usetikzlibrary{patterns}
+\usetikzlibrary{mindmap}
+\usetikzlibrary{shapes.misc, fit}
+\usepackage{graphicx}
+\usepackage{eso-pic}
+\usepackage{verbatim}
+\usepackage{smartdiagram}
+\usesmartdiagramlibrary{additions}
+\usetikzlibrary{trees}
+\usepackage{datetime}
+\usepackage{hyperref}
+
+\usepackage{tcolorbox}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{colortbl}
+\tcbuselibrary{skins}
+
+\usetikzlibrary{shapes,arrows,positioning}
+\graphicspath{{images/}}
+\newfontfamily{\FA}{FontAwesome}
+
+\def\twitter{{\FA \faTwitter}}
+\def\github{{\FA \faGithub}}
+\def\email{{\FA \faEnvelope}}
+
+\renewcommand{\ttdefault}{pcr}
+\newfontfamily{\ttfamily}{Fira Code}
+
+\usefonttheme{professionalfonts} % using non standard fonts for beamer
+\usefonttheme{serif} % default family is serif
+\usepackage{fontspec}
+\setmainfont{Liberation Sans}
+\newfontfamily\ExtraLight{Liberation Sans}
+\newfontfamily\Light{Liberation Sans}
+\newfontfamily\Book{Liberation Sans}
+\newfontfamily\Medium{Liberation Sans}
+
+\makeatletter
+\newcommand\HUGE{\@setfontsize\Huge{32}{41}}
+\makeatother
+
+\newcommand\AtPagemyUpperLeft[1]{\AtPageLowerLeft{%
+\put(\LenToUnit{0.85\paperwidth},\LenToUnit{0.05\paperheight}){#1}}}
+
+\newcommand\AtPagemyUpperTop[1]{\AtPageLowerLeft{%
+\put(\LenToUnit{0.42\paperwidth},\LenToUnit{0.90\paperheight}){#1}}}
+
+\renewcommand{\ULthickness}{2.0pt}
+
+\definecolor{links}{HTML}{0099FF}
+\hypersetup{colorlinks, linkcolor=, urlcolor=links}
+\definecolor{greenGood}{HTML}{99FF99}
+\definecolor{redBad}{HTML}{FF9980}
+
+\setbeamerfont{section title}{family=\Book, size=\Huge, shape=\normalfont}
+\setbeamerfont{frametitle}{family=\Book, size=\large, shape=\normalfont}
+\setbeamerfont{title}{family=\Book, size=\Large, shape=\normalfont}
+\setbeamerfont{subtitle}{size=\small}
+\setbeamerfont{author}{family=\ExtraLight, size=\footnotesize}
+
+\definecolor{cec1d24}{RGB}{236,29,36}
+\definecolor{cffffff}{RGB}{255,255,255}
+
+\pagenumbering{gobble}
+
+\newdateformat{specialdate}{\twodigit{\THEDAY}-\twodigit{\THEMONTH}-\THEYEAR}
+
+\newcommand\tikzmark[1]{%
+  \tikz[overlay,remember picture] \coordinate (#1);}
+
+\setbeamertemplate{title page}
+{
+
+  \vspace*{2.1cm}
+  \begin{minipage}[b][\paperheight]{\textwidth}
+  \begin{center}
+
+    \ifx\inserttitle\@empty\else
+    {{% \inserttitle is nonempty
+      \raggedright%
+      %\linespread{1.0}%
+      \usebeamerfont{title}%
+      \usebeamercolor[fg]{title}%
+      %\vspace*{1.3em}
+      \if@noSmallCapitals%
+        \inserttitle%
+      \else%
+        \scshape{\color{black} \textbf{\begin{center}\inserttitle\end{center}}}%
+      \fi%
+      \vspace*{0.3em}
+    }}
+    \fi
+
+    \vspace*{0.5em}%
+
+    \ifx\insertsubtitle\@empty\else
+    {{% \insertsubtitle is nonempty
+      \usebeamerfont{subtitle}%
+      \usebeamercolor[fg]{subtitle}%
+      {\color{black} \insertsubtitle}%
+      \vspace*{3.0em}%
+    }}
+    \fi
+
+    \vspace*{1.0em}%
+
+    \usebeamerfont{author}%
+    \usebeamercolor[fg]{author}%
+    {\color{black} \insertauthor}%
+
+    \vspace*{1.5em}
+    \fontsize{8pt}{10}\selectfont
+    {\color{black} 03-12-2019}%
+
+    \vfill
+    \vspace*{2em}
+  \end{center}
+  \end{minipage}
+}
+
+\setbeamertemplate{section page}
+{
+  \vspace{2em}
+  \centering
+  \begin{minipage}{22em}
+    \usebeamercolor[fg]{section title}
+    \usebeamerfont{section title}
+    {\color{black} \insertsectionhead\\[-1ex]}
+  \end{minipage}
+  \par
+}
+
+\setbeamertemplate{footline}
+{
+\begin{beamercolorbox}[wd=\textwidth,ht=3ex,dp=3ex,leftskip=0.3cm,rightskip=0.3cm]{structure}
+  \usebeamerfont{page number in head/foot}
+  \insertframenumber
+\end{beamercolorbox}
+}
+
+\title{Modern BTree\\ techniques}
+\subtitle{}
+\date{\today}
+\author{DMITRY DOLGOV}
+\institute{}
+
+\tikzset{rum-node/.style={draw,circle,fill=white,minimum width=2cm}}
+\tikzset{rum-extra-node/.style={rectangle, draw, dashed, rounded corners, fill=white }}
+
+\begin{document}
+{
+  \usebackgroundtemplate{\includegraphics[width=\paperwidth]{template_2.png}}%
+  \fontsize{17pt}{18}\selectfont
+  \maketitle
+}
+
+\AddToShipoutPictureBG{
+  \AtPagemyUpperLeft{{\includegraphics[width=2.0cm,keepaspectratio]{logo.png}}}
+}%
+
+\setbeamertemplate{background canvas}{
+\begin{tikzpicture}
+    \clip (0,0) rectangle (\paperwidth,\paperheight);
+    \fill[color=orange] (4cm, \paperheight-6pt) rectangle (\paperwidth-4cm,\paperheight);
+\end{tikzpicture}
+}
+
+\fontsize{17pt}{18}\selectfont
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \only<1>{
+            \includegraphics[width=0.5\textwidth,center]{tree.jpg}
+            \vspace{-0.8cm}
+            \hspace*{6cm}
+            \href{https://www.flickr.com/photos/aspis7/5075169756/}
+                 {\color{white}\fontsize{5pt}{0}\selectfont @aspis7}
+        }
+        \only<2>{
+            \includegraphics[width=0.5\textwidth,center]{cs_tree.jpg}
+            \vspace{-0.8cm}
+            \hspace*{6cm}
+            \href{https://www.flickr.com/photos/aspis7/5075169756/}
+                 {\color{white}\fontsize{5pt}{0}\selectfont @aspis7}
+        }
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+
+    \begin{itemize}[label={\MVRightarrow}]
+        \item <+-> Graefe, Goetz and Harumi A. Kuno. “Modern B-tree
+            techniques.” IEEE 27th International Conference on Data
+            Engineering, 2011.
+        \item <+-> D. Comet, "Ubiquitous B-tree", ACM Comp. Surv., vol. 11, no.
+            2, 1979.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+
+    \def\arraystretch{1.5}
+    \begin{tabular}{cccc}
+        B-Tree & B$^{+}$-Tree & B$_{link}$-Tree & DP-Tree \\
+        wB$^{+}$-Tree & NV-Tree & FP-Tree & FASTFAIR \\
+        HiKV & Mass-Tree & Skip List & ART \\
+        WORT & CDDS-Tree & Bw-Tree & HOT \\
+        KISS-Tree & VAST-Tree & FAST & HV-Tree \\
+        UB-Tree & LHAM & MDM & Hybrid B$^{+}$-Tree
+    \end{tabular}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+
+    \only<1>
+    {
+        \begin{tikzpicture}[]
+            \node [rum-node] (memory) at ( 3, 0) {Mem};
+            \node [rum-node] (write) at (-3, 0) {Write};
+            \node [rum-node] (read) at ( 0, 3) {Read};
+            \draw (read) -- (write) -- (memory) -- (read);
+            \begin{scope}[on background layer]
+                \fill [gray, opacity=0.2]
+                    (read.center) --
+                    (write.center) --
+                    (memory.center) -- cycle;
+            \end{scope}
+        \end{tikzpicture}
+    }
+
+    \only<2>
+    {
+        \begin{tikzpicture}[]
+            \node [rum-node, fill=greenGood] (memory) at ( 3, 0) {Mem};
+            \node [rum-node, fill=redBad] (write) at (-3, 0) {Write};
+            \node [rum-node, fill=greenGood] (read) at ( 0, 3) {Read};
+            \draw (read) -- (write) -- (memory) -- (read);
+            \begin{scope}[on background layer]
+                \fill [gray, opacity=0.2]
+                    (read.center) --
+                    (write.center) --
+                    (memory.center) -- cycle;
+            \end{scope}
+        \end{tikzpicture}
+    }
+
+    \only<3>
+    {
+        \begin{tikzpicture}[]
+            \node [rum-extra-node] (complex) at ( 0, -3) {Complexity?};
+            \node [rum-node] (memory) at ( 3, 0) {Mem};
+            \node [rum-node] (write) at (-3, 0) {Write};
+            \node [rum-node] (read) at ( 0, 3) {Read};
+            \draw (read) -- (memory) -- (complex) -- (write) -- (read);
+            \begin{scope}[on background layer]
+                \fill [gray, opacity=0.2]
+                    (read.center) --
+                    (memory.center) --
+                    (complex.center) --
+                    (write.center) -- cycle;
+            \end{scope}
+        \end{tikzpicture}
+    }
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+
+    \begin{tikzpicture}[]
+        \path
+          node[minimum height=1cm, draw] (pointer1) {}
+          node[minimum height=1cm, pattern=north west lines, draw, right=0 of pointer1] (sep1) {}
+          node[minimum height=1cm, pattern=north west lines, draw, left=0 of pointer1] (sep2) {}
+          node[minimum height=1cm, draw, right=0 of sep1] (pointer2) {}
+          node[minimum height=1cm, draw, left=0 of sep2] (pointer3) {}
+          node[minimum height=1cm, pattern=north west lines, draw, right=0 of pointer2] (sep3) {}
+          node[minimum height=1cm, pattern=north west lines, draw, left=0 of pointer3] (sep4) {}
+          node[draw, inner sep=0, behind path,
+              fit=(pointer1)(pointer2)(pointer3)
+                  (sep1)(sep2)(sep3)(sep4)
+          ] (root) {};
+
+        \path
+          node[minimum height=0.5cm, pattern=north west lines, draw, below=1cm of root] (key11) {}
+          node[minimum height=0.5cm, pattern=north west lines, draw, left=0 of key11] (key21) {}
+          node[minimum height=0.5cm, pattern=north west lines, draw, right=0 of key11] (key31) {}
+          node[minimum height=0.5cm, draw, below=0 of key11] (val11) {}
+          node[minimum height=0.5cm, draw, left=0 of val11] (val21) {}
+          node[minimum height=0.5cm, draw, right=0 of val11] (val31) {}
+          node[draw, inner sep=0, behind path,
+              fit=(key11)(key21)(key31)
+                  (val11)(val21)(val31)
+          ] (child1) {};
+
+        \path
+          node[minimum height=0.5cm, pattern=north west lines, draw, below=1cm of root.south west, xshift=-2cm] (key12) {}
+          node[minimum height=0.5cm, pattern=north west lines, draw, left=0 of key12] (key22) {}
+          node[minimum height=0.5cm, pattern=north west lines, draw, right=0 of key12] (key32) {}
+          node[minimum height=0.5cm, draw, below=0 of key12] (val12) {}
+          node[minimum height=0.5cm, draw, left=0 of val12] (val22) {}
+          node[minimum height=0.5cm, draw, right=0 of val12] (val32) {}
+          node[draw, inner sep=0, behind path,
+              fit=(key12)(key22)(key32)
+                  (val12)(val22)(val32)
+          ] (child2) {};
+
+        \path
+          node[minimum height=0.5cm, pattern=north west lines, draw, below=1cm of root.south east, xshift=2cm] (key13) {}
+          node[minimum height=0.5cm, pattern=north west lines, draw, left=0 of key13] (key23) {}
+          node[minimum height=0.5cm, pattern=north west lines, draw, right=0 of key13] (key33) {}
+          node[minimum height=0.5cm, draw, below=0 of key13] (val13) {}
+          node[minimum height=0.5cm, draw, left=0 of val13] (val23) {}
+          node[minimum height=0.5cm, draw, right=0 of val13] (val33) {}
+          node[draw, inner sep=0, behind path,
+              fit=(key13)(key23)(key33)
+                  (val13)(val23)(val33)
+          ] (child3) {};
+
+        \draw[->] (pointer1.south) -- (key11.north);
+        \draw[->] (pointer2.south) .. controls ([yshift=-1cm] pointer2) and ([yshift=1cm] key13) .. (key13.north);
+        \draw[->] (pointer3.south) .. controls ([yshift=-1cm] pointer3) and ([yshift=1cm] key12) .. (key12.north);
+    \end{tikzpicture}
+
+    \end{center}
+\end{frame}
+
+\fontsize{18pt}{18}\selectfont
+\begin{frame}
+  \vspace*{2.5cm}
+  \begin{minipage}[b][\paperheight]{\textwidth}
+  \begin{center}
+
+      %\raggedright%
+      \linespread{1.0}%
+      \usebeamerfont{title}%
+      \usebeamercolor[fg]{title}%
+      \if@noSmallCapitals%
+        Questions?
+      \else%
+        \scshape{\color{black} Questions?}%
+      \fi%
+      \vspace*{0.3em}
+
+      \usebeamerfont{subtitle}%
+      \fontsize{13pt}{14}\selectfont
+      \usebeamercolor[fg]{subtitle}%
+        \begin{itemize}[label={}]
+            \item {\color{black} \github\ \href{github.com/erthalion}
+                                               {\color{black}github.com/erthalion}}
+            \item {\color{black} \github\ \href{github.com/erthalion/postgres-bcc}
+                                               {\color{black}github.com/erthalion/postgres-bcc}}
+            \item {\color{black} \twitter\ @erthalion}
+            \item {\color{black} \email\ dmitrii.dolgov at zalando dot de}
+            \item {\color{black} \email\ 9erthalion6 at gmail dot com}
+        \end{itemize}
+      \vspace*{2.5em}%
+
+    \vfill
+    \vspace*{2em}
+  \end{center}
+  \end{minipage}
+
+\end{frame}
+
+\end{document}
