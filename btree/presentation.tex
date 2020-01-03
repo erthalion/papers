@@ -204,6 +204,45 @@
       } {}
 }
 
+\newcommand{\btreenodenotfull}[5] {
+    \path
+        \newcounter{themenumber}
+        \newcounter{classnumber}
+        \newcounter{imagenumber}
+        \forloop{themenumber}{1}{\value{themenumber} < 24}{
+            % \hline <-- Error here
+            \arabic{themenumber}
+            \forloop{classnumber}{0}{\value{classnumber} < 2}{
+                \forloop{imagenumber}{1}{\value{imagenumber} < 6}{
+                    & \includegraphics[scale=2]{
+                        ../../results/\arabic{themenumber}/\arabic{classnumber}_\arabic{imagenumber}.eps
+                    }
+                }
+            }
+        }
+      node[btree-pointer, #2, #3] (pointer1#1) {}
+      node[btree-key, right=0 of pointer1#1, #3] (sep1#1) {}
+      node[btree-key, left=0 of pointer1#1, #3] (sep2#1) {}
+      node[btree-pointer, right=0 of sep1#1, #3] (pointer2#1) {}
+      node[btree-pointer, left=0 of sep2#1, #3] (pointer3#1) {}
+      node[btree-key, right=0 of pointer2#1, #3] (sep3#1) {}
+      node[btree-key, left=0 of pointer3#1, #3] (sep4#1) {}
+      node[draw, inner sep=0, behind path, #4,
+          fit=(pointer1#1)(pointer2#1)(pointer3#1)
+              (sep1#1)(sep2#1)(sep3#1)(sep4#1)
+      ] (node#1) {};
+
+      \ifthenelse{ \equal{#5}{show-pointers} } {
+            \coordinate[below=0.5 of pointer1#1] (heap-pointer1#1);
+            \coordinate[below=0.5 of pointer2#1] (heap-pointer2#1);
+            \coordinate[below=0.5 of pointer3#1] (heap-pointer3#1);
+
+            \draw[->, btree-line] (pointer1#1.south) -- (heap-pointer1#1.north);
+            \draw[->, btree-line] (pointer2#1.south) -- (heap-pointer2#1.north);
+            \draw[->, btree-line] (pointer3#1.south) -- (heap-pointer3#1.north);
+      } {}
+}
+
 \begin{document}
 {
   \usebackgroundtemplate{\includegraphics[width=\paperwidth]{template_2.png}}%
@@ -248,11 +287,11 @@
     \frametitle{}
 
     \begin{itemize}[label={\MVRightarrow}]
+        \item <+-> D. Comet, "Ubiquitous B-tree", ACM Comp. Surv., vol. 11, no.
+            2, 1979.
         \item <+-> Graefe, Goetz and Harumi A. Kuno. “Modern B-tree
             techniques.” IEEE 27th International Conference on Data
             Engineering, 2011.
-        \item <+-> D. Comet, "Ubiquitous B-tree", ACM Comp. Surv., vol. 11, no.
-            2, 1979.
     \end{itemize}
 \end{frame}
 
@@ -346,6 +385,11 @@
             \draw[->, btree-line] (pointer31.south)
                 .. controls ([yshift=-1cm] pointer31) and ([yshift=1cm] pointer13) ..
                 (pointer13.north);
+
+            \coordinate[right=0.5cm of sep34.east] (link-sep34);
+            \draw[btree-hide] ([yshift=0.1cm]sep34.east) -- ([yshift=0.1cm]link-sep34.west);
+            \coordinate[left=0.5cm of sep43.west] (link-sep43);
+            \draw[btree-hide] ([yshift=0.1cm]sep43.west) -- ([yshift=0.1cm]link-sep43.east);
         \end{tikzpicture}
 
         \onslide<2>
@@ -362,6 +406,11 @@
             \draw[->, btree-line] (pointer31.south)
             .. controls ([yshift=-1cm] pointer31) and ([yshift=1cm] pointer13) ..
             (pointer13.north);
+
+            \coordinate[right=0.5cm of sep34.east] (link-sep34);
+            \draw[btree-hide] ([yshift=0.1cm]sep34.east) -- ([yshift=0.1cm]link-sep34.west);
+            \coordinate[left=0.5cm of sep43.west] (link-sep43);
+            \draw[btree-hide] ([yshift=0.1cm]sep43.west) -- ([yshift=0.1cm]link-sep43.east);
         \end{tikzpicture}
 
         \onslide<3>
@@ -381,9 +430,68 @@
             \draw[->, btree-line] (pointer31.south)
                 .. controls ([yshift=-1cm] pointer31) and ([yshift=1cm] pointer13) ..
                 (pointer13.north);
+
+            \coordinate[right=0.5cm of sep34.east] (link-sep34);
+            \draw[btree-hide] ([yshift=0.1cm]sep34.east) -- ([yshift=0.1cm]link-sep34.west);
+            \coordinate[left=0.5cm of sep43.west] (link-sep43);
+            \draw[btree-hide] ([yshift=0.1cm]sep43.west) -- ([yshift=0.1cm]link-sep43.east);
         \end{tikzpicture}
 
         \onslide<4>
+        \begin{tikzpicture}[]
+            \btreenode{1}{}{}{btree-branch}{}
+            \btreenode{2}{below=1cm of node1.south}
+                {}{btree-leaf}{show-pointers}
+            \btreenode{3}{below=1cm of node1.south west, xshift=-3cm}
+                {}{btree-leaf}{show-pointers}
+            \btreenode{4}{below=1cm of node1.south east, xshift=3cm}
+                {}{btree-leaf}{show-pointers}
+
+            \draw[->, btree-line] (pointer11.south) -- (pointer12.north);
+            \draw[->, btree-line] (pointer21.south)
+                .. controls ([yshift=-1cm] pointer21) and ([yshift=1cm] pointer14) ..
+                (pointer14.north);
+            \draw[->, btree-line] (pointer31.south)
+                .. controls ([yshift=-1cm] pointer31) and ([yshift=1cm] pointer13) ..
+                (pointer13.north);
+
+            \draw[->, btree-line] ([yshift=0.1cm]sep33.east) -- ([yshift=0.1cm]sep42.west);
+            \draw[->, btree-line] ([yshift=0.1cm]sep32.east) -- ([yshift=0.1cm]sep44.west);
+            \coordinate[right=0.5cm of sep34.east] (link-sep34);
+            \draw[->, btree-line] ([yshift=0.1cm]sep34.east) -- ([yshift=0.1cm]link-sep34.west);
+            \coordinate[left=0.5cm of sep43.west] (link-sep43);
+            \draw[btree-hide] ([yshift=0.1cm]sep43.west) -- ([yshift=0.1cm]link-sep43.east);
+        \end{tikzpicture}
+
+        \onslide<5>
+        \begin{tikzpicture}[]
+            \btreenode{1}{}{}{btree-branch}{}
+            \btreenode{2}{below=1cm of node1.south}
+                {}{btree-leaf}{show-pointers}
+            \btreenode{3}{below=1cm of node1.south west, xshift=-3cm}
+                {}{btree-leaf}{show-pointers}
+            \btreenode{4}{below=1cm of node1.south east, xshift=3cm}
+                {}{btree-leaf}{show-pointers}
+
+            \draw[->, btree-line] (pointer11.south) -- (pointer12.north);
+            \draw[->, btree-line] (pointer21.south)
+                .. controls ([yshift=-1cm] pointer21) and ([yshift=1cm] pointer14) ..
+                (pointer14.north);
+            \draw[->, btree-line] (pointer31.south)
+                .. controls ([yshift=-1cm] pointer31) and ([yshift=1cm] pointer13) ..
+                (pointer13.north);
+
+            \draw[->, btree-line] ([yshift=0.1cm]sep33.east) -- ([yshift=0.1cm]sep42.west);
+            \draw[->, btree-line] ([yshift=0.1cm]sep32.east) -- ([yshift=0.1cm]sep44.west);
+            \draw[<-, btree-line] ([yshift=-0.1cm]sep33.east) -- ([yshift=-0.1cm]sep42.west);
+            \draw[<-, btree-line] ([yshift=-0.1cm]sep32.east) -- ([yshift=-0.1cm]sep44.west);
+            \coordinate[right=0.5cm of sep34.east] (link-sep34);
+            \draw[->, btree-line] ([yshift=0.1cm]sep34.east) -- ([yshift=0.1cm]link-sep34.west);
+            \coordinate[left=0.5cm of sep43.west] (link-sep43);
+            \draw[->, btree-line] ([yshift=0.1cm]sep43.west) -- ([yshift=0.1cm]link-sep43.east);
+        \end{tikzpicture}
+
+        \onslide<6>
         \begin{tikzpicture}[]
             \btreenode{1}{}{}{btree-branch}{}
             \btreenode{2}{below=1cm of node1.south}
@@ -407,6 +515,41 @@
 
             \draw[->, btree-line, color=red, line width=2pt]
                 (pointer32.south) -- (heap-pointer32.north);
+
+            \draw[->, btree-line] ([yshift=0.1cm]sep33.east) -- ([yshift=0.1cm]sep42.west);
+            \draw[->, btree-line] ([yshift=0.1cm]sep32.east) -- ([yshift=0.1cm]sep44.west);
+            \draw[<-, btree-line] ([yshift=-0.1cm]sep33.east) -- ([yshift=-0.1cm]sep42.west);
+            \draw[<-, btree-line] ([yshift=-0.1cm]sep32.east) -- ([yshift=-0.1cm]sep44.west);
+            \coordinate[right=0.5cm of sep34.east] (link-sep34);
+            \draw[->, btree-line] ([yshift=0.1cm]sep34.east) -- ([yshift=0.1cm]link-sep34.west);
+            \coordinate[left=0.5cm of sep43.west] (link-sep43);
+            \draw[->, btree-line] ([yshift=0.1cm]sep43.west) -- ([yshift=0.1cm]link-sep43.east);
+        \end{tikzpicture}
+    \end{overprint}
+    \end{center}
+
+
+    \linespread{0.5}
+    \vspace{0.5cm}
+    \color{black}\fontsize{6pt}{0}\selectfont
+        P. Lehman and S. Yao, Efficient Locking for Concurrent Operations on B-Trees, ACM Transactions on Database Systems, Vol 6, No. 4, December 1981, pp 650-670
+    \linespread{1.5}
+
+\end{frame}
+
+\fontsize{17pt}{18}\selectfont
+\begin{frame}[fragile]{}
+    \frametitle{}
+
+    \begin{center}
+    \begin{overprint}[12cm]
+        \onslide<1>
+        \begin{tikzpicture}[]
+            \btreenode{1}{}{}{btree-branch}{}
+            \btreenode{3}{below=1cm of node1.south west, xshift=-1cm}
+                {}{btree-leaf}{}
+            \btreenode{4}{below=1cm of node1.south east, xshift=1cm}
+                {}{btree-hide}{}
 
         \end{tikzpicture}
     \end{overprint}
