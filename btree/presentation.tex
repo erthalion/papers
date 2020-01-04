@@ -174,11 +174,13 @@
 \tikzset{btree-key/.style={minimum height=1cm, pattern=north west lines, draw}}
 \tikzset{btree-pointer/.style={minimum height=1cm, draw}}
 \tikzset{btree-hide/.style={draw opacity=0, line width=0, pattern=none}}
+\tikzset{btree-empty/.style={btree-pointer, dashed}}
 \tikzset{btree-leaf/.style={fill=greenGood}}
 \tikzset{btree-branch/.style={fill=gray!20}}
 \tikzset{btree-line/.style={line width=0.5pt}}
 \tikzset{btree-path/.style={btree-pointer, minimum width=0.8cm, fill=red, opacity=0.5}}
 \tikzset{>=latex}
+\tikzset{btree-high-key/.style={btree-key, pattern=crosshatch, pattern color=red, draw=red}}
 
 \newcommand{\btreenode}[5] {
     \path
@@ -205,27 +207,46 @@
       } {}
 }
 
-\newcommand{\btreenodewithitems}[3] {
-    \newcounter{itemid}
-    \newcounter{itemid-prev}
+\newcounter{itemid}
+\newcounter{itemid-prev}
 
-    \node[btree-key] (key#11) {};
+\newcommand{\btreenodewithitems}[5] {
+    \node[btree-key, #4] (key#11) {};
     \forloop{itemid}{2}{\value{itemid} < #2} {
       \setcounter{itemid-prev}{\value{itemid} - 1}
       \ifthenelse{\number\value{itemid} < #3} {
         \node[btree-key, right=0.2cm of key#1\number\value{itemid-prev}]
           (key#1\number\value{itemid}) {};
       } {
-        \node[btree-hide, right=0.2cm of key#1\number\value{itemid-prev}]
+        \node[btree-empty, right=0.2cm of key#1\number\value{itemid-prev}]
           (key#1\number\value{itemid}) {};
       }
     }
-    \node[draw, inner sep=0.2cm, behind path,
-        fit=\directlua{
+    \setcounter{itemid-prev}{\value{itemid} - 1}
+    \node[btree-high-key, right=0.2cm of key#1\number\value{itemid-prev}]
+        (high-key#1) {};
+    \node[draw, inner sep=0.2cm, behind path, #5,
+        fit=(high-key#1)\directlua{
           for index=1,#2-1 do
               tex.print("(key#1"..index..")")
           end}
     ] (node#1) {};
+
+    %% redraw after background
+    \node[btree-key, #4] (key#11) {};
+    \forloop{itemid}{2}{\value{itemid} < #2} {
+      \setcounter{itemid-prev}{\value{itemid} - 1}
+      \ifthenelse{\number\value{itemid} < #3} {
+        \node[btree-key, right=0.2cm of key#1\number\value{itemid-prev}]
+          (key#1\number\value{itemid}) {};
+      } {
+        \node[btree-empty, right=0.2cm of key#1\number\value{itemid-prev}]
+          (key#1\number\value{itemid}) {};
+      }
+    }
+    \setcounter{itemid-prev}{\value{itemid} - 1}
+    \node[btree-high-key, right=0.2cm of key#1\number\value{itemid-prev}]
+        (high-key#1) {};
 }
 
 \begin{document}
@@ -527,11 +548,61 @@
     \frametitle{}
 
     \begin{center}
-    \begin{overprint}[12cm]
+    \begin{overprint}[8cm]
         \onslide<1>
         \begin{tikzpicture}[]
-            \btreenodewithitems{1}{6}{4}
+            \btreenodewithitems{1}{5}{2}{}{btree-branch}
+            \btreenodewithitems{2}{5}{4}{below=1cm of key11, xshift=-2cm}{btree-leaf}
+            \draw[->, btree-line] (node1.south)
+                .. controls ([yshift=-1cm] node1) and ([yshift=1.2cm] node2) ..
+                (node2.north);
         \end{tikzpicture}
+
+        \onslide<2>
+        \begin{tikzpicture}[]
+            \btreenodewithitems{1}{5}{2}{}{btree-branch}
+            \btreenodewithitems{2}{5}{4}{below=1cm of key11, xshift=-2cm}{btree-leaf}
+            \draw[->, btree-line] (node1.south)
+                .. controls ([yshift=-1cm] node1) and ([yshift=1.2cm] node2) ..
+                (node2.north);
+
+            \node[btree-key, below=1cm of key23] (new-key) {};
+            \draw[->, btree-line] (new-key.east)
+                .. controls ([xshift=1cm] new-key) and (key24) ..
+                (key24.center);
+        \end{tikzpicture}
+
+        \onslide<3>
+        \begin{tikzpicture}[]
+            \btreenodewithitems{1}{5}{2}{}{btree-branch}
+            \btreenodewithitems{2}{5}{3}{below=1cm of key11, xshift=-2cm}{btree-leaf}
+            \btreenodewithitems{3}{5}{3}{below=1cm of key11, xshift=2cm}{btree-leaf}
+            \draw[->, btree-line] (node1.south)
+                .. controls ([yshift=-1cm] node1) and ([yshift=1.2cm] node2) ..
+                (node2.north);
+            \draw[->, btree-line] (node1.south)
+                .. controls ([yshift=-1cm] node1) and ([yshift=1.2cm] node3) ..
+                (node3.north);
+        \end{tikzpicture}
+
+        \onslide<4>
+        \begin{tikzpicture}[]
+            \btreenodewithitems{1}{5}{2}{}{btree-branch}
+            \btreenodewithitems{2}{5}{3}{below=1cm of key11, xshift=-2cm}{btree-leaf}
+            \btreenodewithitems{3}{5}{3}{below=1cm of key11, xshift=2cm}{btree-leaf}
+            \draw[->, btree-line] (node1.south)
+                .. controls ([yshift=-1cm] node1) and ([yshift=1.2cm] node2) ..
+                (node2.north);
+            \draw[->, btree-line] (node1.south)
+                .. controls ([yshift=-1cm] node1) and ([yshift=1.2cm] node3) ..
+                (node3.north);
+
+            \node[btree-key, below=-0.5cm of key13.center] (promoted) {};
+            \draw[->, btree-line] (key31.west)
+                .. controls ([xshift=-1cm] key31) and (promoted) ..
+                (promoted.center);
+        \end{tikzpicture}
+
     \end{overprint}
     \end{center}
 
