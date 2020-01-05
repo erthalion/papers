@@ -33,6 +33,7 @@
 \usepackage{datetime}
 \usepackage{hyperref}
 \usepackage{forloop}
+\usepackage{csquotes}
 
 \usepackage{tcolorbox}
 \usepackage{tabularx}
@@ -295,8 +296,8 @@
     \begin{itemize}[label={\MVRightarrow}]
         \item <+-> D. Comet, "Ubiquitous B-tree", ACM Comp. Surv., vol. 11, no.
             2, 1979.
-        \item <+-> Graefe, Goetz and Harumi A. Kuno. “Modern B-tree
-            techniques.” IEEE 27th International Conference on Data
+        \item <+-> Graefe, Goetz and Harumi A. Kuno. "Modern B-tree
+            techniques." IEEE 27th International Conference on Data
             Engineering, 2011.
     \end{itemize}
 \end{frame}
@@ -376,6 +377,9 @@
     \frametitle{}
 
     \begin{center}
+    \textbf{B$^+$Tree}
+    \vspace{1cm}
+
     \begin{overprint}[12cm]
         \onslide<1>
         \begin{tikzpicture}[]
@@ -548,6 +552,9 @@
     \frametitle{}
 
     \begin{center}
+    \textbf{Page split}
+    \vspace{1cm}
+
     \begin{overprint}[8cm]
         \onslide<1>
         \begin{tikzpicture}[]
@@ -608,6 +615,31 @@
 
 \end{frame}
 
+\begin{frame}[fragile]{}
+    \frametitle{}
+
+    \begin{center}
+    \textbf{Page merge}
+    %\vspace{1cm}
+    \end{center}
+
+    \begin{flushleft}
+        \begin{displayquote}
+            By adding periodic rebuilding of the tree, we obtain a data
+            structure that is theoreticaly superior to standard B-trees in many
+            ways. Our results suggest that rebalancing on deletion no only
+            unnecessary but may be harmful.
+        \end{displayquote}
+        \footnotesize{S. Sen and R. E. Tarjan, "Deletion without rebalancing in multiway
+        search trees." ISAAC, pp. 832-841, 2009}
+    \end{flushleft}
+
+\end{frame}
+\note{
+    Postgres deletes via marking a tuple as dead, and then vacuuming either a
+    table of a single page.
+}
+
 \fontsize{18pt}{18}\selectfont
 \begin{frame}
   \vspace*{2.5cm}
@@ -629,10 +661,6 @@
       \fontsize{13pt}{14}\selectfont
       \usebeamercolor[fg]{subtitle}%
         \begin{itemize}[label={}]
-            \item {\color{black} \github\ \href{github.com/erthalion}
-                                               {\color{black}github.com/erthalion}}
-            \item {\color{black} \github\ \href{github.com/erthalion/postgres-bcc}
-                                               {\color{black}github.com/erthalion/postgres-bcc}}
             \item {\color{black} \twitter\ @erthalion}
             \item {\color{black} \email\ dmitrii.dolgov at zalando dot de}
             \item {\color{black} \email\ 9erthalion6 at gmail dot com}
