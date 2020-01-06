@@ -546,6 +546,10 @@
     \linespread{1.5}
 
 \end{frame}
+\note{
+    Postgres uses variation of B-link Tree, seems like MySQL innodb uses
+    regular B+ Tree.
+}
 
 \fontsize{17pt}{18}\selectfont
 \begin{frame}[fragile]{}
@@ -625,10 +629,10 @@
 
     \begin{flushleft}
         \begin{displayquote}
-            By adding periodic rebuilding of the tree, we obtain a data
+            "By adding periodic rebuilding of the tree, we obtain a data
             structure that is theoreticaly superior to standard B-trees in many
             ways. Our results suggest that rebalancing on deletion no only
-            unnecessary but may be harmful.
+            unnecessary but may be harmful."
         \end{displayquote}
         \footnotesize{S. Sen and R. E. Tarjan, "Deletion without rebalancing in multiway
         search trees." ISAAC, pp. 832-841, 2009}
@@ -639,6 +643,74 @@
     Postgres deletes via marking a tuple as dead, and then vacuuming either a
     table of a single page.
 }
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+
+    \begin{center}
+    \begin{overprint}[8cm]
+        \onslide<1>
+        \begin{tikzpicture}[]
+            \node [rum-node] (memory) at ( 3, 0) {Mem};
+            \node [rum-node] (write) at (-3, 0) {Write};
+            \node [rum-node] (read) at ( 0, 3) {Read};
+            \draw (read) -- (write) -- (memory) -- (read);
+            \begin{scope}[on background layer]
+                \fill [gray, opacity=0.2]
+                    (read.center) --
+                    (write.center) --
+                    (memory.center) -- cycle;
+            \end{scope}
+
+            \coordinate[below=0.5 of read] (btree-pointer);
+            \coordinate[right=2 of read] (btree-angle);
+            \node[above=0.5 of btree-angle, draw=none, color=white] (btree) {B-Tree};
+        \end{tikzpicture}
+
+        \onslide<2>
+        \begin{tikzpicture}[]
+            \node [rum-node] (memory) at ( 3, 0) {Mem};
+            \node [rum-node] (write) at (-3, 0) {Write};
+            \node [rum-node] (read) at ( 0, 3) {Read};
+            \draw (read) -- (write) -- (memory) -- (read);
+            \begin{scope}[on background layer]
+                \fill [gray, opacity=0.2]
+                    (read.center) --
+                    (write.center) --
+                    (memory.center) -- cycle;
+            \end{scope}
+
+            \coordinate[below=0.5 of read] (btree-pointer);
+            \coordinate[right=2 of read] (btree-angle);
+            \node[above=0.5 of btree-angle, draw=none] (btree) {B-Tree};
+            \draw[->, line width=2pt] (btree)
+                .. controls ([yshift=-2cm] btree) and (btree-pointer) ..
+                (btree-pointer);
+        \end{tikzpicture}
+
+        \onslide<3>
+        \begin{tikzpicture}[]
+            \node [rum-node, fill=greenGood] (memory) at ( 3, 0) {Mem};
+            \node [rum-node, fill=greenGood] (write) at (-3, 0) {Write};
+            \node [rum-node, fill=redBad] (read) at ( 0, 3) {Read};
+            \draw (read) -- (write) -- (memory) -- (read);
+            \begin{scope}[on background layer]
+                \fill [gray, opacity=0.2]
+                    (read.center) --
+                    (write.center) --
+                    (memory.center) -- cycle;
+            \end{scope}
+
+            \coordinate[below=0.5 of read] (btree-pointer);
+            \coordinate[right=2 of read] (btree-angle);
+            \node[above=0.5 of btree-angle, draw=none] (btree) {B-Tree};
+            \draw[->, line width=2pt] (btree)
+                .. controls ([yshift=-2cm] btree) and (btree-pointer) ..
+                (btree-pointer);
+        \end{tikzpicture}
+    \end{overprint}
+    \end{center}
+\end{frame}
 
 \fontsize{18pt}{18}\selectfont
 \begin{frame}
@@ -673,5 +745,8 @@
   \end{minipage}
 
 \end{frame}
+\note{
+    ClickHouse - B-Tries
+}
 
 \end{document}
