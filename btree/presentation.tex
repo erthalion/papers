@@ -712,6 +712,104 @@
     \end{center}
 \end{frame}
 
+\begin{frame}[fragile]{}
+    \frametitle{}
+
+    \begin{center}
+    \textbf{Key normalization}
+    \vspace{1cm}
+
+    \begin{tabular}{cccl}
+        1 & "Dirk" & "Bart" &
+            \colorbox{BurntOrange}{1}
+            \colorbox{SpringGreen}{0..01}
+            \colorbox{BurntOrange}{1}
+            \colorbox{SpringGreen}{11..00}
+            \colorbox{Gray!40}{$\emptyset$}
+            \colorbox{BurntOrange}{1}
+            \colorbox{SpringGreen}{10..10}
+            \colorbox{Gray!40}{$\emptyset$} \\
+        2 & "Todd" & Null &
+            \colorbox{BurntOrange}{1}
+            \colorbox{SpringGreen}{0..10}
+            \colorbox{BurntOrange}{1}
+            \colorbox{SpringGreen}{01..00}
+            \colorbox{Gray!40}{$\emptyset$}
+            \colorbox{BurntOrange}{0} \\
+        Null & "" & Null &
+            \colorbox{BurntOrange}{0}
+            \colorbox{BurntOrange}{1}
+            \colorbox{Gray!40}{$\emptyset$}
+            \colorbox{BurntOrange}{0} \\
+    \end{tabular}
+
+    \end{center}
+\end{frame}
+\note{
+    https://wiki.postgresql.org/wiki/Key_normalization
+
+    Should be not used for leaves, since normalization looses the information.
+    Other option is too store both normalized and original key values.
+}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+
+    \begin{center}
+    \textbf{Prefix truncation}
+    \vspace{1cm}
+
+    \begin{overprint}[8cm]
+        \onslide<1>
+        \begin{tabular}{lll}
+            & & \\
+            & Smith Jack & 01-02-2019 \\
+            & Smith Jane & 02-03-2019 \\
+            & Smith James & 03-04-2019 \\
+        \end{tabular}
+
+        \onslide<2>
+        \begin{tabular}{lll}
+            & & \\
+            & \colorbox{BurntOrange}{Smith Ja}ck & 01-02-2019 \\
+            & \colorbox{BurntOrange}{Smith Ja}ne & 02-03-2019 \\
+            & \colorbox{BurntOrange}{Smith Ja}mes & 03-04-2019 \\
+        \end{tabular}
+
+        \onslide<3>
+        \begin{tabular}{lll}
+            \colorbox{BurntOrange}{Smith Ja} & & \\
+            & ck & 01-02-2019 \\
+            & ne & 02-03-2019 \\
+            & mes & 03-04-2019 \\
+        \end{tabular}
+
+        \onslide<4>
+        \begin{tikzpicture}[]
+            \btreenodewithitems{1}{5}{4}{}{btree-leaf}
+        \end{tikzpicture}
+
+    \end{overprint}
+
+    \end{center}
+\end{frame}
+\note{
+    BerkleyDB, https://web.stanford.edu/class/cs276a/projects/docs/berkeleydb/api_c/db_set_bt_prefix.html
+}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+
+    \begin{center}
+    \textbf{Dynamic prefix truncation}
+    \vspace{1cm}
+
+    \begin{overprint}[8cm]
+    \end{overprint}
+
+    \end{center}
+\end{frame}
+
 \fontsize{18pt}{18}\selectfont
 \begin{frame}
   \vspace*{2.5cm}
