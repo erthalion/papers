@@ -181,7 +181,9 @@
 \tikzset{btree-line/.style={line width=0.5pt}}
 \tikzset{btree-path/.style={btree-pointer, minimum width=0.8cm, fill=red, opacity=0.5}}
 \tikzset{>=latex}
-\tikzset{btree-high-key/.style={btree-key, pattern=crosshatch, pattern color=red, draw=red}}
+\tikzset{btree-high-key/.style={btree-key, pattern=north west lines, pattern color=red, draw=red}}
+\tikzset{btree-key-prefix/.style={btree-key, minimum height=0.2cm, fill=red, opacity=0.5}}
+\tikzset{btree-key-compare/.style={btree-key, minimum height=0.6cm, fill=blue, opacity=0.5}}
 
 \newcommand{\btreenode}[5] {
     \path
@@ -785,9 +787,27 @@
         \end{tabular}
 
         \onslide<4>
+        \begin{center}
         \begin{tikzpicture}[]
-            \btreenodewithitems{1}{5}{4}{}{btree-leaf}
+            \btreenodewithitems{1}{8}{5}{}{btree-leaf}
+            \coordinate[below=1cm of key11] (start1);
+            \coordinate[below=1cm of high-key1] (start2);
+            \draw[->, btree-line, line width=1.5pt, shorten >= 2mm] (start1) -- (key11);
+            \draw[->, btree-line, line width=1.5pt, shorten >= 2mm] (start2) -- (high-key1);
         \end{tikzpicture}
+        \end{center}
+
+        \onslide<5>
+        \begin{center}
+        \begin{tikzpicture}[]
+            \btreenodewithitems{1}{8}{5}{}{btree-leaf}
+            \foreach \i in {1,...,4}
+            {
+                \coordinate[below=1cm of key1\i] (start\i);
+                \draw[->, btree-line, line width=1.5pt, shorten >= 2mm] (start\i) -- (key1\i);
+            }
+        \end{tikzpicture}
+        \end{center}
 
     \end{overprint}
 
@@ -795,6 +815,8 @@
 \end{frame}
 \note{
     BerkleyDB, https://web.stanford.edu/class/cs276a/projects/docs/berkeleydb/api_c/db_set_bt_prefix.html
+
+    TODO: mark shared parts of keys in both situations
 }
 
 \begin{frame}[fragile]{}
@@ -805,9 +827,60 @@
     \vspace{1cm}
 
     \begin{overprint}[8cm]
+        \onslide<1>
+        \begin{center}
+        \begin{tikzpicture}[]
+            \btreenodewithitems{1}{8}{5}{}{btree-leaf}
+            \node[btree-key, below=1cm of key13.center] (compared) {};
+        \end{tikzpicture}
+        \end{center}
+
+        \onslide<2>
+        \begin{center}
+        \begin{tikzpicture}[]
+            \btreenodewithitems{1}{8}{5}{}{btree-leaf}
+            \node[btree-key, below=1cm of key13.center] (compared) {};
+
+            \node[btree-key-prefix, below=1cm of key13.center] (compared-prefix) {};
+            \node[btree-key-prefix, below=-0.5cm of high-key1.center] (compared-high-key-prefix) {};
+            \node[btree-key-prefix, below=-0.5cm of key11.center] (compared-first-key-prefix) {};
+        \end{tikzpicture}
+        \end{center}
+
+        \onslide<3>
+        \begin{center}
+        \begin{tikzpicture}[]
+            \btreenodewithitems{1}{8}{5}{}{btree-leaf}
+            \node[btree-key, below=1cm of key13.center] (compared) {};
+
+            \node[btree-key-prefix, below=1cm of key13.center] (compared-prefix) {};
+            \node[btree-key-prefix, below=-0.5cm of high-key1.center] (compared-high-key-prefix) {};
+            \node[btree-key-prefix, below=-0.5cm of key11.center] (compared-first-key-prefix) {};
+
+            \node[btree-key-compare, below=-0.1cm of compared.center] (compare-key) {};
+            \foreach \i in {1,...,4}
+            {
+                \node[btree-key-compare, below=-0.1cm of key1\i.center] (compare-\i) {};
+            }
+        \end{tikzpicture}
+        \end{center}
+
     \end{overprint}
 
     \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+
+    \begin{center}
+    \textbf{Suffix truncation}
+    \vspace{1cm}
+
+    \begin{overprint}[8cm]
+    \end{overprint}
+    \end{center}
+
 \end{frame}
 
 \fontsize{18pt}{18}\selectfont
