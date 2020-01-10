@@ -34,6 +34,7 @@
 \usepackage{hyperref}
 \usepackage{forloop}
 \usepackage{csquotes}
+\usetikzlibrary{tikzmark}
 
 \usepackage{tcolorbox}
 \usepackage{tabularx}
@@ -91,8 +92,8 @@
 
 \newdateformat{specialdate}{\twodigit{\THEDAY}-\twodigit{\THEMONTH}-\THEYEAR}
 
-\newcommand\tikzmark[1]{%
-  \tikz[overlay,remember picture] \coordinate (#1);}
+%\newcommand\tikzmark[1]{%
+  %\tikz[overlay,remember picture] \coordinate (#1);}
 
 \setbeamertemplate{title page}
 {
@@ -184,6 +185,17 @@
 \tikzset{btree-high-key/.style={btree-key, pattern=north west lines, pattern color=red, draw=red}}
 \tikzset{btree-key-prefix/.style={btree-key, minimum height=0.2cm, fill=red, opacity=0.5}}
 \tikzset{btree-key-compare/.style={btree-key, minimum height=0.6cm, fill=blue, opacity=0.5}}
+\tikzset{arrow-pointer/.style={
+        single arrow,
+        minimum height=1.5cm,
+        inner sep=3pt,
+        line width=1pt,
+        draw,
+        color=gray,
+        single arrow tip angle=45,
+        single arrow head extend=0.1cm
+    }
+}
 
 \newcommand{\btreenode}[5] {
     \path
@@ -878,9 +890,69 @@
     \vspace{1cm}
 
     \begin{overprint}[8cm]
+        \onslide<1>
+        \begin{tabular}{lll}
+            & Johnson David & 04-02-2019 \\
+            & Miller Kevin & 01-02-2019 \\
+            & Miller Ned & 02-03-2019 \\
+            & Miller Steven & 03-04-2019 \\
+            & Smith Jack & 01-02-2019 \\
+        \end{tabular}
+
+        \onslide<2>
+        \begin{tabular}{lll}
+            & Johnson David & 04-02-2019 \\
+            & Miller Kevin & 01-02-2019 \\
+            & \tikzmark{middle}Miller Ned & 02-03-2019 \\
+            & Miller Steven & 03-04-2019 \\
+            & Smith Jack & 01-02-2019 \\
+        \end{tabular}
+        \begin{tikzpicture}[overlay, remember picture]
+            \node[arrow-pointer, left=0.5cm of {pic cs:middle}, yshift=0.2cm] {};
+        \end{tikzpicture}
+
+        \onslide<3>
+        \begin{tabular}{lll}
+            & Johnson David & 04-02-2019 \\
+            & Miller Kevin & 01-02-2019 \\
+            & \tikzmark{middle}\colorbox{BurntOrange}{Miller N}ed & 02-03-2019 \\
+            & Miller Steven & 03-04-2019 \\
+            & Smith Jack & 01-02-2019 \\
+        \end{tabular}
+        \begin{tikzpicture}[overlay, remember picture]
+            \node[arrow-pointer, left=0.5cm of {pic cs:middle}, yshift=0.2cm] {};
+        \end{tikzpicture}
+
+        \onslide<4>
+        \begin{tabular}{lll}
+            & \tikzmark{middle}\colorbox{BurntOrange}{J}ohnson David & 04-02-2019 \\
+            & Miller Kevin & 01-02-2019 \\
+            & Miller Ned & 02-03-2019 \\
+            & Miller Steven & 03-04-2019 \\
+            & Smith Jack & 01-02-2019 \\
+        \end{tabular}
+        \begin{tikzpicture}[overlay, remember picture]
+            \node[arrow-pointer, left=0.5cm of {pic cs:middle}, yshift=0.2cm] {};
+        \end{tikzpicture}
+
     \end{overprint}
     \end{center}
+\end{frame}
+\note{
+    Not a normalized version, but whole column version is in PG12
+}
 
+\begin{frame}[fragile]{}
+    \frametitle{}
+
+    \begin{center}
+    \textbf{Indirection vector}
+    \vspace{1cm}
+
+    \begin{overprint}[8cm]
+    \end{overprint}
+
+    \end{center}
 \end{frame}
 
 \fontsize{18pt}{18}\selectfont
