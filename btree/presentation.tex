@@ -196,6 +196,8 @@
         single arrow head extend=0.1cm
     }
 }
+\tikzset{btree-indirection/.style={btree-key, minimum width=0.2cm, inner sep=0, pattern=none}}
+\tikzset{btree-page-header/.style={btree-key, minimum width=0.5cm, inner sep=0, pattern=none}}
 
 \newcommand{\btreenode}[5] {
     \path
@@ -224,6 +226,7 @@
 
 \newcounter{itemid}
 \newcounter{itemid-prev}
+\newcounter{itemid-next}
 
 \newcommand{\btreenodewithitems}[5] {
     \node[btree-key, #4] (key#11) {};
@@ -262,6 +265,43 @@
     \setcounter{itemid-prev}{\value{itemid} - 1}
     \node[btree-high-key, right=0.2cm of key#1\number\value{itemid-prev}]
         (high-key#1) {};
+}
+
+\newcommand{\btreenodewithindirectioninternal}[5] {
+    \node[btree-page-header, #4] (page-header#1) {};
+    \node[btree-indirection, #4, right=0.2cm of page-header#1] (indirection-key#11) {};
+    \forloop{itemid}{2}{\value{itemid} < #2} {
+      \setcounter{itemid-prev}{\value{itemid} - 1}
+      \node[btree-indirection, right=0 of indirection-key#1\number\value{itemid-prev}]
+        (indirection-key#1\number\value{itemid}) {};
+    }
+
+    \node[btree-key, #4, right=1cm of indirection-key#1\number\value{itemid-prev}] (key#11) {};
+    \forloop[2]{itemid}{2}{\value{itemid} < #2} {
+      \setcounter{itemid-prev}{\value{itemid} - 1}
+      \setcounter{itemid-next}{\value{itemid} + 1}
+      \node[btree-key, right=0.2cm of key#1\number\value{itemid-prev}, minimum width=1cm]
+        (key#1\number\value{itemid}) {};
+      \node[btree-key, right=0.2cm of key#1\number\value{itemid}] (key#1\number\value{itemid-next}) {};
+    }
+}
+
+\newcommand{\btreenodewithindirection}[5] {
+    \btreenodewithindirectioninternal{#1}{#2}{#3}{#4}{#5}
+    \node[draw, inner sep=0.2cm, behind path, #5,
+        fit=(page-header#1)
+        \directlua{
+          for index=1,#2 do
+              tex.print("(key#1"..index..")")
+          end}
+        \directlua{
+          for index=1,#2-1 do
+              tex.print("(indirection-key#1"..index..")")
+          end}
+    ] (node#1) {};
+
+    %% redraw after background
+    \btreenodewithindirectioninternal{#1}{#2}{#3}{#4}{#5}
 }
 
 \begin{document}
@@ -950,6 +990,60 @@
     \vspace{1cm}
 
     \begin{overprint}[8cm]
+        \onslide<1>
+        \begin{center}
+        \begin{tikzpicture}[]
+            \btreenodewithindirection{1}{5}{5}{}{btree-leaf}
+
+            \foreach \i/ \shift in {1/0.35cm,2/0.11cm,3/-0.07cm,4/-0.3cm} {
+                \draw[->, btree-line] ([yshift=\shift]indirection-key1\i.center) -- ([yshift=\shift]key1\i.center);
+            }
+        \end{tikzpicture}
+        \end{center}
+
+        \onslide<2>
+        \begin{center}
+        \begin{tikzpicture}[]
+            \btreenodewithindirection{1}{5}{5}{}{btree-leaf}
+
+            \foreach \i/ \shift/ \letter in {1/-0.6cm/a,2/-0.4cm/b,3/-0.2cm/c,4/-0.0cm/d} {
+              \node[draw=none, below=\shift of indirection-key1\i.center]
+                (normalized-indirection-key1\i) {\tiny{\letter}};
+            }
+
+            \foreach \i/ \shift in {1/0.35cm,2/0.11cm,3/-0.07cm,4/-0.3cm} {
+                \draw[->, btree-line] ([yshift=\shift]indirection-key1\i.center) -- ([yshift=\shift]key1\i.center);
+            }
+        \end{tikzpicture}
+        \end{center}
+
+        \onslide<3>
+        \begin{center}
+        \begin{tikzpicture}[]
+            \btreenodewithindirection{1}{5}{5}{}{btree-leaf}
+
+            \foreach \i/ \shift/ \letter in {1/-0.6cm/a,2/-0.4cm/b,3/-0.2cm/c,4/-0.0cm/d} {
+              \node[draw=none, below=\shift of indirection-key1\i.center]
+                (normalized-indirection-key1\i) {\tiny{\letter}};
+            }
+
+            \foreach \i/ \shift in {1/0.35cm,2/0.11cm,3/-0.07cm,4/-0.3cm} {
+                \draw[->, btree-line] ([yshift=\shift]indirection-key1\i.center) -- ([yshift=\shift]key1\i.center);
+            }
+
+          \linespread{0.5}
+          \node[draw, below=1cm of indirection-key12.east, minimum width=1cm, minimum height=1cm, text width=1cm, align=center, rounded corners]
+              (cpu-cache) {\footnotesize{CPU\\Cache}};
+
+          \coordinate[above=2cm of cpu-cache.north east] (cpu-cache-top-left);
+          \coordinate[above=2cm of cpu-cache.north west] (cpu-cache-top-right);
+          \draw[dashed] ([xshift=-0.2cm]cpu-cache.north east) -- ([xshift=-0.2cm]cpu-cache-top-left);
+          \draw[dashed] ([xshift=0.2cm]cpu-cache.north west) -- ([xshift=0.2cm]cpu-cache-top-right);
+
+          \linespread{1.5}
+
+        \end{tikzpicture}
+        \end{center}
     \end{overprint}
 
     \end{center}
