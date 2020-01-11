@@ -198,6 +198,8 @@
 }
 \tikzset{btree-indirection/.style={btree-key, minimum width=0.2cm, inner sep=0, pattern=none}}
 \tikzset{btree-page-header/.style={btree-key, minimum width=0.5cm, inner sep=0, pattern=none}}
+\tikzset{cpu-cache/.style={draw, minimum width=1cm, minimum height=1cm, text width=1cm, align=center, rounded corners}}
+\tikzset{cpu-cache-hide/.style={cpu-cache, draw=none, color=white}}
 
 \newcommand{\btreenode}[5] {
     \path
@@ -797,6 +799,13 @@
             \colorbox{BurntOrange}{0} \\
     \end{tabular}
 
+    \linespread{0.5}
+    \vspace{0.5cm}
+    \color{black}\fontsize{6pt}{0}\selectfont
+        R. C. Singleton, "An efficient algorithm for sorting with minimal
+        storage", Communications of the ACM, vol. 12, no.3 pp. 185-186, 1969
+    \linespread{1.5}
+
     \end{center}
 \end{frame}
 \note{
@@ -976,6 +985,14 @@
         \end{tikzpicture}
 
     \end{overprint}
+
+    \linespread{0.5}
+    \vspace{0.5cm}
+    \color{black}\fontsize{6pt}{0}\selectfont
+        R. Bayer, K. Unterauer, "Prefix B-trees", ACM Transactions on Database
+        Systems, vol. 2, no. 1, pp. 11-26, 1977
+    \linespread{1.5}
+
     \end{center}
 \end{frame}
 \note{
@@ -996,8 +1013,19 @@
             \btreenodewithindirection{1}{5}{5}{}{btree-leaf}
 
             \foreach \i/ \shift in {1/0.35cm,2/0.11cm,3/-0.07cm,4/-0.3cm} {
-                \draw[->, btree-line] ([yshift=\shift]indirection-key1\i.center) -- ([yshift=\shift]key1\i.center);
+                \draw[->, btree-line] ([yshift=\shift]indirection-key1\i.east) -- ([yshift=\shift]key1\i.center);
             }
+          \linespread{0.5}
+          \node[cpu-cache-hide, below=1cm of indirection-key12.east]
+              (cpu-cache) {\footnotesize{CPU\\Cache}};
+
+          \coordinate[above=2cm of cpu-cache.north east] (cpu-cache-top-left);
+          \coordinate[above=2cm of cpu-cache.north west] (cpu-cache-top-right);
+          \draw[draw=none] ([xshift=-0.2cm]cpu-cache.north east) -- ([xshift=-0.2cm]cpu-cache-top-left);
+          \draw[draw=none] ([xshift=0.2cm]cpu-cache.north west) -- ([xshift=0.2cm]cpu-cache-top-right);
+
+          \linespread{1.5}
+
         \end{tikzpicture}
         \end{center}
 
@@ -1012,8 +1040,20 @@
             }
 
             \foreach \i/ \shift in {1/0.35cm,2/0.11cm,3/-0.07cm,4/-0.3cm} {
-                \draw[->, btree-line] ([yshift=\shift]indirection-key1\i.center) -- ([yshift=\shift]key1\i.center);
+                \draw[->, btree-line] ([yshift=\shift]indirection-key1\i.east) -- ([yshift=\shift]key1\i.center);
             }
+
+          \linespread{0.5}
+          \node[cpu-cache-hide, below=1cm of indirection-key12.east]
+              (cpu-cache) {\footnotesize{CPU\\Cache}};
+
+          \coordinate[above=2cm of cpu-cache.north east] (cpu-cache-top-left);
+          \coordinate[above=2cm of cpu-cache.north west] (cpu-cache-top-right);
+          \draw[draw=none] ([xshift=-0.2cm]cpu-cache.north east) -- ([xshift=-0.2cm]cpu-cache-top-left);
+          \draw[draw=none] ([xshift=0.2cm]cpu-cache.north west) -- ([xshift=0.2cm]cpu-cache-top-right);
+
+          \linespread{1.5}
+
         \end{tikzpicture}
         \end{center}
 
@@ -1028,11 +1068,11 @@
             }
 
             \foreach \i/ \shift in {1/0.35cm,2/0.11cm,3/-0.07cm,4/-0.3cm} {
-                \draw[->, btree-line] ([yshift=\shift]indirection-key1\i.center) -- ([yshift=\shift]key1\i.center);
+                \draw[->, btree-line] ([yshift=\shift]indirection-key1\i.east) -- ([yshift=\shift]key1\i.center);
             }
 
           \linespread{0.5}
-          \node[draw, below=1cm of indirection-key12.east, minimum width=1cm, minimum height=1cm, text width=1cm, align=center, rounded corners]
+          \node[cpu-cache, below=1cm of indirection-key12.east]
               (cpu-cache) {\footnotesize{CPU\\Cache}};
 
           \coordinate[above=2cm of cpu-cache.north east] (cpu-cache-top-left);
@@ -1045,6 +1085,13 @@
         \end{tikzpicture}
         \end{center}
     \end{overprint}
+
+    \linespread{0.5}
+    \vspace{0.5cm}
+    \color{black}\fontsize{6pt}{0}\selectfont
+        G. Graefe, Per-Ake Larson, "B-tree indexes and CPU caches",
+        International Conference on Data Engineering, pp. 349-358, 2001
+    \linespread{1.5}
 
     \end{center}
 \end{frame}
