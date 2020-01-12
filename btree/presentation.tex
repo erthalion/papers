@@ -92,8 +92,8 @@
 
 \newdateformat{specialdate}{\twodigit{\THEDAY}-\twodigit{\THEMONTH}-\THEYEAR}
 
-%\newcommand\tikzmark[1]{%
-  %\tikz[overlay,remember picture] \coordinate (#1);}
+\def\strongdata{strong_correlation.data}
+\def\weakdata{weak_correlation.data}
 
 \setbeamertemplate{title page}
 {
@@ -597,7 +597,9 @@
     \linespread{0.5}
     \vspace{0.5cm}
     \color{black}\fontsize{6pt}{0}\selectfont
-        P. Lehman and S. Yao, Efficient Locking for Concurrent Operations on B-Trees, ACM Transactions on Database Systems, Vol 6, No. 4, December 1981, pp 650-670
+        P. Lehman and S. Yao, Efficient Locking for Concurrent Operations on
+        B-Trees, ACM Transactions on Database Systems, Vol 6, No. 4, December
+        1981, pp 650-670
     \linespread{1.5}
 
 \end{frame}
@@ -1169,6 +1171,106 @@
         performance sequential access", Acta Informatica, vol. 29, no. 3. pp.
         241-265, 1992
     \linespread{1.5}
+
+    \end{center}
+\end{frame}
+\note{
+    OrientDB uses SB-Tree, but are they the same?
+}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+
+    \begin{center}
+    \textbf{Interpolation search}
+    \vspace{1cm}
+
+    \begin{overprint}[12cm]
+        \onslide<1>
+        \begin{center}
+        \begin{tikzpicture}[]
+            \node[draw] (key1) {5};
+            \foreach \i / \value [evaluate=\i as \prev using \i-1] in
+                {2/9,3/12,4/16,5/19,6/21,7/25,8/27,9/31,10/34,11/36}
+            {
+                \node[draw, right=0 of key\prev] (key\i) {\value};
+            }
+        \end{tikzpicture}
+        \end{center}
+
+        \onslide<2>
+        \begin{center}
+        \begin{tikzpicture}[]
+            \node[draw] (key1) {5};
+            \foreach \i / \value [evaluate=\i as \prev using \i-1] in
+                {2/9,3/12,4/16,5/19,6/21,7/25,8/27,9/31,10/34,11/36}
+            {
+                \node[draw, right=0 of key\prev] (key\i) {\value};
+            }
+
+            \coordinate[below=1cm of key1] (start);
+            \draw[->, btree-line] (start.south)
+                .. controls ([xshift=1cm] start) and ([yshift=-1cm] key6) ..
+                (key6.south);
+            \draw[->, btree-line] (key6.south)
+                .. controls ([yshift=-1cm] key6) and ([yshift=-1cm] key9) ..
+                (key9.south);
+            \draw[->, btree-line] (key9.south)
+                .. controls ([yshift=-0.9cm] key9) and ([yshift=-0.9cm] key10) ..
+                (key10.south);
+
+        \end{tikzpicture}
+        \end{center}
+
+        \onslide<3>
+        \begin{center}
+        \begin{tikzpicture}[xscale=0.6, yscale=0.1]
+            \draw[->] (0,0) -- (11,0);
+            \draw[->] (0,0) -- (0,36);
+            \draw[color=red, line width=2pt] plot[id=x] file {\strongdata};
+        \end{tikzpicture}
+        \end{center}
+
+        \onslide<4>
+        \begin{center}
+        \begin{tikzpicture}[]
+            \node[draw] (key1) {5};
+            \foreach \i / \value [evaluate=\i as \prev using \i-1] in
+                {2/9,3/12,4/16,5/19,6/21,7/25,8/27,9/31,10/34,11/36}
+            {
+                \node[draw, right=0 of key\prev] (key\i) {\value};
+            }
+
+            \coordinate[below=1cm of key6] (start);
+            \draw[->, btree-line] (start.south)
+                .. controls ([xshift=1cm] start) and ([yshift=-1cm] key10) ..
+                (key10.south);
+
+        \end{tikzpicture}
+        \end{center}
+
+        \onslide<5>
+        \begin{center}
+        \begin{tikzpicture}[]
+            \node[draw] (key1) {5};
+            \foreach \i / \value [evaluate=\i as \prev using \i-1] in
+                {2/6,3/15,4/15,5/16,6/43,7/95,8/96,9/97,10/128,11/499}
+            {
+                \node[draw, right=0 of key\prev] (key\i) {\value};
+            }
+
+        \end{tikzpicture}
+        \end{center}
+
+        \onslide<6>
+        \begin{center}
+        \begin{tikzpicture}[xscale=0.6, yscale=0.008]
+            \draw[->] (0,0) -- (11,0);
+            \draw[->] (0,0) -- (0,499);
+            \draw[color=red, line width=2pt] plot[id=x] file {\weakdata};
+        \end{tikzpicture}
+        \end{center}
+    \end{overprint}
 
     \end{center}
 \end{frame}
