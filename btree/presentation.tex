@@ -274,7 +274,7 @@
     \node[btree-indirection, #4, right=0.2cm of page-header#1] (indirection-key#11) {};
     \forloop{itemid}{2}{\value{itemid} < #2} {
       \setcounter{itemid-prev}{\value{itemid} - 1}
-      \node[btree-indirection, right=0 of indirection-key#1\number\value{itemid-prev}]
+      \node[btree-indirection, right=0 of indirection-key#1\number\value{itemid-prev}, #4]
         (indirection-key#1\number\value{itemid}) {};
     }
 
@@ -282,9 +282,9 @@
     \forloop[2]{itemid}{2}{\value{itemid} < #2} {
       \setcounter{itemid-prev}{\value{itemid} - 1}
       \setcounter{itemid-next}{\value{itemid} + 1}
-      \node[btree-key, right=0.2cm of key#1\number\value{itemid-prev}, minimum width=1cm]
+      \node[btree-key, right=0.2cm of key#1\number\value{itemid-prev}, minimum width=1cm, #4]
         (key#1\number\value{itemid}) {};
-      \node[btree-key, right=0.2cm of key#1\number\value{itemid}] (key#1\number\value{itemid-next}) {};
+      \node[btree-key, right=0.2cm of key#1\number\value{itemid}, #4] (key#1\number\value{itemid-next}) {};
     }
 }
 
@@ -593,7 +593,6 @@
         \end{tikzpicture}
     \end{overprint}
     \end{center}
-
 
     \linespread{0.5}
     \vspace{0.5cm}
@@ -1010,7 +1009,7 @@
         \onslide<1>
         \begin{center}
         \begin{tikzpicture}[]
-            \btreenodewithindirection{1}{5}{5}{}{btree-leaf}
+            \btreenodewithindirection{1}{5}{5}{minimum height=1.5cm}{btree-leaf}
 
             \foreach \i/ \shift in {1/0.35cm,2/0.11cm,3/-0.07cm,4/-0.3cm} {
                 \draw[->, btree-line] ([yshift=\shift]indirection-key1\i.east) -- ([yshift=\shift]key1\i.center);
@@ -1032,11 +1031,11 @@
         \onslide<2>
         \begin{center}
         \begin{tikzpicture}[]
-            \btreenodewithindirection{1}{5}{5}{}{btree-leaf}
+            \btreenodewithindirection{1}{5}{5}{minimum height=1.5cm}{btree-leaf}
 
             \foreach \i/ \shift/ \letter in {1/-0.6cm/a,2/-0.4cm/b,3/-0.2cm/c,4/-0.0cm/d} {
               \node[draw=none, below=\shift of indirection-key1\i.center]
-                (normalized-indirection-key1\i) {\tiny{\letter}};
+                (normalized-indirection-key1\i) {\tiny{\textbf{\letter}}};
             }
 
             \foreach \i/ \shift in {1/0.35cm,2/0.11cm,3/-0.07cm,4/-0.3cm} {
@@ -1060,11 +1059,11 @@
         \onslide<3>
         \begin{center}
         \begin{tikzpicture}[]
-            \btreenodewithindirection{1}{5}{5}{}{btree-leaf}
+            \btreenodewithindirection{1}{5}{5}{minimum height=1.5cm}{btree-leaf}
 
             \foreach \i/ \shift/ \letter in {1/-0.6cm/a,2/-0.4cm/b,3/-0.2cm/c,4/-0.0cm/d} {
               \node[draw=none, below=\shift of indirection-key1\i.center]
-                (normalized-indirection-key1\i) {\tiny{\letter}};
+                (normalized-indirection-key1\i) {\tiny{\textbf{\letter}}};
             }
 
             \foreach \i/ \shift in {1/0.35cm,2/0.11cm,3/-0.07cm,4/-0.3cm} {
@@ -1072,11 +1071,11 @@
             }
 
           \linespread{0.5}
-          \node[cpu-cache, below=1cm of indirection-key12.east]
+          \node[cpu-cache, below=1.5cm of indirection-key12.east]
               (cpu-cache) {\footnotesize{CPU\\Cache}};
 
-          \coordinate[above=2cm of cpu-cache.north east] (cpu-cache-top-left);
-          \coordinate[above=2cm of cpu-cache.north west] (cpu-cache-top-right);
+          \coordinate[above=2.5cm of cpu-cache.north east] (cpu-cache-top-left);
+          \coordinate[above=2.5cm of cpu-cache.north west] (cpu-cache-top-right);
           \draw[dashed] ([xshift=-0.2cm]cpu-cache.north east) -- ([xshift=-0.2cm]cpu-cache-top-left);
           \draw[dashed] ([xshift=0.2cm]cpu-cache.north west) -- ([xshift=0.2cm]cpu-cache-top-right);
 
@@ -1103,8 +1102,73 @@
     \textbf{SB-tree}
     \vspace{1cm}
 
-    \begin{overprint}[8cm]
+    \begin{overprint}[15cm]
+        \onslide<1>
+        \begin{tikzpicture}[]
+            \btreenode{1}{}{btree-hide}{btree-branch}{}
+            \btreenode{2}{right=2cm of node1.east}{btree-hide}{btree-branch}{}
+            \node[btree-hide, right=2cm of node2.east, minimum width=0.5cm] (node2-extra) {};
+
+            \btreenode{3}{below=1cm of node1.south west, xshift=-0.5cm}{btree-hide}{btree-leaf}{}
+            \btreenode{4}{below=1cm of node1.south east, xshift=0.5cm}{btree-hide}{btree-leaf}{}
+            \btreenode{5}{right=2cm of node4.east}{btree-hide}{btree-leaf}{}
+            \node[btree-hide, right=2cm of node5.east, minimum width=0.5cm] (node5-extra) {};
+
+            \draw[->, btree-line] (pointer21.south)
+                .. controls ([yshift=-1cm] pointer21) and ([yshift=1cm] pointer14) ..
+                (pointer14.north);
+            \draw[->, btree-line] (pointer31.south)
+                .. controls ([yshift=-1cm] pointer31) and ([yshift=1cm] pointer13) ..
+                (pointer13.north);
+
+            \node[draw, inner sep=0.2cm, behind path, dashed,
+                fit=(node1)(node2)(node2-extra)
+            ] (extent-1) {};
+
+            \node[draw, inner sep=0.2cm, behind path, dashed,
+                fit=(node3)(node4)(node5)(node5-extra)
+            ] (extent-2) {};
+        \end{tikzpicture}
+
+        \onslide<2>
+        \begin{tikzpicture}[]
+            \btreenode{1}{}{btree-hide}{btree-branch}{}
+            \btreenode{2}{right=2cm of node1.east}{btree-hide}{btree-branch}{}
+            \node[btree-hide, right=2cm of node2.east, minimum width=0.5cm] (node2-extra) {};
+
+            \btreenode{3}{below=1cm of node1.south west, xshift=-0.5cm}{btree-hide}{btree-leaf}{}
+            \btreenode{4}{below=1cm of node1.south east, xshift=0.5cm}{btree-hide}{btree-leaf}{}
+            \btreenode{5}{right=2cm of node4.east}{btree-hide}{btree-leaf}{}
+            \node[btree-hide, right=2cm of node5.east, minimum width=0.5cm] (node5-extra) {};
+
+            \draw[->, btree-line] (pointer21.south)
+                .. controls ([yshift=-1cm] pointer21) and ([yshift=1cm] pointer14) ..
+                (pointer14.north);
+            \draw[->, btree-line] (pointer31.south)
+                .. controls ([yshift=-1cm] pointer31) and ([yshift=1cm] pointer13) ..
+                (pointer13.north);
+
+            \node[draw, inner sep=0.2cm, behind path, dashed,
+                fit=(node1)(node2)(node2-extra)
+            ] (extent-1) {};
+
+            \node[draw, inner sep=0.2cm, behind path, dashed,
+                fit=(node3)(node4)(node5)(node5-extra)
+            ] (extent-2) {};
+
+            \draw[->, btree-line] (node5.center)
+                .. controls ([yshift=-1cm] node5) and ([yshift=-1cm,xshift=-1cm] node5-extra) ..
+                ([xshift=-1cm]node5-extra.center);
+        \end{tikzpicture}
     \end{overprint}
+
+    \linespread{0.5}
+    \vspace{0.5cm}
+    \color{black}\fontsize{6pt}{0}\selectfont
+        P. E. O'Neil, "The SB-tree: An index-sequential structure for high
+        performance sequential access", Acta Informatica, vol. 29, no. 3. pp.
+        241-265, 1992
+    \linespread{1.5}
 
     \end{center}
 \end{frame}
