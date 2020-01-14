@@ -200,6 +200,10 @@
 \tikzset{btree-page-header/.style={btree-key, minimum width=0.5cm, inner sep=0, pattern=none}}
 \tikzset{cpu-cache/.style={draw, minimum width=1cm, minimum height=1cm, text width=1cm, align=center, rounded corners}}
 \tikzset{cpu-cache-hide/.style={cpu-cache, draw=none, color=white}}
+\tikzset{btree-node/.style={draw, inner sep=0, minimum width=1cm, minimum height=1cm, rounded corners}}
+\tikzset{btree-partition1/.style={draw, inner sep=0, minimum width=1cm, minimum height=1cm, rounded corners, fill=red!20}}
+\tikzset{btree-partition2/.style={draw, inner sep=0, minimum width=1cm, minimum height=1cm, rounded corners, fill=green!20}}
+\tikzset{btree-partition3/.style={draw, inner sep=0, minimum width=1cm, minimum height=1cm, rounded corners, fill=blue!20}}
 
 \newcommand{\btreenode}[5] {
     \path
@@ -1208,15 +1212,15 @@
                 \node[draw, right=0 of key\prev] (key\i) {\value};
             }
 
-            \coordinate[below=1cm of key1] (start);
+            \coordinate[below=2cm of key1] (start);
             \draw[->, btree-line] (start.south)
-                .. controls ([xshift=1cm] start) and ([yshift=-1cm] key6) ..
+                .. controls ([xshift=1cm] start) and ([yshift=-3cm] key6) ..
                 (key6.south);
             \draw[->, btree-line] (key6.south)
-                .. controls ([yshift=-1cm] key6) and ([yshift=-1cm] key9) ..
+                .. controls ([yshift=-3cm] key6) and ([yshift=-3cm] key9) ..
                 (key9.south);
             \draw[->, btree-line] (key9.south)
-                .. controls ([yshift=-0.9cm] key9) and ([yshift=-0.9cm] key10) ..
+                .. controls ([yshift=-2cm] key9) and ([yshift=-2cm] key10) ..
                 (key10.south);
 
         \end{tikzpicture}
@@ -1241,9 +1245,9 @@
                 \node[draw, right=0 of key\prev] (key\i) {\value};
             }
 
-            \coordinate[below=1cm of key6] (start);
+            \coordinate[below=2cm of key6] (start);
             \draw[->, btree-line] (start.south)
-                .. controls ([xshift=1cm] start) and ([yshift=-1cm] key10) ..
+                .. controls ([xshift=1cm] start) and ([yshift=-3cm] key10) ..
                 (key10.south);
 
         \end{tikzpicture}
@@ -1274,6 +1278,271 @@
 
     \end{center}
 \end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+
+    \begin{center}
+        \includegraphics[width=0.65\textwidth,center]{waves.png}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+
+    \begin{center}
+    \textbf{Partitioned B-tree}
+    \vspace{1cm}
+
+    \begin{overprint}[8cm]
+        \onslide<1>
+        \begin{tikzpicture}[]
+            \node[btree-node] (node1) {};
+
+            \node[btree-node, below=0.5cm of node1.south west, xshift=-2.5cm] (node2) {};
+            \node[btree-node, below=0.5cm of node1.south] (node3) {};
+            \node[btree-node, below=0.5cm of node1.south east, xshift=2.5cm] (node4) {};
+
+            \node[btree-node, below=0.5cm of node2.south west, xshift=-0.2cm] (node5) {};
+            \node[btree-node, below=0.5cm of node2.south east, xshift=0.2cm] (node6) {};
+
+            \node[btree-node, below=0.5cm of node3.south west, xshift=-0.2cm] (node7) {};
+            \node[btree-node, below=0.5cm of node3.south east, xshift=0.2cm] (node8) {};
+
+            \node[btree-node, below=0.5cm of node4.south west, xshift=-0.2cm] (node9) {};
+            \node[btree-node, below=0.5cm of node4.south east, xshift=0.2cm] (node10) {};
+
+            \draw[->, btree-line] (node1) -- (node2);
+            \draw[->, btree-line] (node1) -- (node3);
+            \draw[->, btree-line] (node1) -- (node4);
+
+            \draw[->, btree-line] (node2) -- (node5);
+            \draw[->, btree-line] (node2) -- (node6);
+
+            \draw[->, btree-line] (node3) -- (node7);
+            \draw[->, btree-line] (node3) -- (node8);
+
+            \draw[->, btree-line] (node4) -- (node9);
+            \draw[->, btree-line] (node4) -- (node10);
+        \end{tikzpicture}
+
+        \onslide<2>
+        \begin{tikzpicture}[]
+            \node[btree-node] (node1) {};
+
+            \node[btree-node, below=0.5cm of node1.south west, xshift=-2.5cm] (node2) {};
+            \node[btree-node, below=0.5cm of node1.south] (node3) {};
+            \node[btree-partition1, below=0.5cm of node1.south east, xshift=2.5cm] (node4) {};
+
+            \node[btree-node, below=0.5cm of node2.south west, xshift=-0.2cm] (node5) {};
+            \node[btree-node, below=0.5cm of node2.south east, xshift=0.2cm] (node6) {};
+
+            \node[btree-node, below=0.5cm of node3.south west, xshift=-0.2cm] (node7) {};
+            \node[btree-node, below=0.5cm of node3.south east, xshift=0.2cm] (node8) {};
+
+            \node[btree-partition1, below=0.5cm of node4.south west, xshift=-0.2cm] (node9) {};
+            \node[btree-partition1, below=0.5cm of node4.south east, xshift=0.2cm] (node10) {};
+
+            \draw[->, btree-line] (node1) -- (node2);
+            \draw[->, btree-line] (node1) -- (node3);
+            \draw[->, btree-line] (node1) -- (node4);
+
+            \draw[->, btree-line] (node2) -- (node5);
+            \draw[->, btree-line] (node2) -- (node6);
+
+            \draw[->, btree-line] (node3) -- (node7);
+            \draw[->, btree-line] (node3) -- (node8);
+
+            \draw[->, btree-line] (node4) -- (node9);
+            \draw[->, btree-line] (node4) -- (node10);
+        \end{tikzpicture}
+
+        \onslide<3>
+        \begin{tikzpicture}[]
+            \node[btree-node] (node1) {};
+
+            \node[btree-partition1, below=0.5cm of node1.south west, xshift=-2.5cm] (node2) {};
+            \node[btree-partition2, below=0.5cm of node1.south] (node3) {};
+            \node[btree-partition3, below=0.5cm of node1.south east, xshift=2.5cm] (node4) {};
+
+            \node[btree-partition1, below=0.5cm of node2.south west, xshift=-0.2cm] (node5) {};
+            \node[btree-partition1, below=0.5cm of node2.south east, xshift=0.2cm] (node6) {};
+
+            \node[btree-partition2, below=0.5cm of node3.south west, xshift=-0.2cm] (node7) {};
+            \node[btree-partition2, below=0.5cm of node3.south east, xshift=0.2cm] (node8) {};
+
+            \node[btree-partition3, below=0.5cm of node4.south west, xshift=-0.2cm] (node9) {};
+            \node[btree-partition3, below=0.5cm of node4.south east, xshift=0.2cm] (node10) {};
+
+            \draw[->, btree-line] (node1) -- (node2);
+            \draw[->, btree-line] (node1) -- (node3);
+            \draw[->, btree-line] (node1) -- (node4);
+
+            \draw[->, btree-line] (node2) -- (node5);
+            \draw[->, btree-line] (node2) -- (node6);
+
+            \draw[->, btree-line] (node3) -- (node7);
+            \draw[->, btree-line] (node3) -- (node8);
+
+            \draw[->, btree-line] (node4) -- (node9);
+            \draw[->, btree-line] (node4) -- (node10);
+
+            \node[arrow-pointer, below=3cm of node2.center, rotate=90, yshift=0.2cm] {};
+            \node[arrow-pointer, below=3cm of node3.center, rotate=90, yshift=0.2cm] {};
+            \node[arrow-pointer, below=3cm of node4.center, rotate=90, yshift=0.2cm] {};
+            \node[below=3cm of node3.center, minimum height=1cm] {};
+
+        \end{tikzpicture}
+        \linespread{0.5}
+        \color{black}\fontsize{6pt}{0}\selectfont
+            G. Graefe, "Sorting and indexing with partitioned B-Trees",
+            Classless Inter Domain Routing, 2003
+        \linespread{1.5}
+
+        \onslide<4>
+        \begin{tikzpicture}[]
+            \node[btree-node] (node1) {};
+
+            \node[btree-partition1, below=0.5cm of node1.south west, xshift=-2.5cm] (node2) {};
+            \node[btree-partition2, below=0.5cm of node1.south] (node3) {};
+            \node[btree-partition3, below=0.5cm of node1.south east, xshift=2.5cm] (node4) {};
+
+            \node[btree-partition1, below=0.5cm of node2.south west, xshift=-0.2cm] (node5) {};
+            \node[btree-partition1, below=0.5cm of node2.south east, xshift=0.2cm] (node6) {};
+
+            \node[btree-partition2, below=0.5cm of node3.south west, xshift=-0.2cm] (node7) {};
+            \node[btree-partition2, below=0.5cm of node3.south east, xshift=0.2cm] (node8) {};
+
+            \node[btree-partition3, below=0.5cm of node4.south west, xshift=-0.2cm] (node9) {};
+            \node[btree-partition3, below=0.5cm of node4.south east, xshift=0.2cm] (node10) {};
+
+            \draw[->, btree-line] (node1) -- (node2);
+            \draw[->, btree-line] (node1) -- (node3);
+            \draw[->, btree-line] (node1) -- (node4);
+
+            \draw[->, btree-line] (node2) -- (node5);
+            \draw[->, btree-line] (node2) -- (node6);
+
+            \draw[->, btree-line] (node3) -- (node7);
+            \draw[->, btree-line] (node3) -- (node8);
+
+            \draw[->, btree-line] (node4) -- (node9);
+            \draw[->, btree-line] (node4) -- (node10);
+
+            \draw[->, btree-line] ([yshift=-2cm]node2.center)
+                .. controls ([yshift=-3cm] node2) and ([yshift=-3cm] node3) ..
+                ([yshift=-2cm]node3.center);
+            \draw[->, btree-line] ([yshift=-2cm]node4.center)
+                .. controls ([yshift=-3cm] node4) and ([yshift=-3cm] node3) ..
+                ([yshift=-2cm]node3.center);
+            \node[below=3cm of node3.center, minimum height=1cm] {};
+
+        \end{tikzpicture}
+        \linespread{0.5}
+        \color{black}\fontsize{6pt}{0}\selectfont
+            G. Graefe, "Sorting and indexing with partitioned B-Trees",
+            Classless Inter Domain Routing, 2003
+        \linespread{1.5}
+
+        \onslide<5>
+        \begin{tikzpicture}[]
+            \node[btree-node] (node1) {};
+
+            \node[btree-node, below=0.5cm of node1.south west, xshift=-2.5cm] (node2) {};
+            \node[btree-node, below=0.5cm of node1.south] (node3) {};
+            \node[btree-partition1, below=0.5cm of node1.south east, xshift=2.5cm] (node4) {};
+
+            \node[btree-node, below=0.5cm of node2.south west, xshift=-0.2cm] (node5) {};
+            \node[btree-node, below=0.5cm of node2.south east, xshift=0.2cm] (node6) {};
+
+            \node[btree-node, below=0.5cm of node3.south west, xshift=-0.2cm] (node7) {};
+            \node[btree-node, below=0.5cm of node3.south east, xshift=0.2cm] (node8) {};
+
+            \node[btree-partition1, below=0.5cm of node4.south west, xshift=-0.2cm] (node9) {};
+            \node[btree-partition1, below=0.5cm of node4.south east, xshift=0.2cm] (node10) {};
+
+            \draw[->, btree-line] (node1) -- (node2);
+            \draw[->, btree-line] (node1) -- (node3);
+            \draw[->, btree-line] (node1) -- (node4);
+
+            \draw[->, btree-line] (node2) -- (node5);
+            \draw[->, btree-line] (node2) -- (node6);
+
+            \draw[->, btree-line] (node3) -- (node7);
+            \draw[->, btree-line] (node3) -- (node8);
+
+            \draw[->, btree-line] (node4) -- (node9);
+            \draw[->, btree-line] (node4) -- (node10);
+
+            \node[arrow-pointer, right=2cm of node9.center, rotate=-135, xshift=-2.7cm, yshift=-1cm] {};
+            \node[draw, behind path, fit=(node4)(node9)(node10), rounded corners, dashed] {};
+            \node[below=3cm of node3.center, minimum height=1cm] {};
+
+        \end{tikzpicture}
+        \linespread{0.5}
+        \color{black}\fontsize{6pt}{0}\selectfont
+            Riegger, Christian Vincon, Tobias Petrov, Ilia. (2017).
+            Write-optimized indexing with partitioned b-trees. 296-300.
+            10.1145/3151759.3151814.
+        \linespread{1.5}
+
+        \onslide<6>
+        \begin{tikzpicture}[]
+            \node[btree-node] (node1) {};
+
+            \node[btree-node, below=0.5cm of node1.south west, xshift=-2.5cm] (node2) {};
+            \node[btree-node, below=0.5cm of node1.south] (node3) {};
+            \node[btree-partition1, below=0.5cm of node1.south east, xshift=2.5cm] (node4) {};
+
+            \node[btree-node, below=0.5cm of node2.south west, xshift=-0.2cm] (node5) {};
+            \node[btree-node, below=0.5cm of node2.south east, xshift=0.2cm] (node6) {};
+
+            \node[btree-node, below=0.5cm of node3.south west, xshift=-0.2cm] (node7) {};
+            \node[btree-node, below=0.5cm of node3.south east, xshift=0.2cm] (node8) {};
+
+            \node[btree-partition1, below=0.5cm of node4.south west, xshift=-0.2cm] (node9) {};
+            \node[btree-partition1, below=0.5cm of node4.south east, xshift=0.2cm] (node10) {};
+
+            \draw[->, btree-line] (node1) -- (node2);
+            \draw[->, btree-line] (node1) -- (node3);
+            \draw[->, btree-line] (node1) -- (node4);
+
+            \draw[->, btree-line] (node2) -- (node5);
+            \draw[->, btree-line] (node2) -- (node6);
+
+            \draw[->, btree-line] (node3) -- (node7);
+            \draw[->, btree-line] (node3) -- (node8);
+
+            \draw[->, btree-line] (node4) -- (node9);
+            \draw[->, btree-line] (node4) -- (node10);
+
+            \node[arrow-pointer, right=2cm of node9.center, rotate=-135, xshift=-2.7cm, yshift=-1cm] {};
+            \node[draw, behind path, fit=(node4)(node9)(node10), rounded corners, dashed] {};
+            \node[below=3cm of node3.center, minimum height=1cm] {};
+
+            \draw[->, btree-line] ([yshift=-2cm]node4.center)
+                .. controls ([yshift=-3cm] node4) and ([yshift=-3cm] node3) ..
+                ([yshift=-2cm]node3.center);
+            \draw[->, btree-line] ([yshift=-2cm]node4.center)
+                .. controls ([yshift=-4cm] node4) and ([yshift=-4cm] node2) ..
+                ([yshift=-2cm]node2.center);
+
+        \end{tikzpicture}
+        \linespread{0.5}
+        \color{black}\fontsize{6pt}{0}\selectfont
+            Riegger, Christian Vincon, Tobias Petrov, Ilia. (2017).
+            Write-optimized indexing with partitioned b-trees. 296-300.
+            10.1145/3151759.3151814.
+        \linespread{1.5}
+
+    \end{overprint}
+
+    \end{center}
+\end{frame}
+\note{
+    For faster index creation, via pushing all merge runs into btree into
+    different partitions.
+}
 
 \fontsize{18pt}{18}\selectfont
 \begin{frame}
