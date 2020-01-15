@@ -35,6 +35,7 @@
 \usepackage{forloop}
 \usepackage{csquotes}
 \usetikzlibrary{tikzmark}
+\usetikzlibrary{arrows.meta}
 
 \usepackage{tcolorbox}
 \usepackage{tabularx}
@@ -204,6 +205,18 @@
 \tikzset{btree-partition1/.style={draw, inner sep=0, minimum width=1cm, minimum height=1cm, rounded corners, fill=red!20}}
 \tikzset{btree-partition2/.style={draw, inner sep=0, minimum width=1cm, minimum height=1cm, rounded corners, fill=green!20}}
 \tikzset{btree-partition3/.style={draw, inner sep=0, minimum width=1cm, minimum height=1cm, rounded corners, fill=blue!20}}
+\tikzset{smallbtree-node/.style={btree-node, minimum width=0.4cm, minimum height=0.4cm, rounded corners=0.1cm}}
+\tikzset{box/.style={draw, dashed, rounded corners, behind path}}
+\tikzset{green-box/.style={box, fill=greenGood}}
+\tikzset{blue-box/.style={box, fill=blue!20}}
+\tikzset{bloom-filter/.style={
+    draw,
+    isosceles triangle,
+    minimum width=1.2cm,
+    shape border rotate=-90,
+    isosceles triangle apex angle=60,
+    rounded corners
+}}
 
 \newcommand{\btreenode}[5] {
     \path
@@ -308,6 +321,31 @@
 
     %% redraw after background
     \btreenodewithindirectioninternal{#1}{#2}{#3}{#4}{#5}
+}
+
+\newcommand{\smallbtree}[6] {
+    \node[smallbtree-node, #4, #3] (node#11) {};
+
+    \node[smallbtree-node, #4, below=0.4cm * #2 of node#11.south west, xshift=-0.4cm * #2] (node#12) {};
+    \node[smallbtree-node, #4, below=0.4cm * #2 of node#11.south] (node#13) {};
+    \node[smallbtree-node, #4, below=0.4cm * #2 of node#11.south east, xshift=0.4cm * #2] (node#14) {};
+
+    \draw[->, btree-line, #5] (node#11) -- (node#12);
+    \draw[->, btree-line, #5] (node#11) -- (node#13);
+    \draw[->, btree-line, #5] (node#11) -- (node#14);
+    \node[#6, rounded corners=0.2cm, inner sep=0.2cm,
+          fit=(node#11)(node#12)(node#13)(node#14)] (nodebox#1) {};
+
+    % redraw
+    \node[smallbtree-node, #4, #3] (node#11) {};
+
+    \node[smallbtree-node, #4, below=0.4cm * #2 of node#11.south west, xshift=-0.4cm * #2] (node#12) {};
+    \node[smallbtree-node, #4, below=0.4cm * #2 of node#11.south] (node#13) {};
+    \node[smallbtree-node, #4, below=0.4cm * #2 of node#11.south east, xshift=0.4cm * #2] (node#14) {};
+
+    \draw[->, btree-line, #5] (node#11) -- (node#12);
+    \draw[->, btree-line, #5] (node#11) -- (node#13);
+    \draw[->, btree-line, #5] (node#11) -- (node#14);
 }
 
 \begin{document}
@@ -1127,11 +1165,11 @@
                 .. controls ([yshift=-1cm] pointer31) and ([yshift=1cm] pointer13) ..
                 (pointer13.north);
 
-            \node[draw, inner sep=0.2cm, behind path, dashed,
+            \node[box, inner sep=0.2cm,
                 fit=(node1)(node2)(node2-extra)
             ] (extent-1) {};
 
-            \node[draw, inner sep=0.2cm, behind path, dashed,
+            \node[box, inner sep=0.2cm,
                 fit=(node3)(node4)(node5)(node5-extra)
             ] (extent-2) {};
         \end{tikzpicture}
@@ -1154,11 +1192,11 @@
                 .. controls ([yshift=-1cm] pointer31) and ([yshift=1cm] pointer13) ..
                 (pointer13.north);
 
-            \node[draw, inner sep=0.2cm, behind path, dashed,
+            \node[box, inner sep=0.2cm,
                 fit=(node1)(node2)(node2-extra)
             ] (extent-1) {};
 
-            \node[draw, inner sep=0.2cm, behind path, dashed,
+            \node[box, inner sep=0.2cm,
                 fit=(node3)(node4)(node5)(node5-extra)
             ] (extent-2) {};
 
@@ -1475,7 +1513,7 @@
             \draw[->, btree-line] (node4) -- (node10);
 
             \node[arrow-pointer, right=2cm of node9.center, rotate=-135, xshift=-2.7cm, yshift=-1cm] {};
-            \node[draw, behind path, fit=(node4)(node9)(node10), rounded corners, dashed] {};
+            \node[box, fit=(node4)(node9)(node10)] {};
             \node[below=3cm of node3.center, minimum height=1cm] {};
 
         \end{tikzpicture}
@@ -1517,7 +1555,7 @@
             \draw[->, btree-line] (node4) -- (node10);
 
             \node[arrow-pointer, right=2cm of node9.center, rotate=-135, xshift=-2.7cm, yshift=-1cm] {};
-            \node[draw, behind path, fit=(node4)(node9)(node10), rounded corners, dashed] {};
+            \node[box, fit=(node4)(node9)(node10)] {};
             \node[below=3cm of node3.center, minimum height=1cm] {};
 
             \draw[->, btree-line] ([yshift=-2cm]node4.center)
@@ -1542,6 +1580,73 @@
 \note{
     For faster index creation, via pushing all merge runs into btree into
     different partitions.
+}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+
+    \begin{center}
+    \textbf{Hybrid indexes}
+    \vspace{1cm}
+
+    \begin{overprint}[12cm]
+        \onslide<1>
+        \begin{tikzpicture}[]
+            \smallbtree{1}{2.5}{}{}{}{green-box}
+            \node[draw, color=white, left=4cm of node11, minimum width=1.2cm,
+                  minimum height=0.4cm, yshift=-0.6cm] (node21) {};
+            \node[bloom-filter, color=white, above=0.5cm of node21] (bloom) {};
+            \node[arrow-pointer, left=0.5cm of node21.west, color=white] {\footnotesize{Insert}};
+        \end{tikzpicture}
+
+        \onslide<2>
+        \begin{tikzpicture}[]
+            \smallbtree{1}{2.5}{}{}{}{green-box}
+            \smallbtree{2}{1}{left=4cm of node11, yshift=-0.6cm}{color=blue!20}{color=blue!20}{blue-box}
+            \node[bloom-filter, color=white, above=0.5cm of node21] (bloom) {};
+            \node[arrow-pointer, left=0.5cm of nodebox2.west, color=white] {\footnotesize{Insert}};
+        \end{tikzpicture}
+
+        \onslide<3>
+        \begin{tikzpicture}[]
+            \smallbtree{1}{2.5}{}{}{}{green-box}
+            \smallbtree{2}{1}{left=4cm of node11, yshift=-0.6cm}{}{}{blue-box}
+            \node[bloom-filter, color=white, above=0.5cm of node21] (bloom) {};
+            \node[arrow-pointer, left=0.5cm of nodebox2.west, color=white] {\footnotesize{Insert}};
+        \end{tikzpicture}
+
+        \onslide<4>
+        \begin{tikzpicture}[]
+            \smallbtree{1}{2.5}{}{}{}{green-box}
+            \smallbtree{2}{1}{left=4cm of node11, yshift=-0.6cm}{}{}{blue-box}
+            \node[bloom-filter, above=0.5cm of node21, fill=redBad] (bloom) {};
+            \node[arrow-pointer, left=0.5cm of nodebox2.west, color=white] {\footnotesize{Insert}};
+        \end{tikzpicture}
+
+        \onslide<5>
+        \begin{tikzpicture}[]
+            \smallbtree{1}{2.5}{}{}{}{green-box}
+            \smallbtree{2}{1}{left=4cm of node11, yshift=-0.6cm}{}{}{blue-box}
+            \node[bloom-filter, above=0.5cm of node21, fill=redBad] (bloom) {};
+            \node[arrow-pointer, left=0.5cm of nodebox2.west] {\footnotesize{Insert}};
+        \end{tikzpicture}
+
+        \onslide<6>
+        \begin{tikzpicture}[]
+            \smallbtree{1}{2.5}{}{}{}{green-box}
+            \smallbtree{2}{1}{left=4cm of node11, yshift=-0.6cm}{}{}{blue-box}
+            \node[bloom-filter, above=0.5cm of node21, fill=redBad] (bloom) {};
+            \node[arrow-pointer, left=0.5cm of nodebox2.west] (inserts) {\footnotesize{Insert}};
+            \node[arrow-pointer, above=1.2cm of inserts] {\footnotesize{Read}};
+            \draw[->, btree-line] (bloom.south) -- (nodebox2.north);
+        \end{tikzpicture}
+
+
+    \end{overprint}
+    \end{center}
+\end{frame}
+\note{
+    Designed for B-Tree, Masstree, Skip List, ART
 }
 
 \fontsize{18pt}{18}\selectfont
