@@ -1636,11 +1636,39 @@
             \smallbtree{1}{2.5}{}{}{}{green-box}
             \smallbtree{2}{1}{left=4cm of node11, yshift=-0.6cm}{}{}{blue-box}
             \node[bloom-filter, above=0.5cm of node21, fill=redBad] (bloom) {};
-            \node[arrow-pointer, left=0.5cm of nodebox2.west] (inserts) {\footnotesize{Insert}};
-            \node[arrow-pointer, above=1.2cm of inserts] {\footnotesize{Read}};
-            \draw[->, btree-line] (bloom.south) -- (nodebox2.north);
+            \node[arrow-pointer, left=0.5cm of nodebox2.west] {\footnotesize{Insert}};
+            \draw[->, btree-line] ([yshift=-0.2cm]nodebox2.south)
+                .. controls ([yshift=-2.5cm] nodebox2) and ([yshift=-2.5cm] nodebox1) ..
+                ([yshift=-0.2cm]nodebox1.south);
         \end{tikzpicture}
 
+        \onslide<7>
+        \begin{tikzpicture}[]
+            \smallbtree{1}{2.5}{}{}{}{green-box}
+            \smallbtree{2}{1}{left=4cm of node11, yshift=-0.6cm}{}{}{blue-box}
+            \node[bloom-filter, above=0.5cm of node21, fill=redBad] (bloom) {};
+            \node[arrow-pointer, left=0.5cm of nodebox2.west] (inserts) {\footnotesize{Insert}};
+            \node[arrow-pointer, above=1.2cm of inserts] {\footnotesize{Read}};
+
+            \draw[->, btree-line] ([yshift=-0.2cm]nodebox2.south)
+                .. controls ([yshift=-2.5cm] nodebox2) and ([yshift=-2.5cm] nodebox1) ..
+                ([yshift=-0.2cm]nodebox1.south);
+        \end{tikzpicture}
+
+        \onslide<8>
+        \begin{tikzpicture}[]
+            \smallbtree{1}{2.5}{}{}{}{green-box}
+            \smallbtree{2}{1}{left=4cm of node11, yshift=-0.6cm}{}{}{blue-box}
+            \node[bloom-filter, above=0.5cm of node21, fill=redBad] (bloom) {};
+            \node[arrow-pointer, left=0.5cm of nodebox2.west] (inserts) {\footnotesize{Insert}};
+            \node[arrow-pointer, above=1.2cm of inserts] {\footnotesize{Read}};
+
+            \draw[->, btree-line] ([yshift=-0.2cm]nodebox2.south)
+                .. controls ([yshift=-2.5cm] nodebox2) and ([yshift=-2.5cm] nodebox1) ..
+                ([yshift=-0.2cm]nodebox1.south);
+            \draw[->, btree-line] (bloom.south) -- (nodebox2.north);
+            \draw[->, btree-line] (bloom.east) -| (nodebox1.north);
+        \end{tikzpicture}
 
     \end{overprint}
     \end{center}
@@ -1648,6 +1676,113 @@
 \note{
     Designed for B-Tree, Masstree, Skip List, ART
 }
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+
+    \begin{center}
+    \textbf{Bw-Tree}
+    \vspace{1cm}
+
+    \begin{overprint}[12cm]
+        \onslide<1>
+        \begin{tikzpicture}[]
+            \node[btree-node] (node1) {};
+
+            \node[btree-node, below=0.5cm of node1.south west, xshift=-2.5cm] (node2) {};
+            \node[btree-node, below=0.5cm of node1.south] (node3) {};
+            \node[btree-node, below=0.5cm of node1.south east, xshift=2.5cm] (node4) {};
+
+            \node[btree-node, below=0.5cm of node2.south west, xshift=-0.2cm] (node5) {};
+            \node[btree-node, below=0.5cm of node2.south east, xshift=0.2cm] (node6) {};
+
+            \node[btree-node, below=0.5cm of node3.south west, xshift=-0.2cm] (node7) {};
+            \node[btree-node, below=0.5cm of node3.south east, xshift=0.2cm] (node8) {};
+
+            \node[btree-node, below=0.5cm of node4.south west, xshift=-0.2cm] (node9) {};
+            \node[btree-node, below=0.5cm of node4.south east, xshift=0.2cm] (node10) {};
+
+            \draw[->, btree-line] (node1) -- (node2);
+            \draw[->, btree-line] (node1) -- (node3);
+            \draw[->, btree-line] (node1) -- (node4);
+
+            \draw[->, btree-line] (node2) -- (node5);
+            \draw[->, btree-line] (node2) -- (node6);
+
+            \draw[->, btree-line] (node3) -- (node7);
+            \draw[->, btree-line] (node3) -- (node8);
+
+            \draw[->, btree-line] (node4) -- (node9);
+            \draw[->, btree-line] (node4) -- (node10);
+        \end{tikzpicture}
+
+        \onslide<2>
+        \begin{tikzpicture}[]
+            \node[btree-node] (node1) {};
+
+            \node[btree-node, below=0.5cm of node1.south west, xshift=-2.5cm] (node2) {};
+            \node[btree-node, below=0.5cm of node1.south] (node3) {};
+            \node[btree-node, below=0.5cm of node1.south east, xshift=2.5cm] (node4) {};
+
+            \node[btree-node, below=0.5cm of node2.south west, xshift=-0.2cm] (node5) {};
+            \node[btree-node, below=0.5cm of node2.south east, xshift=0.2cm] (node6) {};
+
+            \node[btree-node, below=0.5cm of node3.south west, xshift=-0.2cm] (node7) {};
+            \node[btree-node, below=0.5cm of node3.south east, xshift=0.2cm] (node8) {};
+
+            \node[btree-node, below=0.5cm of node4.south west, xshift=-0.2cm] (node9) {};
+            \node[btree-node, below=0.5cm of node4.south east, xshift=0.2cm] (node10) {};
+
+            \draw[->, btree-line, color=white] (node1) -- (node2);
+            \draw[->, btree-line, color=white] (node1) -- (node3);
+            \draw[->, btree-line, color=white] (node1) -- (node4);
+
+            \draw[->, btree-line, color=white] (node2) -- (node5);
+            \draw[->, btree-line, color=white] (node2) -- (node6);
+
+            \draw[->, btree-line, color=white] (node3) -- (node7);
+            \draw[->, btree-line, color=white] (node3) -- (node8);
+
+            \draw[->, btree-line, color=white] (node4) -- (node9);
+            \draw[->, btree-line, color=white] (node4) -- (node10);
+
+            \path
+                node[draw, right=5cm of node1.east, minimum width=1.2cm] (header1) {\textbf{\normalsize{ID}}}
+                node[draw, right=0 of header1, minimum width=1.2cm] (header2) {\textbf{\normalsize{PTR}}}
+                    node[draw, below=0 of header1, minimum width=1.2cm] (row11) {\normalsize{1}}
+                    node[draw, right=0 of row11, minimum width=1.2cm] (row12) {\normalsize{0x...}}
+                    node[draw, below=0 of row11, minimum width=1.2cm] (row21) {\normalsize{2}}
+                    node[draw, right=0 of row21, minimum width=1.2cm] (row22) {\normalsize{0x...}}
+                    node[behind path, fit=(header1)(header2)(row11)(row12)(row21)(row22)] (mapping) {};
+
+            \draw[->, btree-line] (row11.west)
+            .. controls ([xshift=-1cm] row11) and ([yshift=2cm] node4) ..
+            (node4.center);
+
+            \draw[->, btree-line] (row21.west)
+            .. controls ([xshift=-2cm] row21) and ([xshift=2cm] node8) ..
+            (node8.center);
+
+        \end{tikzpicture}
+    \end{overprint}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+
+    \begin{center}
+    \only<1> {
+        \textbf{Is that all?}
+    }
+    \only<2> {
+        \includegraphics[width=0.5\textwidth,center]{nein.png}
+    }
+    \only<3> {
+    }
+
+    \end{center}
+\end{frame}
 
 \fontsize{18pt}{18}\selectfont
 \begin{frame}
@@ -1684,6 +1819,10 @@
 \end{frame}
 \note{
     ClickHouse - B-Tries
+    HyPer - ART
+    MSFT Hekaton - Bw-Tree
+    Redis, MemSQL - Skip list
+    Silo - Masstree
 }
 
 \end{document}
