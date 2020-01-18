@@ -202,6 +202,8 @@
 \tikzset{cpu-cache/.style={draw, minimum width=1cm, minimum height=1cm, text width=1cm, align=center, rounded corners}}
 \tikzset{cpu-cache-hide/.style={cpu-cache, draw=none, color=white}}
 \tikzset{btree-node/.style={draw, inner sep=0, minimum width=1cm, minimum height=1cm, rounded corners}}
+\tikzset{btree-leaf-node/.style={btree-node, fill=greenGood}}
+\tikzset{btree-branch-node/.style={btree-node, fill=gray!20}}
 \tikzset{btree-partition1/.style={draw, inner sep=0, minimum width=1cm, minimum height=1cm, rounded corners, fill=red!20}}
 \tikzset{btree-partition2/.style={draw, inner sep=0, minimum width=1cm, minimum height=1cm, rounded corners, fill=green!20}}
 \tikzset{btree-partition3/.style={draw, inner sep=0, minimum width=1cm, minimum height=1cm, rounded corners, fill=blue!20}}
@@ -217,6 +219,8 @@
     isosceles triangle apex angle=60,
     rounded corners
 }}
+\tikzset{bw-delta/.style={draw, fill=redBad, rounded corners}}
+\tikzset{bw-page/.style={draw, fill=greenGood, rounded corners}}
 
 \newcommand{\btreenode}[5] {
     \path
@@ -1138,6 +1142,10 @@
 
     \end{center}
 \end{frame}
+\note{
+    Another interesting approach is partial value on a page and the rest is on
+    extended pages (MySQL, SQLite).
+}
 
 \begin{frame}[fragile]{}
     \frametitle{}
@@ -1687,20 +1695,20 @@
     \begin{overprint}[12cm]
         \onslide<1>
         \begin{tikzpicture}[]
-            \node[btree-node] (node1) {};
+            \node[btree-branch-node] (node1) {};
 
-            \node[btree-node, below=0.5cm of node1.south west, xshift=-2.5cm] (node2) {};
-            \node[btree-node, below=0.5cm of node1.south] (node3) {};
-            \node[btree-node, below=0.5cm of node1.south east, xshift=2.5cm] (node4) {};
+            \node[btree-branch-node, below=0.5cm of node1.south west, xshift=-2.5cm] (node2) {};
+            \node[btree-branch-node, below=0.5cm of node1.south] (node3) {};
+            \node[btree-branch-node, below=0.5cm of node1.south east, xshift=2.5cm] (node4) {};
 
-            \node[btree-node, below=0.5cm of node2.south west, xshift=-0.2cm] (node5) {};
-            \node[btree-node, below=0.5cm of node2.south east, xshift=0.2cm] (node6) {};
+            \node[btree-leaf-node, below=0.5cm of node2.south west, xshift=-0.2cm] (node5) {};
+            \node[btree-leaf-node, below=0.5cm of node2.south east, xshift=0.2cm] (node6) {};
 
-            \node[btree-node, below=0.5cm of node3.south west, xshift=-0.2cm] (node7) {};
-            \node[btree-node, below=0.5cm of node3.south east, xshift=0.2cm] (node8) {};
+            \node[btree-leaf-node, below=0.5cm of node3.south west, xshift=-0.2cm] (node7) {};
+            \node[btree-leaf-node, below=0.5cm of node3.south east, xshift=0.2cm] (node8) {};
 
-            \node[btree-node, below=0.5cm of node4.south west, xshift=-0.2cm] (node9) {};
-            \node[btree-node, below=0.5cm of node4.south east, xshift=0.2cm] (node10) {};
+            \node[btree-leaf-node, below=0.5cm of node4.south west, xshift=-0.2cm] (node9) {};
+            \node[btree-leaf-node, below=0.5cm of node4.south east, xshift=0.2cm] (node10) {};
 
             \draw[->, btree-line] (node1) -- (node2);
             \draw[->, btree-line] (node1) -- (node3);
@@ -1718,30 +1726,35 @@
 
         \onslide<2>
         \begin{tikzpicture}[]
-            \node[btree-node] (node1) {};
+            \node[btree-branch-node] (node1) {};
+            \coordinate[right=0.25cm of node1.center] (link-anchor1);
+            \node[below=-0.05cm of link-anchor1] (link1) {\footnotesize{1}};
 
-            \node[btree-node, below=0.5cm of node1.south west, xshift=-2.5cm] (node2) {};
-            \node[btree-node, below=0.5cm of node1.south] (node3) {};
-            \node[btree-node, below=0.5cm of node1.south east, xshift=2.5cm] (node4) {};
+            \node[btree-branch-node, below=0.5cm of node1.south west, xshift=-2.5cm] (node2) {};
+            \node[btree-branch-node, below=0.5cm of node1.south] (node3) {};
+            \coordinate[right=0.25cm of node3.center] (link-anchor2);
+            \node[below=-0.05cm of link-anchor2] (link2) {\footnotesize{2}};
 
-            \node[btree-node, below=0.5cm of node2.south west, xshift=-0.2cm] (node5) {};
-            \node[btree-node, below=0.5cm of node2.south east, xshift=0.2cm] (node6) {};
+            \node[btree-branch-node, below=0.5cm of node1.south east, xshift=2.5cm] (node4) {};
 
-            \node[btree-node, below=0.5cm of node3.south west, xshift=-0.2cm] (node7) {};
-            \node[btree-node, below=0.5cm of node3.south east, xshift=0.2cm] (node8) {};
+            \node[btree-leaf-node, below=0.5cm of node2.south west, xshift=-0.2cm] (node5) {};
+            \node[btree-leaf-node, below=0.5cm of node2.south east, xshift=0.2cm] (node6) {};
 
-            \node[btree-node, below=0.5cm of node4.south west, xshift=-0.2cm] (node9) {};
-            \node[btree-node, below=0.5cm of node4.south east, xshift=0.2cm] (node10) {};
+            \node[btree-leaf-node, below=0.5cm of node3.south west, xshift=-0.2cm] (node7) {};
+            \node[btree-leaf-node, below=0.5cm of node3.south east, xshift=0.2cm] (node8) {};
+
+            \node[btree-leaf-node, below=0.5cm of node4.south west, xshift=-0.2cm] (node9) {};
+            \node[btree-leaf-node, below=0.5cm of node4.south east, xshift=0.2cm] (node10) {};
 
             \draw[->, btree-line, color=white] (node1) -- (node2);
             \draw[->, btree-line, color=white] (node1) -- (node3);
-            \draw[->, btree-line, color=white] (node1) -- (node4);
+            \draw[->, btree-line, dashed] (node1) -- (node4);
 
             \draw[->, btree-line, color=white] (node2) -- (node5);
             \draw[->, btree-line, color=white] (node2) -- (node6);
 
             \draw[->, btree-line, color=white] (node3) -- (node7);
-            \draw[->, btree-line, color=white] (node3) -- (node8);
+            \draw[->, btree-line, dashed] (node3) -- (node8);
 
             \draw[->, btree-line, color=white] (node4) -- (node9);
             \draw[->, btree-line, color=white] (node4) -- (node10);
@@ -1762,11 +1775,150 @@
             \draw[->, btree-line] (row21.west)
             .. controls ([xshift=-2cm] row21) and ([xshift=2cm] node8) ..
             (node8.center);
-
         \end{tikzpicture}
+
+        \onslide<3>
+        \begin{tikzpicture}[]
+            \path
+                node[draw, right=5cm of node1.east, minimum width=1.2cm] (header1) {\textbf{\normalsize{ID}}}
+                node[draw, right=0 of header1, minimum width=1.2cm] (header2) {\textbf{\normalsize{PTR}}}
+                    node[draw, below=0 of header1, minimum width=1.2cm] (row11) {\normalsize{1}}
+                    node[draw, right=0 of row11, minimum width=1.2cm] (row12) {\normalsize{0x...}}
+                    node[draw, below=0 of row11, minimum width=1.2cm] (row21) {\normalsize{2}}
+                    node[draw, right=0 of row21, minimum width=1.2cm] (row22) {\normalsize{0x...}}
+                    node[behind path, fit=(header1)(header2)(row11)(row12)(row21)(row22)] (mapping) {};
+
+            \node[bw-delta, right=4cm of header2, color=white] (delta) {$\Delta$};
+            \node[bw-page, below=0.5cm of delta] (page) {Page};
+            \draw[->, btree-line] (row22)
+                .. controls ([yshift=-2cm] row22) and ([yshift=-2cm] page) ..
+            (page);
+        \end{tikzpicture}
+
+        \onslide<4>
+        \begin{tikzpicture}[]
+            \path
+                node[draw, right=5cm of node1.east, minimum width=1.2cm] (header1) {\textbf{\normalsize{ID}}}
+                node[draw, right=0 of header1, minimum width=1.2cm] (header2) {\textbf{\normalsize{PTR}}}
+                    node[draw, below=0 of header1, minimum width=1.2cm] (row11) {\normalsize{1}}
+                    node[draw, right=0 of row11, minimum width=1.2cm] (row12) {\normalsize{0x...}}
+                    node[draw, below=0 of row11, minimum width=1.2cm] (row21) {\normalsize{2}}
+                    node[draw, right=0 of row21, minimum width=1.2cm] (row22) {\normalsize{0x...}}
+                    node[behind path, fit=(header1)(header2)(row11)(row12)(row21)(row22)] (mapping) {};
+
+            \node[bw-delta, right=4cm of header2] (delta) {$\Delta$};
+            \node[bw-page, below=0.5cm of delta] (page) {Page};
+            \draw[->, btree-line] (delta) -- (page);
+            \draw[->, btree-line] (row22)
+                .. controls ([yshift=-2cm] row22) and ([yshift=-2cm] page) ..
+            (page);
+        \end{tikzpicture}
+
+        \onslide<5>
+        \begin{tikzpicture}[]
+            \path
+                node[draw, right=5cm of node1.east, minimum width=1.2cm] (header1) {\textbf{\normalsize{ID}}}
+                node[draw, right=0 of header1, minimum width=1.2cm] (header2) {\textbf{\normalsize{PTR}}}
+                    node[draw, below=0 of header1, minimum width=1.2cm] (row11) {\normalsize{1}}
+                    node[draw, right=0 of row11, minimum width=1.2cm] (row12) {\normalsize{0x...}}
+                    node[draw, below=0 of row11, minimum width=1.2cm] (row21) {\normalsize{2}}
+                    node[draw, right=0 of row21, minimum width=1.2cm] (row22) {\normalsize{0x...}}
+                    node[behind path, fit=(header1)(header2)(row11)(row12)(row21)(row22)] (mapping) {};
+
+            \node[bw-delta, right=4cm of header2] (delta) {$\Delta$};
+            \node[bw-page, below=0.5cm of delta] (page) {Page};
+            \draw[->, btree-line] (delta) -- (page);
+            \draw[->, btree-line, dashed, color=gray] (row22)
+                .. controls ([yshift=-2cm] row22) and ([yshift=-2cm] page) ..
+                node[midway, above, color=gray] {\footnotesize{CAS}} (page);
+            \draw[->, btree-line] (row22)
+                .. controls ([xshift=2cm] row22) and ([xshift=-2cm] delta) ..
+            (delta);
+        \end{tikzpicture}
+
+        \onslide<6>
+        \begin{tikzpicture}[]
+            \path
+                node[draw, right=5cm of node1.east, minimum width=1.2cm] (header1) {\textbf{\normalsize{ID}}}
+                node[draw, right=0 of header1, minimum width=1.2cm] (header2) {\textbf{\normalsize{PTR}}}
+                    node[draw, below=0 of header1, minimum width=1.2cm] (row11) {\normalsize{1}}
+                    node[draw, right=0 of row11, minimum width=1.2cm] (row12) {\normalsize{0x...}}
+                    node[draw, below=0 of row11, minimum width=1.2cm] (row21) {\normalsize{2}}
+                    node[draw, right=0 of row21, minimum width=1.2cm] (row22) {\normalsize{0x...}}
+                    node[behind path, fit=(header1)(header2)(row11)(row12)(row21)(row22)] (mapping) {};
+
+            \node[bw-delta, right=5cm of header2] (delta1) {$\Delta_1$};
+            \node[bw-delta, left=0.5cm of delta1] (delta2) {$\Delta_2$};
+            \node[bw-delta, left=0.5cm of delta2] (delta3) {$\Delta_3$};
+            \node[bw-page, below=0.5cm of delta2] (page) {Page};
+            \node[behind path, fit=(delta1)(delta2)(delta3)(page), rounded corners, color=white] (merged) {};
+            \draw[->, btree-line] (delta1) -- (delta2) -- (delta3) -- (page);
+            \draw[->, btree-line] (row22)
+                .. controls ([xshift=2cm] row22) and ([xshift=-2cm] delta3) ..
+            (delta3);
+        \end{tikzpicture}
+
+        \onslide<7>
+        \begin{tikzpicture}[]
+            \path
+                node[draw, right=5cm of node1.east, minimum width=1.2cm] (header1) {\textbf{\normalsize{ID}}}
+                node[draw, right=0 of header1, minimum width=1.2cm] (header2) {\textbf{\normalsize{PTR}}}
+                    node[draw, below=0 of header1, minimum width=1.2cm] (row11) {\normalsize{1}}
+                    node[draw, right=0 of row11, minimum width=1.2cm] (row12) {\normalsize{0x...}}
+                    node[draw, below=0 of row11, minimum width=1.2cm] (row21) {\normalsize{2}}
+                    node[draw, right=0 of row21, minimum width=1.2cm] (row22) {\normalsize{0x...}}
+                    node[behind path, fit=(header1)(header2)(row11)(row12)(row21)(row22)] (mapping) {};
+
+            \path
+                node[bw-delta, right=5cm of header2] (delta1) {$\Delta_1$}
+                node[bw-delta, left=0.5cm of delta1] (delta2) {$\Delta_2$}
+                node[bw-delta, left=0.5cm of delta2] (delta3) {$\Delta_3$}
+                node[bw-page, below=0.5cm of delta2] (page) {Page}
+                node[behind path, fill=gray!20, fit=(delta1)(delta2)(delta3)(page), rounded corners] (merged) {};
+            \draw[->, btree-line] (delta1) -- (delta2) -- (delta3) -- (page);
+            \draw[->, btree-line] (row22)
+                .. controls ([xshift=2cm] row22) and ([xshift=-2cm] delta3) ..
+            (delta3);
+
+            \node[bw-page, below=1cm of page] (merged-page) {Merged Page};
+            \draw[->, btree-line] (merged.south) -- (merged-page);
+        \end{tikzpicture}
+
+        \onslide<8>
+        \begin{tikzpicture}[]
+            \path
+                node[draw, right=5cm of node1.east, minimum width=1.2cm] (header1) {\textbf{\normalsize{ID}}}
+                node[draw, right=0 of header1, minimum width=1.2cm] (header2) {\textbf{\normalsize{PTR}}}
+                    node[draw, below=0 of header1, minimum width=1.2cm] (row11) {\normalsize{1}}
+                    node[draw, right=0 of row11, minimum width=1.2cm] (row12) {\normalsize{0x...}}
+                    node[draw, below=0 of row11, minimum width=1.2cm] (row21) {\normalsize{2}}
+                    node[draw, right=0 of row21, minimum width=1.2cm] (row22) {\normalsize{0x...}}
+                    node[behind path, fit=(header1)(header2)(row11)(row12)(row21)(row22)] (mapping) {};
+
+            \path
+                node[bw-delta, right=5cm of header2] (delta1) {$\Delta_1$}
+                node[bw-delta, left=0.5cm of delta1] (delta2) {$\Delta_2$}
+                node[bw-delta, left=0.5cm of delta2] (delta3) {$\Delta_3$}
+                node[bw-page, below=0.5cm of delta2] (page) {Page}
+                node[behind path, fill=gray!20, fit=(delta1)(delta2)(delta3)(page), rounded corners] (merged) {};
+            \draw[->, btree-line] (delta1) -- (delta2) -- (delta3) -- (page);
+            \draw[->, btree-line, color=gray, dashed] (row22)
+                .. controls ([xshift=2cm] row22) and ([xshift=-2cm] delta3) ..
+            node[midway, above, color=gray] {\footnotesize{CAS}} (delta3);
+
+            \node[bw-page, below=1cm of page, rounded corners] (merged-page) {Merged Page};
+            \draw[->, btree-line] (merged.south) -- (merged-page);
+            \draw[->, btree-line] (row22)
+                .. controls ([xshift=2cm] row22) and ([xshift=-3cm] merged-page) ..
+            (merged-page.west);
+        \end{tikzpicture}
+
     \end{overprint}
     \end{center}
 \end{frame}
+\note{
+    Requires also "split", "index", "remove node", "merge", "flush" deltas
+}
 
 \begin{frame}[fragile]{}
     \frametitle{}
