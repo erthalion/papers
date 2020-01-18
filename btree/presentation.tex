@@ -1679,6 +1679,17 @@
         \end{tikzpicture}
 
     \end{overprint}
+
+    \linespread{0.5}
+    \vspace{0.5cm}
+    \color{black}\fontsize{6pt}{0}\selectfont
+        Huanchen Zhang, David G. Andersen, Andrew Pavlo, Michael Kaminsky, Lin
+        Ma, and Rui Shen. 2016. Reducing the Storage Overhead of Main-Memory
+        OLTP Databases with Hybrid Indexes. In Proceedings of the 2016
+        International Conference on Management of Data (SIGMOD ’16).
+        Association for Computing Machinery, New York, NY, USA, 1567–1581.
+    \linespread{1.5}
+
     \end{center}
 \end{frame}
 \note{
@@ -1914,11 +1925,141 @@
         \end{tikzpicture}
 
     \end{overprint}
+
+    \linespread{0.5}
+    \vspace{0.5cm}
+    \color{black}\fontsize{6pt}{0}\selectfont
+        Levandoski, Justin Lomet, David Sengupta, Sudipta. (2012). The Bw-Tree:
+        A B-tree for New Hardware Platforms. Proceedings - International
+        Conference on Data Engineering. 10.1109/ICDE.2013.6544834.
+    \linespread{1.5}
+
     \end{center}
 \end{frame}
 \note{
     Requires also "split", "index", "remove node", "merge", "flush" deltas
 }
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+
+    \begin{center}
+    \textbf{DPTree}
+    \vspace{1cm}
+
+    \begin{overprint}[12cm]
+        \onslide<1>
+        \begin{tikzpicture}[]
+            \node[btree-branch-node] (node1) {};
+
+            \node[btree-branch-node, below=0.5cm of node1.south west, xshift=-2.5cm] (node2) {};
+            \node[btree-branch-node, below=0.5cm of node1.south] (node3) {};
+            \node[btree-branch-node, below=0.5cm of node1.south east, xshift=2.5cm] (node4) {};
+
+            \node[btree-leaf-node, below=0.5cm of node2.south west, xshift=-0.2cm] (node5) {};
+            \node[btree-leaf-node, below=0.5cm of node2.south east, xshift=0.2cm] (node6) {};
+
+            \node[btree-leaf-node, below=0.5cm of node3.south west, xshift=-0.2cm] (node7) {};
+            \node[btree-leaf-node, below=0.5cm of node3.south east, xshift=0.2cm] (node8) {};
+
+            \node[btree-leaf-node, below=0.5cm of node4.south west, xshift=-0.2cm] (node9) {};
+            \node[btree-leaf-node, below=0.5cm of node4.south east, xshift=0.2cm] (node10) {};
+
+            \draw[->, btree-line] (node1) -- (node2);
+            \draw[->, btree-line] (node1) -- (node3);
+            \draw[->, btree-line] (node1) -- (node4);
+
+            \draw[->, btree-line] (node2) -- (node5);
+            \draw[->, btree-line] (node2) -- (node6);
+
+            \draw[->, btree-line] (node3) -- (node7);
+            \draw[->, btree-line] (node3) -- (node8);
+
+            \draw[->, btree-line] (node4) -- (node9);
+            \draw[->, btree-line] (node4) -- (node10);
+        \end{tikzpicture}
+
+        \onslide<2>
+        \begin{tikzpicture}[]
+            \node[btree-branch-node] (node1) {};
+
+            \node[btree-branch-node, below=0.5cm of node1.south west, xshift=-2.5cm] (node2) {};
+            \node[btree-branch-node, below=0.5cm of node1.south] (node3) {};
+            \node[btree-branch-node, below=0.5cm of node1.south east, xshift=2.5cm] (node4) {};
+
+            \node[btree-leaf-node, below=0.5cm of node2.south west, xshift=-0.2cm] (node5) {};
+            \node[btree-leaf-node, below=0.5cm of node2.south east, xshift=0.2cm] (node6) {};
+
+            \node[btree-leaf-node, below=0.5cm of node3.south west, xshift=-0.2cm] (node7) {};
+            \node[btree-leaf-node, below=0.5cm of node3.south east, xshift=0.2cm] (node8) {};
+
+            \node[btree-leaf-node, below=0.5cm of node4.south west, xshift=-0.2cm] (node9) {};
+            \node[btree-leaf-node, below=0.5cm of node4.south east, xshift=0.2cm] (node10) {};
+            \coordinate[above=0.25cm of node5] (left-point);
+            \coordinate[above=0.25cm of node10] (right-point);
+
+            \draw[->, btree-line] (node1) -- (node2);
+            \draw[->, btree-line] (node1) -- (node3);
+            \draw[->, btree-line] (node1) -- (node4);
+
+            \draw[->, btree-line] (node2) -- (node5);
+            \draw[->, btree-line] (node2) -- (node6);
+
+            \draw[->, btree-line] (node3) -- (node7);
+            \draw[->, btree-line] (node3) -- (node8);
+
+            \draw[->, btree-line] (node4) -- (node9);
+            \draw[->, btree-line] (node4) -- (node10);
+
+            \draw[dashed] ([xshift=-2cm]left-point) -- ([xshift=2cm]right-point);
+        \end{tikzpicture}
+
+        \onslide<3>
+        \begin{tikzpicture}[]
+            \node[btree-branch-node] (node1) {};
+
+            \node[btree-branch-node, below=0.5cm of node1.south west, xshift=-2.5cm] (node2) {};
+            \node[btree-branch-node, below=0.5cm of node1.south] (node3) {};
+            \node[btree-branch-node, below=0.5cm of node1.south east, xshift=2.5cm] (node4) {};
+
+            \node[btree-leaf-node, below=0.5cm of node2.south west, xshift=-0.2cm] (node5) {};
+            \node[btree-leaf-node, below=0.5cm of node2.south east, xshift=0.2cm] (node6) {};
+
+            \node[btree-leaf-node, below=0.5cm of node3.south west, xshift=-0.2cm] (node7) {};
+            \node[btree-leaf-node, below=0.5cm of node3.south east, xshift=0.2cm] (node8) {};
+
+            \node[btree-leaf-node, below=0.5cm of node4.south west, xshift=-0.2cm] (node9) {};
+            \node[btree-leaf-node, below=0.5cm of node4.south east, xshift=0.2cm] (node10) {};
+            \coordinate[above=0.25cm of node5] (left-point);
+            \coordinate[above=0.25cm of node10] (right-point);
+
+            \draw[->, btree-line] (node1) -- (node2);
+            \draw[->, btree-line] (node1) -- (node3);
+            \draw[->, btree-line] (node1) -- (node4);
+
+            \draw[->, btree-line] (node2) -- (node5);
+            \draw[->, btree-line] (node2) -- (node6);
+
+            \draw[->, btree-line] (node3) -- (node7);
+            \draw[->, btree-line] (node3) -- (node8);
+
+            \draw[->, btree-line] (node4) -- (node9);
+            \draw[->, btree-line] (node4) -- (node10);
+
+            \draw[dashed] ([xshift=-2cm]left-point) -- ([xshift=2cm]right-point);
+
+            \smallbtree{1}{1.5}{left=6cm of node1}{}{}{blue-box}
+            \node[draw, minimum width=0.5cm, minimum height=0.5cm, rounded corners=0.1cm, below=1.5cm of nodebox1.south] (log2) {};
+            \node[draw, minimum width=0.5cm, minimum height=0.5cm, rounded corners=0.1cm, right=0.5cm of log2] (log3) {};
+            \node[draw, minimum width=0.5cm, minimum height=0.5cm, rounded corners=0.1cm, left=0.5cm of log2] (log1) {};
+            \draw[->, btree-line] (nodebox1.south) -- (log1);
+            \draw[->, btree-line] (nodebox1.south) -- (log2);
+            \draw[->, btree-line] (nodebox1.south) -- (log3);
+        \end{tikzpicture}
+
+    \end{overprint}
+    \end{center}
+\end{frame}
 
 \begin{frame}[fragile]{}
     \frametitle{}
