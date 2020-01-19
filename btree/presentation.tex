@@ -221,6 +221,7 @@
 }}
 \tikzset{bw-delta/.style={draw, fill=redBad, rounded corners}}
 \tikzset{bw-page/.style={draw, fill=greenGood, rounded corners}}
+\tikzset{dp-tree-log/.style={draw, minimum width=0.5cm, minimum height=0.5cm, rounded corners=0.1cm}}
 
 \newcommand{\btreenode}[5] {
     \path
@@ -350,6 +351,55 @@
     \draw[->, btree-line, #5] (node#11) -- (node#12);
     \draw[->, btree-line, #5] (node#11) -- (node#13);
     \draw[->, btree-line, #5] (node#11) -- (node#14);
+}
+
+
+\newcommand{\basicbtree}[1] {
+    \node[btree-branch-node] (node1) {};
+
+    \node[btree-branch-node, below=0.5cm of node1.south west, xshift=-2.5cm] (node2) {};
+    \node[btree-branch-node, below=0.5cm of node1.south] (node3) {};
+    \node[btree-branch-node, below=0.5cm of node1.south east, xshift=2.5cm] (node4) {};
+
+    \node[btree-leaf-node, below=0.5cm of node2.south west, xshift=-0.2cm] (node5) {};
+    \node[btree-leaf-node, below=0.5cm of node2.south east, xshift=0.2cm] (node6) {};
+
+    \node[btree-leaf-node, below=0.5cm of node3.south west, xshift=-0.2cm] (node7) {};
+    \node[btree-leaf-node, below=0.5cm of node3.south east, xshift=0.2cm] (node8) {};
+
+    \node[btree-leaf-node, below=0.5cm of node4.south west, xshift=-0.2cm] (node9) {};
+    \node[btree-leaf-node, below=0.5cm of node4.south east, xshift=0.2cm] (node10) {};
+
+    \ifthenelse{ \equal{#1}{show-connections} } {
+        \draw[->, btree-line] (node1) -- (node2);
+        \draw[->, btree-line] (node1) -- (node3);
+        \draw[->, btree-line] (node1) -- (node4);
+
+        \draw[->, btree-line] (node2) -- (node5);
+        \draw[->, btree-line] (node2) -- (node6);
+
+        \draw[->, btree-line] (node3) -- (node7);
+        \draw[->, btree-line] (node3) -- (node8);
+
+        \draw[->, btree-line] (node4) -- (node9);
+        \draw[->, btree-line] (node4) -- (node10);
+    } {}
+}
+
+\newcommand{\basicleafconnection}[1] {
+    \ifthenelse{ \equal{#1}{active} } {
+        \draw[->, btree-line] (node5) -- (node6);
+        \draw[->, btree-line] (node6) -- (node7);
+        \draw[->, btree-line] (node7) -- (node8);
+        \draw[->, btree-line] (node8) -- (node9);
+        \draw[->, btree-line] (node9) -- (node10);
+    } {
+        \draw[->, btree-line, color=gray] (node5) -- (node6);
+        \draw[->, btree-line, color=gray] (node6) -- (node7);
+        \draw[->, btree-line, color=gray] (node7) -- (node8);
+        \draw[->, btree-line, color=gray] (node8) -- (node9);
+        \draw[->, btree-line, color=gray] (node9) -- (node10);
+    }
 }
 
 \begin{document}
@@ -1706,56 +1756,17 @@
     \begin{overprint}[12cm]
         \onslide<1>
         \begin{tikzpicture}[]
-            \node[btree-branch-node] (node1) {};
-
-            \node[btree-branch-node, below=0.5cm of node1.south west, xshift=-2.5cm] (node2) {};
-            \node[btree-branch-node, below=0.5cm of node1.south] (node3) {};
-            \node[btree-branch-node, below=0.5cm of node1.south east, xshift=2.5cm] (node4) {};
-
-            \node[btree-leaf-node, below=0.5cm of node2.south west, xshift=-0.2cm] (node5) {};
-            \node[btree-leaf-node, below=0.5cm of node2.south east, xshift=0.2cm] (node6) {};
-
-            \node[btree-leaf-node, below=0.5cm of node3.south west, xshift=-0.2cm] (node7) {};
-            \node[btree-leaf-node, below=0.5cm of node3.south east, xshift=0.2cm] (node8) {};
-
-            \node[btree-leaf-node, below=0.5cm of node4.south west, xshift=-0.2cm] (node9) {};
-            \node[btree-leaf-node, below=0.5cm of node4.south east, xshift=0.2cm] (node10) {};
-
-            \draw[->, btree-line] (node1) -- (node2);
-            \draw[->, btree-line] (node1) -- (node3);
-            \draw[->, btree-line] (node1) -- (node4);
-
-            \draw[->, btree-line] (node2) -- (node5);
-            \draw[->, btree-line] (node2) -- (node6);
-
-            \draw[->, btree-line] (node3) -- (node7);
-            \draw[->, btree-line] (node3) -- (node8);
-
-            \draw[->, btree-line] (node4) -- (node9);
-            \draw[->, btree-line] (node4) -- (node10);
+            \basicbtree{show-connections}
         \end{tikzpicture}
 
         \onslide<2>
         \begin{tikzpicture}[]
-            \node[btree-branch-node] (node1) {};
+            \basicbtree{}
             \coordinate[right=0.25cm of node1.center] (link-anchor1);
             \node[below=-0.05cm of link-anchor1] (link1) {\footnotesize{1}};
 
-            \node[btree-branch-node, below=0.5cm of node1.south west, xshift=-2.5cm] (node2) {};
-            \node[btree-branch-node, below=0.5cm of node1.south] (node3) {};
             \coordinate[right=0.25cm of node3.center] (link-anchor2);
             \node[below=-0.05cm of link-anchor2] (link2) {\footnotesize{2}};
-
-            \node[btree-branch-node, below=0.5cm of node1.south east, xshift=2.5cm] (node4) {};
-
-            \node[btree-leaf-node, below=0.5cm of node2.south west, xshift=-0.2cm] (node5) {};
-            \node[btree-leaf-node, below=0.5cm of node2.south east, xshift=0.2cm] (node6) {};
-
-            \node[btree-leaf-node, below=0.5cm of node3.south west, xshift=-0.2cm] (node7) {};
-            \node[btree-leaf-node, below=0.5cm of node3.south east, xshift=0.2cm] (node8) {};
-
-            \node[btree-leaf-node, below=0.5cm of node4.south west, xshift=-0.2cm] (node9) {};
-            \node[btree-leaf-node, below=0.5cm of node4.south east, xshift=0.2cm] (node10) {};
 
             \draw[->, btree-line, color=white] (node1) -- (node2);
             \draw[->, btree-line, color=white] (node1) -- (node3);
@@ -1947,117 +1958,95 @@
     \textbf{DPTree}
     \vspace{1cm}
 
-    \begin{overprint}[12cm]
+    \begin{overprint}[14cm]
         \onslide<1>
         \begin{tikzpicture}[]
-            \node[btree-branch-node] (node1) {};
+            \basicbtree{show-connections}
 
-            \node[btree-branch-node, below=0.5cm of node1.south west, xshift=-2.5cm] (node2) {};
-            \node[btree-branch-node, below=0.5cm of node1.south] (node3) {};
-            \node[btree-branch-node, below=0.5cm of node1.south east, xshift=2.5cm] (node4) {};
+            \coordinate[above=0.25cm of node5] (left-point);
+            \coordinate[above=0.25cm of node10] (right-point);
 
-            \node[btree-leaf-node, below=0.5cm of node2.south west, xshift=-0.2cm] (node5) {};
-            \node[btree-leaf-node, below=0.5cm of node2.south east, xshift=0.2cm] (node6) {};
+            \draw[color=white, opacity=0] ([xshift=-5cm]left-point) -- ([xshift=1cm]right-point);
 
-            \node[btree-leaf-node, below=0.5cm of node3.south west, xshift=-0.2cm] (node7) {};
-            \node[btree-leaf-node, below=0.5cm of node3.south east, xshift=0.2cm] (node8) {};
+            \smallbtree{1}{1.5}{left=6cm of node1}{color=white}{color=white}{color=white}
 
-            \node[btree-leaf-node, below=0.5cm of node4.south west, xshift=-0.2cm] (node9) {};
-            \node[btree-leaf-node, below=0.5cm of node4.south east, xshift=0.2cm] (node10) {};
-
-            \draw[->, btree-line] (node1) -- (node2);
-            \draw[->, btree-line] (node1) -- (node3);
-            \draw[->, btree-line] (node1) -- (node4);
-
-            \draw[->, btree-line] (node2) -- (node5);
-            \draw[->, btree-line] (node2) -- (node6);
-
-            \draw[->, btree-line] (node3) -- (node7);
-            \draw[->, btree-line] (node3) -- (node8);
-
-            \draw[->, btree-line] (node4) -- (node9);
-            \draw[->, btree-line] (node4) -- (node10);
+            \coordinate[left=1.2cm of nodebox1.south west] (inserts-start);
+            \coordinate[left=1.2cm of nodebox1.north west] (reads-start);
+            \node[arrow-pointer, above=0.2cm of inserts-start, color=white] (inserts) {\footnotesize{Insert}};
+            \node[arrow-pointer, below=0.2cm of reads-start, color=white] (reads) {\footnotesize{Read}};
         \end{tikzpicture}
 
         \onslide<2>
         \begin{tikzpicture}[]
-            \node[btree-branch-node] (node1) {};
+            \basicbtree{show-connections}
 
-            \node[btree-branch-node, below=0.5cm of node1.south west, xshift=-2.5cm] (node2) {};
-            \node[btree-branch-node, below=0.5cm of node1.south] (node3) {};
-            \node[btree-branch-node, below=0.5cm of node1.south east, xshift=2.5cm] (node4) {};
-
-            \node[btree-leaf-node, below=0.5cm of node2.south west, xshift=-0.2cm] (node5) {};
-            \node[btree-leaf-node, below=0.5cm of node2.south east, xshift=0.2cm] (node6) {};
-
-            \node[btree-leaf-node, below=0.5cm of node3.south west, xshift=-0.2cm] (node7) {};
-            \node[btree-leaf-node, below=0.5cm of node3.south east, xshift=0.2cm] (node8) {};
-
-            \node[btree-leaf-node, below=0.5cm of node4.south west, xshift=-0.2cm] (node9) {};
-            \node[btree-leaf-node, below=0.5cm of node4.south east, xshift=0.2cm] (node10) {};
             \coordinate[above=0.25cm of node5] (left-point);
             \coordinate[above=0.25cm of node10] (right-point);
 
-            \draw[->, btree-line] (node1) -- (node2);
-            \draw[->, btree-line] (node1) -- (node3);
-            \draw[->, btree-line] (node1) -- (node4);
+            \draw[color=white, opacity=0] ([xshift=-5cm]left-point) -- ([xshift=1cm]right-point);
 
-            \draw[->, btree-line] (node2) -- (node5);
-            \draw[->, btree-line] (node2) -- (node6);
+            \smallbtree{1}{1.5}{left=6cm of node1}{}{}{blue-box}
 
-            \draw[->, btree-line] (node3) -- (node7);
-            \draw[->, btree-line] (node3) -- (node8);
-
-            \draw[->, btree-line] (node4) -- (node9);
-            \draw[->, btree-line] (node4) -- (node10);
-
-            \draw[dashed] ([xshift=-2cm]left-point) -- ([xshift=2cm]right-point);
+            \coordinate[left=1.2cm of nodebox1.south west] (inserts-start);
+            \coordinate[left=1.2cm of nodebox1.north west] (reads-start);
+            \node[arrow-pointer, above=0.2cm of inserts-start, color=white] (inserts) {\footnotesize{Insert}};
+            \node[arrow-pointer, below=0.2cm of reads-start, color=white] (reads) {\footnotesize{Read}};
         \end{tikzpicture}
 
         \onslide<3>
         \begin{tikzpicture}[]
-            \node[btree-branch-node] (node1) {};
+            \basicbtree{show-connections}
+            \basicleafconnection{active}
 
-            \node[btree-branch-node, below=0.5cm of node1.south west, xshift=-2.5cm] (node2) {};
-            \node[btree-branch-node, below=0.5cm of node1.south] (node3) {};
-            \node[btree-branch-node, below=0.5cm of node1.south east, xshift=2.5cm] (node4) {};
-
-            \node[btree-leaf-node, below=0.5cm of node2.south west, xshift=-0.2cm] (node5) {};
-            \node[btree-leaf-node, below=0.5cm of node2.south east, xshift=0.2cm] (node6) {};
-
-            \node[btree-leaf-node, below=0.5cm of node3.south west, xshift=-0.2cm] (node7) {};
-            \node[btree-leaf-node, below=0.5cm of node3.south east, xshift=0.2cm] (node8) {};
-
-            \node[btree-leaf-node, below=0.5cm of node4.south west, xshift=-0.2cm] (node9) {};
-            \node[btree-leaf-node, below=0.5cm of node4.south east, xshift=0.2cm] (node10) {};
             \coordinate[above=0.25cm of node5] (left-point);
             \coordinate[above=0.25cm of node10] (right-point);
 
-            \draw[->, btree-line] (node1) -- (node2);
-            \draw[->, btree-line] (node1) -- (node3);
-            \draw[->, btree-line] (node1) -- (node4);
-
-            \draw[->, btree-line] (node2) -- (node5);
-            \draw[->, btree-line] (node2) -- (node6);
-
-            \draw[->, btree-line] (node3) -- (node7);
-            \draw[->, btree-line] (node3) -- (node8);
-
-            \draw[->, btree-line] (node4) -- (node9);
-            \draw[->, btree-line] (node4) -- (node10);
-
-            \draw[dashed] ([xshift=-2cm]left-point) -- ([xshift=2cm]right-point);
+            \draw[dashed] ([xshift=-5cm]left-point) -- ([xshift=1cm]right-point);
 
             \smallbtree{1}{1.5}{left=6cm of node1}{}{}{blue-box}
-            \node[draw, minimum width=0.5cm, minimum height=0.5cm, rounded corners=0.1cm, below=1.5cm of nodebox1.south] (log2) {};
-            \node[draw, minimum width=0.5cm, minimum height=0.5cm, rounded corners=0.1cm, right=0.5cm of log2] (log3) {};
-            \node[draw, minimum width=0.5cm, minimum height=0.5cm, rounded corners=0.1cm, left=0.5cm of log2] (log1) {};
-            \draw[->, btree-line] (nodebox1.south) -- (log1);
-            \draw[->, btree-line] (nodebox1.south) -- (log2);
+
+            \coordinate[left=1.2cm of nodebox1.south west] (inserts-start);
+            \coordinate[left=1.2cm of nodebox1.north west] (reads-start);
+            \node[arrow-pointer, above=0.2cm of inserts-start, color=white] (inserts) {\footnotesize{Insert}};
+            \node[arrow-pointer, below=0.2cm of reads-start, color=white] (reads) {\footnotesize{Read}};
+        \end{tikzpicture}
+
+        \onslide<4>
+        \begin{tikzpicture}[]
+            \basicbtree{show-connections}
+            \basicleafconnection{}
+
+            \coordinate[above=0.25cm of node5] (left-point);
+            \coordinate[above=0.25cm of node10] (right-point);
+
+            \draw[dashed] ([xshift=-5cm]left-point) -- ([xshift=1cm]right-point);
+
+            \smallbtree{1}{1.5}{left=6cm of node1}{}{}{blue-box}
+            \node[dp-tree-log, below=1.5cm of nodebox1.south] (log2) {};
+            \node[dp-tree-log, right=0.5cm of log2] (log3) {};
+            \node[dp-tree-log, left=0.5cm of log2] (log1) {};
             \draw[->, btree-line] (nodebox1.south) -- (log3);
+            \draw[->, btree-line] (log1) -- (log2) -- (log3);
+
+            \coordinate[left=1.2cm of nodebox1.south west] (inserts-start);
+            \coordinate[left=1.2cm of nodebox1.north west] (reads-start);
+            \node[arrow-pointer, above=0.2cm of inserts-start] (inserts) {\footnotesize{Insert}};
+            \node[arrow-pointer, below=0.2cm of reads-start] (reads) {\footnotesize{Read}};
+
+            \node[arrow-pointer, left=2cm of node1] {\footnotesize{Read}};
+            \node[arrow-pointer, right=0.2cm of nodebox1.south east, rotate=-45, fill=white] {\footnotesize{Merge}};
         \end{tikzpicture}
 
     \end{overprint}
+
+    \linespread{0.5}
+    \vspace{0.5cm}
+    \color{black}\fontsize{6pt}{0}\selectfont
+        Zhou, Xinjing Shou, Lidan Chen, Ke Hu, Wei Chen, Gang. (2019).  DPTree:
+        differential indexing for persistent memory. Proceedings of the VLDB
+        Endowment.
+    \linespread{1.5}
+
     \end{center}
 \end{frame}
 
