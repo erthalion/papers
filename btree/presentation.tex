@@ -222,6 +222,7 @@
 \tikzset{bw-delta/.style={draw, fill=redBad, rounded corners}}
 \tikzset{bw-page/.style={draw, fill=greenGood, rounded corners}}
 \tikzset{dp-tree-log/.style={draw, minimum width=0.5cm, minimum height=0.5cm, rounded corners=0.1cm}}
+\tikzset{trie-node/.style={draw, circle}}
 
 \newcommand{\btreenode}[5] {
     \path
@@ -384,6 +385,21 @@
         \draw[->, btree-line] (node4) -- (node9);
         \draw[->, btree-line] (node4) -- (node10);
     } {}
+
+    \ifthenelse{ \equal{#1}{show-fade-connections} } {
+        \draw[->, btree-line, color=gray] (node1) -- (node2);
+        \draw[->, btree-line, color=gray] (node1) -- (node3);
+        \draw[->, btree-line, color=gray] (node1) -- (node4);
+
+        \draw[->, btree-line, color=gray] (node2) -- (node5);
+        \draw[->, btree-line, color=gray] (node2) -- (node6);
+
+        \draw[->, btree-line, color=gray] (node3) -- (node7);
+        \draw[->, btree-line, color=gray] (node3) -- (node8);
+
+        \draw[->, btree-line, color=gray] (node4) -- (node9);
+        \draw[->, btree-line, color=gray] (node4) -- (node10);
+    } {}
 }
 
 \newcommand{\basicleafconnection}[1] {
@@ -399,6 +415,18 @@
         \draw[->, btree-line, color=gray] (node7) -- (node8);
         \draw[->, btree-line, color=gray] (node8) -- (node9);
         \draw[->, btree-line, color=gray] (node9) -- (node10);
+    }
+}
+
+\newcommand{\trienode}[5] {
+    \node[trie-node, below=0.35cm of node#1, xshift=#4] (node#2) {};
+    \coordinate[above=0.3cm of node#2.center] (node#2-anchor);
+    \node[below=0.0cm of node#2-anchor] (node#2-value) {\footnotesize{#3}};
+    \draw[-, btree-line] (node#1) -- (node#2);
+
+    \ifthenelse{ \equal{#5}{} } {}
+    {
+        \node[below=0.05cm of node#2, color=gray] (node#2-total-value) {\tiny{#5}};
     }
 }
 
@@ -1577,9 +1605,8 @@
         \end{tikzpicture}
         \linespread{0.5}
         \color{black}\fontsize{6pt}{0}\selectfont
-            Riegger, Christian Vincon, Tobias Petrov, Ilia. (2017).
+            Riegger Christian, Vincon Tobias, Petrov Ilia. (2017).
             Write-optimized indexing with partitioned b-trees. 296-300.
-            10.1145/3151759.3151814.
         \linespread{1.5}
 
         \onslide<6>
@@ -1626,9 +1653,8 @@
         \end{tikzpicture}
         \linespread{0.5}
         \color{black}\fontsize{6pt}{0}\selectfont
-            Riegger, Christian Vincon, Tobias Petrov, Ilia. (2017).
+            Riegger Christian, Vincon Tobias, Petrov Ilia. (2017).
             Write-optimized indexing with partitioned b-trees. 296-300.
-            10.1145/3151759.3151814.
         \linespread{1.5}
 
     \end{overprint}
@@ -1940,9 +1966,9 @@
     \linespread{0.5}
     \vspace{0.5cm}
     \color{black}\fontsize{6pt}{0}\selectfont
-        Levandoski, Justin Lomet, David Sengupta, Sudipta. (2012). The Bw-Tree:
+        Levandoski Justin, Lomet David, Sengupta Sudipta. (2012). The Bw-Tree:
         A B-tree for New Hardware Platforms. Proceedings - International
-        Conference on Data Engineering. 10.1109/ICDE.2013.6544834.
+        Conference on Data Engineering.
     \linespread{1.5}
 
     \end{center}
@@ -2013,7 +2039,7 @@
 
         \onslide<4>
         \begin{tikzpicture}[]
-            \basicbtree{show-connections}
+            \basicbtree{show-fade-connections}
             \basicleafconnection{}
 
             \coordinate[above=0.25cm of node5] (left-point);
@@ -2042,10 +2068,143 @@
     \linespread{0.5}
     \vspace{0.5cm}
     \color{black}\fontsize{6pt}{0}\selectfont
-        Zhou, Xinjing Shou, Lidan Chen, Ke Hu, Wei Chen, Gang. (2019).  DPTree:
+        Zhou Xinjing, Shou Lidan, Chen Ke, Hu Wei, Chen Gang. (2019). DPTree:
         differential indexing for persistent memory. Proceedings of the VLDB
         Endowment.
     \linespread{1.5}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+
+    \begin{center}
+    \textbf{Trie}
+    \vspace{0.2cm}
+
+    \begin{overprint}[12cm]
+        \onslide<1>
+        \begin{tikzpicture}[]
+            \node[minimum width=12cm] (base) {};
+            \node[trie-node] (node1) at (base.north) {};
+            \trienode{1}{2}{0}{-1.75cm}{}
+            \trienode{1}{3}{1}{1.75cm}{}
+
+            \trienode{2}{4}{01}{-1.0cm}{}
+            \trienode{2}{5}{1}{1.0cm}{}
+            \trienode{3}{6}{0}{-1.0cm}{10}
+            \trienode{3}{7}{11}{1.0cm}{}
+
+            \trienode{4}{8}{0}{-0.5cm}{0010}
+            \trienode{4}{9}{1}{0.5cm}{}
+            \trienode{5}{10}{0}{-0.5cm}{010}
+            \trienode{5}{11}{1}{0.5cm}{011}
+            \trienode{7}{12}{0}{-0.5cm}{}
+            \trienode{7}{13}{1}{0.5cm}{1111}
+
+            \trienode{9}{14}{00}{-0.5cm}{}
+            \trienode{9}{15}{00}{0.5cm}{001100}
+            \trienode{12}{16}{01}{-0.5cm}{111001}
+            \trienode{12}{17}{1}{0.5cm}{11101}
+
+            \trienode{14}{18}{0}{-0.5cm}{0011000}
+            \trienode{14}{19}{1}{0.5cm}{0011001}
+        \end{tikzpicture}
+
+        \onslide<2>
+        \begin{tikzpicture}[]
+            \node[minimum width=12cm] (base) {};
+            \node[trie-node] (node1) at (base.north) {};
+            \trienode{1}{2}{0}{-1.75cm}{}
+            \trienode{1}{3}{1}{1.75cm}{}
+            \node[draw, dashed, rounded corners, behind path, inner sep=0.2, fit=(node1)(node2)(node3)] {};
+
+            \trienode{2}{4}{01}{-1.0cm}{}
+            \trienode{2}{5}{1}{1.0cm}{}
+            \trienode{3}{6}{0}{-1.0cm}{10}
+            \trienode{3}{7}{11}{1.0cm}{}
+
+            \trienode{4}{8}{0}{-0.5cm}{0010}
+            \trienode{4}{9}{1}{0.5cm}{}
+            \trienode{5}{10}{0}{-0.5cm}{010}
+            \trienode{5}{11}{1}{0.5cm}{011}
+            \trienode{7}{12}{0}{-0.5cm}{}
+            \trienode{7}{13}{1}{0.5cm}{1111}
+            \node[draw, dashed, rounded corners, behind path, inner sep=0.2, fit=(node4)(node5)(node8)(node9)(node10)(node11)] {};
+            \node[draw, dashed, rounded corners, behind path, inner sep=0.2, fit=(node6)(node7)(node12)(node13)] {};
+
+            \trienode{9}{14}{00}{-0.5cm}{}
+            \trienode{9}{15}{00}{0.5cm}{001100}
+            \trienode{12}{16}{01}{-0.5cm}{111001}
+            \trienode{12}{17}{1}{0.5cm}{11101}
+            \node[draw, dashed, rounded corners, inner sep=0.1, behind path, fit=(node16)(node17)] {};
+
+            \trienode{14}{18}{0}{-0.5cm}{0011000}
+            \trienode{14}{19}{1}{0.5cm}{0011001}
+
+            \node[draw, dashed, rounded corners, behind path, inner sep=0.2, fit=(node14)(node15)(node18)(node19)] {};
+        \end{tikzpicture}
+        \linespread{0.5}
+        \color{black}\fontsize{6pt}{0}\selectfont
+            Leis V., Kemper Alfons, Neumann Thomas. (2013). The adaptive radix
+            tree: ARTful indexing for main-memory databases. Proceedings -
+            International Conference on Data Engineering. 38-49.
+        \linespread{1.5}
+
+        \onslide<3>
+        \begin{tikzpicture}[]
+            \node[minimum width=12cm] (base) {};
+            \node[trie-node, fill=greenGood] (node1) at (base.north) {};
+            \trienode{1}{2}{0}{-1.75cm, fill=greenGood}{}
+            \trienode{1}{3}{1}{1.75cm, fill=greenGood}{}
+
+            \coordinate[left=0.35cm of node2] (node2-shift);
+            \node[trie-node, fill=blue!20, below=0.35cm of node2-shift] (node2-shift-target) {};
+            \trienode{2-shift-target}{4}{01}{-1.0cm, fill=blue!20}{}
+            \trienode{2-shift-target}{5}{1}{1.0cm, fill=blue!20}{}
+            \draw[-, btree-line, dotted] (node2) -- (node2-shift-target);
+
+            \coordinate[right=0.35cm of node3] (node3-shift);
+            \node[trie-node, fill=yellow!20, below=0.35cm of node3-shift] (node3-shift-target) {};
+            \trienode{3-shift-target}{6}{0}{-1.0cm, fill=yellow!20}{10}
+            \trienode{3-shift-target}{7}{11}{1.0cm, fill=yellow!20}{}
+            \draw[-, btree-line, dotted] (node3) -- (node3-shift-target);
+
+            \trienode{4}{8}{0}{-0.5cm, fill=blue!20}{0010}
+            \trienode{4}{9}{1}{0.5cm, fill=blue!20}{}
+
+            \coordinate[right=0.35cm of node5] (node5-shift);
+            \node[trie-node, fill=red!20, below=0.35cm of node5-shift] (node5-shift-target) {};
+            \trienode{5-shift-target}{10}{0}{-0.5cm, fill=red!20}{010}
+            \trienode{5-shift-target}{11}{1}{0.5cm, fill=red!20}{011}
+            \draw[-, btree-line, dotted] (node5) -- (node5-shift-target);
+
+            \coordinate[left=0.35cm of node7] (node7-shift);
+            \node[trie-node, fill=gray!20, below=0.35cm of node7-shift] (node7-shift-target) {};
+            \trienode{7-shift-target}{12}{0}{-0.5cm, fill=gray!20}{}
+            \trienode{7-shift-target}{13}{1}{0.5cm, fill=gray!20}{1111}
+            \draw[-, btree-line, dotted] (node7) -- (node7-shift-target);
+
+            \coordinate[right=0.35cm of node9] (node9-shift);
+            \node[trie-node, fill=Sepia!20, below=0.35cm of node9-shift] (node9-shift-target) {};
+            \trienode{9-shift-target}{14}{00}{-0.5cm, fill=Sepia!20}{}
+            \trienode{9-shift-target}{15}{00}{0.5cm, fill=Sepia!20}{001100}
+            \trienode{14}{18}{0}{-0.5cm, fill=Sepia!20}{0011000}
+            \trienode{14}{19}{1}{0.5cm, fill=Sepia!20}{0011001}
+            \draw[-, btree-line, dotted] (node9) -- (node9-shift-target);
+
+            \trienode{12}{16}{01}{-0.5cm, fill=gray!20}{111001}
+            \trienode{12}{17}{1}{0.5cm, fill=gray!20}{11101}
+        \end{tikzpicture}
+        \linespread{0.5}
+        \color{black}\fontsize{6pt}{0}\selectfont
+            Binna Robert, Zangerle Eva, Pichl Martin, Specht Guenther, Leis
+            Viktor. (2018). HOT: A Height Optimized Trie Index \\
+            for Main-Memory Database Systems. 521-534.
+        \linespread{1.5}
+
+    \end{overprint}
 
     \end{center}
 \end{frame}
