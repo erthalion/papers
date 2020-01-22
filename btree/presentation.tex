@@ -223,6 +223,7 @@
 \tikzset{bw-page/.style={draw, fill=greenGood, rounded corners}}
 \tikzset{dp-tree-log/.style={draw, minimum width=0.5cm, minimum height=0.5cm, rounded corners=0.1cm}}
 \tikzset{trie-node/.style={draw, circle}}
+\tikzset{selected-path/.style={->, btree-line, line width=2pt, color=red}}
 
 \newcommand{\btreenode}[5] {
     \path
@@ -487,12 +488,12 @@
 
     \def\arraystretch{1.5}
     \begin{tabular}{cccc}
-        B-Tree & B$^{+}$-Tree & B$_{link}$-Tree & DP-Tree \\
-        wB$^{+}$-Tree & NV-Tree & FP-Tree & FASTFAIR \\
-        HiKV & Mass-Tree & Skip List & ART \\
+        B-Tree & B$^{+}$-Tree & B$_{link}$-Tree & DPTree \\
+        wB$^{+}$-Tree & NV-Tree & FPTree & FASTFAIR \\
+        HiKV & Masstree & Skip List & ART \\
         WORT & CDDS-Tree & Bw-Tree & HOT \\
         KISS-Tree & VAST-Tree & FAST & HV-Tree \\
-        UB-Tree & LHAM & MDM & Hybrid B$^{+}$-Tree
+        UB-Tree & LHAM & MDAM & Hybrid B$^{+}$-Tree
     \end{tabular}
 \end{frame}
 
@@ -730,6 +731,8 @@
 \note{
     Postgres uses variation of B-link Tree, seems like MySQL innodb uses
     regular B+ Tree.
+
+    WiredTiger uses parent pointers.
 }
 
 \fontsize{17pt}{18}\selectfont
@@ -799,6 +802,9 @@
     \end{center}
 
 \end{frame}
+\note{
+    B*-Tree rebalances between neighbors, e.g. as in SQLite.
+}
 
 \begin{frame}[fragile]{}
     \frametitle{}
@@ -1222,7 +1228,7 @@
 \end{frame}
 \note{
     Another interesting approach is partial value on a page and the rest is on
-    extended pages (MySQL, SQLite).
+    extended pages (MySQL InnoDB, SQLite).
 }
 
 \begin{frame}[fragile]{}
@@ -1310,98 +1316,184 @@
     \frametitle{}
 
     \begin{center}
-    \textbf{Interpolation search}
+    \textbf{Multidimentional Access Method}
     \vspace{1cm}
 
-    \begin{overprint}[12cm]
+    \begin{overprint}[8cm]
         \onslide<1>
-        \begin{center}
         \begin{tikzpicture}[]
-            \node[draw] (key1) {5};
-            \foreach \i / \value [evaluate=\i as \prev using \i-1] in
-                {2/9,3/12,4/16,5/19,6/21,7/25,8/27,9/31,10/34,11/36}
-            {
-                \node[draw, right=0 of key\prev] (key\i) {\value};
-            }
+            \basicbtree{show-connections}
+            \node[below=0.2 of node5] {\footnotesize{1,a}};
+            \node[below=1.8 of node2] {\footnotesize{...}};
+            \node[below=0.2 of node6] {\footnotesize{1,z}};
+
+            \node[below=0.2 of node7] {\footnotesize{2,a}};
+            \node[below=1.8 of node3] {\footnotesize{...}};
+            \node[below=0.2 of node8] {\footnotesize{2,z}};
+
+            \node[below=0.2 of node9] {\footnotesize{3,a}};
+            \node[below=1.8 of node4] {\footnotesize{...}};
+            \node[below=0.2 of node10] {\footnotesize{3,z}};
         \end{tikzpicture}
-        \end{center}
 
         \onslide<2>
-        \begin{center}
         \begin{tikzpicture}[]
-            \node[draw] (key1) {5};
-            \foreach \i / \value [evaluate=\i as \prev using \i-1] in
-                {2/9,3/12,4/16,5/19,6/21,7/25,8/27,9/31,10/34,11/36}
-            {
-                \node[draw, right=0 of key\prev] (key\i) {\value};
-            }
+            \basicbtree{show-connections}
+            \node[below=0.2 of node5] {\footnotesize{1,a}};
+            \node[below=1.8 of node2] {\footnotesize{...}};
+            \node[below=0.2 of node6] {\footnotesize{1,z}};
 
-            \coordinate[below=2cm of key1] (start);
-            \draw[->, btree-line] (start.south)
-                .. controls ([xshift=1cm] start) and ([yshift=-3cm] key6) ..
-                (key6.south);
-            \draw[->, btree-line] (key6.south)
-                .. controls ([yshift=-3cm] key6) and ([yshift=-3cm] key9) ..
-                (key9.south);
-            \draw[->, btree-line] (key9.south)
-                .. controls ([yshift=-2cm] key9) and ([yshift=-2cm] key10) ..
-                (key10.south);
+            \node[below=0.2 of node7] {\footnotesize{2,a}};
+            \node[below=1.8 of node3] {\footnotesize{...}};
+            \node[below=0.2 of node8] {\footnotesize{2,z}};
 
+            \node[below=0.2 of node9] {\footnotesize{3,a}};
+            \node[below=1.8 of node4] {\footnotesize{...}};
+            \node[below=0.2 of node10] {\footnotesize{3,z}};
+
+            \draw[selected-path] (node1.center) -- (node2.center) -- (node5.center);
         \end{tikzpicture}
-        \end{center}
 
         \onslide<3>
-        \begin{center}
-        \begin{tikzpicture}[xscale=0.6, yscale=0.1]
-            \draw[->] (0,0) -- (11,0);
-            \draw[->] (0,0) -- (0,36);
-            \draw[color=red, line width=2pt] plot[id=x] file {\strongdata};
+        \begin{tikzpicture}[]
+            \basicbtree{show-connections}
+            \node[below=0.2 of node5] {\footnotesize{1,a}};
+            \node[below=1.8 of node2] {\footnotesize{...}};
+            \node[below=0.2 of node6] {\footnotesize{1,z}};
+
+            \node[below=0.2 of node7] {\footnotesize{2,a}};
+            \node[below=1.8 of node3] {\footnotesize{...}};
+            \node[below=0.2 of node8] {\footnotesize{2,z}};
+
+            \node[below=0.2 of node9] {\footnotesize{3,a}};
+            \node[below=1.8 of node4] {\footnotesize{...}};
+            \node[below=0.2 of node10] {\footnotesize{3,z}};
+
+            \draw[selected-path] (node1.center) -- (node3.center) -- (node7.center);
         \end{tikzpicture}
-        \end{center}
 
         \onslide<4>
-        \begin{center}
         \begin{tikzpicture}[]
-            \node[draw] (key1) {5};
-            \foreach \i / \value [evaluate=\i as \prev using \i-1] in
-                {2/9,3/12,4/16,5/19,6/21,7/25,8/27,9/31,10/34,11/36}
-            {
-                \node[draw, right=0 of key\prev] (key\i) {\value};
-            }
+            \basicbtree{show-connections}
+            \node[below=0.2 of node5] {\footnotesize{1,a}};
+            \node[below=1.8 of node2] {\footnotesize{...}};
+            \node[below=0.2 of node6] {\footnotesize{1,z}};
 
-            \coordinate[below=2cm of key6] (start);
-            \draw[->, btree-line] (start.south)
-                .. controls ([xshift=1cm] start) and ([yshift=-3cm] key10) ..
-                (key10.south);
+            \node[below=0.2 of node7] {\footnotesize{2,a}};
+            \node[below=1.8 of node3] {\footnotesize{...}};
+            \node[below=0.2 of node8] {\footnotesize{2,z}};
 
+            \node[below=0.2 of node9] {\footnotesize{3,a}};
+            \node[below=1.8 of node4] {\footnotesize{...}};
+            \node[below=0.2 of node10] {\footnotesize{3,z}};
+
+            \draw[selected-path] (node1.center) -- (node4.center) -- (node9.center);
         \end{tikzpicture}
-        \end{center}
-
-        \onslide<5>
-        \begin{center}
-        \begin{tikzpicture}[]
-            \node[draw] (key1) {5};
-            \foreach \i / \value [evaluate=\i as \prev using \i-1] in
-                {2/6,3/15,4/15,5/16,6/43,7/95,8/96,9/97,10/128,11/499}
-            {
-                \node[draw, right=0 of key\prev] (key\i) {\value};
-            }
-
-        \end{tikzpicture}
-        \end{center}
-
-        \onslide<6>
-        \begin{center}
-        \begin{tikzpicture}[xscale=0.6, yscale=0.008]
-            \draw[->] (0,0) -- (11,0);
-            \draw[->] (0,0) -- (0,499);
-            \draw[color=red, line width=2pt] plot[id=x] file {\weakdata};
-        \end{tikzpicture}
-        \end{center}
     \end{overprint}
 
     \end{center}
 \end{frame}
+\note{
+    For not complete search keys, if a dimension is under-specified, its
+    possible values must be enumerated.
+}
+
+%\begin{frame}[fragile]{}
+    %\frametitle{}
+
+    %\begin{center}
+    %\textbf{Interpolation search}
+    %\vspace{1cm}
+
+    %\begin{overprint}[12cm]
+        %\onslide<1>
+        %\begin{center}
+        %\begin{tikzpicture}[]
+            %\node[draw] (key1) {5};
+            %\foreach \i / \value [evaluate=\i as \prev using \i-1] in
+                %{2/9,3/12,4/16,5/19,6/21,7/25,8/27,9/31,10/34,11/36}
+            %{
+                %\node[draw, right=0 of key\prev] (key\i) {\value};
+            %}
+        %\end{tikzpicture}
+        %\end{center}
+
+        %\onslide<2>
+        %\begin{center}
+        %\begin{tikzpicture}[]
+            %\node[draw] (key1) {5};
+            %\foreach \i / \value [evaluate=\i as \prev using \i-1] in
+                %{2/9,3/12,4/16,5/19,6/21,7/25,8/27,9/31,10/34,11/36}
+            %{
+                %\node[draw, right=0 of key\prev] (key\i) {\value};
+            %}
+
+            %\coordinate[below=2cm of key1] (start);
+            %\draw[->, btree-line] (start.south)
+                %.. controls ([xshift=1cm] start) and ([yshift=-3cm] key6) ..
+                %(key6.south);
+            %\draw[->, btree-line] (key6.south)
+                %.. controls ([yshift=-3cm] key6) and ([yshift=-3cm] key9) ..
+                %(key9.south);
+            %\draw[->, btree-line] (key9.south)
+                %.. controls ([yshift=-2cm] key9) and ([yshift=-2cm] key10) ..
+                %(key10.south);
+
+        %\end{tikzpicture}
+        %\end{center}
+
+        %\onslide<3>
+        %\begin{center}
+        %\begin{tikzpicture}[xscale=0.6, yscale=0.1]
+            %\draw[->] (0,0) -- (11,0);
+            %\draw[->] (0,0) -- (0,36);
+            %\draw[color=red, line width=2pt] plot[id=x] file {\strongdata};
+        %\end{tikzpicture}
+        %\end{center}
+
+        %\onslide<4>
+        %\begin{center}
+        %\begin{tikzpicture}[]
+            %\node[draw] (key1) {5};
+            %\foreach \i / \value [evaluate=\i as \prev using \i-1] in
+                %{2/9,3/12,4/16,5/19,6/21,7/25,8/27,9/31,10/34,11/36}
+            %{
+                %\node[draw, right=0 of key\prev] (key\i) {\value};
+            %}
+
+            %\coordinate[below=2cm of key6] (start);
+            %\draw[->, btree-line] (start.south)
+                %.. controls ([xshift=1cm] start) and ([yshift=-3cm] key10) ..
+                %(key10.south);
+
+        %\end{tikzpicture}
+        %\end{center}
+
+        %\onslide<5>
+        %\begin{center}
+        %\begin{tikzpicture}[]
+            %\node[draw] (key1) {5};
+            %\foreach \i / \value [evaluate=\i as \prev using \i-1] in
+                %{2/6,3/15,4/15,5/16,6/43,7/95,8/96,9/97,10/128,11/499}
+            %{
+                %\node[draw, right=0 of key\prev] (key\i) {\value};
+            %}
+
+        %\end{tikzpicture}
+        %\end{center}
+
+        %\onslide<6>
+        %\begin{center}
+        %\begin{tikzpicture}[xscale=0.6, yscale=0.008]
+            %\draw[->] (0,0) -- (11,0);
+            %\draw[->] (0,0) -- (0,499);
+            %\draw[color=red, line width=2pt] plot[id=x] file {\weakdata};
+        %\end{tikzpicture}
+        %\end{center}
+    %\end{overprint}
+
+    %\end{center}
+%\end{frame}
 
 \begin{frame}[fragile]{}
     \frametitle{}
@@ -1975,6 +2067,7 @@
 \end{frame}
 \note{
     Requires also "split", "index", "remove node", "merge", "flush" deltas
+    MSFT Hekaton, Sled db - Bw-Tree
 }
 
 \begin{frame}[fragile]{}
@@ -2208,6 +2301,11 @@
 
     \end{center}
 \end{frame}
+\note{
+    Silo - Masstree
+    HyPer - ART
+    ClickHouse - BTrie
+}
 
 \begin{frame}[fragile]{}
     \frametitle{}
@@ -2235,12 +2333,18 @@
             \item <+-> Buffered (Lazy) B-Tree
             \item <+-> Cache conscious B-Tree
             \item <+-> Learned indexes
+            \item <+-> UB-Tree
             \item <+-> Skip List
             \item <+-> LSM Tree
             \item <+-> ...
         \end{itemize}
     \end{center}
 \end{frame}
+\note{
+    Buffered B-Tree are used in WiredTiger.
+    Skip list are used also in WiredTiger as in memory structure, in Apache
+    Cassandra again as in memory, and in Redis.
+}
 
 \fontsize{18pt}{18}\selectfont
 \begin{frame}
