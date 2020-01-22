@@ -138,7 +138,7 @@
 
     \vspace*{1.5em}
     \fontsize{8pt}{10}\selectfont
-    {\color{black} 03-12-2019}%
+    {\color{black} 31-01-2019}%
 
     \vfill
     \vspace*{2em}
@@ -1804,7 +1804,11 @@
             \smallbtree{1}{2.5}{}{}{}{green-box}
             \smallbtree{2}{1}{left=4cm of node11, yshift=-0.6cm}{}{}{blue-box}
             \node[bloom-filter, above=0.5cm of node21, fill=redBad] (bloom) {};
-            \node[arrow-pointer, left=0.5cm of nodebox2.west] {\footnotesize{Insert}};
+            \node[arrow-pointer, left=0.5cm of nodebox2.west, color=white] (inserts) {\footnotesize{Insert}};
+            \node[arrow-pointer, above=1.2cm of inserts] {\footnotesize{Read}};
+
+            \draw[->, btree-line] (bloom.south) -- (nodebox2.north);
+            \draw[->, btree-line] (bloom.east) -| (nodebox1.north);
         \end{tikzpicture}
 
         \onslide<6>
@@ -1812,40 +1816,16 @@
             \smallbtree{1}{2.5}{}{}{}{green-box}
             \smallbtree{2}{1}{left=4cm of node11, yshift=-0.6cm}{}{}{blue-box}
             \node[bloom-filter, above=0.5cm of node21, fill=redBad] (bloom) {};
-            \node[arrow-pointer, left=0.5cm of nodebox2.west] {\footnotesize{Insert}};
-            \draw[->, btree-line] ([yshift=-0.2cm]nodebox2.south)
-                .. controls ([yshift=-2.5cm] nodebox2) and ([yshift=-2.5cm] nodebox1) ..
-                ([yshift=-0.2cm]nodebox1.south);
-        \end{tikzpicture}
-
-        \onslide<7>
-        \begin{tikzpicture}[]
-            \smallbtree{1}{2.5}{}{}{}{green-box}
-            \smallbtree{2}{1}{left=4cm of node11, yshift=-0.6cm}{}{}{blue-box}
-            \node[bloom-filter, above=0.5cm of node21, fill=redBad] (bloom) {};
             \node[arrow-pointer, left=0.5cm of nodebox2.west] (inserts) {\footnotesize{Insert}};
             \node[arrow-pointer, above=1.2cm of inserts] {\footnotesize{Read}};
 
             \draw[->, btree-line] ([yshift=-0.2cm]nodebox2.south)
                 .. controls ([yshift=-2.5cm] nodebox2) and ([yshift=-2.5cm] nodebox1) ..
                 ([yshift=-0.2cm]nodebox1.south);
-        \end{tikzpicture}
 
-        \onslide<8>
-        \begin{tikzpicture}[]
-            \smallbtree{1}{2.5}{}{}{}{green-box}
-            \smallbtree{2}{1}{left=4cm of node11, yshift=-0.6cm}{}{}{blue-box}
-            \node[bloom-filter, above=0.5cm of node21, fill=redBad] (bloom) {};
-            \node[arrow-pointer, left=0.5cm of nodebox2.west] (inserts) {\footnotesize{Insert}};
-            \node[arrow-pointer, above=1.2cm of inserts] {\footnotesize{Read}};
-
-            \draw[->, btree-line] ([yshift=-0.2cm]nodebox2.south)
-                .. controls ([yshift=-2.5cm] nodebox2) and ([yshift=-2.5cm] nodebox1) ..
-                ([yshift=-0.2cm]nodebox1.south);
             \draw[->, btree-line] (bloom.south) -- (nodebox2.north);
             \draw[->, btree-line] (bloom.east) -| (nodebox1.north);
         \end{tikzpicture}
-
     \end{overprint}
 
     \linespread{0.5}
