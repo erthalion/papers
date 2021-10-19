@@ -327,6 +327,24 @@
         \vspace{0.2cm}
 
         \begin{minted}[fontsize=\normalsize]{bash}
+    # Voice Activity Detector to trim
+    # silence and quiet background noise
+    # at the beginning and the end
+
+    sox audio.mp3 trimmed.mp3 vad
+
+        \end{minted}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \textbf{Cleaning up}
+        \vspace{0.2cm}
+
+        \begin{minted}[fontsize=\normalsize]{bash}
     # -v, --volume to adjust volume by certain factor
 
     sox audio.mp3 output.mp3 stat
@@ -386,6 +404,142 @@
     \end{center}
 \end{frame}
 
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \textbf{Unite and lead}
+        \vspace{0.2cm}
+
+        \begin{minted}[fontsize=\normalsize]{bash}
+    sox audio.mp3 output.mp3 \
+        trim 0 30 # cut out from the 0 to 30th second
+        fade 5    # fade in/out for 5 seconds
+        pad 7     # pad with 7 seconds of silence
+        \end{minted}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \textbf{Unite and lead}
+        \vspace{0.2cm}
+
+        \begin{minted}[fontsize=\normalsize]{bash}
+    # splice two parts together at position 00:25 with
+    # excess/leeway 1 second and half-cosine wave fading
+
+    sox part1.mp3 part2.mp3 mix.mp3 \
+        splice -h 00:25,1,1
+        \end{minted}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \textbf{Effects}
+        \vspace{0.2cm}
+
+        \begin{minted}[fontsize=\normalsize]{bash}
+    # add an echo with the delay 500 ms and loudness 0.3
+
+    sox voice.clean.mp3 echo.mp3 echo 0.8 0.9 500 0.3
+        \end{minted}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \textbf{Effects}
+        \vspace{0.2cm}
+
+        \begin{minted}[fontsize=\normalsize]{bash}
+    # Kaiser–Bessel window band-pass filter
+    # to generate "phone" effect
+
+    sox audio.mp3 output.mp3 sinc 500-3000 vol +3
+
+    # Add some clicking noise on top of it
+    sox -n pinknoise.mp3 rate 44100 \
+        synth 10 pinknoise vol 0.01
+    sox -m -v 1 output.mp3 pinknoise.mp3 phone.mp3
+        \end{minted}
+
+        \href{https://en.wikipedia.org/wiki/Kaiser_window}{Kaiser-Bessel window}
+    \end{center}
+\end{frame}
+
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \textbf{Generating effects}
+        \vspace{0.2cm}
+
+        \begin{minted}[fontsize=\normalsize]{bash}
+# -n says the input is a special "null" file
+sox -n guitar-chortds.mp3 \
+
+  # sine waves for tones of specified note and octave
+  synth pl G2 pl B2 pl D3 pl G3 pl D4 pl G4 \
+
+  # delay channels with each tone and mix with fading effect
+  delay 0 .05 .1 .15 .2 .25 remix - fade 0 4 .1 norm -1
+        \end{minted}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \textbf{Development history}
+        \vspace{0.2cm}
+
+        \href{http://sox.sourceforge.net/}{sox.sourceforge.net}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \textbf{Development history}
+        \vspace{0.2cm}
+
+        \includegraphics[width=0.8\textwidth]{sox-releases.png}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \textbf{Development history}
+        \vspace{0.2cm}
+
+        \begin{flushleft}
+        SoX has had several vulnerabilities listed in the National
+        Vulnerability Database since its last public release in 2015. These
+        vulnerabilities include stack and heap overflows and denial-of-service
+        attacks.
+        \end{flushleft}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \textbf{Development history}
+        \vspace{0.2cm}
+
+        \includegraphics[width=0.7\textwidth]{sox-commits.png}
+
+    \end{center}
+\end{frame}
 
 \fontsize{18pt}{18}\selectfont
 \begin{frame}
