@@ -36,6 +36,7 @@
 \usepackage{csquotes}
 \usetikzlibrary{tikzmark}
 \usetikzlibrary{arrows.meta}
+\usepackage[font=small,labelfont=bf]{caption}
 
 \usepackage{tcolorbox}
 \usepackage{tabularx}
@@ -50,6 +51,11 @@
 \def\twitter{{\FA \faTwitter}}
 \def\github{{\FA \faGithub}}
 \def\email{{\FA \faEnvelope}}
+\def\audio{{\FA \faFileAudioO}}
+\def\cut{{\FA \faCut}}
+\def\spinner{{\FA \faSpinner}}
+\def\music{{\FA \faMusic}}
+\def\sliders{{\FA \faSliders}}
 
 \renewcommand{\ttdefault}{pcr}
 \newfontfamily{\ttfamily}{Fira Code}
@@ -138,7 +144,7 @@
 
     \vspace*{1.5em}
     \fontsize{8pt}{10}\selectfont
-    {\color{black} 31-01-2020}%
+    {\color{black} 06-11-2021}%
 
     \vfill
     \vspace*{2em}
@@ -190,6 +196,44 @@
 \end{tikzpicture}
 }
 
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \begin{itemize}[label={\MVRightarrow}]
+            \item Why sound processing?
+            \item Sound Exchange
+            \item Recording and formats
+            \item Cleaning up
+            \item Merging layers
+            \item Adding effects
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \begin{itemize}[]
+            \fontsize{20pt}{21}\selectfont
+            \item {\hfil \music \ \ \ \ \music \ \ \ \ \music \ \ \ \ \music
+                \ \ \ \  ...  \ \ \ \ \music}
+
+            \fontsize{15pt}{16}\selectfont
+
+            \item \vspace{0.5cm}{\hfil \cut \ \ \ \ \spinner \ \ \ \ \sliders}\vspace{0.5cm}
+
+            \fontsize{20pt}{21}\selectfont
+            \item {\hfil \audio \ \ \ \ \audio \ \ \ \ ... \ \ \ \ \audio}
+
+            \fontsize{15pt}{16}\selectfont
+            \item \vspace{0.5cm}{\hfil \cut \ \ \ \ \spinner \ \ \ \ \sliders}\vspace{0.5cm}
+
+            \fontsize{20pt}{21}\selectfont
+            \item {\hfil \audio}
+        \end{itemize}
+    \end{center}
+\end{frame}
+
 \begin{frame}
     \frametitle{}
     \begin{center}
@@ -215,25 +259,25 @@
     \end{center}
 \end{frame}
 
-\begin{frame}[fragile]{}
-    \frametitle{}
-    \begin{center}
-        \textbf{Record audio}
-        \vspace{0.2cm}
+%\begin{frame}[fragile]{}
+    %\frametitle{}
+    %\begin{center}
+        %\textbf{Record audio}
+        %\vspace{0.2cm}
 
-        \begin{minted}[fontsize=\normalsize]{bash}
-    # Thread_queue_size applies to the first
-    # input specified after it.
-    # In some cases it's not enough to avoid
-    # "buffer xrun", try to record video and
-    # audio separately.
+        %\begin{minted}[fontsize=\normalsize]{bash}
+    %# Thread_queue_size applies to the first
+    %# input specified after it.
+    %# In some cases it's not enough to avoid
+    %# "buffer xrun", try to record video and
+    %# audio separately.
 
-    ffmpeg -f alsa -thread_queue_size 4096
-        -i hw:0 -acodec aac audio.mp3
-        \end{minted}
+    %ffmpeg -f alsa -thread_queue_size 4096
+        %-i hw:0 -acodec aac audio.mp3
+        %\end{minted}
 
-    \end{center}
-\end{frame}
+    %\end{center}
+%\end{frame}
 
 \begin{frame}[fragile]{}
     \frametitle{}
@@ -300,9 +344,15 @@
         \textbf{Cleaning up}
         \vspace{0.2cm}
 
-        \includegraphics[width=0.48\textwidth]{voice-spectrogram.png}
+        \begin{minipage}{0.49\linewidth}
+            \includegraphics[width=\linewidth]{voice-spectrogram.png}
+            \captionof{figure}{With noise}
+        \end{minipage}
         \hfill
-        \includegraphics[width=0.48\textwidth]{voice-clean-spectrogram.png}
+        \begin{minipage}{0.49\linewidth}
+            \includegraphics[width=\linewidth]{voice-clean-spectrogram.png}
+            \captionof{figure}{Without noise}
+        \end{minipage}
 
     \end{center}
 \end{frame}
@@ -312,6 +362,7 @@
     \begin{center}
         \textbf{Cleaning up}
         \vspace{0.2cm}
+        \\ Fast Fourier transform \\
 
         \huge
         \begin{equation*}
@@ -348,7 +399,7 @@
         \begin{minted}[fontsize=\normalsize]{bash}
     # -v, --volume to adjust volume by certain factor
 
-    sox audio.mp3 output.mp3 stat
+    sox audio.mp3 -n stat
 
         Samples read:            441216
         Length (seconds):     10.004898
@@ -362,25 +413,9 @@
 
     \end{center}
 \end{frame}
-
-\begin{frame}[fragile]{}
-    \frametitle{}
-    \begin{center}
-        \textbf{Clipping}
-        \vspace{0.2cm}
-
-        \includegraphics[width=0.6\textwidth]{clipping.png}
-        \hspace*{-2cm}
-        \href{https://en.wikipedia.org/wiki/File:Clipping.svg}
-             {\color{black}\fontsize{5pt}{0}\selectfont @Gutten på Hemsen}
-
-
-    \end{center}
-\end{frame}
-\note {
-    Many electric guitar players intentionally overdrive their amplifiers (or
-    insert a "fuzz box") to cause clipping in order to get a desired sound (see
-    guitar distortion).
+\note{
+    Volume adjustment: The parameter  to  the  vol  effect  which would  make
+    the audio as loud as possible without clipping.
 }
 
 \begin{frame}[fragile]{}
@@ -389,7 +424,6 @@
         \textbf{Automatic Gain Control}
         \vspace{0.2cm}
 
-
         \begin{minted}[fontsize=\normalsize]{bash}
     sox audio.mp3 agc.mp3 compand \
         0.3,0.3 \ # attach, decay, time over which
@@ -397,14 +431,25 @@
 
         6:      \ # transfer function, with 6dB soft knee
 
-             0, -80, \    # do nothing below 80dB
-            -80,-60, \    # compand 80dB to 60dB
-            -60,-40, \    # compand 60dB to 40dB
-            -40,-20, \    # etc
-            -40 0 0 0.3
+             0, -40,     \    # do nothing below -40dB
+            -40,-35,     \    # compand -40dB to -35dB
+            -20,  0, -20 \    # everything else to -20dB
+            -10 -60 1
         \end{minted}
     \end{center}
 \end{frame}
+\note{
+    Automatic Gain Control (AGC) is an audio processing technique that is
+    designed to smooth out volume differences between different parts of an
+    audio.
+
+    Compand - compress or expand the dynamic range of audio.
+    If the list is preceded by a soft-knee-dB value, then the points at where
+    adjacent line segments on the transfer function meet will be rounded by the
+    amount given.
+
+    In the example above very soft sounds (below -80dB) will be left untouched.
+}
 
 \begin{frame}[fragile]{}
     \frametitle{}
@@ -412,7 +457,8 @@
         \textbf{Automatic Gain Control}
         \vspace{0.2cm}
 
-        \includegraphics[width=0.7\textwidth]{agc.png}
+        \includegraphics[width=0.6\textwidth]{agc.png}
+        \captionof{figure}{SoX compand (compress and expand) effect}
 
     \end{center}
 \end{frame}
@@ -433,6 +479,28 @@
         \end{minted}
     \end{center}
 \end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \textbf{Clipping}
+        \vspace{0.2cm}
+
+        \includegraphics[width=0.6\textwidth]{clipping.png}
+        \hspace*{-2cm}
+        \href{https://en.wikipedia.org/wiki/File:Clipping.svg}
+             {\color{black}\fontsize{5pt}{0}\selectfont @Gutten på Hemsen}
+        \captionof{figure}{This PCM waveform is clipped between the red lines}
+
+    \end{center}
+\end{frame}
+\note {
+    PCM: Pulse-code modulation (PCM)
+
+    Many electric guitar players intentionally overdrive their amplifiers (or
+    insert a "fuzz box") to cause clipping in order to get a desired sound (see
+    guitar distortion).
+}
 
 \begin{frame}[fragile]{}
     \frametitle{}
@@ -503,6 +571,12 @@
         \href{https://en.wikipedia.org/wiki/Kaiser_window}{Kaiser-Bessel window}
     \end{center}
 \end{frame}
+\note{
+    A high-pass filter (HPF) attenuates content below a cutoff frequency,
+    allowing higher frequencies to pass through the filter. A low-pass filter
+    (LPF) attenuates content above a cutoff frequency, allowing lower
+    frequencies to pass through the filter.
+}
 
 \begin{frame}[fragile]{}
     \frametitle{}
@@ -510,7 +584,8 @@
         \textbf{Effects}
         \vspace{0.2cm}
 
-        \includegraphics[width=0.7\textwidth]{phone.png}
+        \includegraphics[width=0.6\textwidth]{phone.png}
+        \captionof{figure}{SoX sinc (band-pass filter) effect}
 
     \end{center}
 \end{frame}
@@ -544,7 +619,7 @@ sox -n guitar-chortds.mp3 \
         \includegraphics[width=0.4\textwidth]{dither.png}
         \href{https://en.wikipedia.org/wiki/Dither#/media/File:Michelangelo's_David_-_Bayer.png}
              {\color{black}\fontsize{5pt}{0}\selectfont @Gerbrant}
-
+        \captionof{figure}{Dithering in image processing.}
 
     \end{center}
 \end{frame}
@@ -553,54 +628,54 @@ sox -n guitar-chortds.mp3 \
     occurring.
 }
 
-\begin{frame}[fragile]{}
-    \frametitle{}
-    \begin{center}
-        \textbf{Development history}
-        \vspace{0.2cm}
+%\begin{frame}[fragile]{}
+    %\frametitle{}
+    %\begin{center}
+        %\textbf{Development history}
+        %\vspace{0.2cm}
 
-        \href{http://sox.sourceforge.net/}{sox.sourceforge.net}
+        %\href{http://sox.sourceforge.net/}{sox.sourceforge.net}
 
-    \end{center}
-\end{frame}
+    %\end{center}
+%\end{frame}
 
-\begin{frame}[fragile]{}
-    \frametitle{}
-    \begin{center}
-        \textbf{Development history}
-        \vspace{0.2cm}
+%\begin{frame}[fragile]{}
+    %\frametitle{}
+    %\begin{center}
+        %\textbf{Development history}
+        %\vspace{0.2cm}
 
-        \includegraphics[width=0.8\textwidth]{sox-releases.png}
+        %\includegraphics[width=0.8\textwidth]{sox-releases.png}
 
-    \end{center}
-\end{frame}
+    %\end{center}
+%\end{frame}
 
-\begin{frame}[fragile]{}
-    \frametitle{}
-    \begin{center}
-        \textbf{Development history}
-        \vspace{0.2cm}
+%\begin{frame}[fragile]{}
+    %\frametitle{}
+    %\begin{center}
+        %\textbf{Development history}
+        %\vspace{0.2cm}
 
-        \begin{flushleft}
-        SoX has had several vulnerabilities listed in the National
-        Vulnerability Database since its last public release in 2015. These
-        vulnerabilities include stack and heap overflows and denial-of-service
-        attacks.
-        \end{flushleft}
+        %\begin{flushleft}
+        %SoX has had several vulnerabilities listed in the National
+        %Vulnerability Database since its last public release in 2015. These
+        %vulnerabilities include stack and heap overflows and denial-of-service
+        %attacks.
+        %\end{flushleft}
 
-    \end{center}
-\end{frame}
+    %\end{center}
+%\end{frame}
 
-\begin{frame}[fragile]{}
-    \frametitle{}
-    \begin{center}
-        \textbf{Development history}
-        \vspace{0.2cm}
+%\begin{frame}[fragile]{}
+    %\frametitle{}
+    %\begin{center}
+        %\textbf{Development history}
+        %\vspace{0.2cm}
 
-        \includegraphics[width=0.7\textwidth]{sox-commits.png}
+        %\includegraphics[width=0.7\textwidth]{sox-commits.png}
 
-    \end{center}
-\end{frame}
+    %\end{center}
+%\end{frame}
 
 \fontsize{18pt}{18}\selectfont
 \begin{frame}
