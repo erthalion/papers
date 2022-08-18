@@ -339,6 +339,35 @@
     \frametitle{Probes before/after}
 
     \begin{center}
+        \begin{minted}[fontsize=\Large, escapeinside=||]{c}
+  struct kretprobe {
+    struct kprobe kp;
+    kretprobe_handler_t handler;
+    kretprobe_handler_t entry_handler;
+    |\colorbox{red!20}{\textbf{int maxactive;}}|
+    |\colorbox{red!20}{\textbf{int nmissed;}}|
+    size_t data_size;
+    struct freelist_head freelist;
+    struct kretprobe_holder *rph;
+  };
+        \end{minted}
+    \end{center}
+\end{frame}
+\note{
+    While the probed function is executing, its return address is stored in an
+    object of type kretprobe_instance.  Before calling register_kretprobe(),
+    the user sets the maxactive field of the kretprobe struct to specify how
+    many instances of the specified function can be probed simultaneously.
+    register_kretprobe() pre-allocates the indicated number of
+    kretprobe_instance objects.
+
+mention kprobe vs kfunc, the patch and that maxactive could go away (but didn't yet).
+}
+
+\begin{frame}[fragile]{}
+    \frametitle{Probes before/after}
+
+    \begin{center}
         \begin{columns}
             \begin{column}{0.5\textwidth}
                 \begin{minted}[fontsize=\large]{c}
@@ -366,6 +395,22 @@
     Pros: fast, only target progs
     Cons: requires BTF
 }
+
+\begin{frame}[fragile]{}
+    \frametitle{Probes before/after}
+
+    \begin{center}
+        \begin{minted}[fontsize=\Large]{c}
+    if (!btf) {
+      bpf_log(log,
+        "FENTRY/FEXIT program can only be"
+        "attached to another program"
+        "annotated with BTF\n");
+      return -EINVAL;
+    }
+        \end{minted}
+    \end{center}
+\end{frame}
 
 \begin{frame}[fragile]{}
     \frametitle{Probes before/after}
@@ -399,6 +444,26 @@
 }
 
 \begin{frame}[fragile]{}
+    \frametitle{Probes before/after}
+
+    \begin{center}
+        \begin{columns}
+            \begin{column}{0.5\textwidth}
+                \begin{minted}[fontsize=\large, escapeinside=||]{shell-session}
+  $ bpftool prog profile \
+      id 5 \
+      duration 10 \
+      cycles instructions
+                \end{minted}
+            \end{column}
+        \end{columns}
+    \end{center}
+\end{frame}
+\note{
+    In this way bpftool profile & perf stat -b work
+}
+
+\begin{frame}[fragile]{}
     \frametitle{Profiling}
 
     \begin{center}
@@ -421,6 +486,8 @@
     Few samples, only an example. Uops_retired.stall_cycles = Cycles without
     actually retired uops.  BTF is needed, not only as debugging information,
     but also as perf facilitation.
+
+    Sampling the whole kernel, limiting, intel_pt?
 }
 
 \fontsize{26pt}{26}\selectfont
@@ -439,7 +506,7 @@
 
     \begin{center}
         \begin{minted}[fontsize=\large]{c}
-                       if (pid < ts)
+                       if (delta < ts)
         \end{minted}
 
         \vspace{0.5cm}
@@ -447,7 +514,7 @@
         \begin{columns}
             \begin{column}{0.5\textwidth}
                 \begin{minted}[fontsize=\large, escapeinside=||]{asm}
-    ; if (pid < ts)
+    ; if (delta < ts)
       cmp    %rsi,%rdi
       jae    0x0000000000000068
                \end{minted}
@@ -456,7 +523,7 @@
 
            \begin{column}{0.5\textwidth}
                 \begin{minted}[fontsize=\large, escapeinside=||]{asm}
-; if (pid < ts)
+; if (delta < ts)
   cmp    %rdi,%rsi
   jbe    0x0000000000000065
                 \end{minted}
@@ -473,6 +540,32 @@
     Influences size of the program and final instructions (more workarounds for
     v1 here vs v2).  Wors with -mcpu=v1/v2/v3 -mattr=+alu32 (for me ‘probe’
     wasn’t working) via llc. With clang use -mllvm -mcpu …
+
+    BPF_JLT (jump less than)
+    jae (jump if above or equal, prev cmp is greater than or equal)
+    jbe (jump if below or equal, prev cmp lesser than or equal)
+}
+
+\begin{frame}[fragile]{}
+    \frametitle{BPF Instruction Set}
+
+    \begin{center}
+        \begin{minted}[fontsize=\Large, escapeinside=||]{shell-session}
+      $ llc probe.bc
+          |\colorbox{red!20}{\textbf{-mcpu=v2}}|
+          |\colorbox{red!20}{\textbf{-march=+alu32}}|
+          -march=bpf
+          -filetype=obj
+          -o probe.o
+        \end{minted}
+        \begin{minted}[fontsize=\Large, escapeinside=||]{shell}
+      # otherwise -mllvm -mcpu=...
+        \end{minted}
+
+    \end{center}
+\end{frame}
+\note{
+    Arithmetic logic unit
 }
 
 \begin{frame}[fragile]{}
@@ -540,6 +633,42 @@
     BPF calls as conventional BPF helper calls.
 }
 
+\begin{frame}[fragile]{}
+    \frametitle{BPF 2 BPF}
+
+    \begin{center}
+        \begin{minted}[fontsize=\large]{c}
+  if (idx && subprog[idx].has_tail_call && depth >= 256) {
+    verbose(env,
+      "tail_calls are not allowed when call stack"
+      "of previous frames is %d bytes. Too large\n",
+      depth);
+    return -EACCES;
+  }
+        \end{minted}
+    \end{center}
+\end{frame}
+\note{
+    protect against potential stack overflow that might happen when
+    bpf2bpf calls get combined with tailcalls. Limit the caller's stack
+    depth for such case down to 256 so that the worst case scenario
+    would result in 8k stack size (32 which is tailcall limit * 256 =
+    8k).
+
+    To get the idea what might happen, see an example:
+    func1 -> sub rsp, 128
+     subfunc1 -> sub rsp, 256
+     tailcall1 -> add rsp, 256
+      func2 -> sub rsp, 192 (total stack size = 128 + 192 = 320)
+      subfunc2 -> sub rsp, 64
+      subfunc22 -> sub rsp, 128
+      tailcall2 -> add rsp, 128
+       func3 -> sub rsp, 32 (total stack size 128 + 192 + 64 + 32 = 416)
+
+    tailcall will unwind the current stack frame but it will not get rid
+    of caller's stack as shown on the example above.
+}
+
 \fontsize{26pt}{26}\selectfont
 \begin{frame}[fragile]{}
     \frametitle{}
@@ -567,6 +696,10 @@
     aa2e93b8e58e18442edfb2427446732415bc215e
     cb4d03ab499d4c040f4ab6fd4389d2b49f42b5a5
     + Libbpf support
+
+    Batching saves on user/kernel space interaction.
+    Visible improvements ~1M records with batches of size
+    10, 1000 etc.
 }
 
 \begin{frame}[fragile]{}
@@ -605,6 +738,14 @@
 \end{frame}
 \note{
     9330986c03006ab1d33d243b7cfe598a7a3c1baa
+
+    A Bloom filter is a space-efficient probabilistic data structure that is
+    used to test whether an element is a member of a set. False positive
+    matches are possible, but false negatives are not – in other words, a query
+    returns either "possibly in set" or "definitely not in set". Elements can
+    be added to the set, but not removed (though this can be addressed with the
+    counting Bloom filter variant); the more items added, the larger the
+    probability of false positives.
 }
 
 \begin{frame}[fragile]{}
@@ -620,6 +761,26 @@
 \end{frame}
 \note{
     a10787e6d58c24b51e91c19c6d16c5da89fcaa4b
+
+    To access per-task data, BPF programs usually creates a hash table with
+    pid as the key. This is not ideal because:
+     1. The user need to estimate the proper size of the hash table, which may
+        be inaccurate;
+     2. Big hash tables are slow;
+     3. To clean up the data properly during task terminations, the user need
+        to write extra logic.
+
+	Logically, it could be thought of as getting the value from
+	a *map* with *task* as the **key**.  From this
+	perspective,  the usage is not much different from
+	**bpf_map_lookup_elem**\ (*map*, **&**\ *task*) except this
+	helper enforces the key must be an task_struct and the map must also
+	be a **BPF_MAP_TYPE_TASK_STORAGE**.
+
+	Underneath, the value is stored locally at *task* instead of
+	the *map*.  The *map* is used as the bpf-local-storage
+	"type". The bpf-local-storage "type" (i.e. the *map*) is
+	searched against all bpf_local_storage residing at *task*.
 }
 
 \fontsize{18pt}{18}\selectfont
