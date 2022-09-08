@@ -321,7 +321,7 @@
 
     \vspace{2.0cm}
     \href{https://pchaigno.github.io/bpf/2021/10/20/ebpf-instruction-sets.html}
-         {\color{links}\fontsize{10pt}{0}\selectfont eBPF Instruction Sets}
+         {\color{links}\fontsize{8pt}{0}\selectfont eBPF Instruction Sets}
     \end{center}
 \end{frame}
 \note{
@@ -378,6 +378,28 @@
     counting Bloom filter variant); the more items added, the larger the
     probability of false positives.
 }
+
+\begin{frame}[fragile]{}
+    \frametitle{BPF program pack allocator}
+
+    \begin{center}
+        \begin{minted}[fontsize=\Large]{c}
+    struct bpf_prog_pack {
+        struct list_head list;
+        void *ptr;
+        unsigned long bitmap[];
+    };
+        \end{minted}
+    \end{center}
+\end{frame}
+
+\note{
+    57631054fae6dcc9c892ae6310b58bbb6f6e5048
+    iTLB trashing due to small progs
+
+    Followed after frontent bound bpf progs, where iTLB contributes.
+}
+
 
 \begin{frame}[fragile]{}
     \frametitle{Task local storage}
@@ -564,6 +586,7 @@
 \begin{frame}[fragile]{}
     \frametitle{}
 
+    \vspace{1.5cm}
     \begin{center}
         \begin{tikzpicture}[
                 align=center,
@@ -682,8 +705,6 @@
 }
 
 \begin{frame}[fragile]{}
-    \frametitle{Modeling}
-
     \begin{center}
         \includegraphics[width=0.65\textwidth,center]{overhead.png}
     \end{center}
