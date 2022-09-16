@@ -2014,6 +2014,59 @@
     \end{center}
 \end{frame}
 
+\begin{frame}[fragile]{}
+    \frametitle{}
+
+    \begin{center}
+    \textbf{Learned Index}
+    \vspace{1.0cm}
+
+    \begin{overprint}[3cm]
+        \onslide<1>
+        \begin{tikzpicture}[]
+            \smallbtree{1}{2.5}{}{}{}{green-box}
+            \node[dp-tree-log, below=1.5cm of nodebox1.south] (log2) {};
+            \node[dp-tree-log, right=0.5cm of log2] (log3) {};
+            \node[dp-tree-log, left=0.5cm of log2] (log1) {};
+            \draw[->, btree-line] (nodebox1.south) -- (log3);
+            \draw[->, btree-line] (nodebox1.south) -- (log2);
+            \draw[->, btree-line] (nodebox1.south) -- (log1);
+            \draw[->, btree-line] (log1) -- (log2) -- (log3);
+        \end{tikzpicture}
+
+        \onslide<2>
+        \begin{tikzpicture}[]
+            \node[green-box,
+                  rounded corners=0.2cm,
+                  inner sep=0.2cm,
+                  minimum width=3.23cm,
+                  minimum height=2.23cm,
+                  right=1cm of nodebox1]
+                (unknown-box) {?};
+            \node[dp-tree-log, below=1.5cm of unknown-box.south] (log2) {};
+            \node[dp-tree-log, right=0.5cm of log2] (log3) {};
+            \node[dp-tree-log, left=0.5cm of log2] (log1) {};
+            \draw[->, btree-line] (unknown-box.south) -- (log3);
+            \draw[->, btree-line] (unknown-box.south) -- (log2);
+            \draw[->, btree-line] (unknown-box.south) -- (log1);
+            \draw[->, btree-line] (log1) -- (log2) -- (log3);
+        \end{tikzpicture}
+
+    \end{overprint}
+
+    \linespread{0.5}
+    \vspace{0.5cm}
+    \color{black}\fontsize{6pt}{0}\selectfont
+        Kraska Tim, Alex Beutel, Ed H. Chi, Jeffrey Dean, and Neoklis
+        Polyzotis. "The case for learned index structures." In Proceedings of
+        the 2018 international conference on management of data.
+    \linespread{1.5}
+
+    \end{center}
+\end{frame}
+\note{
+}
+
 \pgfdeclarelayer{background layer}
 \pgfsetlayers{background layer,main}
 
@@ -2125,7 +2178,6 @@
     in performance. PLEX addresses this issue by replacing the
     radix table with a radix tree, represented by CHT.
 }
-
 
 %\begin{frame}[fragile]{}
     %\frametitle{}
