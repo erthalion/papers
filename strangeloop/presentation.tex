@@ -464,11 +464,10 @@
     \frametitle{}
 
     \begin{itemize}[label={\MVRightarrow}]
-        \item <+-> D. Comet, "Ubiquitous B-tree", ACM Comp. Surv., vol. 11, no.
-            2, 1979.
-        \item <+-> Graefe, Goetz and Harumi A. Kuno. "Modern B-tree
-            techniques." IEEE 27th International Conference on Data
-            Engineering, 2011.
+        \item <+-> Comer D. (1979). The Ubiquitous B-Tree. \\
+            Computing Surveys, 11 (2).
+        \item <+-> Graefe G. (2011). Modern B-Tree Techniques. \\
+            Foundations and Trends in Databases.
     \end{itemize}
 \end{frame}
 
@@ -477,17 +476,24 @@
 
     \begin{itemize}[label={\MVRightarrow}]
         \item RUM conjecture
-        \item B-Tree
+        \item B-Tree internals
         \begin{itemize}[label={}]
-            \item Key normalization \& friends
+            \item Key normalization
+            \item Prefix/Suffix truncation
             \item SB-Tree
-            \item MDAM
         \end{itemize}
-        \item Hybrid, Bw-Tree, DPTree
+        \item B-Tree as a component
+        \begin{itemize}[label={}]
+            \item Hybrid index
+            \item Bw-Tree
+            \item Partitioned B-Tree
+        \end{itemize}
         \item Learned Indexes
         \item Everything else
     \end{itemize}
 \end{frame}
+
+\section{RUM conjecture}
 
 \begin{frame}
     \frametitle{}
@@ -528,11 +534,13 @@
     \end{center}
 \end{frame}
 
+\section{B-Tree internals}
+
 \begin{frame}[fragile]{}
     \frametitle{}
 
     \begin{center}
-    \textbf{B$^+$Tree}
+    \textbf{B-Tree $\,\to\,$ B$^+$Tree}
     \vspace{1cm}
 
     \begin{overprint}[12cm]
@@ -691,15 +699,14 @@
             \draw[->, btree-line] ([yshift=0.1cm]sep43.west) -- ([yshift=0.1cm]link-sep43.east);
         \end{tikzpicture}
     \end{overprint}
-    \end{center}
 
     \linespread{0.5}
     \vspace{0.5cm}
     \color{black}\fontsize{6pt}{0}\selectfont
-        P. Lehman and S. Yao, Efficient Locking for Concurrent Operations on
-        B-Trees, ACM Transactions on Database Systems, Vol 6, No. 4, December
-        1981, pp 650-670
+        Lehman P., Yao S. (1981). Efficient Locking for Concurrent Operations on B-Trees. \\
+        ACM Transactions on Database Systems.
     \linespread{1.5}
+    \end{center}
 
 \end{frame}
 \note{
@@ -795,8 +802,8 @@
             ways. Our results suggest that rebalancing on deletion no only
             unnecessary but may be harmful."
         \end{displayquote}
-        \footnotesize{S. Sen and R. E. Tarjan, "Deletion without rebalancing in multiway
-        search trees." ISAAC, pp. 832-841, 2009}
+        \footnotesize{Sen S., Tarjan R. E. (2009). Deletion without rebalancing
+            in multiway search trees ACM Transactions on Database Systems}
     \end{flushleft}
 
 \end{frame}
@@ -839,8 +846,8 @@
     \linespread{0.5}
     \vspace{0.5cm}
     \color{black}\fontsize{6pt}{0}\selectfont
-        R. C. Singleton, "An efficient algorithm for sorting with minimal
-        storage", Communications of the ACM, vol. 12, no.3 pp. 185-186, 1969
+        Singleton, R. C. (1969). An efficient algorithm for sorting with minimal storage. \\
+        Communications of the ACM.
     \linespread{1.5}
 
     \end{center}
@@ -895,17 +902,17 @@
         \end{tikzpicture}
         \end{center}
 
-        \onslide<5>
-        \begin{center}
-        \begin{tikzpicture}[]
-            \btreenodewithitems{1}{8}{5}{}{btree-leaf}
-            \foreach \i in {1,...,4}
-            {
-                \coordinate[below=1cm of key1\i] (start\i);
-                \draw[->, btree-line, line width=1.5pt, shorten >= 2mm] (start\i) -- (key1\i);
-            }
-        \end{tikzpicture}
-        \end{center}
+        %\onslide<5>
+        %\begin{center}
+        %\begin{tikzpicture}[]
+            %\btreenodewithitems{1}{8}{5}{}{btree-leaf}
+            %\foreach \i in {1,...,4}
+            %{
+                %\coordinate[below=1cm of key1\i] (start\i);
+                %\draw[->, btree-line, line width=1.5pt, shorten >= 2mm] (start\i) -- (key1\i);
+            %}
+        %\end{tikzpicture}
+        %\end{center}
 
     \end{overprint}
 
@@ -1013,15 +1020,47 @@
     \linespread{0.5}
     \vspace{0.5cm}
     \color{black}\fontsize{6pt}{0}\selectfont
-        R. Bayer, K. Unterauer, "Prefix B-trees", ACM Transactions on Database
-        Systems, vol. 2, no. 1, pp. 11-26, 1977
+        Bayer, R., Unterauer, K. (1977). Prefix B-trees. \\
+        ACM Transactions on Database Systems.
     \linespread{1.5}
 
     \end{center}
 \end{frame}
 \note{
-    Not a normalized version, but whole column version is in PG12
+    Not a normalized version, but whole column version is in PG12.
 }
+
+\fontsize{17pt}{18}\selectfont
+\begin{frame}[fragile]{}
+    \frametitle{}
+
+    \begin{center}
+    \textbf{Page split}
+    \vspace{1cm}
+
+    \begin{overprint}[6cm]
+        \onslide<1>
+        \begin{tikzpicture}[]
+            \btreenodewithitems{1}{5}{2}{}{btree-branch}
+            \btreenodewithitems{2}{5}{3}{below=1cm of key11, xshift=-2cm}{btree-leaf}
+            \btreenodewithitems{3}{5}{3}{below=1cm of key11, xshift=2cm}{btree-leaf}
+            \draw[->, btree-line] (node1.south)
+                .. controls ([yshift=-1cm] node1) and ([yshift=1.2cm] node2) ..
+                (node2.north);
+            \draw[->, btree-line] (node1.south)
+                .. controls ([yshift=-1cm] node1) and ([yshift=1.2cm] node3) ..
+                (node3.north);
+
+            \node[btree-key, below=-0.5cm of key13.center] (promoted) {};
+            \draw[->, btree-line, color=red, line width=0.5mm] (key31.west)
+                .. controls ([xshift=-1cm] key31) and (promoted) ..
+                (promoted.center);
+        \end{tikzpicture}
+
+    \end{overprint}
+    \end{center}
+
+\end{frame}
 
 \begin{frame}[fragile]{}
     \frametitle{}
@@ -1113,8 +1152,8 @@
     \linespread{0.5}
     \vspace{0.5cm}
     \color{black}\fontsize{6pt}{0}\selectfont
-        G. Graefe, Per-Ake Larson, "B-tree indexes and CPU caches",
-        International Conference on Data Engineering, pp. 349-358, 2001
+        Graefe G., Larson P. (2001). B-tree indexes and CPU caches. \\
+        International Conference on Data Engineering.
     \linespread{1.5}
 
     \end{center}
@@ -1194,9 +1233,8 @@
     \linespread{0.5}
     \vspace{0.5cm}
     \color{black}\fontsize{6pt}{0}\selectfont
-        P. E. O'Neil, "The SB-tree: An index-sequential structure for high
-        performance sequential access", Acta Informatica, vol. 29, no. 3. pp.
-        241-265, 1992
+        O’Neil P. E. (1992). The SB-tree: An index-sequential structure for high performance sequential access. \\
+        Acta Informatica.
     \linespread{1.5}
 
     \end{center}
@@ -1205,98 +1243,96 @@
     OrientDB uses SB-Tree, but are they the same?
 }
 
-\begin{frame}[fragile]{}
-    \frametitle{}
+%\begin{frame}[fragile]{}
+    %\frametitle{}
 
-    \begin{center}
-    \textbf{Multidimentional Access Method}
-    \vspace{1cm}
+    %\begin{center}
+    %\textbf{Multidimentional Access Method}
+    %\vspace{1cm}
 
-    \begin{overprint}[8cm]
-        \onslide<1>
-        \begin{tikzpicture}[]
-            \basicbtree{show-connections}
-            \node[below=0.2 of node5] {\footnotesize{1,a}};
-            \node[below=1.8 of node2] {\footnotesize{...}};
-            \node[below=0.2 of node6] {\footnotesize{1,z}};
+    %\begin{overprint}[8cm]
+        %\onslide<1>
+        %\begin{tikzpicture}[]
+            %\basicbtree{show-connections}
+            %\node[below=0.2 of node5] {\footnotesize{1,a}};
+            %\node[below=1.8 of node2] {\footnotesize{...}};
+            %\node[below=0.2 of node6] {\footnotesize{1,z}};
 
-            \node[below=0.2 of node7] {\footnotesize{2,a}};
-            \node[below=1.8 of node3] {\footnotesize{...}};
-            \node[below=0.2 of node8] {\footnotesize{2,z}};
+            %\node[below=0.2 of node7] {\footnotesize{2,a}};
+            %\node[below=1.8 of node3] {\footnotesize{...}};
+            %\node[below=0.2 of node8] {\footnotesize{2,z}};
 
-            \node[below=0.2 of node9] {\footnotesize{3,a}};
-            \node[below=1.8 of node4] {\footnotesize{...}};
-            \node[below=0.2 of node10] {\footnotesize{3,z}};
-        \end{tikzpicture}
+            %\node[below=0.2 of node9] {\footnotesize{3,a}};
+            %\node[below=1.8 of node4] {\footnotesize{...}};
+            %\node[below=0.2 of node10] {\footnotesize{3,z}};
+        %\end{tikzpicture}
 
-        \onslide<2>
-        \begin{tikzpicture}[]
-            \basicbtree{show-connections}
-            \node[below=0.2 of node5] {\footnotesize{1,a}};
-            \node[below=1.8 of node2] {\footnotesize{...}};
-            \node[below=0.2 of node6] {\footnotesize{1,z}};
+        %\onslide<2>
+        %\begin{tikzpicture}[]
+            %\basicbtree{show-connections}
+            %\node[below=0.2 of node5] {\footnotesize{1,a}};
+            %\node[below=1.8 of node2] {\footnotesize{...}};
+            %\node[below=0.2 of node6] {\footnotesize{1,z}};
 
-            \node[below=0.2 of node7] {\footnotesize{2,a}};
-            \node[below=1.8 of node3] {\footnotesize{...}};
-            \node[below=0.2 of node8] {\footnotesize{2,z}};
+            %\node[below=0.2 of node7] {\footnotesize{2,a}};
+            %\node[below=1.8 of node3] {\footnotesize{...}};
+            %\node[below=0.2 of node8] {\footnotesize{2,z}};
 
-            \node[below=0.2 of node9] {\footnotesize{3,a}};
-            \node[below=1.8 of node4] {\footnotesize{...}};
-            \node[below=0.2 of node10] {\footnotesize{3,z}};
+            %\node[below=0.2 of node9] {\footnotesize{3,a}};
+            %\node[below=1.8 of node4] {\footnotesize{...}};
+            %\node[below=0.2 of node10] {\footnotesize{3,z}};
 
-            \draw[selected-path] (node1.center) -- (node2.center) -- (node5.center);
-        \end{tikzpicture}
+            %\draw[selected-path] (node1.center) -- (node2.center) -- (node5.center);
+        %\end{tikzpicture}
 
-        \onslide<3>
-        \begin{tikzpicture}[]
-            \basicbtree{show-connections}
-            \node[below=0.2 of node5] {\footnotesize{1,a}};
-            \node[below=1.8 of node2] {\footnotesize{...}};
-            \node[below=0.2 of node6] {\footnotesize{1,z}};
+        %\onslide<3>
+        %\begin{tikzpicture}[]
+            %\basicbtree{show-connections}
+            %\node[below=0.2 of node5] {\footnotesize{1,a}};
+            %\node[below=1.8 of node2] {\footnotesize{...}};
+            %\node[below=0.2 of node6] {\footnotesize{1,z}};
 
-            \node[below=0.2 of node7] {\footnotesize{2,a}};
-            \node[below=1.8 of node3] {\footnotesize{...}};
-            \node[below=0.2 of node8] {\footnotesize{2,z}};
+            %\node[below=0.2 of node7] {\footnotesize{2,a}};
+            %\node[below=1.8 of node3] {\footnotesize{...}};
+            %\node[below=0.2 of node8] {\footnotesize{2,z}};
 
-            \node[below=0.2 of node9] {\footnotesize{3,a}};
-            \node[below=1.8 of node4] {\footnotesize{...}};
-            \node[below=0.2 of node10] {\footnotesize{3,z}};
+            %\node[below=0.2 of node9] {\footnotesize{3,a}};
+            %\node[below=1.8 of node4] {\footnotesize{...}};
+            %\node[below=0.2 of node10] {\footnotesize{3,z}};
 
-            \draw[selected-path] (node1.center) -- (node3.center) -- (node7.center);
-        \end{tikzpicture}
+            %\draw[selected-path] (node1.center) -- (node3.center) -- (node7.center);
+        %\end{tikzpicture}
 
-        \onslide<4>
-        \begin{tikzpicture}[]
-            \basicbtree{show-connections}
-            \node[below=0.2 of node5] {\footnotesize{1,a}};
-            \node[below=1.8 of node2] {\footnotesize{...}};
-            \node[below=0.2 of node6] {\footnotesize{1,z}};
+        %\onslide<4>
+        %\begin{tikzpicture}[]
+            %\basicbtree{show-connections}
+            %\node[below=0.2 of node5] {\footnotesize{1,a}};
+            %\node[below=1.8 of node2] {\footnotesize{...}};
+            %\node[below=0.2 of node6] {\footnotesize{1,z}};
 
-            \node[below=0.2 of node7] {\footnotesize{2,a}};
-            \node[below=1.8 of node3] {\footnotesize{...}};
-            \node[below=0.2 of node8] {\footnotesize{2,z}};
+            %\node[below=0.2 of node7] {\footnotesize{2,a}};
+            %\node[below=1.8 of node3] {\footnotesize{...}};
+            %\node[below=0.2 of node8] {\footnotesize{2,z}};
 
-            \node[below=0.2 of node9] {\footnotesize{3,a}};
-            \node[below=1.8 of node4] {\footnotesize{...}};
-            \node[below=0.2 of node10] {\footnotesize{3,z}};
+            %\node[below=0.2 of node9] {\footnotesize{3,a}};
+            %\node[below=1.8 of node4] {\footnotesize{...}};
+            %\node[below=0.2 of node10] {\footnotesize{3,z}};
 
-            \draw[selected-path] (node1.center) -- (node4.center) -- (node9.center);
-        \end{tikzpicture}
-    \end{overprint}
+            %\draw[selected-path] (node1.center) -- (node4.center) -- (node9.center);
+        %\end{tikzpicture}
+    %\end{overprint}
 
-    \linespread{0.5}
-    \color{black}\fontsize{6pt}{0}\selectfont
-        H. Leslie, R. Jain, D. Birdsall, H. Yaghmai, "Efficient search of
-        multidimentionel B-trees", \\ ACM Transactions on Database Systems,
-        vol. 6, no. 4, pp. 650-670, 1995
-    \linespread{1.5}
+    %\linespread{0.5}
+    %\color{black}\fontsize{6pt}{0}\selectfont
+        %Leslie, H., Jain, R., Birdsall, D., Yaghmai, H. (1995). Efficient search of multi-dimensional b-trees. VLDB.
+    %\linespread{1.5}
 
-    \end{center}
-\end{frame}
-\note{
-    For not complete search keys, if a dimension is under-specified, its
-    possible values must be enumerated.
-}
+    %\end{center}
+%\end{frame}
+%\note{
+    %For not complete search keys, if a dimension is under-specified, its
+    %possible values must be enumerated.
+%}
 
 \begin{frame}[fragile]{}
     \frametitle{}
@@ -1353,18 +1389,45 @@
     \end{center}
 \end{frame}
 
+\section{B-Tree as a component}
+
 \begin{frame}[fragile]{}
     \frametitle{}
 
     \def\arraystretch{1.5}
-    \begin{tabular}{cccc}
-        B-Tree & B$^{+}$-Tree & B$_{link}$-Tree & DPTree \\
-        wB$^{+}$-Tree & NV-Tree & FPTree & FASTFAIR \\
-        HiKV & Masstree & Skip List & ART \\
-        WORT & CDDS-Tree & Bw-Tree & HOT \\
-        KISS-Tree & VAST-Tree & FAST & HV-Tree \\
-        UB-Tree & LHAM & MDAM & Hybrid B$^{+}$-Tree
-    \end{tabular}
+    \begin{overprint}[8cm]
+        \onslide<1>
+        \begin{tabular}{cccc}
+            \colorbox{white}{B-Tree} & \colorbox{white}{B$^{+}$-Tree} & \colorbox{white}{B$_{link}$-Tree} & \colorbox{white}{DPTree} \\
+            wB$^{+}$-Tree & NV-Tree & FPTree & FASTFAIR \\
+            HiKV & Masstree & Skip List & ART \\
+            WORT & CDDS-Tree & \colorbox{white}{Bw-Tree} & HOT \\
+            KISS-Tree & VAST-Tree & FAST & HV-Tree \\
+            UB-Tree & LHAM & \colorbox{white}{PBT} & \colorbox{white}{Hybrid B$^{+}$-Tree}
+        \end{tabular}
+
+        \onslide<2>
+        \begin{tabular}{cccc}
+            \colorbox{red!20}{B-Tree} & \colorbox{red!20}{B$^{+}$-Tree} & \colorbox{red!20}{B$_{link}$-Tree} & DPTree \\
+            wB$^{+}$-Tree & NV-Tree & FPTree & FASTFAIR \\
+            HiKV & Masstree & Skip List & ART \\
+            WORT & CDDS-Tree & \colorbox{white}{Bw-Tree} & HOT \\
+            KISS-Tree & VAST-Tree & FAST & HV-Tree \\
+            UB-Tree & LHAM & \colorbox{white}{PBT} & \colorbox{white}{Hybrid B$^{+}$-Tree}
+        \end{tabular}
+
+        \onslide<3>
+        \begin{tabular}{cccc}
+            \colorbox{red!20}{B-Tree} & \colorbox{red!20}{B$^{+}$-Tree} & \colorbox{red!20}{B$_{link}$-Tree} & \colorbox{red!20}{DPTree} \\
+            wB$^{+}$-Tree & NV-Tree & FPTree & FASTFAIR \\
+            HiKV & Masstree & Skip List & ART \\
+            WORT & CDDS-Tree & \colorbox{red!20}{Bw-Tree} & HOT \\
+            KISS-Tree & VAST-Tree & FAST & HV-Tree \\
+            UB-Tree & LHAM & \colorbox{red!20}{PBT} & \colorbox{red!20}{Hybrid B$^{+}$-Tree}
+        \end{tabular}
+
+    \end{overprint}
+
 \end{frame}
 
 \begin{frame}[fragile]{}
@@ -1475,8 +1538,8 @@
         \end{tikzpicture}
         \linespread{0.5}
         \color{black}\fontsize{6pt}{0}\selectfont
-            G. Graefe, "Sorting and indexing with partitioned B-Trees",
-            Classless Inter Domain Routing, 2003
+            Graefe G. (2003). Sorting and indexing with partitioned B-Trees. \\
+            Classless Inter Domain Routing
         \linespread{1.5}
 
         \onslide<4>
@@ -1520,8 +1583,8 @@
         \end{tikzpicture}
         \linespread{0.5}
         \color{black}\fontsize{6pt}{0}\selectfont
-            G. Graefe, "Sorting and indexing with partitioned B-Trees",
-            Classless Inter Domain Routing, 2003
+            Graefe G. (2003). Sorting and indexing with partitioned B-Trees. \\
+            Classless Inter Domain Routing
         \linespread{1.5}
 
         \onslide<5>
@@ -1561,8 +1624,8 @@
         \end{tikzpicture}
         \linespread{0.5}
         \color{black}\fontsize{6pt}{0}\selectfont
-            Riegger Christian, Vincon Tobias, Petrov Ilia. (2017).
-            Write-optimized indexing with partitioned b-trees. 296-300.
+            Riegger C., Vincon T., Petrov I. (2017). Write-optimized indexing with partitioned b-trees. \\
+            Proceedings of the 19th International Conference on Information Integration and Web-based Applications \& Services
         \linespread{1.5}
 
         \onslide<6>
@@ -1609,8 +1672,8 @@
         \end{tikzpicture}
         \linespread{0.5}
         \color{black}\fontsize{6pt}{0}\selectfont
-            Riegger Christian, Vincon Tobias, Petrov Ilia. (2017).
-            Write-optimized indexing with partitioned b-trees. 296-300.
+            Riegger C., Vincon T., Petrov I. (2017). Write-optimized indexing with partitioned b-trees. \\
+            Proceedings of the 19th International Conference on Information Integration and Web-based Applications \& Services
         \linespread{1.5}
 
     \end{overprint}
@@ -1695,11 +1758,11 @@
     \linespread{0.5}
     \vspace{0.5cm}
     \color{black}\fontsize{6pt}{0}\selectfont
-        Huanchen Zhang, David G. Andersen, Andrew Pavlo, Michael Kaminsky, Lin
-        Ma, and Rui Shen. 2016. Reducing the Storage Overhead of Main-Memory
-        OLTP Databases with Hybrid Indexes. In Proceedings of the 2016
-        International Conference on Management of Data (SIGMOD ’16).
-        Association for Computing Machinery, New York, NY, USA, 1567–1581.
+        Zhang H., Andersen D. G., Pavlo A., Kaminsky M., Ma L., Shen R. (2016). \\
+        Reducing the Storage Overhead of Main-Memory OLTP Databases with Hybrid
+        Indexes. \\
+        Proceedings of the 2016 International Conference on Management of Data
+        (SIGMOD ’16)
     \linespread{1.5}
 
     \end{center}
@@ -1902,9 +1965,9 @@
     \linespread{0.5}
     \vspace{0.5cm}
     \color{black}\fontsize{6pt}{0}\selectfont
-        Levandoski Justin, Lomet David, Sengupta Sudipta. (2012). The Bw-Tree:
-        A B-tree for New Hardware Platforms. Proceedings - International
-        Conference on Data Engineering.
+        Levandoski J., Lomet D., Sengupta S. (2012). The Bw-Tree: A B-tree for
+        New Hardware Platforms. \\
+        International Conference on Data Engineering.
     \linespread{1.5}
 
     \end{center}
@@ -2005,19 +2068,21 @@
     \linespread{0.5}
     \vspace{0.5cm}
     \color{black}\fontsize{6pt}{0}\selectfont
-        Zhou Xinjing, Shou Lidan, Chen Ke, Hu Wei, Chen Gang. (2019). DPTree:
-        differential indexing for persistent memory. Proceedings of the VLDB
-        Endowment.
+         Zhou Xinjing, Shou Lidan, Chen Ke, Hu Wei, Chen Gang. (2019). DPTree:
+         differential indexing for persistent memory. \\
+         Proceedings of the VLDB Endowment.
     \linespread{1.5}
 
     \end{center}
 \end{frame}
 
+\section{Learned Indexes}
+
 \begin{frame}[fragile]{}
     \frametitle{}
 
     \begin{center}
-    \textbf{Learned Index}
+    \textbf{Learned Indexes}
     \vspace{1.0cm}
 
     \begin{overprint}[3cm]
@@ -2056,15 +2121,13 @@
     \linespread{0.5}
     \vspace{0.5cm}
     \color{black}\fontsize{6pt}{0}\selectfont
-        Kraska Tim, Alex Beutel, Ed H. Chi, Jeffrey Dean, and Neoklis
-        Polyzotis. "The case for learned index structures." In Proceedings of
-        the 2018 international conference on management of data.
+        Kraska T., Beutel A., Chi E. H., Dean J., Polyzotis N. (2018). The Case
+        for Learned Index Structures. \\
+        2018 International Conference on Management of Data (SIGMOD ‘18).
     \linespread{1.5}
 
     \end{center}
 \end{frame}
-\note{
-}
 
 \pgfdeclarelayer{background layer}
 \pgfsetlayers{background layer,main}
@@ -2073,7 +2136,7 @@
     \frametitle{}
 
     \begin{center}
-    \textbf{Learned Index}
+    \textbf{Data approximation}
 
     \begin{overprint}[14cm]
         \onslide<1>
@@ -2129,9 +2192,9 @@
     \linespread{0.5}
     \vspace{0.5cm}
     \color{black}\fontsize{6pt}{0}\selectfont
-        Zhou Xinjing, Shou Lidan, Chen Ke, Hu Wei, Chen Gang. (2019). DPTree:
-        differential indexing for persistent memory. Proceedings of the VLDB
-        Endowment.
+        Galakatos, A., Markovitch, M., Binnig, C., Fonseca, R., Kraska, T.
+        (2019). Fiting-tree: A data-aware index structure. \\
+        Proceedings of the 2019 International Conference on Management of Data.
     \linespread{1.5}
 
     \end{center}
@@ -2343,7 +2406,7 @@
             \item <+-> Cache conscious B-Tree
             \item <+-> Distributed B-Tree
             \item <+-> UB-Tree
-            \item <+-> Skip List
+            \item <+-> MDAM
             \item <+-> LSM Tree
             \item <+-> Trie
             \item <+-> ...
