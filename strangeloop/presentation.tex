@@ -478,20 +478,23 @@
         \item RUM conjecture
         \item B-Tree internals
         \begin{itemize}[label={}]
-            \item Key normalization
-            \item Prefix/Suffix truncation
-            \item SB-Tree
+            \item \footnotesize{Key normalization}
+            \item \footnotesize{Prefix/Suffix truncation}
+            %\item SB-Tree
         \end{itemize}
         \item B-Tree as a component
         \begin{itemize}[label={}]
-            \item Hybrid index
-            \item Bw-Tree
-            \item Partitioned B-Tree
+            \item \footnotesize{Hybrid index}
+            \item \footnotesize{Bw-Tree}
+            \item \footnotesize{Partitioned B-Tree}
         \end{itemize}
         \item Learned Indexes
         \item Everything else
     \end{itemize}
 \end{frame}
+\note{
+    small sub points
+}
 
 \section{RUM conjecture}
 
@@ -1163,85 +1166,85 @@
     extended pages (MySQL InnoDB, SQLite).
 }
 
-\begin{frame}[fragile]{}
-    \frametitle{}
+%\begin{frame}[fragile]{}
+    %\frametitle{}
 
-    \begin{center}
-    \textbf{SB-tree}
-    \vspace{1cm}
+    %\begin{center}
+    %\textbf{SB-tree}
+    %\vspace{1cm}
 
-    \begin{overprint}[15cm]
-        \onslide<1>
-        \begin{tikzpicture}[]
-            \btreenode{1}{}{btree-hide}{btree-branch}{}
-            \btreenode{2}{right=2cm of node1.east}{btree-hide}{btree-branch}{}
-            \node[btree-hide, right=2cm of node2.east, minimum width=0.5cm] (node2-extra) {};
+    %\begin{overprint}[15cm]
+        %\onslide<1>
+        %\begin{tikzpicture}[]
+            %\btreenode{1}{}{btree-hide}{btree-branch}{}
+            %\btreenode{2}{right=2cm of node1.east}{btree-hide}{btree-branch}{}
+            %\node[btree-hide, right=2cm of node2.east, minimum width=0.5cm] (node2-extra) {};
 
-            \btreenode{3}{below=1cm of node1.south west, xshift=-0.5cm}{btree-hide}{btree-leaf}{}
-            \btreenode{4}{below=1cm of node1.south east, xshift=0.5cm}{btree-hide}{btree-leaf}{}
-            \btreenode{5}{right=2cm of node4.east}{btree-hide}{btree-leaf}{}
-            \node[btree-hide, right=2cm of node5.east, minimum width=0.5cm] (node5-extra) {};
+            %\btreenode{3}{below=1cm of node1.south west, xshift=-0.5cm}{btree-hide}{btree-leaf}{}
+            %\btreenode{4}{below=1cm of node1.south east, xshift=0.5cm}{btree-hide}{btree-leaf}{}
+            %\btreenode{5}{right=2cm of node4.east}{btree-hide}{btree-leaf}{}
+            %\node[btree-hide, right=2cm of node5.east, minimum width=0.5cm] (node5-extra) {};
 
-            \draw[->, btree-line] (pointer21.south)
-                .. controls ([yshift=-1cm] pointer21) and ([yshift=1cm] pointer14) ..
-                (pointer14.north);
-            \draw[->, btree-line] (pointer31.south)
-                .. controls ([yshift=-1cm] pointer31) and ([yshift=1cm] pointer13) ..
-                (pointer13.north);
+            %\draw[->, btree-line] (pointer21.south)
+                %.. controls ([yshift=-1cm] pointer21) and ([yshift=1cm] pointer14) ..
+                %(pointer14.north);
+            %\draw[->, btree-line] (pointer31.south)
+                %.. controls ([yshift=-1cm] pointer31) and ([yshift=1cm] pointer13) ..
+                %(pointer13.north);
 
-            \node[box, inner sep=0.2cm,
-                fit=(node1)(node2)(node2-extra)
-            ] (extent-1) {};
+            %\node[box, inner sep=0.2cm,
+                %fit=(node1)(node2)(node2-extra)
+            %] (extent-1) {};
 
-            \node[box, inner sep=0.2cm,
-                fit=(node3)(node4)(node5)(node5-extra)
-            ] (extent-2) {};
-        \end{tikzpicture}
+            %\node[box, inner sep=0.2cm,
+                %fit=(node3)(node4)(node5)(node5-extra)
+            %] (extent-2) {};
+        %\end{tikzpicture}
 
-        \onslide<2>
-        \begin{tikzpicture}[]
-            \btreenode{1}{}{btree-hide}{btree-branch}{}
-            \btreenode{2}{right=2cm of node1.east}{btree-hide}{btree-branch}{}
-            \node[btree-hide, right=2cm of node2.east, minimum width=0.5cm] (node2-extra) {};
+        %\onslide<2>
+        %\begin{tikzpicture}[]
+            %\btreenode{1}{}{btree-hide}{btree-branch}{}
+            %\btreenode{2}{right=2cm of node1.east}{btree-hide}{btree-branch}{}
+            %\node[btree-hide, right=2cm of node2.east, minimum width=0.5cm] (node2-extra) {};
 
-            \btreenode{3}{below=1cm of node1.south west, xshift=-0.5cm}{btree-hide}{btree-leaf}{}
-            \btreenode{4}{below=1cm of node1.south east, xshift=0.5cm}{btree-hide}{btree-leaf}{}
-            \btreenode{5}{right=2cm of node4.east}{btree-hide}{btree-leaf}{}
-            \node[btree-hide, right=2cm of node5.east, minimum width=0.5cm] (node5-extra) {};
+            %\btreenode{3}{below=1cm of node1.south west, xshift=-0.5cm}{btree-hide}{btree-leaf}{}
+            %\btreenode{4}{below=1cm of node1.south east, xshift=0.5cm}{btree-hide}{btree-leaf}{}
+            %\btreenode{5}{right=2cm of node4.east}{btree-hide}{btree-leaf}{}
+            %\node[btree-hide, right=2cm of node5.east, minimum width=0.5cm] (node5-extra) {};
 
-            \draw[->, btree-line] (pointer21.south)
-                .. controls ([yshift=-1cm] pointer21) and ([yshift=1cm] pointer14) ..
-                (pointer14.north);
-            \draw[->, btree-line] (pointer31.south)
-                .. controls ([yshift=-1cm] pointer31) and ([yshift=1cm] pointer13) ..
-                (pointer13.north);
+            %\draw[->, btree-line] (pointer21.south)
+                %.. controls ([yshift=-1cm] pointer21) and ([yshift=1cm] pointer14) ..
+                %(pointer14.north);
+            %\draw[->, btree-line] (pointer31.south)
+                %.. controls ([yshift=-1cm] pointer31) and ([yshift=1cm] pointer13) ..
+                %(pointer13.north);
 
-            \node[box, inner sep=0.2cm,
-                fit=(node1)(node2)(node2-extra)
-            ] (extent-1) {};
+            %\node[box, inner sep=0.2cm,
+                %fit=(node1)(node2)(node2-extra)
+            %] (extent-1) {};
 
-            \node[box, inner sep=0.2cm,
-                fit=(node3)(node4)(node5)(node5-extra)
-            ] (extent-2) {};
+            %\node[box, inner sep=0.2cm,
+                %fit=(node3)(node4)(node5)(node5-extra)
+            %] (extent-2) {};
 
-            \draw[->, btree-line] (node5.center)
-                .. controls ([yshift=-1cm] node5) and ([yshift=-1cm,xshift=-1cm] node5-extra) ..
-                ([xshift=-1cm]node5-extra.center);
-        \end{tikzpicture}
-    \end{overprint}
+            %\draw[->, btree-line] (node5.center)
+                %.. controls ([yshift=-1cm] node5) and ([yshift=-1cm,xshift=-1cm] node5-extra) ..
+                %([xshift=-1cm]node5-extra.center);
+        %\end{tikzpicture}
+    %\end{overprint}
 
-    \linespread{0.5}
-    \vspace{0.5cm}
-    \color{black}\fontsize{6pt}{0}\selectfont
-        O’Neil P. E. (1992). The SB-tree: An index-sequential structure for high performance sequential access. \\
-        Acta Informatica.
-    \linespread{1.5}
+    %\linespread{0.5}
+    %\vspace{0.5cm}
+    %\color{black}\fontsize{6pt}{0}\selectfont
+        %O’Neil P. E. (1992). The SB-tree: An index-sequential structure for high performance sequential access. \\
+        %Acta Informatica.
+    %\linespread{1.5}
 
-    \end{center}
-\end{frame}
-\note{
-    OrientDB uses SB-Tree, but are they the same?
-}
+    %\end{center}
+%\end{frame}
+%\note{
+    %OrientDB uses SB-Tree, but are they the same?
+%}
 
 %\begin{frame}[fragile]{}
     %\frametitle{}
@@ -2402,14 +2405,14 @@
 
     \begin{center}
         \begin{itemize}[label={\MVRightarrow}]
-            \item <+-> Buffered (Lazy) B-Tree
-            \item <+-> Cache conscious B-Tree
-            \item <+-> Distributed B-Tree
-            \item <+-> UB-Tree
-            \item <+-> MDAM
-            \item <+-> LSM Tree
-            \item <+-> Trie
-            \item <+-> ...
+            \item Buffered (Lazy) B-Tree
+            \item Cache conscious B-Tree
+            \item Distributed B-Tree
+            \item SB-Tree
+            \item MDAM
+            \item LSM Tree
+            \item Trie
+            \item ...
         \end{itemize}
     \end{center}
 \end{frame}
