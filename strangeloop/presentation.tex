@@ -997,6 +997,24 @@
         \end{tabular}
 
         \onslide<2>
+        \begin{tikzpicture}[]
+            \btreenodewithitems{1}{5}{2}{}{btree-branch}
+            \btreenodewithitems{2}{5}{3}{below=1cm of key11, xshift=-2cm}{btree-leaf}
+            \btreenodewithitems{3}{5}{3}{below=1cm of key11, xshift=2cm}{btree-leaf}
+            \draw[->, btree-line] (node1.south)
+                .. controls ([yshift=-1cm] node1) and ([yshift=1.2cm] node2) ..
+                (node2.north);
+            \draw[->, btree-line] (node1.south)
+                .. controls ([yshift=-1cm] node1) and ([yshift=1.2cm] node3) ..
+                (node3.north);
+
+            \node[btree-key, below=-0.5cm of key13.center] (promoted) {};
+            \draw[->, btree-line, color=red, line width=0.5mm] (key31.west)
+                .. controls ([xshift=-1cm] key31) and (promoted) ..
+                (promoted.center);
+        \end{tikzpicture}
+
+        \onslide<3>
         \begin{tabular}{lll}
             & Cohen Richard & 02-02-2019 \\
             & Johnson David & 04-02-2019 \\
@@ -1007,7 +1025,7 @@
             & Smith Susan & 01-02-2019 \\
         \end{tabular}
 
-        \onslide<3>
+        \onslide<4>
         \begin{tabular}{lll}
             & Cohen Richard & 02-02-2019 \\
             \hline
@@ -1032,38 +1050,6 @@
 \note{
     Not a normalized version, but whole column version is in PG12.
 }
-
-\fontsize{17pt}{18}\selectfont
-\begin{frame}[fragile]{}
-    \frametitle{}
-
-    \begin{center}
-    \textbf{Page split}
-    \vspace{1cm}
-
-    \begin{overprint}[6cm]
-        \onslide<1>
-        \begin{tikzpicture}[]
-            \btreenodewithitems{1}{5}{2}{}{btree-branch}
-            \btreenodewithitems{2}{5}{3}{below=1cm of key11, xshift=-2cm}{btree-leaf}
-            \btreenodewithitems{3}{5}{3}{below=1cm of key11, xshift=2cm}{btree-leaf}
-            \draw[->, btree-line] (node1.south)
-                .. controls ([yshift=-1cm] node1) and ([yshift=1.2cm] node2) ..
-                (node2.north);
-            \draw[->, btree-line] (node1.south)
-                .. controls ([yshift=-1cm] node1) and ([yshift=1.2cm] node3) ..
-                (node3.north);
-
-            \node[btree-key, below=-0.5cm of key13.center] (promoted) {};
-            \draw[->, btree-line, color=red, line width=0.5mm] (key31.west)
-                .. controls ([xshift=-1cm] key31) and (promoted) ..
-                (promoted.center);
-        \end{tikzpicture}
-
-    \end{overprint}
-    \end{center}
-
-\end{frame}
 
 \begin{frame}[fragile]{}
     \frametitle{}
