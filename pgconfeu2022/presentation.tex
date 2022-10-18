@@ -1,0 +1,437 @@
+\documentclass[usenames,dvipsnames, 18pt, compress, aspectratio=169]{beamer}
+
+% can be compiled by xelatex -shell-escape presentation.tex
+% lualatex -shell-escape presentation.tex
+
+\usetheme[]{metropolis}
+
+\usepackage[utf8]{inputenc}
+\usepackage[russian, english]{babel}
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+\usepackage{listings}
+\usepackage{marvosym}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage[document]{ragged2e}
+\usepackage[export]{adjustbox}
+\usepackage{fontawesome5}
+\usepackage{enumitem}
+\usepackage{minted}
+\usemintedstyle{tango}
+\usepackage[normalem]{ulem}
+\usepackage{tikz}
+\usetikzlibrary{patterns}
+\usetikzlibrary{mindmap}
+\usetikzlibrary{shapes.misc, fit}
+\usetikzlibrary{spy, decorations, decorations.pathmorphing, decorations.pathreplacing, backgrounds}
+\usepackage{graphicx}
+\usepackage{eso-pic}
+\usepackage{verbatim}
+\usepackage{smartdiagram}
+\usesmartdiagramlibrary{additions}
+\usetikzlibrary{trees}
+\usepackage{datetime}
+\usepackage{hyperref}
+\usepackage{forloop}
+\usepackage{csquotes}
+\usetikzlibrary{tikzmark}
+\usetikzlibrary{arrows.meta}
+
+\usepackage{tcolorbox}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{colortbl}
+\tcbuselibrary{skins}
+
+\usetikzlibrary{shapes,arrows,positioning}
+\graphicspath{{images/}}
+%\newfontfamily{\FA}{FontAwesome}
+
+\def\twitter{{\faTwitter}}
+\def\github{{\faGithub}}
+\def\email{{\faEnvelope}}
+
+\renewcommand{\ttdefault}{pcr}
+\setmonofont{FiraCode-VF}
+%\newfontfamily{\ttfamily}{FiraCode-VF}
+
+\usefonttheme{professionalfonts} % using non standard fonts for beamer
+\usefonttheme{serif} % default family is serif
+\usepackage{fontspec}
+\setmainfont{Liberation Sans}
+\newfontfamily\ExtraLight{Liberation Sans}
+\newfontfamily\Light{Liberation Sans}
+\newfontfamily\Book{Liberation Sans}
+\newfontfamily\Medium{Liberation Sans}
+
+\makeatletter
+\newcommand\HUGE{\@setfontsize\Huge{32}{41}}
+\makeatother
+
+\newcommand\AtPagemyUpperLeft[1]{\AtPageLowerLeft{%
+\put(\LenToUnit{0.85\paperwidth},\LenToUnit{0.05\paperheight}){#1}}}
+
+\newcommand\AtPagemyUpperTop[1]{\AtPageLowerLeft{%
+\put(\LenToUnit{0.42\paperwidth},\LenToUnit{0.90\paperheight}){#1}}}
+
+\renewcommand{\ULthickness}{2.0pt}
+
+\definecolor{links}{HTML}{0099FF}
+\hypersetup{colorlinks, linkcolor=, urlcolor=links}
+\definecolor{greenGood}{HTML}{99FF99}
+\definecolor{redBad}{HTML}{FF9980}
+\definecolor{title}{HTML}{ee0000}
+
+\setbeamerfont{section title}{family=\Book, size=\Huge, shape=\normalfont}
+\setbeamerfont{frametitle}{family=\Book, size=\large, shape=\normalfont}
+\setbeamerfont{title}{family=\Book, size=\Large, shape=\normalfont}
+\setbeamerfont{subtitle}{size=\small}
+\setbeamerfont{author}{family=\ExtraLight, size=\footnotesize}
+
+\definecolor{cec1d24}{RGB}{236,29,36}
+\definecolor{cffffff}{RGB}{255,255,255}
+
+\setbeamertemplate{navigation symbols}{}
+\beamertemplatenavigationsymbolsempty
+\pagenumbering{gobble}
+
+\setbeamertemplate{title page}
+{
+
+  \vspace*{2.1cm}
+  \hspace{7.0cm}
+  \begin{minipage}[b][\paperheight]{0.5\textwidth}
+  \begin{center}
+
+    \ifx\inserttitle\@empty\else
+    {{% \inserttitle is nonempty
+      \raggedright%
+      %\linespread{1.0}%
+      \usebeamerfont{title}%
+      \usebeamercolor[fg]{title}%
+      %\vspace*{1.3em}
+      \if@noSmallCapitals%
+        \inserttitle%
+      \else%
+        \scshape{\color{title} \textbf{\begin{flushleft}\inserttitle\end{flushleft}}}%
+      \fi%
+      \vspace*{0.3em}
+    }}
+    \fi
+
+    \vspace*{0.5em}%
+
+    \ifx\insertsubtitle\@empty\else
+    {{% \insertsubtitle is nonempty
+      \usebeamerfont{subtitle}%
+      \usebeamercolor[fg]{subtitle}%
+      {\color{black} \insertsubtitle}%
+      \vspace*{3.0em}%
+    }}
+    \fi
+
+    \vspace*{1.0em}%
+
+    \usebeamerfont{author}%
+    \usebeamercolor[fg]{author}%
+    {\begin{flushleft}\color{black} \insertauthor\end{flushleft}}%
+
+    %\vspace*{1.5em}
+    \fontsize{8pt}{10}\selectfont
+    {\begin{flushleft}\color{black} 24-09-2022\end{flushleft}}%
+
+    \vfill
+    \vspace*{2em}
+  \end{center}
+  \end{minipage}
+}
+
+\setbeamertemplate{section page}
+{
+  \vspace{2em}
+  \centering
+  \begin{minipage}{22em}
+    \usebeamercolor[fg]{section title}
+    \usebeamerfont{section title}
+    {\color{black} \insertsectionhead\\[-1ex]}
+  \end{minipage}
+  \par
+}
+
+\setbeamertemplate{footline}
+{
+\begin{beamercolorbox}[wd=\textwidth,ht=3ex,dp=3ex,leftskip=0.3cm,rightskip=0.3cm]{structure}
+  \usebeamerfont{page number in head/foot}
+  \insertframenumber
+\end{beamercolorbox}
+}
+
+
+\title{Party tricks for PostgreSQL \\ perf, ftrace and bpftrace}
+\subtitle{}
+\date{\today}
+\author{DMITRII DOLGOV}
+\institute{}
+
+\begin{document}
+{
+  \usebackgroundtemplate{\includegraphics[width=\paperwidth]{title.png}}%
+  \fontsize{17pt}{18}\selectfont
+  \maketitle
+}
+
+\AddToShipoutPictureBG{
+  \AtPagemyUpperLeft{{\includegraphics[width=2.0cm,keepaspectratio]{logo.png}}}
+}
+
+%\setbeamertemplate{background canvas}{}
+
+\fontsize{17pt}{18}\selectfont
+
+{
+\setbeamercolor{background canvas}{bg=black}
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \includegraphics[width=1.0\textwidth,center]{nethack.png}
+    \end{center}
+\end{frame}
+\note{Originally about resources, but now not only}
+}
+
+\setbeamertemplate{background canvas}{}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \begin{minted}[fontsize=\large]{c}
+    /* XXX guessed-at value */
+    #define PGPROC_MAX_CACHED_SUBXIDS 64
+
+
+    /* has PGPROC->subxids overflowed */
+    bool        overflowed;
+        \end{minted}
+    \end{center}
+\end{frame}
+\note{
+    pg_stat_toast, original FPI stats (have landed in pgss via wal_fpi), etc.
+}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \begin{minted}[fontsize=\large]{shell-session}
+$ perf record -e probe_postgres:GetNewTransactionId
+$ perf script
+    postgres 29959 probe_postgres
+    GetNewTransactionId: nxids=0
+
+        \end{minted}
+    \end{center}
+\end{frame}
+\note{edited for slides}
+
+\section{Instrumentation basics}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \begin{itemize}[label={}]
+            \item {Static tracing}
+            \item {Tracepoints}
+            \item {USDT}
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \begin{itemize}[label={}]
+            \item {Dynamic tracing}
+            \item {kprobe/kretprobe}
+            \item {uprobe/uretprobe}
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \begin{minted}[fontsize=\Large, escapeinside=||]{c}
+    <handle_event>:   |\colorbox{red!20}{push %rbp}|
+    <handle_event+1>: mov  %rsp,%rbp
+    <handle_event+4>: sub  $0x60,%rsp
+
+    <handle_event>:   |\colorbox{red!20}{int3}|
+    <handle_event+1>: mov  %rsp,%rbp
+    <handle_event+4>: sub  $0x60,%rsp
+        \end{minted}
+
+    \end{center}
+\end{frame}
+\note{
+    cat /proc/30615/maps
+    00400000-0045a000 r-xp 00000000 fd:03 338992387 /path/to/binary
+
+    gdb -p <process>
+
+    > x/128i 0x00400000
+
+    Breakpoint/context switch overhead.
+}
+
+\section{Static tracing}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \begin{minted}[fontsize=\large]{shell-session}
+--enable-dtrace
+
+$ bpftrace -l 'usdt:bin/postgres:*'
+usdt:bin/postgres:postgresql:buffer__checkpoint__done
+usdt:bin/postgres:postgresql:buffer__checkpoint__start
+[...]
+        \end{minted}
+    \end{center}
+\end{frame}
+\note{edited for slides}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \begin{minted}[fontsize=\large]{shell-session}
+$ bpftrace -p 31715 -f json -e
+    'usdt:bin/postgres:postgresql:checkpoint__start
+    {printf("Checkpoint, Flags %d\n", arg0);}'
+
+{"type": "attached_probes", "data": {"probes": 1}}
+{"type": "printf", "data": "Checkpoint, Flags 108\n"}
+{"type": "printf", "data": "Checkpoint, Flags 108\n"}
+        \end{minted}
+    \end{center}
+\end{frame}
+\note{edited for slides}
+
+\section{Dynamic tracing}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \begin{minted}[fontsize=\large]{shell-session}
+$ perf probe -x bin/postgres \
+    -L GetNewTransactionId
+
+[...]
+187 int nxids = MyProc->subxidStatus.count;
+[...]
+        \end{minted}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \begin{minted}[fontsize=\large]{shell-session}
+$ perf probe -x bin/postgres \
+    -V GetNewTransactionId:187
+
+Available variables at GetNewTransactionId:187
+	@<GetNewTransactionId+1040>
+		FullTransactionId       full_xid
+		TransactionId   xid
+		XidCacheStatus* substat
+		_Bool   isSubXact
+		char*   __func__
+		int     nxids
+        \end{minted}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \begin{minted}[fontsize=\large]{shell-session}
+$ perf probe -x bin/postgres \
+    GetNewTransactionId:187 nxids
+
+$ perf record -e \
+	probe_postgres:GetNewTransactionId_L187_2
+
+$ perf script
+	postgres probe_postgres
+	GetNewTransactionId_L187_2: nxids=0
+
+        \end{minted}
+    \end{center}
+\end{frame}
+\note{edited for slides}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \includegraphics[width=0.9\textwidth,center]{more.png}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \begin{minted}[fontsize=\large]{c}
+*dovacuum =
+	force_vacuum ||
+	(vactuples > vacthresh) ||
+	(vac_ins_base_thresh >= 0 &&
+		instuples > vacinsthresh);
+        \end{minted}
+    \end{center}
+\end{frame}
+\note{
+	Filter doesn't work with comparisons, requires post-processing,
+	complicated. For such cases it's good to have a stable usdt.
+}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth,center]{elephant.jpg}
+    \end{center}
+\end{frame}
+
+\fontsize{18pt}{18}\selectfont
+\begin{frame}
+  \vspace*{2.5cm}
+  \begin{minipage}[b][\paperheight]{\textwidth}
+  \begin{center}
+
+      %\raggedright%
+      \linespread{1.0}%
+      \usebeamerfont{title}%
+      \usebeamercolor[fg]{title}%
+      \if@noSmallCapitals%
+        Questions?
+      \else%
+        \scshape{\color{black} Questions?}%
+      \fi%
+      \vspace*{0.3em}
+
+      \usebeamerfont{subtitle}%
+      \fontsize{13pt}{14}\selectfont
+      \usebeamercolor[fg]{subtitle}%
+        \begin{itemize}[label={}]
+            \item {\color{black} \twitter\ @erthalion}
+            \item {\color{black} \email\ ddolgov at redhat dot com}
+        \end{itemize}
+      \vspace*{2.5em}%
+
+    \vfill
+    \vspace*{2em}
+  \end{center}
+  \end{minipage}
+
+\end{frame}
+
+\end{document}
