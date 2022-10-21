@@ -24,7 +24,7 @@
 \usetikzlibrary{patterns}
 \usetikzlibrary{mindmap}
 \usetikzlibrary{shapes.misc, fit}
-\usetikzlibrary{spy, decorations, decorations.pathmorphing, decorations.pathreplacing, backgrounds}
+\usetikzlibrary{spy, decorations, decorations.pathmorphing, decorations.pathreplacing, backgrounds, decorations.text}
 \usepackage{graphicx}
 \usepackage{eso-pic}
 \usepackage{verbatim}
@@ -370,6 +370,83 @@ $ perf script
 \end{frame}
 \note{edited for slides}
 
+\section{Limitations}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \begin{minted}[fontsize=\large, escapeinside=::]{c}
+*dovacuum =
+	force_vacuum ||
+	(vactuples > vacthresh) ||
+	(vac_ins_base_thresh >= 0 &&
+		:\colorbox{red!20}{instuples > vacinsthresh)};:
+        \end{minted}
+    \end{center}
+\end{frame}
+\note{
+	Filter doesn't work with comparisons, requires post-processing,
+	complicated. For such cases it's good to have a stable usdt.
+}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \begin{itemize}[label={}]
+            \item<+-> {Context switch overhead}
+            \item<+-> {Debugging symbols}
+            \item<+-> {Incorporate into infrastructure?}
+            \item<+-> {Privileges?}
+        \end{itemize}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \begin{minted}[fontsize=\large]{c}
+BPF_OBJ_PIN
+    Pin an eBPF program or map referred
+    by the specified *bpf_fd* to the
+    provided *pathname* on the filesystem.
+        \end{minted}
+    \end{center}
+\end{frame}
+\note{
+    BPFD
+}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \begin{minted}[fontsize=\large]{shell-session}
+$ cat events/synthetic/query_latency/hist
+# event histogram
+
+hitcount: 1
+{ lat_us: 223,
+  query_string: select a from test1;}
+
+hitcount: 1
+{ lat_us: 314,
+  query_string: select b from test2;}
+        \end{minted}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \begin{minted}[fontsize=\large]{shell-session}
+$ perf probe -x bin/postgres \
+    exec_simple_query query_string:string
+
+$ perf probe -x bin/postgres \
+    exec_simple_query%return
+        \end{minted}
+    \end{center}
+\end{frame}
+
 \begin{frame}
     \frametitle{}
     \begin{center}
@@ -380,19 +457,252 @@ $ perf script
 \begin{frame}[fragile]{}
     \frametitle{}
     \begin{center}
-        \begin{minted}[fontsize=\large]{c}
-*dovacuum =
-	force_vacuum ||
-	(vactuples > vacthresh) ||
-	(vac_ins_base_thresh >= 0 &&
-		instuples > vacinsthresh);
+    \begin{overprint}[14.5cm]
+        \onslide<1>
+		\vspace{-0.73cm}
+        \begin{minted}[fontsize=\large, bgcolor=white]{shell-session}
+synthetic_events
+query_latency u64 lat_us; char[] query_string
+        \end{minted}
+
+		\vspace{-0.73cm}
+        \begin{minted}[fontsize=\large, bgcolor=white]{shell-session}
+events/probe_postgres/exec_simple_query/trigger
+hist:keys=common_pid:t0=common_timestamp.usecs
+        \end{minted}
+
+		\vspace{-0.73cm}
+        \begin{minted}[fontsize=\large, bgcolor=white]{shell-session}
+events/probe_postgres/exec_simple_query__return/trigger
+hist:keys=common_pid:lat_us=common_timestamp.usecs-$t0:
+   onmatch(probe_postgres.exec_simple_query).
+   trace(query_latency,$lat_us,query_string_string)
+        \end{minted}
+
+		\vspace{-0.73cm}
+        \begin{minted}[fontsize=\large, bgcolor=white]{shell-session}
+events/synthetic/query_latency/trigger
+hist:keys=lat_us,query_string:sort=lat_us
+        \end{minted}
+
+        \onslide<2>
+        \begin{minted}[fontsize=\large, bgcolor=red!20]{shell-session}
+synthetic_events
+query_latency u64 lat_us; char[] query_string
+        \end{minted}
+
+		\vspace{-0.73cm}
+        \begin{minted}[fontsize=\large, bgcolor=white]{shell-session}
+events/probe_postgres/exec_simple_query/trigger
+hist:keys=common_pid:t0=common_timestamp.usecs
+        \end{minted}
+
+		\vspace{-0.73cm}
+        \begin{minted}[fontsize=\large, bgcolor=white]{shell-session}
+events/probe_postgres/exec_simple_query__return/trigger
+hist:keys=common_pid:lat_us=common_timestamp.usecs-$t0:
+   onmatch(probe_postgres.exec_simple_query).
+   trace(query_latency,$lat_us,query_string_string)
+        \end{minted}
+
+		\vspace{-0.73cm}
+        \begin{minted}[fontsize=\large, bgcolor=white]{shell-session}
+events/synthetic/query_latency/trigger
+hist:keys=lat_us,query_string:sort=lat_us
+        \end{minted}
+
+        \onslide<3>
+        \begin{minted}[fontsize=\large, bgcolor=white]{shell-session}
+synthetic_events
+query_latency u64 lat_us; char[] query_string
+        \end{minted}
+
+		\vspace{-0.73cm}
+        \begin{minted}[fontsize=\large, bgcolor=red!20]{shell-session}
+events/probe_postgres/exec_simple_query/trigger
+hist:keys=common_pid:t0=common_timestamp.usecs
+        \end{minted}
+
+		\vspace{-0.73cm}
+        \begin{minted}[fontsize=\large, bgcolor=white]{shell-session}
+events/probe_postgres/exec_simple_query__return/trigger
+hist:keys=common_pid:lat_us=common_timestamp.usecs-$t0:
+   onmatch(probe_postgres.exec_simple_query).
+   trace(query_latency,$lat_us,query_string_string)
+        \end{minted}
+
+		\vspace{-0.73cm}
+        \begin{minted}[fontsize=\large, bgcolor=white]{shell-session}
+events/synthetic/query_latency/trigger
+hist:keys=lat_us,query_string:sort=lat_us
+        \end{minted}
+
+        \onslide<4>
+        \begin{minted}[fontsize=\large, bgcolor=white]{shell-session}
+synthetic_events
+query_latency u64 lat_us; char[] query_string
+        \end{minted}
+
+		\vspace{-0.73cm}
+        \begin{minted}[fontsize=\large, bgcolor=white]{shell-session}
+events/probe_postgres/exec_simple_query/trigger
+hist:keys=common_pid:t0=common_timestamp.usecs
+        \end{minted}
+
+		\vspace{-0.73cm}
+        \begin{minted}[fontsize=\large, bgcolor=red!20]{shell-session}
+events/probe_postgres/exec_simple_query__return/trigger
+hist:keys=common_pid:lat_us=common_timestamp.usecs-$t0:
+   onmatch(probe_postgres.exec_simple_query).
+   trace(query_latency,$lat_us,query_string_string)
+        \end{minted}
+
+		\vspace{-0.73cm}
+        \begin{minted}[fontsize=\large, bgcolor=white]{shell-session}
+events/synthetic/query_latency/trigger
+hist:keys=lat_us,query_string:sort=lat_us
+        \end{minted}
+
+        \onslide<5>
+        \begin{minted}[fontsize=\large, bgcolor=white]{shell-session}
+synthetic_events
+query_latency u64 lat_us; char[] query_string
+        \end{minted}
+
+		\vspace{-0.73cm}
+        \begin{minted}[fontsize=\large, bgcolor=white]{shell-session}
+events/probe_postgres/exec_simple_query/trigger
+hist:keys=common_pid:t0=common_timestamp.usecs
+        \end{minted}
+
+		\vspace{-0.73cm}
+        \begin{minted}[fontsize=\large, bgcolor=white]{shell-session}
+events/probe_postgres/exec_simple_query__return/trigger
+hist:keys=common_pid:lat_us=common_timestamp.usecs-$t0:
+   onmatch(probe_postgres.exec_simple_query).
+   trace(query_latency,$lat_us,query_string_string)
+        \end{minted}
+
+		\vspace{-0.73cm}
+        \begin{minted}[fontsize=\large, bgcolor=red!20]{shell-session}
+events/synthetic/query_latency/trigger
+hist:keys=lat_us,query_string:sort=lat_us
+        \end{minted}
+
+    \end{overprint}
+
+    \end{center}
+\end{frame}
+
+\section{Development}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \begin{minted}[fontsize=\large]{shell-session}
+$ perf record -a -g --event=mem:0x7ff3bc1f9000/8:rw
         \end{minted}
     \end{center}
 \end{frame}
-\note{
-	Filter doesn't work with comparisons, requires post-processing,
-	complicated. For such cases it's good to have a stable usdt.
-}
+\note{share memory from postmaster maps}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \begin{minted}[fontsize=\large]{text}
+$ bpftrace -e 'kprobe:__x64_sys_pwrite64
+    /comm == "postgres"/ { override(-12) }' --unsafe
+Attaching 1 probe...
+        \end{minted}
+
+        \begin{minted}[fontsize=\large]{text}
+=# create table test();
+PANIC:  XX000: could not write to
+log file 00000001000000000000002B at offset 11444224,
+length 106496: Cannot allocate memory
+LOCATION:  XLogWrite, xlog.c:2233
+        \end{minted}
+    \end{center}
+\end{frame}
+\note{ENOMEM, only for those functions that are markes safe to fail.}
+
+\section{Tips \& tricks}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \begin{minted}[fontsize=\large]{shell-session}
+$ perf report --header
+
+# ========
+# captured on    : Wed Oct 12 17:07:32 2022
+# header version : 1
+# data offset    : 504
+# data size      : 1392968
+# feat offset    : 1393472
+# arch : x86_64
+# cpudesc : Intel(R) Core(TM) i7-10610U CPU @ 1.80GHz
+# ...
+        \end{minted}
+    \end{center}
+\end{frame}
+\note{ENOMEM, only for those functions that are markes safe to fail.}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \begin{minted}[fontsize=\large]{shell-session}
+$ perf archive
+
+  Now please run:
+  tar xvf perf.data.tar.bz2 -C ~/.debug
+        \end{minted}
+    \end{center}
+\end{frame}
+\note{Archives all available symbols}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \begin{minted}[fontsize=\large]{shell-session}
+$ perf record --overwrite --switch-output=signal
+$ kill -SIGUSR2 <perf-pid>
+        \end{minted}
+    \end{center}
+\end{frame}
+\note{Daemonized perf, optionally specify ring buffer size with -m 1M to
+    control memory better}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \begin{minted}[fontsize=\large]{shell-session}
+$ perf record -p <pid> -e intel_pt//u --filter\
+ 'filter tts_buffer_heap_materialize @ bin/postgres'
+        \end{minted}
+    \end{center}
+\end{frame}
+\note{Duplicated functions?}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+		\begin{tikzpicture}[
+		  decoration={
+			reverse path,
+			text effects along path,
+			text={perf record -e probe\_postgres:GetNewTransactionId perf script bpftrace -l 'usdt:bin/postgres:*' bpftrace -p 31715 -f json -e 'usdt:bin/postgres:postgresql:checkpoint\_\_start printf("Checkpoint, Flags d", arg0);' perf probe -x bin/postgres -L GetNewTransactionId perf probe -x bin/postgres -V GetNewTransactionId:187 perf probe -x bin/postgres GetNewTransactionId:187 nxids perf record -e probe\_postgres:GetNewTransactionId\_L187\_2 perf script cat events/synthetic/query\_latency/hist perf probe -x bin/postgres exec\_simple\_query query\_string:string perf probe -x bin/postgres exec\_simple\_query return echo 'query\_latency u64 lat\_us; char[] query\_string' > synthetic\_events echo 'hist:keys=common\_pid:ts0=common\_timestamp.usecs' > events/probe\_postgres/exec\_simple\_query/trigger echo 'hist:keys=common\_pid:lat\_us=common\_timestamp.usecs-ts0:onmatch(probe\_postgres.exec\_simple\_query).trace(query\_latency,lat\_us,query\_string\_string)' > events/probe\_postgres/exec\_simple\_query\_\_return/trigger echo 'hist:keys=lat\_us,query\_string:sort=lat\_us' > events/synthetic/query\_latency/trigger perf record -a -g --event=mem:0x7ff3bc1f9000/8:rw bpftrace -e 'kprobe:\_\_x64\_sys\_pwrite64 comm == "postgres"  override(-12) ' --unsafe perf report --header perf archive perf record --overwrite --switch-output=signal kill -SIGUSR2 <perf-pid> perf record -p <pid> -e intel\_pt//u --filter 'filter tts\_buffer\_heap\_materialize @ bin/postgres'},
+			text effects/.cd,
+			  text along path,
+			  character count=\i, character total=\n,
+			  characters={scale=1-\i/\n}
+			}
+		]
+		\draw [decorate] (0,0)
+			\foreach \i [evaluate={\r=(\i/2000)^2;}] in {0,5,...,4880}{ -- (\i:\r)};
+		\end{tikzpicture}
+    \end{center}
+\end{frame}
 
 \begin{frame}
     \frametitle{}
