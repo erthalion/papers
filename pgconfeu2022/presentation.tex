@@ -34,6 +34,7 @@
 \usepackage{datetime}
 \usepackage{hyperref}
 \usepackage{forloop}
+\usepackage{copyrightbox}
 \usepackage{csquotes}
 \usetikzlibrary{tikzmark}
 \usetikzlibrary{arrows.meta}
@@ -238,22 +239,14 @@ $ perf script
 \begin{frame}[fragile]{}
     \frametitle{}
     \begin{center}
-        \begin{itemize}[label={}]
-            \item {Static tracing}
-            \item {Tracepoints}
-            \item {USDT}
-        \end{itemize}
+        Static tracing: Tracepoints, USDT
     \end{center}
 \end{frame}
 
 \begin{frame}[fragile]{}
     \frametitle{}
     \begin{center}
-        \begin{itemize}[label={}]
-            \item {Dynamic tracing}
-            \item {kprobe/kretprobe}
-            \item {uprobe/uretprobe}
-        \end{itemize}
+        Dynamic tracing: k[ret]probe, u[ret]probe
     \end{center}
 \end{frame}
 
@@ -304,7 +297,7 @@ usdt:bin/postgres:postgresql:buffer__checkpoint__start
     \frametitle{}
     \begin{center}
         \begin{minted}[fontsize=\large]{shell-session}
-$ bpftrace -p 31715 -f json -e
+$ bpftrace -p <pid> -f json -e
     'usdt:bin/postgres:postgresql:checkpoint__start
     {printf("Checkpoint, Flags %d\n", arg0);}'
 
@@ -372,22 +365,22 @@ $ perf script
 
 \section{Limitations}
 
-\begin{frame}[fragile]{}
-    \frametitle{}
-    \begin{center}
-        \begin{minted}[fontsize=\large, escapeinside=::]{c}
-*dovacuum =
-	force_vacuum ||
-	(vactuples > vacthresh) ||
-	(vac_ins_base_thresh >= 0 &&
-		:\colorbox{red!20}{instuples > vacinsthresh)};:
-        \end{minted}
-    \end{center}
-\end{frame}
-\note{
-	Filter doesn't work with comparisons, requires post-processing,
-	complicated. For such cases it's good to have a stable usdt.
-}
+%\begin{frame}[fragile]{}
+    %\frametitle{}
+    %\begin{center}
+        %\begin{minted}[fontsize=\large, escapeinside=::]{c}
+%*dovacuum =
+	%force_vacuum ||
+	%(vactuples > vacthresh) ||
+	%(vac_ins_base_thresh >= 0 &&
+		%:\colorbox{red!20}{instuples > vacinsthresh)};:
+        %\end{minted}
+    %\end{center}
+%\end{frame}
+%\note{
+	%Filter doesn't work with comparisons, requires post-processing,
+	%complicated. For such cases it's good to have a stable usdt.
+%}
 
 \begin{frame}[fragile]{}
     \frametitle{}
@@ -395,6 +388,7 @@ $ perf script
         \begin{itemize}[label={}]
             \item<+-> {Context switch overhead}
             \item<+-> {Debugging symbols}
+            \item<+-> {Post-processing}
             \item<+-> {Incorporate into infrastructure?}
             \item<+-> {Privileges?}
         \end{itemize}
@@ -433,6 +427,9 @@ hitcount: 1
         \end{minted}
     \end{center}
 \end{frame}
+\note{
+    visual hists if possible
+}
 
 \begin{frame}[fragile]{}
     \frametitle{}
@@ -447,12 +444,18 @@ $ perf probe -x bin/postgres \
     \end{center}
 \end{frame}
 
+\renewcommand\UrlFont{\color{gray!50}\rmfamily\itshape}
 \begin{frame}
     \frametitle{}
     \begin{center}
-        \includegraphics[width=0.9\textwidth,center]{more.png}
+        \copyrightbox[b]
+            {\includegraphics[width=0.9\textwidth,center]{more.png}}
+            {Belzebubs: \url{belzebubsofficial.tumblr.com}}
     \end{center}
 \end{frame}
+\note{
+    Copyright, link
+}
 
 \begin{frame}[fragile]{}
     \frametitle{}
@@ -641,7 +644,6 @@ $ perf report --header
 # data size      : 1392968
 # feat offset    : 1393472
 # arch : x86_64
-# cpudesc : Intel(R) Core(TM) i7-10610U CPU @ 1.80GHz
 # ...
         \end{minted}
     \end{center}
@@ -707,9 +709,15 @@ $ perf record -p <pid> -e intel_pt//u --filter\
 \begin{frame}
     \frametitle{}
     \begin{center}
-        \includegraphics[width=0.7\textwidth,center]{elephant.jpg}
+        \copyrightbox[b]
+            {\includegraphics[width=0.7\textwidth,center]{elephant.jpg}}
+            {Dmitrii Dolgov: Teufelsberg, Berlin}
+
     \end{center}
 \end{frame}
+\note{
+    Copyright, name place
+}
 
 \fontsize{18pt}{18}\selectfont
 \begin{frame}
