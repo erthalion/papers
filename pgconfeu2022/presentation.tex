@@ -683,6 +683,16 @@ $ perf record -p <pid> -e intel_pt//u --filter\
 \end{frame}
 \note{Duplicated functions?}
 
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \begin{minted}[fontsize=\large]{shell-session}
+$ perf record -e event:[u:k:pp:b]
+        \end{minted}
+    \end{center}
+\end{frame}
+\note{Duplicated functions?}
+
 \begin{frame}
     \frametitle{}
     \begin{center}
