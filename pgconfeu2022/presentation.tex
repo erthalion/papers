@@ -253,6 +253,16 @@ $ perf script
 \begin{frame}[fragile]{}
     \frametitle{}
     \begin{center}
+        Dynamic tracing: k[ret]probe vs k[ret]func
+    \end{center}
+\end{frame}
+\note{
+    maxactive patch, shadow stack improvements
+}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
         \begin{minted}[fontsize=\Large, escapeinside=||]{c}
     <handle_event>:   |\colorbox{red!20}{push %rbp}|
     <handle_event+1>: mov  %rsp,%rbp
@@ -692,6 +702,21 @@ $ perf record -e event:[u:k:pp:b]
     \end{center}
 \end{frame}
 \note{Duplicated functions?}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \begin{minted}[fontsize=\large]{shell-session}
+$ perf record -F max | -c 1000
+$ perf script
+$ stackcollapse-perf.pl
+$ flamegraph.pl --hash
+        \end{minted}
+    \end{center}
+\end{frame}
+\note{
+    Frequency vs event sample period, inconsistency with flamegraph
+}
 
 \begin{frame}
     \frametitle{}
