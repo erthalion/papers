@@ -1,0 +1,442 @@
+\documentclass[usenames,dvipsnames, 18pt, compress, aspectratio=169]{beamer}
+
+% can be compiled by xelatex -shell-escape presentation.tex
+% lualatex -shell-escape presentation.tex
+
+\usetheme[]{metropolis}
+
+\usepackage[utf8]{inputenc}
+\usepackage[russian, english]{babel}
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+\usepackage{listings}
+\usepackage{marvosym}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage[document]{ragged2e}
+\usepackage[export]{adjustbox}
+\usepackage{fontawesome5}
+\usepackage{enumitem}
+\usepackage{minted}
+\usemintedstyle{tango}
+\usepackage[normalem]{ulem}
+\usepackage{tikz}
+\usetikzlibrary{patterns}
+\usetikzlibrary{mindmap}
+\usetikzlibrary{shapes.misc, fit}
+\usetikzlibrary{spy, decorations, decorations.pathmorphing, decorations.pathreplacing, backgrounds, decorations.text}
+\usepackage{graphicx}
+\usepackage{eso-pic}
+\usepackage{verbatim}
+\usepackage{smartdiagram}
+\usesmartdiagramlibrary{additions}
+\usetikzlibrary{trees}
+\usepackage{datetime}
+\usepackage{hyperref}
+\usepackage{forloop}
+\usepackage{copyrightbox}
+\usepackage{csquotes}
+\usepackage{hyperref}
+\usepackage{pgfplots}
+\usetikzlibrary{tikzmark}
+\usetikzlibrary{arrows.meta}
+
+\usepackage{tcolorbox}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{colortbl}
+\tcbuselibrary{skins}
+
+\usetikzlibrary{shapes,arrows,positioning}
+\graphicspath{{images/}}
+%\newfontfamily{\FA}{FontAwesome}
+
+\def\social{{\faMastodon}}
+\def\github{{\faGithub}}
+\def\email{{\faEnvelope}}
+
+\renewcommand{\ttdefault}{pcr}
+\setmonofont{FiraCode-VF}
+%\newfontfamily{\ttfamily}{FiraCode-VF}
+
+\usefonttheme{professionalfonts} % using non standard fonts for beamer
+\usefonttheme{serif} % default family is serif
+\usepackage{fontspec}
+\setmainfont{Liberation Sans}
+\newfontfamily\ExtraLight{Liberation Sans}
+\newfontfamily\Light{Liberation Sans}
+\newfontfamily\Book{Liberation Sans}
+\newfontfamily\Medium{Liberation Sans}
+
+\makeatletter
+\newcommand\HUGE{\@setfontsize\Huge{32}{41}}
+\makeatother
+
+\newcommand\AtPagemyUpperLeft[1]{\AtPageLowerLeft{%
+\put(\LenToUnit{0.85\paperwidth},\LenToUnit{0.05\paperheight}){#1}}}
+
+\newcommand\AtPagemyUpperTop[1]{\AtPageLowerLeft{%
+\put(\LenToUnit{0.42\paperwidth},\LenToUnit{0.90\paperheight}){#1}}}
+
+\renewcommand{\ULthickness}{2.0pt}
+
+\definecolor{links}{HTML}{0099FF}
+\hypersetup{colorlinks, linkcolor=, urlcolor=links}
+\definecolor{greenGood}{HTML}{99FF99}
+\definecolor{redBad}{HTML}{FF9980}
+\definecolor{title}{HTML}{ee0000}
+
+\setbeamerfont{section title}{family=\Book, size=\Huge, shape=\normalfont}
+\setbeamerfont{frametitle}{family=\Book, size=\large, shape=\normalfont}
+\setbeamerfont{title}{family=\Book, size=\Large, shape=\normalfont}
+\setbeamerfont{subtitle}{size=\small}
+\setbeamerfont{author}{family=\ExtraLight, size=\footnotesize}
+
+\definecolor{cec1d24}{RGB}{236,29,36}
+\definecolor{cffffff}{RGB}{255,255,255}
+
+\setbeamertemplate{navigation symbols}{}
+\beamertemplatenavigationsymbolsempty
+\pagenumbering{gobble}
+
+\setbeamertemplate{title page}
+{
+
+  \vspace*{2.1cm}
+  \hspace{6.0cm}
+  \begin{minipage}[b][\paperheight]{0.6\textwidth}
+  \begin{center}
+
+    \ifx\inserttitle\@empty\else
+    {{% \inserttitle is nonempty
+      \raggedright%
+      %\linespread{1.0}%
+      \usebeamerfont{title}%
+      \usebeamercolor[fg]{title}%
+      %\vspace*{1.3em}
+      \if@noSmallCapitals%
+        \inserttitle%
+      \else%
+        \scshape{\color{title} \textbf{\begin{flushleft}\inserttitle\end{flushleft}}}%
+      \fi%
+      \vspace*{0.3em}
+    }}
+    \fi
+
+    \vspace*{0.5em}%
+
+    \ifx\insertsubtitle\@empty\else
+    {{% \insertsubtitle is nonempty
+      \usebeamerfont{subtitle}%
+      \usebeamercolor[fg]{subtitle}%
+      {\color{black} \insertsubtitle}%
+      \vspace*{3.0em}%
+    }}
+    \fi
+
+    \vspace*{1.0em}%
+
+    \usebeamerfont{author}%
+    \usebeamercolor[fg]{author}%
+    {\begin{flushleft}\color{black} \insertauthor\end{flushleft}}%
+
+    %\vspace*{1.5em}
+    \fontsize{8pt}{10}\selectfont
+    {\begin{flushleft}\color{black} 15-12-2022\end{flushleft}}%
+
+    \vfill
+    \vspace*{2em}
+  \end{center}
+  \end{minipage}
+}
+
+\setbeamertemplate{section page}
+{
+  \vspace{2em}
+  \centering
+  \begin{minipage}{22em}
+    \usebeamercolor[fg]{section title}
+    \usebeamerfont{section title}
+    {\color{black} \insertsectionhead\\[-1ex]}
+  \end{minipage}
+  \par
+}
+
+\setbeamertemplate{footline}
+{
+\begin{beamercolorbox}[wd=\textwidth,ht=3ex,dp=3ex,leftskip=0.3cm,rightskip=0.3cm]{structure}
+  \usebeamerfont{page number in head/foot}
+  \insertframenumber
+\end{beamercolorbox}
+}
+
+
+\title{Demanding the impossible: \\ rigorous database benchmarking}
+\subtitle{}
+\date{\today}
+\author{DMITRII DOLGOV}
+\institute{}
+
+\begin{document}
+{
+  \usebackgroundtemplate{\includegraphics[width=\paperwidth]{title.png}}%
+  \fontsize{17pt}{18}\selectfont
+  \maketitle
+}
+
+\AddToShipoutPictureBG{
+  \AtPagemyUpperLeft{{\includegraphics[width=2.0cm,keepaspectratio]{logo.png}}}
+}
+
+%\setbeamertemplate{background canvas}{}
+
+\fontsize{17pt}{18}\selectfont
+
+% party tricks references
+
+%{
+%\setbeamercolor{background canvas}{bg=black}
+%\begin{frame}
+    %\frametitle{}
+    %\begin{center}
+        %\includegraphics[width=1.0\textwidth,center]{nethack.png}
+    %\end{center}
+%\end{frame}
+%\note{Originally about resources, but now not only}
+%}
+
+\setbeamertemplate{background canvas}{}
+
+\section{Benchmarking model}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        Motivation: Choose your fighter
+
+        https://github.com/cmu-db/benchbase
+        https://github.com/akopytov/sysbench
+        https://www.postgresql.org/docs/current/pgbench.html
+        https://github.com/brianfrankcooper/YCSB
+        https://github.com/TPC-Council/HammerDB
+
+        Replicated prod workload
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        Motivation
+
+		\begin{overprint}[14.5cm]
+        \onslide<1>
+        \begin{minted}[fontsize=\large]{shell-session}
+latency average = 0.011 ms
+latency stddev = 0.002 ms
+tps = 89357.630697 (without initial connection time)
+        \end{minted}
+
+        \onslide<2>
+        \begin{minted}[fontsize=\large]{shell-session}
+latency average = 0.011 ms
+latency stddev = 0.002 ms
+tps = 89357.630697 (without initial connection time)
+
+latency average = 0.014 ms
+latency stddev = 0.023 ms
+tps = 67107.536620 (without initial connection time)
+        \end{minted}
+		\end{overprint}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \copyrightbox[b]
+            {\includegraphics[width=0.8\textwidth,center]{lorenz.png}}
+            {
+                The phase space plot of the Lorenz attractor,
+                \\ {\scriptsize
+                    \href{https://www.researchgate.net/publication/339796576_Nonlinear_time_series_methods_for_analyzing_behavioral_sequences}
+                         {{\color{gray!60} "Nonlinear time series methods for analyzing behavioral sequences"}}}
+            }
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        Dimentions
+
+        DB parameters (e.g. shared\_buffers) +
+        Workload parameters (e.g. rate of incoming queries) +
+        Performance results (e.g. query latency)
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \begin{tikzpicture}
+        \begin{axis}[
+            xlabel = shared\_buffers,
+            ylabel = queries rate,
+            zlabel = query latency,
+            xtick = {0},
+            ytick = {0},
+            ztick = {0},
+            ticklabel style = {font = \tiny},
+            xmajorgrids=false,
+            ymajorgrids=false,
+            zmajorgrids=false,
+        ]
+        %\addplot3[
+            %surf,
+        %]
+        \addplot3 [surf, domain=0:360, samples=60]
+            { sin(x)*sin(y) };]
+        %coordinates {
+        %(0,0,0) (0,1,0) (0,2,0)
+
+        %(1,0,0) (1,1,0.6) (1,2,0.7)
+
+        %(2,0,0) (2,1,0.7) (2,2,1.8)
+        %};
+        %{exp(-x^2-y^2)*x};
+        \end{axis}
+        \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \copyrightbox[b]
+            {\includegraphics[width=0.8\textwidth,center]{probability-distribution.png}}
+            {Probability distribution}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        Benchmarking = exploring
+
+        known vs unknown
+
+        common vs particular
+    \end{center}
+\end{frame}
+
+\section{PostgreSQL specifics}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        Misconfiguration, too small or too big
+
+        shared\_buffers, work\_mem, max\_wal\_size, wal\_writer\_flush\_after, checkpoint\_timeout, checkpoint\_completion\_target, checkpoint\_flush\_after
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        Not configuring OS
+
+        huge pages, dirty\_bytes, dirty\_background\_bytes, readahead, fs journal, priorities
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        Noise, VM, noisy neighbors. hwlat.
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        How long does it take to see the effect?
+
+        Take into account checkpoints, autovacuum, bloat
+
+        \begin{minted}[fontsize=\large]{shell-session}
+#autovacuum_naptime = 1min		# time between autovacuum runs
+#autovacuum_vacuum_threshold = 50	# min number of row updates before
+                    # vacuum
+#autovacuum_vacuum_insert_threshold = 1000	# min number of row inserts
+                    # before vacuum; -1 disables insert
+                    # vacuums
+#autovacuum_vacuum_scale_factor = 0.2	# fraction of table size before vacuum
+#autovacuum_vacuum_insert_scale_factor = 0.2	# fraction of inserts over table
+                    # size before insert vacuum
+#autovacuum_vacuum_cost_delay = 2ms	# default vacuum cost delay for
+                    # autovacuum, in milliseconds;
+                    # -1 means use vacuum_cost_delay
+#autovacuum_vacuum_cost_limit = -1	# default vacuum cost limit for
+                    # autovacuum, -1 means use
+                    # vacuum_cost_limit
+        \end{minted}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        Load generator performance. Open vs closed systems. Pgbench is closed,
+        benchbase can be open. The example at the beginning is from pgbench
+        logging vs not logging.
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        Hardware. fsync graph.
+    \end{center}
+\end{frame}
+
+\section{Statistics}
+
+\fontsize{18pt}{18}\selectfont
+\begin{frame}
+  \vspace*{2.5cm}
+  \begin{minipage}[b][\paperheight]{\textwidth}
+  \begin{center}
+
+      %\raggedright%
+      \linespread{1.0}%
+      \usebeamerfont{title}%
+      \usebeamercolor[fg]{title}%
+      \if@noSmallCapitals%
+        Questions?
+      \else%
+        \scshape{\color{black} Questions?}%
+      \fi%
+      \vspace*{0.3em}
+
+      \usebeamerfont{subtitle}%
+      \fontsize{13pt}{14}\selectfont
+      \usebeamercolor[fg]{subtitle}%
+        \begin{itemize}[label={}]
+            \item {\color{black} \social\ @erthalion@fosstodon.org}
+            \item {\color{black} \email\ ddolgov at redhat dot com}
+        \end{itemize}
+      \vspace*{2.5em}%
+
+    \vfill
+    \vspace*{2em}
+  \end{center}
+  \end{minipage}
+
+\end{frame}
+
+\end{document}
