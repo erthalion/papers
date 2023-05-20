@@ -99,6 +99,16 @@
 \beamertemplatenavigationsymbolsempty
 \pagenumbering{gobble}
 
+\tcbset{
+    on line,
+    boxsep=4pt,
+    left=0pt,
+    right=0pt,
+    top=0pt,
+    bottom=0pt,
+    colframe=white
+}
+
 \setbeamertemplate{title page}
 {
 
@@ -207,29 +217,29 @@
 
 \setbeamertemplate{background canvas}{}
 
-\section{Benchmarking model}
-
 \begin{frame}
     \frametitle{}
     \begin{center}
-        Motivation: Choose your fighter
+        Choose your fighter:
 
-        https://github.com/cmu-db/benchbase
-        https://github.com/akopytov/sysbench
-        https://www.postgresql.org/docs/current/pgbench.html
-        https://github.com/brianfrankcooper/YCSB
-        https://github.com/TPC-Council/HammerDB
+        \begin{flushleft}
+            \href{github.com/cmu-db/benchbase}{\color{blue!60} github.com/cmu-db/benchbase}
+            \href{github.com/akopytov/sysbench}{\color{blue!60} github.com/akopytov/sysbench}
+            \href{github.com/brianfrankcooper/YCSB}{\color{blue!60} github.com/brianfrankcooper/YCSB}
+            \href{github.com/TPC-Council/HammerDB}{\color{blue!60} github.com/TPC-Council/HammerDB}
+            \href{postgresql.org/docs/current/pgbench.html}{\color{blue!60} postgresql.org/docs/current/pgbench.html}
 
-        Replicated prod workload
+            Replicated live workload
+        \end{flushleft}
+
     \end{center}
 \end{frame}
 
 \begin{frame}[fragile]{}
     \frametitle{}
     \begin{center}
-        Motivation
 
-		\begin{overprint}[14.5cm]
+		\begin{overprint}[12.5cm]
         \onslide<1>
         \begin{minted}[fontsize=\large]{shell-session}
 latency average = 0.011 ms
@@ -252,17 +262,19 @@ tps = 67107.536620 (without initial connection time)
     \end{center}
 \end{frame}
 
+\section{Benchmarking model}
+
 \begin{frame}
     \frametitle{}
     \begin{center}
         \copyrightbox[b]
-            {\includegraphics[width=0.8\textwidth,center]{lorenz.png}}
-            {
-                The phase space plot of the Lorenz attractor,
-                \\ {\scriptsize
-                    \href{https://www.researchgate.net/publication/339796576_Nonlinear_time_series_methods_for_analyzing_behavioral_sequences}
-                         {{\color{gray!60} "Nonlinear time series methods for analyzing behavioral sequences"}}}
-            }
+        {\includegraphics[width=0.8\textwidth,center]{lorenz.png}}
+        {
+            The phase space plot of the Lorenz attractor,
+            \\ {\scriptsize
+                \href{https://www.researchgate.net/publication/339796576_Nonlinear_time_series_methods_for_analyzing_behavioral_sequences}
+                     {{\color{gray!60} "Nonlinear time series methods for analyzing behavioral sequences"}}}
+        }
 
     \end{center}
 \end{frame}
@@ -270,11 +282,14 @@ tps = 67107.536620 (without initial connection time)
 \begin{frame}
     \frametitle{}
     \begin{center}
-        Dimentions
+        Dimentions?
 
-        DB parameters (e.g. shared\_buffers) +
-        Workload parameters (e.g. rate of incoming queries) +
-        Performance results (e.g. query latency)
+        \begin{itemize}
+            \item DB parameters
+            \item Hardware resources
+            \item Workload parameters
+            \item Performance results
+        \end{itemize}
     \end{center}
 \end{frame}
 
@@ -294,19 +309,8 @@ tps = 67107.536620 (without initial connection time)
             ymajorgrids=false,
             zmajorgrids=false,
         ]
-        %\addplot3[
-            %surf,
-        %]
-        \addplot3 [surf, domain=0:360, samples=60]
-            { sin(x)*sin(y) };]
-        %coordinates {
-        %(0,0,0) (0,1,0) (0,2,0)
-
-        %(1,0,0) (1,1,0.6) (1,2,0.7)
-
-        %(2,0,0) (2,1,0.7) (2,2,1.8)
-        %};
-        %{exp(-x^2-y^2)*x};
+        \addplot3 [surf, domain=0:180, samples=60]
+            { 1 - sin(x) + 0.01 * y };]
         \end{axis}
         \end{tikzpicture}
     \end{center}
@@ -325,86 +329,224 @@ tps = 67107.536620 (without initial connection time)
 \begin{frame}
     \frametitle{}
     \begin{center}
-        Benchmarking = exploring
+        Benchmarking is exploring the system's {{\bf \tcbox[colback=blue!30]{known}}}
+        properties in presence of {\bf {\tcbox[colback=red!30]{unknown}}} factors.
 
-        known vs unknown
-
-        common vs particular
     \end{center}
 \end{frame}
+\note{
+    common vs particular
+    statistical approach as clear communication pattern
+}
 
 \section{PostgreSQL specifics}
 
-\begin{frame}
+\begin{frame}[fragile]{}
     \frametitle{}
     \begin{center}
-        Misconfiguration, too small or too big
+        Too low or too high?
 
-        shared\_buffers, work\_mem, max\_wal\_size, wal\_writer\_flush\_after, checkpoint\_timeout, checkpoint\_completion\_target, checkpoint\_flush\_after
-    \end{center}
-\end{frame}
+        \begin{minted}[fontsize=\large]{shell-session}
+    shared_buffers
+    max_wal_size
+    work_mem
+    checkpoint_timeout
+    checkpoint_completion_target
+    wal_writer_flush_after
+    checkpoint_flush_after
+    [...]
+        \end{minted}
 
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-        Not configuring OS
-
-        huge pages, dirty\_bytes, dirty\_background\_bytes, readahead, fs journal, priorities
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-        Noise, VM, noisy neighbors. hwlat.
     \end{center}
 \end{frame}
 
 \begin{frame}[fragile]{}
     \frametitle{}
     \begin{center}
-        How long does it take to see the effect?
-
-        Take into account checkpoints, autovacuum, bloat
+        Too low or too high?
 
         \begin{minted}[fontsize=\large]{shell-session}
-#autovacuum_naptime = 1min		# time between autovacuum runs
-#autovacuum_vacuum_threshold = 50	# min number of row updates before
-                    # vacuum
-#autovacuum_vacuum_insert_threshold = 1000	# min number of row inserts
-                    # before vacuum; -1 disables insert
-                    # vacuums
-#autovacuum_vacuum_scale_factor = 0.2	# fraction of table size before vacuum
-#autovacuum_vacuum_insert_scale_factor = 0.2	# fraction of inserts over table
-                    # size before insert vacuum
-#autovacuum_vacuum_cost_delay = 2ms	# default vacuum cost delay for
-                    # autovacuum, in milliseconds;
-                    # -1 means use vacuum_cost_delay
-#autovacuum_vacuum_cost_limit = -1	# default vacuum cost limit for
-                    # autovacuum, -1 means use
-                    # vacuum_cost_limit
+        vm.nr_hugepages
+        vm.dirty_background_bytes
+        vm.dirty_bytes
+        block/<dev>/queue/read_ahead_kb
+        block/<dev>/queue/scheduler
+        [...]
+        \end{minted}
+    \end{center}
+\end{frame}
+\note{
+    fs journal, priorities, etc
+}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+		\begin{overprint}[12.5cm]
+
+        \onslide<1>
+        \includegraphics[width=0.8\textwidth,center]{in-memory-insert-latency.png}
+
+        \onslide<2>
+        \includegraphics[width=0.8\textwidth,center]{in-memory-insert-latency-sync.png}
+		\end{overprint}
+
+    \end{center}
+\end{frame}
+\note{
+    ext4_sync_file_enter/ext4_sync_file_exit
+}
+
+%\begin{frame}
+    %\frametitle{}
+    %\begin{center}
+        %Noise, VM, noisy neighbors. hwlat.
+    %\end{center}
+%\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        How long?
+
+        \begin{minted}[fontsize=\large]{shell-session}
+autovacuum_naptime = 1min
+autovacuum_vacuum_threshold = 50
+autovacuum_vacuum_insert_threshold = 1000
+autovacuum_vacuum_scale_factor = 0.2
+autovacuum_vacuum_insert_scale_factor = 0.2
+autovacuum_vacuum_cost_delay = 2ms
+autovacuum_vacuum_cost_limit = -1
         \end{minted}
 
     \end{center}
 \end{frame}
+\note{
+    + checkpoints, + bloat
+}
 
 \begin{frame}
     \frametitle{}
     \begin{center}
-        Load generator performance. Open vs closed systems. Pgbench is closed,
-        benchbase can be open. The example at the beginning is from pgbench
-        logging vs not logging.
-    \end{center}
-\end{frame}
+        The load generator?
+		\vspace{0.5cm}
 
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-        Hardware. fsync graph.
+		\begin{overprint}[10.0cm]
+
+        \onslide<1>
+        \begin{tikzpicture}[thick,scale=1.5, every node/.style={transform shape}]
+            % the rectangle with vertical rules
+            \draw (0,0) -- ++(2cm,0) -- ++(0,-1.5cm) -- ++(-2cm,0);
+            \foreach \i in {1,...,4}
+              \draw (2cm-\i*10pt,0) -- +(0,-1.5cm);
+
+            % the circle
+            \draw (2.75,-0.75cm) circle [radius=0.75cm];
+
+            % the arrows and labels
+            \draw[->] (3.5,-0.75) -- +(20pt,0);
+            \draw[<-] (0,-0.75) -- +(-20pt,0) node[left] {$\lambda$};
+            \node[draw opacity=0, line width=0, pattern=none, color=white] (generator) at (2.0,1.0cm) {Gen};
+            \node at (2.75,-0.75cm) {$\mu$};
+            \node[align=center] at (1cm,-2cm) {};
+            \node[align=center] at (3cm,-2cm) {};
+        \end{tikzpicture}
+
+        \onslide<2>
+        \begin{tikzpicture}[thick,scale=1.5, every node/.style={transform shape}]
+            % the rectangle with vertical rules
+            \draw (0,0) -- ++(2cm,0) -- ++(0,-1.5cm) -- ++(-2cm,0);
+            \foreach \i in {1,...,4}
+              \draw (2cm-\i*10pt,0) -- +(0,-1.5cm);
+
+            % the circle
+            \draw (2.75,-0.75cm) circle [radius=0.75cm];
+
+            % the arrows and labels
+            \draw (3.5,-0.75) -- +(20pt,0);
+            \draw[<-] (0,-0.75) -- +(-20pt,0) node[left, color=white] {$\lambda$};
+            \node (generator) at (2.0,1.0cm) {Gen};
+            \draw (generator.west) -| (-20pt, -0.75);
+            \draw[<-] (generator.east) -| (4.2, -0.75);
+            \node at (2.75,-0.75cm) {$\mu$};
+            \node[align=center] at (1cm,-2cm) {};
+            \node[align=center] at (3cm,-2cm) {};
+        \end{tikzpicture}
+		\end{overprint}
     \end{center}
+
+    \linespread{0.5}
+    \vspace{0.5cm}
+    \color{black}\fontsize{6pt}{0}\selectfont
+        "Open versus closed: A cautionary tale". Schroeder, B., Wierman, A. and
+        Harchol-Balter, M., USENIX. 2006.
+    \linespread{1.5}
 \end{frame}
+\note{
+    The example at the beginning is from pgbench logging vs not logging
+}
 
 \section{Statistics}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        Long history of statistical experiments
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        Normal vs long tail distribution
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        Still sometimes long tail could be approximated by normal.
+        datastax-labs/hunter, clickhouse with randomized block testing
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        Aggregated statistics, mean, variance, multi modal distr
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        How much data for confident measurement, ergodic systems.
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        Comparing two measurements, factorial design, randomized testing.
+    \end{center}
+\end{frame}
+
+\section{Final thoughts}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        Benchmarking = exploring
+
+        known vs unknown
+
+        common vs particular
+
+        validation and verification with other tools \& metrics
+
+        Statistical approach as clear communication pattern
+    \end{center}
+\end{frame}
 
 \fontsize{18pt}{18}\selectfont
 \begin{frame}
