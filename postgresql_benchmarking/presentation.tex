@@ -99,6 +99,8 @@
 \beamertemplatenavigationsymbolsempty
 \pagenumbering{gobble}
 
+\SetBlockThreshold{0}
+
 \tcbset{
     on line,
     boxsep=4pt,
@@ -504,10 +506,37 @@ autovacuum_vacuum_cost_limit = -1
             of the population to which the experiment belong.}
 
         \begin{flushright}
+            \fontsize{10pt}{0}\selectfont
             Student, 1908. The probable error of a mean. Biometrika, 6(1), pp.1-25.
         \end{flushright}
     \end{center}
 \end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{flushleft}
+        Population, metrics
+
+        \begin{center}
+        $\mu = E(x)$, $\sigma = \sqrt{E[(X - \mu) ^ 2]}$
+        \end{center}
+
+        Samples, statistics
+
+        \begin{center}
+        $\overline{X}$, $s_N = \sqrt{\frac{1}{N} \sum^N_{i=1}{(x_i - \overline{x})^2}}$
+        \end{center}
+
+        t-test
+
+        \begin{center}
+        $t = \frac{\overline{X} - \mu}{\hat{\sigma} / \sqrt{n}}$
+        \end{center}
+    \end{flushleft}
+\end{frame}
+\note{
+    $\hat{\sigma} -- stddev of mean$
+}
 
 \begin{frame}
     \frametitle{}
@@ -534,20 +563,58 @@ autovacuum_vacuum_cost_limit = -1
         \end{axis}
         \end{tikzpicture}
     \end{center}
+
+    \linespread{0.5}
+    \vspace{0.5cm}
+    \color{black}\fontsize{6pt}{0}\selectfont
+        Hoefler, T. and Belli, R., 2015, November. Scientific benchmarking of
+        parallel computing systems: twelve ways to tell the masses when
+        reporting performance results. In Proceedings of the international
+        conference for high performance computing, networking, storage and
+        analysis (pp. 1-12).
+    \linespread{1.5}
+
 \end{frame}
 
 \begin{frame}
     \frametitle{}
     \begin{center}
-        Still sometimes long tail could be approximated by normal.
-        datastax-labs/hunter, clickhouse with randomized block testing
+        \blockquote{\it Tests for comparison of means are not affected very much by
+            the distributional nonnormality, but this does not extend to the
+            comparison of variances.}
+
+        \begin{flushright}
+            \fontsize{10pt}{0}\selectfont
+            Box, G.E., Hunter, J.S. and Hunter, W.G., 2005. Statistics for
+            experimenters. In Wiley series in probability and statistics. Hoboken,
+            NJ: Wiley.
+        \end{flushright}
+
     \end{center}
+
+    \linespread{0.5}
+    \vspace{0.5cm}
+    \color{black}\fontsize{6pt}{0}\selectfont
+        Fleming, M., Kolaczkowski, P., Kumar, I., Das, S., McCarthy, S.,
+        Pattabhiraman, P. and Ingo, H., 2023, April. Hunter: Using Change Point
+        Detection to Hunt for Performance Regressions. In Proceedings of the
+        2023 ACM/SPEC International Conference on Performance Engineering (pp.
+        199-206).
+
+    \color{black}\fontsize{6pt}{0}\selectfont
+        clickhouse.com/docs/en/operations/utilities/clickhouse-benchmark
+
+    \linespread{1.5}
+
 \end{frame}
+\note{
+    https://github.com/datastax-labs/hunter
+    https://clickhouse.com/docs/en/operations/utilities/clickhouse-benchmark
+}
 
 \begin{frame}
     \frametitle{}
     \begin{center}
-        Aggregated statistics, mean, variance, multi modal distr
     \end{center}
 \end{frame}
 
