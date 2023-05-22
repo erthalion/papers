@@ -530,12 +530,14 @@ autovacuum_vacuum_cost_limit = -1
         t-test
 
         \begin{center}
-        $t = \frac{\overline{X} - \mu}{\hat{\sigma} / \sqrt{n}}$
+        $t = \frac{\overline{X} - \mu}{s / \sqrt{n}}, [ \overline{x} \pm \frac{cs}{\sqrt{n}} ]$
         \end{center}
     \end{flushleft}
 \end{frame}
 \note{
     $\hat{\sigma} -- stddev of mean$
+
+    normal dist + independent identically distributed
 }
 
 \begin{frame}
@@ -615,6 +617,38 @@ autovacuum_vacuum_cost_limit = -1
 \begin{frame}
     \frametitle{}
     \begin{center}
+        \includegraphics[width=0.8\textwidth,center]{bimodal-dist.png}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+        \begin{minted}[fontsize=\large]{shell-session}
+@usecs:
+[16, 32)        32 |                                    |
+[32, 64)       202 |                                    |
+[64, 128)   169897 |@@@@@@                              |
+[128, 256)  679545 |@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@|
+[256, 512)   20950 |                                    |
+[512, 1K)      378 |                                    |
+[1K, 2K)       118 |                                    |
+[2K, 4K)       133 |                                    |
+[4K, 8K)       306 |                                    |
+        \end{minted}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+
+    Median, quantiles, IQR
+
+    \begin{minted}[fontsize=\Large]{python}
+            scipy.stats.mannwhitneyu
+    \end{minted}
     \end{center}
 \end{frame}
 
