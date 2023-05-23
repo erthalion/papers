@@ -639,6 +639,9 @@ autovacuum_vacuum_cost_limit = -1
 
     \end{center}
 \end{frame}
+\note{
+    validation and verification with other tools \& metrics
+}
 
 \begin{frame}[fragile]{}
     \frametitle{}
@@ -655,31 +658,64 @@ autovacuum_vacuum_cost_limit = -1
 \begin{frame}
     \frametitle{}
     \begin{center}
-        How much data for confident measurement, ergodic systems.
+        How many runs, $E(1\%, 95\%, X)$?
+
+        $CoV \approx 0.3 \% \to E(1\%, 95\%, X) \approx 10$
+        $CoV \approx 9.0 \% \to E(1\%, 95\%, X) \approx 240$
+
+    \linespread{0.5}
+    \vspace{0.5cm}
+    \color{black}\fontsize{6pt}{0}\selectfont
+        Maricq, A., Duplyakin, D., Jimenez, I., Maltzahn, C., Stutsman, R. and
+        Ricci, R., 2018. Taming performance variability. In 13th {USENIX}
+        Symposium on Operating Systems Design and Implementation ({OSDI} 18)
+        (pp. 409-425).
+    \linespread{1.5}
+
     \end{center}
 \end{frame}
 
 \begin{frame}
     \frametitle{}
     \begin{center}
-        Comparing two measurements, factorial design, randomized testing.
+        Time average vs ensemble average?
+
+        For an ergodic system: $\overline{N}^{Time Avg} = \overline{N}^{Ensemble}$
+
+    \linespread{0.5}
+    \vspace{0.5cm}
+    \color{black}\fontsize{6pt}{0}\selectfont
+        Harchol-Balter, M., 2013. Performance modeling and design of computer
+        systems: queueing theory in action. Cambridge University Press.
+    \linespread{1.5}
+
     \end{center}
 \end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        Paired difference test.
+
+        Randomized testing.
+    \end{center}
+\end{frame}
+\note{
+    Non-parametric tests and metrics are still not robust against
+    autocorrelation.
+}
 
 \section{Final thoughts}
 
 \begin{frame}
     \frametitle{}
     \begin{center}
-        Benchmarking = exploring
-
-        known vs unknown
-
-        common vs particular
-
-        validation and verification with other tools \& metrics
-
-        Statistical approach as clear communication pattern
+        \begin{itemize}
+            \item Benchmarking is exploring
+            \item Known vs Unknown
+            \item Common vs Particular
+            \item Statistical approach for clear communication
+        \end{itemize}
     \end{center}
 \end{frame}
 
