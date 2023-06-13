@@ -154,7 +154,7 @@
 
     %\vspace*{1.5em}
     \fontsize{8pt}{10}\selectfont
-    {\begin{flushleft}\color{black} 15-12-2022\end{flushleft}}%
+    {\begin{flushleft}\color{black} 18-06-2023\end{flushleft}}%
 
     \vfill
     \vspace*{2em}
@@ -389,23 +389,37 @@ tps = 67107.536620 (without initial connection time)
     fs journal, priorities, etc
 }
 
-\begin{frame}[fragile]{}
+\begin{frame}
     \frametitle{}
     \begin{center}
-		\begin{overprint}[12.5cm]
+        \textbf{Noise}
 
-        \onslide<1>
-        \includegraphics[width=0.8\textwidth,center]{in-memory-insert-latency.png}
-
-        \onslide<2>
-        \includegraphics[width=0.8\textwidth,center]{in-memory-insert-latency-sync.png}
-		\end{overprint}
-
+        \vspace{0.5cm}
+        \begin{itemize}
+            \item CPU/NUMA pinning, p-state, frequency scaling
+            \item Files creation, NVMe trim
+            \item Noisy neighbors, virtualized infrastructure
+        \end{itemize}
     \end{center}
 \end{frame}
-\note{
-    ext4_sync_file_enter/ext4_sync_file_exit
-}
+
+%\begin{frame}[fragile]{}
+    %\frametitle{}
+    %\begin{center}
+		%\begin{overprint}[12.5cm]
+
+        %\onslide<1>
+        %\includegraphics[width=0.8\textwidth,center]{in-memory-insert-latency.png}
+
+        %\onslide<2>
+        %\includegraphics[width=0.8\textwidth,center]{in-memory-insert-latency-sync.png}
+		%\end{overprint}
+
+    %\end{center}
+%\end{frame}
+%\note{
+    %ext4_sync_file_enter/ext4_sync_file_exit
+%}
 
 %\begin{frame}
     %\frametitle{}
