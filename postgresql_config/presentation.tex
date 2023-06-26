@@ -155,7 +155,7 @@
 
     %\vspace*{1.5em}
     \fontsize{8pt}{10}\selectfont
-    {\begin{flushleft}\color{black} 15-12-2022\end{flushleft}}%
+    {\begin{flushleft}\color{black} 27-06-2023\end{flushleft}}%
 
     \vfill
     \vspace*{2em}
@@ -576,11 +576,11 @@
         \copyrightbox[b]
         {\includegraphics[width=0.8\textwidth,center]{lorenz.png}}
         {
-            The phase space plot of the Lorenz attractor,
-            \\ {\scriptsize
-                \href{https://www.researchgate.net/publication/339796576_Nonlinear_time_series_methods_for_analyzing_behavioral_sequences}
-                     {{\color{gray!60} "Nonlinear time series methods for analyzing behavioral sequences"}}}
-        }
+            The phase space plot of the Lorenz attractor, \\
+            {\scriptsize
+             \color{gray!60}
+                 Kuznetsov, N., Bonnette, S. and Riley, M.A., 2013. Nonlinear time series methods\\
+                 for analyzing behavioural sequences. In Complex systems in sport (pp. 111-130).}}
 
     \end{center}
 \end{frame}
@@ -592,7 +592,7 @@
 \begin{frame}
     \frametitle{}
     \begin{center}
-        Dimentions?
+        Dimensions?
 
         \begin{itemize}
             \item DB parameters
@@ -600,30 +600,6 @@
             \item Workload parameters
             \item Performance results
         \end{itemize}
-    \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{}
-    \begin{center}
-        \begin{tikzpicture}
-        \begin{axis}[
-            grid = major,
-            xlabel = shared\_buffers,
-            ylabel = queries rate,
-            zlabel = query latency,
-            xtick = \empty,
-            ytick = \empty,
-            ztick = \empty,
-            ticklabel style = {font = \tiny},
-            xmajorgrids=false,
-            ymajorgrids=false,
-            zmajorgrids=false,
-        ]
-        \addplot3 [surf, domain=0:180, samples=60]
-            { 1 - sin(x) + 0.01 * y };]
-        \end{axis}
-        \end{tikzpicture}
     \end{center}
 \end{frame}
 
@@ -655,6 +631,32 @@
     Usually captured in documentation, how-to articles, in a not formalized
     human language.
 }
+
+\begin{frame}
+    \frametitle{}
+    \begin{center}
+        \begin{tikzpicture}
+        \begin{axis}[
+            grid = major,
+            xlabel = shared\_buffers,
+            ylabel = queries rate,
+            zlabel = query latency,
+            xtick = \empty,
+            ytick = \empty,
+            ztick = \empty,
+            ticklabel style = {font = \tiny},
+            xmajorgrids=false,
+            ymajorgrids=false,
+            zmajorgrids=false,
+            x label style={rotate=-10},
+            y label style={rotate=38},
+        ]
+        \addplot3 [surf, domain=0:180, samples=60]
+            { 1 - sin(x) + 0.01 * y };]
+        \end{axis}
+        \end{tikzpicture}
+    \end{center}
+\end{frame}
 
 \begin{frame}[fragile]{}
     \frametitle{}
@@ -727,9 +729,18 @@
           \hline
         \end{tabular}
 
+    \linespread{0.5}
+    \vspace{0.5cm}
+    \color{black}\fontsize{6pt}{0}\selectfont
+        Box, G.E., Hunter, J.S. and Hunter, W.G., 2005. Statistics for
+        experimenters. \\ In Wiley series in probability and statistics.
+        Hoboken, NJ: Wiley.
+
     \end{center}
 \end{frame}
 \note{
+    Pointer. Add reference to statistic for experimentess.
+
     ANOVA, factorial design, critical mix.
 
     Simple example, e.g. shared buffers + work\_mem cause memory pressure?
@@ -766,6 +777,8 @@
         \textbf{Feedback loop}
 
         \vspace{1.0cm}
+		\begin{overprint}[9cm]
+        \onslide<1>
         \begin{tikzpicture}[thick, scale=3, every node/.style={transform shape}]
             \node[draw, ultra thick] (process) {P};
             \coordinate[left=1.5cm of process.center] (input-start);
@@ -779,6 +792,23 @@
             \draw[-, thick] (feedback-start) |- (feedback-middle);
             \draw[->, thick] (feedback-middle) |- (feedback-end);
         \end{tikzpicture}
+
+        \onslide<2>
+        \begin{tikzpicture}[thick, scale=3, every node/.style={transform shape}]
+            \node[draw, ultra thick] (process) {P};
+            \coordinate[left=1.5cm of process.center] (input-start);
+            \coordinate[right=1.5cm of process.center] (output-start);
+            \coordinate[right=0.75cm of process.center] (feedback-start);
+            \coordinate[below=0.5cm of process.south west] (corner);
+            \coordinate[left=0.5cm of corner] (feedback-middle);
+            \coordinate[above=0.2cm of process.south west] (feedback-end);
+            \draw[->, thick] (input-start) -- (process) node[fill=white, midway, above] {\tiny Input};
+            \draw[->, thick] (process) -- (output-start) node[fill=white, midway, above] {\tiny Output};
+            \draw[-, thick] (feedback-start) |- (feedback-middle) node[draw, fill=white, pos=0.725] {\tiny Ctrl};
+            \draw[->, thick] (feedback-middle) |- (feedback-end);
+        \end{tikzpicture}
+
+		\end{overprint}
 
     \end{center}
 \end{frame}
@@ -834,8 +864,11 @@
             ymajorgrids=false,
             zmajorgrids=false,
             opacity=0.8,
+            x label style={rotate=-10},
+            y label style={rotate=38},
+            %x label style={at={(axis description cs:0.5,-0.1)}, anchor=north},
             %view={60}{30},
-            view/az=14,
+            %view/az=14,
         ]
         \addplot3 [surf, samples=60]
             { - exp(-sqrt(x^2 + y^2)) };
@@ -859,8 +892,10 @@
             ymajorgrids=false,
             zmajorgrids=false,
             opacity=0.8,
+            x label style={rotate=-10},
+            y label style={rotate=38},
             %view={60}{30},
-            view/az=14,
+            %view/az=14,
         ]
         \addplot3 [surf, samples=60]
             { - exp(-sqrt(x^2 + y^2)) };
@@ -891,7 +926,29 @@
 \end{frame}
 \note {
     Academia, rocksdb.
+
+    Put workload B axis more precise.
 }
+
+\section{Final thoughts}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \begin{center}
+
+        \begin{itemize}
+            \item Who's using?
+            \item           An engineer or an algorithm.
+            \item
+            \item What's missing?
+            \item           Higher-order interaction and feedback.
+            \item
+            \item What's the goal?
+            \item           Best robust performance.
+        \end{itemize}
+
+    \end{center}
+\end{frame}
 
 \fontsize{18pt}{18}\selectfont
 \begin{frame}
