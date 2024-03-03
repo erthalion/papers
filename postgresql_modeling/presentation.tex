@@ -704,25 +704,8 @@
 \begin{frame}[fragile]{}
     \frametitle{}
 
-    \begin{center}
-    \copyrightbox[b]
-    {
-        \includegraphics
-        [width=0.4\textwidth,center]
-        {schrei_bloat.png}
-    } { \hspace{1.8cm} Edvard Munch -- The Scream (about a bloated index) }
-	\end{center}
-
-\end{frame}
-\note{
-	Demo
-}
-
-\begin{frame}[fragile]{}
-    \frametitle{}
-
     Assuming we know the workload,\\
-    how to approximate free space or bloat?
+    how to approximate free space?
 \end{frame}
 
 \begin{frame}[fragile]{}
@@ -731,31 +714,14 @@
     \begin{minted}[fontsize=\Large,escapeinside=||]{text}
     -- -M prepared --rate=max-rate
     \set aid random(0, N)
-    \set bid random(0, N)
     \end{minted}
 
     \begin{minted}[fontsize=\Large,escapeinside=||]{sql}
-    update test set a = :aid where a = :bid;
+    -- a pre-populated table
+    insert into test values(:aid);
     \end{minted}
 
 \end{frame}
-
-\begin{frame}[fragile]{}
-    \frametitle{}
-
-    \begin{center}
-    \copyrightbox[b]
-    {
-        \includegraphics
-        [width=0.4\textwidth,center]
-        {dead_tuples.jpg}
-    } { \hspace{2.0cm} Portrait de l'artiste sous les traits d'un moqueur }
-	\end{center}
-
-\end{frame}
-\note{
-    Make sure to use index scan, disable seqscan/bitmap scan if needed
-}
 
 \begin{frame}[fragile]{}
     \frametitle{}
@@ -777,6 +743,40 @@
 
 \begin{frame}[fragile]{}
     \frametitle{}
+
+    \begin{center}
+    \copyrightbox[b]
+    {
+        \includegraphics
+        [width=0.4\textwidth,center]
+        {schrei_bloat.png}
+    } { \hspace{1.8cm} Edvard Munch -- The Scream (about a bloated index) }
+	\end{center}
+
+\end{frame}
+\note{
+	Demo
+}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+
+    \begin{minted}[fontsize=\Large,escapeinside=||]{text}
+    -- -M prepared --rate=max-rate
+    \set aid random(0, N)
+    \set bid random(0, N)
+    \end{minted}
+
+    \begin{minted}[fontsize=\Large,escapeinside=||]{sql}
+    -- a pre-populated table
+    update test set a = :aid
+        where a = :bid;
+    \end{minted}
+
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
     \begin{center}
 
         \includegraphics[width=0.8\textwidth,center]{bloat-single-page-update.png}
@@ -793,7 +793,31 @@
     \end{center}
 \end{frame}
 
+\begin{frame}[fragile]{}
+    \frametitle{}
+
+    \begin{center}
+    \copyrightbox[b]
+    {
+        \includegraphics
+        [width=0.4\textwidth,center]
+        {dead_tuples.jpg}
+    } { \hspace{2.0cm} Portrait de l'artiste sous les traits d'un moqueur }
+	\end{center}
+
+\end{frame}
+\note{
+    Make sure to use index scan, disable seqscan/bitmap scan if needed
+}
+
 \section{Approximation}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+
+    Assuming we know the workload,\\
+    how to approximate amount of IO?
+\end{frame}
 
 \begin{frame}[fragile]{}
     \frametitle{}
@@ -819,8 +843,8 @@
       create index on test(a)
           with (fillfactor = 100);
 
-      # fsync = off
       # autovacuum = off
+      # *_flush_after = 0
       # etc
         \end{minted}
 
@@ -837,13 +861,6 @@
     max\_wal\_senders = 0
     wal\_writer\_flush\_after = 0
 }
-
-\begin{frame}[fragile]{}
-    \frametitle{}
-
-    Assuming we know the workload,\\
-    how to approximate amount of IO?
-\end{frame}
 
 \begin{frame}[fragile]{}
     \frametitle{}
@@ -995,8 +1012,8 @@
     \frametitle{}
 
     \begin{minted}[fontsize=\Large]{haskell}
-  data Event = GetCachedPlan TxLatency
-             | PqGetByte TxLatency
+  data Event = PqGetByte TxLatency
+             | GetCachedPlan TxLatency
              | BtGetTuple TxLatency
              | BtInsert TxLatency
              | HeapPagePrune TxLatency
@@ -1014,6 +1031,17 @@
         \includegraphics[width=0.8\textwidth,center]{pq_getbyte.png}
 
     \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+    \textbf{Summary}
+    \begin{itemize}[label={\MVRightarrow }]
+        \item Predicting the future is possible!
+        \item Be aware of limitations
+        \item Reduce large system to small parts
+        \item Combine with benchmarking and profiling
+    \end{itemize}
 \end{frame}
 
 \fontsize{18pt}{18}\selectfont
