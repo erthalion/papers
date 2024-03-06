@@ -701,45 +701,45 @@
     taken space.
 }
 
-\begin{frame}[fragile]{}
-    \frametitle{}
+%\begin{frame}[fragile]{}
+    %\frametitle{}
 
-    Assuming we know the workload,\\
-    how to approximate free space?
-\end{frame}
+    %Assuming we know the workload,\\
+    %how to approximate free space?
+%\end{frame}
 
-\begin{frame}[fragile]{}
-    \frametitle{}
+%\begin{frame}[fragile]{}
+    %\frametitle{}
 
-    \begin{minted}[fontsize=\Large,escapeinside=||]{text}
-    -- -M prepared --rate=max-rate
-    \set aid random(0, N)
-    \end{minted}
+    %\begin{minted}[fontsize=\Large,escapeinside=||]{text}
+    %-- -M prepared --rate=max-rate
+    %\set aid random(0, N)
+    %\end{minted}
 
-    \begin{minted}[fontsize=\Large,escapeinside=||]{sql}
-    -- a pre-populated table
-    insert into test values(:aid);
-    \end{minted}
+    %\begin{minted}[fontsize=\Large,escapeinside=||]{sql}
+    %-- a pre-populated table
+    %insert into test values(:aid);
+    %\end{minted}
 
-\end{frame}
+%\end{frame}
 
-\begin{frame}[fragile]{}
-    \frametitle{}
-    \begin{center}
+%\begin{frame}[fragile]{}
+    %\frametitle{}
+    %\begin{center}
 
-        \includegraphics[width=0.8\textwidth,center]{free_space_single_page.png}
+        %\includegraphics[width=0.8\textwidth,center]{free_space_single_page.png}
 
-    \end{center}
-\end{frame}
+    %\end{center}
+%\end{frame}
 
-\begin{frame}[fragile]{}
-    \frametitle{}
-    \begin{center}
+%\begin{frame}[fragile]{}
+    %\frametitle{}
+    %\begin{center}
 
-        \includegraphics[width=0.8\textwidth,center]{free_space.png}
+        %\includegraphics[width=0.8\textwidth,center]{free_space.png}
 
-    \end{center}
-\end{frame}
+    %\end{center}
+%\end{frame}
 
 \begin{frame}[fragile]{}
     \frametitle{}
@@ -757,6 +757,13 @@
 \note{
 	Demo
 }
+
+\begin{frame}[fragile]{}
+    \frametitle{}
+
+    Assuming we know the workload,\\
+    how to approximate bloat?
+\end{frame}
 
 \begin{frame}[fragile]{}
     \frametitle{}
